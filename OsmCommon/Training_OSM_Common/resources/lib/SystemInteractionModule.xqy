@@ -112,18 +112,37 @@ declare function systeminteractionmodule:addCaptureInteraction(
         }
 };
 
+(: Create the bi:processInteractionRequest element :)
+declare function systeminteractionmodule:addProcessInteraction(
+    $orderData as element()*) as element()*
+{ 
+   (: <bi:processInteractionRequest> :)
+   let $elementname := fn:QName($uimlib:biNamespace, fn:concat($uimlib:biPrefix, $uimlib:processInteractionRequest))
+   
+   where (exists($orderData ))
+   return
+       element {$elementname } {
+           uimlib:createQualifiedElementFromString($uimlib:biNamespace, $uimlib:biPrefix, $uimlib:responseLevel, $uimlib:EntityConfigurationLevel),
+           systeminteractionmodule:addInteraction($orderData)
+
+       }
+};
+
 (: Creates the bi:interaction element :)
 declare function systeminteractionmodule:addInteraction(
     $orderData as element()*) as element()*
 { 
     (: <bi:interaction> :)
-    let $elementname := fn:QName($uimlib:biNamespace, fn:concat($uimlib:biPrefix, $uimlib:interaction)) 
+    let $elementname    := fn:QName($uimlib:biNamespace, fn:concat($uimlib:biPrefix, $uimlib:interaction)) 
+    let $taskName       := $orderData/oms:Task/text()
 
     where (fn:exists($orderData))
     return
         element {$elementname} {
             systeminteractionmodule:addInteractionHeader($orderData),
-            systeminteractionmodule:addInteractionBody($orderData)
+            if($taskName=$uimlib:CaptureBITask)
+            then systeminteractionmodule:addInteractionBody($orderData)
+            else ()
         }
 };
 
@@ -132,20 +151,25 @@ declare function systeminteractionmodule:addInteractionHeader(
     $orderData as element() *) as element()*
 {
     (: <invbi:header> :)
-    let $elementname := fn:QName($uimlib:invbiNamespace, fn:concat($uimlib:invbiPrefix, $uimlib:header))
-    
-    let $bicorrID := uimlib:getBICorrelationID($orderData)
+    let $elementname            := fn:QName($uimlib:invbiNamespace, fn:concat($uimlib:invbiPrefix, $uimlib:header))
+    let $taskName               := $orderData/oms:Task/text()
+    let $bicorrID               := uimlib:getBICorrelationID($orderData)/text()
+    let $bicorrIDModified       := if(fn:empty($bicorrID))
+                                   then ''
+                                   else $bicorrID
     let $friendlyReference := $orderData/oms:Reference
     
       where (exists($orderData))
         return
             element {$elementname} {
+                uimlib:createQualifiedElementFromString($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:id, $bicorrIDModified),
+                if($taskName=$uimlib:CaptureBITask)then(
                 uimlib:createQualifiedSpecificationName($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:sBIOrder),
-                uimlib:createQualifiedElementFromString($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:action, $uimlib:CREATE), 
-                uimlib:createQualifiedElementFromString($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:id, ''),             
+                uimlib:createQualifiedElementFromString($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:action, $uimlib:CREATE),         
                 uimlib:createQualifiedElementFromString($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:name, $uimlib:ossintegration),
                (: uimlib:createFriendlyQualifiedExternalIdentity($uimlib:invbiNamespace, $uimlib:invbiPrefix, $bicorrID, $friendlyReference),:)
                 uimlib:createQualifiedElementFromString($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:effDate, (current-dateTime() cast as xs:string) )
+                )else()
        }
 };
 

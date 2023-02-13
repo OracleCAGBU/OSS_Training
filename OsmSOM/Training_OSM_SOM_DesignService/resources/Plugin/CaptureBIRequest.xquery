@@ -32,8 +32,6 @@ declare variable $sUsername             := 'oms-automation';
 declare variable $sPassword             := 'admin123';
 declare variable $sUimUsername          := 'uimadmin';
 declare variable $sUimPassword          := 'oracle123';
-declare variable $wsNamespace           := "http://xmlns.oracle.com/communications/ordermanagement";
-declare variable $wsPrefix              := "ws:";
 declare variable $serviceManagementURI  := "/InventoryWS/InventoryWSJMS";
 declare variable $mimeContextType       := "text/xml; charset=UTF-8";
 

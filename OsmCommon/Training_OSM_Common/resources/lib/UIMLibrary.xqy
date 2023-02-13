@@ -87,14 +87,14 @@ declare variable $uimlib:EntityExpandedLevel                := "INTERACTION_ITEM
 declare variable $uimlib:EntityConfigurationLevel           := "INTERACTION_ITEM_ENTITY_CONFIGURATION";
 declare variable $uimlib:AllExpandedLevel                   := "INTERACTION_ITEM_ENTITY_CONFIGURATION_EXPANDED";
 declare variable $uimlib:executeProcess                     := "executeProcess";
-declare variable $uimlib:DesignServiceFunction              := "DesignServiceFunction";
-
 declare variable $uimlib:invstrucNamespace                  := "http://xmlns.oracle.com/communications/inventory/structure";
 declare variable $uimlib:invstrucPrefix                     := "invstruc:";
 declare variable $uimlib:invconfigNamespace                 := "http://xmlns.oracle.com/communications/inventory/configuration";
 declare variable $uimlib:invconfigPrefix                    := "invconfig:";
 declare variable $uimlib:child                              := "child";
 declare variable $uimlib:sBIOrder                           := "BI_Order";
+declare variable $uimlib:DesignServiceFunction              := "DesignServiceFunction";
+declare variable $uimlib:CaptureBITask                      := "CaptureBITask";
 
 (: Creates a namespace qualified property element with name/value child elements 
 <$prefix:property>
@@ -340,7 +340,7 @@ of the Business Interaction and would correlate to the business component ID for
 declare function uimlib:getBICorrelationID(
              $taskData as element()*) as element()* {
    
-       let $corrid := $taskData/oms:_root/oms:CustomerHeaders/oms:Identification/oms:BusinessComponentID
+       let $corrid := $taskData/oms:_root/oms:BusinessInteractions/oms:BusinessInteraction/oms:InteractionID
        where (exists($corrid))
           return $corrid
       

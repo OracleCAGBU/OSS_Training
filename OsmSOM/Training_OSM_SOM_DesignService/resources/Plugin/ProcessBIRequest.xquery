@@ -22,25 +22,58 @@ declare variable $context external;
 declare variable $log external;
 declare variable $outboundMessage external;
 
-declare variable $eTaskData             := fn:root(.)/oms:GetOrder.Response;
+declare variable $orderData             := fn:root(.)/oms:GetOrder.Response;
 declare variable $sTaskName             := context:getTaskMnemonic($context);
-declare variable $sOrderId              := $eTaskData/oms:OrderID/text();
-declare variable $sVersion              := $eTaskData/oms:Version/text();
+declare variable $sOrderId              := $orderData/oms:OrderID/text();
+declare variable $sVersion              := $orderData/oms:Version/text();
 declare variable $sUsername             := 'oms-automation';
 declare variable $sPassword             := 'admin123';
-declare variable $wsNamespace           := "http://xmlns.oracle.com/communications/ordermanagement";
-declare variable $wsPrefix              := "ws:";
-declare variable $createOrder           := "CreateOrder";
-declare variable $ebmName               := "{http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/ProvisioningOrder/V1}ProcessProvisioningOrderEBM";
-declare variable $eboName               := "{http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/ProvisioningOrder/V1}ProvisioningOrderEBO";
-declare variable $currentORRVersion     := '%{CARTRIDGE_VERSION}';
+declare variable $sUimUsername          := 'uimadmin';
+declare variable $sUimPassword          := 'oracle123';
+declare variable $serviceManagementURI  := "/InventoryWS/InventoryWSJMS";
+declare variable $mimeContextType       := "text/xml; charset=UTF-8";
 
 
-let $sTaskData                          := saxon:serialize($eTaskData, <xsl:output method='xml' omit-xml-declaration='yes' indent='yes' saxon:indent-spaces='4'/>)
+(: Creates the soap message :)
+declare function local:createSoapMessage(
+    $orderData as element()*) as element()*
+{ 
+    <soapenv:Envelope 
+        xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:bi="http://xmlns.oracle.com/communications/inventory/webservice/businessinteraction"
+        xmlns:invbi="http://xmlns.oracle.com/communications/inventory/businessinteraction"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"> 
+        { 
+            (: Add the security header to the soap request :)
+            soaplib:createHeaderForCustomCredential($sUimUsername, $sUimPassword),
+            local:addSoapBody( $orderData ) 
+        }
+    </soapenv:Envelope>            
+};
+
+(: Create the soapenv:Body element. Child elements should be created directly here. Groups should be created through a call to another function :)   
+declare function local:addSoapBody(
+    $orderData as element()*) as element()*
+{ 
+   (: <soapenv:Body> :)
+   let $elementname := fn:QName($soaplib:soapNamespace, concat($soaplib:soapPrefix, $soaplib:Body))
+   where (exists($orderData ))
+   return
+       element {$elementname } {
+             systeminteractionmodule:addProcessInteraction($orderData)
+       }
+};
+
+let $eProcessRequest                     := local:createSoapMessage($orderData)
+let $sProcessRequest                     := saxon:serialize($eProcessRequest, <xsl:output method='xml' omit-xml-declaration='yes' indent='yes' saxon:indent-spaces='4'/>)
+let $sOrderData                          := saxon:serialize($orderData, <xsl:output method='xml' omit-xml-declaration='yes' indent='yes' saxon:indent-spaces='4'/>)
 
 return
     (
-        (:log:info($log, fn:concat('GetOrder.Response : ', $sTaskData)),:)
-        <foo/>,
-        context:completeTaskOnExit($context,'success')
+        log:info($log, fn:concat('ProcessBI Request : ', $sProcessRequest)),
+        outboundMessage:setStringProperty($outboundMessage, "URI", $serviceManagementURI),
+        outboundMessage:setStringProperty($outboundMessage, "_wls_mimehdrContent_Type", $mimeContextType),
+        $eProcessRequest
     )
