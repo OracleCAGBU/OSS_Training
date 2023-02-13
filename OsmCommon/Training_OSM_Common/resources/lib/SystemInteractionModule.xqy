@@ -115,7 +115,7 @@ declare function systeminteractionmodule:addCaptureInteraction(
     return
         element {$elementname } {
             uimlib:createQualifiedElementFromString($uimlib:comNamespace, $uimlib:comPrefix, $uimlib:header, ''),
-            systeminteractionmodule:addInteraction($orderData),
+            systeminteractionmodule:addInteraction('',$orderData),
             uimlib:createQualifiedElementFromString($uimlib:biNamespace, $uimlib:biPrefix, $uimlib:executeProcess, $uimlib:true),
             uimlib:createQualifiedElementFromString($uimlib:biNamespace, $uimlib:biPrefix, $uimlib:responseLevel, $uimlib:AllExpandedLevel)
         }
@@ -132,13 +132,29 @@ declare function systeminteractionmodule:addProcessInteraction(
    return
        element {$elementname } {
            uimlib:createQualifiedElementFromString($uimlib:biNamespace, $uimlib:biPrefix, $uimlib:responseLevel, $uimlib:EntityConfigurationLevel),
-           systeminteractionmodule:addInteraction($orderData)
+           systeminteractionmodule:addInteraction('',$orderData)
 
        }
 };
 
+(: Create the bi:updateInteractionRequest element :)
+declare function systeminteractionmodule:addUpdateInteraction(
+    $tmpaction as xs:string, 
+    $orderData as element()*) as element()*
+{ 
+   (: <bi:updateInteractionRequest> :)
+   let $elementname := fn:QName($uimlib:biNamespace, concat($uimlib:biPrefix, $uimlib:updateInteractionRequest))
+   
+   where (exists($orderData ))
+   return
+       element {$elementname } {
+           uimlib:createQualifiedElementFromString($uimlib:biNamespace, $uimlib:biPrefix, $uimlib:responseLevel, $uimlib:InteractionLevel),
+           systeminteractionmodule:addInteraction($tmpaction, $orderData)
+       }
+};
+
 (: Creates the bi:interaction element :)
-declare function systeminteractionmodule:addInteraction(
+declare function systeminteractionmodule:addInteraction($tmpaction as xs:string?,
     $orderData as element()*) as element()*
 { 
     (: <bi:interaction> :)
@@ -148,7 +164,7 @@ declare function systeminteractionmodule:addInteraction(
     where (fn:exists($orderData))
     return
         element {$elementname} {
-            systeminteractionmodule:addInteractionHeader($orderData),
+            systeminteractionmodule:addInteractionHeader($tmpaction,$orderData),
             if($taskName=$uimlib:CaptureBITask)
             then systeminteractionmodule:addInteractionBody($orderData)
             else ()
@@ -157,6 +173,7 @@ declare function systeminteractionmodule:addInteraction(
 
 (: Creates the invbi:header element :)
 declare function systeminteractionmodule:addInteractionHeader(
+    $tmpaction as xs:string?,
     $orderData as element() *) as element()*
 {
     (: <invbi:header> :)
@@ -172,6 +189,9 @@ declare function systeminteractionmodule:addInteractionHeader(
         return
             element {$elementname} {
                 uimlib:createQualifiedElementFromString($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:id, $bicorrIDModified),
+                if($taskName=($uimlib:ApproveTask,$uimlib:IssueTask,$uimlib:CompleteTask))then(
+                uimlib:createQualifiedElementFromString($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:action, $tmpaction)
+                )else(),
                 if($taskName=$uimlib:CaptureBITask)then(
                 uimlib:createQualifiedSpecificationName($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:sBIOrder),
                 uimlib:createQualifiedElementFromString($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:action, $uimlib:CREATE),         

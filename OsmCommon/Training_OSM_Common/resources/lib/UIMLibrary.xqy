@@ -95,6 +95,9 @@ declare variable $uimlib:child                              := "child";
 declare variable $uimlib:sBIOrder                           := "BI_Order";
 declare variable $uimlib:DesignServiceFunction              := "DesignServiceFunction";
 declare variable $uimlib:CaptureBITask                      := "CaptureBITask";
+declare variable $uimlib:CompleteTask                       := "CompleteBITask";
+declare variable $uimlib:IssueTask                          := "IssueBITask";
+declare variable $uimlib:ApproveTask                        := "ApproveBITask";
 
 (: Creates a namespace qualified property element with name/value child elements 
 <$prefix:property>
