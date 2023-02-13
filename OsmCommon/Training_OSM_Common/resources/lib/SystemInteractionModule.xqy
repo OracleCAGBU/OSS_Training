@@ -1,12 +1,21 @@
-module namespace systeminteractionmodule    = "http://www.training.com/comms/ordermanagement/common/systeminteractionmodule";
+module namespace systeminteractionmodule                                    = "http://www.training.com/comms/ordermanagement/common/systeminteractionmodule";
 
-import module namespace uimlib              = "http://www.training.com/comms/ordermanagement/common/uim/library" at "http://www.training.com/resources/lib/UIMLibrary.xqy";
+import module namespace uimlib                                              = "http://www.training.com/comms/ordermanagement/common/uim/library" at "http://www.training.com/resources/lib/UIMLibrary.xqy";
 
-declare namespace UUID                      = "java:java.util.UUID";
-declare namespace oms                       = "urn:com:metasolv:oms:xmlapi:1";
-declare namespace toibns                    = "http://xmlns.oracle.com/communications/studio/ordermanagement/transformation";
-declare namespace bi                        = "http://xmlns.oracle.com/communications/inventory/webservice/businessinteraction";
-declare namespace invbi                     = "http://xmlns.oracle.com/communications/inventory/businessinteraction";
+declare namespace UUID                                                      = "java:java.util.UUID";
+declare namespace oms                                                       = "urn:com:metasolv:oms:xmlapi:1";
+declare namespace toibns                                                    = "http://xmlns.oracle.com/communications/studio/ordermanagement/transformation";
+declare namespace bi                                                        = "http://xmlns.oracle.com/communications/inventory/webservice/businessinteraction";
+declare namespace invbi                                                     = "http://xmlns.oracle.com/communications/inventory/businessinteraction";
+declare namespace ser                                                       = "http://xmlns.oracle.com/communications/inventory/service";
+declare namespace ent                                                       = "http://xmlns.oracle.com/communications/inventory/entity";
+declare namespace con                                                       = "http://xmlns.oracle.com/communications/inventory/configuration";
+declare namespace spec                                                      = "http://xmlns.oracle.com/communications/inventory/specification";
+
+declare variable $systeminteractionmodule:ORDER_ITEM_NS                    := "urn:com:metasolv:oms:xmlapi:1";
+declare variable $systeminteractionmodule:ORDER_ITEM_TYPE                  := "omsAny";
+declare variable $systeminteractionmodule:ORDER_ITEM_FULLTYPE              := fn:concat("{", $systeminteractionmodule:ORDER_ITEM_NS, "}", 
+                                                                              $systeminteractionmodule:ORDER_ITEM_TYPE);
 
 (: functions :)
 
@@ -396,4 +405,254 @@ declare function systeminteractionmodule:createProperty(
             $valueElement
         }
     
+};
+
+(: ************************************** Functions to handle a ProcessInteractionResponse message  **************************************************************  :)
+
+(: Creates the OSM Order Data Update after a processInteractionResponse message :)
+declare function systeminteractionmodule:createOrderDataUpdateForDesignInteraction(
+            $processResponse as element()*,
+            $orderData as element()*) as element()* {
+
+    let $functionName := $uimlib:DesignServiceFunction
+    let $componentKey := $orderData/oms:_root/oms:ControlData/oms:Functions/*[local-name()=$functionName]/oms:componentKey/text()
+    let $sTaskName := $orderData/oms:Task/text()
+    let $sOrderID := $orderData/oms:OrderID/text()
+        
+    return
+           <OrderDataUpdate xmlns="http://www.metasolv.com/OMS/OrderDataUpdate/2002/10/25"
+                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <UpdatedNodes>
+                <_root>                
+                    <ControlData>
+                        <Functions>
+                        {
+                            element{$functionName}{
+                                <componentKey>{$componentKey}</componentKey>,
+                                (: Need to loop through the 'OrderItem's and update each one with their specific info :)
+                                for $oi in $orderData/oms:_root/oms:ControlData/oms:Functions/*[local-name()=$functionName]/oms:orderItem
+                                let $osmitem := $oi/oms:orderItemRef
+                                
+                                (: OrderLineID is used as the key for order item so this must be included in any update to an order item :)
+                                let $baseLineIDValue := $osmitem/oms:LineId/text()  
+                                
+                                return
+                                <orderItem>
+                                    {
+                                        let $osmCorrelator := $orderData/oms:Reference
+                                        let $service := $processResponse/bi:interaction/invbi:body/invbi:item/invbi:entity[ser:externalIdentity/ent:externalObjectId=$osmCorrelator]
+                                        let $serviceAssignment  :=  $service/ser:configuration/con:configurationItem/con:configurationItem/con:entityAssignment/con:entity[ser:specification/spec:entityClass="Service"]
+                                        (: Find the child service being assigned :)
+                                        let $childService := $processResponse/bi:interaction/invbi:body/invbi:interaction/invbi:body/invbi:item/invbi:entity[ser:id/text() = $serviceAssignment/ser:id/text()]
+                                        return (
+                                           <orderItemRef type="{$systeminteractionmodule:ORDER_ITEM_FULLTYPE}">
+                                            <LineId>{$baseLineIDValue}</LineId>
+                                            {
+                                                systeminteractionmodule:createServiceConfiguration($service[1], $processResponse),
+                                                systeminteractionmodule:setServiceId($osmCorrelator, $processResponse),
+                                                systeminteractionmodule:setEntityCharacteristics($osmCorrelator, $service[1])
+                                            }
+                                           </orderItemRef>
+                                        )
+                                    }
+                                </orderItem>
+                                }
+                            }
+                        </Functions>
+                    </ControlData>
+                </_root>
+           </UpdatedNodes>
+       </OrderDataUpdate>
+};
+
+
+declare function systeminteractionmodule:isServiceType(
+    $type as xs:string?)
+{
+    if (fn:exists($type))
+    then fn:ends-with($type, ":ServiceType")
+    else fn:false()
+};
+
+declare function systeminteractionmodule:setServiceId(
+    $osmCorrelator as xs:string?,
+    $processResponse as element()*)
+{
+    let $service := $processResponse/bi:interaction/invbi:body/invbi:item/invbi:entity[systeminteractionmodule:isServiceType(fn:data(@xsi:type))=fn:true() and ser:externalIdentity/ent:externalObjectId=$osmCorrelator]
+    where (fn:exists($service))
+    return 
+        <ServiceId>{$service[1]/ser:id/text()}</ServiceId>
+};
+
+declare function systeminteractionmodule:setEntityCharacteristics(
+    $osmCorrelator as xs:string?,
+    $service as element()*)
+{
+        let $name := $service/con:name/text()
+        return
+        (
+        <ServiceEntityData>
+            <EntityCharacteristics>
+                {
+                    for $property in $service/*:property
+                    return (
+                    <Characteristic>
+                        {
+                            let $charName := $property/*:name/text()
+                            let $charValue := $property/*:value/text()
+                            return (
+                                <Name>{$charName}</Name>,
+                                <Value>{$charValue}</Value>
+                            )
+                        }
+                    </Characteristic>
+                        )  
+                }
+             </EntityCharacteristics>
+        </ServiceEntityData>
+        )
+};
+
+declare function systeminteractionmodule:createServiceConfiguration(
+            $service as element()?,
+            $processResponse as element()*) as element()* 
+{ 
+    systeminteractionmodule:createServiceConfig($service),
+    for $serviceAssignment in $service/ser:configuration/con:configurationItem/con:configurationItem/con:entityAssignment/con:entity[ser:specification/spec:entityClass="Service"]
+    (: Find the child service being assigned :)
+    let $childService := $processResponse/bi:interaction/invbi:body/invbi:interaction/invbi:body/invbi:item/invbi:entity[ser:id/text() = $serviceAssignment/ser:id/text()]
+    where exists($childService)
+    return
+        systeminteractionmodule:createServiceConfig($childService[1])    
+};  
+
+declare function systeminteractionmodule:createServiceConfig(
+            $service as element()?) as element()* { 
+  
+      let $config := $service/ser:configuration
+      where exists($config)
+      return
+          <ServiceConfiguration>
+              <version>{$config/con:version/text()}</version>
+              <ServiceID>{$service/ser:id/text()}</ServiceID>
+              <ExternalObjectID>{$service/ser:externalIdentity/ent:externalObjectId/text()}</ExternalObjectID>
+              {
+                  for $configItem at $position in $config/con:configurationItem
+                  return (
+                      systeminteractionmodule:createConfigItem("", $configItem, $position)
+                  )
+              }
+              <serviceSpecName>{$service/ser:specification/spec:name/text()}</serviceSpecName>
+          </ServiceConfiguration>
+};  
+
+declare function systeminteractionmodule:createConfigItem(
+            $parentId as xs:string,
+            $configItem as element()*,
+            $configPosition as xs:integer*) as element()* { 
+
+    let $name := $configItem/con:name/text()
+    let $id := if ($parentId="") then "/root" else concat($parentId,"/",$configPosition)
+    return (
+        <configurationItem>
+            <id>{$id}</id>
+            <parentId>{$parentId}</parentId>
+            <name>{$name}</name>
+            {
+                for $property in $configItem/*[local-name()='property']
+                return (
+                    <characteristic>
+                        {
+                            let $charName := $property/*[local-name()='name']/text()
+                            let $charValue := $property/*[local-name()='value']/text()
+                            return (
+                                <Name>{$charName}</Name>,
+                                <Value>{$charValue}</Value>
+                            )
+                    }
+                    </characteristic>
+                ),
+                systeminteractionmodule:processEntityAssignment($configItem),
+                systeminteractionmodule:processEntityReference($configItem)
+            }
+        </configurationItem>,
+        for $childItem at $position in $configItem/con:configurationItem
+                return (
+                    systeminteractionmodule:createConfigItem($id,$childItem, $position)
+                )
+    )
+
+};
+
+declare function systeminteractionmodule:processEntityAssignment(
+            $configItem as element()*) as element()* { 
+
+    let $assignment := $configItem/con:entityAssignment
+    where exists($assignment) and not (fn:exists($assignment[@xsi:nil="true"])) and (exists($assignment/con:resource) or exists($assignment/con:entity))
+    return
+        if (exists($assignment/con:resource))
+        then (
+            <entityAssignment>
+                <refState>{$assignment/con:state/text()}</refState>
+                {systeminteractionmodule:processResource($assignment/con:resource)}
+            </entityAssignment>
+        ) else if (exists($assignment/con:entity))
+        then (
+            <entityAssignment>
+                <refState>{$assignment/con:state/text()}</refState>
+                {systeminteractionmodule:processResource($assignment/con:entity)}
+            </entityAssignment>
+        ) else ()
+
+};
+
+declare function systeminteractionmodule:processEntityReference(
+            $configItem as element()*) as element()* { 
+
+    let $assignment := $configItem/con:entityReference
+    where exists($assignment) and not (fn:exists($assignment[@xsi:nil="true"])) and (exists($assignment/con:resource) or exists($assignment/con:entity))
+    return
+        if (exists($assignment/con:resource))
+        then (
+            <entityReference>
+                <refState>{$assignment/con:state/text()}</refState>
+                {systeminteractionmodule:processResource($assignment/con:resource)}
+            </entityReference>
+        ) else if (exists($assignment/con:entity))
+        then (
+            <entityReference>
+                <refState>{$assignment/con:state/text()}</refState>
+                {systeminteractionmodule:processResource($assignment/con:entity)}
+            </entityReference>
+        ) else ()
+
+};
+
+declare function systeminteractionmodule:processResource(
+            $resource as element()*) as element()* {
+
+    let $id := $resource/*[local-name()='id']/text()
+    let $name := $resource/*[local-name()='name']/text()
+    let $specification := $resource/*[local-name()='specification']
+    let $specName := $specification/*[local-name()='name']/text()
+    let $state := $resource/*[local-name()='state']/text()
+    return (
+        <id>{$id}</id>,
+        <name>{$name}</name>,
+        <specification>{$specName}</specification>,
+        <entityState>{$state}</entityState>,
+        for $property in $resource/*[local-name()='property']
+        return
+            <characteristic>
+                {
+                    let $charName := $property/*[local-name()='name']/text()
+                    let $charValue := $property/*[local-name()='value']/text()
+                    return (
+                        <Name>{$charName}</Name>,
+                        <Value>{$charValue}</Value>
+                        )
+                }
+            </characteristic>
+    )
+
 };

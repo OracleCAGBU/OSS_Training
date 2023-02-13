@@ -101,4 +101,204 @@
       </xs:element>
     </xs:sequence>
   </xs:complexType>
+    <xs:complexType name="ServiceConfiguration">
+    <xs:complexContent>
+      <xs:extension base="tns:InventoryConfiguration">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+    <xs:complexType name="AttributeType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="Name">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="0"/>
+            <xs:maxLength value="256"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element maxOccurs="1" minOccurs="0" name="Value">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="0"/>
+            <xs:maxLength value="256"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+    <xs:complexType name="ConfigurationItemResourceType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="id">
+        <xs:simpleType>
+          <xs:restriction base="tns:id"/>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="name">
+        <xs:simpleType>
+          <xs:restriction base="tns:name"/>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="characteristic">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="tns:AttributeType"/>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="specification">
+        <xs:simpleType>
+          <xs:restriction base="tns:specification"/>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="refState">
+        <xs:simpleType>
+          <xs:restriction base="tns:refState"/>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="entityState">
+        <xs:simpleType>
+          <xs:restriction base="tns:entityState"/>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+    <xs:simpleType name="id">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="256"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="name">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="256"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="parentId">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="256"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="specification">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="refState">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="40"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="entityState">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="40"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:complexType name="ConfigurationItemType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="id">
+        <xs:simpleType>
+          <xs:restriction base="tns:id"/>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="parentId">
+        <xs:simpleType>
+          <xs:restriction base="tns:parentId"/>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="name">
+        <xs:simpleType>
+          <xs:restriction base="tns:name"/>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="characteristic">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="tns:AttributeType"/>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element maxOccurs="1" minOccurs="0" name="entityAssignment">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="tns:ConfigurationItemResourceType"/>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element maxOccurs="1" minOccurs="0" name="entityReference">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="tns:ConfigurationItemResourceType"/>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+    <xs:complexType name="InventoryConfiguration">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="version">
+        <xs:simpleType>
+          <xs:restriction base="tns:version"/>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="configurationItem">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="tns:ConfigurationItemType"/>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element maxOccurs="1" minOccurs="0" name="ServiceID">
+        <xs:simpleType>
+          <xs:restriction base="tns:ServiceID"/>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element maxOccurs="1" minOccurs="0" name="ExternalObjectID">
+        <xs:simpleType>
+          <xs:restriction base="tns:ExternalObjectID"/>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="serviceSpecName">
+        <xs:simpleType>
+          <xs:restriction base="tns:serviceSpecName"/>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+    <xs:simpleType name="version">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="40"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="ServiceID">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="ExternalObjectID">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="serviceSpecName">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="1000"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="ServiceId">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="40"/>
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>

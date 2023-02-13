@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xsi:type="orderType" name="SOM_ProvisionServiceOrderFulfillment">
   <com:displayName>SOM_ProvisionServiceOrderFulfillment</com:displayName>
-  <com:saveVersion>11</com:saveVersion>
+  <com:saveVersion>36</com:saveVersion>
   <com:id>---brYUg--+DS9xQ--+jNQ</com:id>
   <amendable>false</amendable>
   <keyDef name="Key">
@@ -64,6 +64,9 @@
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/DesignServiceFunction</path>
+      <keyExpression name="Key">
+        <prov:expression>./componentKey</prov:expression>
+      </keyExpression>
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/DesignServiceFunction/componentKey</path>
@@ -76,6 +79,9 @@
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/DesignServiceFunction/orderItem</path>
+      <keyExpression name="Key">
+        <prov:expression>./orderItemRef/LineId</prov:expression>
+      </keyExpression>
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/DesignServiceFunction/orderItem/ExternalFulfillmentState</path>
@@ -85,6 +91,9 @@
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef</path>
+      <keyExpression name="Key">
+        <prov:expression>./LineId</prov:expression>
+      </keyExpression>
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/PointOfNoReturn</path>
@@ -130,6 +139,9 @@
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/DeliverOrderFunction</path>
+      <keyExpression name="Key">
+        <prov:expression>./componentKey</prov:expression>
+      </keyExpression>
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/DeliverOrderFunction/componentKey</path>
@@ -142,6 +154,9 @@
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/DeliverOrderFunction/orderItem</path>
+      <keyExpression name="Key">
+        <prov:expression>./orderItemRef/LineId</prov:expression>
+      </keyExpression>
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/DeliverOrderFunction/orderItem/ExternalFulfillmentState</path>
@@ -151,6 +166,9 @@
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef</path>
+      <keyExpression name="Key">
+        <prov:expression>./LineId</prov:expression>
+      </keyExpression>
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/PointOfNoReturn</path>
@@ -193,6 +211,9 @@
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/PlanDeliveryFunction</path>
+      <keyExpression name="Key">
+        <prov:expression>./componentKey</prov:expression>
+      </keyExpression>
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/PlanDeliveryFunction/componentKey</path>
@@ -205,6 +226,9 @@
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/PlanDeliveryFunction/orderItem</path>
+      <keyExpression name="Key">
+        <prov:expression>./orderItemRef/LineId</prov:expression>
+      </keyExpression>
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/ExternalFulfillmentState</path>
@@ -214,6 +238,9 @@
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef</path>
+      <keyExpression name="Key">
+        <prov:expression>./LineId</prov:expression>
+      </keyExpression>
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/PointOfNoReturn</path>
@@ -256,6 +283,9 @@
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/CompleteDeliveryFunction</path>
+      <keyExpression name="Key">
+        <prov:expression>./componentKey</prov:expression>
+      </keyExpression>
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/CompleteDeliveryFunction/componentKey</path>
@@ -268,6 +298,9 @@
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem</path>
+      <keyExpression name="Key">
+        <prov:expression>./orderItemRef/LineId</prov:expression>
+      </keyExpression>
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/ExternalFulfillmentState</path>
@@ -277,6 +310,9 @@
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef</path>
+      <keyExpression name="Key">
+        <prov:expression>./LineId</prov:expression>
+      </keyExpression>
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/PointOfNoReturn</path>
@@ -388,6 +424,513 @@
     </nodeExtension>
     <nodeExtension>
       <path>/BusinessInteractions/BusinessInteraction/StatusDescription</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceId</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration</path>
+      <keyExpression name="Key">
+        <prov:expression>./ServiceID</prov:expression>
+      </keyExpression>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/version</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem</path>
+      <keyExpression name="Key">
+        <prov:expression>./id</prov:expression>
+      </keyExpression>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/id</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/parentId</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/characteristic</path>
+      <keyExpression name="Key">
+        <prov:expression>./Name</prov:expression>
+      </keyExpression>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/characteristic/Name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/characteristic/Value</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityAssignment</path>
+      <keyExpression name="Key">
+        <prov:expression>./id</prov:expression>
+      </keyExpression>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityAssignment/id</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityAssignment/name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityAssignment/characteristic</path>
+      <keyExpression name="Key">
+        <prov:expression>./Name</prov:expression>
+      </keyExpression>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityAssignment/characteristic/Name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityAssignment/characteristic/Value</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityAssignment/specification</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityAssignment/refState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityAssignment/entityState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityReference</path>
+      <keyExpression name="Key">
+        <prov:expression>./id</prov:expression>
+      </keyExpression>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityReference/id</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityReference/name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityReference/characteristic</path>
+      <keyExpression name="Key">
+        <prov:expression>./Name</prov:expression>
+      </keyExpression>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityReference/characteristic/Name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityReference/characteristic/Value</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityReference/specification</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityReference/refState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityReference/entityState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/ServiceID</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/ExternalObjectID</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/ServiceConfiguration/serviceSpecName</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceId</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/version</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/id</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/parentId</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/characteristic</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/characteristic/Name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/characteristic/Value</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/id</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/characteristic</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/characteristic/Name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/characteristic/Value</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/specification</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/refState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/entityState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/id</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/characteristic</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/characteristic/Name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/characteristic/Value</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/specification</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/refState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/entityState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/ServiceID</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/ExternalObjectID</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/ServiceConfiguration/serviceSpecName</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceId</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/version</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/id</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/parentId</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/characteristic</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/characteristic/Name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/characteristic/Value</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/id</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/characteristic</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/characteristic/Name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/characteristic/Value</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/specification</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/refState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/entityState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/id</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/characteristic</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/characteristic/Name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/characteristic/Value</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/specification</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/refState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/entityState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/ServiceID</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/ExternalObjectID</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/serviceSpecName</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceId</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/version</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/id</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/parentId</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/characteristic</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/characteristic/Name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/characteristic/Value</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/id</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/characteristic</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/characteristic/Name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/characteristic/Value</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/specification</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/refState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/entityState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/id</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/characteristic</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/characteristic/Name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/characteristic/Value</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/specification</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/refState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/entityState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/ServiceID</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/ExternalObjectID</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/serviceSpecName</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceId</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration</path>
+      <keyExpression name="Key">
+        <prov:expression>./ServiceID</prov:expression>
+      </keyExpression>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/version</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem</path>
+      <keyExpression name="Key">
+        <prov:expression>./id</prov:expression>
+      </keyExpression>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/id</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/parentId</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/characteristic</path>
+      <keyExpression name="Key">
+        <prov:expression>./Name</prov:expression>
+      </keyExpression>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/characteristic/Name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/characteristic/Value</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment</path>
+      <keyExpression name="Key">
+        <prov:expression>./id</prov:expression>
+      </keyExpression>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/id</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/characteristic</path>
+      <keyExpression name="Key">
+        <prov:expression>./Name</prov:expression>
+      </keyExpression>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/characteristic/Name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/characteristic/Value</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/specification</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/refState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityAssignment/entityState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference</path>
+      <keyExpression name="Key">
+        <prov:expression>./id</prov:expression>
+      </keyExpression>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/id</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/characteristic</path>
+      <keyExpression name="Key">
+        <prov:expression>./Name</prov:expression>
+      </keyExpression>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/characteristic/Name</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/characteristic/Value</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/specification</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/refState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/configurationItem/entityReference/entityState</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/ServiceID</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/ExternalObjectID</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/ServiceConfiguration/serviceSpecName</path>
     </nodeExtension>
     <orderData>
       <com:entity>OracleComms_OSM_CommonDataDictionary</com:entity>
