@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:complexType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:_25="http://www.metasolv.com/OMS/OrderModel/2002/06/25" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="BillingProfileExtensionsType" namespace="OracleComms_OSM_CommonDataDictionary/4.0" abstract="false" final="false">
+  <model:description>BillingProfileExtensions</model:description>
+  <model:element xsi:type="model:LookupType" name="billFrequency">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Bill Frequency</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Bill Frequency</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:lookupEntry>
+      <model:code>Monthly</model:code>
+      <model:description>Monthly</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>Quarterly</model:code>
+      <model:description>Quarterly</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>Annually</model:code>
+      <model:description>Annually</model:description>
+    </model:lookupEntry>
+  </model:element>
+  <model:element xsi:type="model:LookupType" name="billMedia">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Bill Media</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Bill Media</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:lookupEntry>
+      <model:code>Email</model:code>
+      <model:description>Email</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>CD</model:code>
+      <model:description>CD</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>Paper</model:code>
+      <model:description>Paper</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>INVOICE</model:code>
+      <model:description>Invoice</model:description>
+    </model:lookupEntry>
+  </model:element>
+  <model:element xsi:type="model:LookupType" name="billType">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Bill Type</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Bill Type</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:lookupEntry>
+      <model:code>Detail</model:code>
+      <model:description>Detail</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>Summary</model:code>
+      <model:description>Summary</model:description>
+    </model:lookupEntry>
+  </model:element>
+  <model:element xsi:type="model:LookupType" name="currency">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Currency</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Currency</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:lookupEntry>
+      <model:code>AED</model:code>
+      <model:description>United Arab Emirates Dirham </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>AFN</model:code>
+      <model:description>Afghanistan Afghani </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>ALL</model:code>
+      <model:description>Albania Lek </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>AMD</model:code>
+      <model:description>Armenia Dram </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>ANG</model:code>
+      <model:description>Netherlands Antilles Guilder </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>AOA</model:code>
+      <model:description>Angola Kwanza </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>ARS</model:code>
+      <model:description>Argentina Peso </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>AUD</model:code>
+      <model:description>Australia Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>AWG</model:code>
+      <model:description>Aruba Guilder </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>AZN</model:code>
+      <model:description>Azerbaijan New Manat </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>BAM</model:code>
+      <model:description>Bosnia and Herzegovina Convertible Marka </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>BBD</model:code>
+      <model:description>Barbados Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>BDT</model:code>
+      <model:description>Bangladesh Taka </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>BGN</model:code>
+      <model:description>Bulgaria Lev </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>BHD</model:code>
+      <model:description>Bahrain Dinar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>BIF</model:code>
+      <model:description>Burundi Franc </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>BMD</model:code>
+      <model:description>Bermuda Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>BND</model:code>
+      <model:description>Brunei Darussalam Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>BOB</model:code>
+      <model:description>Bolivia Boliviano </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>BRL</model:code>
+      <model:description>Brazil Real </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>BSD</model:code>
+      <model:description>Bahamas Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>BTN</model:code>
+      <model:description>Bhutan Ngultrum </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>BWP</model:code>
+      <model:description>Botswana Pula </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>BYR</model:code>
+      <model:description>Belarus Ruble </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>BZD</model:code>
+      <model:description>Belize Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>CAD</model:code>
+      <model:description>Canada Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>CDF</model:code>
+      <model:description>Congo/Kinshasa Franc </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>CHF</model:code>
+      <model:description>Switzerland Franc </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>CLP</model:code>
+      <model:description>Chile Peso </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>CNY</model:code>
+      <model:description>China Yuan Renminbi </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>COP</model:code>
+      <model:description>Colombia Peso </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>CRC</model:code>
+      <model:description>Costa Rica Colon </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>CUC</model:code>
+      <model:description>Cuba Convertible Peso </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>CUP</model:code>
+      <model:description>Cuba Peso </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>CVE</model:code>
+      <model:description>Cape Verde Escudo </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>CZK</model:code>
+      <model:description>Czech Republic Koruna </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>DJF</model:code>
+      <model:description>Djibouti Franc </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>DKK</model:code>
+      <model:description>Denmark Krone </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>DOP</model:code>
+      <model:description>Dominican Republic Peso </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>DZD</model:code>
+      <model:description>Algeria Dinar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>EGP</model:code>
+      <model:description>Egypt Pound </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>ERN</model:code>
+      <model:description>Eritrea Nakfa </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>ETB</model:code>
+      <model:description>Ethiopia Birr </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>EUR</model:code>
+      <model:description>Euro Member Countries </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>FJD</model:code>
+      <model:description>Fiji Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>FKP</model:code>
+      <model:description>Falkland Islands (Malvinas) Pound </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>GBP</model:code>
+      <model:description>United Kingdom Pound </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>GEL</model:code>
+      <model:description>Georgia Lari </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>GGP</model:code>
+      <model:description>Guernsey Pound </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>GHS</model:code>
+      <model:description>Ghana Cedi </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>GIP</model:code>
+      <model:description>Gibraltar Pound </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>GMD</model:code>
+      <model:description>Gambia Dalasi </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>GNF</model:code>
+      <model:description>Guinea Franc </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>GTQ</model:code>
+      <model:description>Guatemala Quetzal </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>GYD</model:code>
+      <model:description>Guyana Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>HKD</model:code>
+      <model:description>Hong Kong Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>HNL</model:code>
+      <model:description>Honduras Lempira </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>HRK</model:code>
+      <model:description>Croatia Kuna </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>HTG</model:code>
+      <model:description>Haiti Gourde </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>HUF</model:code>
+      <model:description>Hungary Forint </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>IDR</model:code>
+      <model:description>Indonesia Rupiah </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>ILS</model:code>
+      <model:description>Israel Shekel </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>IMP</model:code>
+      <model:description>Isle of Man Pound </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>INR</model:code>
+      <model:description>India Rupee </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>IQD</model:code>
+      <model:description>Iraq Dinar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>IRR</model:code>
+      <model:description>Iran Rial </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>ISK</model:code>
+      <model:description>Iceland Krona </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>JEP</model:code>
+      <model:description>Jersey Pound </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>JMD</model:code>
+      <model:description>Jamaica Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>JOD</model:code>
+      <model:description>Jordan Dinar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>JPY</model:code>
+      <model:description>Japan Yen </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>KES</model:code>
+      <model:description>Kenya Shilling </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>KGS</model:code>
+      <model:description>Kyrgyzstan Som </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>KHR</model:code>
+      <model:description>Cambodia Riel </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>KMF</model:code>
+      <model:description>Comoros Franc </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>KPW</model:code>
+      <model:description>Korea (North) Won </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>KRW</model:code>
+      <model:description>Korea (South) Won </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>KWD</model:code>
+      <model:description>Kuwait Dinar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>KYD</model:code>
+      <model:description>Cayman Islands Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>KZT</model:code>
+      <model:description>Kazakhstan Tenge </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>LAK</model:code>
+      <model:description>Laos Kip </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>LBP</model:code>
+      <model:description>Lebanon Pound </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>LKR</model:code>
+      <model:description>Sri Lanka Rupee </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>LRD</model:code>
+      <model:description>Liberia Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>LSL</model:code>
+      <model:description>Lesotho Loti </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>LYD</model:code>
+      <model:description>Libya Dinar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>MAD</model:code>
+      <model:description>Morocco Dirham </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>MDL</model:code>
+      <model:description>Moldova Leu </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>MGA</model:code>
+      <model:description>Madagascar Ariary </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>MKD</model:code>
+      <model:description>Macedonia Denar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>MMK</model:code>
+      <model:description>Myanmar (Burma) Kyat </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>MNT</model:code>
+      <model:description>Mongolia Tughrik </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>MOP</model:code>
+      <model:description>Macau Pataca </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>MRO</model:code>
+      <model:description>Mauritania Ouguiya </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>MUR</model:code>
+      <model:description>Mauritius Rupee </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>MVR</model:code>
+      <model:description>Maldives (Maldive Islands) Rufiyaa </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>MWK</model:code>
+      <model:description>Malawi Kwacha </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>MXN</model:code>
+      <model:description>Mexico Peso </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>MYR</model:code>
+      <model:description>Malaysia Ringgit </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>MZN</model:code>
+      <model:description>Mozambique Metical </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>NAD</model:code>
+      <model:description>Namibia Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>NGN</model:code>
+      <model:description>Nigeria Naira </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>NIO</model:code>
+      <model:description>Nicaragua Cordoba </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>NOK</model:code>
+      <model:description>Norway Krone </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>NPR</model:code>
+      <model:description>Nepal Rupee </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>NZD</model:code>
+      <model:description>New Zealand Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>OMR</model:code>
+      <model:description>Oman Rial </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>PAB</model:code>
+      <model:description>Panama Balboa </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>PEN</model:code>
+      <model:description>Peru Nuevo Sol </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>PGK</model:code>
+      <model:description>Papua New Guinea Kina </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>PHP</model:code>
+      <model:description>Philippines Peso </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>PKR</model:code>
+      <model:description>Pakistan Rupee </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>PLN</model:code>
+      <model:description>Poland Zloty </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>PYG</model:code>
+      <model:description>Paraguay Guarani </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>QAR</model:code>
+      <model:description>Qatar Riyal </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>RON</model:code>
+      <model:description>Romania New Leu </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>RSD</model:code>
+      <model:description>Serbia Dinar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>RUB</model:code>
+      <model:description>Russia Ruble </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>RWF</model:code>
+      <model:description>Rwanda Franc </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>SAR</model:code>
+      <model:description>Saudi Arabia Riyal </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>SBD</model:code>
+      <model:description>Solomon Islands Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>SCR</model:code>
+      <model:description>Seychelles Rupee </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>SDG</model:code>
+      <model:description>Sudan Pound </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>SEK</model:code>
+      <model:description>Sweden Krona </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>SGD</model:code>
+      <model:description>Singapore Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>SHP</model:code>
+      <model:description>Saint Helena Pound </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>SLL</model:code>
+      <model:description>Sierra Leone Leone </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>SOS</model:code>
+      <model:description>Somalia Shilling </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>SPL</model:code>
+      <model:description>Seborga Luigino</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>SRD</model:code>
+      <model:description>Suriname Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>STD</model:code>
+      <model:description>São Tomé and Príncipe Dobra </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>SVC</model:code>
+      <model:description>El Salvador Colon </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>SYP</model:code>
+      <model:description>Syria Pound </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>SZL</model:code>
+      <model:description>Swaziland Lilangeni </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>THB</model:code>
+      <model:description>Thailand Baht </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>TJS</model:code>
+      <model:description>Tajikistan Somoni </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>TMT</model:code>
+      <model:description>Turkmenistan Manat </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>TND</model:code>
+      <model:description>Tunisia Dinar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>TOP</model:code>
+      <model:description>Tonga Pa'anga </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>TRY</model:code>
+      <model:description>Turkey Lira </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>TTD</model:code>
+      <model:description>Trinidad and Tobago Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>TVD</model:code>
+      <model:description>Tuvalu Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>TWD</model:code>
+      <model:description>Taiwan New Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>TZS</model:code>
+      <model:description>Tanzania Shilling </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>UAH</model:code>
+      <model:description>Ukraine Hryvnia </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>UGX</model:code>
+      <model:description>Uganda Shilling </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>USD</model:code>
+      <model:description>United States Dollar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>UYU</model:code>
+      <model:description>Uruguay Peso </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>UZS</model:code>
+      <model:description>Uzbekistan Som </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>VEF</model:code>
+      <model:description>Venezuela Bolivar </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>VND</model:code>
+      <model:description>Viet Nam Dong </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>VUV</model:code>
+      <model:description>Vanuatu Vatu </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>WST</model:code>
+      <model:description>Samoa Tala </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>YER</model:code>
+      <model:description>Yemen Rial </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>ZAR</model:code>
+      <model:description>South Africa Rand </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>ZMW</model:code>
+      <model:description>Zambia Kwacha </model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>ZWD</model:code>
+      <model:description>Zimbabwe Dollar</model:description>
+    </model:lookupEntry>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="language">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Language</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Language</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>50</model:length>
+  </model:element>
+</model:complexType>

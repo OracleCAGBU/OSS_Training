@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/core/model/common" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:dom="http://xmlns.oracle.com/communications/studio/model/osm/transformation" xmlns:provisioning="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xsi:type="dom:OrderItemParameterBindingType" name="COM_Broadband_Modem_PSBinding">
+  <displayName lang="[default]">COM_Broadband_Modem_PSBinding</displayName>
+  <saveVersion>4</saveVersion>
+  <id>T67sFc+GSvy4ITQDNpo86Q</id>
+  <elementDetails xsi:type="provisioning:ExpressionDetail">
+    <id>-Eoicb+8SB+uYBG63hu-Wg</id>
+    <elementType>oracle.communications.studio.osm.XQueryExpressionDetail</elementType>
+    <parentElementId>JEUHtZa7Sn6+fyMyskngqg</parentElementId>
+    <provisioning:expression xsi:type="provisioning:XqueryExpressionFileRuleType">
+      <provisioning:fileUri>http://www.training.com/binding/COM_Broadband_Modem_PSBinding.xquery</provisioning:fileUri>
+    </provisioning:expression>
+  </elementDetails>
+  <dom:namespace>COM_SalesOrderFulfillment</dom:namespace>
+  <dom:bindings>
+    <id>JEUHtZa7Sn6+fyMyskngqg</id>
+    <elementType>oracle.communications.studio.osm.transformation.entities.binding.parameterbinding</elementType>
+    <dom:bindingName>binding</dom:bindingName>
+  </dom:bindings>
+  <dom:orderItemSpecRef>
+    <entity>COM_SalesOrderFulfillment</entity>
+    <entityType>orderItemSpec</entityType>
+    <relationship>oracle.communications.studio.osm.transformation.entities.binding.binding.orderitem</relationship>
+  </dom:orderItemSpecRef>
+  <dom:orderItemParameterSpecRef>
+    <entity>Broadband_Modem_PS</entity>
+    <entityType>cmnProduct</entityType>
+    <relationship>oracle.communications.studio.osm.transformation.entities.binding.binding.parameterSpec</relationship>
+  </dom:orderItemParameterSpecRef>
+</modelEntity>

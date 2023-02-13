@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<masterOrderTemplate 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns="http://www.metasolv.com/OMS/OrderModel/2002/06/25">
+        <dataNode element="ControlData"  ><dataNode element="OrderItem"  ><dataNode element="PointOfNoReturn"   />
+<dataNode element="OrderItemFulfillmentState"   />
+<dataNode element="FulfillmentPattern"   />
+<dataNode element="LineId"   />
+<dataNode element="LineName"   />
+<dataNode element="ServiceSpecification"   />
+<dataNode element="RequestedDeliveryDate"   />
+<dataNode element="ParentLineId"   />
+<dataNode element="Recognition"   />
+<dataNode element="Action"   />
+<dataNode element="dynamicParams"   />
+<dataNode element="xmlData"   />
+<dataNode element="SpecificationGroup"   />
+ </dataNode>
+<dataNode element="OrderFulfillmentState"   />
+<dataNode element="Functions"  ><dataNode element="DeliverOrderFunction"  ><dataNode element="componentKey"   />
+<dataNode element="calculatedStartDate"   />
+<dataNode element="duration"   />
+<dataNode element="orderItem"  ><dataNode element="ExternalFulfillmentState"   />
+<dataNode element="FunctionProcessingState"   />
+<dataNode element="orderItemRef"  >	<reference>
+		<pathToNode>/ControlData/OrderItem</pathToNode>
+	</reference>
+ </dataNode>
+ </dataNode>
+ </dataNode>
+<dataNode element="PlanDeliveryFunction"  ><dataNode element="componentKey"   />
+<dataNode element="calculatedStartDate"   />
+<dataNode element="duration"   />
+<dataNode element="orderItem"  ><dataNode element="ExternalFulfillmentState"   />
+<dataNode element="FunctionProcessingState"   />
+<dataNode element="orderItemRef"  >	<reference>
+		<pathToNode>/ControlData/OrderItem</pathToNode>
+	</reference>
+ </dataNode>
+ </dataNode>
+ </dataNode>
+<dataNode element="CompleteDeliveryFunction"  ><dataNode element="componentKey"   />
+<dataNode element="calculatedStartDate"   />
+<dataNode element="duration"   />
+<dataNode element="orderItem"  ><dataNode element="ExternalFulfillmentState"   />
+<dataNode element="FunctionProcessingState"   />
+<dataNode element="orderItemRef"  >	<reference>
+		<pathToNode>/ControlData/OrderItem</pathToNode>
+	</reference>
+ </dataNode>
+ </dataNode>
+ </dataNode>
+<dataNode element="DesignServiceFunction"  ><dataNode element="componentKey"   />
+<dataNode element="calculatedStartDate"   />
+<dataNode element="duration"   />
+<dataNode element="orderItem"  ><dataNode element="ExternalFulfillmentState"   />
+<dataNode element="FunctionProcessingState"   />
+<dataNode element="orderItemRef"  >	<reference>
+		<pathToNode>/ControlData/OrderItem</pathToNode>
+	</reference>
+ </dataNode>
+ </dataNode>
+ </dataNode>
+ </dataNode>
+        </dataNode>
+        <dataNode element="inputMessage"  />
+        <dataNode element="BusinessInteractions"  ><dataNode element="BusinessInteraction"  ><dataNode element="Key"   />
+<dataNode element="InteractionID"   />
+<dataNode element="CorrelationID"   />
+<dataNode element="Status"   />
+<dataNode element="StatusDescription"   />
+ </dataNode>
+        </dataNode>
+</masterOrderTemplate>

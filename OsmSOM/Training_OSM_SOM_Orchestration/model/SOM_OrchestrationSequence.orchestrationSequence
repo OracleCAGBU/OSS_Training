@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/orchestration" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:osm="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="OrchestrationSequenceType" name="SOM_OrchestrationSequence">
+  <com:displayName>SOM_OrchestrationSequence</com:displayName>
+  <com:saveVersion>8</com:saveVersion>
+  <com:id>--+HnyRo--+Y---B--+EcA</com:id>
+  <namespace>SOM_ProvisioningOrderFulfillment</namespace>
+  <orderItem>
+    <com:entity>SOM_OrderItemSpecification</com:entity>
+    <com:entityType>orderItemSpec</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.orchestrationSequence.item</com:relationship>
+  </orderItem>
+  <orderItemSelector>
+    <elementSetExpression xsi:type="osm:XqueryExpressionFileRuleType">
+      <osm:fileUri>http://www.somtraining.com/orchestration_sequence/_OrderItemSelector.xquery</osm:fileUri>
+    </elementSetExpression>
+  </orderItemSelector>
+  <fulfillmentMode>
+    <fulfillmentModeRefExpression xsi:type="osm:XqueryExpressionFileRuleType">
+      <osm:fileUri>http://www.somtraining.com/orchestration_sequence/_FulfillmentModeExpression.xquery</osm:fileUri>
+    </fulfillmentModeRefExpression>
+  </fulfillmentMode>
+  <stage>
+    <com:entity>SOM_DetermineFulfillmentFunction</com:entity>
+    <com:entityType>orchestrationStage</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.orchestrationSequence.stage</com:relationship>
+  </stage>
+  <stage>
+    <com:entity>SOM_DetermineTargetSystem</com:entity>
+    <com:entityType>orchestrationStage</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.orchestrationSequence.stage</com:relationship>
+  </stage>
+  <stage>
+    <com:entity>SOM_DetermineProcessingGranularity</com:entity>
+    <com:entityType>orchestrationStage</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.orchestrationSequence.stage</com:relationship>
+  </stage>
+</com:modelEntity>

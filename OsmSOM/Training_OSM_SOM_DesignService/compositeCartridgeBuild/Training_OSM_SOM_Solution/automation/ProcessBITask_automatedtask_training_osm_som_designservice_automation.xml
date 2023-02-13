@@ -1,0 +1,34 @@
+<taskAutomator>
+	<pluginJndiName>ProcessBITask.automatedtask.training_osm_som_designservice.ProcessBIRequestBean</pluginJndiName>
+	<ejbName>ProcessBITask.automatedtask.training_osm_som_designservice.ProcessBIRequestBean</ejbName>
+	<className>oracle.communications.ordermanagement.automation.plugin.XQuerySender</className>
+	<runAs>%{DEFAULT_AUTOMATION_USER}</runAs>
+	          
+	<cartridgeNamespace>@cartridgeNamespace@</cartridgeNamespace>
+    <cartridgeVersion>@cartridgeVersion@</cartridgeVersion>    
+
+	<receive xsi:type="am:InternalReceiver">
+		<mnemonic>ProcessBITask</mnemonic>
+ 		<executionModes>do</executionModes>
+	</receive>		
+    
+	<implement xsi:type="am:XquerySender">
+		<to>
+			<jndiName>%{INVENTORY_REQUEST_QUEUE}</jndiName>
+			<destinationType>javax.jms.Queue</destinationType>
+		</to>
+		<replyTo>
+			<jndiName>%{INVENTORY_RESPONSE_QUEUE}</jndiName>
+			<destinationType>javax.jms.Queue</destinationType>
+		</replyTo>
+		<am:sendNullMessage>false</am:sendNullMessage>
+		<am:script>
+			<am:url>http://www.training.com/som/designservice/resources/plugin/ProcessBIRequest.xquery</am:url>
+			<am:cache>
+				<am:maxSize>50</am:maxSize>
+				<am:timeout>15000</am:timeout>
+			</am:cache>
+		</am:script>
+	</implement>          
+	<failTaskOnException>false</failTaskOnException>
+</taskAutomator>

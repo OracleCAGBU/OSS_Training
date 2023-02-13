@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:tns="http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_SOM_Orchestration/OracleComms_OSM_SOM_Orchestration" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_SOM_Orchestration/OracleComms_OSM_SOM_Orchestration">
+    <xs:complexType name="xmlData">
+    <xs:sequence/>
+  </xs:complexType>
+    <xs:complexType name="inputMessage">
+    <xs:complexContent>
+      <xs:extension base="tns:xmlData"/>
+    </xs:complexContent>
+  </xs:complexType>
+    <xs:simpleType name="LineId">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="40"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="LineName">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="40"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="ServiceSpecification">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="40"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="FulfillmentPattern">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="40"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="RequestedDeliveryDate">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="40"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="ParentLineId">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="40"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:complexType name="SpecificationGroup">
+    <xs:sequence/>
+  </xs:complexType>
+    <xs:complexType name="BusinessInteractions">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="BusinessInteraction">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:restriction base="xs:anyType">
+              <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="0" name="Key">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:minLength value="0"/>
+                      <xs:maxLength value="200"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:element>
+                <xs:element maxOccurs="1" minOccurs="0" name="InteractionID">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:minLength value="0"/>
+                      <xs:maxLength value="200"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:element>
+                <xs:element maxOccurs="1" minOccurs="0" name="CorrelationID">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:minLength value="0"/>
+                      <xs:maxLength value="200"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:element>
+                <xs:element maxOccurs="1" minOccurs="0" name="Status">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:minLength value="0"/>
+                      <xs:maxLength value="40"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:element>
+                <xs:element maxOccurs="1" minOccurs="0" name="StatusDescription">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:minLength value="0"/>
+                      <xs:maxLength value="1000"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:element>
+              </xs:sequence>
+            </xs:restriction>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

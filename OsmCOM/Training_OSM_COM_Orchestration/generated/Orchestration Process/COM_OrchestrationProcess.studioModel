@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:OrchestrationProcess" id="op=COM_OrchestrationProcess" type="op" typeName="Orchestration Process" name="COM_OrchestrationProcess" resource="\Training_OSM_COM_Orchestration\model\COM_OrchestrationProcess.orchestrationProcess">
+    <displayName lang="default">COM_OrchestrationProcess</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=Training_OSM_COM_Orchestration" type="Order and Service Management Project" name="Dependency">
+        <target name="Training_OSM_COM_Orchestration" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <sequence>
+      <relation ref="osq=COM_OrchestrationSequence" type="Orchestration Sequence" name="Sequenece" kind="Entity">
+        <target name="COM_OrchestrationSequence" typeName="Orchestration Sequence"/>
+      </relation>
+    </sequence>
+    <providerFunctions>
+      <relation ref="pf=Calculate_Service_Order" type="Provider Function" name="Provider Function" kind="Entity">
+        <target name="Calculate_Service_Order" typeName="Provider Function"/>
+      </relation>
+    </providerFunctions>
+  </entity>
+</model:Model>

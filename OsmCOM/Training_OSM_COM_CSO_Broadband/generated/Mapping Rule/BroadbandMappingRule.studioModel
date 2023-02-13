@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:MappingRule" id="mr=BroadbandMappingRule" type="mr" typeName="Mapping Rule" name="BroadbandMappingRule" resource="\Training_OSM_COM_CSO_Broadband\model\MAPPING_RULE\BroadbandMappingRule.mappingRule">
+    <displayName lang="default">BroadbandMappingRule</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=Training_OSM_COM_CSO_Broadband" type="Order and Service Management Project" name="Dependency">
+        <target name="Training_OSM_COM_CSO_Broadband" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <inputOrderItem>
+      <relation ref="ois=COM_SalesOrderFulfillment" type="Order Item Specification" name="Input Order Item" kind="Entity">
+        <target name="COM_SalesOrderFulfillment" typeName="Order Item Specification"/>
+      </relation>
+    </inputOrderItem>
+    <outputOrderItem>
+      <relation ref="ois=COM_TransformedOrderLine" type="Order Item Specification" name="Output Order Item" kind="Entity">
+        <target name="COM_TransformedOrderLine" typeName="Order Item Specification"/>
+      </relation>
+    </outputOrderItem>
+    <providerFunction>
+      <relation ref="pf=Calculate_Service_Order" type="Provider Function" name="Provider Function" kind="Entity">
+        <target name="Calculate_Service_Order" typeName="Provider Function"/>
+      </relation>
+    </providerFunction>
+    <namedRelationship>
+      <element id="mr=BroadbandMappingRule+mr.nr=VUgh28IEQP2oUx+jdVjZcw" type="mr.nr" typeName="Named Relationship" kind="Element" name="Broadband_PS -> ServiceActions_Broadband_CFS - Primary" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary">
+        <note lang="default"></note>
+        <namedRelationship>
+          <relation ref="prd=Broadband_PS+prd.sd=KziDUC9vRI6mMFHEa7hhlQ" type="Service Detail" name="Named Relationship" kind="Element">
+            <target name="Broadband_PS_Broadband_CFS_Primary" typeName="Service Detail"/>
+            <inEntity name="Broadband_PS" typeName="Product"/>
+          </relation>
+        </namedRelationship>
+        <mappingRuleItem>
+          <element id="mr=BroadbandMappingRule+mr.mri=5jW7fSUzR5+c987ah+63Zw" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[Username] -> [Username]" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[Username] -> [Username]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=h2UOk0ypRcKCJrpDzSp4YA" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[Username] -> [Username] Mapping Rule Item Source" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[Username] -> [Username]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_PS+dataElement=0M7SZRUfTBG4KA6jOTTtyA" type="Data Element" name="Source" kind="Element">
+                    <target name="Username" typeName="Data Element"/>
+                    <inEntity name="Broadband_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=RlzDrwpVSsex0Z4AGGFSqQ" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[Username] -> [Username] Mapping Rule Item Target" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[Username] -> [Username]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=8CvoGRwmRPeSHyLtpJYmYQ" type="Data Element" name="Target" kind="Element">
+                    <target name="Username" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=klEqjPddRMmx9o50HFQM-w" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[Username] -> [Username] Multiple Instance" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[Username] -> [Username]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=a5z21WnbSUKvXCmNBZk5rw" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[BuildingName] -> [BuildingName]" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[BuildingName] -> [BuildingName]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=Zmg8VQbWRmCl7p2VKhWe1g" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[BuildingName] -> [BuildingName] Mapping Rule Item Source" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[BuildingName] -> [BuildingName]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_PS+dataElement=LiEIkwN-RTSY2JRmRmkU5g" type="Data Element" name="Source" kind="Element">
+                    <target name="BuildingName" typeName="Data Element"/>
+                    <inEntity name="Broadband_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=nNISZTYPTMCZRJSEbpiwgQ" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[BuildingName] -> [BuildingName] Mapping Rule Item Target" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[BuildingName] -> [BuildingName]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=yuKTSAybS6CpfQdJ0UgAWA" type="Data Element" name="Target" kind="Element">
+                    <target name="BuildingName" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=RgwEE4pCRRGtGVPYK2yz-g" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[BuildingName] -> [BuildingName] Multiple Instance" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[BuildingName] -> [BuildingName]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=N2gh7RXKQ8i-YwPZz67n1A" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[PayType] -> [PayType]" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[PayType] -> [PayType]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=r3InE9tWTTyV6x6AHZDh-Q" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[PayType] -> [PayType] Mapping Rule Item Source" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[PayType] -> [PayType]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_PS+dataElement=v8ZG2sO2To+3Kyn7ZycN2w" type="Data Element" name="Source" kind="Element">
+                    <target name="PayType" typeName="Data Element"/>
+                    <inEntity name="Broadband_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=g-PbEwlUQ5yvSBoHaVgelQ" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[PayType] -> [PayType] Mapping Rule Item Target" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[PayType] -> [PayType]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=+Up1r21GRty9dkSBcK3AOw" type="Data Element" name="Target" kind="Element">
+                    <target name="PayType" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=cVUaWZH5Qr6ifIx-gEok7A" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[PayType] -> [PayType] Multiple Instance" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[PayType] -> [PayType]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=MwIrK2l-SCKtfAVvzD+CYA" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[Longitude] -> [Longitude]" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[Longitude] -> [Longitude]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=4pcSCxpHTc24lpfODo9XAQ" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[Longitude] -> [Longitude] Mapping Rule Item Source" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[Longitude] -> [Longitude]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_PS+dataElement=vaIu5ejNSRm7vzqv+72CkA" type="Data Element" name="Source" kind="Element">
+                    <target name="Longitude" typeName="Data Element"/>
+                    <inEntity name="Broadband_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=TEoF1gGcQJyDFLRqZ5gH7Q" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[Longitude] -> [Longitude] Mapping Rule Item Target" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[Longitude] -> [Longitude]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=yl7kxJyNQLqXQmAspQJFzA" type="Data Element" name="Target" kind="Element">
+                    <target name="Longitude" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=RJAqag6FTHajMAYWi5Lyeg" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[Longitude] -> [Longitude] Multiple Instance" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[Longitude] -> [Longitude]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=qSaoIxeiS-iCtAlPcTC0Cw" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[PlanName] -> [PlanName]" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[PlanName] -> [PlanName]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=ZD3wmyoJTHmjFoOcTfvsqA" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[PlanName] -> [PlanName] Mapping Rule Item Source" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[PlanName] -> [PlanName]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_PS+dataElement=GJo4j75WS2ym1j28rYNUXQ" type="Data Element" name="Source" kind="Element">
+                    <target name="PlanName" typeName="Data Element"/>
+                    <inEntity name="Broadband_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=6pn-u68YTlCuohXBy6neaA" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[PlanName] -> [PlanName] Mapping Rule Item Target" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[PlanName] -> [PlanName]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=KiXUFZH-QySpg7bnRidVTw" type="Data Element" name="Target" kind="Element">
+                    <target name="PlanName" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=tRTx-47JQP2qy7QiVFGwrw" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[PlanName] -> [PlanName] Multiple Instance" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[PlanName] -> [PlanName]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=gIAQ5WbnTq+-XGLOi9j4qQ" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[CustomerSegment] -> [CustomerSegment]" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[CustomerSegment] -> [CustomerSegment]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=srDB73wwQUmkDpskpqJINg" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[CustomerSegment] -> [CustomerSegment] Mapping Rule Item Source" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[CustomerSegment] -> [CustomerSegment]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_PS+dataElement=tOloSGFlSm2gF9hp6Q99lQ" type="Data Element" name="Source" kind="Element">
+                    <target name="CustomerSegment" typeName="Data Element"/>
+                    <inEntity name="Broadband_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=k8gbmA3JTwWgDsn6sNFhOw" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[CustomerSegment] -> [CustomerSegment] Mapping Rule Item Target" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[CustomerSegment] -> [CustomerSegment]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=CwMp4FK1Q0GbHFIDG1TLhg" type="Data Element" name="Target" kind="Element">
+                    <target name="CustomerSegment" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=XAK+ua6tRWaolr0fNQvkpA" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[CustomerSegment] -> [CustomerSegment] Multiple Instance" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[CustomerSegment] -> [CustomerSegment]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=XB-sJX1+TKasxIWVrQOydQ" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[PartyName] -> [PartyName]" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[PartyName] -> [PartyName]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=jtDtaoV6QfqClqrGpJ7LHg" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[PartyName] -> [PartyName] Mapping Rule Item Source" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[PartyName] -> [PartyName]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_PS+dataElement=mD+Ajy7uTl+2PXnnjcqBsA" type="Data Element" name="Source" kind="Element">
+                    <target name="PartyName" typeName="Data Element"/>
+                    <inEntity name="Broadband_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=ant8umTES36vof8yim8c3w" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[PartyName] -> [PartyName] Mapping Rule Item Target" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[PartyName] -> [PartyName]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=8pl52mPOT4e3B0PNUC-iLg" type="Data Element" name="Target" kind="Element">
+                    <target name="PartyName" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=wnUN3R+WR+G46Ph-Yt2qjA" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[PartyName] -> [PartyName] Multiple Instance" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[PartyName] -> [PartyName]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=Gk-BzJaARbi9LoYyiq-WVA" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[HouseNumber] -> [Street_HouseNumber]" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[HouseNumber] -> [Street_HouseNumber]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=JBzRHNIqRX29MSOUY6ENcA" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[HouseNumber] -> [Street_HouseNumber] Mapping Rule Item Source" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[HouseNumber] -> [Street_HouseNumber]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_PS+dataElement=tFacHVd2R46F+9EIAEvZEA" type="Data Element" name="Source" kind="Element">
+                    <target name="HouseNumber" typeName="Data Element"/>
+                    <inEntity name="Broadband_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=bmPv+i4hSwaQZ0VQfjlKAQ" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[HouseNumber] -> [Street_HouseNumber] Mapping Rule Item Target" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[HouseNumber] -> [Street_HouseNumber]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=ljLRzhmuQnyJ88jvVzuhKg" type="Data Element" name="Target" kind="Element">
+                    <target name="Street_HouseNumber" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=ZsXBH11QTtO3LpDwS0Dx9g" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[HouseNumber] -> [Street_HouseNumber] Multiple Instance" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[HouseNumber] -> [Street_HouseNumber]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=NY6hQE5TTnSOOPMDoUrdYA" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[ProductAction] -> [ServiceAction]" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[ProductAction] -> [ServiceAction]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=Ca4oM+PhR+yLRf20EwC0zQ" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[ProductAction] -> [ServiceAction] Mapping Rule Item Source" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[ProductAction] -> [ServiceAction]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_PS+dataElement=7hvi1ejCRM+b3vQbaSbFZw" type="Data Element" name="Source" kind="Element">
+                    <target name="ProductAction" typeName="Data Element"/>
+                    <inEntity name="Broadband_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=MjU6osdVTM2YVfjHWXIQ+A" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[ProductAction] -> [ServiceAction] Mapping Rule Item Target" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[ProductAction] -> [ServiceAction]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=bRBe+GjFQoClgQ4iLxFs1w" type="Data Element" name="Target" kind="Element">
+                    <target name="ServiceAction" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=PsPov3i8TrmOQyAWqrjFPA" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[ProductAction] -> [ServiceAction] Multiple Instance" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[ProductAction] -> [ServiceAction]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=4wVXsSGbQSGuupo3riZZxw" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[Latitude] -> [Latitude]" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[Latitude] -> [Latitude]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=6x9QMreLQqGPMJQlcJNJDg" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[Latitude] -> [Latitude] Mapping Rule Item Source" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[Latitude] -> [Latitude]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_PS+dataElement=szOy-GQuTieAJIjTBKpv6A" type="Data Element" name="Source" kind="Element">
+                    <target name="Latitude" typeName="Data Element"/>
+                    <inEntity name="Broadband_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=cdmsIAt4QQS8+WZpIVwjQA" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[Latitude] -> [Latitude] Mapping Rule Item Target" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[Latitude] -> [Latitude]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=r1YC9xHqS5qc3Sm7GiILwA" type="Data Element" name="Target" kind="Element">
+                    <target name="Latitude" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=u+LKueFaQVSFeE2BVcIkSw" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[Latitude] -> [Latitude] Multiple Instance" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[Latitude] -> [Latitude]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=O3id+FmzRGe9DZu5i6BpjA" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[RequestedDeliveryDate] -> [RequestedDeliveryDate]" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[RequestedDeliveryDate] -> [RequestedDeliveryDate]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=fXf4sAnnQQC7Uc2ce0wrtA" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[RequestedDeliveryDate] -> [RequestedDeliveryDate] Mapping Rule Item Source" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[RequestedDeliveryDate] -> [RequestedDeliveryDate]/Unknown">
+                <source>
+                  <relation ref="ois=COM_SalesOrderFulfillment+prov.order.node=/ControlData/OrderItem/RequestedDeliveryDate" type="Order Node Element" name="Source" kind="Element">
+                    <target name="RequestedDeliveryDate" typeName="Order Node Element"/>
+                    <inEntity name="COM_SalesOrderFulfillment" typeName="Order Item Specification"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=eLWWJWh4SYK+4P5cXLhkhQ" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[RequestedDeliveryDate] -> [RequestedDeliveryDate] Mapping Rule Item Target" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[RequestedDeliveryDate] -> [RequestedDeliveryDate]/Unknown">
+                <target>
+                  <relation ref="ois=COM_TransformedOrderLine+prov.order.node=/ControlData/OrderItem/RequestedDeliveryDate" type="Order Node Element" name="Target" kind="Element">
+                    <target name="RequestedDeliveryDate" typeName="Order Node Element"/>
+                    <inEntity name="COM_TransformedOrderLine" typeName="Order Item Specification"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=k5HGyqHKQOmPwOe8votveg" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[RequestedDeliveryDate] -> [RequestedDeliveryDate] Multiple Instance" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[RequestedDeliveryDate] -> [RequestedDeliveryDate]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=rymWompMRV2CO9Ik05VYUA" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[Password] -> [Password]" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[Password] -> [Password]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=KFgQg-TOSzKUqp1+v-mNlA" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[Password] -> [Password] Mapping Rule Item Source" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[Password] -> [Password]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_PS+dataElement=YMeV3-TuRDWBxez3kJ0AQQ" type="Data Element" name="Source" kind="Element">
+                    <target name="Password" typeName="Data Element"/>
+                    <inEntity name="Broadband_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=2kOWfSp5Q0yGWTpwQCqfew" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[Password] -> [Password] Mapping Rule Item Target" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[Password] -> [Password]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=BE8fbNb8Tb+QN9NA5qjmHQ" type="Data Element" name="Target" kind="Element">
+                    <target name="Password" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=+7TkNZeRTQC+TaFIR35kAw" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[Password] -> [Password] Multiple Instance" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[Password] -> [Password]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=seO2VIxrRZOmBB9lYj+cqQ" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[FulfillmentPattern] -> [FulfillmentPattern]" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[FulfillmentPattern] -> [FulfillmentPattern]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=75WxMPccT4GWFXbbEfMo-A" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[FulfillmentPattern] -> [FulfillmentPattern] Mapping Rule Item Source" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[FulfillmentPattern] -> [FulfillmentPattern]/Unknown">
+                <source>
+                  <relation ref="ois=COM_SalesOrderFulfillment+prov.order.node=/ControlData/OrderItem/FulfillmentPattern" type="Order Node Element" name="Source" kind="Element">
+                    <target name="FulfillmentPattern" typeName="Order Node Element"/>
+                    <inEntity name="COM_SalesOrderFulfillment" typeName="Order Item Specification"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=UJFGA+a2SbO0N1TABYaEdg" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[FulfillmentPattern] -> [FulfillmentPattern] Mapping Rule Item Target" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[FulfillmentPattern] -> [FulfillmentPattern]/Unknown">
+                <target>
+                  <relation ref="ois=COM_TransformedOrderLine+prov.order.node=/ControlData/OrderItem/FulfillmentPattern" type="Order Node Element" name="Target" kind="Element">
+                    <target name="FulfillmentPattern" typeName="Order Node Element"/>
+                    <inEntity name="COM_TransformedOrderLine" typeName="Order Item Specification"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=BoZkcr9sSoCj6gcgDp-2Hg" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[FulfillmentPattern] -> [FulfillmentPattern] Multiple Instance" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[FulfillmentPattern] -> [FulfillmentPattern]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=iYbhtqW9R7CJiR4cu6N9Ng" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[StreetName] -> [Street_VillageName]" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[StreetName] -> [Street_VillageName]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=O4NNi9TzQL+WikdeBjnKyA" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[StreetName] -> [Street_VillageName] Mapping Rule Item Source" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[StreetName] -> [Street_VillageName]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_PS+dataElement=sxV7pzOLSgS7Qs-x1pqXTQ" type="Data Element" name="Source" kind="Element">
+                    <target name="StreetName" typeName="Data Element"/>
+                    <inEntity name="Broadband_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=1fL1V6U7QJOxAKQxlPxfew" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[StreetName] -> [Street_VillageName] Mapping Rule Item Target" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[StreetName] -> [Street_VillageName]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=f2g8v00bSvyFJ-4BpabJ3Q" type="Data Element" name="Target" kind="Element">
+                    <target name="Street_VillageName" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=Z7faly4oTvuDSdmZsE8H1Q" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[StreetName] -> [Street_VillageName] Multiple Instance" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/[StreetName] -> [Street_VillageName]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+        </mappingRuleItem>
+        <input>
+          <relation ref="prd=Broadband_PS" type="Product" name="Input" kind="Entity">
+            <target name="Broadband_PS" typeName="Product"/>
+          </relation>
+        </input>
+        <output>
+          <relation ref="cfs=Broadband_CFS" type="Customer Facing Service" name="Output" kind="Entity">
+            <target name="Broadband_CFS" typeName="Customer Facing Service"/>
+          </relation>
+        </output>
+        <relationshipType>
+          <relation ref="rt=Primary" type="Relationship Type" name="Relationship Type" kind="Entity">
+            <target name="Primary" typeName="Relationship Type"/>
+          </relation>
+        </relationshipType>
+        <actionMappings>
+          <element id="mr=BroadbandMappingRule+mr.am=fgwiv6a5T5CYGke8EH0LJQ" type="mr.am" typeName="Action Mappings" kind="Element" name="Broadband_PS -> ServiceActions_Broadband_CFS - Primary Action Mappings" path="/Broadband_PS -> ServiceActions_Broadband_CFS - Primary/Unknown" useRelationshipActionMap="true"/>
+        </actionMappings>
+      </element>
+      <element id="mr=BroadbandMappingRule+mr.nr=el0JHTulRmioNeXmObdwWA" type="mr.nr" typeName="Named Relationship" kind="Element" name="Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary">
+        <note lang="default"></note>
+        <namedRelationship>
+          <relation ref="prd=Broadband_Modem_PS+prd.sd=HwH2UVG4T4eXbJCjYQ2TbA" type="Service Detail" name="Named Relationship" kind="Element">
+            <target name="Broadband_Modem_PS_Broadband_CFS_Auxiliary" typeName="Service Detail"/>
+            <inEntity name="Broadband_Modem_PS" typeName="Product"/>
+          </relation>
+        </namedRelationship>
+        <mappingRuleItem>
+          <element id="mr=BroadbandMappingRule+mr.mri=QJ2m3Y07TGWT-p47lsSKjw" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[Vendor] -> [Vendor]" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[Vendor] -> [Vendor]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=pqIbwDXJT8WGry1UXNWASw" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[Vendor] -> [Vendor] Mapping Rule Item Source" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[Vendor] -> [Vendor]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_Modem_PS+dataElement=XSCm-bCAQCWuAiZahLxNPg" type="Data Element" name="Source" kind="Element">
+                    <target name="Vendor" typeName="Data Element"/>
+                    <inEntity name="Broadband_Modem_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=BVQpJzPpRQ6tFjXu5rC81Q" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[Vendor] -> [Vendor] Mapping Rule Item Target" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[Vendor] -> [Vendor]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=jpTN2MELRZGFjwWLNHbIdA" type="Data Element" name="Target" kind="Element">
+                    <target name="Vendor" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=nclfi5RgQ6CDEQ00+KsUhQ" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[Vendor] -> [Vendor] Multiple Instance" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[Vendor] -> [Vendor]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=t-uWEArBT12THCexATDBUA" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[MACAddress] -> [MACAddress]" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[MACAddress] -> [MACAddress]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=JnqwA1fsR6eIzhllRsH-Sw" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[MACAddress] -> [MACAddress] Mapping Rule Item Source" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[MACAddress] -> [MACAddress]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_Modem_PS+dataElement=r35G0VmBQPiDfcucHTJmsg" type="Data Element" name="Source" kind="Element">
+                    <target name="MACAddress" typeName="Data Element"/>
+                    <inEntity name="Broadband_Modem_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=PyugCZ9-Qqm4kh1dAzHDxg" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[MACAddress] -> [MACAddress] Mapping Rule Item Target" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[MACAddress] -> [MACAddress]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=7SngMXsUQRa6FRLhdKpdJg" type="Data Element" name="Target" kind="Element">
+                    <target name="MACAddress" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=RGxkmiuqRoufZ4YoxN+Zsg" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[MACAddress] -> [MACAddress] Multiple Instance" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[MACAddress] -> [MACAddress]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=JJfsHoWtQlGdHU7kZ0aEiw" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[Model] -> [Model]" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[Model] -> [Model]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=gG1353mARieXUnMImD6O1Q" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[Model] -> [Model] Mapping Rule Item Source" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[Model] -> [Model]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_Modem_PS+dataElement=NINLdWQ8RWqnLoLPggehog" type="Data Element" name="Source" kind="Element">
+                    <target name="Model" typeName="Data Element"/>
+                    <inEntity name="Broadband_Modem_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=1-KuWS1BTSuO2kXZUZG9dw" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[Model] -> [Model] Mapping Rule Item Target" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[Model] -> [Model]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=wr9KsgX8R+SnAsF-VC+m5g" type="Data Element" name="Target" kind="Element">
+                    <target name="Model" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=tdu0pJVOQXGMUQK7zDElKw" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[Model] -> [Model] Multiple Instance" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[Model] -> [Model]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=lqmkiKoGTPu0lvSoLU11CA" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[IPAddress] -> [IPAddress]" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[IPAddress] -> [IPAddress]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=sgYSCNtPTVm4Eo8RVc9C7A" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[IPAddress] -> [IPAddress] Mapping Rule Item Source" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[IPAddress] -> [IPAddress]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_Modem_PS+dataElement=tx2OR9qXQCKF2g4oYqOgAA" type="Data Element" name="Source" kind="Element">
+                    <target name="IPAddress" typeName="Data Element"/>
+                    <inEntity name="Broadband_Modem_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=jnMgWI0dQju+8VQhAXYcrw" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[IPAddress] -> [IPAddress] Mapping Rule Item Target" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[IPAddress] -> [IPAddress]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=E4g5QVwWQBe0VYjfXqavOg" type="Data Element" name="Target" kind="Element">
+                    <target name="IPAddress" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=lWHTQIaNT2KNahpqoThGEQ" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[IPAddress] -> [IPAddress] Multiple Instance" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[IPAddress] -> [IPAddress]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=wrVp+JhLTs6uvvHCs-aFfA" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[SerialNumber] -> [SerialNumber]" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[SerialNumber] -> [SerialNumber]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=yaAFMV7TTaulVHXHoLDVrg" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[SerialNumber] -> [SerialNumber] Mapping Rule Item Source" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[SerialNumber] -> [SerialNumber]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_Modem_PS+dataElement=RRhchtOaSfeGArnpNKGHmA" type="Data Element" name="Source" kind="Element">
+                    <target name="SerialNumber" typeName="Data Element"/>
+                    <inEntity name="Broadband_Modem_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=rg7J1NCERLmwaoCJFjPaTw" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[SerialNumber] -> [SerialNumber] Mapping Rule Item Target" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[SerialNumber] -> [SerialNumber]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=vmvImEiTQruVHmRAoUSqxA" type="Data Element" name="Target" kind="Element">
+                    <target name="SerialNumber" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=Q-iiG8BoQb+20v012jruRQ" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[SerialNumber] -> [SerialNumber] Multiple Instance" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[SerialNumber] -> [SerialNumber]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=8N76Xtp9SqOy0rTYHokoTQ" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[AccessTechnology] -> [AccessTechnology]" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[AccessTechnology] -> [AccessTechnology]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=mweDzAwMQka4SwTxCBPL9w" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[AccessTechnology] -> [AccessTechnology] Mapping Rule Item Source" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[AccessTechnology] -> [AccessTechnology]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_Modem_PS+dataElement=GzzbMEGKT3yJKChb+MyXyw" type="Data Element" name="Source" kind="Element">
+                    <target name="AccessTechnology" typeName="Data Element"/>
+                    <inEntity name="Broadband_Modem_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=9hM9+vcQQlOluY1PI4NaMw" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[AccessTechnology] -> [AccessTechnology] Mapping Rule Item Target" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[AccessTechnology] -> [AccessTechnology]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=-ezdC2y9TLuby+tGeuqdKQ" type="Data Element" name="Target" kind="Element">
+                    <target name="AccessTechnology" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=b+ujid3BTHCmTs2TDYRZYw" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[AccessTechnology] -> [AccessTechnology] Multiple Instance" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[AccessTechnology] -> [AccessTechnology]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=AKuwkwkhSwWtpdHvrUDpuA" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[DeviceType] -> [CPEType]" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[DeviceType] -> [CPEType]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=y1XFazhDQ2OX34V8r+rOfQ" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[DeviceType] -> [CPEType] Mapping Rule Item Source" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[DeviceType] -> [CPEType]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_Modem_PS+dataElement=sBWdDqOvQ2SZcghfXALG5w" type="Data Element" name="Source" kind="Element">
+                    <target name="DeviceType" typeName="Data Element"/>
+                    <inEntity name="Broadband_Modem_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=ExpRs02wTCynQFahECl6+g" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[DeviceType] -> [CPEType] Mapping Rule Item Target" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[DeviceType] -> [CPEType]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=F0vzCk1lTo+8FOVVnAW0zQ" type="Data Element" name="Target" kind="Element">
+                    <target name="CPEType" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=UInpI9GTSjGGsA16YgRcYg" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[DeviceType] -> [CPEType] Multiple Instance" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/[DeviceType] -> [CPEType]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+        </mappingRuleItem>
+        <input>
+          <relation ref="prd=Broadband_Modem_PS" type="Product" name="Input" kind="Entity">
+            <target name="Broadband_Modem_PS" typeName="Product"/>
+          </relation>
+        </input>
+        <output>
+          <relation ref="cfs=Broadband_CFS" type="Customer Facing Service" name="Output" kind="Entity">
+            <target name="Broadband_CFS" typeName="Customer Facing Service"/>
+          </relation>
+        </output>
+        <relationshipType>
+          <relation ref="rt=Auxiliary" type="Relationship Type" name="Relationship Type" kind="Entity">
+            <target name="Auxiliary" typeName="Relationship Type"/>
+          </relation>
+        </relationshipType>
+        <actionMappings>
+          <element id="mr=BroadbandMappingRule+mr.am=E5cAkowGQMCVcOV5oxxn7Q" type="mr.am" typeName="Action Mappings" kind="Element" name="Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary Action Mappings" path="/Broadband_Modem_PS -> ServiceActions_Broadband_CFS - Auxiliary/Unknown" useRelationshipActionMap="true"/>
+        </actionMappings>
+      </element>
+      <element id="mr=BroadbandMappingRule+mr.nr=xtbblJe1S76fsUlLZn5qsQ" type="mr.nr" typeName="Named Relationship" kind="Element" name="Broadband_Bandwidth_PS -> ServiceActions_Broadband_CFS - Auxiliary" path="/Broadband_Bandwidth_PS -> ServiceActions_Broadband_CFS - Auxiliary">
+        <note lang="default"></note>
+        <namedRelationship>
+          <relation ref="prd=Broadband_Bandwidth_PS+prd.sd=uzNTpoDlSb+JZuZ4N9z2cQ" type="Service Detail" name="Named Relationship" kind="Element">
+            <target name="Broadband_Bandwidth_PS_Broadband_CFS_Auxiliary" typeName="Service Detail"/>
+            <inEntity name="Broadband_Bandwidth_PS" typeName="Product"/>
+          </relation>
+        </namedRelationship>
+        <mappingRuleItem>
+          <element id="mr=BroadbandMappingRule+mr.mri=FtAKJMObTgCecOArKKxD1w" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[UploadSpeed] -> [UploadSpeed]" path="/Broadband_Bandwidth_PS -> ServiceActions_Broadband_CFS - Auxiliary/[UploadSpeed] -> [UploadSpeed]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=+6ZIQ0N+QvqG6YOTpuNRqQ" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[UploadSpeed] -> [UploadSpeed] Mapping Rule Item Source" path="/Broadband_Bandwidth_PS -> ServiceActions_Broadband_CFS - Auxiliary/[UploadSpeed] -> [UploadSpeed]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_Bandwidth_PS+dataElement=oYAFn+9mTtOECYNYlmsung" type="Data Element" name="Source" kind="Element">
+                    <target name="UploadSpeed" typeName="Data Element"/>
+                    <inEntity name="Broadband_Bandwidth_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=iC2bzJM0R6a07jFf1dGpQg" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[UploadSpeed] -> [UploadSpeed] Mapping Rule Item Target" path="/Broadband_Bandwidth_PS -> ServiceActions_Broadband_CFS - Auxiliary/[UploadSpeed] -> [UploadSpeed]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=Qs2V5wmkTKaqMgukTzUWcA" type="Data Element" name="Target" kind="Element">
+                    <target name="UploadSpeed" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=ILq5Hpw0TjG2Oe6amGo5Rg" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[UploadSpeed] -> [UploadSpeed] Multiple Instance" path="/Broadband_Bandwidth_PS -> ServiceActions_Broadband_CFS - Auxiliary/[UploadSpeed] -> [UploadSpeed]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+          <element id="mr=BroadbandMappingRule+mr.mri=obLL2W3RRDmdpXEcWKMPgw" type="mr.mri" typeName="Mapping Rule Item" kind="Element" name="[DownloadSpeed] -> [DownloadSpeed]" path="/Broadband_Bandwidth_PS -> ServiceActions_Broadband_CFS - Auxiliary/[DownloadSpeed] -> [DownloadSpeed]">
+            <sourceParameter>
+              <element id="mr=BroadbandMappingRule+mr.mris=9p5mBMLMSCmmHClzmhiC+g" type="mr.mris" typeName="Mapping Rule Item Source" kind="Element" name="[DownloadSpeed] -> [DownloadSpeed] Mapping Rule Item Source" path="/Broadband_Bandwidth_PS -> ServiceActions_Broadband_CFS - Auxiliary/[DownloadSpeed] -> [DownloadSpeed]/Unknown">
+                <source>
+                  <relation ref="prd=Broadband_Bandwidth_PS+dataElement=QiS8NfmDQGyFxFm9SU+CPw" type="Data Element" name="Source" kind="Element">
+                    <target name="DownloadSpeed" typeName="Data Element"/>
+                    <inEntity name="Broadband_Bandwidth_PS" typeName="Product"/>
+                  </relation>
+                </source>
+              </element>
+            </sourceParameter>
+            <targetParameter>
+              <element id="mr=BroadbandMappingRule+mr.mrit=swSWpmnqSW2ywuIs-TQi-w" type="mr.mrit" typeName="Mapping Rule Item Target" kind="Element" name="[DownloadSpeed] -> [DownloadSpeed] Mapping Rule Item Target" path="/Broadband_Bandwidth_PS -> ServiceActions_Broadband_CFS - Auxiliary/[DownloadSpeed] -> [DownloadSpeed]/Unknown">
+                <target>
+                  <relation ref="act=ServiceActions_Broadband_CFS+dataElement=-kAupJfVTdSDch1oWVAR2w" type="Data Element" name="Target" kind="Element">
+                    <target name="DownloadSpeed" typeName="Data Element"/>
+                    <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+                  </relation>
+                </target>
+              </element>
+            </targetParameter>
+            <multiInstance>
+              <element id="mr=BroadbandMappingRule+mr.mi=u65++PHiTgqJ1rApEP01AA" type="mr.mi" typeName="Multiple Instance" kind="Element" name="[DownloadSpeed] -> [DownloadSpeed] Multiple Instance" path="/Broadband_Bandwidth_PS -> ServiceActions_Broadband_CFS - Auxiliary/[DownloadSpeed] -> [DownloadSpeed]/Unknown" useDefaultKey="true"/>
+            </multiInstance>
+          </element>
+        </mappingRuleItem>
+        <input>
+          <relation ref="prd=Broadband_Bandwidth_PS" type="Product" name="Input" kind="Entity">
+            <target name="Broadband_Bandwidth_PS" typeName="Product"/>
+          </relation>
+        </input>
+        <output>
+          <relation ref="cfs=Broadband_CFS" type="Customer Facing Service" name="Output" kind="Entity">
+            <target name="Broadband_CFS" typeName="Customer Facing Service"/>
+          </relation>
+        </output>
+        <relationshipType>
+          <relation ref="rt=Auxiliary" type="Relationship Type" name="Relationship Type" kind="Entity">
+            <target name="Auxiliary" typeName="Relationship Type"/>
+          </relation>
+        </relationshipType>
+        <actionMappings>
+          <element id="mr=BroadbandMappingRule+mr.am=xBsp5E0sSvmGz62OYr9rRQ" type="mr.am" typeName="Action Mappings" kind="Element" name="Broadband_Bandwidth_PS -> ServiceActions_Broadband_CFS - Auxiliary Action Mappings" path="/Broadband_Bandwidth_PS -> ServiceActions_Broadband_CFS - Auxiliary/Unknown" useRelationshipActionMap="true"/>
+        </actionMappings>
+      </element>
+    </namedRelationship>
+    <domain>
+      <relation ref="dom=Broadband" type="Domain" name="Domain" kind="Entity">
+        <target name="Broadband" typeName="Domain"/>
+      </relation>
+    </domain>
+  </entity>
+</model:Model>

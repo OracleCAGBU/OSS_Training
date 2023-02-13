@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:UnitOfMeasure" id="uom=Time" type="uom" typeName="Unit Of Measure" name="Time" resource="\OracleComms_Model_Base\model\Time.cmnUOM">
+    <displayName lang="default">Time</displayName>
+    <note lang="default">This Unit of Measure defines conversions between various times including:&#xD;
+-Seconds&#xD;
+-Minutes&#xD;
+-Hours&#xD;
+-Weeks&#xD;
+-Years (assuming 365 days)</note>
+    <project>
+      <relation ref="mprj=OracleComms_Model_Base" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model_Base" typeName="Model Project"/>
+      </relation>
+    </project>
+    <unitOfMeasure>
+      <element id="uom=Time+uom.umd=---5---f--+ZFyly--+3gw" type="uom.umd" typeName="Unit of Measure Detail" kind="Element" name="seconds" path="/seconds">
+        <value>1</value>
+        <unitOfMeasureDisplayName>Seconds</unitOfMeasureDisplayName>
+        <description>Seconds</description>
+      </element>
+      <element id="uom=Time+uom.umd=vM9-KpVI--+DA4Bk----tQ" type="uom.umd" typeName="Unit of Measure Detail" kind="Element" name="minutes" path="/minutes">
+        <value>60</value>
+        <unitOfMeasureDisplayName>Minutes</unitOfMeasureDisplayName>
+        <description>Minutes</description>
+      </element>
+      <element id="uom=Time+uom.umd=--+V--+h--+o--+u--+R7Q" type="uom.umd" typeName="Unit of Measure Detail" kind="Element" name="hours" path="/hours">
+        <value>3600</value>
+        <unitOfMeasureDisplayName>Hours</unitOfMeasureDisplayName>
+        <description>Hours</description>
+      </element>
+      <element id="uom=Time+uom.umd=--+yTTlK--+6QegT--+jLQ" type="uom.umd" typeName="Unit of Measure Detail" kind="Element" name="days" path="/days">
+        <value>86400</value>
+        <unitOfMeasureDisplayName>Days</unitOfMeasureDisplayName>
+        <description>Days</description>
+      </element>
+      <element id="uom=Time+uom.umd=rvYQ---N--+iD-ZT---ZQw" type="uom.umd" typeName="Unit of Measure Detail" kind="Element" name="weeks" path="/weeks">
+        <value>604800</value>
+        <unitOfMeasureDisplayName>Weeks</unitOfMeasureDisplayName>
+        <description>Weeks</description>
+      </element>
+      <element id="uom=Time+uom.umd=--+P--+O--+U---glvdUdA" type="uom.umd" typeName="Unit of Measure Detail" kind="Element" name="years" path="/years">
+        <value>31536000</value>
+        <unitOfMeasureDisplayName>Years</unitOfMeasureDisplayName>
+        <description>Years (assume 365 days)</description>
+      </element>
+    </unitOfMeasure>
+  </entity>
+</model:Model>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:FulfillmentPattern" id="fp=COM_BroadbandInternet_FulfillmentPattern" type="fp" typeName="Fulfillment Pattern" name="COM_BroadbandInternet_FulfillmentPattern" resource="\Training_Model_Broadband_PS\model\FULFILLMENT_PATTERN\COM_BroadbandInternet_FulfillmentPattern.procPtrnType">
+    <displayName lang="default">COM_BroadbandInternet_FulfillmentPattern</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="mprj=Training_Model_Broadband_PS" type="Model Project" name="Dependency">
+        <target name="Training_Model_Broadband_PS" typeName="Model Project"/>
+      </relation>
+    </project>
+    <realization>
+      <element id="fp=COM_BroadbandInternet_FulfillmentPattern+fp.ppr=9Joabo9kTBCcrt1I07qhaA" type="fp.ppr" typeName="Processing Pattern Realization" kind="Element" name="COM_BroadbandInternet_FulfillmentPattern Processing Pattern Realization" path="COM_BroadbandInternet_FulfillmentPattern Processing Pattern Realization">
+        <fulfillmentPatternSystemType>OSM</fulfillmentPatternSystemType>
+      </element>
+    </realization>
+    <classification>
+      <element id="fp=COM_BroadbandInternet_FulfillmentPattern+fp.ppc=wmjny2mCQ6yvX73mzhLcAw" type="fp.ppc" typeName="Processing Pattern Classification" kind="Element" name="COM_BroadbandInternet_FulfillmentPattern Processing Pattern Classification" path="COM_BroadbandInternet_FulfillmentPattern Processing Pattern Classification">
+        <functionalAreas>
+          <relation ref="fa=Commercial" type="Functional Area" name="Functional Area" kind="Entity">
+            <target name="Commercial" typeName="Functional Area"/>
+          </relation>
+        </functionalAreas>
+        <providerFunction>
+          <relation ref="pf=Calculate_Service_Order" type="Provider Function" name="Provider Function" kind="Entity">
+            <target name="Calculate_Service_Order" typeName="Provider Function"/>
+          </relation>
+        </providerFunction>
+      </element>
+    </classification>
+  </entity>
+</model:Model>

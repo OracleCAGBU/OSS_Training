@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:DecompositionRule" id="dr=Decomp_SOM_Provisioning_To_WholeOrderGranularity" type="dr" typeName="Decomposition Rule" name="Decomp_SOM_Provisioning_To_WholeOrderGranularity" resource="\Training_OSM_SOM_Topology\model\GRANULARITY_DR\Decomp_SOM_Provisioning_To_WholeOrderGranularity.decompositionRule">
+    <displayName lang="default">Decomp_SOM_Provisioning_To_WholeOrderGranularity</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=Training_OSM_SOM_Topology" type="Order and Service Management Project" name="Dependency">
+        <target name="Training_OSM_SOM_Topology" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <orderItem>
+      <relation ref="ois=SOM_OrderItemSpecification" type="Order Item Specification" name="Order Item" kind="Entity">
+        <target name="SOM_OrderItemSpecification" typeName="Order Item Specification"/>
+      </relation>
+    </orderItem>
+    <sources>
+      <relation ref="ocs=CompleteDeliveryFunction" type="Order Component Specification" name="Source" kind="Entity">
+        <target name="CompleteDeliveryFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=DeliverOrderFunction" type="Order Component Specification" name="Source" kind="Entity">
+        <target name="DeliverOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=DesignServiceFunction" type="Order Component Specification" name="Source" kind="Entity">
+        <target name="DesignServiceFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=PlanDeliveryFunction" type="Order Component Specification" name="Source" kind="Entity">
+        <target name="PlanDeliveryFunction" typeName="Order Component Specification"/>
+      </relation>
+    </sources>
+    <targets>
+      <relation ref="ocs=SOM_WholeOrderGranularity" type="Order Component Specification" name="Target" kind="Entity">
+        <target name="SOM_WholeOrderGranularity" typeName="Order Component Specification"/>
+      </relation>
+    </targets>
+    <fulfillmentPatterns>
+      <relation ref="ofp=SOFP_BROADBAND_Standard" type="Orchestration Fulfillment Pattern" name="Fulfillment Pattern" kind="Entity">
+        <target name="SOFP_BROADBAND_Standard" typeName="Orchestration Fulfillment Pattern"/>
+      </relation>
+    </fulfillmentPatterns>
+  </entity>
+</model:Model>

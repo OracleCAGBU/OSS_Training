@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:UnitOfMeasure" id="uom=DigitalStorage" type="uom" typeName="Unit Of Measure" name="DigitalStorage" resource="\OracleComms_Model_Base\model\DigitalStorage.cmnUOM">
+    <displayName lang="default">Digital Storage</displayName>
+    <note lang="default">This Unit of Measure defines conversions between various digital storage capactities including:&#xD;
+-Bytes&#xD;
+-Kilobytes&#xD;
+-Megabytes&#xD;
+-Gigabytes</note>
+    <project>
+      <relation ref="mprj=OracleComms_Model_Base" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model_Base" typeName="Model Project"/>
+      </relation>
+    </project>
+    <unitOfMeasure>
+      <element id="uom=DigitalStorage+uom.umd=z39s--+8--+mPbIlCh9zrA" type="uom.umd" typeName="Unit of Measure Detail" kind="Element" name="B" path="/B">
+        <value>1</value>
+        <unitOfMeasureDisplayName>Bytes</unitOfMeasureDisplayName>
+        <description>Bytes</description>
+      </element>
+      <element id="uom=DigitalStorage+uom.umd=---nQisP--+tSSx1P4kiKA" type="uom.umd" typeName="Unit of Measure Detail" kind="Element" name="KB" path="/KB">
+        <value>1024</value>
+        <unitOfMeasureDisplayName>Kilobyte</unitOfMeasureDisplayName>
+        <description>Kilobytes</description>
+      </element>
+      <element id="uom=DigitalStorage+uom.umd=---c--+2--+1--+M---DBQ" type="uom.umd" typeName="Unit of Measure Detail" kind="Element" name="MB" path="/MB">
+        <value>1048576</value>
+        <unitOfMeasureDisplayName>Megabyte</unitOfMeasureDisplayName>
+        <description>Megabytes</description>
+      </element>
+      <element id="uom=DigitalStorage+uom.umd=sWY2---r--+9---P---SyQ" type="uom.umd" typeName="Unit of Measure Detail" kind="Element" name="GB" path="/GB">
+        <value>1073741824</value>
+        <unitOfMeasureDisplayName>Gigabyte</unitOfMeasureDisplayName>
+        <description>Gigabytes</description>
+      </element>
+    </unitOfMeasure>
+  </entity>
+</model:Model>

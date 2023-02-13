@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:complexType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:_25="http://www.metasolv.com/OMS/OrderModel/2002/06/25" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="PaymentMethodExtensionsType" namespace="OracleComms_OSM_CommonDataDictionary/4.0" abstract="false" final="false">
+  <model:description>PaymentMethodExtensions</model:description>
+  <model:element xsi:type="model:LookupType" name="paymentMethod">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Payment Method</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Payment Method</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:lookupEntry>
+      <model:code>Credit Card</model:code>
+      <model:description>Credit Card</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>Debit Card</model:code>
+      <model:description>Debit Card</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>Bill Me</model:code>
+      <model:description>Bill Me</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>ACH</model:code>
+      <model:description>ACH</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>SEPA</model:code>
+      <model:description>SEPA</model:description>
+    </model:lookupEntry>
+  </model:element>
+</model:complexType>

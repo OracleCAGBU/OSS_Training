@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet
+      title="Set up Project Dependencies">
+  <intro>
+      <description>
+          This cheat sheet guides you through what needs to be done to create a common Data Dictionary project and how to set dependences between the projects created by the design pattern. 
+          <br/><br/>Once these tasks are completed, one build error will remain: the creation task will not have control data. This error will be fixed when you add an executable order component to your configuration.
+      </description>
+   </intro>
+   <item
+         skip="true"
+         title="Create Common Data Dictionary Project">
+      <description>
+		In order to resolve Order Template dependencies, the Order and Service Management Common Data Dictionary (named 
+		OracleComms_OSM_CommonDataDictionary) must be present in the workspace. If not present, import by right-clicking in the Studio Projects view and 
+		selecting Import -> Import Order and Service Management Common Data Dictionary.  
+      </description>
+   </item>
+   <item
+         skip="true"
+         title="Set Dependency With Common Data Dictionary Project.">
+      <description>
+          Because the main project created by the design pattern uses data from the common Data Dictionary, you need to set a dependency between the projects.  
+          <br/><br/>
+          Click "Click to perform" in this cheat sheet to open the editor for the main cartridge. Go to the <b>Dependency</b> tab, and click <b>Add</b>. Select the OracleComms_OSM_CommonDataDictionary in the resulting dialog box and click <b>OK</b>.
+      </description>
+      <command
+            required="false"
+            serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_COM_Orchestration/Training_OSM_COM_Orchestration.osmCartridge)"/>
+   </item>
+   <item
+         title="Set Dependency Between Base Orchestration Project and Fulfillment Pattern Project">
+      <description>
+         The design pattern prompted you for two project names: one for the base orchestration project and one for the fulfillment pattern project. Oracle recommended that you use different projects for these two fields.  If, however, you used the same project for both, you can skip this step. 
+<br/><br/>
+Because the fulfillment pattern in the fulfillment pattern cartridge uses the fulfillment modes in the main cartridge, you need to set a dependency between the projects. Open the editor for the fulfillment pattern cartridge. Go to the Dependency tab, and click <b>Add</b>. Select the main cartridge created by the design pattern in the resulting dialog box and click <b>OK</b>.
+<br/><br/>Perform a Clean and Build, If there are any build errors not related to missing control data in the creation task.
+      </description>
+   </item>
+   </cheatsheet>

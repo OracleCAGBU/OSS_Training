@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xsi:type="ord:orderStatePolicyType" name="COM_OrderLifeCyclePolicy">
+  <com:displayName>COM_OrderLifeCyclePolicy</com:displayName>
+  <com:saveVersion>5</com:saveVersion>
+  <com:id>tM0eE3XGTYCAm3dEeSL-Cg</com:id>
+  <ord:amendingOrderState>
+    <ord:submitAmendmentOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:submitAmendmentOrderTransaction>
+    <ord:suspendOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:suspendOrderTransaction>
+    <ord:abortOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:abortOrderTransaction>
+    <ord:resolveFailureOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:resolveFailureOrderTransaction>
+    <ord:processAmendmentOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:processAmendmentOrderTransaction>
+  </ord:amendingOrderState>
+  <ord:cancelledOrderState>
+    <ord:deleteOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:deleteOrderTransaction>
+    <ord:resumeOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:resumeOrderTransaction>
+    <ord:updateOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:updateOrderTransaction>
+    <ord:abortOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:abortOrderTransaction>
+  </ord:cancelledOrderState>
+  <ord:cancellingOrderState>
+    <ord:suspendOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:suspendOrderTransaction>
+    <ord:abortOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:abortOrderTransaction>
+    <ord:resolveFailureOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:resolveFailureOrderTransaction>
+  </ord:cancellingOrderState>
+  <ord:completedOrderState>
+    <ord:deleteOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:deleteOrderTransaction>
+    <ord:updateOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+      <ord:permission name="Permission1">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:updateOrderTransaction>
+    <ord:cancelOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:cancelOrderTransaction>
+  </ord:completedOrderState>
+  <ord:inProgressState>
+    <ord:cancelOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:cancelOrderTransaction>
+    <ord:processAmendmentOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:processAmendmentOrderTransaction>
+    <ord:raiseExceptionTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+      <ord:permission name="Permission1">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:raiseExceptionTransaction>
+    <ord:submitAmendmentOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:submitAmendmentOrderTransaction>
+    <ord:suspendOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:suspendOrderTransaction>
+    <ord:updateOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+      <ord:permission name="Permission1">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:updateOrderTransaction>
+    <ord:failOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:failOrderTransaction>
+    <ord:abortOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:abortOrderTransaction>
+    <ord:resolveFailureOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:resolveFailureOrderTransaction>
+  </ord:inProgressState>
+  <ord:notStartedOrderState>
+    <ord:deleteOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+      <ord:permission name="Permission1">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:deleteOrderTransaction>
+    <ord:suspendOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:suspendOrderTransaction>
+    <ord:updateOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+      <ord:permission name="Permission1">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:updateOrderTransaction>
+    <ord:failOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:failOrderTransaction>
+    <ord:abortOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:abortOrderTransaction>
+  </ord:notStartedOrderState>
+  <ord:suspendedOrderState>
+    <ord:cancelOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:cancelOrderTransaction>
+    <ord:resumeOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:resumeOrderTransaction>
+    <ord:submitAmendmentOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:submitAmendmentOrderTransaction>
+    <ord:updateOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:updateOrderTransaction>
+    <ord:failOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:failOrderTransaction>
+    <ord:abortOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:abortOrderTransaction>
+    <ord:resolveFailureOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:resolveFailureOrderTransaction>
+  </ord:suspendedOrderState>
+  <ord:abortedOrderState>
+    <ord:deleteOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:deleteOrderTransaction>
+    <ord:updateOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:updateOrderTransaction>
+  </ord:abortedOrderState>
+  <ord:failedOrderState>
+    <ord:updateOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:updateOrderTransaction>
+    <ord:submitAmendmentOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:submitAmendmentOrderTransaction>
+    <ord:cancelOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:cancelOrderTransaction>
+    <ord:abortOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:abortOrderTransaction>
+    <ord:resolveFailureOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:resolveFailureOrderTransaction>
+  </ord:failedOrderState>
+  <ord:waitingForRevisionOrderState>
+    <ord:updateOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:updateOrderTransaction>
+    <ord:resumeOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:resumeOrderTransaction>
+    <ord:submitAmendmentOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:submitAmendmentOrderTransaction>
+    <ord:cancelOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:cancelOrderTransaction>
+    <ord:failOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:failOrderTransaction>
+    <ord:abortOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:abortOrderTransaction>
+    <ord:resolveFailureOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:resolveFailureOrderTransaction>
+  </ord:waitingForRevisionOrderState>
+  <ord:waitingOrderState>
+    <ord:abortOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:abortOrderTransaction>
+    <ord:cancelOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:cancelOrderTransaction>
+    <ord:failOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:failOrderTransaction>
+    <ord:submitAmendmentOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:submitAmendmentOrderTransaction>
+    <ord:suspendOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:suspendOrderTransaction>
+    <ord:updateOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>COM_Role</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:updateOrderTransaction>
+  </ord:waitingOrderState>
+</com:modelEntity>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:orderItemSpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:_25="http://www.metasolv.com/OMS/OrderModel/2002/06/25" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="COM_SalesOrderFulfillment" namespace="COM_SalesOrderFulfillment">
+  <model:description>COM_SalesOrderFulfillment</model:description>
+  <model:productSpecMappingProperty>FulfillmentPattern</model:productSpecMappingProperty>
+  <model:requestedDeliveryDateMappingProperty>RequestedDeliveryDate</model:requestedDeliveryDateMappingProperty>
+  <model:itemNameProperty>LineName</model:itemNameProperty>
+  <model:itemIdProperty>LineId</model:itemIdProperty>
+  <model:itemActionProperty>Action</model:itemActionProperty>
+  <model:itemRecognitionProperty>Recognition</model:itemRecognitionProperty>
+  <model:dynamicParametersProperty>dynamicParams</model:dynamicParametersProperty>
+  <model:property name="LineId" useComplexDataType="false">
+    <model:nodesetExpression xsi:type="model:XqueryExpressionUriRuleType" enabled="true">
+      <model:xqueryUri>http://www.training.com/orderitem_properties/_LineId.xquery</model:xqueryUri>
+    </model:nodesetExpression>
+  </model:property>
+  <model:property name="LineName" useComplexDataType="false">
+    <model:nodesetExpression xsi:type="model:XqueryExpressionUriRuleType" enabled="true">
+      <model:xqueryUri>http://www.training.com/orderitem_properties/_LineName.xquery</model:xqueryUri>
+    </model:nodesetExpression>
+  </model:property>
+  <model:property name="ProductSpecification" useComplexDataType="false">
+    <model:nodesetExpression xsi:type="model:XqueryExpressionUriRuleType" enabled="true">
+      <model:xqueryUri>http://www.training.com/orderitem_properties/_ProductSpecification.xquery</model:xqueryUri>
+    </model:nodesetExpression>
+  </model:property>
+  <model:property name="RequestedDeliveryDate" useComplexDataType="false">
+    <model:nodesetExpression xsi:type="model:XqueryExpressionUriRuleType" enabled="true">
+      <model:xqueryUri>http://www.training.com/orderitem_properties/_RequestedDeliveryDate.xquery</model:xqueryUri>
+    </model:nodesetExpression>
+  </model:property>
+  <model:property name="FulfillmentPattern" useComplexDataType="false">
+    <model:nodesetExpression xsi:type="model:XqueryExpressionUriRuleType" enabled="true">
+      <_25:instance xsi:type="_25:externalInstanceType" name="ProductSpecMap"><_25:adapter>com.mslv.oms.view.rule.adapter.XMLFileAdapter</_25:adapter><_25:parameter name="oms:url">'http://www.training.com/productSpecMapping/productSpecMapping.xml'</_25:parameter><_25:cache>
+          <_25:scope>SYSTEM</_25:scope>
+          <_25:timeout>15000</_25:timeout>
+          <_25:maxSize>50</_25:maxSize>
+        </_25:cache></_25:instance>
+      <model:xqueryUri>http://www.training.com/orderitem_properties/_FulfillmentPattern.xquery</model:xqueryUri>
+    </model:nodesetExpression>
+  </model:property>
+  <model:property name="ParentLineId" useComplexDataType="false">
+    <model:nodesetExpression xsi:type="model:XqueryExpressionUriRuleType" enabled="true">
+      <model:xqueryUri>http://www.training.com/orderitem_properties/_ParentLineId.xquery</model:xqueryUri>
+    </model:nodesetExpression>
+  </model:property>
+  <model:property name="Recognition" useComplexDataType="false">
+    <model:nodesetExpression xsi:type="model:XqueryExpressionUriRuleType" enabled="true">
+      <model:xqueryUri>http://www.training.com/orderitem_properties/_Recognition.xquery</model:xqueryUri>
+    </model:nodesetExpression>
+  </model:property>
+  <model:property name="Action" useComplexDataType="false">
+    <model:nodesetExpression xsi:type="model:XqueryExpressionUriRuleType" enabled="true">
+      <model:xqueryUri>http://www.training.com/orderitem_properties/_Action.xquery</model:xqueryUri>
+    </model:nodesetExpression>
+  </model:property>
+  <model:property name="dynamicParams" useComplexDataType="true">
+    <model:nodesetExpression xsi:type="model:XqueryExpressionRuleType" enabled="true">
+      <model:xquery><![CDATA[]]></model:xquery>
+    </model:nodesetExpression>
+  </model:property>
+  <model:property name="xmlData" useComplexDataType="false">
+    <model:nodesetExpression xsi:type="model:XqueryExpressionUriRuleType" enabled="true">
+      <model:xqueryUri>http://www.training.com/orderitem_properties/_xmlData.xquery</model:xqueryUri>
+    </model:nodesetExpression>
+  </model:property>
+  <model:property name="ServiceInstanceIndicator" useComplexDataType="false">
+    <model:nodesetExpression xsi:type="model:XqueryExpressionRuleType" enabled="true">
+      <model:xquery><![CDATA['true']]></model:xquery>
+    </model:nodesetExpression>
+  </model:property>
+  <model:hierarchy name="parentChildHierarchy" useForChildCompletionDependency="false">
+    <model:key>
+      <model:nodesetExpression xsi:type="model:XqueryExpressionUriRuleType" enabled="true">
+        <model:xqueryUri>http://www.training.com/orderitem_hierarchies/_KeyExpression.xquery</model:xqueryUri>
+      </model:nodesetExpression>
+    </model:key>
+    <model:parentKey>
+      <model:nodesetExpression xsi:type="model:XqueryExpressionUriRuleType" enabled="true">
+        <model:xqueryUri>http://www.training.com/orderitem_hierarchies/_ParentKeyExpression.xquery</model:xqueryUri>
+      </model:nodesetExpression>
+    </model:parentKey>
+  </model:hierarchy>
+  <model:physicalHierarchy>parentChildHierarchy</model:physicalHierarchy>
+</model:orderItemSpec>

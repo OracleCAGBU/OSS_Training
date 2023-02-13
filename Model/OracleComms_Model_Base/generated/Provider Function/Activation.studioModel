@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:ProviderFunction" id="pf=Activation" type="pf" typeName="Provider Function" name="Activation" resource="\OracleComms_Model_Base\model\Activation.provFunc">
+    <displayName lang="default">Activation</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="mprj=OracleComms_Model_Base" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model_Base" typeName="Model Project"/>
+      </relation>
+    </project>
+    <mappingSource>
+      <element id="pf=Activation+pf.ms=EfNp---N--+Z--+b---OEg" type="pf.ms" typeName="Mapping Source" kind="Element" name="RESOURCE.Technical" path="/RESOURCE.Technical">
+        <actionType>
+          <relation ref="fa=Technical" type="Functional Area" name="Action Type" kind="Entity">
+            <target name="Technical" typeName="Functional Area"/>
+          </relation>
+        </actionType>
+        <MappingSource>RESOURCE</MappingSource>
+      </element>
+      <element id="pf=Activation+pf.ms=SXcNUqhM--+i---j1yskPQ" type="pf.ms" typeName="Mapping Source" kind="Element" name="RFS.Technical" path="/RFS.Technical">
+        <actionType>
+          <relation ref="fa=Technical" type="Functional Area" name="Action Type" kind="Entity">
+            <target name="Technical" typeName="Functional Area"/>
+          </relation>
+        </actionType>
+        <MappingSource>RFS</MappingSource>
+      </element>
+    </mappingSource>
+    <providerFunctionRelationshipTypes>
+      <element id="pf=Activation+pf.rt=--+nwV9h--+jxTUs--+aIg" type="pf.rt" typeName="Relationship Types" kind="Element" name="Activation Relationship Types" path="Activation Relationship Types"/>
+    </providerFunctionRelationshipTypes>
+  </entity>
+</model:Model>

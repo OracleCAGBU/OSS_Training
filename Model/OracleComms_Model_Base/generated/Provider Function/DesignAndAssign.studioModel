@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:ProviderFunction" id="pf=DesignAndAssign" type="pf" typeName="Provider Function" name="DesignAndAssign" resource="\OracleComms_Model_Base\model\DesignAndAssign.provFunc">
+    <displayName lang="default">Design And Assign</displayName>
+    <note lang="default">This is a Provider Function that is invoked to define an intended state of Service &amp; Resource inventory in an SRM system, in response to a Service Order.</note>
+    <project>
+      <relation ref="mprj=OracleComms_Model_Base" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model_Base" typeName="Model Project"/>
+      </relation>
+    </project>
+    <mappingSource>
+      <element id="pf=DesignAndAssign+pf.ms=---K--+a--+NljQo---ITQ" type="pf.ms" typeName="Mapping Source" kind="Element" name="CFS.Service" path="/CFS.Service">
+        <actionType>
+          <relation ref="fa=Service" type="Functional Area" name="Action Type" kind="Entity">
+            <target name="Service" typeName="Functional Area"/>
+          </relation>
+        </actionType>
+        <MappingSource>CFS</MappingSource>
+      </element>
+      <element id="pf=DesignAndAssign+pf.ms=--+l--+d--+A9jsW6oIz-A" type="pf.ms" typeName="Mapping Source" kind="Element" name="RESOURCE.Service" path="/RESOURCE.Service">
+        <actionType>
+          <relation ref="fa=Service" type="Functional Area" name="Action Type" kind="Entity">
+            <target name="Service" typeName="Functional Area"/>
+          </relation>
+        </actionType>
+        <MappingSource>RESOURCE</MappingSource>
+      </element>
+      <element id="pf=DesignAndAssign+pf.ms=MAR8--+o--+i5cJR--+WYQ" type="pf.ms" typeName="Mapping Source" kind="Element" name="RFS" path="/RFS">
+        <MappingSource>RFS</MappingSource>
+      </element>
+    </mappingSource>
+    <mappingTarget>
+      <element id="pf=DesignAndAssign+pf.mt=1IlvrYtG--+K--+b---izw" type="pf.mt" typeName="Mapping Target" kind="Element" name="RFS" path="/RFS">
+        <MappingTarget>RFS</MappingTarget>
+      </element>
+      <element id="pf=DesignAndAssign+pf.mt=---WxZlM--+w--+9---y5Q" type="pf.mt" typeName="Mapping Target" kind="Element" name="RESOURCE" path="/RESOURCE">
+        <MappingTarget>RESOURCE</MappingTarget>
+      </element>
+      <element id="pf=DesignAndAssign+pf.mt=+2wU---Q--+1--+Jfuo5pQ" type="pf.mt" typeName="Mapping Target" kind="Element" name="LOCATION" path="/LOCATION">
+        <MappingTarget>LOCATION</MappingTarget>
+      </element>
+    </mappingTarget>
+    <providerFunctionRelationshipTypes>
+      <element id="pf=DesignAndAssign+pf.rt=a74R0i5U--+BJM8lcUVkvA" type="pf.rt" typeName="Relationship Types" kind="Element" name="DesignAndAssign Relationship Types" path="DesignAndAssign Relationship Types">
+        <defaultRelationship>
+          <relation ref="rt=Composition.Reference" type="Relationship Type" name="Default Relationship" kind="Entity">
+            <target name="Composition.Reference" typeName="Relationship Type"/>
+          </relation>
+        </defaultRelationship>
+        <relationships>
+          <relation ref="rt=Composition.Exclusive" type="Relationship Type" name="Relationship Types" kind="Entity">
+            <target name="Composition.Exclusive" typeName="Relationship Type"/>
+          </relation>
+          <relation ref="rt=Composition.Reference" type="Relationship Type" name="Relationship Types" kind="Entity">
+            <target name="Composition.Reference" typeName="Relationship Type"/>
+          </relation>
+          <relation ref="rt=Composition.Shared" type="Relationship Type" name="Relationship Types" kind="Entity">
+            <target name="Composition.Shared" typeName="Relationship Type"/>
+          </relation>
+          <relation ref="rt=Composition.ConfigHierarchy" type="Relationship Type" name="Relationship Types" kind="Entity">
+            <target name="Composition.ConfigHierarchy" typeName="Relationship Type"/>
+          </relation>
+        </relationships>
+      </element>
+    </providerFunctionRelationshipTypes>
+  </entity>
+</model:Model>

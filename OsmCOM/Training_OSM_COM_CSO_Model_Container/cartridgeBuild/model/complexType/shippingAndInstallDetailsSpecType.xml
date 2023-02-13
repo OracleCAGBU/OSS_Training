@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:complexType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:_25="http://www.metasolv.com/OMS/OrderModel/2002/06/25" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="shippingAndInstallDetailsType" namespace="OracleComms_OSM_CommonDataDictionary/4.0" abstract="false" final="false">
+  <model:description>shippingAndInstallDetails</model:description>
+  <model:element xsi:type="model:DateTimeType" name="shippingDate">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Shipping Date</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Shipping Date</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+  </model:element>
+  <model:element xsi:type="model:DateTimeType" name="installedDate">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Installed Date</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Installed Date</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+  </model:element>
+  <model:element xsi:type="model:DateTimeType" name="returnDate">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Return Date</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Return Date</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+  </model:element>
+  <model:element xsi:type="model:GroupType" name="shippingAccount">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Shipping Account</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Shipping Account</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:element xsi:type="model:TextType" name="id">
+      <model:minOccurs>1</model:minOccurs>
+      <model:maxOccurs>1</model:maxOccurs>
+      <model:description>Id</model:description>
+      <model:editable>true</model:editable>
+      <model:significant>true</model:significant>
+      <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+        <_25:description>Id</_25:description>
+        <_25:label lang="en"></_25:label>
+      </model:viewRule>
+      <model:length>256</model:length>
+    </model:element>
+  </model:element>
+</model:complexType>

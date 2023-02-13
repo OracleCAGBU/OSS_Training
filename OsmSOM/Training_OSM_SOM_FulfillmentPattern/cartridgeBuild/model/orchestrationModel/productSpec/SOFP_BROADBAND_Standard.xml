@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:productSpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="SOFP_BROADBAND_Standard" namespace="SOM_ProvisioningOrderFulfillment">
+  <model:description>SOFP_BROADBAND_Standard</model:description>
+  <model:orchestrationPlan>
+    <model:fulfillmentMode>
+      <model:name>SOM_Deliver</model:name>
+      <model:namespace>SOM_ProvisioningOrderFulfillment</model:namespace>
+    </model:fulfillmentMode>
+    <model:component>
+      <model:name>CompleteDeliveryFunction</model:name>
+      <model:namespace>SOM_ProvisioningOrderFulfillment</model:namespace>
+    </model:component>
+    <model:component>
+      <model:name>DeliverOrderFunction</model:name>
+      <model:namespace>SOM_ProvisioningOrderFulfillment</model:namespace>
+    </model:component>
+    <model:component>
+      <model:name>PlanDeliveryFunction</model:name>
+      <model:namespace>SOM_ProvisioningOrderFulfillment</model:namespace>
+    </model:component>
+    <model:component>
+      <model:name>DesignServiceFunction</model:name>
+      <model:namespace>SOM_ProvisioningOrderFulfillment</model:namespace>
+    </model:component>
+    <model:transition name="SOFP_BROADBAND_Standard-SOM_Deliver--DesignServiceFunction-PlanDeliveryFunction">
+      <model:from>
+        <model:component>
+          <model:name>DesignServiceFunction</model:name>
+          <model:namespace>SOM_ProvisioningOrderFulfillment</model:namespace>
+        </model:component>
+      </model:from>
+      <model:to>
+        <model:name>PlanDeliveryFunction</model:name>
+        <model:namespace>SOM_ProvisioningOrderFulfillment</model:namespace>
+      </model:to>
+      <model:waitForCondition xsi:type="model:TaskStateWaitForConditionType">
+        <model:state>
+          <model:name>completed</model:name>
+          <model:namespace>default</model:namespace>
+        </model:state>
+      </model:waitForCondition>
+      <model:orderItemDependencyCriteria xsi:type="model:IdentityIntersectionOrderItemRelationship" name="SOFP_BROADBAND_Standard-SOM_Deliver--DesignServiceFunction-PlanDeliveryFunctionOrderItemRelationship"/>
+    </model:transition>
+    <model:transition name="SOFP_BROADBAND_Standard-SOM_Deliver--PlanDeliveryFunction-DeliverOrderFunction">
+      <model:from>
+        <model:component>
+          <model:name>PlanDeliveryFunction</model:name>
+          <model:namespace>SOM_ProvisioningOrderFulfillment</model:namespace>
+        </model:component>
+      </model:from>
+      <model:to>
+        <model:name>DeliverOrderFunction</model:name>
+        <model:namespace>SOM_ProvisioningOrderFulfillment</model:namespace>
+      </model:to>
+      <model:waitForCondition xsi:type="model:TaskStateWaitForConditionType">
+        <model:state>
+          <model:name>completed</model:name>
+          <model:namespace>default</model:namespace>
+        </model:state>
+      </model:waitForCondition>
+      <model:orderItemDependencyCriteria xsi:type="model:IdentityIntersectionOrderItemRelationship" name="SOFP_BROADBAND_Standard-SOM_Deliver--PlanDeliveryFunction-DeliverOrderFunctionOrderItemRelationship"/>
+    </model:transition>
+    <model:transition name="SOFP_BROADBAND_Standard-SOM_Deliver--DeliverOrderFunction-CompleteDeliveryFunction">
+      <model:from>
+        <model:component>
+          <model:name>DeliverOrderFunction</model:name>
+          <model:namespace>SOM_ProvisioningOrderFulfillment</model:namespace>
+        </model:component>
+      </model:from>
+      <model:to>
+        <model:name>CompleteDeliveryFunction</model:name>
+        <model:namespace>SOM_ProvisioningOrderFulfillment</model:namespace>
+      </model:to>
+      <model:waitForCondition xsi:type="model:TaskStateWaitForConditionType">
+        <model:state>
+          <model:name>completed</model:name>
+          <model:namespace>default</model:namespace>
+        </model:state>
+      </model:waitForCondition>
+      <model:orderItemDependencyCriteria xsi:type="model:IdentityIntersectionOrderItemRelationship" name="SOFP_BROADBAND_Standard-SOM_Deliver--DeliverOrderFunction-CompleteDeliveryFunctionOrderItemRelationship"/>
+    </model:transition>
+  </model:orchestrationPlan>
+</model:productSpec>

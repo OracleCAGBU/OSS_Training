@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet
+      title="Verify Order Component Specifications">
+  <intro>
+      <description>
+         This cheat sheet guides you through the order component specifications created by the design pattern.
+      </description>
+   </intro>
+    <item
+         title="Verify Order Component Specifications: COM_FulfillmentFunction, COM_BaseSystem, COM_BaseGranularity">
+      <description>
+		The order components have the <b>Namespace</b> and <b>Description</b> set according to the entries in the design pattern. These order components are intended to serve as entities that can be extended by new order components to create a hierarchy. For example, if a new system called BillingSystem is needed, it can extend the base System order component.
+	 </description>
+      <subitem
+            label="Open Base Function Order Component: COM_FulfillmentFunction"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_COM_Orchestration/model/FUNCTION/COM_FulfillmentFunction.orderComponentSpec)"/>
+      </subitem>
+      <subitem
+            label="Open Base System Order Component: COM_BaseSystem"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_COM_Orchestration/model/SYSTEM/COM_BaseSystem.orderComponentSpec)"/>
+      </subitem>
+      <subitem
+            label="Open Base Granularity Order Component: COM_BaseGranularity"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_COM_Orchestration/model/GRANULARITY/COM_BaseGranularity.orderComponentSpec)"/>
+      </subitem>
+   </item>
+   </cheatsheet>

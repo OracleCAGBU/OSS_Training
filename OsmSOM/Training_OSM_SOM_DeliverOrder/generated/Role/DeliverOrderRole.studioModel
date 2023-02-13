@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:Role" id="rol=DeliverOrderRole" type="rol" typeName="Role" name="DeliverOrderRole" resource="\Training_OSM_SOM_DeliverOrder\model\ROLE\DeliverOrderRole.rolePermissions">
+    <displayName lang="default">DeliverOrderRole</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=Training_OSM_SOM_DeliverOrder" type="Order and Service Management Project" name="Dependency">
+        <target name="Training_OSM_SOM_DeliverOrder" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+  </entity>
+</model:Model>

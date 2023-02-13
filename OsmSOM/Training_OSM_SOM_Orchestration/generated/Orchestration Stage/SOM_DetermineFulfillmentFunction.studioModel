@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:OrchestrationStage" id="ost=SOM_DetermineFulfillmentFunction" type="ost" typeName="Orchestration Stage" name="SOM_DetermineFulfillmentFunction" resource="\Training_OSM_SOM_Orchestration\model\SOM_DetermineFulfillmentFunction.orchestrationStage">
+    <displayName lang="default">SOM_DetermineFulfillmentFunction</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=Training_OSM_SOM_Orchestration" type="Order and Service Management Project" name="Dependency">
+        <target name="Training_OSM_SOM_Orchestration" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <producesOrderComponent>
+      <relation ref="ocs=SOM_ProvisioningFunction" type="Order Component Specification" name="Produce" kind="Entity">
+        <target name="SOM_ProvisioningFunction" typeName="Order Component Specification"/>
+      </relation>
+    </producesOrderComponent>
+  </entity>
+</model:Model>

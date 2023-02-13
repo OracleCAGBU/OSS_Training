@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:FunctionalArea" id="fa=Technical" type="fa" typeName="Functional Area" name="Technical" resource="\OracleComms_Model_Base\model\Technical.funcArea">
+    <displayName lang="default">Technical</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="mprj=OracleComms_Model_Base" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model_Base" typeName="Model Project"/>
+      </relation>
+    </project>
+    <dataElements/>
+    <actionPrefix>
+      <element id="fa=Technical+fa.ap=--+x---A--+3pdYe---+NA" type="fa.ap" typeName="Action Prefix" kind="Element" name="Technical Action Prefix" path="Technical Action Prefix">
+        <supportAction>true</supportAction>
+        <prefix>TechnicalActions</prefix>
+      </element>
+    </actionPrefix>
+    <actionCodes>
+      <element id="fa=Technical+fa.faac=QixeLUBr--+mRD44--+3HA" type="fa.faac" typeName="Functional Area Action Codes" kind="Element" name="Technical Functional Area Action Codes" path="Technical Functional Area Action Codes"/>
+    </actionCodes>
+    <realization>
+      <element id="fa=Technical+fa.far=K9cu---C--+HFLc7--+Mow" type="fa.far" typeName="Functional Area Realization" kind="Element" name="Technical Functional Area Realization" path="Technical Functional Area Realization">
+        <designPattern></designPattern>
+        <functionalAreaRealizationStruct>NONE</functionalAreaRealizationStruct>
+      </element>
+    </realization>
+    <providerFunctions>
+      <element id="fa=Technical+fa.pf=---rxopL--+Z---G---nMw" type="fa.pf" typeName="Provider Functions" kind="Element" name="Technical Provider Functions" path="Technical Provider Functions">
+        <providerFunctions>
+          <relation ref="pf=Activation" type="Provider Function" name="Provider Functions" kind="Entity">
+            <target name="Activation" typeName="Provider Function"/>
+          </relation>
+        </providerFunctions>
+      </element>
+    </providerFunctions>
+    <actionCodeDataMapList/>
+  </entity>
+</model:Model>

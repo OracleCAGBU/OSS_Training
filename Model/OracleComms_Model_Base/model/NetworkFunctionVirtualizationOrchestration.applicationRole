@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/core/model/common" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:dom="http://xmlns.oracle.com/communications/sce/model/common/entity" xsi:type="dom:ApplicationRoleType" name="NetworkFunctionVirtualizationOrchestration">
+  <displayName lang="[default]">Network Function Virtualization Orchestration</displayName>
+  <saveVersion>5</saveVersion>
+  <id>rXJDf14xQ9+AL4sM0420Bw</id>
+  <dom:abbrevation>NFVO</dom:abbrevation>
+  <dom:specializedActionCodes>
+    <id>JDo3EqcYROmTgS9Q3ke7cw</id>
+    <elementType>oracle.communications.sce.common.entity.entities.application.role.specializedactioncode</elementType>
+    <dom:specializedActionName>Instantiate</dom:specializedActionName>
+    <dom:actionType>
+      <entity>Create</entity>
+      <entityType>actionType</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.application.role.specializedactioncode.actionTypeRef</relationship>
+    </dom:actionType>
+  </dom:specializedActionCodes>
+  <dom:specializedActionCodes>
+    <id>tFb9mQceTeK7AkOfB-2J0w</id>
+    <elementType>oracle.communications.sce.common.entity.entities.application.role.specializedactioncode</elementType>
+    <dom:specializedActionName>Terminate</dom:specializedActionName>
+    <dom:actionType>
+      <entity>Remove</entity>
+      <entityType>actionType</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.application.role.specializedactioncode.actionTypeRef</relationship>
+    </dom:actionType>
+  </dom:specializedActionCodes>
+  <dom:actionType>
+    <entity>Technical</entity>
+    <entityType>funcArea</entityType>
+    <relationship>oracle.communications.sce.common.entity.entities.application.role.FunctionalAreaRef</relationship>
+  </dom:actionType>
+</modelEntity>

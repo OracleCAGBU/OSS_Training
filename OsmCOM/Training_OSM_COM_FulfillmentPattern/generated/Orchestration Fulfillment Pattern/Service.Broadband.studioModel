@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:FulfillmentPattern" id="ofp=Service.Broadband" type="ofp" typeName="Orchestration Fulfillment Pattern" name="Service.Broadband" resource="\Training_OSM_COM_FulfillmentPattern\model\Service.Broadband.productSpec">
+    <displayName lang="default">Service.Broadband</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=Training_OSM_COM_FulfillmentPattern" type="Order and Service Management Project" name="Dependency">
+        <target name="Training_OSM_COM_FulfillmentPattern" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <fulfillmentModes>
+      <relation ref="fm=COM_Deliver" type="Fulfillment Mode" name="Fullfillment Mode" kind="Entity">
+        <target name="COM_Deliver" typeName="Fulfillment Mode"/>
+      </relation>
+    </fulfillmentModes>
+    <orchestrationPlanComponents>
+      <relation ref="ocs=ProvisioningFunction" type="Order Component Specification" name="FulfillmentModeOrderComponentSpecs" kind="Entity">
+        <target name="ProvisioningFunction" typeName="Order Component Specification"/>
+      </relation>
+    </orchestrationPlanComponents>
+    <realizes>
+      <relation ref="fp=COM_BroadbandInternet_FulfillmentPattern" type="Fulfillment Pattern" name="Realization" kind="Entity">
+        <target name="COM_BroadbandInternet_FulfillmentPattern" typeName="Fulfillment Pattern"/>
+      </relation>
+    </realizes>
+    <plans>
+      <element xsi:type="osm:Plan" id="ofp=Service.Broadband+osm.orch.productSpec.plan=RbF446y9TY+uRDNwLhXwrg" type="osm.orch.productSpec.plan" typeName="Orchestration Plan Element" kind="Element" name="COM_Deliver" path="/COM_Deliver"/>
+    </plans>
+  </entity>
+</model:Model>

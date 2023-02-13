@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:AutomatedTask" id="atsk=ApproveBITask" type="atsk" typeName="Automated Task" name="ApproveBITask" resource="\Training_OSM_SOM_DesignService\model\AUTOMATED_TASK\ApproveBITask.automationTask">
+    <displayName lang="default">ApproveBITask</displayName>
+    <note lang="default"/>
+    <extends>
+      <relation ref="mtsk=DesignServiceBaseTask" type="Manual Task" name="Dependency" kind="Entity">
+        <target name="DesignServiceBaseTask" typeName="Manual Task"/>
+      </relation>
+    </extends>
+    <project>
+      <relation ref="oprj=Training_OSM_SOM_DesignService" type="Order and Service Management Project" name="Dependency">
+        <target name="Training_OSM_SOM_DesignService" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <order>
+      <relation ref="ord=SOM_ProvisionServiceOrderFulfillment" type="Order" name="Order" kind="Entity">
+        <target name="SOM_ProvisionServiceOrderFulfillment" typeName="Order"/>
+      </relation>
+    </order>
+    <taskDataElements>
+      <element xsi:type="osm:TaskData" id="atsk=ApproveBITask+prov.task.data.node=/ControlData" type="prov.task.data.node" typeName="Task Data Element" kind="Element" name="ControlData" path="/ControlData"/>
+      <element xsi:type="osm:TaskData" id="atsk=ApproveBITask+prov.task.data.node=/BusinessInteractions" type="prov.task.data.node" typeName="Task Data Element" kind="Element" name="BusinessInteractions" path="/BusinessInteractions"/>
+    </taskDataElements>
+  </entity>
+</model:Model>

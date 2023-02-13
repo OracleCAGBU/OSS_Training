@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:UnitOfMeasure" id="uom=Bandwidth" type="uom" typeName="Unit Of Measure" name="Bandwidth" resource="\OracleComms_Model_Base\model\Bandwidth.cmnUOM">
+    <displayName lang="default">Bandwidth</displayName>
+    <note lang="default">This Unit of Measure defines conversions between various bandwidths including:&#xD;
+-Bytes per Second&#xD;
+-Kilobytes per Second&#xD;
+-Megabytes per Second&#xD;
+-Gigabytes per Second</note>
+    <project>
+      <relation ref="mprj=OracleComms_Model_Base" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model_Base" typeName="Model Project"/>
+      </relation>
+    </project>
+    <unitOfMeasure>
+      <element id="uom=Bandwidth+uom.umd=dARSPrlP--+W0Ml9sI1gIg" type="uom.umd" typeName="Unit of Measure Detail" kind="Element" name="bps" path="/bps">
+        <value>1</value>
+        <unitOfMeasureDisplayName>bps</unitOfMeasureDisplayName>
+        <description>Bytes Per Second</description>
+      </element>
+      <element id="uom=Bandwidth+uom.umd=---CugdO--+L--+0kRsUew" type="uom.umd" typeName="Unit of Measure Detail" kind="Element" name="kbps" path="/kbps">
+        <value>1024</value>
+        <unitOfMeasureDisplayName>Kbps</unitOfMeasureDisplayName>
+        <description>Kilobytes per second</description>
+      </element>
+      <element id="uom=Bandwidth+uom.umd=---d--+V--+ymWgxvJE4jA" type="uom.umd" typeName="Unit of Measure Detail" kind="Element" name="mbps" path="/mbps">
+        <value>1048576</value>
+        <unitOfMeasureDisplayName>Mbps</unitOfMeasureDisplayName>
+        <description>Megabytes per second</description>
+      </element>
+      <element id="uom=Bandwidth+uom.umd=--+I---2--+M--+g7QhriQ" type="uom.umd" typeName="Unit of Measure Detail" kind="Element" name="gbps" path="/gbps">
+        <value>1073741824</value>
+        <unitOfMeasureDisplayName>Gbps</unitOfMeasureDisplayName>
+        <description>Gigabbytes per second</description>
+      </element>
+    </unitOfMeasure>
+  </entity>
+</model:Model>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet
+      title="Verify Orchestration Sequence">
+  <intro>
+      <description>
+         This cheat sheet guides you through the orchestration sequence created by the design pattern.
+      </description>
+   </intro>
+   <item
+         title="Verify Orchestration Sequence: SOM_OrchestrationSequence">
+      <description>
+		The orchestration sequence has the <b>Description</b>, <b>Namespace</b>, <b>Order Item</b>, and <b>Orchestration Stages</b> set according to the entries in the design pattern. 
+		<br/><br/>
+		Template XQuery modules for <b>Order Item Selector</b> and <b>Fulfillment Mode Expression</b> have been placed in the <b>resources/OrderRecognitionRule</b> directory, and the location of these files has been added to the catalog.xml file using the ResourceURI value entered in the design pattern. These XQuery templates need to be modified for your specific business logic.
+	 </description>
+      <subitem
+            label="Open Orchestration Sequence"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_SOM_Orchestration/model/SOM_OrchestrationSequence.orchestrationSequence)"/>
+      </subitem>
+      <subitem
+            label="Open _OrderItemSelector.xquery"
+            skip="true">
+     
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_SOM_Orchestration/resources/OrchestrationSequence/_OrderItemSelector.xquery)"/>
+      </subitem>
+      <subitem
+            label="Open _FulfillmentModeExpression.xquery"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_SOM_Orchestration/resources/OrchestrationSequence/_FulfillmentModeExpression.xquery)"/>
+      </subitem>
+   </item>
+</cheatsheet>

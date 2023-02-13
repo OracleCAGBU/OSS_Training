@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:complexType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:_25="http://www.metasolv.com/OMS/OrderModel/2002/06/25" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="updateDetailsType" namespace="OracleComms_OSM_CommonDataDictionary/4.0" abstract="false" final="false">
+  <model:description>updateDetails</model:description>
+  <model:element xsi:type="model:TextType" name="orderId">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Order Id</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Order Id</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>256</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="orderNumber">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Order Number</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Order Number</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>1000</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="quoteId">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Quote Id</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Quote Id</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>256</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="quoteNumber">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Quote Number</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Quote Number</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>1000</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="agreementId">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Agreement Id</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Agreement Id</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>256</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="agreementNumber">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Agreement Number</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Agreement Number</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>1000</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="updatedBy">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Updated By</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Updated By</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>256</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="updatedBySystem">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Updated By System</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Updated By System</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>256</model:length>
+  </model:element>
+  <model:element xsi:type="model:LookupType" name="updateMode">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Update Mode Type</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Update Mode Type</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:lookupEntry>
+      <model:code>MANUAL</model:code>
+      <model:description>Manual</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>ORDER</model:code>
+      <model:description>Order</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>QUOTE</model:code>
+      <model:description>Quote</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>AGREEMENT</model:code>
+      <model:description>Agreement</model:description>
+    </model:lookupEntry>
+  </model:element>
+  <model:element xsi:type="model:LookupType" name="updateReasonCode">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Update Reason Code</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Update Reason Code</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:lookupEntry>
+      <model:code>NORMAL</model:code>
+      <model:description>Normal</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>UPGRADED</model:code>
+      <model:description>Upgraded</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>DOWNGRADED</model:code>
+      <model:description>Downgraded</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>MOVED</model:code>
+      <model:description>Moved</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>FORCED</model:code>
+      <model:description>Forced</model:description>
+    </model:lookupEntry>
+  </model:element>
+</model:complexType>

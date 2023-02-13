@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:complexType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="BaseAbstractOrderItem" namespace="http://xmlns.oracle.com/communications/studio/ordermanagement/transformation" abstract="true" final="false">
+  <model:element xsi:type="model:LookupType" name="OrderItemProcessingState">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Order Item Processing State</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>false</model:significant>
+    <model:ignoreDataRollbackDuringUndo>true</model:ignoreDataRollbackDuringUndo>
+    <model:defaultValue>NotStarted</model:defaultValue>
+    <model:lookupEntry>
+      <model:code>NotStarted</model:code>
+      <model:description>Not Started</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>InProgress</model:code>
+      <model:description>In Progress</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>InProgressWithFailures</model:code>
+      <model:description>In Progress (w/ Failures)</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>InProgressWithWarnings</model:code>
+      <model:description>In Progress (w/ Warnings)</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>Completed</model:code>
+      <model:description>Completed</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>CompletedWithWarnings</model:code>
+      <model:description>Completed (w/ Warnings)</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>PartiallyFailed</model:code>
+      <model:description>Partially Failed</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>Undoing</model:code>
+      <model:description>Undoing</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>UndoingWithFailures</model:code>
+      <model:description>Undoing (w/ Failures)</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>UndoingWithWarnings</model:code>
+      <model:description>Undoing (w/ Warnings)</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>UndoFailed</model:code>
+      <model:description>Undo Failed</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>UndoCompleted</model:code>
+      <model:description>Undo Completed</model:description>
+    </model:lookupEntry>
+    <model:lookupEntry>
+      <model:code>UndoCompletedWithWarnings</model:code>
+      <model:description>Undo Completed (w/ Warnings)</model:description>
+    </model:lookupEntry>
+  </model:element>
+</model:complexType>

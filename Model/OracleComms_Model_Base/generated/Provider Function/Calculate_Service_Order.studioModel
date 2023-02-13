@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:ProviderFunction" id="pf=Calculate_Service_Order" type="pf" typeName="Provider Function" name="Calculate_Service_Order" resource="\OracleComms_Model_Base\model\Calculate_Service_Order.provFunc">
+    <displayName lang="default">Calculate  Service  Order</displayName>
+    <note lang="default">This is a Provider Function that calculates the Service Order lines from a customer order. The calculation is based on mapping the requested product attributes to the corresponding service attributes to fulfill order.</note>
+    <project>
+      <relation ref="mprj=OracleComms_Model_Base" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model_Base" typeName="Model Project"/>
+      </relation>
+    </project>
+    <mappingSource>
+      <element id="pf=Calculate_Service_Order+pf.ms=---xNpl7--+O---i---41g" type="pf.ms" typeName="Mapping Source" kind="Element" name="PRODUCT" path="/PRODUCT">
+        <MappingSource>PRODUCT</MappingSource>
+      </element>
+      <element id="pf=Calculate_Service_Order+pf.ms=gIa4yOdLTPeV7me5pcQ7AQ" type="pf.ms" typeName="Mapping Source" kind="Element" name="CFS.Service" path="/CFS.Service">
+        <actionType>
+          <relation ref="fa=Service" type="Functional Area" name="Action Type" kind="Entity">
+            <target name="Service" typeName="Functional Area"/>
+          </relation>
+        </actionType>
+        <MappingSource>CFS</MappingSource>
+      </element>
+    </mappingSource>
+    <mappingTarget>
+      <element id="pf=Calculate_Service_Order+pf.mt=O8R3--+T--+CB4xe---bkw" type="pf.mt" typeName="Mapping Target" kind="Element" name="CFS.Service" path="/CFS.Service">
+        <actionType>
+          <relation ref="fa=Service" type="Functional Area" name="Action Type" kind="Entity">
+            <target name="Service" typeName="Functional Area"/>
+          </relation>
+        </actionType>
+        <MappingTarget>CFS</MappingTarget>
+      </element>
+      <element id="pf=Calculate_Service_Order+pf.mt=--+HTfcU--+K--+1PFtOig" type="pf.mt" typeName="Mapping Target" kind="Element" name="RESOURCE.Service" path="/RESOURCE.Service">
+        <actionType>
+          <relation ref="fa=Service" type="Functional Area" name="Action Type" kind="Entity">
+            <target name="Service" typeName="Functional Area"/>
+          </relation>
+        </actionType>
+        <MappingTarget>RESOURCE</MappingTarget>
+      </element>
+    </mappingTarget>
+    <providerFunctionRelationshipTypes>
+      <element id="pf=Calculate_Service_Order+pf.rt=vhY+03MY--+XyYMmuK5eHQ" type="pf.rt" typeName="Relationship Types" kind="Element" name="Calculate_Service_Order Relationship Types" path="Calculate_Service_Order Relationship Types">
+        <defaultRelationship>
+          <relation ref="rt=Primary" type="Relationship Type" name="Default Relationship" kind="Entity">
+            <target name="Primary" typeName="Relationship Type"/>
+          </relation>
+        </defaultRelationship>
+        <relationships>
+          <relation ref="rt=Primary" type="Relationship Type" name="Relationship Types" kind="Entity">
+            <target name="Primary" typeName="Relationship Type"/>
+          </relation>
+          <relation ref="rt=Auxiliary" type="Relationship Type" name="Relationship Types" kind="Entity">
+            <target name="Auxiliary" typeName="Relationship Type"/>
+          </relation>
+        </relationships>
+      </element>
+    </providerFunctionRelationshipTypes>
+  </entity>
+</model:Model>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:RelationshipType" id="rt=Auxiliary" type="rt" typeName="Relationship Type" name="Auxiliary" resource="\OracleComms_Model_Base\model\Auxiliary.relType">
+    <displayName lang="default">Auxiliary</displayName>
+    <note lang="default">This is a type of relationship between a Product Spec and the CFS Service Action.&#xD;
+Each subject CFS/RS can have 0 or more Auxiliary relationships.&#xD;
+</note>
+    <project>
+      <relation ref="mprj=OracleComms_Model_Base" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model_Base" typeName="Model Project"/>
+      </relation>
+    </project>
+  </entity>
+</model:Model>

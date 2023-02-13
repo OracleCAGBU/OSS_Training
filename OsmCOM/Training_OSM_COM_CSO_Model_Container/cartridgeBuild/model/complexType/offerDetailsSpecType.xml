@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:complexType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:_25="http://www.metasolv.com/OMS/OrderModel/2002/06/25" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="offerDetailsType" namespace="OracleComms_OSM_CommonDataDictionary/4.0" abstract="false" final="false">
+  <model:description>offerDetails</model:description>
+  <model:element xsi:type="model:TextType" name="offerVersion">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>999999999</model:maxOccurs>
+    <model:description>Offer Version</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Offer Version</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>40</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="productSpecName">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Product Spec Name</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Product Spec Name</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>200</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="productSpecVersion">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Product Spec Version</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Product Spec Version</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>20</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="productCatalogName">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Product Catalog Name</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Product Catalog Name</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>200</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="productCatalogVersion">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Product Catalog Version</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Product Catalog Version</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>20</model:length>
+  </model:element>
+  <model:element xsi:type="model:NumericType" name="offerQuantity">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Offer Quantity</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Offer Quantity</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+  </model:element>
+</model:complexType>

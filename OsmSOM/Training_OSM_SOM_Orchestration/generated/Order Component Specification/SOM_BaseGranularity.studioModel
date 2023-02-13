@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:OrderComponentSpecification" id="ocs=SOM_BaseGranularity" type="ocs" typeName="Order Component Specification" name="SOM_BaseGranularity" resource="\Training_OSM_SOM_Orchestration\model\GRANULARITY\SOM_BaseGranularity.orderComponentSpec">
+    <displayName lang="default">SOM_BaseGranularity</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=Training_OSM_SOM_Orchestration" type="Order and Service Management Project" name="Dependency">
+        <target name="Training_OSM_SOM_Orchestration" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <componentElements>
+      <element xsi:type="osm:Component" id="ocs=SOM_BaseGranularity+osm.orch.orderComponentSpec.element=+h6+RvhPQz+2kuagY-LtDw" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="SOM_BaseGranularity" path="/SOM_BaseGranularity">
+        <components>
+          <element xsi:type="osm:Component" id="ocs=SOM_ProvisioningGranularity+osm.orch.orderComponentSpec.element=53MWu7cWTuGbAc8ioAsIJw" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="SOM_ProvisioningGranularity" path="/SOM_BaseGranularity/SOM_ProvisioningGranularity">
+            <components>
+              <element xsi:type="osm:Component" id="ocs=SOM_WholeOrderGranularity+osm.orch.orderComponentSpec.element=XYQMAD53SyK-BX5vkDuZew" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="SOM_WholeOrderGranularity" path="/SOM_BaseGranularity/SOM_ProvisioningGranularity/SOM_WholeOrderGranularity"/>
+            </components>
+          </element>
+        </components>
+      </element>
+    </componentElements>
+  </entity>
+</model:Model>

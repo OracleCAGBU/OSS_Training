@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/orchestration" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:osm="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="DecompositionRuleType" name="Decomp_SOM_Provisioning_To_UIM_SOM">
+  <com:displayName>Decomp_SOM_Provisioning_To_UIM_SOM</com:displayName>
+  <com:saveVersion>4</com:saveVersion>
+  <com:id>e-xMQGxaQMGpq+qLjYnzug</com:id>
+  <namespace>SOM_ProvisioningOrderFulfillment</namespace>
+  <orderItem>
+    <com:entity>SOM_OrderItemSpecification</com:entity>
+    <com:entityType>orderItemSpec</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.decompositionRule.orderItem</com:relationship>
+  </orderItem>
+  <product>
+    <com:entity>SOFP_BROADBAND_Standard</com:entity>
+    <com:entityType>productSpec</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.decompositionRule.productSpec</com:relationship>
+  </product>
+  <source>
+    <com:entity>PlanDeliveryFunction</com:entity>
+    <com:entityType>orderComponentSpec</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.decompositionRule.source</com:relationship>
+  </source>
+  <source>
+    <com:entity>DesignServiceFunction</com:entity>
+    <com:entityType>orderComponentSpec</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.decompositionRule.source</com:relationship>
+  </source>
+  <source>
+    <com:entity>CompleteDeliveryFunction</com:entity>
+    <com:entityType>orderComponentSpec</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.decompositionRule.source</com:relationship>
+  </source>
+  <target>
+    <com:entity>UIM_SOM</com:entity>
+    <com:entityType>orderComponentSpec</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.decompositionRule.target</com:relationship>
+  </target>
+</com:modelEntity>

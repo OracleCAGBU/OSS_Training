@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:OrderComponentSpecification" id="ocs=SOM_ProvisioningFunction" type="ocs" typeName="Order Component Specification" name="SOM_ProvisioningFunction" resource="\Training_OSM_SOM_Orchestration\model\FUNCTION\SOM_ProvisioningFunction.orderComponentSpec">
+    <displayName lang="default">SOM_ProvisioningFunction</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=Training_OSM_SOM_Orchestration" type="Order and Service Management Project" name="Dependency">
+        <target name="Training_OSM_SOM_Orchestration" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <componentElements>
+      <element xsi:type="osm:Component" id="ocs=SOM_ProvisioningFunction+osm.orch.orderComponentSpec.element=TSBufea6QEiGU07SOi+iyQ" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="SOM_ProvisioningFunction" path="/SOM_ProvisioningFunction">
+        <components>
+          <element xsi:type="osm:Component" id="ocs=CompleteDeliveryFunction+osm.orch.orderComponentSpec.element=uuS5XIsnSoqBkY82AzieBw" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="CompleteDeliveryFunction" path="/SOM_ProvisioningFunction/CompleteDeliveryFunction"/>
+          <element xsi:type="osm:Component" id="ocs=DeliverOrderFunction+osm.orch.orderComponentSpec.element=g0RILgB8TKObFEDA0S+ZYA" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="DeliverOrderFunction" path="/SOM_ProvisioningFunction/DeliverOrderFunction"/>
+          <element xsi:type="osm:Component" id="ocs=DesignServiceFunction+osm.orch.orderComponentSpec.element=jp9r4mf9SmKDQ3y+ZsbqKg" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="DesignServiceFunction" path="/SOM_ProvisioningFunction/DesignServiceFunction"/>
+          <element xsi:type="osm:Component" id="ocs=PlanDeliveryFunction+osm.orch.orderComponentSpec.element=wGm5+GgqRVSHGHEClUFh8g" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="PlanDeliveryFunction" path="/SOM_ProvisioningFunction/PlanDeliveryFunction"/>
+        </components>
+      </element>
+    </componentElements>
+  </entity>
+</model:Model>

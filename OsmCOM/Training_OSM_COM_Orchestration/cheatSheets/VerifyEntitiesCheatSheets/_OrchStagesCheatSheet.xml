@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet
+      title="Verify Orchestration Stages">
+  <intro>
+      <description>
+         This cheat sheet guides you through the orchestration stages created by the design pattern.
+      </description>
+   </intro>
+    <item
+         title="Verify Orchestration Stages: COM_DetermineFulfillmentFunction, COM_DetermineTargetSystem, COM_DetermineProcessingGranularity">
+      <description>
+		Three orchestration stages have been created.  Each has the <b>Description</b> populated, and the appropriate order component is selected by default in the <b>Produces Order Component</b> section.
+	 </description>
+      <subitem
+            label="Open Function Stage: COM_DetermineFulfillmentFunction"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_COM_Orchestration/model/COM_DetermineFulfillmentFunction.orchestrationStage)"/>
+      </subitem>
+      <subitem
+            label="Open System Stage: COM_DetermineTargetSystem"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_COM_Orchestration/model/COM_DetermineTargetSystem.orchestrationStage)"/>
+      </subitem>
+      <subitem
+            label="Open Granularity Stage: COM_DetermineProcessingGranularity"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_COM_Orchestration/model/COM_DetermineProcessingGranularity.orchestrationStage)"/>
+      </subitem>
+   </item>
+   </cheatsheet>

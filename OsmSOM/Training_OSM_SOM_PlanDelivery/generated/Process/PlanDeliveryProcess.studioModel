@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:Process" id="pro=PlanDeliveryProcess" type="pro" typeName="Process" name="PlanDeliveryProcess" resource="\Training_OSM_SOM_PlanDelivery\model\PROCESS\PlanDeliveryProcess.process">
+    <displayName lang="default">PlanDeliveryProcess</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=Training_OSM_SOM_PlanDelivery" type="Order and Service Management Project" name="Dependency">
+        <target name="Training_OSM_SOM_PlanDelivery" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <order>
+      <relation ref="ord=SOM_ProvisionServiceOrderFulfillment" type="Order" name="Order" kind="Entity">
+        <target name="SOM_ProvisionServiceOrderFulfillment" typeName="Order"/>
+      </relation>
+    </order>
+    <tasks>
+      <relation ref="atsk=IssueBITask" type="Automated Task" name="Task" kind="Entity">
+        <target name="IssueBITask" typeName="Automated Task"/>
+      </relation>
+      <relation ref="atsk=CalculateTechnicalActionsTask" type="Automated Task" name="Task" kind="Entity">
+        <target name="CalculateTechnicalActionsTask" typeName="Automated Task"/>
+      </relation>
+    </tasks>
+  </entity>
+</model:Model>

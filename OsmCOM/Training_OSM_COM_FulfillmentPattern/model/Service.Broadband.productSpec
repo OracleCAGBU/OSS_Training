@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/orchestration" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:osm="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="ProductSpec" name="Service.Broadband">
+  <com:displayName>Service.Broadband</com:displayName>
+  <com:saveVersion>9</com:saveVersion>
+  <com:id>---mlKI5--+8--+FWrNF9w</com:id>
+  <com:genericModelRef>
+    <com:entity>COM_BroadbandInternet_FulfillmentPattern</com:entity>
+    <com:entityType>procPtrnType</com:entityType>
+    <com:relationship>oracle.communications.sce.common.entity.pattern.relalizationRef</com:relationship>
+  </com:genericModelRef>
+  <namespace>COM_SalesOrderFulfillment</namespace>
+  <supportedFulfillmentMode>
+    <com:entity>COM_Deliver</com:entity>
+    <com:entityType>fulfillmentMode</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.productSpec.fulfillmentMode</com:relationship>
+  </supportedFulfillmentMode>
+  <supportedFulfillmentMode>
+    <com:entity>COM_Deliver</com:entity>
+    <com:entityType>fulfillmentMode</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.productSpec.fulfillmentMode</com:relationship>
+  </supportedFulfillmentMode>
+  <orchestrationPlan>
+    <fulfillmentMode>
+      <com:entity>COM_Deliver</com:entity>
+      <com:entityType>fulfillmentMode</com:entityType>
+      <com:relationship>oracle.communications.sce.osm.orchestration.productSpec.fulfillmentMode</com:relationship>
+    </fulfillmentMode>
+    <processingDuration/>
+    <component>
+      <com:entity>ProvisioningFunction</com:entity>
+      <com:entityType>orderComponentSpec</com:entityType>
+      <com:relationship>oracle.communications.sce.osm.orchestration.productSpec.orchPlanComponent</com:relationship>
+      <minDuration/>
+      <processingDuration/>
+      <maxDuration/>
+    </component>
+  </orchestrationPlan>
+</com:modelEntity>

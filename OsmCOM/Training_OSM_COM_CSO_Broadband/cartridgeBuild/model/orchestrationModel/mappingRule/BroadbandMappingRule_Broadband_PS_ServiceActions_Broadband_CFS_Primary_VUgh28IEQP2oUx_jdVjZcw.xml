@@ -1,0 +1,85 @@
+<model:mappingRule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="BroadbandMappingRule_Broadband_PS_ServiceActions_Broadband_CFS_Primary_VUgh28IEQP2oUx_jdVjZcw" namespace="COM_SalesOrderFulfillment">
+  <model:description>[BroadbandMappingRule] Broadband_PS to ServiceActions_Broadband_CFS - Primary</model:description>
+  <model:supportsDataPropagation>false</model:supportsDataPropagation>
+  <model:useForOrderItemSelection>false</model:useForOrderItemSelection>
+  <model:sourceOrderItemParameterSpec>
+    <model:name>Broadband_PSSpec</model:name>
+    <model:namespace>Training_Model_Broadband_PS/1.0.0.0.0</model:namespace>
+  </model:sourceOrderItemParameterSpec>
+  <model:targetOrderItemParameterSpec>
+    <model:name>ServiceActions_Broadband_CFSSpec</model:name>
+    <model:namespace>Training_Model_Broadband_Service/1.0.0.0.0</model:namespace>
+  </model:targetOrderItemParameterSpec>
+  <model:relationshipType>
+    <model:name>Primary</model:name>
+    <model:namespace>OracleComms_Model_Base/1.0.0.0.0</model:namespace>
+  </model:relationshipType>
+  <model:providerFunctionFilter>
+    <model:name>Calculate_Service_Order</model:name>
+    <model:namespace>OracleComms_Model_Base/1.0.0.0.0</model:namespace>
+  </model:providerFunctionFilter>
+  <model:sourceOrderItemFilter>
+    <model:name>COM_SalesOrderFulfillment</model:name>
+    <model:namespace>COM_SalesOrderFulfillment</model:namespace>
+  </model:sourceOrderItemFilter>
+  <model:targetOrderItemFilter>
+    <model:name>COM_TransformedOrderLine</model:name>
+    <model:namespace>COM_SalesOrderFulfillment</model:namespace>
+  </model:targetOrderItemFilter>
+  <model:mappingRuleItem xsi:type="model:CopyValueMappingRuleItemType" name="BroadbandMappingRule_Item_0">
+    <model:sourcePropertyRef path="/Username">dynamicParams</model:sourcePropertyRef>
+    <model:targetPropertyRef path="/Username">dynamicParams</model:targetPropertyRef>
+  </model:mappingRuleItem>
+  <model:mappingRuleItem xsi:type="model:CopyValueMappingRuleItemType" name="BroadbandMappingRule_Item_1">
+    <model:sourcePropertyRef path="/BuildingName">dynamicParams</model:sourcePropertyRef>
+    <model:targetPropertyRef path="/BuildingName">dynamicParams</model:targetPropertyRef>
+  </model:mappingRuleItem>
+  <model:mappingRuleItem xsi:type="model:CopyValueMappingRuleItemType" name="BroadbandMappingRule_Item_2">
+    <model:sourcePropertyRef path="/PayType">dynamicParams</model:sourcePropertyRef>
+    <model:targetPropertyRef path="/PayType">dynamicParams</model:targetPropertyRef>
+  </model:mappingRuleItem>
+  <model:mappingRuleItem xsi:type="model:CopyValueMappingRuleItemType" name="BroadbandMappingRule_Item_3">
+    <model:sourcePropertyRef path="/Longitude">dynamicParams</model:sourcePropertyRef>
+    <model:targetPropertyRef path="/Longitude">dynamicParams</model:targetPropertyRef>
+  </model:mappingRuleItem>
+  <model:mappingRuleItem xsi:type="model:CopyValueMappingRuleItemType" name="BroadbandMappingRule_Item_4">
+    <model:sourcePropertyRef path="/PlanName">dynamicParams</model:sourcePropertyRef>
+    <model:targetPropertyRef path="/PlanName">dynamicParams</model:targetPropertyRef>
+  </model:mappingRuleItem>
+  <model:mappingRuleItem xsi:type="model:CopyValueMappingRuleItemType" name="BroadbandMappingRule_Item_5">
+    <model:sourcePropertyRef path="/CustomerSegment">dynamicParams</model:sourcePropertyRef>
+    <model:targetPropertyRef path="/CustomerSegment">dynamicParams</model:targetPropertyRef>
+  </model:mappingRuleItem>
+  <model:mappingRuleItem xsi:type="model:CopyValueMappingRuleItemType" name="BroadbandMappingRule_Item_6">
+    <model:sourcePropertyRef path="/PartyName">dynamicParams</model:sourcePropertyRef>
+    <model:targetPropertyRef path="/PartyName">dynamicParams</model:targetPropertyRef>
+  </model:mappingRuleItem>
+  <model:mappingRuleItem xsi:type="model:CopyValueMappingRuleItemType" name="BroadbandMappingRule_Item_7">
+    <model:sourcePropertyRef path="/HouseNumber">dynamicParams</model:sourcePropertyRef>
+    <model:targetPropertyRef path="/Street_HouseNumber">dynamicParams</model:targetPropertyRef>
+  </model:mappingRuleItem>
+  <model:mappingRuleItem xsi:type="model:CopyValueMappingRuleItemType" name="BroadbandMappingRule_Item_8">
+    <model:sourcePropertyRef path="/ProductAction">dynamicParams</model:sourcePropertyRef>
+    <model:targetPropertyRef path="/ServiceAction">dynamicParams</model:targetPropertyRef>
+  </model:mappingRuleItem>
+  <model:mappingRuleItem xsi:type="model:CopyValueMappingRuleItemType" name="BroadbandMappingRule_Item_9">
+    <model:sourcePropertyRef path="/Latitude">dynamicParams</model:sourcePropertyRef>
+    <model:targetPropertyRef path="/Latitude">dynamicParams</model:targetPropertyRef>
+  </model:mappingRuleItem>
+  <model:mappingRuleItem xsi:type="model:CopyValueMappingRuleItemType" name="BroadbandMappingRule_Item_10">
+    <model:sourcePropertyRef>RequestedDeliveryDate</model:sourcePropertyRef>
+    <model:targetPropertyRef>RequestedDeliveryDate</model:targetPropertyRef>
+  </model:mappingRuleItem>
+  <model:mappingRuleItem xsi:type="model:CopyValueMappingRuleItemType" name="BroadbandMappingRule_Item_11">
+    <model:sourcePropertyRef path="/Password">dynamicParams</model:sourcePropertyRef>
+    <model:targetPropertyRef path="/Password">dynamicParams</model:targetPropertyRef>
+  </model:mappingRuleItem>
+  <model:mappingRuleItem xsi:type="model:CopyValueMappingRuleItemType" name="BroadbandMappingRule_Item_12">
+    <model:sourcePropertyRef>FulfillmentPattern</model:sourcePropertyRef>
+    <model:targetPropertyRef>FulfillmentPattern</model:targetPropertyRef>
+  </model:mappingRuleItem>
+  <model:mappingRuleItem xsi:type="model:CopyValueMappingRuleItemType" name="BroadbandMappingRule_Item_13">
+    <model:sourcePropertyRef path="/StreetName">dynamicParams</model:sourcePropertyRef>
+    <model:targetPropertyRef path="/Street_VillageName">dynamicParams</model:targetPropertyRef>
+  </model:mappingRuleItem>
+</model:mappingRule>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet
+      title="Verify Order Item Specification">
+  <intro>
+      <description>
+         This cheat sheet guides you through the order item specification created by the design pattern.
+      </description>
+   </intro>
+    <item
+         title="Verify Order Item Specification: COM_SalesOrderFulfillment">
+      <description>
+		In the <b>Order Item Properties</b> tab, the order item specification has various properties set, including those used for 
+		<b>Fulfillment Pattern Mapping Property</b>, <b>Order Item Name Property</b>, and <b>Requested Delivery Date</b>. Template XQuery modules for the order item properties have been placed in the <b>resources/OrderItemSpecification</b> directory, and the location of these files has been added to the catalog.xml file using the ResourceURI value entered in the design pattern. These XQuery templates need to be modified for your specific business logic.
+		<br/><br/>
+		In the <b>Order Item Hierarchies</b> tab, a default configuration is present.  Template XQuery modules for <b>Key Expression</b> and <b>Parent Key Expression</b> have been placed in the <b>resources/OrderItemSpecification</b> directory, and the location of these files has been added to the <b>catalog.xml</b> file using the ResourceURI value entered in the design pattern. These XQuery templates need to be modified for your specific business logic.
+	 </description>
+      <subitem
+            label="Open Order Item Specification"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_COM_Orchestration/model/COM_SalesOrderFulfillment.orderItemSpec)"/>
+      </subitem>
+      <subitem
+            label="Open _LineId.xquery"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_COM_Orchestration/resources/OrderItemSpecification/_LineId.xquery)"/>
+      </subitem>
+      <subitem
+            label="Open _LineName.xquery"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_COM_Orchestration/resources/OrderItemSpecification/_LineName.xquery)"/>
+      </subitem>
+      <subitem
+            label="Open _ProductSpecification.xquery"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_COM_Orchestration/resources/OrderItemSpecification/_ProductSpecification.xquery)"/>
+      </subitem>
+      <subitem
+            label="Open _FulfillmentPattern.xquery"
+            skip="true">
+
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_COM_Orchestration/resources/OrderItemSpecification/_FulfillmentPattern.xquery)"/>
+      </subitem>
+      <subitem
+            label="Open _RequestedDeliveryDate.xquery"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_COM_Orchestration/resources/OrderItemSpecification/_RequestedDeliveryDate.xquery)"/>
+      </subitem>
+	  <subitem
+            label="Open _ParentLineId.xquery"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_COM_Orchestration/resources/OrderItemSpecification/_ParentLineId.xquery)"/>
+      </subitem>
+	  <subitem
+            label="Open _KeyExpression.xquery"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_COM_Orchestration/resources/OrderItemSpecification/_KeyExpression.xquery)"/>
+      </subitem>
+	  <subitem
+            label="Open _ParentKeyExpression.xquery"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_COM_Orchestration/resources/OrderItemSpecification/_ParentKeyExpression.xquery)"/>
+      </subitem>
+   </item>
+   </cheatsheet>

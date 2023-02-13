@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<masterOrderTemplate 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns="http://www.metasolv.com/OMS/OrderModel/2002/06/25">
+        <dataNode element="ControlData"  ><dataNode element="OrderFulfillmentState"   />
+<dataNode element="Functions"  ><dataNode element="ProvisioningFunction"  ><dataNode element="componentKey"   />
+<dataNode element="calculatedStartDate"   />
+<dataNode element="duration"   />
+<dataNode element="orderItem"  ><dataNode element="ExternalFulfillmentState"   />
+<dataNode element="FunctionProcessingState"   />
+<dataNode element="orderItemRef"  >	<reference>
+		<pathToNode>/ControlData/OrderItem</pathToNode>
+	</reference>
+ </dataNode>
+ </dataNode>
+<dataNode element="transformedOrderItem"  ><dataNode element="ExternalFulfillmentState"   />
+<dataNode element="FunctionProcessingState"   />
+<dataNode element="orderItemRef"  >	<reference>
+		<pathToNode>/ControlData/TransformedOrderItem</pathToNode>
+	</reference>
+ </dataNode>
+ </dataNode>
+ </dataNode>
+ </dataNode>
+<dataNode element="OrderItem"  ><dataNode element="Action"   />
+<dataNode element="FulfillmentPattern"   />
+<dataNode element="LineId"   />
+<dataNode element="LineName"   />
+<dataNode element="ParentLineId"   />
+<dataNode element="ProductSpecification"   />
+<dataNode element="Recognition"   />
+<dataNode element="RequestedDeliveryDate"   />
+<dataNode element="dynamicParams"   />
+<dataNode element="PointOfNoReturn"   />
+<dataNode element="OrderItemFulfillmentState"   />
+<dataNode element="xmlData"   />
+<dataNode element="ServiceInstanceIndicator"   />
+ </dataNode>
+<dataNode element="TransformedOrderItem"   />
+<dataNode element="MappingContext"  ><dataNode element="ProviderFunction"  ><dataNode element="namespace"   />
+<dataNode element="name"   />
+<dataNode element="TargetMapping"  ><dataNode element="target"   />
+<dataNode element="SourceMapping"  ><dataNode element="source"   />
+<dataNode element="InstantiatingMappingRule"  ><dataNode element="namespace"   />
+<dataNode element="name"   />
+<dataNode element="AttributeMapping"  ><dataNode element="Source"  ><dataNode element="name"   />
+<dataNode element="path"   />
+ </dataNode>
+<dataNode element="Target"  ><dataNode element="name"   />
+<dataNode element="path"   />
+<dataNode element="instanceKeyPath"   />
+<dataNode element="instanceKey"   />
+ </dataNode>
+<dataNode element="mappingRuleItem"   />
+ </dataNode>
+ </dataNode>
+<dataNode element="MappingRule"  ><dataNode element="namespace"   />
+<dataNode element="name"   />
+<dataNode element="AttributeMapping"  ><dataNode element="Source"  ><dataNode element="name"   />
+<dataNode element="path"   />
+ </dataNode>
+<dataNode element="Target"  ><dataNode element="name"   />
+<dataNode element="path"   />
+<dataNode element="instanceKeyPath"   />
+<dataNode element="instanceKey"   />
+ </dataNode>
+<dataNode element="mappingRuleItem"   />
+ </dataNode>
+ </dataNode>
+ </dataNode>
+ </dataNode>
+ </dataNode>
+ </dataNode>
+        </dataNode>
+        <dataNode element="inputMessage"  />
+        <dataNode element="Order"  ><dataNode element="OrderNumber"   />
+<dataNode element="TypeCode"   />
+<dataNode element="CustomerPartyReference"  ><dataNode element="FirstName"   />
+<dataNode element="LastName"   />
+<dataNode element="AccountType"   />
+<dataNode element="AccountID"   />
+<dataNode element="ContactID"   />
+ </dataNode>
+        </dataNode>
+</masterOrderTemplate>

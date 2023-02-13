@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="model:Project" id="oprj=Training_OSM_SOM_CSO_Broadband_Service" type="oprj" typeName="Order and Service Management Project" name="Training_OSM_SOM_CSO_Broadband_Service" resource="\Training_OSM_SOM_CSO_Broadband_Service\Training_OSM_SOM_CSO_Broadband_Service.osmCartridge">
+    <displayName lang="default">Training_OSM_SOM_CSO_Broadband_Service</displayName>
+    <note lang="default"/>
+    <version>
+      <major>1</major>
+      <minor>0</minor>
+      <maintenance>0</maintenance>
+      <servicePack>0</servicePack>
+      <efix>0</efix>
+      <build>53</build>
+    </version>
+    <targetVersion xsi:type="model:BuildVersion">
+      <major>7</major>
+      <minor>4</minor>
+      <maintenance>0</maintenance>
+      <servicePack>0</servicePack>
+      <efix>0</efix>
+      <build>0</build>
+    </targetVersion>
+    <propertyCategory name="Cartridge Management">
+      <property defaultValue="false" name="PURGE_CARTRIDGE_BEFORE_DEPLOY"/>
+      <property defaultValue="replace" name="ENTITY_CONFLICT_ACTION_ON_DEPLOY"/>
+      <property defaultValue="true" name="PURGE_ORDER_ON_UNDEPLOY"/>
+      <property defaultValue="true" name="FAST_CARTRIDGE_UNDEPLOY"/>
+      <property defaultValue="true" name="DEFAULT_CARTRIDGE"/>
+    </propertyCategory>
+    <propertyCategory name="Model">
+      <property defaultValue="oms-automation" name="DEFAULT_AUTOMATION_USER"/>
+      <property defaultValue="" name="DEFAULT_REQUEST_QUEUE"/>
+      <property defaultValue="mslv/oms/oms1/internal/jms/events" name="DEFAULT_RESPONSE_QUEUE"/>
+      <property defaultValue="" name="DEFAULT_MESSAGE_PROPERTY_SELECTOR"/>
+      <property defaultValue="ENV1" name="ACTIVATION_ENVIRONMENT_ID"/>
+      <property defaultValue="1.0.0.0.0" name="CARTRIDGE_VERSION"/>
+    </propertyCategory>
+    <dependencies>
+      <element id="oprj=Training_OSM_SOM_CSO_Broadband_Service+prjd=Training_OSM_SOM_Orchestration" type="prjd" typeName="Project Dependency" name="Training_OSM_SOM_Orchestration">
+        <supportedVersion>
+          <minVersion exclusive="false">1.0.0.0.0</minVersion>
+          <maxVersion exclusive="true"></maxVersion>
+        </supportedVersion>
+        <project>
+          <relation ref="oprj=Training_OSM_SOM_Orchestration" type="Order and Service Management Project" name="Dependency">
+            <target name="Training_OSM_SOM_Orchestration" typeName="Order and Service Management Project"/>
+          </relation>
+        </project>
+      </element>
+      <element id="oprj=Training_OSM_SOM_CSO_Broadband_Service+prjd=Training_Model_Broadband_Service" type="prjd" typeName="Project Dependency" name="Training_Model_Broadband_Service">
+        <supportedVersion>
+          <minVersion exclusive="false">1.0.0.0.0</minVersion>
+          <maxVersion exclusive="true"></maxVersion>
+        </supportedVersion>
+        <project>
+          <relation ref="mprj=Training_Model_Broadband_Service" type="Model Project" name="Dependency">
+            <target name="Training_Model_Broadband_Service" typeName="Model Project"/>
+          </relation>
+        </project>
+      </element>
+    </dependencies>
+    <identifier>Training_OSM_SOM_CSO_Broadband_Service</identifier>
+    <provider>OSM Cartridge Provider</provider>
+    <sealed>false</sealed>
+    <package></package>
+  </entity>
+</model:Model>

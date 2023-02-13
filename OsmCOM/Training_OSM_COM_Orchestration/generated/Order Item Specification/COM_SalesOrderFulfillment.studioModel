@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:OrderItemSpecification" id="ois=COM_SalesOrderFulfillment" type="ois" typeName="Order Item Specification" name="COM_SalesOrderFulfillment" resource="\Training_OSM_COM_Orchestration\model\COM_SalesOrderFulfillment.orderItemSpec">
+    <displayName lang="default">COM_SalesOrderFulfillment</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=Training_OSM_COM_Orchestration" type="Order and Service Management Project" name="Dependency">
+        <target name="Training_OSM_COM_Orchestration" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <requestedDeliveryDateProperty>
+      <relation ref="ois=COM_SalesOrderFulfillment+osm.orch.orderItemSpec.property=RequestedDeliveryDate" type="Order Item Property Element" name="Requested Delivery Date Property" kind="Element">
+        <target name="RequestedDeliveryDate" typeName="Order Item Property Element"/>
+        <inEntity name="COM_SalesOrderFulfillment" typeName="Order Item Specification"/>
+      </relation>
+    </requestedDeliveryDateProperty>
+    <orderItemNameProperty>
+      <relation ref="ois=COM_SalesOrderFulfillment+osm.orch.orderItemSpec.property=LineName" type="Order Item Property Element" name="Item Name Property" kind="Element">
+        <target name="LineName" typeName="Order Item Property Element"/>
+        <inEntity name="COM_SalesOrderFulfillment" typeName="Order Item Specification"/>
+      </relation>
+    </orderItemNameProperty>
+    <orderItemRecognitionProperty>
+      <relation ref="ois=COM_SalesOrderFulfillment+osm.orch.orderItemSpec.property=Recognition" type="Order Item Property Element" name="Recognition Property" kind="Element">
+        <target name="Recognition" typeName="Order Item Property Element"/>
+        <inEntity name="COM_SalesOrderFulfillment" typeName="Order Item Specification"/>
+      </relation>
+    </orderItemRecognitionProperty>
+    <orderItemActionProperty>
+      <relation ref="ois=COM_SalesOrderFulfillment+osm.orch.orderItemSpec.property=Action" type="Order Item Property Element" name="Action Property" kind="Element">
+        <target name="Action" typeName="Order Item Property Element"/>
+        <inEntity name="COM_SalesOrderFulfillment" typeName="Order Item Specification"/>
+      </relation>
+    </orderItemActionProperty>
+    <orderItemIdProperty>
+      <relation ref="ois=COM_SalesOrderFulfillment+osm.orch.orderItemSpec.property=LineId" type="Order Item Property Element" name="Item Id Property" kind="Element">
+        <target name="LineId" typeName="Order Item Property Element"/>
+        <inEntity name="COM_SalesOrderFulfillment" typeName="Order Item Specification"/>
+      </relation>
+    </orderItemIdProperty>
+    <dynamicParameterProperty>
+      <relation ref="ois=COM_SalesOrderFulfillment+osm.orch.orderItemSpec.property=dynamicParams" type="Order Item Property Element" name="Dynamic Param Property" kind="Element">
+        <target name="dynamicParams" typeName="Order Item Property Element"/>
+        <inEntity name="COM_SalesOrderFulfillment" typeName="Order Item Specification"/>
+      </relation>
+    </dynamicParameterProperty>
+    <orderItemProperties>
+      <element xsi:type="osm:OrderItemProperty" id="ois=COM_SalesOrderFulfillment+osm.orch.orderItemSpec.property=Action" type="osm.orch.orderItemSpec.property" typeName="Order Item Property Element" kind="Element" name="Action" path="/Action"/>
+      <element xsi:type="osm:OrderItemProperty" id="ois=COM_SalesOrderFulfillment+osm.orch.orderItemSpec.property=FulfillmentPattern" type="osm.orch.orderItemSpec.property" typeName="Order Item Property Element" kind="Element" name="FulfillmentPattern" path="/FulfillmentPattern"/>
+      <element xsi:type="osm:OrderItemProperty" id="ois=COM_SalesOrderFulfillment+osm.orch.orderItemSpec.property=LineId" type="osm.orch.orderItemSpec.property" typeName="Order Item Property Element" kind="Element" name="LineId" path="/LineId"/>
+      <element xsi:type="osm:OrderItemProperty" id="ois=COM_SalesOrderFulfillment+osm.orch.orderItemSpec.property=LineName" type="osm.orch.orderItemSpec.property" typeName="Order Item Property Element" kind="Element" name="LineName" path="/LineName"/>
+      <element xsi:type="osm:OrderItemProperty" id="ois=COM_SalesOrderFulfillment+osm.orch.orderItemSpec.property=ParentLineId" type="osm.orch.orderItemSpec.property" typeName="Order Item Property Element" kind="Element" name="ParentLineId" path="/ParentLineId"/>
+      <element xsi:type="osm:OrderItemProperty" id="ois=COM_SalesOrderFulfillment+osm.orch.orderItemSpec.property=ProductSpecification" type="osm.orch.orderItemSpec.property" typeName="Order Item Property Element" kind="Element" name="ProductSpecification" path="/ProductSpecification"/>
+      <element xsi:type="osm:OrderItemProperty" id="ois=COM_SalesOrderFulfillment+osm.orch.orderItemSpec.property=Recognition" type="osm.orch.orderItemSpec.property" typeName="Order Item Property Element" kind="Element" name="Recognition" path="/Recognition"/>
+      <element xsi:type="osm:OrderItemProperty" id="ois=COM_SalesOrderFulfillment+osm.orch.orderItemSpec.property=RequestedDeliveryDate" type="osm.orch.orderItemSpec.property" typeName="Order Item Property Element" kind="Element" name="RequestedDeliveryDate" path="/RequestedDeliveryDate"/>
+      <element xsi:type="osm:OrderItemProperty" id="ois=COM_SalesOrderFulfillment+osm.orch.orderItemSpec.property=ServiceInstanceIndicator" type="osm.orch.orderItemSpec.property" typeName="Order Item Property Element" kind="Element" name="ServiceInstanceIndicator" path="/ServiceInstanceIndicator"/>
+      <element xsi:type="osm:OrderItemProperty" id="ois=COM_SalesOrderFulfillment+osm.orch.orderItemSpec.property=dynamicParams" type="osm.orch.orderItemSpec.property" typeName="Order Item Property Element" kind="Element" name="dynamicParams" path="/dynamicParams"/>
+      <element xsi:type="osm:OrderItemProperty" id="ois=COM_SalesOrderFulfillment+osm.orch.orderItemSpec.property=xmlData" type="osm.orch.orderItemSpec.property" typeName="Order Item Property Element" kind="Element" name="xmlData" path="/xmlData"/>
+    </orderItemProperties>
+    <orderItemHierarchies>
+      <element xsi:type="osm:OrderItemHierarchy" id="ois=COM_SalesOrderFulfillment+osm.orch.orderItemSpec.hierarchy=parentChildHierarchy" type="osm.orch.orderItemSpec.hierarchy" typeName="Order Item Hierarchy Element" kind="Element" name="parentChildHierarchy" path="/parentChildHierarchy"/>
+    </orderItemHierarchies>
+    <orderTemplateNodes>
+      <element xsi:type="osm:OrderTemplateNode" id="ois=COM_SalesOrderFulfillment+prov.order.node=/ControlData" type="prov.order.node" typeName="Order Node Element" kind="Element" name="ControlData" path="/ControlData"/>
+    </orderTemplateNodes>
+  </entity>
+</model:Model>

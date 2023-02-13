@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:ActionCode" id="ac=Move-Delete" type="ac" typeName="Action Code" name="Move-Delete" resource="\OracleComms_Model_Base\model\Move-Delete.actionType">
+    <displayName lang="default">Move  Delete</displayName>
+    <note lang="default">The Action code is specified when defining an Action for an entity.&#xD;
+The Modify-Delete Action Code indicates that the Action when triggered in the runtime will delete an existing instance of sub-entity of the entity associated with the Action.&#xD;    
+This action code is typically associated with an Action on a CFS.&#xD;
+</note>
+    <project>
+      <relation ref="mprj=OracleComms_Model_Base" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model_Base" typeName="Model Project"/>
+      </relation>
+    </project>
+    <functionalAreas>
+      <element id="ac=Move-Delete+ac.atc=8WNX--+H--+E---5---FSw" type="ac.atc" typeName="Action Type Classification" kind="Element" name="Move-Delete Action Type Classification" path="Move-Delete Action Type Classification"/>
+    </functionalAreas>
+  </entity>
+</model:Model>

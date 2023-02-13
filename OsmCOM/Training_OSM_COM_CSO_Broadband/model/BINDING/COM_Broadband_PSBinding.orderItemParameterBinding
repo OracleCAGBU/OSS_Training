@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/core/model/common" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:dom="http://xmlns.oracle.com/communications/studio/model/osm/transformation" xmlns:provisioning="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xsi:type="dom:OrderItemParameterBindingType" name="COM_Broadband_PSBinding">
+  <displayName lang="[default]">COM_Broadband_PSBinding</displayName>
+  <saveVersion>5</saveVersion>
+  <id>PS+y5GfBTgaEizZhbndOhA</id>
+  <elementDetails xsi:type="provisioning:ExpressionDetail">
+    <id>yhqYuAHCRFuERCBPfctFtw</id>
+    <elementType>oracle.communications.studio.osm.XQueryExpressionDetail</elementType>
+    <parentElementId>XHO+4OH1SwCLeLsen5fBjQ</parentElementId>
+    <provisioning:expression xsi:type="provisioning:XqueryExpressionFileRuleType">
+      <provisioning:fileUri>http://www.training.com/binding/COM_Broadband_PSBinding.xquery</provisioning:fileUri>
+    </provisioning:expression>
+  </elementDetails>
+  <dom:namespace>COM_SalesOrderFulfillment</dom:namespace>
+  <dom:bindings>
+    <id>XHO+4OH1SwCLeLsen5fBjQ</id>
+    <elementType>oracle.communications.studio.osm.transformation.entities.binding.parameterbinding</elementType>
+    <dom:bindingName>binding</dom:bindingName>
+  </dom:bindings>
+  <dom:orderItemSpecRef>
+    <entity>COM_SalesOrderFulfillment</entity>
+    <entityType>orderItemSpec</entityType>
+    <relationship>oracle.communications.studio.osm.transformation.entities.binding.binding.orderitem</relationship>
+  </dom:orderItemSpecRef>
+  <dom:orderItemParameterSpecRef>
+    <entity>Broadband_PS</entity>
+    <entityType>cmnProduct</entityType>
+    <relationship>oracle.communications.studio.osm.transformation.entities.binding.binding.parameterSpec</relationship>
+  </dom:orderItemParameterSpecRef>
+</modelEntity>

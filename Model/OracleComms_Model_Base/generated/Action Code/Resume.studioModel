@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:ActionCode" id="ac=Resume" type="ac" typeName="Action Code" name="Resume" resource="\OracleComms_Model_Base\model\Resume.actionType">
+    <displayName lang="default">Resume</displayName>
+    <note lang="default">The Action code is specified when defining an Action for an entity.&#xD;
+The Resume Action Code indicates that the Action when triggered in the runtime will resume the requested instance of the entity associated with the Action (from a prior state such as Disconnected).&#xD;
+This action code is typically associated with an Action on a RFS.&#xD;
+</note>
+    <project>
+      <relation ref="mprj=OracleComms_Model_Base" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model_Base" typeName="Model Project"/>
+      </relation>
+    </project>
+    <functionalAreas>
+      <element id="ac=Resume+ac.atc=03NsZE1V--+sqARnmE8-Dw" type="ac.atc" typeName="Action Type Classification" kind="Element" name="Resume Action Type Classification" path="Resume Action Type Classification">
+        <functionalArea>
+          <relation ref="fa=Service" type="Functional Area" name="Functional Area" kind="Entity">
+            <target name="Service" typeName="Functional Area"/>
+          </relation>
+        </functionalArea>
+      </element>
+    </functionalAreas>
+  </entity>
+</model:Model>

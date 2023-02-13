@@ -1,0 +1,266 @@
+<automationMap xmlns="http://www.metasolv.com/OMS/AutomationMap/2001/11/23" xmlns:am="http://www.metasolv.com/OMS/AutomationMap/2001/11/23" xmlns:db="http://www.metasolv.com/Provisioning/database/DatabasePlugin/2006/02/28" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.metasolv.com/Provisioning/database/DatabasePlugin/2006/02/28 ./databasePlugin.xsd http://www.metasolv.com/OMS/AutomationMap/2001/11/23 ./automationMap.xsd ">
+<taskAutomator>
+	<pluginJndiName>ApproveBITask.automatedtask.training_osm_som_designservice.ApproveBIRequestBean</pluginJndiName>
+	<ejbName>ApproveBITask.automatedtask.training_osm_som_designservice.ApproveBIRequestBean</ejbName>
+	<className>oracle.communications.ordermanagement.automation.plugin.XQuerySender</className>
+	<runAs>%{DEFAULT_AUTOMATION_USER}</runAs>
+	          
+	<cartridgeNamespace>Training_OSM_SOM_Solution</cartridgeNamespace>
+    <cartridgeVersion>1.0.0.0.0</cartridgeVersion>    
+
+	<receive xsi:type="am:InternalReceiver">
+		<mnemonic>ApproveBITask</mnemonic>
+ 		<executionModes>do</executionModes>
+	</receive>		
+    
+	<implement xsi:type="am:XquerySender">
+		<to>
+			<jndiName>%{INVENTORY_REQUEST_QUEUE}</jndiName>
+			<destinationType>javax.jms.Queue</destinationType>
+		</to>
+		<replyTo>
+			<jndiName>%{INVENTORY_RESPONSE_QUEUE}</jndiName>
+			<destinationType>javax.jms.Queue</destinationType>
+		</replyTo>
+		<am:sendNullMessage>false</am:sendNullMessage>
+		<am:script>
+			<am:url>http://www.training.com/som/designservice/resources/plugin/ApproveBIRequest.xquery</am:url>
+			<am:cache>
+				<am:maxSize>50</am:maxSize>
+				<am:timeout>15000</am:timeout>
+			</am:cache>
+		</am:script>
+	</implement>          
+	<failTaskOnException>false</failTaskOnException>
+</taskAutomator><taskAutomator>
+	<pluginJndiName>CalculateTechnicalActionsTask.automatedtask.training_osm_som_plandelivery.CalculateTechnicalActionsRequestBean</pluginJndiName>
+	<ejbName>CalculateTechnicalActionsTask.automatedtask.training_osm_som_plandelivery.CalculateTechnicalActionsRequestBean</ejbName>
+	<className>oracle.communications.ordermanagement.automation.plugin.XQuerySender</className>
+	<runAs>%{DEFAULT_AUTOMATION_USER}</runAs>
+	          
+	<cartridgeNamespace>Training_OSM_SOM_Solution</cartridgeNamespace>
+    <cartridgeVersion>1.0.0.0.0</cartridgeVersion>    
+
+	<receive xsi:type="am:InternalReceiver">
+		<mnemonic>CalculateTechnicalActionsTask</mnemonic>
+ 		<executionModes>do</executionModes>
+	</receive>		
+    
+	<implement xsi:type="am:XquerySender">
+		<to>
+			<jndiName>%{INVENTORY_REQUEST_QUEUE}</jndiName>
+			<destinationType>javax.jms.Queue</destinationType>
+		</to>
+		<replyTo>
+			<jndiName>%{INVENTORY_RESPONSE_QUEUE}</jndiName>
+			<destinationType>javax.jms.Queue</destinationType>
+		</replyTo>
+		<am:sendNullMessage>false</am:sendNullMessage>
+		<am:script>
+			<am:url>http://www.training.com/som/plandelivery/resources/plugin/CalculateTechnicalActionRequest.xquery</am:url>
+			<am:cache>
+				<am:maxSize>50</am:maxSize>
+				<am:timeout>15000</am:timeout>
+			</am:cache>
+		</am:script>
+	</implement>          
+	<failTaskOnException>false</failTaskOnException>
+</taskAutomator><taskAutomator>
+	<pluginJndiName>CaptureBITask.automatedtask.training_osm_som_designservice.CaptureBIRequestBean</pluginJndiName>
+	<ejbName>CaptureBITask.automatedtask.training_osm_som_designservice.CaptureBIRequestBean</ejbName>
+	<className>oracle.communications.ordermanagement.automation.plugin.XQuerySender</className>
+	<runAs>%{DEFAULT_AUTOMATION_USER}</runAs>
+	          
+	<cartridgeNamespace>Training_OSM_SOM_Solution</cartridgeNamespace>
+    <cartridgeVersion>1.0.0.0.0</cartridgeVersion>    
+
+	<receive xsi:type="am:InternalReceiver">
+		<mnemonic>CaptureBITask</mnemonic>
+ 		<executionModes>do</executionModes>
+	</receive>		
+    
+	<implement xsi:type="am:XquerySender">
+		<to>
+			<jndiName>%{INVENTORY_REQUEST_QUEUE}</jndiName>
+			<destinationType>javax.jms.Queue</destinationType>
+		</to>
+		<replyTo>
+			<jndiName>%{INVENTORY_RESPONSE_QUEUE}</jndiName>
+			<destinationType>javax.jms.Queue</destinationType>
+		</replyTo>
+		<am:sendNullMessage>false</am:sendNullMessage>
+		<am:script>
+			<am:url>http://www.training.com/som/designservice/resources/plugin/CaptureBIRequest.xquery</am:url>
+			<am:cache>
+				<am:maxSize>50</am:maxSize>
+				<am:timeout>15000</am:timeout>
+			</am:cache>
+		</am:script>
+	</implement>          
+	<failTaskOnException>false</failTaskOnException>
+</taskAutomator><taskAutomator>
+	<pluginJndiName>CaptureBITask.automatedtask.training_osm_som_designservice.CaptureBIResponseBean</pluginJndiName>
+	<ejbName>CaptureBITask.automatedtask.training_osm_som_designservice.CaptureBIResponseBean</ejbName>
+	<className>oracle.communications.ordermanagement.automation.plugin.XQueryReceiver</className>
+	<runAs>%{DEFAULT_AUTOMATION_USER}</runAs>
+	          
+	<cartridgeNamespace>Training_OSM_SOM_Solution</cartridgeNamespace>
+    <cartridgeVersion>1.0.0.0.0</cartridgeVersion>    
+
+	<receive xsi:type="am:ExternalReceiver">
+		<jmsSource>
+			<from>
+				<jndiName>%{INVENTORY_RESPONSE_QUEUE}</jndiName>
+				<destinationType>javax.jms.Queue</destinationType>				
+			</from>			
+		</jmsSource>	
+		<correlation xsi:type="MessagePropertyCorrelation">
+			<property>JMSCorrelationID</property>
+		</correlation>	
+	</receive>	
+    
+	<implement xsi:type="am:XqueryAutomator">
+		<am:script>
+			<am:url>http://www.training.com/som/designservice/resources/plugin/CaptureBIResponse.xquery</am:url>
+			<am:cache>
+				<am:maxSize>50</am:maxSize>
+				<am:timeout>15000</am:timeout>
+			</am:cache>
+		</am:script>
+		<am:updateOrder>false</am:updateOrder>
+	</implement>          
+	<failTaskOnException>false</failTaskOnException>
+</taskAutomator><taskAutomator>
+	<pluginJndiName>CompleteBITask.automatedtask.training_osm_som_completedelivery.CompleteBIRequestBean</pluginJndiName>
+	<ejbName>CompleteBITask.automatedtask.training_osm_som_completedelivery.CompleteBIRequestBean</ejbName>
+	<className>oracle.communications.ordermanagement.automation.plugin.XQuerySender</className>
+	<runAs>%{DEFAULT_AUTOMATION_USER}</runAs>
+	          
+	<cartridgeNamespace>Training_OSM_SOM_Solution</cartridgeNamespace>
+    <cartridgeVersion>1.0.0.0.0</cartridgeVersion>    
+
+	<receive xsi:type="am:InternalReceiver">
+		<mnemonic>CompleteBITask</mnemonic>
+ 		<executionModes>do</executionModes>
+	</receive>		
+    
+	<implement xsi:type="am:XquerySender">
+		<to>
+			<jndiName>%{INVENTORY_REQUEST_QUEUE}</jndiName>
+			<destinationType>javax.jms.Queue</destinationType>
+		</to>
+		<replyTo>
+			<jndiName>%{INVENTORY_RESPONSE_QUEUE}</jndiName>
+			<destinationType>javax.jms.Queue</destinationType>
+		</replyTo>
+		<am:sendNullMessage>false</am:sendNullMessage>
+		<am:script>
+			<am:url>http://www.training.com/som/completedelivery/resources/plugin/CompleteBIRequest.xquery</am:url>
+			<am:cache>
+				<am:maxSize>50</am:maxSize>
+				<am:timeout>15000</am:timeout>
+			</am:cache>
+		</am:script>
+	</implement>          
+	<failTaskOnException>false</failTaskOnException>
+</taskAutomator><taskAutomator>
+	<pluginJndiName>CreateTechnicalOrderTask.automatedtask.training_osm_som_deliverorder.CreateTechnicalOrderRequestBean</pluginJndiName>
+	<ejbName>CreateTechnicalOrderTask.automatedtask.training_osm_som_deliverorder.CreateTechnicalOrderRequestBean</ejbName>
+	<className>oracle.communications.ordermanagement.automation.plugin.XQuerySender</className>
+	<runAs>%{DEFAULT_AUTOMATION_USER}</runAs>
+	          
+	<cartridgeNamespace>Training_OSM_SOM_Solution</cartridgeNamespace>
+    <cartridgeVersion>1.0.0.0.0</cartridgeVersion>    
+
+	<receive xsi:type="am:InternalReceiver">
+		<mnemonic>CreateTechnicalOrderTask</mnemonic>
+ 		<executionModes>do</executionModes>
+	</receive>		
+    
+	<implement xsi:type="am:XquerySender">
+		<to>
+			<jndiName>%{OSM_TO_TOM_REQUEST_QUEUE}</jndiName>
+			<destinationType>javax.jms.Queue</destinationType>
+		</to>
+		<replyTo>
+			<jndiName>%{TOM_TO_OSM_RESPONSE_QUEUE}</jndiName>
+			<destinationType>javax.jms.Queue</destinationType>
+		</replyTo>
+		<am:sendNullMessage>false</am:sendNullMessage>
+		<am:script>
+			<am:url>http://www.training.com/som/deliverorder/resources/plugin/CreateTechnicalOrderRequest.xquery</am:url>
+			<am:cache>
+				<am:maxSize>50</am:maxSize>
+				<am:timeout>15000</am:timeout>
+			</am:cache>
+		</am:script>
+	</implement>          
+	<failTaskOnException>false</failTaskOnException>
+</taskAutomator><taskAutomator>
+	<pluginJndiName>IssueBITask.automatedtask.training_osm_som_plandelivery.IssueBIRequestBean</pluginJndiName>
+	<ejbName>IssueBITask.automatedtask.training_osm_som_plandelivery.IssueBIRequestBean</ejbName>
+	<className>oracle.communications.ordermanagement.automation.plugin.XQuerySender</className>
+	<runAs>%{DEFAULT_AUTOMATION_USER}</runAs>
+	          
+	<cartridgeNamespace>Training_OSM_SOM_Solution</cartridgeNamespace>
+    <cartridgeVersion>1.0.0.0.0</cartridgeVersion>    
+
+	<receive xsi:type="am:InternalReceiver">
+		<mnemonic>IssueBITask</mnemonic>
+ 		<executionModes>do</executionModes>
+	</receive>		
+    
+	<implement xsi:type="am:XquerySender">
+		<to>
+			<jndiName>%{INVENTORY_REQUEST_QUEUE}</jndiName>
+			<destinationType>javax.jms.Queue</destinationType>
+		</to>
+		<replyTo>
+			<jndiName>%{INVENTORY_RESPONSE_QUEUE}</jndiName>
+			<destinationType>javax.jms.Queue</destinationType>
+		</replyTo>
+		<am:sendNullMessage>false</am:sendNullMessage>
+		<am:script>
+			<am:url>http://www.training.com/som/plandelivery/resources/plugin/IssueBIRequest.xquery</am:url>
+			<am:cache>
+				<am:maxSize>50</am:maxSize>
+				<am:timeout>15000</am:timeout>
+			</am:cache>
+		</am:script>
+	</implement>          
+	<failTaskOnException>false</failTaskOnException>
+</taskAutomator><taskAutomator>
+	<pluginJndiName>ProcessBITask.automatedtask.training_osm_som_designservice.ProcessBIRequestBean</pluginJndiName>
+	<ejbName>ProcessBITask.automatedtask.training_osm_som_designservice.ProcessBIRequestBean</ejbName>
+	<className>oracle.communications.ordermanagement.automation.plugin.XQuerySender</className>
+	<runAs>%{DEFAULT_AUTOMATION_USER}</runAs>
+	          
+	<cartridgeNamespace>Training_OSM_SOM_Solution</cartridgeNamespace>
+    <cartridgeVersion>1.0.0.0.0</cartridgeVersion>    
+
+	<receive xsi:type="am:InternalReceiver">
+		<mnemonic>ProcessBITask</mnemonic>
+ 		<executionModes>do</executionModes>
+	</receive>		
+    
+	<implement xsi:type="am:XquerySender">
+		<to>
+			<jndiName>%{INVENTORY_REQUEST_QUEUE}</jndiName>
+			<destinationType>javax.jms.Queue</destinationType>
+		</to>
+		<replyTo>
+			<jndiName>%{INVENTORY_RESPONSE_QUEUE}</jndiName>
+			<destinationType>javax.jms.Queue</destinationType>
+		</replyTo>
+		<am:sendNullMessage>false</am:sendNullMessage>
+		<am:script>
+			<am:url>http://www.training.com/som/designservice/resources/plugin/ProcessBIRequest.xquery</am:url>
+			<am:cache>
+				<am:maxSize>50</am:maxSize>
+				<am:timeout>15000</am:timeout>
+			</am:cache>
+		</am:script>
+	</implement>          
+	<failTaskOnException>false</failTaskOnException>
+</taskAutomator>
+</automationMap>

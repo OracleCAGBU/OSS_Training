@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:complexType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:_25="http://www.metasolv.com/OMS/OrderModel/2002/06/25" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="AbstractOrderItem" namespace="http://xmlns.oracle.com/communications/studio/ordermanagement/transformation" abstract="true" final="false">
+  <model:extends>
+    <model:name>BaseAbstractOrderItem</model:name>
+    <model:namespace>http://xmlns.oracle.com/communications/studio/ordermanagement/transformation</model:namespace>
+  </model:extends>
+  <model:keyDef>
+    <_25:key>./LineId</_25:key>
+  </model:keyDef>
+  <model:element xsi:type="model:TextType" name="LineId">
+    <model:minOccurs>1</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Line ID</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>false</model:significant>
+    <model:length>100</model:length>
+  </model:element>
+</model:complexType>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:orchestrationModel xmlns:include="http://www.w3.org/2001/XInclude" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="Training_OSM_COM_Topology" namespace="Training_OSM_COM_Topology">
+  <model:description>Training_OSM_COM_Topology</model:description>
+  <include:include href="orderComponentSpec/COM_ProvisioningGranularity.xml"/>
+  <include:include href="orderComponentSpec/COM_WholeOrderGranularity.xml"/>
+  <include:include href="orderComponentSpec/COM_ProvisioningSystem.xml"/>
+  <include:include href="orderComponentSpec/OSM_SOM.xml"/>
+  <include:include href="decompositionRule/Decomp_COM_Provisioning_To_WholeOrderGranularity.xml"/>
+  <include:include href="decompositionRule/Decomp_COM_Provisioning_To_OSM_SOM.xml"/>
+</model:orchestrationModel>

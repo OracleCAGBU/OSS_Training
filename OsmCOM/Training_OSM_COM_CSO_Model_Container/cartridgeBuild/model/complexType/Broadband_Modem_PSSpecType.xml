@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:complexType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:_25="http://www.metasolv.com/OMS/OrderModel/2002/06/25" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="Broadband_Modem_PSType" namespace="Training_Model_Broadband_PS/1.0.0.0.0" abstract="false" final="false">
+  <model:description>Broadband_Modem_PS</model:description>
+  <model:extends>
+    <model:name>AbstractParameterSpecification</model:name>
+    <model:namespace>http://xmlns.oracle.com/communications/studio/ordermanagement/transformation</model:namespace>
+  </model:extends>
+  <model:element xsi:type="model:TextType" name="AccessTechnology">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Access Technology</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Access Technology</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>40</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="DeviceType">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Device Type</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Device Type</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>40</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="IPAddress">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>IPAddress</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>IPAddress</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>40</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="MACAddress">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>MACAddress</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>MACAddress</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>40</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="Model">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Model</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Model</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>40</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="SerialNumber">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Serial Number</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Serial Number</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>40</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="Vendor">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>Vendor</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>Vendor</_25:description>
+      <_25:label lang="en"></_25:label>
+    </model:viewRule>
+    <model:length>40</model:length>
+  </model:element>
+</model:complexType>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:orchestrationModel xmlns:include="http://www.w3.org/2001/XInclude" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="Training_OSM_COM_CSO_Model_Container" namespace="Training_OSM_COM_CSO_Model_Container">
+  <model:description>Training_OSM_COM_CSO_Model_Container</model:description>
+  <include:include href="providerFunction/Calculate_Technical_Order.xml"/>
+  <include:include href="providerFunction/DesignAndAssign.xml"/>
+  <include:include href="providerFunction/Calculate_Service_Order.xml"/>
+  <include:include href="providerFunction/Activation.xml"/>
+  <include:include href="serviceDomain/Broadband.xml"/>
+  <include:include href="domainBinding/BroadbandBinding.xml"/>
+  <include:include href="transformationSequence/COM_OTM_Sequence.xml"/>
+  <include:include href="relationshipSpecification/Primary.xml"/>
+  <include:include href="relationshipSpecification/Auxiliary.xml"/>
+  <include:include href="providerFunctionBinding/COM_CSO_OTM_Common_Manager.xml"/>
+  <include:include href="unitOfMeasure/Time.xml"/>
+  <include:include href="unitOfMeasure/DigitalStorage.xml"/>
+  <include:include href="unitOfMeasure/Bandwidth.xml"/>
+  <include:include href="parameterSpec/Broadband_Modem_PSSpec.xml"/>
+  <include:include href="parameterSpec/Broadband_PSSpec.xml"/>
+  <include:include href="parameterSpec/Broadband_Bandwidth_PSSpec.xml"/>
+  <include:include href="parameterSpec/Broadband_CFSSpec.xml"/>
+  <include:include href="parameterSpec/ServiceActions_Broadband_CFSSpec.xml"/>
+</model:orchestrationModel>

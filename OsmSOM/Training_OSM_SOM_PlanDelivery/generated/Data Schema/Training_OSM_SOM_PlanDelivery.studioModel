@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:data="http://xmlns.oracle.com/communications/studio/model/data" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="data:DataSchema" id="ds=Training_OSM_SOM_PlanDelivery" type="ds" typeName="Data Schema" name="Training_OSM_SOM_PlanDelivery" resource="\Training_OSM_SOM_PlanDelivery\dataDictionary\Training_OSM_SOM_PlanDelivery.xsd">
+    <displayName lang="default">Training_OSM_SOM_PlanDelivery</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=Training_OSM_SOM_PlanDelivery" type="Order and Service Management Project" name="Dependency">
+        <target name="Training_OSM_SOM_PlanDelivery" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="ds=Training_OSM_SOM_PlanDelivery+dataElement=PlanDeliveryFunction" type="dataElement" typeName="Schema Element" kind="Element" name="PlanDeliveryFunction" path="/PlanDeliveryFunction">
+        <displayName lang="default">PlanDeliveryFunction</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="true">-1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <base>
+          <relation ref="ds=OracleComms_OSM_CommonDataDictionary+dataElement=FulfillmentFunctionType" type="Schema Element" name="Type" kind="Element">
+            <target name="FulfillmentFunctionType" typeName="Schema Element"/>
+            <inEntity name="OracleComms_OSM_CommonDataDictionary" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements>
+          <element id="ds=Training_OSM_SOM_PlanDelivery+dataElement=PlanDeliveryFunction/componentKey" type="dataElement" typeName="Schema Element" kind="Element" name="componentKey" path="/PlanDeliveryFunction/componentKey" inherited="true">
+            <displayName lang="default">Component Key</displayName>
+            <minOccurs inherited="false">1</minOccurs>
+            <maxOccurs inherited="false">1</maxOccurs>
+            <defaultValue inherited="false"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="false">false</sensitive>
+            <minLength inherited="false">0</minLength>
+            <maxLength inherited="false">1000</maxLength>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=Training_OSM_SOM_PlanDelivery+dataElement=PlanDeliveryFunction/calculatedStartDate" type="dataElement" typeName="Schema Element" kind="Element" name="calculatedStartDate" path="/PlanDeliveryFunction/calculatedStartDate" inherited="true">
+            <minOccurs inherited="false">0</minOccurs>
+            <maxOccurs inherited="false">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=OracleComms_OSM_CommonDataDictionary+dataElement=calculatedStartDate" type="Schema Element" name="Type" kind="Element">
+                <target name="calculatedStartDate" typeName="Schema Element"/>
+                <inEntity name="OracleComms_OSM_CommonDataDictionary" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>dateTime</primitiveType>
+          </element>
+          <element id="ds=Training_OSM_SOM_PlanDelivery+dataElement=PlanDeliveryFunction/duration" type="dataElement" typeName="Schema Element" kind="Element" name="duration" path="/PlanDeliveryFunction/duration" inherited="true">
+            <minOccurs inherited="false">0</minOccurs>
+            <maxOccurs inherited="false">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=OracleComms_OSM_CommonDataDictionary+dataElement=duration" type="Schema Element" name="Type" kind="Element">
+                <target name="duration" typeName="Schema Element"/>
+                <inEntity name="OracleComms_OSM_CommonDataDictionary" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=Training_OSM_SOM_PlanDelivery+dataElement=PlanDeliveryFunction/orderItem" type="dataElement" typeName="Schema Element" kind="Element" name="orderItem" path="/PlanDeliveryFunction/orderItem" inherited="true">
+            <displayName lang="default">Order Item</displayName>
+            <minOccurs inherited="false">0</minOccurs>
+            <maxOccurs inherited="false">-1</maxOccurs>
+            <defaultValue inherited="false"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="false">false</sensitive>
+            <dataElements>
+              <element id="ds=Training_OSM_SOM_PlanDelivery+dataElement=PlanDeliveryFunction/orderItem/ExternalFulfillmentState" type="dataElement" typeName="Schema Element" kind="Element" name="ExternalFulfillmentState" path="/PlanDeliveryFunction/orderItem/ExternalFulfillmentState" inherited="true">
+                <displayName lang="default">External Fulfillment State</displayName>
+                <minOccurs inherited="false">0</minOccurs>
+                <maxOccurs inherited="false">1</maxOccurs>
+                <defaultValue inherited="true"></defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="true">false</sensitive>
+                <minLength inherited="true">0</minLength>
+                <maxLength inherited="true">-1</maxLength>
+                <base>
+                  <relation ref="ds=OracleComms_OSM_CommonDataDictionary+dataElement=ExternalFulfillmentState" type="Schema Element" name="Type" kind="Element">
+                    <target name="ExternalFulfillmentState" typeName="Schema Element"/>
+                    <inEntity name="OracleComms_OSM_CommonDataDictionary" typeName="Data Schema"/>
+                  </relation>
+                </base>
+                <dataElements/>
+                <primitiveType>string</primitiveType>
+              </element>
+              <element id="ds=Training_OSM_SOM_PlanDelivery+dataElement=PlanDeliveryFunction/orderItem/FunctionProcessingState" type="dataElement" typeName="Schema Element" kind="Element" name="FunctionProcessingState" path="/PlanDeliveryFunction/orderItem/FunctionProcessingState" inherited="true">
+                <displayName lang="default">Function Processing State</displayName>
+                <minOccurs inherited="false">0</minOccurs>
+                <maxOccurs inherited="false">1</maxOccurs>
+                <defaultValue inherited="true">NotStarted</defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="true">false</sensitive>
+                <minLength inherited="true">0</minLength>
+                <maxLength inherited="true">40</maxLength>
+                <enum literal="NotStarted" default="false" inherited="true" excluded="false">
+                  <name lang="default">Not Started</name>
+                </enum>
+                <enum literal="InProgress" default="false" inherited="true" excluded="false">
+                  <name lang="default">In Progress</name>
+                </enum>
+                <enum literal="Completed" default="false" inherited="true" excluded="false">
+                  <name lang="default">Completed</name>
+                </enum>
+                <enum literal="Failed" default="false" inherited="true" excluded="false">
+                  <name lang="default">Failed</name>
+                </enum>
+                <enum literal="FailedContinue" default="false" inherited="true" excluded="false">
+                  <name lang="default">Failed Continue</name>
+                </enum>
+                <enum literal="Undoing" default="false" inherited="true" excluded="false">
+                  <name lang="default">Undoing</name>
+                </enum>
+                <enum literal="UndoCompleted" default="false" inherited="true" excluded="false">
+                  <name lang="default">Undo Completed</name>
+                </enum>
+                <enum literal="UndoFailedContinue" default="false" inherited="true" excluded="false">
+                  <name lang="default">Undo Failed Continue</name>
+                </enum>
+                <enum literal="UndoFailed" default="false" inherited="true" excluded="false">
+                  <name lang="default">Undo Failed</name>
+                </enum>
+                <enum literal="DownstreamCorrectionRequired" default="false" inherited="true" excluded="false">
+                  <name lang="default">Downstream Correction Required</name>
+                </enum>
+                <base>
+                  <relation ref="ds=OracleComms_OSM_CommonDataDictionary+dataElement=OrderComponentOrderItemProcessingState" type="Schema Element" name="Type" kind="Element">
+                    <target name="OrderComponentOrderItemProcessingState" typeName="Schema Element"/>
+                    <inEntity name="OracleComms_OSM_CommonDataDictionary" typeName="Data Schema"/>
+                  </relation>
+                </base>
+                <dataElements/>
+                <primitiveType>string</primitiveType>
+              </element>
+            </dataElements>
+            <primitiveType>structure</primitiveType>
+          </element>
+          <element id="ds=Training_OSM_SOM_PlanDelivery+dataElement=PlanDeliveryFunction/transformedOrderItem" type="dataElement" typeName="Schema Element" kind="Element" name="transformedOrderItem" path="/PlanDeliveryFunction/transformedOrderItem" inherited="true">
+            <minOccurs inherited="false">0</minOccurs>
+            <maxOccurs inherited="false">-1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <base>
+              <relation ref="ds=OracleComms_OSM_CommonDataDictionary+dataElement=transformedOrderItem" type="Schema Element" name="Type" kind="Element">
+                <target name="transformedOrderItem" typeName="Schema Element"/>
+                <inEntity name="OracleComms_OSM_CommonDataDictionary" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements>
+              <element id="ds=Training_OSM_SOM_PlanDelivery+dataElement=PlanDeliveryFunction/transformedOrderItem/ExternalFulfillmentState" type="dataElement" typeName="Schema Element" kind="Element" name="ExternalFulfillmentState" path="/PlanDeliveryFunction/transformedOrderItem/ExternalFulfillmentState" inherited="true">
+                <displayName lang="default">External Fulfillment State</displayName>
+                <minOccurs inherited="false">0</minOccurs>
+                <maxOccurs inherited="false">1</maxOccurs>
+                <defaultValue inherited="true"></defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="true">false</sensitive>
+                <minLength inherited="true">0</minLength>
+                <maxLength inherited="true">-1</maxLength>
+                <base>
+                  <relation ref="ds=OracleComms_OSM_CommonDataDictionary+dataElement=ExternalFulfillmentState" type="Schema Element" name="Type" kind="Element">
+                    <target name="ExternalFulfillmentState" typeName="Schema Element"/>
+                    <inEntity name="OracleComms_OSM_CommonDataDictionary" typeName="Data Schema"/>
+                  </relation>
+                </base>
+                <dataElements/>
+                <primitiveType>string</primitiveType>
+              </element>
+              <element id="ds=Training_OSM_SOM_PlanDelivery+dataElement=PlanDeliveryFunction/transformedOrderItem/FunctionProcessingState" type="dataElement" typeName="Schema Element" kind="Element" name="FunctionProcessingState" path="/PlanDeliveryFunction/transformedOrderItem/FunctionProcessingState" inherited="true">
+                <displayName lang="default">Function Processing State</displayName>
+                <minOccurs inherited="true">0</minOccurs>
+                <maxOccurs inherited="false">1</maxOccurs>
+                <defaultValue inherited="true">NotStarted</defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="true">false</sensitive>
+                <minLength inherited="true">0</minLength>
+                <maxLength inherited="true">40</maxLength>
+                <enum literal="NotStarted" default="false" inherited="true" excluded="false">
+                  <name lang="default">Not Started</name>
+                </enum>
+                <enum literal="InProgress" default="false" inherited="true" excluded="false">
+                  <name lang="default">In Progress</name>
+                </enum>
+                <enum literal="Completed" default="false" inherited="true" excluded="false">
+                  <name lang="default">Completed</name>
+                </enum>
+                <enum literal="Failed" default="false" inherited="true" excluded="false">
+                  <name lang="default">Failed</name>
+                </enum>
+                <enum literal="FailedContinue" default="false" inherited="true" excluded="false">
+                  <name lang="default">Failed Continue</name>
+                </enum>
+                <enum literal="Undoing" default="false" inherited="true" excluded="false">
+                  <name lang="default">Undoing</name>
+                </enum>
+                <enum literal="UndoCompleted" default="false" inherited="true" excluded="false">
+                  <name lang="default">Undo Completed</name>
+                </enum>
+                <enum literal="UndoFailedContinue" default="false" inherited="true" excluded="false">
+                  <name lang="default">Undo Failed Continue</name>
+                </enum>
+                <enum literal="UndoFailed" default="false" inherited="true" excluded="false">
+                  <name lang="default">Undo Failed</name>
+                </enum>
+                <enum literal="DownstreamCorrectionRequired" default="false" inherited="true" excluded="false">
+                  <name lang="default">Downstream Correction Required</name>
+                </enum>
+                <base>
+                  <relation ref="ds=OracleComms_OSM_CommonDataDictionary+dataElement=OrderComponentOrderItemProcessingState" type="Schema Element" name="Type" kind="Element">
+                    <target name="OrderComponentOrderItemProcessingState" typeName="Schema Element"/>
+                    <inEntity name="OracleComms_OSM_CommonDataDictionary" typeName="Data Schema"/>
+                  </relation>
+                </base>
+                <dataElements/>
+                <primitiveType>string</primitiveType>
+              </element>
+            </dataElements>
+            <primitiveType>structure</primitiveType>
+          </element>
+        </dataElements>
+        <primitiveType>structure</primitiveType>
+      </element>
+    </dataElements>
+  </entity>
+</model:Model>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cartridge namespace="Training_OSM_SOM_Solution" version="1.0.0.0.0" 
+    xsi:schemaLocation="http://www.metasolv.com/OMS/OrderModel/2002/06/25" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:xi="http://www.w3.org/2001/XInclude" 
+    xmlns="http://www.metasolv.com/OMS/OrderModel/2002/06/25"    
+    xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model">	
+		<description>Training_OSM_SOM_Solution</description>
+		<default>true</default>
+		<timestamp>2007-02-01T21:31:09</timestamp>
+		<state name="accepted">
+		   	<description>Accepted</description>
+		</state>
+		<state name="received">
+		   	<description>Received</description>
+		</state>
+		<state name="assigned">
+		   	<description>Assigned</description>
+		</state>
+		<state name="completed">
+		   	<description>Completed</description>
+		</state> 
+ 		<status name="next">
+		   	<description>Next</description>
+		   	<allowableConstraintViolationSeverity>WARNING</allowableConstraintViolationSeverity>
+		</status>
+ 		<status name="cancel">
+		   	<description>Cancel</description>
+		   	<allowableConstraintViolationSeverity>WARNING</allowableConstraintViolationSeverity>
+		</status>
+ 		<status name="success">
+		   	<description>Success</description>
+		   	<allowableConstraintViolationSeverity>WARNING</allowableConstraintViolationSeverity>
+		</status>
+ 		<status name="all_subprocess_threads_complete">
+		   	<description>N/A</description>
+		   	<allowableConstraintViolationSeverity>CRITICAL</allowableConstraintViolationSeverity>
+		</status>
+ 		<status name="back">
+		   	<description>Back</description>
+		   	<allowableConstraintViolationSeverity>WARNING</allowableConstraintViolationSeverity>
+		</status>
+ 		<status name="finish">
+		   	<description>Finish</description>
+		   	<allowableConstraintViolationSeverity>WARNING</allowableConstraintViolationSeverity>
+		</status>
+ 		<xi:include href="task/CompleteBITask.xml"/>
+ 		<xi:include href="task/CompleteBITask_view.xml"/>
+ 		
+ 		
+ 		<xi:include href="task/ProcessBITask.xml"/>
+ 		<xi:include href="task/ProcessBITask_view.xml"/>
+ 		
+ 		
+ 		<xi:include href="task/ApproveBITask.xml"/>
+ 		<xi:include href="task/ApproveBITask_view.xml"/>
+ 		
+ 		
+ 		<xi:include href="task/SOM_QueryTask.xml"/>
+ 		<xi:include href="task/SOM_QueryTask_view.xml"/>
+ 		
+ 		
+ 		<xi:include href="task/CreateTechnicalOrderTask.xml"/>
+ 		<xi:include href="task/CreateTechnicalOrderTask_view.xml"/>
+ 		
+ 		
+ 		<xi:include href="task/CalculateTechnicalActionsTask.xml"/>
+ 		<xi:include href="task/CalculateTechnicalActionsTask_view.xml"/>
+ 		
+ 		
+ 		<xi:include href="task/SOM_CreationTask.xml"/>
+ 		<xi:include href="task/SOM_CreationTask_view.xml"/>
+ 		
+ 		
+ 		<xi:include href="task/CaptureBITask.xml"/>
+ 		<xi:include href="task/CaptureBITask_view.xml"/>
+ 		
+ 		
+ 		<xi:include href="task/IssueBITask.xml"/>
+ 		<xi:include href="task/IssueBITask_view.xml"/>
+ 		
+ 			
+		<task name="start1" xsi:type="ruleTaskType">
+			<description>start1</description>
+			<state>completed</state>
+			<state>received</state>
+			<status>true</status>
+	   		<condition>null_rule</condition>
+			<compensationStrategy>
+				<onTaskReevaluate>redo</onTaskReevaluate>
+			</compensationStrategy>
+		</task>
+ 	 	<xi:include href="process/PlanDeliveryProcess.xml"/>
+ 	 	<xi:include href="process/DesignServiceProcess.xml"/>
+ 	 	<xi:include href="process/CompleteDeliveryProcess.xml"/>
+ 	 	<xi:include href="process/DeliverOrderProcess.xml"/>
+ 	 	
+	    <xi:include href="orchestrationProcess/SOM_OrchestrationProcess.xml"/>
+        
+		<xi:include href="dataDictionary.xml"/>
+		<xi:include href="masterOrderTemplate.xml"/>		
+ 		<xi:include href="orderLifecyclePolicy/SOM_OrderLifeCyclePolicy.xml"/>
+ 		<xi:include href="order/SOM_ProvisionServiceOrderFulfillment.xml"/>
+ 		<xi:include href="order/SOM_ProvisionServiceOrderFulfillment_orderType.xml"/>
+	 	<xi:include href="order/SOM_ProvisionServiceOrderFulfillment_orderSource.xml"/>
+		<workgroup name="CompleteDeliveryRole">
+	   		
+	 	
+			<permissions>
+		
+ 	 			<task executionModes="do undo redo">CompleteBITask</task>
+   			</permissions>
+		</workgroup>
+		<workgroup name="DeliverOrderRole">
+	   		
+	 	
+			<permissions>
+		
+ 	 			<task executionModes="do undo redo">CreateTechnicalOrderTask</task>
+   			</permissions>
+		</workgroup>
+		<workgroup name="DesignServiceRole">
+	   		
+	 	
+			<permissions>
+		
+ 	 			<task executionModes="do undo redo">ProcessBITask</task>
+ 	 			<task executionModes="do undo redo">ApproveBITask</task>
+ 	 			<task executionModes="do undo redo">CaptureBITask</task>
+   			</permissions>
+		</workgroup>
+		<workgroup name="SOM_Role">
+	   		
+	 	
+				<permissions>
+			
+ 				<orderEntry>
+        			<orderType>SOM_ProvisionServiceOrderFulfillment</orderType>
+		     	   <orderSource>SOM_ProvisionServiceOrderFulfillment</orderSource>
+				</orderEntry>
+ 	 			<task executionModes="do undo redo">SOM_QueryTask</task>
+ 	 			<task executionModes="do undo redo">SOM_CreationTask</task>
+   			</permissions>
+		</workgroup>
+		<workgroup name="PlanDeliveryRole">
+	   		
+	 	
+			<permissions>
+		
+ 	 			<task executionModes="do undo redo">CalculateTechnicalActionsTask</task>
+ 	 			<task executionModes="do undo redo">IssueBITask</task>
+   			</permissions>
+		</workgroup>
+		<model:complexType name="AbstractProperty" namespace="http://xmlns.oracle.com/communications/studio/ordermanagement/transformation" abstract="true" final="false">
+			<model:description>AbstractProperty</model:description>
+		</model:complexType>
+		<model:complexType name="AbstractParameterSpecification" namespace="http://xmlns.oracle.com/communications/studio/ordermanagement/transformation" abstract="true" final="false">
+			<model:description>AbstractParameterSpecification</model:description>
+			
+				 <model:extends>
+				    <model:name>BaseAbstractParameterSpecificationType</model:name>
+				    <model:namespace>OracleComms_OSM_CommonDataDictionary/4.0</model:namespace>
+				  </model:extends>
+			
+		</model:complexType>
+		<xi:include href="complexType/AbstractOrderItem.xml"/>
+		
+			<xi:include href="complexType/BaseAbstractOrderItem.xml"/>
+		
+	 
+
+        	<xi:include href="orderComponentSubProcess/CompleteDeliveryFunction_CompleteDeliveryProcess.xml"/>
+        	<xi:include href="orderComponentSubProcess/DeliverOrderFunction_DeliverOrderProcess.xml"/>
+        	<xi:include href="orderComponentSubProcess/DesignServiceFunction_DesignServiceProcess.xml"/>
+        	<xi:include href="orderComponentSubProcess/PlanDeliveryFunction_PlanDeliveryProcess.xml"/>
+      <model:resource name="Training_OSM_SOM_Solution" namespace="Training_OSM_SOM_Solution">
+         <model:description>resource files</model:description>
+         <model:location>resources/resources.zip</model:location>
+      </model:resource>
+      <model:xmlCatalog name="Training_OSM_SOM_Solution" namespace="Training_OSM_SOM_Solution">
+         <model:description>xml catalogs</model:description>
+         <model:location>xmlCatalogs/catalogs.zip</model:location>
+      </model:xmlCatalog>
+         <xi:include href="manifest/Training_OSM_SOM_Solution.xml"/>  
+               
+</cartridge>
+
+

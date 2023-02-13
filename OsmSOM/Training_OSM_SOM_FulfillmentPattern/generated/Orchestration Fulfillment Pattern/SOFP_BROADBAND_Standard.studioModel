@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:FulfillmentPattern" id="ofp=SOFP_BROADBAND_Standard" type="ofp" typeName="Orchestration Fulfillment Pattern" name="SOFP_BROADBAND_Standard" resource="\Training_OSM_SOM_FulfillmentPattern\model\SOFP_BROADBAND_Standard.productSpec">
+    <displayName lang="default">SOFP_BROADBAND_Standard</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=Training_OSM_SOM_FulfillmentPattern" type="Order and Service Management Project" name="Dependency">
+        <target name="Training_OSM_SOM_FulfillmentPattern" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <fulfillmentModes>
+      <relation ref="fm=SOM_Deliver" type="Fulfillment Mode" name="Fullfillment Mode" kind="Entity">
+        <target name="SOM_Deliver" typeName="Fulfillment Mode"/>
+      </relation>
+    </fulfillmentModes>
+    <orchestrationPlanComponents>
+      <relation ref="ocs=CompleteDeliveryFunction" type="Order Component Specification" name="FulfillmentModeOrderComponentSpecs" kind="Entity">
+        <target name="CompleteDeliveryFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=DeliverOrderFunction" type="Order Component Specification" name="FulfillmentModeOrderComponentSpecs" kind="Entity">
+        <target name="DeliverOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=DesignServiceFunction" type="Order Component Specification" name="FulfillmentModeOrderComponentSpecs" kind="Entity">
+        <target name="DesignServiceFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=PlanDeliveryFunction" type="Order Component Specification" name="FulfillmentModeOrderComponentSpecs" kind="Entity">
+        <target name="PlanDeliveryFunction" typeName="Order Component Specification"/>
+      </relation>
+    </orchestrationPlanComponents>
+    <transitionFromOrchestrationPlanComponents>
+      <relation ref="ocs=DeliverOrderFunction" type="Order Component Specification" name="oracle.communications.sce.osm.orchestration.productSpec.from.orchPlanComponent" kind="Entity">
+        <target name="DeliverOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=DesignServiceFunction" type="Order Component Specification" name="oracle.communications.sce.osm.orchestration.productSpec.from.orchPlanComponent" kind="Entity">
+        <target name="DesignServiceFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=PlanDeliveryFunction" type="Order Component Specification" name="oracle.communications.sce.osm.orchestration.productSpec.from.orchPlanComponent" kind="Entity">
+        <target name="PlanDeliveryFunction" typeName="Order Component Specification"/>
+      </relation>
+    </transitionFromOrchestrationPlanComponents>
+    <transitionToOrchestrationPlanComponents>
+      <relation ref="ocs=CompleteDeliveryFunction" type="Order Component Specification" name="oracle.communications.sce.osm.orchestration.productSpec.to.orchPlanComponent" kind="Entity">
+        <target name="CompleteDeliveryFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=DeliverOrderFunction" type="Order Component Specification" name="oracle.communications.sce.osm.orchestration.productSpec.to.orchPlanComponent" kind="Entity">
+        <target name="DeliverOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=PlanDeliveryFunction" type="Order Component Specification" name="oracle.communications.sce.osm.orchestration.productSpec.to.orchPlanComponent" kind="Entity">
+        <target name="PlanDeliveryFunction" typeName="Order Component Specification"/>
+      </relation>
+    </transitionToOrchestrationPlanComponents>
+    <realizes>
+      <relation ref="fp=SOFP_BROADBAND_Standard" type="Fulfillment Pattern" name="Realization" kind="Entity">
+        <target name="SOFP_BROADBAND_Standard" typeName="Fulfillment Pattern"/>
+      </relation>
+    </realizes>
+    <plans>
+      <element xsi:type="osm:Plan" id="ofp=SOFP_BROADBAND_Standard+osm.orch.productSpec.plan=okV8gH-HTwyZ4ev9NsqOIA" type="osm.orch.productSpec.plan" typeName="Orchestration Plan Element" kind="Element" name="SOM_Deliver" path="/SOM_Deliver"/>
+    </plans>
+  </entity>
+</model:Model>

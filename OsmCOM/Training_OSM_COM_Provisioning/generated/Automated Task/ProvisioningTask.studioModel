@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:AutomatedTask" id="atsk=ProvisioningTask" type="atsk" typeName="Automated Task" name="ProvisioningTask" resource="\Training_OSM_COM_Provisioning\model\AUTOMATED_TASK\ProvisioningTask.automationTask">
+    <displayName lang="default">ProvisioningTask</displayName>
+    <note lang="default"/>
+    <extends>
+      <relation ref="mtsk=ProvisionOrderBaseTask" type="Manual Task" name="Dependency" kind="Entity">
+        <target name="ProvisionOrderBaseTask" typeName="Manual Task"/>
+      </relation>
+    </extends>
+    <project>
+      <relation ref="oprj=Training_OSM_COM_Provisioning" type="Order and Service Management Project" name="Dependency">
+        <target name="Training_OSM_COM_Provisioning" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <order>
+      <relation ref="ord=COM_SalesOrderFulfillment" type="Order" name="Order" kind="Entity">
+        <target name="COM_SalesOrderFulfillment" typeName="Order"/>
+      </relation>
+    </order>
+    <taskDataElements>
+      <element xsi:type="osm:TaskData" id="atsk=ProvisioningTask+prov.task.data.node=/inputMessage" type="prov.task.data.node" typeName="Task Data Element" kind="Element" name="inputMessage" path="/inputMessage"/>
+      <element xsi:type="osm:TaskData" id="atsk=ProvisioningTask+prov.task.data.node=/ControlData" type="prov.task.data.node" typeName="Task Data Element" kind="Element" name="ControlData" path="/ControlData"/>
+      <element xsi:type="osm:TaskData" id="atsk=ProvisioningTask+prov.task.data.node=/Order" type="prov.task.data.node" typeName="Task Data Element" kind="Element" name="Order" path="/Order"/>
+    </taskDataElements>
+  </entity>
+</model:Model>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:OrderComponentSpecification" id="ocs=DesignServiceFunction" type="ocs" typeName="Order Component Specification" name="DesignServiceFunction" resource="\Training_OSM_SOM_DesignService\model\FUNCTION\DesignServiceFunction.orderComponentSpec">
+    <displayName lang="default">DesignServiceFunction</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=Training_OSM_SOM_DesignService" type="Order and Service Management Project" name="Dependency">
+        <target name="Training_OSM_SOM_DesignService" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <baseTask>
+      <relation ref="mtsk=DesignServiceBaseTask" type="Manual Task" name="Base Task" kind="Entity">
+        <target name="DesignServiceBaseTask" typeName="Manual Task"/>
+      </relation>
+    </baseTask>
+    <process>
+      <relation ref="pro=DesignServiceProcess" type="Process" name="Process" kind="Entity">
+        <target name="DesignServiceProcess" typeName="Process"/>
+      </relation>
+    </process>
+    <componentElements>
+      <element xsi:type="osm:Component" id="ocs=DesignServiceFunction+osm.orch.orderComponentSpec.element=jp9r4mf9SmKDQ3y+ZsbqKg" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="DesignServiceFunction" path="/SOM_ProvisioningFunction/DesignServiceFunction"/>
+    </componentElements>
+    <orderTemplateNodes>
+      <element xsi:type="osm:OrderTemplateNode" id="ocs=DesignServiceFunction+prov.order.node=/ControlData" type="prov.order.node" typeName="Order Node Element" kind="Element" name="ControlData" path="/ControlData"/>
+    </orderTemplateNodes>
+    <extend>
+      <relation ref="ocs=SOM_ProvisioningFunction" type="Order Component Specification" name="Extends" kind="Entity">
+        <target name="SOM_ProvisioningFunction" typeName="Order Component Specification"/>
+      </relation>
+    </extend>
+  </entity>
+</model:Model>
