@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aut="http://xmlns.oracle.com/communications/sce/osm/model/process/task/automation" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:task="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="task:manualTaskType" name="CompleteDeliveryBaseTask">
   <com:displayName>CompleteDeliveryBaseTask</com:displayName>
-  <com:saveVersion>12</com:saveVersion>
+  <com:saveVersion>14</com:saveVersion>
   <com:id>eYg5KFF3RHOdJxD3DiRVfw</com:id>
   <task:orderType>
     <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
@@ -430,6 +430,13 @@
               <com:element>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/SpecificationGroup</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
             </task:childNode>
+            <task:childNode>
+              <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+              <com:entityType>order</com:entityType>
+              <com:relationship>ora.task.orderTemplateRef</com:relationship>
+              <com:element>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/TechnicalAction</com:element>
+              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+            </task:childNode>
           </task:childNode>
         </task:childNode>
       </task:childNode>
@@ -441,6 +448,13 @@
       <com:element>/ControlData/OrderFulfillmentState</com:element>
       <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
     </task:childNode>
+  </task:orderTemplateRef>
+  <task:orderTemplateRef>
+    <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+    <com:entityType>order</com:entityType>
+    <com:relationship>ora.task.orderTemplateRef</com:relationship>
+    <com:element>/inputMessage</com:element>
+    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
   </task:orderTemplateRef>
   <task:viewNodeExtension>
     <task:path>/BusinessInteractions</task:path>
@@ -748,7 +762,17 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/TechnicalAction</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
     <task:path>/ControlData/OrderFulfillmentState</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/inputMessage</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>

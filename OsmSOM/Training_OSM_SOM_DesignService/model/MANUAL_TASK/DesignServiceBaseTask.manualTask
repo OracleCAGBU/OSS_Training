@@ -1,13 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aut="http://xmlns.oracle.com/communications/sce/osm/model/process/task/automation" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:task="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="task:manualTaskType" name="DesignServiceBaseTask">
   <com:displayName>DesignServiceBaseTask</com:displayName>
-  <com:saveVersion>17</com:saveVersion>
+  <com:saveVersion>18</com:saveVersion>
   <com:id>AEWYoyfERiWizJN8f2qitA</com:id>
   <task:orderType>
     <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
     <com:entityType>order</com:entityType>
     <com:relationship>com.mslv.studio.provisioning.task.manual.orderType</com:relationship>
   </task:orderType>
+  <task:orderTemplateRef>
+    <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+    <com:entityType>order</com:entityType>
+    <com:relationship>ora.task.orderTemplateRef</com:relationship>
+    <com:element>/BusinessInteractions</com:element>
+    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+    <task:childNode>
+      <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+      <com:entityType>order</com:entityType>
+      <com:relationship>ora.task.orderTemplateRef</com:relationship>
+      <com:element>/BusinessInteractions/BusinessInteraction</com:element>
+      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      <task:childNode>
+        <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/BusinessInteractions/BusinessInteraction/Key</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/BusinessInteractions/BusinessInteraction/InteractionID</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/BusinessInteractions/BusinessInteraction/CorrelationID</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/BusinessInteractions/BusinessInteraction/Status</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/BusinessInteractions/BusinessInteraction/StatusDescription</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+    </task:childNode>
+  </task:orderTemplateRef>
+  <task:orderTemplateRef>
+    <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+    <com:entityType>order</com:entityType>
+    <com:relationship>ora.task.orderTemplateRef</com:relationship>
+    <com:element>/inputMessage</com:element>
+    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+  </task:orderTemplateRef>
   <task:orderTemplateRef>
     <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
     <com:entityType>order</com:entityType>
@@ -381,6 +437,13 @@
               <com:element>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/SpecificationGroup</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
             </task:childNode>
+            <task:childNode>
+              <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+              <com:entityType>order</com:entityType>
+              <com:relationship>ora.task.orderTemplateRef</com:relationship>
+              <com:element>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/TechnicalAction</com:element>
+              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+            </task:childNode>
           </task:childNode>
         </task:childNode>
       </task:childNode>
@@ -393,62 +456,46 @@
       <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
     </task:childNode>
   </task:orderTemplateRef>
-  <task:orderTemplateRef>
-    <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
-    <com:entityType>order</com:entityType>
-    <com:relationship>ora.task.orderTemplateRef</com:relationship>
-    <com:element>/BusinessInteractions</com:element>
-    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-    <task:childNode>
-      <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
-      <com:entityType>order</com:entityType>
-      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-      <com:element>/BusinessInteractions/BusinessInteraction</com:element>
-      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-      <task:childNode>
-        <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
-        <com:entityType>order</com:entityType>
-        <com:relationship>ora.task.orderTemplateRef</com:relationship>
-        <com:element>/BusinessInteractions/BusinessInteraction/Key</com:element>
-        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-      </task:childNode>
-      <task:childNode>
-        <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
-        <com:entityType>order</com:entityType>
-        <com:relationship>ora.task.orderTemplateRef</com:relationship>
-        <com:element>/BusinessInteractions/BusinessInteraction/InteractionID</com:element>
-        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-      </task:childNode>
-      <task:childNode>
-        <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
-        <com:entityType>order</com:entityType>
-        <com:relationship>ora.task.orderTemplateRef</com:relationship>
-        <com:element>/BusinessInteractions/BusinessInteraction/CorrelationID</com:element>
-        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-      </task:childNode>
-      <task:childNode>
-        <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
-        <com:entityType>order</com:entityType>
-        <com:relationship>ora.task.orderTemplateRef</com:relationship>
-        <com:element>/BusinessInteractions/BusinessInteraction/Status</com:element>
-        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-      </task:childNode>
-      <task:childNode>
-        <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
-        <com:entityType>order</com:entityType>
-        <com:relationship>ora.task.orderTemplateRef</com:relationship>
-        <com:element>/BusinessInteractions/BusinessInteraction/StatusDescription</com:element>
-        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-      </task:childNode>
-    </task:childNode>
-  </task:orderTemplateRef>
-  <task:orderTemplateRef>
-    <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
-    <com:entityType>order</com:entityType>
-    <com:relationship>ora.task.orderTemplateRef</com:relationship>
-    <com:element>/inputMessage</com:element>
-    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-  </task:orderTemplateRef>
+  <task:viewNodeExtension>
+    <task:path>/BusinessInteractions</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/BusinessInteractions/BusinessInteraction</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/inputMessage</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/BusinessInteractions/BusinessInteraction/Key</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/BusinessInteractions/BusinessInteraction/InteractionID</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/BusinessInteractions/BusinessInteraction/CorrelationID</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/BusinessInteractions/BusinessInteraction/Status</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/BusinessInteractions/BusinessInteraction/StatusDescription</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
   <task:viewNodeExtension>
     <task:path>/ControlData</task:path>
     <task:editable>true</task:editable>
@@ -720,47 +767,12 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/TechnicalAction</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
     <task:path>/ControlData/OrderFulfillmentState</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/BusinessInteractions</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/BusinessInteractions/BusinessInteraction</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/inputMessage</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/BusinessInteractions/BusinessInteraction/Key</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/BusinessInteractions/BusinessInteraction/InteractionID</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/BusinessInteractions/BusinessInteraction/CorrelationID</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/BusinessInteractions/BusinessInteraction/Status</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/BusinessInteractions/BusinessInteraction/StatusDescription</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>

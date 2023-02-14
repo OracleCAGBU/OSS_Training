@@ -678,6 +678,110 @@ declare function systeminteractionmodule:processResource(
 
 };
 
+(: Creates the OSM Order Data Update after a CalculateTechnicalAssetsResponse  message :)
+declare function systeminteractionmodule:createOrderDataUpdateForCTA(
+    $ctaResponse as element()*,
+    $orderData as element()*) as element()* {
+
+    let $functionName := $uimlib:PlanDeliveryFunction
+    let $componentKey := $orderData/oms:_root/oms:ControlData/oms:Functions/*[local-name()=$functionName]/oms:componentKey/text()
+    let $eOrderItem   := $orderData/oms:_root/oms:ControlData/oms:Functions/*[local-name()=$functionName]/oms:orderItem
+    
+    let $result :=
+       <OrderDataUpdate xmlns="http://www.metasolv.com/OMS/OrderDataUpdate/2002/10/25">
+        <UpdatedNodes>
+            <_root>
+                <ControlData>
+                    <Functions>
+                    {
+                        element{$functionName}{
+                            <componentKey>{$componentKey}</componentKey>,
+                            
+                                (: Need to loop through the 'OrderItem's and update each one with their specific info :)
+                                for $oi in $orderData/oms:_root/oms:ControlData/oms:Functions/*[local-name()=$functionName]/oms:orderItem
+                                return
+                                <orderItem>
+                                    {
+                                        let $osmitem := $oi/oms:orderItemRef                                        
+                                        (: OrderLineID is used as the key for order item so this must be included in any update to an order item :)
+                                        let $baseLineIDValue := $osmitem/oms:LineId/text()
+
+                                        return
+                                        (
+                                        <orderItemRef type="{$systeminteractionmodule:ORDER_ITEM_FULLTYPE}">
+                                            <LineId>{$baseLineIDValue}</LineId>                                                                                                                    
+                                            {   
+                                                let $ctaTechnicalAction:= $ctaResponse/techws:technicalAction
+
+                                                return
+                                                    (
+                                                            for $ta in $ctaTechnicalAction
+                                                                return
+                                                                (
+                                                                        (: return a list of generic actions :)
+                                                                  <TechnicalAction>
+                                                                     {systeminteractionmodule:createGenericAction($ta)}
+                                                                  </TechnicalAction>
+                                                                )
+                                                    )
+                                           }
+                                       </orderItemRef>
+                                       )
+                                    }
+                                </orderItem>
+                            
+                        }
+                    }
+                    </Functions>
+               </ControlData>
+            </_root>
+        </UpdatedNodes>
+       </OrderDataUpdate>
+    return
+    (
+        $result
+    )
+};
+
+
+declare function systeminteractionmodule:createGenericAction(
+    $ta as element()*) as element()*
+{
+    let $targetSpec  := systeminteractionmodule:getTargetSpecFromTA($ta)
+    let $subjectSpec := systeminteractionmodule:getSubjectSpecFromTA($ta)
+    let $generatedValue := $targetSpec
+    let $result :=
+        <TechnicalAction>
+            <ActionCode>{systeminteractionmodule:getActionCodeFromTA($ta)}</ActionCode>
+            <ActionId>{systeminteractionmodule:getActionIdFromTA($ta)}</ActionId>
+            <ParentId>{systeminteractionmodule:getActionIdFromTA($ta)}</ParentId>                                         
+            <SpecializedActionCode>{systeminteractionmodule:getSpecializedActionFromTA($ta)}</SpecializedActionCode>
+            <Subject>{$generatedValue}</Subject>
+            <TechnicalParameters>
+            {
+                for $param in $ta/techws:parameter 
+                return(
+                    element{$param/techws:name/text()}       {
+                         if(fn:exists($param/techws:value/text()))then(
+                         fn:data($param/techws:value)
+                         )else(),
+                         for $prop in $param/techws:value/*:property
+                          return
+                              element{$prop/*:name/text()} {
+                                  fn:data($prop/*:value/text()) 
+                          }                       
+                        
+                    }
+                )
+            }        
+            </TechnicalParameters>   
+        </TechnicalAction>    
+    return       
+    (
+        $result
+    )
+};
+
 (: Create the techws:CalculateTechnicalActionsRequest element :)
 declare function systeminteractionmodule:addCalculateTechnicalActionsRequest(
     $bid as xs:string *) as element()*
@@ -696,4 +800,71 @@ declare function systeminteractionmodule:addCalculateTechnicalActionsRequest(
             </techws:businessInteraction>,  
             <techws:includeConfigItemDifferences>true</techws:includeConfigItemDifferences>            
        }
+};
+
+
+declare function systeminteractionmodule:getServiceIDFromTA(
+    $ta as element()*) as xs:string * {
+
+    $ta/techws:serviceConfiguration/techws:serviceId/text()
+};
+
+declare function systeminteractionmodule:getServiceVersionFromTA(
+    $ta as element()*) as xs:string * {
+
+    $ta/techws:serviceConfiguration/techws:serviceId/text()
+};
+
+declare function systeminteractionmodule:getActionCodeFromTA(
+    $ta as element()*) as xs:string * {
+
+    $ta/techws:action/text()
+};
+
+declare function systeminteractionmodule:getActionIdFromTA(
+    $ta as element()*) as xs:string * {
+
+    $ta/@id
+};
+
+(: This function returns the parentId if it exists, otherwise it returns the action id. This case would represent a generic TA :)
+declare function systeminteractionmodule:getParentIdFromTA(
+    $ta as element()*) as xs:string * {
+
+  (:  $ta/@parent:)
+    
+    let $id := if(exists($ta/@parent))
+    then ($ta/@parent)
+    else (systeminteractionmodule:getActionIdFromTA($ta))
+        return $id
+        
+};
+
+declare function systeminteractionmodule:getSpecializedActionFromTA(
+    $ta as element()*) as xs:string * {
+
+    $ta/techws:specializedAction/text()
+};
+
+declare function systeminteractionmodule:getFulfillmentSystemFromTA(
+    $ta as element()*) as xs:string * {
+
+    $ta/techws:fulfillmentSystemType/text()
+};
+
+declare function systeminteractionmodule:getSubjectSpecFromTA(
+    $ta as element()*) as xs:string * {
+
+    $ta/techws:subjectSpec/text()
+};
+
+declare function systeminteractionmodule:getTargetSpecFromTA(
+    $ta as element()*) as xs:string * {
+
+    $ta/techws:targetSpec/text()
+};
+declare function systeminteractionmodule:getTargetFromTA(
+    $ta as element()*) as xs:string * {
+
+    $ta/techws:target/text()
 };

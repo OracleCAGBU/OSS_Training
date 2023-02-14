@@ -329,6 +329,13 @@
           <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
         </childNode>
       </childNode>
+      <childNode>
+        <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/TechnicalAction</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </childNode>
     </childNode>
     <childNode>
       <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
@@ -741,6 +748,14 @@
               </childNode>
               <childRefNode>true</childRefNode>
             </childNode>
+            <childNode>
+              <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+              <com:entityType>order</com:entityType>
+              <com:relationship>ora.task.orderTemplateRef</com:relationship>
+              <com:element>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/TechnicalAction</com:element>
+              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <childRefNode>true</childRefNode>
+            </childNode>
             <childRefNode>true</childRefNode>
           </childNode>
         </childNode>
@@ -1148,6 +1163,14 @@
                 <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
                 <childRefNode>true</childRefNode>
               </childNode>
+              <childRefNode>true</childRefNode>
+            </childNode>
+            <childNode>
+              <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+              <com:entityType>order</com:entityType>
+              <com:relationship>ora.task.orderTemplateRef</com:relationship>
+              <com:element>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/TechnicalAction</com:element>
+              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
               <childRefNode>true</childRefNode>
             </childNode>
             <childRefNode>true</childRefNode>
@@ -1559,6 +1582,14 @@
               </childNode>
               <childRefNode>true</childRefNode>
             </childNode>
+            <childNode>
+              <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+              <com:entityType>order</com:entityType>
+              <com:relationship>ora.task.orderTemplateRef</com:relationship>
+              <com:element>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/TechnicalAction</com:element>
+              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <childRefNode>true</childRefNode>
+            </childNode>
             <childRefNode>true</childRefNode>
           </childNode>
         </childNode>
@@ -1966,6 +1997,14 @@
                 <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
                 <childRefNode>true</childRefNode>
               </childNode>
+              <childRefNode>true</childRefNode>
+            </childNode>
+            <childNode>
+              <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+              <com:entityType>order</com:entityType>
+              <com:relationship>ora.task.orderTemplateRef</com:relationship>
+              <com:element>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/TechnicalAction</com:element>
+              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
               <childRefNode>true</childRefNode>
             </childNode>
             <childRefNode>true</childRefNode>
@@ -3271,6 +3310,31 @@
   </viewNodeExtension>
   <viewNodeExtension>
     <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/ServiceConfiguration/serviceSpecName</path>
+    <editable>true</editable>
+    <defaultValue></defaultValue>
+  </viewNodeExtension>
+  <viewNodeExtension>
+    <path>/ControlData/OrderItem/TechnicalAction</path>
+    <editable>true</editable>
+    <defaultValue></defaultValue>
+  </viewNodeExtension>
+  <viewNodeExtension>
+    <path>/ControlData/Functions/DesignServiceFunction/orderItem/orderItemRef/TechnicalAction</path>
+    <editable>true</editable>
+    <defaultValue></defaultValue>
+  </viewNodeExtension>
+  <viewNodeExtension>
+    <path>/ControlData/Functions/PlanDeliveryFunction/orderItem/orderItemRef/TechnicalAction</path>
+    <editable>true</editable>
+    <defaultValue></defaultValue>
+  </viewNodeExtension>
+  <viewNodeExtension>
+    <path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/TechnicalAction</path>
+    <editable>true</editable>
+    <defaultValue></defaultValue>
+  </viewNodeExtension>
+  <viewNodeExtension>
+    <path>/ControlData/Functions/CompleteDeliveryFunction/orderItem/orderItemRef/TechnicalAction</path>
     <editable>true</editable>
     <defaultValue></defaultValue>
   </viewNodeExtension>

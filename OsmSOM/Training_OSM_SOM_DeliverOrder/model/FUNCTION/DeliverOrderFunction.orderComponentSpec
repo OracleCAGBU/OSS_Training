@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/orchestration" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:osm="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="OrderComponentSpec" name="DeliverOrderFunction">
   <com:displayName lang="[default]">DeliverOrderFunction</com:displayName>
-  <com:saveVersion>16</com:saveVersion>
+  <com:saveVersion>17</com:saveVersion>
   <com:id>oy-yCzXgTbmhPz+nDyPccA</com:id>
   <namespace>SOM_ProvisioningOrderFulfillment</namespace>
   <extends>
@@ -330,6 +330,12 @@
     <ord:nodeExtension>
       <ord:path>/ControlData/Functions/DeliverOrderFunction/transformedOrderItem/FunctionProcessingState</ord:path>
     </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/OrderItem/TechnicalAction</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/DeliverOrderFunction/orderItem/orderItemRef/TechnicalAction</ord:path>
+    </ord:nodeExtension>
     <ord:orderData>
       <com:entity>OracleComms_OSM_CommonDataDictionary</com:entity>
       <com:entityType>xsd</com:entityType>
@@ -419,7 +425,7 @@
               <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
               <com:element>DeliverOrderFunction/orderItem/ExternalFulfillmentState</com:element>
               <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-              <com:elementName>ExternalFulfillmentState</com:elementName>
+              <com:elementName>DeliverOrderFunction/orderItem/ExternalFulfillmentState</com:elementName>
               <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:namespace>
               <com:baseElement>ExternalFulfillmentState</com:baseElement>
               <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:baseNamespace>

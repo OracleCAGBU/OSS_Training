@@ -285,6 +285,10 @@
     <ord:nodeExtension>
       <ord:path>/ControlData/OrderItem/ServiceConfiguration/configurationItem/entityReference/entityState</ord:path>
     </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/OrderItem/TechnicalAction</ord:path>
+      <ord:xmlType>true</ord:xmlType>
+    </ord:nodeExtension>
     <ord:orderData>
       <com:entity>OracleComms_OSM_CommonDataDictionary</com:entity>
       <com:entityType>xsd</com:entityType>
@@ -301,7 +305,7 @@
         <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
         <com:element>ControlData/OrderItem</com:element>
         <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-        <com:elementName>OrderItem</com:elementName>
+        <com:elementName>ControlData/OrderItem</com:elementName>
         <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:namespace>
         <com:baseElement>OrderItem</com:baseElement>
         <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:baseNamespace>
@@ -311,7 +315,7 @@
           <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
           <com:element>ControlData/OrderItem/PointOfNoReturn</com:element>
           <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-          <com:elementName>ControlData/OrderItem/PointOfNoReturn</com:elementName>
+          <com:elementName>PointOfNoReturn</com:elementName>
           <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:namespace>
           <com:baseElement>PointOfNoReturn</com:baseElement>
           <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:baseNamespace>
@@ -409,7 +413,7 @@
             <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
             <com:element>ServiceConfiguration/version</com:element>
             <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-            <com:elementName>version</com:elementName>
+            <com:elementName>ServiceConfiguration/version</com:elementName>
             <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_SOM_Orchestration/OracleComms_OSM_SOM_Orchestration</com:namespace>
             <com:baseElement>version</com:baseElement>
             <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_SOM_Orchestration/OracleComms_OSM_SOM_Orchestration</com:baseNamespace>
@@ -430,7 +434,7 @@
               <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
               <com:element>ServiceConfiguration/configurationItem/id</com:element>
               <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-              <com:elementName>id</com:elementName>
+              <com:elementName>ServiceConfiguration/configurationItem/id</com:elementName>
               <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_SOM_Orchestration/OracleComms_OSM_SOM_Orchestration</com:namespace>
               <com:baseElement>id</com:baseElement>
               <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_SOM_Orchestration/OracleComms_OSM_SOM_Orchestration</com:baseNamespace>
@@ -473,7 +477,7 @@
                 <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                 <com:element>ServiceConfiguration/configurationItem/characteristic/Name</com:element>
                 <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                <com:elementName>Name</com:elementName>
+                <com:elementName>ServiceConfiguration/configurationItem/characteristic/Name</com:elementName>
                 <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_SOM_Orchestration/OracleComms_OSM_SOM_Orchestration</com:namespace>
                 <com:baseElement>string</com:baseElement>
                 <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -506,7 +510,7 @@
                 <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                 <com:element>ServiceConfiguration/configurationItem/entityAssignment/id</com:element>
                 <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                <com:elementName>id</com:elementName>
+                <com:elementName>ServiceConfiguration/configurationItem/entityAssignment/id</com:elementName>
                 <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_SOM_Orchestration/OracleComms_OSM_SOM_Orchestration</com:namespace>
                 <com:baseElement>id</com:baseElement>
                 <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_SOM_Orchestration/OracleComms_OSM_SOM_Orchestration</com:baseNamespace>
@@ -538,7 +542,7 @@
                   <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                   <com:element>ServiceConfiguration/configurationItem/entityAssignment/characteristic/Name</com:element>
                   <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                  <com:elementName>Name</com:elementName>
+                  <com:elementName>ServiceConfiguration/configurationItem/entityAssignment/characteristic/Name</com:elementName>
                   <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_SOM_Orchestration/OracleComms_OSM_SOM_Orchestration</com:namespace>
                   <com:baseElement>string</com:baseElement>
                   <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -605,7 +609,7 @@
                 <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                 <com:element>ServiceConfiguration/configurationItem/entityReference/id</com:element>
                 <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                <com:elementName>id</com:elementName>
+                <com:elementName>ServiceConfiguration/configurationItem/entityReference/id</com:elementName>
                 <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_SOM_Orchestration/OracleComms_OSM_SOM_Orchestration</com:namespace>
                 <com:baseElement>id</com:baseElement>
                 <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_SOM_Orchestration/OracleComms_OSM_SOM_Orchestration</com:baseNamespace>
@@ -637,7 +641,7 @@
                   <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                   <com:element>ServiceConfiguration/configurationItem/entityReference/characteristic/Name</com:element>
                   <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                  <com:elementName>Name</com:elementName>
+                  <com:elementName>ServiceConfiguration/configurationItem/entityReference/characteristic/Name</com:elementName>
                   <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_SOM_Orchestration/OracleComms_OSM_SOM_Orchestration</com:namespace>
                   <com:baseElement>string</com:baseElement>
                   <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -785,6 +789,17 @@
           <com:element>SpecificationGroup</com:element>
           <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
           <com:elementName>SpecificationGroup</com:elementName>
+          <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_SOM_Orchestration/OracleComms_OSM_SOM_Orchestration</com:namespace>
+          <com:baseElement>(Reusable Structure)</com:baseElement>
+          <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+        </ord:childNode>
+        <ord:childNode>
+          <com:entity>OracleComms_OSM_SOM_Orchestration</com:entity>
+          <com:entityType>xsd</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
+          <com:element>TechnicalAction</com:element>
+          <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+          <com:elementName>TechnicalAction</com:elementName>
           <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_SOM_Orchestration/OracleComms_OSM_SOM_Orchestration</com:namespace>
           <com:baseElement>(Reusable Structure)</com:baseElement>
           <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
