@@ -11,6 +11,7 @@ declare namespace ser                                                       = "h
 declare namespace ent                                                       = "http://xmlns.oracle.com/communications/inventory/entity";
 declare namespace con                                                       = "http://xmlns.oracle.com/communications/inventory/configuration";
 declare namespace spec                                                      = "http://xmlns.oracle.com/communications/inventory/specification";
+declare namespace techws                                                    = "http://xmlns.oracle.com/communications/inventory/webservice/technical";
 
 declare variable $systeminteractionmodule:ORDER_ITEM_NS                    := "urn:com:metasolv:oms:xmlapi:1";
 declare variable $systeminteractionmodule:ORDER_ITEM_TYPE                  := "omsAny";
@@ -675,4 +676,24 @@ declare function systeminteractionmodule:processResource(
             </characteristic>
     )
 
+};
+
+(: Create the techws:CalculateTechnicalActionsRequest element :)
+declare function systeminteractionmodule:addCalculateTechnicalActionsRequest(
+    $bid as xs:string *) as element()*
+{ 
+   (: <techws:CalculateTechnicalActionsRequest> :)
+   let $elementname := fn:QName($uimlib:techwsNamespace, concat($uimlib:techwsPrefix, $uimlib:calculateTechnicalActionsRequest))
+   
+   where (exists($bid))
+
+   return
+       element {$elementname } {
+            <techws:businessInteraction>
+                <invbi:header>
+                    <invbi:id>{$bid}</invbi:id>                    
+                </invbi:header>
+            </techws:businessInteraction>,  
+            <techws:includeConfigItemDifferences>true</techws:includeConfigItemDifferences>            
+       }
 };
