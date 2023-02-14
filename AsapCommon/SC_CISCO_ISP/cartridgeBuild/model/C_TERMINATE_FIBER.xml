@@ -1,0 +1,13 @@
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.metasolv.com/ServiceActivation/2003/ServiceModel">
+  <description></description>
+  <commonService name="C_TERMINATE_FIBER">
+    <description></description>
+    <rollbackOnFailure>false</rollbackOnFailure>
+    <priority>1</priority>
+    <serviceMap>
+      <atomicService>A_CISCO-ISP_1-0_TERMINATE_FIBER_CPE</atomicService>
+      <pointOfNoReturn>0</pointOfNoReturn>
+      <condition xsi:type="AlwaysConditionType"/>
+    </serviceMap>
+  </commonService>
+</serviceModel>

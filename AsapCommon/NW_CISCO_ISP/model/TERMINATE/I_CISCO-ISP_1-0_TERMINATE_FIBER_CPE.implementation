@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/activation/model/action" xmlns:act="http://www.mslv.com/studio/activation/model/action" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xsi:type="serviceModelType" name="I_CISCO-ISP_1-0_TERMINATE_FIBER_CPE">
+  <com:category>
+    <com:name>entity</com:name>
+    <com:value>FIBER_CPE</com:value>
+  </com:category>
+  <com:saveVersion>3</com:saveVersion>
+  <com:id>6whvHeUQTiiMyq4jfoYUgw</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>6whvHeUQTiiMyq4jfoYUgw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>I_CISCO-ISP_1-0_TERMINATE_FIBER_CPE</data:name>
+    <data:displayName lang="[default]">I_CISCO-ISP_1-0_TERMINATE_FIBER_CPE</data:displayName>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>cLbGoqxATqSqDYGxoa5vKg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>6whvHeUQTiiMyq4jfoYUgw</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <service>
+    <implementation>
+      <vendor>CISCO</vendor>
+      <technology>ISP</technology>
+      <softwareLoad>1-0</softwareLoad>
+      <action>TERMINATE</action>
+      <implementation xsi:type="SynchronizedJavaDeviceActionType">
+        <com:entity>com.orcl.activation.cisco.isp.x1_0.fiber_cpe.terminate.generated.TerminateFiber_cpeProxy</com:entity>
+        <com:entityType>java</com:entityType>
+        <com:relationship>synchronizedJavaDeviceAction</com:relationship>
+        <com:method>execute</com:method>
+      </implementation>
+      <commandDetails/>
+      <commandResponseDetails/>
+    </implementation>
+  </service>
+</com:modelEntity>

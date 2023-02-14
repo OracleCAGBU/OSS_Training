@@ -1,0 +1,28 @@
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.metasolv.com/ServiceActivation/2003/ServiceModel">
+  <description></description>
+  <atomicService xsi:type="AtomicServiceType" name="A_CISCO-ISP_1-0_TERMINATE_FIBER_CPE">
+    <description></description>
+    <sendParameterCount>false</sendParameterCount>
+    <parameter xsi:type="SimpleParameterType" name="MCLI">
+      <description></description>
+      <required>true</required>
+      <default>CISCO_ISP_1-0</default>
+      <parameterValueMap>MCLI</parameterValueMap>
+    </parameter>
+    <parameter xsi:type="SimpleParameterType" name="MACAddress">
+      <description></description>
+      <required>true</required>
+      <default></default>
+      <parameterValueMap>MACAddress</parameterValueMap>
+    </parameter>
+  </atomicService>
+  <atomicDeviceMap name="A_CISCO-ISP_1-0_TERMINATE_FIBER_CPE">
+    <deviceMap>
+      <vendor>CISCO</vendor>
+      <type>ISP</type>
+      <version>1-0</version>
+      <implementation>com.orcl.activation.cisco.isp.x1_0.fiber_cpe.terminate.generated.TerminateFiber_cpeProxy.execute</implementation>
+      <interpreter>JINTERPRETER_PROGRAM</interpreter>
+    </deviceMap>
+  </atomicDeviceMap>
+</serviceModel>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/activation/model/config" xmlns:res="http://www.mslv.com/studio/activation/model/config" xmlns:com="http://www.mslv.com/studio/core/model/common" xsi:type="ElementType" name="T_CISCO-ISP_1-0_HOST">
+  <com:displayName></com:displayName>
+  <com:saveVersion>11</com:saveVersion>
+  <com:id>K9afX4ZkRkGePuz8qigslA</com:id>
+  <vendor>CISCO</vendor>
+  <technology>ISP</technology>
+  <softwareLoad>1-0</softwareLoad>
+  <nepServerName>$NEP</nepServerName>
+  <primaryPool name="isppool">
+    <device name="Connection1">
+      <lineType>GENERIC_MESSAGE_BASED_CONNECTION</lineType>
+    </device>
+  </primaryPool>
+  <maximumConnections>5</maximumConnections>
+  <dropTimeout>1</dropTimeout>
+  <spawnThreshold>6</spawnThreshold>
+  <killThreshold>3</killThreshold>
+  <routingElement name="CISCO_ISP_1-0"/>
+  <lineType>GENERIC_MESSAGE_BASED_CONNECTION</lineType>
+  <communicationParameter>
+    <label>HOST</label>
+    <value>
+      <value>10.1.20.21</value>
+    </value>
+    <description>New Parameter</description>
+  </communicationParameter>
+  <communicationParameter>
+    <label>PORT</label>
+    <value>
+      <value>8001</value>
+    </value>
+    <description>New Parameter</description>
+  </communicationParameter>
+  <communicationParameter>
+    <label>URL_Suffix</label>
+    <value>
+      <value>/papi</value>
+    </value>
+    <description>New Parameter</description>
+  </communicationParameter>
+  <communicationParameter>
+    <label>USERNAME</label>
+    <value>
+      <value>oracle</value>
+    </value>
+    <description>New Parameter</description>
+  </communicationParameter>
+</com:modelEntity>

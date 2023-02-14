@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activation="http://xmlns.oracle.com/communications/studio/model/activation" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="activation:AtomicAction" id="aa=A_CISCO-ISP_1-0_RETRIEVE_FIBER_CPE" type="aa" typeName="Atomic Action" name="A_CISCO-ISP_1-0_RETRIEVE_FIBER_CPE" resource="\NW_CISCO_ISP\model\RETRIEVE\A_CISCO-ISP_1-0_RETRIEVE_FIBER_CPE.atomicAction">
+    <note lang="default"/>
+    <project>
+      <relation ref="aprj=NW_CISCO_ISP" type="Activation Project" name="Dependency">
+        <target name="NW_CISCO_ISP" typeName="Activation Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="aa=A_CISCO-ISP_1-0_RETRIEVE_FIBER_CPE+dataElement=X6okKME-SBOLgnAfP9knGA" type="dataElement" typeName="Data Element" kind="Element" name="MCLI" path="/A_CISCO-ISP_1-0_RETRIEVE_FIBER_CPE/MCLI">
+        <displayName lang="default">MCLI</displayName>
+        <minOccurs inherited="true">1</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="false">CISCO_ISP_1-0</defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">254</maxLength>
+        <base>
+          <relation ref="ds=Activation_Schema+dataElement=MCLI" type="Schema Element" name="Type" kind="Element">
+            <target name="MCLI" typeName="Schema Element"/>
+            <inEntity name="Activation_Schema" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_CISCO-ISP_1-0_RETRIEVE_FIBER_CPE+dataElement=nvlisu1SSmWubyS8hFoC3A" type="dataElement" typeName="Data Element" kind="Element" name="MACAddress" path="/A_CISCO-ISP_1-0_RETRIEVE_FIBER_CPE/MACAddress">
+        <displayName lang="default">MACAddress</displayName>
+        <minOccurs inherited="true">1</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_CISCO_ISP+dataElement=MACAddress" type="Schema Element" name="Type" kind="Element">
+            <target name="MACAddress" typeName="Schema Element"/>
+            <inEntity name="NW_CISCO_ISP" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+    </dataElements>
+    <actionProcessors>
+      <relation ref="ap=I_CISCO-ISP_1-0_RETRIEVE_FIBER_CPE" type="Action Processor" name="Action Processor" kind="Entity">
+        <target name="I_CISCO-ISP_1-0_RETRIEVE_FIBER_CPE" typeName="Action Processor"/>
+      </relation>
+    </actionProcessors>
+    <schemaGens>
+      <relation ref="aprj=NW_CISCO_ISP" type="Activation Project" name="com.mslv.studio.activation.networkAction.schemaGen">
+        <target name="NW_CISCO_ISP" typeName="Activation Project"/>
+      </relation>
+    </schemaGens>
+  </entity>
+</model:Model>

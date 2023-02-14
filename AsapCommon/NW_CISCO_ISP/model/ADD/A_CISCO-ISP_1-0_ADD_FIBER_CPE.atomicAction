@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.oracle.com/communications/studio/activation/model/NetworkActionModel" xmlns:namod="http://www.oracle.com/communications/studio/activation/model/NetworkActionModel" xmlns:act="http://www.mslv.com/studio/activation/model/action" xmlns:actddext="http://www.oracle.com/communications/studio/activation/model/actddext" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xsi:type="networkActionType" name="A_CISCO-ISP_1-0_ADD_FIBER_CPE">
+  <com:saveVersion>5</com:saveVersion>
+  <com:id>lee7sT9+S2yq0mt8MD5yZQ</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>lee7sT9+S2yq0mt8MD5yZQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>A_CISCO-ISP_1-0_ADD_FIBER_CPE</data:name>
+    <data:displayName lang="[default]">A_CISCO-ISP_1-0_ADD_FIBER_CPE</data:displayName>
+    <data:dataElement virtual="false">
+      <com:id>H2lTos8vRVaBew2Ot6bgnw</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>MCLI</data:name>
+      <data:displayName lang="[default]">MCLI</data:displayName>
+      <data:baseElement>
+        <com:entity>Activation_Schema</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>MCLI</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>MCLI</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>f4WNDXOzSc++TD4ytNVG7Q</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>SerialNumber</data:name>
+      <data:displayName lang="[default]">Serial Number</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>NW_CISCO_ISP</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>SerialNumber</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>SerialNumber</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>Y-4iySvTSCOI-cmJkKvZiw</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>MACAddress</data:name>
+      <data:displayName lang="[default]">MACAddress</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>NW_CISCO_ISP</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>MACAddress</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>MACAddress</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>eFITmX63QISU-KSUxS841A</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>IPAddress</data:name>
+      <data:displayName lang="[default]">IPAddress</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>NW_CISCO_ISP</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>IPAddress</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>IPAddress</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>urJA2NjUQyuMx+sayZg5LA</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>CPEType</data:name>
+      <data:displayName lang="[default]">CPEType</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>NW_CISCO_ISP</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>CPEType</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>CPEType</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>yuveJezBRsmtspH6EvBsNQ</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>Vendor</data:name>
+      <data:displayName lang="[default]">Vendor</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>NW_CISCO_ISP</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>Vendor</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>Vendor</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>51rTtgN-TIiOnlYSaA-N-Q</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>Model</data:name>
+      <data:displayName lang="[default]">Model</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>NW_CISCO_ISP</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>Model</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>Model</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>ufCITAQ2Ty2SH33bYHTXfw</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>DownloadSpeed</data:name>
+      <data:displayName lang="[default]">Download Speed</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>NW_CISCO_ISP</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>DownloadSpeed</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>DownloadSpeed</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>xUd1oQnLSoaxD3JupAMuMQ</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>UploadSpeed</data:name>
+      <data:displayName lang="[default]">Upload Speed</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>NW_CISCO_ISP</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>UploadSpeed</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>UploadSpeed</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>Aw4wvFzmTZe0EdPqZ9FXqg</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>Username</data:name>
+      <data:displayName lang="[default]">Username</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>NW_CISCO_ISP</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>Username</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>Username</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>FAzstfXMQYKhPpBOvquvjQ</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>Password</data:name>
+      <data:displayName lang="[default]">Password</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>NW_CISCO_ISP</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>Password</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>Password</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>8+J-os0YRvmzXq+v3ShbvQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>lee7sT9+S2yq0mt8MD5yZQ</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>cAEcXyFKSseeVhQkfVtmVA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>H2lTos8vRVaBew2Ot6bgnw</data:dataElementId>
+    <data:defaultValue>CISCO_ISP_1-0</data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>CHp4II77Q3iwiVdwM5+8Tg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>H2lTos8vRVaBew2Ot6bgnw</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="actddext:ActivationDictionaryExtensionDetail">
+    <com:id>wH9k7FaXQMS2uG893u8GFw</com:id>
+    <com:elementType>oracle.communications.studio.activation.ddextension.activationdictionaryelementdetailfactory</com:elementType>
+    <data:dataElementId>H2lTos8vRVaBew2Ot6bgnw</data:dataElementId>
+    <actddext:runtimeType>SCALAR</actddext:runtimeType>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementEnumerationDetail">
+    <com:id>WNIAMY77T4uoqKBx0E1S1A</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+    <data:dataElementId>H2lTos8vRVaBew2Ot6bgnw</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="networkActionParameterDetailsType">
+    <com:id>65v8uVgMTmm2R++yYa86Pg</com:id>
+    <com:elementType>com.mslv.studio.activation.entities.networkaction.ParameterDetailsModelElement</com:elementType>
+    <data:dataElementId>H2lTos8vRVaBew2Ot6bgnw</data:dataElementId>
+    <constraint></constraint>
+    <indexed>false</indexed>
+    <atomicLabel>MCLI</atomicLabel>
+    <runtimeType>SCALAR</runtimeType>
+    <dependentXml></dependentXml>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>UATyW4nSRc2fmmFUA1O1NA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>f4WNDXOzSc++TD4ytNVG7Q</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementEnumerationDetail">
+    <com:id>CdMXIOtgSFW-4Dg+eiT6Lg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+    <data:dataElementId>f4WNDXOzSc++TD4ytNVG7Q</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="networkActionParameterDetailsType">
+    <com:id>OlnBBzNsSKCNs+eOL56teQ</com:id>
+    <com:elementType>com.mslv.studio.activation.entities.networkaction.ParameterDetailsModelElement</com:elementType>
+    <data:dataElementId>f4WNDXOzSc++TD4ytNVG7Q</data:dataElementId>
+    <constraint></constraint>
+    <indexed>false</indexed>
+    <atomicLabel>SerialNumber</atomicLabel>
+    <runtimeType>SCALAR</runtimeType>
+    <dependentXml></dependentXml>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>oGT6-N05R9WtrWg3dSajhA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>Y-4iySvTSCOI-cmJkKvZiw</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementEnumerationDetail">
+    <com:id>Bl43SDkYTKenycwIKDoV6g</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+    <data:dataElementId>Y-4iySvTSCOI-cmJkKvZiw</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>ucX+lBfFQHujL7V8zLBBHg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>Y-4iySvTSCOI-cmJkKvZiw</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="networkActionParameterDetailsType">
+    <com:id>MN7QNRlRRNilxIO8UxcDGg</com:id>
+    <com:elementType>com.mslv.studio.activation.entities.networkaction.ParameterDetailsModelElement</com:elementType>
+    <data:dataElementId>Y-4iySvTSCOI-cmJkKvZiw</data:dataElementId>
+    <constraint></constraint>
+    <indexed>false</indexed>
+    <atomicLabel>MACAddress</atomicLabel>
+    <runtimeType>SCALAR</runtimeType>
+    <dependentXml></dependentXml>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>mVkXne+fSUaK0ecpzJTcPw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>eFITmX63QISU-KSUxS841A</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementEnumerationDetail">
+    <com:id>L2t2U4LvSJCKOaEsXFo-Pw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+    <data:dataElementId>eFITmX63QISU-KSUxS841A</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="networkActionParameterDetailsType">
+    <com:id>Im30huSvRaOMCflEWlwbMg</com:id>
+    <com:elementType>com.mslv.studio.activation.entities.networkaction.ParameterDetailsModelElement</com:elementType>
+    <data:dataElementId>eFITmX63QISU-KSUxS841A</data:dataElementId>
+    <constraint></constraint>
+    <indexed>false</indexed>
+    <atomicLabel>IPAddress</atomicLabel>
+    <runtimeType>SCALAR</runtimeType>
+    <dependentXml></dependentXml>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>+l2RZl+ATRi90fPTMYxnVw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>urJA2NjUQyuMx+sayZg5LA</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementEnumerationDetail">
+    <com:id>H9JJQB9fQTWhD3b+oKsebA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+    <data:dataElementId>urJA2NjUQyuMx+sayZg5LA</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="networkActionParameterDetailsType">
+    <com:id>EqVrF9o4S++rgFM-8LD53A</com:id>
+    <com:elementType>com.mslv.studio.activation.entities.networkaction.ParameterDetailsModelElement</com:elementType>
+    <data:dataElementId>urJA2NjUQyuMx+sayZg5LA</data:dataElementId>
+    <constraint></constraint>
+    <indexed>false</indexed>
+    <atomicLabel>CPEType</atomicLabel>
+    <runtimeType>SCALAR</runtimeType>
+    <dependentXml></dependentXml>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>mWNY9mcYQWeolcgKYdOFgA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>yuveJezBRsmtspH6EvBsNQ</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementEnumerationDetail">
+    <com:id>GQs07UwAQ4+uNIRTZNEpyg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+    <data:dataElementId>yuveJezBRsmtspH6EvBsNQ</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="networkActionParameterDetailsType">
+    <com:id>3Uqe4IyQRqaLBXNNewH+SQ</com:id>
+    <com:elementType>com.mslv.studio.activation.entities.networkaction.ParameterDetailsModelElement</com:elementType>
+    <data:dataElementId>yuveJezBRsmtspH6EvBsNQ</data:dataElementId>
+    <constraint></constraint>
+    <indexed>false</indexed>
+    <atomicLabel>Vendor</atomicLabel>
+    <runtimeType>SCALAR</runtimeType>
+    <dependentXml></dependentXml>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>gpZo-T5IR0iNcy2EU6VmPw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>51rTtgN-TIiOnlYSaA-N-Q</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementEnumerationDetail">
+    <com:id>RNai6qHRTZOyx1ipf1ez6Q</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+    <data:dataElementId>51rTtgN-TIiOnlYSaA-N-Q</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="networkActionParameterDetailsType">
+    <com:id>HeCmCDDWSzylW3r0AbzVIQ</com:id>
+    <com:elementType>com.mslv.studio.activation.entities.networkaction.ParameterDetailsModelElement</com:elementType>
+    <data:dataElementId>51rTtgN-TIiOnlYSaA-N-Q</data:dataElementId>
+    <constraint></constraint>
+    <indexed>false</indexed>
+    <atomicLabel>Model</atomicLabel>
+    <runtimeType>SCALAR</runtimeType>
+    <dependentXml></dependentXml>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>IQEQu94sT6yGT0HXW7-kDg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>ufCITAQ2Ty2SH33bYHTXfw</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementEnumerationDetail">
+    <com:id>rDoGLumESXKxSsE2zEpOwA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+    <data:dataElementId>ufCITAQ2Ty2SH33bYHTXfw</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="networkActionParameterDetailsType">
+    <com:id>wvA8bCWlT0mxnjvcHCOEaA</com:id>
+    <com:elementType>com.mslv.studio.activation.entities.networkaction.ParameterDetailsModelElement</com:elementType>
+    <data:dataElementId>ufCITAQ2Ty2SH33bYHTXfw</data:dataElementId>
+    <constraint></constraint>
+    <indexed>false</indexed>
+    <atomicLabel>DownloadSpeed</atomicLabel>
+    <runtimeType>SCALAR</runtimeType>
+    <dependentXml></dependentXml>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>FKis4XUfQRG9FoTNBbtyTA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>xUd1oQnLSoaxD3JupAMuMQ</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementEnumerationDetail">
+    <com:id>G5RGJU1-S3GiFn3e07xLDg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+    <data:dataElementId>xUd1oQnLSoaxD3JupAMuMQ</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="networkActionParameterDetailsType">
+    <com:id>thnK6WdFQ5u+iiGYVMTOYw</com:id>
+    <com:elementType>com.mslv.studio.activation.entities.networkaction.ParameterDetailsModelElement</com:elementType>
+    <data:dataElementId>xUd1oQnLSoaxD3JupAMuMQ</data:dataElementId>
+    <constraint></constraint>
+    <indexed>false</indexed>
+    <atomicLabel>UploadSpeed</atomicLabel>
+    <runtimeType>SCALAR</runtimeType>
+    <dependentXml></dependentXml>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>d0GWb6FARLeSv9YcP4YEfw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>Aw4wvFzmTZe0EdPqZ9FXqg</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementEnumerationDetail">
+    <com:id>4ZKJi-GmT0+J8sPNk5k0lA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+    <data:dataElementId>Aw4wvFzmTZe0EdPqZ9FXqg</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="networkActionParameterDetailsType">
+    <com:id>xScxS-JRQDqCCbv0VXbQOQ</com:id>
+    <com:elementType>com.mslv.studio.activation.entities.networkaction.ParameterDetailsModelElement</com:elementType>
+    <data:dataElementId>Aw4wvFzmTZe0EdPqZ9FXqg</data:dataElementId>
+    <constraint></constraint>
+    <indexed>false</indexed>
+    <atomicLabel>Username</atomicLabel>
+    <runtimeType>SCALAR</runtimeType>
+    <dependentXml></dependentXml>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>VAZax47GQgCDeFN9EOCplg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>FAzstfXMQYKhPpBOvquvjQ</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementEnumerationDetail">
+    <com:id>hFt7bgMfRV+Uox3K+NFFAA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+    <data:dataElementId>FAzstfXMQYKhPpBOvquvjQ</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="networkActionParameterDetailsType">
+    <com:id>elrjuMjqQxquf8BsmOjs2Q</com:id>
+    <com:elementType>com.mslv.studio.activation.entities.networkaction.ParameterDetailsModelElement</com:elementType>
+    <data:dataElementId>FAzstfXMQYKhPpBOvquvjQ</data:dataElementId>
+    <constraint></constraint>
+    <indexed>false</indexed>
+    <atomicLabel>Password</atomicLabel>
+    <runtimeType>SCALAR</runtimeType>
+    <dependentXml></dependentXml>
+  </data:dataElementDetails>
+  <deviceMap>
+    <act:description></act:description>
+    <act:vendor>CISCO</act:vendor>
+    <act:technology>ISP</act:technology>
+    <act:softwareLoad>1-0</act:softwareLoad>
+    <act:alternateVendor>CISCO</act:alternateVendor>
+    <act:alternateTechnology>ISP</act:alternateTechnology>
+    <act:alternateSoftwareLoad>1-0</act:alternateSoftwareLoad>
+    <act:implementation>
+      <com:entity>I_CISCO-ISP_1-0_ADD_FIBER_CPE</com:entity>
+      <com:entityType>implementation</com:entityType>
+      <com:relationship>deviceMap</com:relationship>
+    </act:implementation>
+  </deviceMap>
+  <details>
+    <routingType>NE</routingType>
+  </details>
+</com:modelEntity>

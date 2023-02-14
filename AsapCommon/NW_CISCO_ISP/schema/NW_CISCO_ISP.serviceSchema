@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified"
+    targetNamespace="http://www.metasolv.com/ServiceActivation/NW_CISCO_ISP"
+    xmlns="http://www.metasolv.com/ServiceActivation/NW_CISCO_ISP"
+    xmlns:mca-serviceentities="http://www.metasolv.com/MCA/ServiceEntities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://www.metasolv.com/MCA/ServiceEntities"/>
+    <xs:element name="C_CISCO-ISP_1-0_ADD_FIBER_CPE">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="CPEType" type="CPETypeType"/>
+                <xs:element name="DownloadSpeed" type="DownloadSpeedType"/>
+                <xs:element name="IPAddress" type="IPAddressType"/>
+                <xs:element name="MACAddress" type="MACAddressType"/>
+                <xs:element name="MCLI" type="MCLIType"/>
+                <xs:element name="Model" type="ModelType"/>
+                <xs:element name="Password" type="PasswordType"/>
+                <xs:element name="SerialNumber" type="SerialNumberType"/>
+                <xs:element name="UploadSpeed" type="UploadSpeedType"/>
+                <xs:element name="Username" type="UsernameType"/>
+                <xs:element name="Vendor" type="VendorType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="C_CISCO-ISP_1-0_CHANGE_FIBER_CPE">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="DownloadSpeed" type="DownloadSpeedType"/>
+                <xs:element name="MACAddress" type="MACAddressType"/>
+                <xs:element name="MCLI" type="MCLIType"/>
+                <xs:element name="Old_SerialNumber" type="Old_SerialNumberType"/>
+                <xs:element name="SerialNumber" type="SerialNumberType"/>
+                <xs:element name="Status" type="StatusType"/>
+                <xs:element name="UploadSpeed" type="UploadSpeedType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="C_CISCO-ISP_1-0_RETRIEVE_FIBER_CPE">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="MACAddress" type="MACAddressType"/>
+                <xs:element name="MCLI" type="MCLIType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="C_CISCO-ISP_1-0_TERMINATE_FIBER_CPE">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="MACAddress" type="MACAddressType"/>
+                <xs:element name="MCLI" type="MCLIType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="StatusType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DownloadSpeedType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CPETypeType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="VendorType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MACAddressType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SerialNumberType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="UsernameType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Old_SerialNumberType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MCLIType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ModelType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="IPAddressType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PasswordType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="UploadSpeedType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

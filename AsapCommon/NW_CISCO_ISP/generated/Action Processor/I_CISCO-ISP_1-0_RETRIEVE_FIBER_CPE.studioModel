@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activation="http://xmlns.oracle.com/communications/studio/model/activation" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="activation:ActionProcessor" id="ap=I_CISCO-ISP_1-0_RETRIEVE_FIBER_CPE" type="ap" typeName="Action Processor" name="I_CISCO-ISP_1-0_RETRIEVE_FIBER_CPE" resource="\NW_CISCO_ISP\model\RETRIEVE\I_CISCO-ISP_1-0_RETRIEVE_FIBER_CPE.implementation">
+    <note lang="default">&lt;QueryRequest>&#xD;
+	&lt;SerialNumber>value&lt;/SerialNumber>&#xD;
+	&lt;MACAddress>value&lt;/MACAddress>&#xD;
+	&lt;Action>QUERY&lt;/Action>&#xD;
+	&lt;Credential>&#xD;
+		&lt;Username>abc&lt;/Username/>&#xD;
+		&lt;Password>****&lt;/Password>&#xD;
+	&lt;/Credential>&#xD;
+&lt;/QueryRequest>&#xD;
+</note>
+    <project>
+      <relation ref="aprj=NW_CISCO_ISP" type="Activation Project" name="Dependency">
+        <target name="NW_CISCO_ISP" typeName="Activation Project"/>
+      </relation>
+    </project>
+  </entity>
+</model:Model>

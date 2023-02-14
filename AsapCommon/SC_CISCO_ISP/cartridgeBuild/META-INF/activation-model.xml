@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<activationModel name="SC_CISCO_ISP" xmlns="http://www.metasolv.com/ServiceActivation/2003/ActivationModel" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <name>SC_CISCO_ISP</name>
+    <description> (b2)</description>
+    <version><label>1.0.0.0.0</label></version>
+    <component>
+        <serviceModel>model/C_TERMINATE_FIBER.xml</serviceModel>
+    </component>
+    <component>
+        <serviceModel>model/C_RESUME_FIBER.xml</serviceModel>
+    </component>
+    <component>
+        <serviceModel>model/C_SUSPEND_FIBER.xml</serviceModel>
+    </component>
+    <component>
+        <serviceModel>model/C_CHANGE_FIBER_PLAN.xml</serviceModel>
+    </component>
+    <component>
+        <serviceModel>model/C_CHANGE_FIBER_CPE.xml</serviceModel>
+    </component>
+    <component>
+        <serviceModel>model/C_ACTIVATE_FIBER.xml</serviceModel>
+    </component>
+    <role name="administrator">
+        <description>System Administrator</description>
+    </role>
+</activationModel>

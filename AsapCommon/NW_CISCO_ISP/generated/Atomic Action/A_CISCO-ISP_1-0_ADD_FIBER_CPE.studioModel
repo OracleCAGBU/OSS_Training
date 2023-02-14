@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activation="http://xmlns.oracle.com/communications/studio/model/activation" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="activation:AtomicAction" id="aa=A_CISCO-ISP_1-0_ADD_FIBER_CPE" type="aa" typeName="Atomic Action" name="A_CISCO-ISP_1-0_ADD_FIBER_CPE" resource="\NW_CISCO_ISP\model\ADD\A_CISCO-ISP_1-0_ADD_FIBER_CPE.atomicAction">
+    <note lang="default"/>
+    <project>
+      <relation ref="aprj=NW_CISCO_ISP" type="Activation Project" name="Dependency">
+        <target name="NW_CISCO_ISP" typeName="Activation Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="aa=A_CISCO-ISP_1-0_ADD_FIBER_CPE+dataElement=H2lTos8vRVaBew2Ot6bgnw" type="dataElement" typeName="Data Element" kind="Element" name="MCLI" path="/A_CISCO-ISP_1-0_ADD_FIBER_CPE/MCLI">
+        <displayName lang="default">MCLI</displayName>
+        <minOccurs inherited="true">1</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="false">CISCO_ISP_1-0</defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">254</maxLength>
+        <base>
+          <relation ref="ds=Activation_Schema+dataElement=MCLI" type="Schema Element" name="Type" kind="Element">
+            <target name="MCLI" typeName="Schema Element"/>
+            <inEntity name="Activation_Schema" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_CISCO-ISP_1-0_ADD_FIBER_CPE+dataElement=f4WNDXOzSc++TD4ytNVG7Q" type="dataElement" typeName="Data Element" kind="Element" name="SerialNumber" path="/A_CISCO-ISP_1-0_ADD_FIBER_CPE/SerialNumber">
+        <displayName lang="default">Serial Number</displayName>
+        <minOccurs inherited="true">1</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_CISCO_ISP+dataElement=SerialNumber" type="Schema Element" name="Type" kind="Element">
+            <target name="SerialNumber" typeName="Schema Element"/>
+            <inEntity name="NW_CISCO_ISP" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_CISCO-ISP_1-0_ADD_FIBER_CPE+dataElement=Y-4iySvTSCOI-cmJkKvZiw" type="dataElement" typeName="Data Element" kind="Element" name="MACAddress" path="/A_CISCO-ISP_1-0_ADD_FIBER_CPE/MACAddress">
+        <displayName lang="default">MACAddress</displayName>
+        <minOccurs inherited="true">1</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_CISCO_ISP+dataElement=MACAddress" type="Schema Element" name="Type" kind="Element">
+            <target name="MACAddress" typeName="Schema Element"/>
+            <inEntity name="NW_CISCO_ISP" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_CISCO-ISP_1-0_ADD_FIBER_CPE+dataElement=eFITmX63QISU-KSUxS841A" type="dataElement" typeName="Data Element" kind="Element" name="IPAddress" path="/A_CISCO-ISP_1-0_ADD_FIBER_CPE/IPAddress">
+        <displayName lang="default">IPAddress</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_CISCO_ISP+dataElement=IPAddress" type="Schema Element" name="Type" kind="Element">
+            <target name="IPAddress" typeName="Schema Element"/>
+            <inEntity name="NW_CISCO_ISP" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_CISCO-ISP_1-0_ADD_FIBER_CPE+dataElement=urJA2NjUQyuMx+sayZg5LA" type="dataElement" typeName="Data Element" kind="Element" name="CPEType" path="/A_CISCO-ISP_1-0_ADD_FIBER_CPE/CPEType">
+        <displayName lang="default">CPEType</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_CISCO_ISP+dataElement=CPEType" type="Schema Element" name="Type" kind="Element">
+            <target name="CPEType" typeName="Schema Element"/>
+            <inEntity name="NW_CISCO_ISP" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_CISCO-ISP_1-0_ADD_FIBER_CPE+dataElement=yuveJezBRsmtspH6EvBsNQ" type="dataElement" typeName="Data Element" kind="Element" name="Vendor" path="/A_CISCO-ISP_1-0_ADD_FIBER_CPE/Vendor">
+        <displayName lang="default">Vendor</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_CISCO_ISP+dataElement=Vendor" type="Schema Element" name="Type" kind="Element">
+            <target name="Vendor" typeName="Schema Element"/>
+            <inEntity name="NW_CISCO_ISP" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_CISCO-ISP_1-0_ADD_FIBER_CPE+dataElement=51rTtgN-TIiOnlYSaA-N-Q" type="dataElement" typeName="Data Element" kind="Element" name="Model" path="/A_CISCO-ISP_1-0_ADD_FIBER_CPE/Model">
+        <displayName lang="default">Model</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_CISCO_ISP+dataElement=Model" type="Schema Element" name="Type" kind="Element">
+            <target name="Model" typeName="Schema Element"/>
+            <inEntity name="NW_CISCO_ISP" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_CISCO-ISP_1-0_ADD_FIBER_CPE+dataElement=ufCITAQ2Ty2SH33bYHTXfw" type="dataElement" typeName="Data Element" kind="Element" name="DownloadSpeed" path="/A_CISCO-ISP_1-0_ADD_FIBER_CPE/DownloadSpeed">
+        <displayName lang="default">Download Speed</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_CISCO_ISP+dataElement=DownloadSpeed" type="Schema Element" name="Type" kind="Element">
+            <target name="DownloadSpeed" typeName="Schema Element"/>
+            <inEntity name="NW_CISCO_ISP" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_CISCO-ISP_1-0_ADD_FIBER_CPE+dataElement=xUd1oQnLSoaxD3JupAMuMQ" type="dataElement" typeName="Data Element" kind="Element" name="UploadSpeed" path="/A_CISCO-ISP_1-0_ADD_FIBER_CPE/UploadSpeed">
+        <displayName lang="default">Upload Speed</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_CISCO_ISP+dataElement=UploadSpeed" type="Schema Element" name="Type" kind="Element">
+            <target name="UploadSpeed" typeName="Schema Element"/>
+            <inEntity name="NW_CISCO_ISP" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_CISCO-ISP_1-0_ADD_FIBER_CPE+dataElement=Aw4wvFzmTZe0EdPqZ9FXqg" type="dataElement" typeName="Data Element" kind="Element" name="Username" path="/A_CISCO-ISP_1-0_ADD_FIBER_CPE/Username">
+        <displayName lang="default">Username</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_CISCO_ISP+dataElement=Username" type="Schema Element" name="Type" kind="Element">
+            <target name="Username" typeName="Schema Element"/>
+            <inEntity name="NW_CISCO_ISP" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_CISCO-ISP_1-0_ADD_FIBER_CPE+dataElement=FAzstfXMQYKhPpBOvquvjQ" type="dataElement" typeName="Data Element" kind="Element" name="Password" path="/A_CISCO-ISP_1-0_ADD_FIBER_CPE/Password">
+        <displayName lang="default">Password</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_CISCO_ISP+dataElement=Password" type="Schema Element" name="Type" kind="Element">
+            <target name="Password" typeName="Schema Element"/>
+            <inEntity name="NW_CISCO_ISP" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+    </dataElements>
+    <actionProcessors>
+      <relation ref="ap=I_CISCO-ISP_1-0_ADD_FIBER_CPE" type="Action Processor" name="Action Processor" kind="Entity">
+        <target name="I_CISCO-ISP_1-0_ADD_FIBER_CPE" typeName="Action Processor"/>
+      </relation>
+    </actionProcessors>
+    <schemaGens>
+      <relation ref="aprj=NW_CISCO_ISP" type="Activation Project" name="com.mslv.studio.activation.networkAction.schemaGen">
+        <target name="NW_CISCO_ISP" typeName="Activation Project"/>
+      </relation>
+    </schemaGens>
+  </entity>
+</model:Model>

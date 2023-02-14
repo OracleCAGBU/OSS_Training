@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  
+  
+  
+  <serviceModel xmlns="http://www.metasolv.com/ServiceActivation/2003/ServiceModel">
+     <userDefinedExitType>
+          <neDescriptor>
+               <softwareLoad>1-0</softwareLoad>
+               <technology>ISP</technology>
+               <neVendor>CISCO</neVendor>
+          </neDescriptor>
+          <searchPattern>3</searchPattern>
+          <userType>MAC_NOT_FOUND</userType>
+          <baseType>SOFT_FAIL</baseType>
+          <description>Description goes Here.</description>
+     </userDefinedExitType>
+     <userDefinedExitType>
+          <neDescriptor>
+               <softwareLoad>1-0</softwareLoad>
+               <technology>ISP</technology>
+               <neVendor>CISCO</neVendor>
+          </neDescriptor>
+          <searchPattern>0</searchPattern>
+          <userType>SUCCESS</userType>
+          <baseType>SUCCEED</baseType>
+          <description>Description goes Here.</description>
+     </userDefinedExitType>
+     <userDefinedExitType>
+          <neDescriptor>
+               <softwareLoad>1-0</softwareLoad>
+               <technology>ISP</technology>
+               <neVendor>CISCO</neVendor>
+          </neDescriptor>
+          <searchPattern>1</searchPattern>
+          <userType>INVLD_AUTHENTICATION</userType>
+          <baseType>FAIL</baseType>
+          <description>Description goes Here.</description>
+     </userDefinedExitType>
+     <userDefinedExitType>
+          <neDescriptor>
+               <softwareLoad>1-0</softwareLoad>
+               <technology>ISP</technology>
+               <neVendor>CISCO</neVendor>
+          </neDescriptor>
+          <searchPattern>2</searchPattern>
+          <userType>INVALID_MAC</userType>
+          <baseType>FAIL</baseType>
+          <description>Description goes Here.</description>
+     </userDefinedExitType>
+     <userDefinedExitType>
+          <neDescriptor>
+               <softwareLoad>1-0</softwareLoad>
+               <technology>ISP</technology>
+               <neVendor>CISCO</neVendor>
+          </neDescriptor>
+          <searchPattern>4</searchPattern>
+          <userType>SERVICE_FAILURE</userType>
+          <baseType>RETRY</baseType>
+          <description>Description goes Here.</description>
+     </userDefinedExitType>
+</serviceModel>
+  
+  
+  
+  

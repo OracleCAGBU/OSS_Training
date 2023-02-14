@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activation="http://xmlns.oracle.com/communications/studio/model/activation" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="activation:UserDefinedExitType" id="udet=CISCO_ISP_UDET" type="udet" typeName="User Defined Exit Type" name="CISCO_ISP_UDET" resource="\NW_CISCO_ISP\model\UDET\CISCO_ISP_UDET.userDefinedExitTypes">
+    <note lang="default"/>
+    <project>
+      <relation ref="aprj=NW_CISCO_ISP" type="Activation Project" name="Dependency">
+        <target name="NW_CISCO_ISP" typeName="Activation Project"/>
+      </relation>
+    </project>
+  </entity>
+</model:Model>

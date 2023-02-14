@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<activationModel name="NW_CISCO_ISP" xmlns="http://www.metasolv.com/ServiceActivation/2003/ActivationModel" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <name>NW_CISCO_ISP</name>
+    <description> (b40)</description>
+    <version><label>1.0.0.0.0</label></version>
+    <component>
+        <serviceModel>model/TERMINATE/A_CISCO-ISP_1-0_TERMINATE_FIBER_CPE.xml</serviceModel>
+    </component>
+    <component>
+        <serviceModel>model/RETRIEVE/A_CISCO-ISP_1-0_RETRIEVE_FIBER_CPE.xml</serviceModel>
+    </component>
+    <component>
+        <serviceModel>model/CHANGE/A_CISCO-ISP_1-0_CHANGE_FIBER_CPE.xml</serviceModel>
+    </component>
+    <component>
+        <serviceModel>model/ADD/A_CISCO-ISP_1-0_ADD_FIBER_CPE.xml</serviceModel>
+    </component>
+    <component>
+        <serviceModel>model/TERMINATE/C_CISCO-ISP_1-0_TERMINATE_FIBER_CPE.xml</serviceModel>
+    </component>
+    <component>
+        <serviceModel>model/RETRIEVE/C_CISCO-ISP_1-0_RETRIEVE_FIBER_CPE.xml</serviceModel>
+    </component>
+    <component>
+        <serviceModel>model/CHANGE/C_CISCO-ISP_1-0_CHANGE_FIBER_CPE.xml</serviceModel>
+    </component>
+    <component>
+        <serviceModel>model/ADD/C_CISCO-ISP_1-0_ADD_FIBER_CPE.xml</serviceModel>
+    </component>
+    <component>
+        <serviceModel>model/CONNECETION_HANDLER_ISP.xml</serviceModel>
+    </component>
+    <component>
+        <serviceModel>model/UDET/CISCO_ISP_UDET.xml</serviceModel>
+    </component>
+    <component>
+        <javaProvisioningFile>
+            <jarFile>lib/NW_CISCO_ISP.jar</jarFile>
+        </javaProvisioningFile>
+    </component>
+    <role name="administrator">
+        <description>System Administrator</description>
+    </role>
+</activationModel>
