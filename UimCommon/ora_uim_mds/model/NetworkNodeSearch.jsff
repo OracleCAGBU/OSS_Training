@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved. */
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    3/28/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea"> 
+      <af:panelGroupLayout id="pgl1">
+                
+        
+          <af:panelHeader text="#{pageFlowScope.InventoryResultsBean.displayInfo}" id="ph2" >
+          <af:panelGroupLayout id="pgl2" layout="scroll">
+            <jsp:include page= "/oracle/communications/inventory/ui/framework/page/InventoryQuery.jsff" />
+            <af:spacer width="10" height="10" id="s1"/>
+            <af:showDetailHeader text="#{inventoryUIBundle.SEARCH_RESULTS}" disclosed="true"
+                               id="rc1">
+            <af:panelCollection id="pc1" styleClass="invSearchPanelCollection">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar"/>
+              <f:facet name="statusbar">
+                <af:toolbar id="t2">
+                  <af:outputText value="#{pageFlowScope.InventoryResultsBean.displayTotalResults}"
+                                 id="ol1"
+                                 styleClass="invSearchOutputLabel" partialTriggers="rtId"
+                                 binding="#{backingBeanScope.totalResultsLabel}"/>
+                </af:toolbar>
+              </f:facet>
+              <af:table id="rtId"
+                        value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}"
+                        var="row"
+                        emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                        fetchSize="#{pageFlowScope.InventoryResultsBean.fetchSize}"
+                        filterModel="#{pageFlowScope.InventoryQueryBean.filterModel}"
+                        queryListener="#{InventoryHelperBean.processQuery}"
+                        filterVisible="false" varStatus="vs" 
+                        selectionListener="#{pageFlowScope.InventoryResultsBean.selectAction}"
+                        selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                        sortListener="#{bindings.searchResultsIterator.dataControl.dataProvider.processSort}"
+                        rowSelection="#{pageFlowScope.InventoryResultsBean.rowSelection}"
+                        binding="#{pageFlowScope.InventoryResultsBean.resultsTable}"
+                        styleClass="invSearchTable"
+                        summary="#{inventoryUIBundle.NETWORKNODE_SEARCH_RESULTS}">
+                <!-- Search Results Fields -->
+                <af:column sortProperty="id" sortable="true" filterable="true" 
+                           headerText="#{inventoryUIBundle.ID}"
+                           id="c7" rowHeader="unstyled">
+                  <af:outputText value="#{row.id}" id="ot4"/>
+                </af:column>
+                <af:column sortProperty="name" sortable="true" filterable="true" 
+                           headerText="#{inventoryUIBundle.NAME}"
+                           id="c4">
+                  <af:outputText value="#{row.name}" id="ot6"/>
+                </af:column>
+                <af:column sortProperty="description" sortable="true" filterable="true" 
+                           headerText="#{inventoryUIBundle.DESCRIPTION}"
+                           id="c1">
+                  <af:outputText value="#{row.description}" id="ot8"/>
+                </af:column>
+                <af:column sortProperty="specification.name" sortable="true" filterable="true"
+                           headerText="#{inventoryUIBundle.SPECIFICATION}"
+                           id="c6">
+                  <af:outputText value="#{row.specification.name}"
+                                 id="ot3"/>
+                </af:column>
+                <af:column sortProperty="id" sortable="false"
+                           headerText="#{inventoryUIBundle.NETWORK_ID}"
+                           id="c3">
+                  <af:outputText value="#{row.network.id}"
+                                 id="ot1"/>
+                </af:column>
+                <af:column sortProperty="name" sortable="false"
+                           headerText="#{inventoryUIBundle.NETWORK_NAME}"
+                           id="c8">
+                  <af:outputText value="#{row.network.name}"
+                                 id="ot2"/>
+                </af:column>
+                
+                <af:column headerText="#{inventoryUIBundle.START_DATE}"
+                           id="c5">
+                  <af:outputText value="#{row.validFor.startDate}"
+                                 id="ot7">
+                    <af:convertDateTime pattern="#{pageFlowScope.InventoryResultsBean.dateTimeFormat}"/>
+                  </af:outputText>
+                </af:column>
+                
+                <af:column headerText="#{inventoryUIBundle.END_DATE}"
+                           id="c2">
+                  <af:outputText value="#{row.validFor.endDate}"
+                                 id="ot5">
+                    <af:convertDateTime pattern="#{pageFlowScope.InventoryResultsBean.dateTimeFormat}"/>
+                  </af:outputText>
+                </af:column>
+                
+              </af:table>
+            </af:panelCollection>
+          </af:showDetailHeader>
+          <af:panelGroupLayout id="pgl4" halign="right" layout="scroll">
+              <af:panelGroupLayout id="pgl3" layout="horizontal">
+                 <af:toolbar id="t4">
+                  <af:commandToolbarButton text="#{inventoryUIBundle.DONE}" id="ctb1"                                         
+                                           actionListener="#{pageFlowScope.InventoryResultsBean.associate}"
+                                           disabled="#{pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size lt 1}"
+                                           partialTriggers="pc1:rtId"
+                                           rendered="#{(pageFlowScope.InventoryResultsBean.popupMode)}"
+                                           accessKey="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>     
+                  <af:spacer width="10" height="10" id="s3"/>                         
+                  <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb3"                                          
+                                           actionListener="#{pageFlowScope.InventoryResultsBean.cancel}"
+                                           rendered="#{(pageFlowScope.InventoryResultsBean.popupMode)}"
+                                           accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                </af:toolbar>
+              </af:panelGroupLayout>
+          </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </af:panelHeader>
+      
+      </af:panelGroupLayout>
+    </f:facet>
+   </af:pageTemplate>
+</jsp:root>

@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved. */
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    2/19/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:showDetailHeader text="#{inventoryUIBundle.SPECIFICATIONS}"
+                       disclosed="true" id="sdh1">
+    
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+
+      <f:facet name="statusbar">
+        <af:toolbar id="t2">
+          <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount lt 0) ? 0 :     bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount}"
+                                 id="ol2" styleClass="invSearchOutputLabel"
+                                 binding="#{backingBeanScope.totalResultsLabel}"
+                                 partialTriggers="resultsTableId"/>                         
+        </af:toolbar>
+      </f:facet>    
+      <af:table id="resultsTableId"
+                value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}"
+                var="row"
+                emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                fetchSize="#{pageFlowScope.SpecificationListBean.fetchSize}"
+                filterModel="#{pageFlowScope.SpecificationQueryBean.filterModel}"
+                selectionListener="#{pageFlowScope.SpecificationListBean.selectAction}"
+                queryListener="#{InventoryHelperBean.processQuery}"
+                filterVisible="false" varStatus="vs"
+                autoHeightRows="#{pageFlowScope.SpecificationListBean.portletHeight}" contentDelivery="immediate"
+                sortListener="#{bindings.searchResultsIterator.dataControl.dataProvider.processSort}"
+                selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                rowSelection="#{pageFlowScope.SpecificationListBean.rowSelection}"
+                binding="#{pageFlowScope.SpecificationListBean.resultsTable}"
+                summary="#{inventoryUIBundle.SPECIFICATION_LIST}">      
+        <af:column sortProperty="name" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.NAME}" rowHeader="unstyled">
+          <af:commandImageLink action="specSummary" actionListener="#{pageFlowScope.SpecificationListBean.registerRecentItemForSummary}"
+                               text="#{row.name}"
+                               shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+                   
+            <af:setActionListener from="#{row.oid}" to="#{specObjectId}"/>
+          </af:commandImageLink>          
+        </af:column>
+        <af:column sortable="true" sortProperty="description" filterable="true"
+                   headerText="#{inventoryUIBundle.DESCRIPTION}"
+                   id="c4">
+          <af:outputText value="#{row.description}" id="ot3"/>
+        </af:column>        
+        <af:column headerText="#{inventoryUIBundle.ENTITY_TYPE}"
+                   id="c3">
+          <af:outputText value="#{pageFlowScope.SpecificationListBean.entityType}" id="ot4"/>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+  </af:showDetailHeader>
+</jsp:root>

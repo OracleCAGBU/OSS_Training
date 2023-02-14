@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:h="http://java.sun.com/jsf/html">
+    <c:set var="inventoryUIBundle"
+           value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:pageTemplate viewId="/oracle/communications/inventory/ui/framework/templates/InventoryUIShellMainArea.jspx"
+                     id="pt1">
+        <f:facet name="localArea">
+            <af:panelStretchLayout id="psl1" dimensionsFrom="auto" styleClass="AFStretchWidth">
+                <f:facet name="center">
+                    <af:masonryLayout id="ml1">
+                        <af:panelBox id="pb2" text="#{inventoryUIBundle.TN_SEARCH_AND_EDIT}" showDisclosure="false"
+                                     styleClass="AFMasonryTileSize1x2"
+                                     inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                                     binding="#{backingBeanScope.panel_TS}"
+                                     rendered="#{pageFlowScope.TelephoneNumbersLandingPageBean.render_TS}">
+                            <af:link icon="/images/SearchEdit_96.png" id="m2"
+                                     shortDesc="#{inventoryUIBundle.TN_SEARCH_EDIT_DESCRIPTION}"
+                                     inlineStyle="width:auto;height:auto;"
+                                     actionListener="#{pageFlowScope.TelephoneNumbersLandingPageBean.navigate}"
+                                     action="search"
+                                     disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/number/flow/TelephoneNumberSearchResultsFlow.xml#TelephoneNumberSearchResultsFlow']}"/>
+                            <h:outputText value="&lt;br/>" escape="false"/>
+                            <h:outputText value="&lt;br/>" escape="false"/>
+                            <af:outputFormatted id="t2" value="#{inventoryUIBundle.TN_SEARCH_EDIT_DESCRIPTION}"/>
+                        </af:panelBox>
+                        <af:panelBox id="pb8" text="#{inventoryUIBundle.TELEPHONE_NUMBER_CREATE}" showDisclosure="false"
+                                     styleClass="AFMasonryTileSize1x2"
+                                     inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                                     binding="#{backingBeanScope.panel_TC}"
+                                     rendered="#{pageFlowScope.TelephoneNumbersLandingPageBean.render_TC &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=TelephoneNumber.CREATE;action=view']}">
+                            <af:link icon="/images/Create_96.png" id="m8"
+                                     shortDesc="#{inventoryUIBundle.TELEPHONE_NUMBER_CREATE_DESCRIPTION}"
+                                     inlineStyle="width:auto;height:auto;"
+                                     actionListener="#{pageFlowScope.TelephoneNumbersLandingPageBean.navigate}"
+                                     action="create"
+                                     disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/number/flow/TelephoneNumberEditFlow.xml#TelephoneNumberEditFlow']}">
+                                <af:setActionListener from="true" to="#{addMode}"/>
+                            </af:link>
+                            <h:outputText value="&lt;br/>" escape="false"/>
+                            <h:outputText value="&lt;br/>" escape="false"/>
+                            <af:outputFormatted id="t8"
+                                                value="#{inventoryUIBundle.TELEPHONE_NUMBER_CREATE_DESCRIPTION}"/>
+                        </af:panelBox>
+                        <af:panelBox id="pb7" text="#{inventoryUIBundle.TN_BLOCK_SEARCH}" showDisclosure="false"
+                                     styleClass="AFMasonryTileSize1x2"
+                                     inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                                     binding="#{backingBeanScope.panel_BS}"
+                                     rendered="#{pageFlowScope.TelephoneNumbersLandingPageBean.render_BS}">
+                            <af:link icon="/images/TNBlockSearch_96a.png" id="m7"
+                                     shortDesc="#{inventoryUIBundle.TN_BLOCK_SEARCH_DESCRIPTION}"
+                                     inlineStyle="width:auto;height:auto;"
+                                     actionListener="#{pageFlowScope.TelephoneNumbersLandingPageBean.navigate}"
+                                     action="blockSearch"
+                                     disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/number/flow/TelephoneNumberSearchResultsFlow.xml#TelephoneNumberSearchResultsFlow']}">
+                                <af:setPropertyListener from="true" to="#{pageFlowScope.blockSearch}" type="action"/>
+                            </af:link>
+                            <h:outputText value="&lt;br/>" escape="false"/>
+                            <h:outputText value="&lt;br/>" escape="false"/>
+                            <af:outputFormatted id="t7" value="#{inventoryUIBundle.TN_BLOCK_SEARCH_DESCRIPTION}"/>
+                        </af:panelBox>
+                        <af:panelBox id="pb6" text="#{inventoryUIBundle.TELEPHONE_NUMBER_LOAD_ASSOCIATE}"
+                                     showDisclosure="false" styleClass="AFMasonryTileSize1x2"
+                                     inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                                     binding="#{backingBeanScope.panel_LA}"
+                                     rendered="#{pageFlowScope.TelephoneNumbersLandingPageBean.render_LA}">
+                            <af:link icon="/images/LoadAndAssociate_96.png" id="m6"
+                                     shortDesc="#{inventoryUIBundle.TELEPHONE_NUMBER_LOAD_ASSOCIATE_DESCRIPTION}"
+                                     inlineStyle="width:auto;height:auto;"
+                                     actionListener="#{pageFlowScope.TelephoneNumbersLandingPageBean.navigate}"
+                                     action="loadAssociate"
+                                     disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/number/flow/TelephoneNumbersOperationsFlow.xml#TelephoneNumbersOperationsFlow']}"/>
+                            <h:outputText value="&lt;br/>" escape="false"/>
+                            <h:outputText value="&lt;br/>" escape="false"/>
+                            <af:outputFormatted id="t6"
+                                                value="#{inventoryUIBundle.TELEPHONE_NUMBER_LOAD_ASSOCIATE_DESCRIPTION}"/>
+                        </af:panelBox>
+                        <af:panelBox id="pb1" text="#{inventoryUIBundle.TELEPHONE_NUMBER_PORT_IN}"
+                                     showDisclosure="false" styleClass="AFMasonryTileSize1x2"
+                                     inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                                     binding="#{backingBeanScope.panel_PI}"
+                                     rendered="#{pageFlowScope.TelephoneNumbersLandingPageBean.render_PI}">
+                            <af:menuBar id="mb66">
+                                <af:spacer id="spr66" width="50"/>
+                                <af:link icon="/images/PortIn_96a.png" id="m1"
+                                         shortDesc="#{inventoryUIBundle.TELEPHONE_NUMBER_PORT_IN_DESCRIPTION}"
+                                         inlineStyle="width:auto;height:auto;align:center;">
+                                    <af:showPopupBehavior popupId="p1" triggerType="mouseHover" align="endAfter"
+                                                          alignId="m1"/>
+                                </af:link>
+                            </af:menuBar>
+                            <af:popup id="p1" contentDelivery="immediate">
+                                <af:commandMenuItem id="cmi11" text="#{inventoryUIBundle.TELEPHONE_NUMBER_PORT_IN}"
+                                                    actionListener="#{pageFlowScope.TelephoneNumbersLandingPageBean.navigate}"
+                                                    action="portIn"
+                                                    disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/number/flow/TelephoneNumbersOperationsFlow.xml#TelephoneNumbersOperationsFlow']}"/>
+                                <af:commandMenuItem id="cmi111"
+                                                    text="#{inventoryUIBundle.TELEPHONE_NUMBER_PORT_IN_SERVICE_ASSIGNMENT}"
+                                                    actionListener="#{pageFlowScope.TelephoneNumbersLandingPageBean.navigate}"
+                                                    action="portInSA"
+                                                    disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/number/flow/TelephoneNumbersOperationsFlow.xml#TelephoneNumbersOperationsFlow']}"/>
+                            </af:popup>
+                            <h:outputText value="&lt;br/>" escape="false"/>
+                            <af:outputFormatted id="t1"
+                                                value="#{inventoryUIBundle.TELEPHONE_NUMBER_PORT_IN_DESCRIPTION}"/>
+                        </af:panelBox>
+                        <af:panelBox id="pb3" text="#{inventoryUIBundle.TELEPHONE_NUMBER_PORT_OUT}"
+                                     showDisclosure="false" styleClass="AFMasonryTileSize1x2"
+                                     inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                                     binding="#{backingBeanScope.panel_PO}"
+                                     rendered="#{pageFlowScope.TelephoneNumbersLandingPageBean.render_PO}">
+                            <af:link icon="/images/PortOut_96a.png" id="m3"
+                                     shortDesc="#{inventoryUIBundle.TELEPHONE_NUMBER_PORT_OUT_DESCRIPTION}"
+                                     inlineStyle="width:auto;height:auto;"
+                                     actionListener="#{pageFlowScope.TelephoneNumbersLandingPageBean.navigate}"
+                                     action="portOut"
+                                     disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/number/flow/TelephoneNumbersOperationsFlow.xml#TelephoneNumbersOperationsFlow']}"/>
+                            <h:outputText value="&lt;br/>" escape="false"/>
+                            <h:outputText value="&lt;br/>" escape="false"/>
+                            <af:outputFormatted id="t3"
+                                                value="#{inventoryUIBundle.TELEPHONE_NUMBER_PORT_OUT_DESCRIPTION}"/>
+                        </af:panelBox>
+                        <af:panelBox id="pb4" text="#{inventoryUIBundle.TELEPHONE_NUMBER_SNAPBACK}"
+                                     showDisclosure="false" styleClass="AFMasonryTileSize1x2"
+                                     inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                                     binding="#{backingBeanScope.panel_SB}"
+                                     rendered="#{pageFlowScope.TelephoneNumbersLandingPageBean.render_SB}">
+                            <af:link icon="/images/SnapBack_96.png" id="m4"
+                                     shortDesc="#{inventoryUIBundle.TELEPHONE_NUMBER_SNAPBACK_DESCRIPTION}"
+                                     inlineStyle="width:auto;height:auto;"
+                                     actionListener="#{pageFlowScope.TelephoneNumbersLandingPageBean.navigate}"
+                                     action="snapback"
+                                     disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/number/flow/TelephoneNumbersOperationsFlow.xml#TelephoneNumbersOperationsFlow']}"/>
+                            <h:outputText value="&lt;br/>" escape="false"/>
+                            <h:outputText value="&lt;br/>" escape="false"/>
+                            <af:outputFormatted id="t4"
+                                                value="#{inventoryUIBundle.TELEPHONE_NUMBER_SNAPBACK_DESCRIPTION}"/>
+                        </af:panelBox>
+                        <af:panelBox id="pb5" text="#{inventoryUIBundle.TELEPHONE_NUMBER_WINBACK}"
+                                     showDisclosure="false" styleClass="AFMasonryTileSize1x2"
+                                     inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                                     binding="#{backingBeanScope.panel_WB}"
+                                     rendered="#{pageFlowScope.TelephoneNumbersLandingPageBean.render_WB}">
+                            <af:menuBar id="mb5">
+                                <af:spacer id="spr5" width="50"/>
+                                <af:link icon="/images/WinBack_96.png" id="m5"
+                                         shortDesc="#{inventoryUIBundle.TELEPHONE_NUMBER_WINBACK_DESCRIPTION}"
+                                         inlineStyle="width:auto;height:auto;">
+                                    <af:showPopupBehavior popupId="p5" triggerType="mouseHover" align="endAfter"
+                                                          alignId="m5"/>
+                                </af:link>
+                            </af:menuBar>
+                            <af:popup id="p5" contentDelivery="immediate">
+                                <af:commandMenuItem id="cmi15" text="#{inventoryUIBundle.TELEPHONE_NUMBER_WINBACK}"
+                                                    actionListener="#{pageFlowScope.TelephoneNumbersLandingPageBean.navigate}"
+                                                    action="winback"
+                                                    disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/number/flow/TelephoneNumbersOperationsFlow.xml#TelephoneNumbersOperationsFlow']}"/>
+                                <af:commandMenuItem id="cmi115"
+                                                    text="#{inventoryUIBundle.TELEPHONE_NUMBER_WINBACK_SERVICE_ASSIGNMENT}"
+                                                    actionListener="#{pageFlowScope.TelephoneNumbersLandingPageBean.navigate}"
+                                                    action="winbackSA"
+                                                    disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/number/flow/TelephoneNumbersOperationsFlow.xml#TelephoneNumbersOperationsFlow']}"/>
+                            </af:popup>
+                            <h:outputText value="&lt;br/>" escape="false"/>
+                            <af:outputFormatted id="t5"
+                                                value="#{inventoryUIBundle.TELEPHONE_NUMBER_WINBACK_DESCRIPTION}"/>
+                        </af:panelBox>
+                    </af:masonryLayout>
+                </f:facet>
+            </af:panelStretchLayout>
+        </f:facet>
+        <f:facet name="contextualArea"/>
+        <f:facet name="metaContainer"/>
+    </af:pageTemplate>
+</jsp:root>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+		   
+ <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+ <c:set var="inventoryuiBundle"
+        value="#{adfBundle['oracle.communications.inventory.ui.InventoryUIBundle']}"/>
+ <af:showDetailHeader text="#{pageFlowScope.MediaResourceLogicalDeviceListBean.displayInfo}"
+                      disclosed="true" id="sdh1">
+  <f:facet name="toolbar">
+   <af:panelGroupLayout id="pgl3"
+                        binding="#{backingBeanScope.MRLDLIST_panelGroupLayout}"
+                        layout="horizontal">
+    <af:commandButton text="#{inventoryUIBundle.SAVE}" action="edit" id="cb1"
+                      actionListener="#{pageFlowScope.MediaResourceLogicalDeviceListBean.saveHandles}"
+                      disabled="#{!(pageFlowScope.MediaResourceLogicalDeviceListBean.editMode)}"
+                      accessKey="#{inventoryUIBundle.SAVE_ACCESS_KEY}"></af:commandButton>
+    <af:commandButton text="#{inventoryUIBundle.RESET}" action="edit" id="cb2"
+                      actionListener="#{pageFlowScope.MediaResourceLogicalDeviceListBean.resetHandles}"
+                      disabled="#{!(pageFlowScope.MediaResourceLogicalDeviceListBean.editMode)}"
+                      accessKey="#{inventoryUIBundle.RESET_ACCESS_KEY}"></af:commandButton>
+   </af:panelGroupLayout>
+  </f:facet>
+  <af:panelCollection id="MRLDRelList" styleClass="AFStretchWidth">
+   <f:facet name="menus"/>
+   <f:facet name="toolbar">
+    <af:toolbar id="t1">
+     <af:commandToolbarButton text="#{(pageFlowScope.MediaResourceLogicalDeviceListBean.addButtonText)}"
+                              id="ctbCreate" disabledIcon="#{InventoryHelperBean.disAssociateIcon}"
+                              binding="#{backingBeanScope.associateButton}" rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=MediaResource.ASSOCIATE;action=view']}"
+                              disabled="#{(pageFlowScope.MediaResourceLogicalDeviceListBean.editMode)}"
+                              icon="#{InventoryHelperBean.associateIcon}">
+      <af:showPopupBehavior popupId="#{(pageFlowScope.MediaResourceLogicalDeviceListBean.popupIdforAdd)}"
+                            triggerType="click"/>
+     </af:commandToolbarButton>
+     <af:spacer width="8" height="8" id="s423"/>
+     <af:commandToolbarButton text="#{inventoryUIBundle.DUPLICATE}" id="cb4Duplicate" 
+                              icon="/images/duplicate.png" disabledIcon="#{InventoryHelperBean.disDuplicateIcon}"
+                              disabled="#{(pageFlowScope.MediaResourceLogicalDeviceListBean.resultsTable.selectedRowKeys.size lt 1) or (pageFlowScope.MediaResourceLogicalDeviceListBean.editMode)}"
+                              partialTriggers="resultsTableId" rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=MediaResource.DUPLICATE;action=view']}"
+                              actionListener="#{pageFlowScope.MediaResourceLogicalDeviceListBean.duplicateEntity}"
+                              binding="#{backingBeanScope.duplicateButton}"></af:commandToolbarButton>
+     <af:spacer width="10" height="10" id="s427"/>
+     <af:commandToolbarButton text="#{inventoryUIBundle.EDIT}" id="cb4Edit"
+                              icon="#{InventoryHelperBean.editIcon}" disabledIcon="#{InventoryHelperBean.disEditIcon}"
+                              partialTriggers="resultsTableId" rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=MediaResource.EDIT;action=view']}"
+                              actionListener="#{pageFlowScope.MediaResourceLogicalDeviceListBean.toggleEditMode}"
+                              disabled="#{(pageFlowScope.MediaResourceLogicalDeviceListBean.editMode)|| pageFlowScope.MediaResourceLogicalDeviceListBean.resultsTable.selectedRowKeys.size != 1}"
+                              binding="#{backingBeanScope.editButton}"
+                              accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}"></af:commandToolbarButton>
+     <af:spacer width="8" height="8" id="s421"/>
+     <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}" id="ctbDelete"
+                              binding="#{backingBeanScope.deleteButton}"
+                              icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                              disabled="#{(pageFlowScope.MediaResourceLogicalDeviceListBean.resultsTable.selectedRowKeys.size lt 1 or pageFlowScope.MediaResourceLogicalDeviceListBean.resultsTable.selectedRowKeys.size eq null) or (pageFlowScope.MediaResourceLogicalDeviceListBean.editMode)}"
+                              partialTriggers="resultsTableId" rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=MediaResource.DELETE;action=view']}"
+                              actionListener="#{pageFlowScope.MediaResourceLogicalDeviceListBean.deleteMRLDRel}"></af:commandToolbarButton>
+    </af:toolbar>
+   </f:facet>
+   <f:facet name="statusbar">
+    <af:toolbar>
+     <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount lt 0) ? 0 : bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount}"
+                    styleClass="invSearchOutputLabel"
+                    binding="#{backingBeanScope.totalResultsLabel}"
+                    partialTriggers="resultsTableId"/>
+    </af:toolbar>
+   </f:facet>
+   <af:table id="resultsTableId"
+             value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}"
+             var="row"
+             emptyText="#{bindings.searchResults1.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+             fetchSize="#{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount &lt; 25) ? bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount : 25}"
+             selectionListener="#{pageFlowScope.MediaResourceLogicalDeviceListBean.selectAction}"
+             queryListener="#{InventoryHelperBean.processQuery}"
+             filterVisible="false" varStatus="vs"
+             autoHeightRows="#{pageFlowScope.MediaResourceLogicalDeviceListBean.portletHeight}"
+             contentDelivery="immediate"
+             rowSelection="#{pageFlowScope.MediaResourceLogicalDeviceListBean.rowSelection}"
+             styleClass="AFStretchWidth"
+             selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+             binding="#{pageFlowScope.MediaResourceLogicalDeviceListBean.resultsTable}"
+             editingMode="editAll"
+             summary="#{inventoryUIBundle.MEDIA_STREAM_TABLE}">
+    <af:column sortable="false" headerText="Row" id="c1" width="20"
+               minimumWidth="10" rowHeader="unstyled">
+               <!-- value="#(vs.index)" but need to add 1 "#{pageFlowScope.MediaResourceLogicalDeviceListBean.rowIndex}" -->
+     <af:outputText value="#{(vs.index +1)}"
+                    id="index"/>
+    </af:column> 
+    <af:column sortable="false" headerText="#{inventoryUIBundle.NAME}" id="c3a"
+               width="150"
+               rendered="#{pageFlowScope.MediaResourceLogicalDeviceListBean.mediaStreamSummary}">
+       <af:commandImageLink action="logicalDeviceSummary" id="cl1"
+                       actionListener="#{bindings.openSubTaskForLDSummary.execute}"
+                            text="#{pageFlowScope.MediaResourceLogicalDeviceListBean.name}"
+                            shortDesc="#{inventoryUIBundle.LOGICAL_DEVICE_SUMMARY_LINK}">
+        <!-- Put the objectId in request scope so that the task flow call can pass it as an input parm -->
+        <af:setActionListener from="#{pageFlowScope.MediaResourceLogicalDeviceListBean.relationshipSummaryPageOid}"
+                              to="#{requestScope.objectId}"/> 
+        
+       </af:commandImageLink>
+    </af:column> 
+    <af:column sortable="false" filterable="false" headerText="#{inventoryUIBundle.NAME}" id="c3ab"
+               width="150"
+               rendered="#{pageFlowScope.MediaResourceLogicalDeviceListBean.logicalDeviceSummary}">
+       <af:commandImageLink action="mediaStreamSummary" id="cl12"
+                       actionListener="#{bindings.openSubTaskForMSSummary.execute}"
+                            text="#{pageFlowScope.MediaResourceLogicalDeviceListBean.name}"
+                            shortDesc="#{inventoryUIBundle.MEDIA_STREAM_SUMMARY_LINK}">
+        <!-- Put the objectId in request scope so that the task flow call can pass it as an input parm -->
+        <af:setActionListener from="#{pageFlowScope.MediaResourceLogicalDeviceListBean.relationshipSummaryPageOid}"
+                              to="#{requestScope.objectId}"/>
+        <af:setActionListener from="#{pageFlowScope.MediaResourceLogicalDeviceListBean.relationshipSummaryPageOid}"
+                                  to="#{requestScope.oid}"/>      
+        
+       </af:commandImageLink>
+    </af:column> 
+    <af:column sortable="false" filterable="false" headerText="#{inventoryUIBundle.MEDIA_HANDLE}"
+               id="c3">
+     <af:inputText id="it47"
+                   value="#{row.mediaHandle}" maximumLength="50"
+                   rendered="#{(pageFlowScope.MediaResourceLogicalDeviceListBean.editMode)}"
+                   shortDesc="#{inventoryUIBundle.MEDIA_HANDLE}">
+                   <af:validateRegExp pattern="[A-Za-z0-9]{1,50}" messageDetailNoMatch="#{inventoryUIBundle.HANDLE_ALPHANUMERIC_VALIDATION}"/>
+                   </af:inputText>
+     <af:outputText id="it48"
+                    value="#{row.mediaHandle}"
+                    rendered="#{!(pageFlowScope.MediaResourceLogicalDeviceListBean.editMode)}"></af:outputText>
+    </af:column>
+    <af:column sortable="false" filterable="false" width="150"
+               headerText="#{inventoryUIBundle.SPECIFICATION}" id="c5">
+       <af:outputText value="#{pageFlowScope.MediaResourceLogicalDeviceListBean.specificationName}"/>               
+       <!-- This link won't work, so comment out for now             
+       <af:link action="SpecificationSummary" id="cl21"
+                       actionListener="#{bindings.openSubTaskForSpecSummary.execute}">
+        <af:outputText value="#{pageFlowScope.MediaResourceLogicalDeviceListBean.specificationName}"/>
+        .. Put the specObjectId in request scope so that the task flow call can pass it as an input parm 
+        <af:setActionListener from="#{pageFlowScope.MediaResourceLogicalDeviceListBean.specificationOid}"
+                              to="#{specObjectId}"/>
+       </af:link> -->
+    </af:column>
+   </af:table>
+   <!-- Logical Device search popup -->
+   <af:popup id="associateLDPopup" contentDelivery="lazyUncached"
+             binding="#{backingBeanScope.popupLDBinding}">
+    <af:dialog id="d6" type="none" title="#{inventoryUIBundle.LOGICAL_DEVICE_SEARCH}">
+     <af:panelStretchLayout id="pt_psl6"
+                            styleClass="invCommonPanelStretchLayout">
+      <f:facet name="center">
+       <af:region value="#{bindings.LogicalDeviceSearchResultsFlow1.regionModel}"
+                  id="r6"/>
+      </f:facet>
+     </af:panelStretchLayout>
+    </af:dialog>
+    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+    <af:serverListener type="refreshEntity"
+                       method="#{pageFlowScope.MediaResourceLogicalDeviceListBean.refresh}"/>
+   </af:popup>
+   <!-- Media Stream search popup -->
+   <af:popup id="associateMSPopup" contentDelivery="lazyUncached"
+             binding="#{backingBeanScope.popupMSBinding}">
+    <af:dialog id="d7" type="none"
+               title="#{inventoryUIBundle.MEDIA_STREAM_SEARCH}">
+     <af:panelStretchLayout id="pt_psl7"
+                            styleClass="invCommonPanelStretchLayout">
+      <f:facet name="center">
+       <af:region value="#{bindings.MediaStreamSearchResultsFlow1.regionModel}"
+                  id="r7"/>
+      </f:facet>
+     </af:panelStretchLayout>
+    </af:dialog>
+    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+    <af:serverListener type="refreshEntity"
+                       method="#{pageFlowScope.MediaResourceLogicalDeviceListBean.refresh}"/>
+   </af:popup>
+  </af:panelCollection>
+ </af:showDetailHeader>
+</jsp:root>

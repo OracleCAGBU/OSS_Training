@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved. */
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    2/25/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelStretchLayout>
+        
+        <f:facet name="center">
+         
+          <af:panelHeader text="#{pageFlowScope.SequenceSpecificationSummaryBean.displayInfo}" helpTopicId="OHW_seqSpecSummary" styleClass="invSummaryPanelHeader">
+           <af:panelGroupLayout layout="scroll" id="pgl23">
+          <af:showDetailHeader text="#{inventoryUIBundle.SEQ_SPECIFICATION_SUMMARY}" styleClass="invSummaryShowDetailHeader"
+                               disclosed="true">
+            <af:panelFormLayout maxColumns="2" rows="2">
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}">
+                <af:outputText value="#{pageFlowScope.SequenceSpecificationSummaryBean.entityObject.name}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.MIN_VALUE}">
+                <af:outputText value="#{pageFlowScope.SequenceSpecificationSummaryBean.entityObject.minValue}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.MAX_VALUE}">
+                <af:outputText value="#{pageFlowScope.SequenceSpecificationSummaryBean.entityObject.maxValue}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.INCREMENT_VALUE}">
+                <af:outputText value="#{pageFlowScope.SequenceSpecificationSummaryBean.entityObject.incrementValue}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.START_DATE}">
+                <af:outputText value="#{pageFlowScope.SequenceSpecificationSummaryBean.entityObject.validFor.startDate}">
+                <af:convertDateTime pattern="#{pageFlowScope.InventoryResultsBean.dateTimeFormat}"/>
+                </af:outputText>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.END_DATE}">
+                <af:outputText value="#{pageFlowScope.SequenceSpecificationSummaryBean.entityObject.validFor.endDate}">
+                <af:convertDateTime pattern="#{pageFlowScope.InventoryResultsBean.dateTimeFormat}"/>
+                </af:outputText>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}">
+                <af:outputText value="#{pageFlowScope.SequenceSpecificationSummaryBean.entityObject.description}"/>
+              </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+          </af:showDetailHeader>
+      </af:panelGroupLayout>
+      </af:panelHeader>
+      </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

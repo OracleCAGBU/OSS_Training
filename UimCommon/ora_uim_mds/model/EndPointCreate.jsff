@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='windows-1250'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:panelStretchLayout id="psl1" dimensionsFrom="auto" styleClass="AFStretchWidth">
+        <f:facet name="center">
+            <af:panelGroupLayout id="epgl" layout="scroll" styleClass="AFStretchWidth">
+                <af:panelGroupLayout layout="horizontal" halign="left" valign="top" id="pgl23"
+                                     rendered="#{pageFlowScope.EndPointCreateBean.addMode || pageFlowScope.EndPointCreateBean.editMode}">
+                    <af:panelFormLayout id="epfl" styleClass="AFStretchWidth" binding="#{backingBeanScope.pfBinding}">
+                        <af:selectOneChoice id="ep-spec" label="#{inventoryUIBundle.SPECIFICATION}" autoSubmit="true"
+                                            disabled="#{pageFlowScope.EndPointCreateBean.editMode}" value="#{pageFlowScope.EndPointCreateBean.selectedSpec}"
+                                            contentStyle="width:170px" valueChangeListener="#{pageFlowScope.EndPointCreateBean.specChanged}"
+                                            showRequired="true">
+                            <f:selectItems binding="#{pageFlowScope.EndPointCreateBean.specifications}" id="si1"/>
+                        </af:selectOneChoice>
+                        <af:inputText value="#{pageFlowScope.EndPointCreateBean.id}" label="#{inventoryUIBundle.ID}" required="true" id="ep-id"
+                                      binding="#{backingBeanScope.idBinding}"
+                                      disabled="#{(pageFlowScope.EndPointCreateBean.specificationCount > 0) &amp;&amp; (!(pageFlowScope.EndPointCreateBean.addMode &amp;&amp; pageFlowScope.EndPointCreateBean.enterIdManually))}"
+                                      maximumLength="25"/>
+                        <af:inputText value="#{pageFlowScope.EndPointCreateBean.name}" id="ep-name" label="#{inventoryUIBundle.NAME}" showRequired="true"
+                                      maximumLength="255" autoSubmit="true" disabled="true"/>
+                    </af:panelFormLayout>
+                    <af:spacer width="300" id="s32"/>
+                    <af:panelFormLayout id="eppf" binding="#{pageFlowScope.EndPointCreateBean.epViewPanel}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="scroll" id="pgl24" rendered="#{pageFlowScope.EndPointCreateBean.viewMode}">
+                    <af:panelFormLayout id="epv" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+                        <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}" id="plm1">
+                            <af:link text="#{pageFlowScope.EndPointCreateBean.consumerInfo.id}" id="l1" action="EndpointSummary"
+                                     actionListener="#{bindings.openSubTaskForEntity.execute}" shortDesc="#{inventoryUIBundle.LINK_FOR_ENDPOINT_SUMMARY}">
+                                <af:setActionListener from="#{pageFlowScope.EndPointCreateBean.entityObject.oid}" to="#{objectId}"/>
+                            </af:link>
+                        </af:panelLabelAndMessage>
+                        <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="plm2">
+                            <af:outputText value="#{pageFlowScope.EndPointCreateBean.consumerInfo.name}" id="ot2"/>
+                        </af:panelLabelAndMessage>
+                        <af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}" id="plm3">
+                            <af:outputText value="#{pageFlowScope.EndPointCreateBean.consumerInfo.descriptorName}" id="ot3"/>
+                        </af:panelLabelAndMessage>
+                        <af:panelLabelAndMessage label="#{inventoryUIBundle.STATUS}" id="plm7">
+                            <af:outputText value="#{pageFlowScope.EndPointCreateBean.consumerInfo.status}" id="ot7"/>
+                        </af:panelLabelAndMessage>
+                        <!-- <af:panelLabelAndMessage label="#{inventoryUIBundle.IP_ADDRESS}" id="plm4">
+                            <af:outputText value="#{pageFlowScope.EndPointCreateBean.consumerInfo.ipAddress}" id="ot4"/>
+                        </af:panelLabelAndMessage> 
+                        <af:panelLabelAndMessage label="#{inventoryUIBundle.FG_DESCRIPTOR}" id="plm6">
+                            <af:outputText value="#{pageFlowScope.EndPointCreateBean.consumerInfo.forwardingGraphDescriptorName}" id="ot6"/>
+                        </af:panelLabelAndMessage>
+                          <af:panelLabelAndMessage label="#{inventoryUIBundle.SERVICE_LOCATION}" id="plm8">
+                            <af:outputText value="#{pageFlowScope.EndPointCreateBean.consumerInfo.serviceLocation}" id="ot8"/>
+                        </af:panelLabelAndMessage> -->
+                        <af:iterator id="it1" value="#{pageFlowScope.EndPointCreateBean.characteristics}" var="characteristicDetails">
+                            <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="plam1"
+                                                     rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'ALPHANUMERIC' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'CALENDAR' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'DROPDOWN_LIST' || characteristicDetails.characteristic.characteristicSpecification.valueType == 'NUMERIC'}">
+                                <af:outputText id="ot9" value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="plam2"
+                                                     rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'URL'}">
+                                <af:link id="l2" targetFrame="_blank"
+                                         destination="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                         inlineStyle="padding-left:6px;">
+                                    <af:outputText id="ot10" truncateAt="50"
+                                                   value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                                </af:link>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="" id="plam3"
+                                                     rendered="#{characteristicDetails.characteristic.characteristicSpecification.controlType == 'CHECKBOX'}">
+                                <af:selectBooleanCheckbox id="sbc1" disabled="true"
+                                                          value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                                          text="#{characteristicDetails.label}" simple="true"/>
+                            </af:panelLabelAndMessage>
+                        </af:iterator>
+                    </af:panelFormLayout>
+                </af:panelGroupLayout>
+            </af:panelGroupLayout>
+        </f:facet>
+    </af:panelStretchLayout>
+</jsp:root>

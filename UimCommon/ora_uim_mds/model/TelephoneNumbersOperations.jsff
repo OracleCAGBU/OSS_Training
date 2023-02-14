@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='windows-1252'?>
+
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+		  xmlns:cui="/CommsUI">
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>		  
+  <af:pageTemplate viewId="/oracle/communications/inventory/ui/framework/templates/InventoryUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+       <af:panelGroupLayout id="pgl1">
+      <cui:WarningDialog id="wd" binding="#{backingBeanScope.navigationWarningDialog}"/>
+        <af:panelHeader text="#{inventoryUIBundle.TELEPHONE_NUMBER_OPERATION}"
+                        id="ph1" helpTopicId="OHW_telephoneOperation">
+          <f:facet name="toolbar">
+            <af:panelGroupLayout layout="horizontal">
+            
+              <af:commandButton text="#{inventoryUIBundle.PROCESS}" id="cb1"
+								 actionListener="#{pageFlowScope.TelephoneNumbersOperationsBean.onProcess}"
+                                action="#{pageFlowScope.TelephoneNumbersOperationsBean.processOutcome}"
+                                 accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+				<af:setActionListener from="processAndClose" to="#{pageFlowScope.processActionOutcome}"/>
+			</af:commandButton>
+			<af:spacer width="10" height="10" id="s4"/>
+			<af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2" action="cancel"
+							  immediate="true" actionListener="#{bindings.closeSubTask.execute}"
+							  accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+            </af:panelGroupLayout>
+          </f:facet>
+      
+        <af:panelGroupLayout layout="horizontal" id="pgl23">
+		 <af:showDetailHeader text="#{pageFlowScope.TelephoneNumbersLandingPageBean.selectedOperation}"
+                                 disclosed="true">
+              <af:panelGroupLayout>
+                <af:panelFormLayout id="pfl1" maxColumns="1" rows="2"
+                                    labelWidth="33%" fieldWidth="67%"> 	
+                  <af:inputFile label="#{inventoryUIBundle.FILE}:" id="if1"
+                                value="#{pageFlowScope.TelephoneNumbersOperationsBean.inputFile}" />
+			
+                </af:panelFormLayout>
+                <af:spacer height="20" id="s44"/>
+                <af:spacer id="spr223" width="9"/>
+                  <af:commandLink text="#{inventoryUIBundle.TN_DOWNLOAD_TEMPLATE}" shortDesc="#{inventoryUIBundle.TN_DOWNLOAD_TEMPLATE_DESCRIPTION}" inlineStyle="font-size:11px;">
+                        <af:fileDownloadActionListener  filename="#{pageFlowScope.TelephoneNumbersOperationsBean.downloadFileName}" contentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=utf-8" method="#{pageFlowScope.TelephoneNumbersOperationsBean.downloadFile}"/>
+                  </af:commandLink>
+              </af:panelGroupLayout>
+            </af:showDetailHeader>
+   
+        </af:panelGroupLayout>
+          </af:panelHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+    <f:facet name="metaContainer"/>
+  </af:pageTemplate>
+</jsp:root>

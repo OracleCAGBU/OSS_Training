@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xsi:type="BusinessEntityType" name="Network" realizeFromBusinessEntity="true">
+  <com:displayName lang="[default]">Network</com:displayName>
+  <com:saveVersion>11</com:saveVersion>
+  <com:id>E:inventoryEntity--Network</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>inventoryEntity--Network</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>Network</data:name>
+    <data:displayName lang="[default]">Network</data:displayName>
+    <data:dataElement virtual="false">
+      <com:id>id</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>id</data:name>
+      <data:displayName lang="[default]">id</data:displayName>
+      <data:displayName lang="[default]">id</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>id</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>id</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>name</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>name</data:name>
+      <data:displayName lang="[default]">name</data:displayName>
+      <data:displayName lang="[default]">name</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>name</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>name</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>description</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>description</data:name>
+      <data:displayName lang="[default]">description</data:displayName>
+      <data:displayName lang="[default]">description</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>description</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>description</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>enforceSameChannelAssignment</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>enforceSameChannelAssignment</data:name>
+      <data:displayName lang="[default]">enforceSameChannelAssignment</data:displayName>
+      <data:displayName lang="[default]">enforceSameChannelAssignment</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>enforceSameChannelAssignment</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>enforceSameChannelAssignment</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>boolean</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>networkTopology</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>networkTopology</data:name>
+      <data:displayName lang="[default]">networkTopology</data:displayName>
+      <data:displayName lang="[default]">networkTopology</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>NetworkTopology</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>NetworkTopology</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>ringType</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>ringType</data:name>
+      <data:displayName lang="[default]">ringType</data:displayName>
+      <data:displayName lang="[default]">ringType</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>RingType</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>RingType</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>protectionType</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>protectionType</data:name>
+      <data:displayName lang="[default]">protectionType</data:displayName>
+      <data:displayName lang="[default]">protectionType</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>ProtectionType</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>ProtectionType</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>isWorkspaceNetwork</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>isWorkspaceNetwork</data:name>
+      <data:displayName lang="[default]">isWorkspaceNetwork</data:displayName>
+      <data:displayName lang="[default]">isWorkspaceNetwork</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>isWorkspaceNetwork</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>isWorkspaceNetwork</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>boolean</data:primitiveType>
+    </data:dataElement>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>---n---7--+4--+lRBlwYg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>inventoryEntity--Network</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>--+mpC52--+g---Zw6lTng</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>id</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>--+kADhc--+o---GvYM61Q</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>id</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>1Vxb4XJz--+z--+4s0RGUA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>id</data:dataElementId>
+    <data:information lang="[default]"></data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>---UbCMZ--+8---Y---nyg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>id</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>FwInfQJP--+s---g--+HLg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>E:inventoryEntity--ServiceNetwork~E:inventoryEntity--VirtualNetwork~id</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>FmEnpKo7--+eX44T--+5DQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>FQ5I3m5J--+zY9c----88g</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+    <data:maxLength>50</data:maxLength>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>--+G--+F--+n8IRvaSdg9w</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+    <data:information lang="[default]"></data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>hhUN--+O--+p---4---szQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>i8NQ---T--+uic17---4fw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>E:inventoryEntity--ServiceNetwork~E:inventoryEntity--VirtualNetwork~name</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>--+lJCAb--+8w3VGYhoZNw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>jNca5yBC--+Mdwc3---d8A</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>---qZuNQ--+7---2U7Uu9w</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+    <data:information lang="[default]"></data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>PgZJoFJJ--+qQ4N0---ECg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>5Tsb---v--+i---0i6k0rw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>enforceSameChannelAssignment</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>---m+0to--+oRNUsWOMPuw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>enforceSameChannelAssignment</data:dataElementId>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>--+S---d--+9---e---bZQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>enforceSameChannelAssignment</data:dataElementId>
+    <data:information lang="[default]"></data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>EnF5g+8h--+NHbpwn8VfoA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>enforceSameChannelAssignment</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>JsZP---k--+X--+vqgsNbg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>networkTopology</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>---OwUkh--+bmgk0sPZWQQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>networkTopology</data:dataElementId>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>--+7---7--+m6dtR0JEomg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>networkTopology</data:dataElementId>
+    <data:information lang="[default]"></data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>---V---4--+i9VNY--+HIw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>networkTopology</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>u6ZyQ+MV--+xnjYV3rtd8g</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>ringType</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>mIB4---W--+FJQg2T-Nkvg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>ringType</data:dataElementId>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>--+5---w--+hOPwa---jqw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>ringType</data:dataElementId>
+    <data:information lang="[default]"></data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>---Mrjoe--+R--+R14t6bQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>ringType</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>---my60d--+s--+xebVh0A</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>protectionType</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>1iJW---H--+0VUN4---HrQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>protectionType</data:dataElementId>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>zAJ4WpEK--+q---fSeEVsQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>protectionType</data:dataElementId>
+    <data:information lang="[default]"></data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>--+J+W1g--+vbvd+--+ilw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>protectionType</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>HeNy--+---+TdNFo---3iA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>isWorkspaceNetwork</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>--+A---I--+knjApLKEq6A</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>isWorkspaceNetwork</data:dataElementId>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>Rb10IyU6--+x---fOyVhSg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>isWorkspaceNetwork</data:dataElementId>
+    <data:information lang="[default]">This flag is used to identify networks created for Project Workspaces</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>---+--+j--+Z--+z260dbQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>isWorkspaceNetwork</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>--+-kCtT--+yLEA8qhVzpA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>---f---Z--+3FrFXTXZVmw~isWorkspaceNetwork</data:dataElementId>
+  </data:dataElementDetails>
+  <capability xsi:type="accessControlledType" enabled="true" id="oracle.communications.sce.poms.capabilities.AccessControlled"/>
+  <capability xsi:type="lifecycleType" enabled="true" id="oracle.communications.sce.poms.capabilities.Lifecycle" stateType="ocim:InventoryState"/>
+  <capability xsi:type="consumableType" enabled="true" id="oracle.communications.sce.poms.capabilities.Consumable" assignmentStateType="AssignmentState" attribute="network" prefix="Network">
+    <consumer ConfigurationItemEnabled="true" name="Service"/>
+    <consumer ConfigurationItemEnabled="true" name="PipeTerminationPoint"/>
+  </capability>
+  <capability xsi:type="referenceEnabledType" enabled="true" id="oracle.communications.sce.poms.capabilities.ReferenceEnabled" attribute="network" prefix="Network">
+    <supportedSubClass name="ocim:PacketVirtualNetwork"/>
+    <supportedSubClass name="ocim:ServiceNetwork"/>
+  </capability>
+  <capability xsi:type="configurableType" enabled="true" id="oracle.communications.sce.poms.capabilities.Configurable" attribute="network" prefix="Network" specRequired="true" tablePrefix="NET" versionManagedBy="oracle.communications.inventory.api.network.NetworkManager">
+    <assignment name="CustomNetworkAddress"/>
+    <assignment name="CustomObject"/>
+    <assignment name="LogicalDevice"/>
+    <assignment name="IPSubnet"/>
+    <assignment name="FlowInterface"/>
+    <assignment name="FlowIdentifier"/>
+  </capability>
+  <capability xsi:type="characteristicType" enabled="true" id="oracle.communications.sce.poms.capabilities.Characteristic" spec="CharacteristicSpecification">
+    <characteristicName interface="oracle.communications.inventory.api.entity.NetworkCharacteristic" name="NetworkCharacteristic" table="NETWORK_CHAR"/>
+  </capability>
+  <capability xsi:type="bIEnabledType" enabled="true" id="oracle.communications.sce.poms.capabilities.BusinessInteractionEnabled" history="true" visibilityState="SHOW"/>
+  <capability xsi:type="roleRelationshipType" enabled="true" id="oracle.communications.sce.poms.capabilities.RoleRelationship" interface="oracle.communications.inventory.api.entity.NetworkRole" name="invRoles"/>
+  <implements interface="oracle.communications.inventory.api.entity.common.TopologyObject"/>
+  <implements interface="oracle.communications.inventory.api.entity.common.Resource"/>
+  <implements interface="oracle.communications.inventory.api.entity.common.EntityConsumer"/>
+  <implements interface="oracle.communications.inventory.api.entity.common.NetworkNodeEnabled"/>
+  <properties interface="oracle.communications.inventory.api.entity.Network" type="ocim:Network"/>
+</com:modelEntity>

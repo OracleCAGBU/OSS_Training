@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2015, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    2/27/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad/html">
+		  
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="queryModel"
+         value="#{pageFlowScope.InventoryQueryBean.queryModel}"/>
+  <trh:tableLayout width="100%" cellSpacing="0" cellPadding="2">
+    <trh:rowLayout halign="right">
+      <trh:cellFormat width="100%">&amp;nbsp;</trh:cellFormat>
+        <trh:cellFormat halign="right">
+        <af:commandToolbarButton text="#{inventoryUIBundle.TN_BLOCK_SEARCH}"
+                                 id="rangeButton"
+                                 rendered="#{pageFlowScope.InventoryQueryBean.TNBlockSearchButton}" binding="#{backingBeanScope.rangeButton}"
+                                 actionListener="#{InventoryHelperBean.processQuery}"
+								 accessKey="#{inventoryUIBundle.SEARCH_ACCESS_KEY}"/>
+      </trh:cellFormat>
+      <trh:cellFormat halign="right">
+        <af:commandToolbarButton text="#{inventoryUIBundle.SEARCH}"
+                                 id="searchButton" binding="#{backingBeanScope.searchButton}"
+                                 rendered="#{!pageFlowScope.InventoryResultsBean.previewLayout &amp;&amp; !pageFlowScope.InventoryQueryBean.TNBlockSearchButton}"
+								 visible="#{!pageFlowScope.InventoryQueryBean.blockSearch}"
+                                 actionListener="#{InventoryHelperBean.processQuery}"
+                                 accessKey="#{inventoryUIBundle.SEARCH_ACCESS_KEY}"/>
+     </trh:cellFormat>
+      <trh:cellFormat>
+        <af:commandToolbarButton text="#{inventoryUIBundle.RESET}"
+                                 id="resetButton" binding="#{backingBeanScope.resetButton}"
+                                 rendered="#{!pageFlowScope.InventoryResultsBean.previewLayout}"
+                                 actionListener="#{pageFlowScope.InventoryQueryBean.resetActionListener}"
+                                 accessKey="#{inventoryUIBundle.RESET_ACCESS_KEY}"/>
+      </trh:cellFormat>
+      <trh:cellFormat>
+        <af:commandToolbarButton text="#{inventoryUIBundle.QUERY_SAVE}" id="saveSearchButton"
+                                 rendered="#{!(pageFlowScope.InventoryResultsBean.previewLayout) &amp;&amp; !(pageFlowScope.InventoryQueryBean.popupMode)}"
+                                 actionListener="#{pageFlowScope.InventoryQueryBean.savedSearchSaveActionListener}"
+                                 accessKey="#{inventoryUIBundle.SAVE_ACCESS_KEY}">
+         <!-- <af:showPopupBehavior popupId="saveSearchPopup" align="endBefore"
+                                triggerType="mouseDown"/> -->
+          <af:clientListener method="handleSaveClick" type="click"/>
+          <af:serverListener type="buttonClickEvent"
+                             method="#{pageFlowScope.InventoryQueryBean.refreshSavedSearch}"/>
+        </af:commandToolbarButton>
+      </trh:cellFormat>
+      <trh:cellFormat>
+        <af:commandToolbarButton id="addFieldsButtonSingle"
+                                 text="#{inventoryUIBundle.ADD_FIELDS}..."
+                                 actionDelivery="none" clientComponent="true" visible="#{!pageFlowScope.InventoryQueryBean.pathAnalysisSearch}"
+                                 rendered="#{!pageFlowScope.InventoryQueryBean.sectionsExist &amp;&amp; !pageFlowScope.InventoryResultsBean.previewLayout &amp;&amp; !pageFlowScope.InventoryQueryBean.checkChars}" >
+          <af:clientAttribute name="sectionClass"
+                              value="#{pageFlowScope.InventoryQueryBean.entityClass.name}"/>
+          <af:clientAttribute name="sectionName"
+                              value="#{pageFlowScope.InventoryQueryBean.sectionName}"/>
+          <af:clientAttribute name="charExtensible"
+                              value="#{queryModel.currentDescriptor.conjunctionCriterion.additionalInfo.charExtensible}"/>
+             <af:showPopupBehavior popupId="searchPopup" triggerType="mouseDown"/>
+
+        </af:commandToolbarButton>
+         
+        <af:commandToolbarButton id="addFieldsButtonMultiple"
+                                 text="#{inventoryUIBundle.ADD_FIELDS}"
+                                 actionDelivery="none" visible="#{!pageFlowScope.InventoryQueryBean.pathAnalysisSearch}"
+                                 rendered="#{pageFlowScope.InventoryQueryBean.sectionsExist &amp;&amp; !pageFlowScope.InventoryResultsBean.previewLayout}">
+          <f:facet name="popup">
+            <af:menu id="addFieldsMenu">
+              <af:iterator id="i13"
+                           value="#{pageFlowScope.InventoryQueryBean.allSections}"
+                           var="section" varStatus="vs">
+                <af:goMenuItem text="#{section.displayLabel}" id="gmi9"
+                               clientComponent="true">
+                  <af:clientAttribute name="sectionClass"
+                                      value="#{section.conjunction.additionalInfo.sectionClass}"/>
+                  <af:clientAttribute name="sectionName"
+                                      value="#{section.conjunction.additionalInfo.name}"/>
+                  <af:clientAttribute name="charExtensible"
+                                      value="#{section.conjunction.additionalInfo.charExtensible}"/>
+                  <af:showPopupBehavior popupId="::searchPopup"
+                                        triggerType="mouseDown"/>
+                </af:goMenuItem>
+              </af:iterator>
+            </af:menu>
+          </f:facet>
+        </af:commandToolbarButton>
+      </trh:cellFormat>
+    </trh:rowLayout>
+  </trh:tableLayout>
+  <af:resource type="javascript">
+    <!-- The below javascript code is defined to handle the Double click event on 'New Facilities' table to display the Connectivity details. -->
+    
+  function handleSaveClick(evt) {
+     var menu = evt.getSource();
+     AdfCustomEvent.queue(menu, "buttonClickEvent", {},true);
+     evt.cancel();
+    }
+  
+  </af:resource>
+  <af:popup id="searchPopup" contentDelivery="lazyUncached" launcherVar="source"
+            eventContext="launcher" >
+    <af:setPropertyListener from="#{CharSearchPopupBean.popupTaskFlowId}"
+                            to="#{CharSearchPopupBean.dynamicTaskFlowId}"
+                            type="popupFetch"/>
+    <af:setPropertyListener from="#{source.attributes.sectionClass}"
+                            to="#{pageFlowScope.charExtensibleClass}"
+                            type="popupFetch"/>
+    <af:setPropertyListener from="#{source.attributes.sectionName}"
+                            to="#{pageFlowScope.charExtensibleSectionName}"
+                            type="popupFetch"/>
+    <af:setPropertyListener from="#{source.attributes.charExtensible}"
+                            to="#{pageFlowScope.charExtensibleInput}"
+                            type="popupFetch"/>
+    <af:panelWindow id="addFieldsPanelWindow" title="#{inventoryUIBundle.ADD_FIELDS}" clientComponent="true"
+                    modal="true" visible="#{!pageFlowScope.InventoryQueryBean.pathAnalysisSearch}">
+      <af:panelHeader text="#{CharSearchPopupBean.popupLabel}"
+                      helpTopicId="OHW_addFields">
+        <af:panelStretchLayout id="pt_ps21"
+                               inlineStyle="width:900px;height:450px;">
+          <f:facet name="center">
+            <af:region value="#{bindings.attributeSelector.regionModel}"
+                       id="IQ_r1"
+                       regionNavigationListener="#{pageFlowScope.InventoryQueryBean.navigationListener}"/>
+          </f:facet>
+        </af:panelStretchLayout>
+      </af:panelHeader>
+    </af:panelWindow>
+    <af:clientListener method="popupClosedListener" type="popupClosed"/>
+    <af:serverListener type="serverPopupClosed"
+                       method="#{CharSearchPopupBean.swapEmptyTaskFlow}"/>
+  </af:popup>
+  <af:popup id="saveSearchPopup" binding="#{backingBeanScope.savedSearchPopupBinding}">
+    <af:dialog type="okCancel" title="#{inventoryUIBundle.CREATE_SAVED_SEARCH}" affirmativeTextAndAccessKey="&amp;Ok" cancelTextAndAccessKey="&amp;Cancel"
+               dialogListener="#{pageFlowScope.InventoryQueryBean.onSavedSearchSaveDialogAction}">
+      <af:panelGroupLayout>
+        <af:panelFormLayout>
+          <af:inputText label="#{inventoryUIBundle.SEARCH_NAME}"
+                        value="#{pageFlowScope.InventoryQueryBean.name}" required="true" requiredMessageDetail="#{inventoryUIBundle.NAME_REQ}"/>
+          <af:selectBooleanCheckbox text="#{inventoryUIBundle.SET_AS_DEFAULT}"
+                                    value="#{pageFlowScope.InventoryQueryBean.setAsDefault}"/>
+          <af:selectBooleanCheckbox text="#{inventoryUIBundle.RUN_AUTOMATICALLY}"
+                                    value="#{pageFlowScope.InventoryQueryBean.runAutomatically}"/>
+        </af:panelFormLayout>
+      </af:panelGroupLayout>
+    </af:dialog>
+    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+    <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.InventoryQueryBean.refreshSavedSearch}"/>
+  </af:popup>
+  <trh:script id="script1">
+    function popupClosedListener(event) {
+        var source = event.getSource();
+        var popupId = source.getClientId();
+        var params = {
+        };
+        params['popupId'] = popupId;
+        var type = "serverPopupClosed";
+        var immediate = true;
+        AdfCustomEvent.queue(source, type, params, immediate);
+    }
+  </trh:script>
+</jsp:root>

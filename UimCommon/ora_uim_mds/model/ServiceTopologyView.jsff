@@ -1,0 +1,323 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" 
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html" 
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:jvf="http://www.ilog.com/jviews/tlds/jviews-framework-faces.tld"
+          xmlns:jvtf="http://www.ilog.com/jviews/tlds/jviews-tgo-faces.tld"
+          xmlns:jv="http://www.ilog.com/jviews/tlds/jviews-faces.tld" 
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+        <f:facet name="localArea">
+       <af:panelGroupLayout layout="scroll" id="pgl3">
+          <af:resource source="script/view.js" type="javascript"/>
+          <af:resource source="css/style.css" type="css"/>
+            <af:panelHeader text="#{inventoryUIBundle.SERVICE_TOPOLOGY_VIEW} #{NonMapTopologyViewBean.displayInfo}"  id="ph1" >
+            <af:panelGroupLayout id="pgl4">
+            
+             <af:link action="#{NonMapTopologyViewBean.getPageAction}"  id="goToPage" visible="false"
+                            binding="#{backingBeanScope.summaryPageLink}">
+              <af:outputText value="#{NonMapTopologyViewBean.fromParameter}" id="ot4"/>
+              <af:setActionListener from="#{NonMapTopologyViewBean.fromParameter}"
+                                    to="#{backingBeanScope.oid}"/>
+            </af:link>
+    <!-- Declare the predefined interactors -->
+    <jvf:zoomInteractor id="zoom" />
+    <jvf:panInteractor id="pan"  />
+    <jvtf:clientSelectInteractor id="clientSelect" menuModelId="selectItr" />
+        <f:facet name="legend">
+          <h:panelGrid id="pg14" binding="#{NonMapTopologyViewBean.canvasMessageGrid}" border="0"
+                                 frame="border" cellpadding="4" cellspacing="1" width="100%"
+                                 columnClasses="psheet-cell" rowClasses="psheet-cell-bold"
+                                 styleClass="tableStyle"/>
+    </f:facet>        
+    <h:panelGrid styleClass="visualToolbar">       
+            <af:panelGroupLayout layout="horizontal" id="pgl1">
+                <!-- Declare a toolbar with six columns to accomodate the buttons -->
+                <af:toolbar id="toolbar1">
+            
+                 <!-- Declare the image buttons -->
+                 <!-- Notice how 'onclick' tag attribute is used -->
+                 <af:group id="g1">
+                 <jv:imageButton style="width: 16px;height: 16px;" 
+                                 selected="true"
+                                 onclick="networkCanvas.setInteractor(clientSelect)"
+                                 image="/images/selectobject_ena.png" buttonGroupId="interactors"
+                                 rolloverImage="/images/selectobject_ovr.png"
+                                 selectedImage="/images/selectobject_dwn.png"
+                                 messageBoxId="messages" 
+                                 title="#{inventoryUIBundle.SELECT}"
+                                 message="#{inventoryUIBundle.SELECT}" />
+                 <af:spacer width="5" height="10" id="s1"/>
+                
+                 <jv:imageButton style="width: 16px;height: 16px;"
+                                 onclick="networkCanvas.setInteractor(zoom)"
+                                 image="/images/zoomtoselection_ena.png" buttonGroupId="interactors"
+                                 rolloverImage="/images/zoomtoselection_ovr.png"
+                                 selectedImage="/images/zoomtoselection_dwn.png"
+                                 messageBoxId="messages"                      
+                                 title="#{inventoryUIBundle.ZOOM}"
+                                 message="#{inventoryUIBundle.ZOOM}" />
+                 <af:spacer width="5" height="10" id="s2"/>
+            
+                 <jv:imageButton style="width: 16px;height: 16px;"
+                                 onclick="networkCanvas.setInteractor(pan)"
+                                 image="/images/pan_ena.png" buttonGroupId="interactors"
+                                 rolloverImage="/images/pan_ovr.png"
+                                 selectedImage="/images/pan_dwn.png" 
+                                 messageBoxId="messages"                     
+                                     title="#{inventoryUIBundle.PAN}"
+                                 message="#{inventoryUIBundle.PAN}" />
+                 <af:spacer width="5" height="10" id="s3"/>
+            
+                 <jv:imageButton style="width: 16px;height: 16px;"
+                                 onclick="networkCanvas.showAll(true)"
+                                 image="/images/zoombestfit_ena.png"
+                                 rolloverImage="/images/zoombestfit_ovr.png"
+                                 selectedImage="/images/zoombestfit_dwn.png"
+                                 messageBoxId="messages" 
+                                 title="#{inventoryUIBundle.SHOW_ALL}" 
+                                 message="#{inventoryUIBundle.SHOW_ALL}"   />
+                 <af:spacer width="5" height="10" id="s4"/>
+                 
+                 <jv:imageButton style="width: 16px;height: 16px;"
+                                 onclick="networkCanvas.zoomIn(true)"
+                                 image="/images/zoomin_ena.png"
+                                 rolloverImage="/images/zoomin_ovr.png"
+                                 selectedImage="/images/zoomin_dwn.png" messageBoxId="messages"
+                                 title="#{inventoryUIBundle.ZOOM_IN}" 
+                                 message="#{inventoryUIBundle.ZOOM_IN}"   />
+                 <af:spacer width="5" height="10" id="s5"/>
+                 
+                 <jv:imageButton style="width: 16px;height: 16px;"
+                                 onclick="networkCanvas.zoomOut(true)"
+                                 image="/images/zoomout_ena.png"
+                                 rolloverImage="/images/zoomout_ovr.png"
+                                 selectedImage="/images/zoomout_dwn.png"
+                                 messageBoxId="messages"
+                                 title="#{inventoryUIBundle.ZOOM_OUT}" 
+                                 message="#{inventoryUIBundle.ZOOM_OUT}"   />
+                 <af:spacer width="5" height="10" id="s6"/>                
+                </af:group>
+                
+                <af:group id="tb2">
+                 <!-- Added for bug 8745783 -->
+                 <jv:imageButton style="width: 16px;height: 16px;"
+                                 onclick="networkCanvas.performAction('editAction',['NonMapTopologyVisualizationAdapter.performLabelLayout'],true)"
+                                 image="/images/aligngoals_ena.png"
+                                 rolloverImage="/images/aligngoals_ovr.png"
+                                 selectedImage="/images/aligngoals_dwn.png"
+                                 messageBoxId="messages"
+                                 title="#{inventoryUIBundle.PERFORM_LABEL_LAYOUT}"
+                                 message="#{inventoryUIBundle.PERFORM_LABEL_LAYOUT}" />
+		<af:spacer width="5" height="10" id="s9"/>
+                                  
+                <jv:imageButton style="width: 16px;height: 16px;"
+                                 onclick="deleteObject();"                                 
+                                 image="/images/delete_ena.png"
+                                 messageBoxId="messages"
+                                 title="#{inventoryUIBundle.DELETE}"
+                                 message="#{inventoryUIBundle.DELETE}" />
+                            
+                  <af:spacer width="5" height="10" id="s10"/>
+            
+                  <jv:imageButton style="width: 16px;height: 16px;"
+                                 onclick="saveNodePositions()"
+                                 image="/images/save_ena.png"
+                                 rolloverImage="/images/save_ovr.png"
+                                 selectedImage="/images/save_dwn.png"
+                                 messageBoxId="messages"
+                                 title="#{inventoryUIBundle.SAVE_NODE_POSITIONS}"
+                                 message="#{inventoryUIBundle.SAVE_NODE_POSITIONS}" />
+                           
+                  <af:spacer width="5" height="10" id="s11"/>      
+                 
+                  <jv:imageButton style="width: 16px;height: 16px;"
+                                 onclick="networkCanvas.performAction('editAction',['NonMapTopologyVisualizationAdapter.doSpringEmbedderLayout'],true)"
+                                 image="/images/SpringEmbedderLayout.gif"
+                                 rolloverImage="/images/SpringEmbedderLayouth.gif"
+                                 selectedImage="/images/SpringEmbedderLayoutd.gif"
+                                 messageBoxId="messages"
+                                 title="#{inventoryUIBundle.SPRING_EMBEDDER_LAYOUT}"
+                                 message="#{inventoryUIBundle.SPRING_EMBEDDER_LAYOUT}" />
+            
+                 <jv:imageButton style="width: 16px;height: 16px;"
+                                 onclick="networkCanvas.performAction('editAction',['NonMapTopologyVisualizationAdapter.doRandomLayout'],true)"
+                                 image="/images/community_ena.png"
+                                 rolloverImage="/images/community_ovr.png"
+                                 selectedImage="/images/community_dwn.png"
+                                 messageBoxId="messages"
+                                 title="#{inventoryUIBundle.RANDOM_LAYOUT}"
+                                 message="#{inventoryUIBundle.RANDOM_LAYOUT}" />
+            
+                 <af:spacer width="5" height="10" id="s12"/>
+                 <!-- deleted button for mesh layout bug 8317674 -->
+            
+                 <jv:imageButton style="width: 16px;height: 16px;"
+                                 onclick="networkCanvas.performAction('editAction',['NonMapTopologyVisualizationAdapter.doUniformLengthEdgesLayout'],true)"
+                                 image="/images/UniformLengthEdgesLayout.gif"
+                                 rolloverImage="/images/UniformLengthEdgesLayouth.gif"
+                                 selectedImage="/images/UniformLengthEdgesLayoutd.gif"
+                                 messageBoxId="messages"
+                                 title="#{inventoryUIBundle.UNIFORM_LENGTH_EDGES_LAYOUT}"
+                                 message="#{inventoryUIBundle.UNIFORM_LENGTH_EDGES_LAYOUT}" />
+            
+                 <af:spacer width="5" height="10" id="s13"/>
+                 
+                 <jv:imageButton style="width: 16px;height: 16px;"
+                                 onclick="networkCanvas.performAction('editAction',['NonMapTopologyVisualizationAdapter.doTreeLayout'],true)"
+                                 image="/images/TreeLayout.gif"
+                                 rolloverImage="/images/TreeLayouth.gif"
+                                 selectedImage="/images/TreeLayoutd.gif"
+                                 messageBoxId="messages"
+                                 title="#{inventoryUIBundle.TREE_LAYOUT}"
+                                 message="#{inventoryUIBundle.TREE_LAYOUT}" />
+            
+                 <af:spacer width="5" height="10" id="s14"/>
+                 
+                 <jv:imageButton style="width: 16px;height: 16px;"
+                                 onclick="networkCanvas.performAction('editAction',['NonMapTopologyVisualizationAdapter.doHierarchicalLayout'],true)"
+                                 image="/images/HierarchicalLayout.gif"
+                                 rolloverImage="/images/HierarchicalLayouth.gif"
+                                 selectedImage="/images/HierarchicalLayoutd.gif"
+                                 messageBoxId="messages"
+                                 title="#{inventoryUIBundle.HIERARCHICAL_LAYOUT}"
+                                 message="#{inventoryUIBundle.HIERARCHICAL_LAYOUT}" />
+            <!-- deleted buttons for bus and circular layouts bug 8317711 -->
+                 
+                 <af:spacer width="5" height="10" id="s15"/>   
+                 <jv:imageButton style="width: 16px;height: 16px;"
+                                 onclick="refreshTopologyProfile();"
+                                 image="/images/refresh_ena.png"
+                                 rolloverImage="/images/refresh_ovr.png"
+                                 selectedImage="/images/refresh_ena.png"
+                                 messageBoxId="messages"
+                                 title="#{inventoryUIBundle.REFRESH}"
+                                 message="#{inventoryUIBundle.REFRESH}" />
+                                 
+                <!-- 
+                                 <jv:imageButton style="width: 16px;height: 16px;"
+                                     onclick="refreshTopologyProfile();"
+                                     image="/images/refresh_ena.png"
+                                     rolloverImage="/images/refresh_ovr.png"
+                                     selectedImage="/images/refresh_dis.png"
+                                     messageBoxId="messages"
+                                     title="#{inventoryUIBundle.REFRESH}"
+                                     message="#{inventoryUIBundle.REFRESH}" />                
+                -->
+                </af:group>
+                </af:toolbar>
+            </af:panelGroupLayout>
+    </h:panelGrid>
+    <af:panelGroupLayout id="pgl5" layout="horizontal" valign="top" halign="left">
+    <!-- Declare a grid with two columns, one for the main view -->
+    <!-- and another for the overview -->
+    <af:panelGroupLayout layout="horizontal" id="canvasArea" binding="#{backingBeanScope.serviceCanvasArea}">
+       <af:serverListener type="jsCreateTopologyDetails" method="#{NonMapTopologyViewBean.createTopologyDetails}"/>
+       <af:serverListener type="jsRefreshTopologyProfile" method="#{NonMapTopologyVisualizationAdapter.refreshTopologyProfile}"/>
+       <af:serverListener type="jsNavigatePage" method="#{NonMapTopologyViewBean.navigatePage}"/>
+       <h:panelGrid border="0" columns="1" styleClass="psheet">
+            <!-- Declare the network faces component -->
+            <jvtf:networkView id="networkCanvas" 
+                              context="#{defContext}"
+                              interactorId="clientSelect" 
+                              width="950" height="600"                           
+                              binding="#{NonMapTopologyViewBean.topologyView}"  
+                              styleSheets="css/topology.css"  
+                              imageFormat="PNG"
+                              servlet = "oracle.communications.inventory.ui.framework.visualization.servlet.NetworkSyncImageServlet"
+                              waitingImage="images/waiting.gif"
+                              scrollBar="need">
+               <jvtf:selectionManager id="selectionManager" 
+                                      imageMode="false"  
+                                      lineColor="black"
+                                      lineWidth="2"
+                                      propertyAccessor="#{NonMapTopologyInteractorBean.propertyAccessor}"                                      
+                                      onSelectionChanged="displaySelection(selection)"/>
+             <!-- Declare the contextual menu with given popup menu factory -->
+             <jvf:contextualMenu factory="#{TopologyPopupMenuFactory}"
+                                 itemStyleClass="menuItem" 
+                                 itemHighlightedStyleClass="menuItemHighlighted" 
+                                 itemDisabledStyleClass="menuItemDisabled" />
+          
+            </jvtf:networkView>            
+       </h:panelGrid>
+    </af:panelGroupLayout>
+        <af:spacer width="10" height="10" id="s16"/>
+       <h:panelGrid border="1" columns="1" styleClass="psheet" id="pg1">
+         <h:panelGrid columns="1" border="0" >         
+            <h:panelGrid border="0" columns="2">
+                <h:graphicImage url="/images/attributegroup_ena.png"/>
+                <h:outputText value="#{inventoryUIBundle.DETAILS}" styleClass="text" style="font-weight:bold" />
+            </h:panelGrid> 
+            <h:panelGrid columns="2" border="0" frame="border" cellpadding="4" cellspacing="1" width="100%" 
+                                        columnClasses="psheet-cell" rowClasses="psheet-cell-bold" styleClass="tableStyle"
+                                        binding="#{NonMapTopologyViewBean.serviceConfDisplayInfoBinding}"/>
+           </h:panelGrid>            
+            <h:panelGrid columns="2" id="pg15" binding="#{NonMapTopologyViewBean.topologyDetailsGrid}" border="0"
+                         frame="border" cellpadding="4" cellspacing="1" width="100%"
+                         columnClasses="psheet-cell" rowClasses="psheet-cell-bold"
+                         styleClass="tableStyle">
+            </h:panelGrid>
+            <trh:script id="vars" text='var ntwkCanvasId = "#{NonMapTopologyViewBean.clientId}"; '/> 
+             <trh:script id="sc1">
+                  var p = "";
+                  // called by the onSelectionChanged attribute on NonMapTopologyView.jsff file. It returns a map of attributes
+                  // to a javascript variable. These attributes will be used to dynamically build the Details section
+                  // in NonMapTopologyViewBean.
+                  function displaySelection(selection) {
+                     try {
+                         if (selection.length == 1) {
+                             p = selection[0].getObjectProperties();
+                         }else if(selection.length == 0){
+                              p = "NOTHING_IS_SELECTED";
+                         }else if(selection.length > 1){
+                              p = "MULTIPLE_OBJECTS_ARE_SELECTED";                                    
+                         }
+                         var ref = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                         AdfCustomEvent.queue(ref, "jsCreateTopologyDetails",{props : p},true);
+                         p = "";
+                     }
+                     catch (e) {
+                        alert("An error occurred when building property sheet." + e);
+                     }
+                 }
+                 
+                 function refreshTopologyProfile(){
+                    if(confirm('Are you sure that you want to refresh the topology view?')){
+                         var ref = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                         AdfCustomEvent.queue(ref, "jsRefreshTopologyProfile",{},true);
+                    }
+                 }
+                
+                function navigatePage(pageId,pageAction){
+                     var networkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                     AdfCustomEvent.queue(networkCanvas, "jsNavigatePage",{pageId : pageId ,pageAction : pageAction},true);
+                     
+                }
+           </trh:script>
+            <af:commandButton id="updateADFComponents" binding="#{backingBeanScope.updateADFComponentBinding}" partialSubmit="true" visible="false" styleClass="invisibleComponent"
+                              shortDesc="#{inventoryUIBundle.UPDATE}"/>  
+                     <trh:script id="vars2" text='var updateADFComponentsId = "#{NonMapTopologyViewBean.updateADFComponentId}"; '/> 
+                     <trh:script id="script2">
+                            function deleteObject(){
+                            networkCanvas.performAction('editAction',['NonMapTopologyVisualizationAdapter.deleteObject'], true);
+                            clickInvisibleButton(updateADFComponentsId);
+                            }  
+                            function saveNodePositions(){
+                            networkCanvas.performAction('editAction',['NonMapTopologyVisualizationAdapter.saveNodePositions'],true);
+                            clickInvisibleButton(updateADFComponentsId);
+                            }  
+                     </trh:script>
+        </h:panelGrid>         
+    </af:panelGroupLayout>
+    </af:panelGroupLayout>
+    </af:panelHeader>
+    
+    </af:panelGroupLayout>
+    </f:facet>
+<!-- End of standard closing elements -->
+</af:pageTemplate>
+</jsp:root>

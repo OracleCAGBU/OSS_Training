@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xsi:type="BusinessEntityType" name="FlowInterface" realizeFromBusinessEntity="false">
+  <com:displayName lang="[default]">FlowInterface</com:displayName>
+  <com:saveVersion>8</com:saveVersion>
+  <com:baseEntityRef>
+    <com:entity>DeviceInterface</com:entity>
+    <com:entityType>inventoryEntity</com:entityType>
+    <com:relationship>oracle.communications.studio.model.baseEntity</com:relationship>
+  </com:baseEntityRef>
+  <com:id>E:inventoryEntity--FlowInterface</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>inventoryEntity--FlowInterface</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>FlowInterface</data:name>
+    <data:displayName lang="[default]">FlowInterface</data:displayName>
+    <data:dataElement virtual="false">
+      <com:id>flowInterfaceBitRate</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>flowInterfaceBitRate</data:name>
+      <data:displayName lang="[default]">Flow Interface Bit Rate</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>flowInterfaceBitRate</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>flowInterfaceBitRate</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>HVxreMlV--+A---g5C8RRw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>inventoryEntity--FlowInterface</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>1+RYQRR4--+NEFNr--+hfA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>flowInterfaceBitRate</data:dataElementId>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>--+R--+v--+7Y+lS--+mkg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>---W---m--+z---q---pnQ</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>--+11iJ1--+1--+NBJJnZg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>flowInterfaceBitRate</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>s0ZqZYJQ--+OQiszXTscLg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>flowInterfaceBitRate</data:dataElementId>
+  </data:dataElementDetails>
+  <properties interface="oracle.communications.inventory.api.entity.FlowInterface"/>
+</com:modelEntity>

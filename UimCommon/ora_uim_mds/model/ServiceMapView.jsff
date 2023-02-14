@@ -1,0 +1,1017 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" 
+		  xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html">
+           <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                     value="#{bindings.ptb1}" id="pt1">
+        <f:facet name="localArea">
+               <af:panelStretchLayout id="psll1" styleClass="AFStretchWidth" binding="#{backingBeanScope.mapViewLayout}"
+                                      dimensionsFrom="auto" topHeight="800px;">
+                    <f:facet name="top">
+                         <af:panelHeader text="#{pageFlowScope.ServiceMapViewBean.displayInfo}" id="ph1">
+                              <f:facet name="context"/>
+                              <f:facet name="menuBar"/>
+                              <f:facet name="toolbar"/>
+                              <f:facet name="legend"/>
+                              <f:facet name="info"/>
+                         </af:panelHeader>
+                    </f:facet>
+                    <f:facet name="center">
+                         <af:clientListener method="goMap()" type="load"/>
+                         <af:panelGroupLayout id="pgl1" layout="scroll">
+                              <!--Here code goes for POP ups  -->
+                              <af:popup id="dynapop2" rendered="true" contentDelivery="lazyUncached" animate="false"
+                                        clientComponent="true"
+                                        binding="#{backingBeanScope.dynapopMenu2}">
+                             <af:clientListener method="interrupt" type="popupOpened"/>
+                                   <af:menu text="menu 1" id="m1" clientComponent="true">
+                                        <af:commandMenuItem text="#{inventoryUIBundle.PLACE_SUMMARY}" id="cmi1"
+                                                            visible="#{pageFlowScope.ServiceMapViewBean.placeVisible}"
+                                                            action="placeSummary"
+                                                            actionListener="#{bindings.openSubTaskForPlaceSummary.execute}">
+                                             <af:setActionListener from="#{pageFlowScope.ServiceMapViewBean.placeId}"
+                                                                   to="#{requestScope.oid}"/>
+                                        </af:commandMenuItem>
+                                        <af:commandMenuItem text="#{inventoryUIBundle.LOCATION_DETAILS}" id="cmi2"
+                                                            visible="#{pageFlowScope.ServiceMapViewBean.locationVisible}"
+                                                            action="locationDetails"
+                                                            actionListener="#{bindings.openSubTaskForLocationDetails.execute}">
+                                             <af:setActionListener from="#{pageFlowScope.ServiceMapViewBean.placeId}"
+                                                                   to="#{requestScope.oid}"/>
+                                        </af:commandMenuItem>
+                                        <af:commandMenuItem text="#{inventoryUIBundle.EQUIPMENT_SUMMARY}" id="cmi3"
+                                                            visible="#{pageFlowScope.ServiceMapViewBean.equipmentVisible}"
+                                                            action="equipmentSummary"
+                                                            actionListener="#{bindings.openSubTaskForEquipmentSummary.execute}">
+                                             <af:setActionListener from="#{pageFlowScope.ServiceMapViewBean.foiId}"
+                                                                   to="#{requestScope.oid}"/>
+                                        </af:commandMenuItem>
+                                        <af:commandMenuItem text="#{inventoryUIBundle.NETWORK_SUMMARY}" id="cmi4"
+                                                            visible="#{pageFlowScope.ServiceMapViewBean.networkVisible}"
+                                                            action="networkSummary"
+                                                            actionListener="#{bindings.openSubTaskForNetworkSummary.execute}">
+                                             <af:setActionListener from="#{pageFlowScope.ServiceMapViewBean.foiId}"
+                                                                   to="#{requestScope.oid}"/>
+                                        </af:commandMenuItem>
+                                        <af:commandMenuItem text="#{inventoryUIBundle.LOGICAL_DEVICE_SUMMARY}" id="cmi5"
+                                                            visible="#{pageFlowScope.ServiceMapViewBean.logicalDeviceVisible}"
+                                                            action="logicalDeviceSummary"
+                                                            actionListener="#{bindings.openSubTaskForLogicalDeviceSummary.execute}">
+                                             <af:setActionListener from="#{pageFlowScope.ServiceMapViewBean.foiId}"
+                                                                   to="#{requestScope.oid}"/>
+                                        </af:commandMenuItem>
+                                        <af:commandMenuItem text="#{inventoryUIBundle.PHYSICAL_DEVICE_SUMMARY}"
+                                                            id="cmi6"
+                                                            visible="#{pageFlowScope.ServiceMapViewBean.physicalDeviceVisible}"
+                                                            action="physicalDeviceSummary"
+                                                            actionListener="#{bindings.openSubTaskForPhysicalDeviceSummary.execute}">
+                                             <af:setActionListener from="#{pageFlowScope.ServiceMapViewBean.foiId}"
+                                                                   to="#{requestScope.oid}"/>
+                                        </af:commandMenuItem>
+                                        <af:commandMenuItem text="#{inventoryUIBundle.CONNECTIVITY_DETAILS}" id="cmi7"
+                                                            visible="#{pageFlowScope.ServiceMapViewBean.connectivityVisible}"
+                                                            action="TDMConnectivityDetails"
+                                                            actionListener="#{bindings.openSubTaskForConnectivityDetails.execute}">
+                                             <af:setActionListener from="#{pageFlowScope.ServiceMapViewBean.foiId}"
+                                                                   to="#{requestScope.oid}"/>
+                                        </af:commandMenuItem>
+                                        <af:commandMenuItem text="#{inventoryUIBundle.PIPE_SUMMARY}" id="cmi8"
+                                                            visible="#{pageFlowScope.ServiceMapViewBean.pipesVisible}"
+                                                            action="pipeSummary"
+                                                            actionListener="#{bindings.openSubTaskForPipeSummary.execute}">
+                                             <af:setActionListener from="#{pageFlowScope.ServiceMapViewBean.foiId}"
+                                                                   to="#{requestScope.oid}"/>
+                                        </af:commandMenuItem>
+                                        <af:commandMenuItem text="#{inventoryUIBundle.ASSOCIATED_NODES}" id="cmib"
+                                                            visible="#{pageFlowScope.ServiceMapViewBean.multiNodePlaceVisible}">                                        
+                                             <af:showPopupBehavior triggerType="click"
+                                                                   popupId="associatedNodesPopup"/>
+                                        </af:commandMenuItem>
+                                        <af:group id="g1" rendered="#{pageFlowScope.ServiceMapViewBean.zoomEnabled}">
+                                        <af:commandMenuItem text="#{inventoryUIBundle.ZOOM} #{inventoryUIBundle.TO} #{inventoryUIBundle.COUNTRY}"
+                                                            id="cmi9"
+                                                            visible="#{pageFlowScope.ServiceMapViewBean.zoomEnabled}">
+                                             <af:clientListener method="setZoomLevelToCountry" type="click"/>
+                                        </af:commandMenuItem>
+                                        <af:commandMenuItem text="#{inventoryUIBundle.ZOOM} #{inventoryUIBundle.TO} #{inventoryUIBundle.CITY}"
+                                                            id="cmi10"
+                                                            visible="#{pageFlowScope.ServiceMapViewBean.zoomEnabled}">
+                                             <af:clientListener method="setZoomLevelToCity" type="click"/>
+                                        </af:commandMenuItem>
+                                        <af:commandMenuItem text="#{inventoryUIBundle.ZOOM} #{inventoryUIBundle.TO} #{inventoryUIBundle.STREET}"
+                                                            id="cmi11"
+                                                            visible="#{pageFlowScope.ServiceMapViewBean.zoomEnabled}">
+                                             <af:clientListener method="setZoomLevelToStreet" type="click"/>
+                                        </af:commandMenuItem>
+                                        <af:commandMenuItem text="#{inventoryUIBundle.ZOOM_OUT}" id="cmi16"
+                                                            visible="#{pageFlowScope.ServiceMapViewBean.zoomEnabled}">
+                                             <af:clientListener method="setZoomLevelToDefault" type="click"/>
+                                        </af:commandMenuItem>
+                                        </af:group>
+                                        <af:commandMenuItem text="#{inventoryUIBundle.CLOSE_MENU}" id="cmi12"/>
+                                   </af:menu>
+                                   <af:serverListener type="jsSendInfo" method="#{pageFlowScope.ServiceMapViewBean.sendInfo}"/>
+                            </af:popup>
+                              <af:popup id="associatedNodesPopup" contentDelivery="lazyUncached"
+                                        binding="#{backingBeanScope.associatedNodesPopup}">
+                                   <af:dialog id="associatedNodesPopupDialog" contentWidth="600" closeIconVisible="true"
+                                              type="none" title="#{inventoryUIBundle.INV_ASSOCIATION_LIST}">
+                                        <af:panelStretchLayout id="pt_psl100" styleClass="invMVPanelStretchLayout">
+                                             <f:facet name="center">
+                                                  <af:table value="#{pageFlowScope.ServiceMapViewBean.associatedEntityList}"
+                                                            var="row" rowBandingInterval="0" id="t1"
+                                                            columnStretching="last">
+                                                       <af:column sortable="false" headerText="#{inventoryUIBundle.ID}"
+                                                                  id="c1">
+                                                            <af:commandImageLink id="cl1"
+                                                                                 actionListener="#{pageFlowScope.ServiceMapViewBean.registerRecentItem}"
+                                                                                 action="#{pageFlowScope.ServiceMapViewBean.getSummaryAction}"
+                                                                                 text="#{row.id}"
+                                                                                 shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                                                 <af:setActionListener from="#{row.oid}"
+                                                                                       to="#{requestScope.oid}"/>
+                                                            </af:commandImageLink>
+                                                       </af:column>
+                                                       <af:column sortable="false"
+                                                                  headerText="#{inventoryUIBundle.NAME}" id="c2">
+                                                            <af:outputText value="#{row.name}" id="ot1"/>
+                                                       </af:column>
+                                                       <af:column sortable="false"
+                                                                  headerText="#{inventoryUIBundle.DESCRIPTION}" id="c3">
+                                                            <af:outputText value="#{row.description}" id="ot2"/>
+                                                       </af:column>
+                                                       <af:column sortable="false"
+                                                                  headerText="#{inventoryUIBundle.SPECIFICATION}">
+                                                            <af:outputText value="#{row.specification}"/>
+                                                       </af:column>
+                                                       <af:column sortable="false"
+                                                                  headerText="#{inventoryUIBundle.ASSOCIATED_ENTITY}">
+                                                            <af:outputText value="#{pageFlowScope.ServiceMapViewBean.associatedEntityType}"/>
+                                                       </af:column>
+                                                  </af:table>
+                                             </f:facet>
+                                        </af:panelStretchLayout>
+                                   </af:dialog>
+                              </af:popup>
+                              <!--pop ups will end here -->
+                                   <f:verbatim> 
+                                   <div id="map" style="position: absolute; height: auto; top: 50px; left: 0px; bottom: 10px; right: 10px; width: auto; border-style:solid; border-color:Gray; border-width:medium;"/>
+                                   </f:verbatim>
+                                   <af:resource source="/resources/mapview/whiteboard/jquery-ui.min.css" type="css"/>
+                                   <af:resource source="/resources/mapview/whiteboard/colorpicker.css" type="css"/>
+                                   <trh:script source="/resources/oraclemapsv2.js" id="res1"><?audit suppress oracle.adf.faces.verbatimScript?></trh:script>
+                                   <trh:script source="/resources/mapview/whiteboard/jquery-ui.min.js" id="res2"><?audit suppress oracle.adf.faces.verbatimScript?></trh:script>
+                                   <trh:script source="/resources/mapview/whiteboard/colorpicker.js" id="res3"><?audit suppress oracle.adf.faces.verbatimScript?></trh:script>
+                                   <trh:script source="/resources/mapview/whiteboard/eye.js" id="res4"><?audit suppress oracle.adf.faces.verbatimScript?></trh:script>
+                                   <trh:script source="/resources/mapview/whiteboard/layout.js" id="res5"><?audit suppress oracle.adf.faces.verbatimScript?></trh:script>
+                                   <trh:script source="/resources/mapview/whiteboard/utils.js" id="res6"><?audit suppress oracle.adf.faces.verbatimScript?></trh:script>
+                                   <!--Here all variables will be written and corresponding getters should be present in bean class  -->
+                                   <trh:script id="vars" text='
+                       
+						   var mapCenterLon = parseFloat("#{pageFlowScope.ServiceMapViewBean.centerMapLongitude}");
+						   var mapCenterLat = parseFloat("#{pageFlowScope.ServiceMapViewBean.centerMapLatitude}");
+						   var mapZoom      = parseInt("#{pageFlowScope.ServiceMapViewBean.zoomLevel}"); 
+						   var baseMapName  = "#{pageFlowScope.ServiceMapViewBean.baseMap}";
+						   var datasource   = "#{pageFlowScope.ServiceMapViewBean.datasource}";
+						   var mapTileServer = "#{pageFlowScope.ServiceMapViewBean.mapTileServerUrl}"; 
+						   var copyright    = "#{pageFlowScope.ServiceMapViewBean.copyright}"; 
+						   var infoStr = "#{pageFlowScope.ServiceMapViewBean.displayLatLon}";
+						   var legendTitle = "#{pageFlowScope.ServiceMapViewBean.legendTitle}";  
+						   var overviewMapTitle = "#{pageFlowScope.ServiceMapViewBean.overviewMapTitle}"; 
+						   var legendName = "#{inventoryUIBundle.MAP_LEGEND}";
+						   var overviewName = "#{inventoryUIBundle.OVERVIEW_MAP}"; 
+						   var coordinates = "#{inventoryUIBundle.COORDINATES}"; 
+						   var baseURL = "#{pageFlowScope.ServiceMapViewBean.mapviewerUrl}";
+						   var dynapop2 = "#{pageFlowScope.ServiceMapViewBean.dynapop2Ref}";
+                                                   var mapLegend    = "#{pageFlowScope.ServiceMapViewBean.mapLegend}";
+                                                   var scvId = "#{pageFlowScope.ServiceMapViewBean.scvId}";
+                                                   var logicalDeviceSpecsImageMap = &#39;#{pageFlowScope.ServiceMapViewBean.logicalDeviceSpecsImageMap}&#39;;
+                                                   var equipmentSpecsImageMap =&#39;#{pageFlowScope.ServiceMapViewBean.equipmentSpecsImageMap}&#39;;
+                                                   var physicalDeviceSpecsImageMap =&#39;#{pageFlowScope.ServiceMapViewBean.physicalDeviceSpecsImageMap}&#39;;
+                                                   var networkSpecsImageMap =&#39;#{pageFlowScope.ServiceMapViewBean.networkSpecsImageMap}&#39;;
+                                                   var multiNodes = "#{pageFlowScope.ServiceMapViewBean.multiNodePlaceList}"; 
+                           '><?audit suppress oracle.adf.faces.verbatimScript?>
+		</trh:script>
+                                   <!-- variable declaration ends here -->
+                  <trh:script id="scr2"><?audit suppress oracle.adf.faces.verbatimScript?>
+                        <![CDATA[
+                                        var mapview;
+                                        /** Look in the same domain if a URL is not passed in. */
+                                        if (!baseURL) {
+                                            baseURL = document.location.protocol+"//" + document.location.host + "/mapviewer/";
+                                        }
+                                        var imgURL = document.location.protocol+"//" + document.location.host + "/Inventory/images/";
+                                        var customImgURL = document.location.protocol+"//" + document.location.host + "/Inventory/";
+                                        var mpoint = new OM.geometry.Point(mapCenterLon, mapCenterLat, 8307);
+                                         
+                            
+                                        var pulse = new OM.style.PulseAnimation({
+                                            stroke: "#3333ff",
+                                            duration: 1,
+                                            beginSize: 8,
+                                            endSize: 50
+                                        });
+                                        
+                                     //create foi layers here for normal icons 
+                                        function getPipeData(scvId) {
+                                        
+                                            var pipeFOI = new OM.layer.VectorLayer("pipe"+scvId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_SERVICE",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            pipeFOI.setQueryParameters(scvId);
+                                            pipeFOI.setVisible(true);
+                                            pipeFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            mapview.addLayer(pipeFOI);
+                                        
+                                        }
+                                        
+                                      function getConnectivityData(scvId) {
+                                        
+                                            var connectivityFOI = new OM.layer.VectorLayer("connectivity"+scvId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "CONNECTIVITY_SERVICE",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            connectivityFOI.setQueryParameters(scvId);
+                                            connectivityFOI.setVisible(true);
+                                            connectivityFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            mapview.addLayer(connectivityFOI);
+                                        
+                                        }
+                                    //LogicalDevice FOI    
+                                    function getLogicalDeviceData(scvId) {                                        
+                                            var ldMarker = new OM.style.Marker({ src: imgURL + "logical_device_mv.png", width: 12, height: 12 });
+                                            var ldFOI = new OM.layer.VectorLayer("logicalDevice"+scvId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "LOGICAL_DEVICE_SERVICE",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            ldFOI.setQueryParameters(scvId,scvId);
+                                            ldFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            ldFOI.setRenderingStyle(ldMarker);
+                                            ldFOI.setHoverStyle(pulse);
+                                            mapview.addLayer(ldFOI);
+                                        
+                                        }    
+                                  
+                                  //Equipment FOI      
+                                  function getEquipmentData(scvId) {
+                                        
+                                            var eqMarker = new OM.style.Marker({ src: imgURL + "equipment_ena.png", width: 12, height: 12 });
+                                            var eqFOI = new OM.layer.VectorLayer("equipment"+scvId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "EQUIPMENT_SERVICE",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            eqFOI.setQueryParameters(scvId,scvId);
+                                            eqFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            eqFOI.setRenderingStyle(eqMarker);
+                                            eqFOI.setHoverStyle(pulse);
+                                            mapview.addLayer(eqFOI);
+                                        
+                                        }
+                                        
+                                    //Physical Device FOI
+                                    function getPhysicalDeviceData(scvId) {
+                                        
+                                            var pdMarker = new OM.style.Marker({ src: imgURL + "physical-device_ena.png", width: 16, height: 16 });
+                                            var pdFOI = new OM.layer.VectorLayer("physicalDevice"+scvId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PHYSICAL_DEVICE_SERVICE",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            pdFOI.setQueryParameters(scvId,scvId);
+                                            pdFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            pdFOI.setRenderingStyle(pdMarker);
+                                            pdFOI.setHoverStyle(pulse);
+                                            mapview.addLayer(pdFOI);
+                                        
+                                        }    
+                                    function getNetworkData(scvId) {
+                                        
+                                            var networkMarker = new OM.style.Marker({ src: imgURL + "cloud_ena.png", width: 16, height: 16 });
+                                            var networkFOI = new OM.layer.VectorLayer("network" + scvId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "NETWORK_SERVICE",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            networkFOI.setQueryParameters(scvId);
+                                            networkFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            networkFOI.setRenderingStyle(networkMarker);
+                                            networkFOI.setHoverStyle(pulse);
+                                            mapview.addLayer(networkFOI);    
+                                        }                                      
+                                    
+                                     //create foi layers here for custom icons 
+				  function parseCustomImageJSON(customImageJSON) {
+                                                return JSON.parse(customImageJSON || '{}');
+                                }
+                                        
+                                 function getCustomImageLogicaldeviceData(scvId) {
+                                        
+                                            var ldImagesArray = parseCustomImageJSON(logicalDeviceSpecsImageMap || "{}");
+                                            for (var specIDCustomImage in ldImagesArray) {
+                                        
+                                                var ldCustomImageMarker = new OM.style.Marker({ src: customImgURL + ldImagesArray[specIDCustomImage] + "&width=16&height=16", width: 16, height: 16 });
+                                        
+                                                var ldCustomImageFOI = new OM.layer.VectorLayer("ldCustomImageFOI" + specIDCustomImage+scvId,
+                                                    {
+                                                        def:
+                                                        {
+                                                            type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                            dataSource: datasource, theme: "LOGICAL_DEVICE_SERVICE_SPEC",
+                                                            url: baseURL,
+                                                            loadOnDemand: false
+                                                        }
+                                                    });
+                                                ldCustomImageFOI.setQueryParameters(scvId, specIDCustomImage,scvId, specIDCustomImage);
+                                                ldCustomImageFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                ldCustomImageFOI.setRenderingStyle(ldCustomImageMarker);
+                                                ldCustomImageFOI.setHoverStyle(pulse);
+                                                mapview.addLayer(ldCustomImageFOI);
+                                            }
+                                        
+                                        }
+                                        
+                                        function getCustomImagePhysicalDeviceData(scvId) {
+                                        
+                                            var physicalDeviceImagesArray = parseCustomImageJSON(physicalDeviceSpecsImageMap || "{}");
+                                            for (var specIDCustomImage in physicalDeviceImagesArray) {
+                                                var pdCustomImageMarker = new OM.style.Marker({ src: customImgURL + physicalDeviceImagesArray[specIDCustomImage] + "&width=16&height=16", width: 16, height: 16 });
+                                        
+                                                var physicalDeviceCustomImageFOI = new OM.layer.VectorLayer("physicalDeviceCustomImageFOI" + specIDCustomImage+scvId,
+                                                    {
+                                                        def:
+                                                        {
+                                                            type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                            dataSource: datasource, theme: "PHYSICAL_DEVICE_SERVICE_SPEC",
+                                                            url: baseURL,
+                                                            loadOnDemand: false
+                                                        }
+                                                    });
+                                                physicalDeviceCustomImageFOI.setQueryParameters(scvId, specIDCustomImage,scvId, specIDCustomImage);
+                                                physicalDeviceCustomImageFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                physicalDeviceCustomImageFOI.setRenderingStyle(pdCustomImageMarker);
+                                                physicalDeviceCustomImageFOI.setHoverStyle(pulse);
+                                                mapview.addLayer(physicalDeviceCustomImageFOI);
+                                            }
+                                        }
+                                        
+                                        function getCustomImageEquipmentData(scvId) {
+                                        
+                                            var equipmentImagesArray = parseCustomImageJSON(equipmentSpecsImageMap || "{}");
+                                            for (var specIDCustomImage in equipmentImagesArray) {
+                                                var eqCustomImageMarker = new OM.style.Marker({ src: customImgURL + equipmentImagesArray[specIDCustomImage] + "&width=16&height=16", width: 16, height: 16 });
+                                        
+                                                var equipmentCustomImageFOI = new OM.layer.VectorLayer("equipmentCustomImageFOI" + specIDCustomImage+scvId,
+                                                    {
+                                                        def:
+                                                        {
+                                                            type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                            dataSource: datasource, theme: "EQUIPMENT_SERVICE_SPEC",
+                                                            url: baseURL,
+                                                            loadOnDemand: false
+                                                        }
+                                                    });
+                                                equipmentCustomImageFOI.setQueryParameters(scvId, specIDCustomImage,scvId, specIDCustomImage);
+                                                equipmentCustomImageFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                equipmentCustomImageFOI.setRenderingStyle(eqCustomImageMarker);
+                                                equipmentCustomImageFOI.setHoverStyle(pulse);
+                                                mapview.addLayer(equipmentCustomImageFOI);
+                                            }
+                                        }
+                                        
+                                        function getCustomImageNetworkData(scvId) {
+                                        
+                                            var networkImagesArray = parseCustomImageJSON(networkSpecsImageMap || "{}");
+                                            for (var specIDCustomImage in networkImagesArray) {
+                                                var networkCustomImageMarker = new OM.style.Marker({ src: customImgURL + networkImagesArray[specIDCustomImage] + "&width=16&height=16", width: 16, height: 16 });
+                                        
+                                                var networktCustomImageFOI = new OM.layer.VectorLayer("networktCustomImageFOI" + specIDCustomImage+scvId,
+                                                    {
+                                                        def:
+                                                        {
+                                                            type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                            dataSource: datasource, theme: "NETWORK_SERVICE_SPEC",
+                                                            url: baseURL,
+                                                            loadOnDemand: false
+                                                        }
+                                                    });
+                                                networktCustomImageFOI.setQueryParameters(scvId, specIDCustomImage);
+                                                networktCustomImageFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                networktCustomImageFOI.setRenderingStyle(networkCustomImageMarker);
+                                                networktCustomImageFOI.setHoverStyle(pulse);
+                                                mapview.addLayer(networktCustomImageFOI);
+                                            }
+                                        
+                                        }
+                                        
+                                     function getMultiNodeData(scvId) {
+                                            if (multiNodes != "false") {
+                                                var placeTopoNodes = multiNodes.split(',');
+                                                for (var i in placeTopoNodes) {
+                                                    var temp = placeTopoNodes[i].split(':');
+                                                    var placeId=temp[0];
+                                                    var nodeId=temp[1];
+                                                    var multiNodeCustomImageMarker = new OM.style.Marker({ src: imgURL + "group_ena.png", width: 16, height: 16 });
+                                        
+                                                    var multiNodeFOI = new OM.layer.VectorLayer(placeTopoNodes[i]+scvId,
+                                                        {
+                                                            def:
+                                                            {
+                                                                type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                                dataSource: datasource, theme: "MULTINODEPLACE_SERVICE",
+                                                                url: baseURL,
+                                                                loadOnDemand: false
+                                                            }
+                                                        });
+                                                    multiNodeFOI.setQueryParameters(placeId,nodeId);
+                                                    multiNodeFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                    multiNodeFOI.setRenderingStyle(multiNodeCustomImageMarker);
+                                                    multiNodeFOI.setHoverStyle(pulse);
+                                                    mapview.addLayer(multiNodeFOI);
+                                        
+                                                }
+                                            }
+                                        }     
+									
+				  //Function that loads all these FOI layers 
+				  function loadAndDisplayLayers() {	
+				  getPipeData(scvId);
+                                  getConnectivityData(scvId);
+                                  getLogicalDeviceData(scvId);
+				  getEquipmentData(scvId);
+				  getPhysicalDeviceData(scvId);
+                                  getNetworkData(scvId);
+                                  getCustomImageLogicaldeviceData(scvId);
+                                  getCustomImageEquipmentData(scvId);  
+                                  getCustomImagePhysicalDeviceData(scvId);
+                                  getCustomImageNetworkData(scvId);
+                                  getMultiNodeData(scvId);
+                                
+                                mapview.getFeatureLayers().forEach(function (layer) {
+                                                layer.on(OM.event.LayerEvent.FEATURES_LOADED,
+                                                    function () {
+                                                        this.getAllFeatures().forEach(function (feature) {
+                                                            feature.setInfoWindowContent(getInfoWindowHtml(feature.getAttributes(), layer.getName()))
+                                                        });
+                                                    });
+                               });
+									
+			}						
+		  
+		   var lastClickedPoint = null;
+		    function goMap() {
+                                        
+                                            // Create an OM.Map instance to display the map
+                                            mapview = new OM.Map(document.getElementById("map"),
+                                                {
+                                                    mapviewerURL: baseURL,
+                                                    disableOverviewMap: false
+                                                });
+                                        
+                                            //Double click zoom is disabled on map
+                                            mapview.enableDoubleClick(false);
+                                        
+                                            //Enable zoom animation
+                                            mapview.enableZoomAnimation(true);
+                                        
+                                            //set defauly style of info windows
+                                            var infoStyle = {
+                                                infoWindowStyle: { "background-color": "#e5f9ff", width: 280 },
+                                                titleStyle: { background: "#F5F5F9", "font-size": "12px", "font-family": "Tahoma" },
+                                                contentStyle: { background: "#F5F5F9", "font-size": "12px", "font-family": "Tahoma" },
+                                                "tailStyle": { "offset": "25", "background": "#ccf3ff" },
+                                                "closeButtonStyle": {
+                                                    "mouseOutButton": { "src": "resources/mapview/infoWindow/close_en.png" },
+                                                    "mouseOverButton": { "src": "resources/mapview/infoWindow/close_ov.png" }
+                                                }
+                                            }
+                                            mapview.setInfoWindowStyle(infoStyle);
+                                        
+                                            //Create the Tile layer object             
+                                            var tileLayer = new OM.layer.TileLayer(
+                                                baseMapName,
+                                                {
+                                                    dataSource: datasource,
+                                                    tileLayer: baseMapName,
+                                                    tileServerURL: baseURL + "/mcserver"
+                                                });
+                                            mapview.addLayer(tileLayer);
+                                            mapview.setMapCenter(mpoint);
+                                            mapview.setMapZoomLevel(mapZoom);
+                                        
+                                            //Display Navigation Panel bar at top left of the map             
+                                            var navigationPanelBar = new OM.control.NavigationPanelBar({ style: 1, anchorPosition: 1 });
+                                            navigationPanelBar.setStyle({ backgroundColor: "#FFFFFF", buttonColor: "#008000", size: 12 });
+                                            mapview.addMapDecoration(navigationPanelBar);
+                                        
+                                            //Display Scale bar               
+                                            var mapScaleBar = new OM.control.ScaleBar({ anchorPosition: 4 });
+                                            mapview.addMapDecoration(mapScaleBar);
+                                        
+                                            //Display copyright on top right corner of map	  
+                                            var note = new OM.control.CopyRight({ textValue: copyright, anchorPosition: 5 });
+                                            mapview.addMapDecoration(note);
+                                        
+                                            //Display lat long on mouse double click anywhere on the map                         
+                                            mapview.on(OM.event.MouseEvent.MOUSE_DOUBLE_CLICK, displayLatLong);
+                                        
+                                            //Display Toolbar with new features
+                                            var toolbar = null;
+                                            toolbar = new OM.control.ToolBar("toolbar1", { builtInButtons: [OM.control.ToolBar.BUILTIN_ALL], orientation: 2, enableClear: true });
+                                            toolbar.setPosition(0.70, 0.004);
+                                        
+                                            //Add custom buttons to the toolbar 
+                                        
+                                            //Magnifier
+                                            var md = new OM.control.Magnifier({
+                                                width: 200,
+                                                height: 150,
+                                                zoomIncrement: 2,
+                                                collapsible: true
+                                            });
+                                            md.setVisible(false);
+                                        
+                                            mapview.addMapDecoration(md);
+                                            //custom button for magnifier     
+                                            var tb_bt1 = new OM.control.ToolButton(
+                                                "tb_bt1", OM.control.ToolButton.TOGGLE,
+                                                {
+                                                    buttonIcon: imgURL + "zoomtoselection_ena.png",
+                                                    buttonSelectedIcon: imgURL + "zoomtoselection_ena.png",
+                                                    width: 16,
+                                                    height: 16,
+                                                    tooltip: "Magnifier"
+                                                });
+                                        
+                                        
+                                            //Overview Map
+                                            var options = {
+                                                display: false,
+                                                collapse: false,
+                                                overviewLayer: tileLayer
+                                            };
+                                            mapview.setOverviewMapOptions(options);
+                                        
+                                            var tb_bt2 = new OM.control.ToolButton(
+                                                "tb_bt2", OM.control.ToolButton.TOGGLE,
+                                                {
+                                                    buttonIcon: imgURL + "geographicmap_ena.png",
+                                                    buttonSelectedIcon: imgURL + "geographicmap_ena.png",
+                                                    width: 16,
+                                                    height: 16,
+                                                    tooltip: "Overview Map"
+                                                });
+                                            //Legend
+                                            //Display map legend		   
+                                            var legend = new OM.control.MapDecoration(mapLegend, { width: 200, height: 340, collapsible: false, title: legendTitle });
+                                            legend.setVisible(false);
+                                            legend.setPosition(0.8, 0.069);
+                                            mapview.addMapDecoration(legend);
+                                        
+                                            var tb_bt3 = new OM.control.ToolButton(
+                                                "tb_bt3", OM.control.ToolButton.TOGGLE,
+                                                {
+                                                    buttonIcon: imgURL + "filenode_ena.png",
+                                                    buttonSelectedIcon: imgURL + "filenode_ena.png",
+                                                    width: 16,
+                                                    height: 16,
+                                                    tooltip: "Legend"
+                                                });
+                                        
+                                            //Print map or save as pdf
+                                            var tb_bt4 = new OM.control.ToolButton(
+                                                "tb_bt4", OM.control.ToolButton.COMMAND,
+                                                {
+                                                    buttonIcon: imgURL + "print_ena.png",
+                                                    buttonSelectedIcon: imgURL + "print_ena.png",
+                                                    width: 16,
+                                                    height: 16,
+                                                    tooltip: "Print Map"
+                                                });
+                                        
+                                            //Whiteboard Tool
+                                            var wb = new OM.tool.WhiteBoardTool(mapview);
+                                            var tb_bt7 = new OM.control.ToolButton(
+                                                "tb_bt7", OM.control.ToolButton.TOGGLE,
+                                                {
+                                                    buttonIcon: imgURL + "task_ena.png",
+                                                    buttonSelectedIcon: imgURL + "taskerrored_ena.png",
+                                                    width: 16,
+                                                    height: 16,
+                                                    tooltip: "White Board"
+                                                });
+                                            
+                                        
+                                            //Add buttons with separators to the toolbar
+                                            toolbar.addSeparator("sp1");
+                                            toolbar.addButton(tb_bt1);
+                                            toolbar.addSeparator("sp2");
+                                            toolbar.addButton(tb_bt2);
+                                            toolbar.addSeparator("sp3");
+                                            toolbar.addButton(tb_bt3);
+                                            toolbar.addSeparator("sp4");
+                                            toolbar.addButton(tb_bt4);
+                                            toolbar.addSeparator("sp7");
+                                            toolbar.addButton(tb_bt7);
+                                            
+                                            
+                                            //Add Event listeners to respective buttons
+                                            tb_bt1.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, displayMagnifier);
+                                            tb_bt1.addListener(OM.event.ToolbarEvent.BUTTON_UP, hideMagnifier);
+                                            tb_bt2.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, displayOverviewMap);
+                                            tb_bt2.addListener(OM.event.ToolbarEvent.BUTTON_UP, hideOverviewMap);
+                                            tb_bt3.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, displayLegend);
+                                            tb_bt3.addListener(OM.event.ToolbarEvent.BUTTON_UP, hideLegend);
+                                            tb_bt4.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, printMap);
+                                            tb_bt7.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, displayWhiteBoard);
+                                            tb_bt7.addListener(OM.event.ToolbarEvent.BUTTON_UP, hideWhiteBoard);
+                                            
+                                        
+                                            function displayMagnifier() {
+                                                //Display Magnifier , to be added in toolbar  
+                                                md.setVisible(true);
+                                                md.setPosition(0.8, 0.069);
+                                            }
+                                        
+                                            function hideMagnifier() {
+                                                md.setVisible(false);
+                                            }
+                                        
+                                            function displayOverviewMap() {
+                                                // Overview map is defined here again to manage the default panel after the map is initialized.
+                                                var options = {
+                                                    display: true,
+                                                    collapse: false,
+                                                    overviewLayer: tileLayer
+                                                };
+                                                mapview.setOverviewMapOptions(options);
+                                                mapview.showOverviewMap();
+                                            }
+                                        
+                                            function hideOverviewMap() {
+                                                mapview.hideOverviewMap();
+                                            }
+                                        
+                                            function displayLegend() {
+                                                legend.setVisible(true);
+                                            }
+                                        
+                                            function hideLegend() {
+                                                legend.setVisible(false);
+                                            }
+                                        
+                                            function printMap() {
+                                                mapview.print();
+                                            }
+                                        
+                                            function displayWhiteBoard() {
+                                                wb.start();
+                                            }
+                                        
+                                            function hideWhiteBoard() {
+                                                wb.finish();
+                                            }
+                                        
+                                            function clearWhiteBoard() {
+                                                wb.clear();
+                                            }
+                                           
+                                            //Add the toolbar to mapview.           
+                                            mapview.addToolBar(toolbar);
+                                        
+                                            //Pulse Animation - create style for all entities
+                                        
+                                            var pulse = new OM.style.PulseAnimation({
+                                                stroke: "#3333ff",
+                                                duration: 1,
+                                                beginSize: 8,
+                                                endSize: 50
+                                            });
+                                        
+                                            var centeredFirstTime = false;
+					//add the code to map center and zoom according to service geo location
+                                        
+                                        //Display data
+                                            loadAndDisplayLayers();
+                                            mapview.init();
+                                            mapview.setInfoWindowStyle({width:"250px" , contentStyle :{"font-size":"12px"} , titleStyle :{"font-size":"13px"} });
+                                            
+                                            
+                                        
+                                            //get the toolbar button for circle.
+                                            var circleBtn = toolbar.getBuiltInToolButton(OM.control.ToolBar.BUILTIN_CIRCLE);
+                                            circleBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, addCircleFilter);
+                                        
+                                            //get the rectangle button from toolbar
+                                            var rectangleBtn = toolbar.getBuiltInToolButton(OM.control.ToolBar.BUILTIN_RECTANGLE);
+                                            rectangleBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, addRectangleFilter);
+											rectangleBtn.addListener(OM.event.ToolbarEvent.BUTTON_UP, clearRectangle);
+											
+											//get the redline button from toolbar
+                                            var redLineBtn = toolbar.getBuiltInToolButton(OM.control.ToolBar.BUILTIN_REDLINE);
+                                            redLineBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, addRedLineFilter);
+											redLineBtn.addListener(OM.event.ToolbarEvent.BUTTON_UP, clearRedLine);
+                                        
+                                        
+                                            // get the clear button , add the code to remove the styling from map.
+                                            var clearBtn = toolbar.getBuiltInToolButton(OM.control.ToolBar.BUILTIN_CLEAR);
+                                            clearBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, removeCircleFilter);
+                                            clearBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, removeRectangleFilter);
+											clearBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, removeRedLineFilter);
+                                            clearBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, hideLegend);
+                                            clearBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, hideOverviewMap);
+                                            clearBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, hideMagnifier);
+                                            clearBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, hideWhiteBoard);
+                                            clearBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, clearWhiteBoard);
+                                        
+                                        
+                                            //get the circle tool from toolbar
+                                            var circleTool = toolbar.getBuiltInTool(OM.control.ToolBar.BUILTIN_CIRCLE);
+                                            circleTool.on(OM.event.ToolEvent.TOOL_END, circleEndAction);
+                                        
+                                            //get the rectangle tool from toolbar
+                                            var rectangleTool = toolbar.getBuiltInTool(OM.control.ToolBar.BUILTIN_RECTANGLE);
+                                            rectangleTool.on(OM.event.ToolEvent.TOOL_END, rectangleEndAction);
+											
+											//get the redline tool from toolbar
+                                            var redLineTool = toolbar.getBuiltInTool(OM.control.ToolBar.BUILTIN_REDLINE);
+                                            redLineTool.on(OM.event.ToolEvent.TOOL_END, redLineEndAction);
+                                                                                
+                                            // define the selection/highlight style
+                                            var glowFilter = new OM.visualfilter.Glow({ color: "#0000ff", strength: 20, applyToLayer: false });
+                                        
+                                        
+                                            //Circle Highlight related functions
+                                            function addCircleFilter() {
+                                                removeCircleFilter();
+                                                circleTool.start();
+                                            }
+                                        
+                                            var visualLayers = [];
+                                            function circleEndAction() {
+                                                var circle = circleTool.getGeometry();
+                                                var allLayers = mapview.getFeatureLayers();
+                                        
+                                                //apply marker style to all vector layers within the circle. 
+                                                var filter1 = new OM.filter.InsidePolygon(circle);
+                                        
+                                                var i = 0;
+                                                allLayers.forEach(function (currentLayer) {
+                                                    if (!(currentLayer.getName().startsWith("visualLayer") || (currentLayer.getName()) == "edge" || (currentLayer.getName()) == "connectivity" || (currentLayer.getName()) == "pipe")) {
+                                                        var newLayer = currentLayer.applyFilter(filter1, false);
+                                                        newLayer.setName("visualLayer" + i);
+                                                        i = i + 1;
+                                                        visualLayers.push(newLayer);
+                                                        mapview.addLayer(newLayer);
+                                                        newLayer.setVisualFilter(glowFilter);
+                                                    } //end if
+                                                })//end for loop
+                                            } //end function
+                                        
+                                            function removeCircleFilter() {
+                                                visualLayers.forEach(function (layer) {
+                                                    mapview.removeLayer(layer);
+                                                })
+                                            }
+                                        
+                                            //Rectangle Highlight related functions
+                                            function addRectangleFilter() {
+                                                removeRectangleFilter();
+                                                rectangleTool.start();
+                                            }
+                                        
+                                            var visualRectLayers = [];
+                                        
+                                            function rectangleEndAction() {
+                                                var rectangle = rectangleTool.getGeometry();
+                                                var allLayers = mapview.getFeatureLayers();
+                                        
+                                                //apply marker style to all vector layers within the rectangle. 
+                                                var filter1 = new OM.filter.InsidePolygon(rectangle);
+                                        
+                                                var i = 0;
+                                                allLayers.forEach(function (currentLayer) {
+                                                    if (!(currentLayer.getName().startsWith("visualRectLayers") || (currentLayer.getName()) == "edge" || (currentLayer.getName()) == "connectivity" || (currentLayer.getName()) == "pipe")) {
+                                                        var newLayer = currentLayer.applyFilter(filter1, false);
+                                                        newLayer.setName("visualRectLayers" + i);
+                                                        i = i + 1;
+                                                        visualRectLayers.push(newLayer);
+                                                        mapview.addLayer(newLayer);
+                                                        newLayer.setVisualFilter(glowFilter);
+                                        
+                                                    } //end if
+                                                }) //end for loop
+                                            } //end function
+                                        
+                                            function removeRectangleFilter() {
+                                                visualRectLayers.forEach(function (layer) {
+                                                    mapview.removeLayer(layer);
+                                                })
+                                            }
+                                        
+											function clearRectangle() {
+												if(rectangleTool.getStatus()==1)
+													rectangleTool.clear();
+                                            }
+											
+											//Redline Highlight related functions
+                                            function addRedLineFilter() {
+                                                removeRedLineFilter();
+                                                redLineTool.start();
+                                            }
+                                        
+                                            var visualRedLayers = [];
+                                        
+                                            function redLineEndAction() {
+                                                var redLine = redLineTool.getGeometry();
+                                                var allLayers = mapview.getFeatureLayers();
+                                        
+                                                //apply marker style to all vector layers within the redLine. 
+                                                var filter1 = new OM.filter.InsidePolygon(redLine);
+                                        
+                                                var i = 0;
+                                                allLayers.forEach(function (currentLayer) {
+                                                    if (!(currentLayer.getName().startsWith("visualRedLayers") || (currentLayer.getName()) == "edge" || (currentLayer.getName()) == "connectivity" || (currentLayer.getName()) == "pipe")) {
+                                                        var newLayer = currentLayer.applyFilter(filter1, false);
+                                                        newLayer.setName("visualRedLayers" + i);
+                                                        i = i + 1;
+                                                        visualRedLayers.push(newLayer);
+                                                        mapview.addLayer(newLayer);
+                                                        newLayer.setVisualFilter(glowFilter);
+                                        
+                                                    } //end if
+                                                }) //end for loop
+                                            } //end function
+                                        
+                                            function removeRedLineFilter() {
+                                                visualRedLayers.forEach(function (layer) {
+                                                    mapview.removeLayer(layer);
+                                                })
+                                            }
+											
+											function clearRedLine() {
+												if(redLineTool.getStatus()==1)
+													redLineTool.clear();
+                                            }
+                                            function processMultiNode() {
+                                        
+                                            }
+                                        
+                                            function displayLatLong(event) {
+                                                var location = mapview.getCursorLocation();
+                                                var locX;
+                                                var locY;
+                                                if (mapview.getUniverse().getSRID() == 8307) {
+                                                    locX = location.getX().toFixed(4);
+                                                    locY = location.getY().toFixed(4);
+                                                } else {
+                                                    var transform = location.transform(8307);
+                                                    locX = transform.getX().toFixed(4);
+                                                    locY = transform.getY().toFixed(4);
+                                                }
+                                        
+                                                //display it inside the info windowm +
+                                                var displayStr = infoStr.replace("locX", locX);
+                                                displayStr = displayStr.replace("locY", locY);
+                                                //set defauly style of info windows
+                                                var infoStyle1 = {
+                                                    infoWindowStyle: { "background-color": "#e5f9ff" },
+                                                    titleStyle: { background: "#F5F5F9", "font-size": "12px", "font-family": "Tahoma" },
+                                                    contentStyle: { background: "#F5F5F9", "font-size": "12px", "font-family": "Tahoma" },
+                                                    "tailStyle": { "offset": "25", "background": "#ccf3ff" },
+                                                    "closeButtonStyle": {
+                                                        "mouseOutButton": { "src": "resources/mapview/infoWindow/close_en.png" },
+                                                        "mouseOverButton": { "src": "resources/mapview/infoWindow/close_ov.png" }
+                                                    }
+                                                }
+                                                mapview.setInfoWindowStyle(infoStyle1);
+                                                mapview.displayInfoWindow(location, displayStr, { title: coordinates, width: "200px", height: "80px" });
+                                            }
+                                        
+                                            
+                                        
+                                        }
+                                        function setCenter() {
+                                            if (lastClickedPoint) {
+                                                mapview.setMapCenter(lastClickedPoint);
+                                                lastClickedPoint = null;
+                                            }
+                                            else {
+                                                mapview.setMapCenter(mapview.getCursorLocation(), true);
+                                            }
+                                        }
+                                        function setZoomLevelToCountry() {
+                                            setCenter();
+                                            mapview.setMapZoomLevel(3);
+                                        
+                                        }
+                                        function setZoomLevelToCity() {
+                                            setCenter();
+                                            mapview.setMapZoomLevel(7);
+                                        }
+                                        function setZoomLevelToStreet() {
+                                            setCenter();
+                                            mapview.setMapZoomLevel(10);
+                                        }
+                                        
+                                        function setZoomLevelToDefault() {
+                                            setCenter();
+                                            mapview.setMapZoomLevel(mapZoom);
+                                        }
+                                        
+                                        
+                                        function getInfoWindowHtml(attribs, deviceType) {
+                                            var oddColor = "#f7f9fc";
+                                            var evenColor = "#d9e7fc";
+                                            var count = 0;
+                                            var htmlStr = "<table>";
+                                            for (var attr in attribs) {
+                                                if (attr == "_LABEL_" || attr =="ENTITYID") continue;
+                                                htmlStr += "<tr><td width=\"350\" style=\"border:solid 1px #545e5e ; font-weight:bold;\" bgcolor=\"" + ((count % 2 == 0) ? evenColor : oddColor) + "\">";
+                                                htmlStr += attr
+                                                htmlStr += "</td><td width=\"750\" style=\"border:solid 1px #545e5e\" bgcolor=\"" + ((count % 2 == 0) ? evenColor : oddColor) + "\">";
+                                                htmlStr += attribs[attr];
+                                                htmlStr += "</td>";
+                                                count++;
+                                                htmlStr += "</tr>";
+                                            }
+                                            htmlStr += "</table>";
+                                            return htmlStr;
+                                        }
+                                        ]]>  
+                        </trh:script>
+                                   <trh:script id="rightclickmenus"><?audit suppress oracle.adf.faces.verbatimScript?>
+						  var foiId = "false";
+						  var msgpop;
+						  var rtx = null; 
+						  var rty = null; 
+						  
+						 /** This function is called when the user right clicks on the map.
+						   *  It displays a context menu at the mouse right click location  */ 
+						  function showContextMenu(point) {    
+							 var foiId = point.feature.id;
+							 var rtx = point.evt.clientX; 
+							 var rty = point.evt.clientY; 
+                                                         lastClickedPoint = point.feature.geo;
+							 msgpop = AdfPage.PAGE.findComponent(dynapop2);
+							 AdfCustomEvent.queue(msgpop, "jsSendInfo", {foiId:foiId ,x: rtx, y: rty}, true);
+        			
+						  } 
+						  
+						  // This method is added as a fix to the problem of bubbling of the IE browser specific 
+						  // popup menu, upon right clicking on the canvas. 
+						  // The clientCliener is added just before the ilog canvas tag (Ex: networkView, equipmentView and diagrammerView tags)
+						  // All this does is capture the user right-click (contextMenu) action and then
+						  // prevent it from bubbling up to the browser by canceling the event.                                  
+						  function interrupt(event) {                
+							  event.cancel(); 
+							  return false;
+						  }
+						  
+					</trh:script>
+                             
+                         </af:panelGroupLayout>
+                    </f:facet>
+               </af:panelStretchLayout>
+          </f:facet>
+        <f:facet name="contextualArea"/>
+        <f:facet name="localAreaScroll"/>
+    </af:pageTemplate>
+</jsp:root>

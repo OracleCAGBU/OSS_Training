@@ -1,0 +1,392 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html" xmlns:tr="http://myfaces.apache.org/trinidad/html"
+          xmlns:pf="/platform/functions" xmlns:cui="/CommsUI">
+    <c:set var="inventoryUIBundle"
+           value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <c:set var="bundle"
+           value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+    <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+        <f:facet name="localArea">
+            <af:panelGroupLayout id="pgl1" binding="#{backingBeanScope.edit_panelGroupLayout}" layout="scroll">
+                <cui:WarningDialog id="wd" binding="#{backingBeanScope.navigationWarningDialog}"/>
+                <af:panelHeader text="#{inventoryUIBundle.LOGICAL_DEVICE} - #{inventoryUIBundle.LOGICAL_DEVICE_BULK_EDIT}"
+                                helpTopicId="#{pageFlowScope.InventoryBulkEditBean.helpTopic}" id="ph1">
+                    <f:facet name="toolbar">
+                        <af:panelGroupLayout id="pgl3" layout="horizontal">
+                            <!--CRUD Buttons Starts -->
+                            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb1"
+                                              actionListener="#{pageFlowScope.InventoryBulkEditBean.saveBefore}"
+                                              accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+                                <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+                            </af:commandButton>
+                            <af:spacer width="10" height="10" id="s4"/>
+                            <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2" action="cancel"
+                                              immediate="true" actionListener="#{bindings.closeSubTask.execute}"
+                                              accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <af:panelGroupLayout layout="scroll" id="pgl23">
+                        <af:showDetailHeader text="#{inventoryUIBundle.LOGICAL_DEVICE_INFORM}" disclosed="true"
+                                             id="PAGE_TITLE">
+                            <af:group id="g1">
+                                <af:panelGroupLayout id="pgl2" layout="scroll">
+                                    <af:panelFormLayout id="queryPFL"
+                                                        binding="#{pageFlowScope.InventoryBulkEditBean.queryPanelFormLayout}"
+                                                        maxColumns="1" fieldWidth="100%">
+                                        <af:selectOneChoice id="logicaldevice-specification"
+                                                            label="#{inventoryUIBundle.SPECIFICATION}" autoSubmit="true"
+                                                            required="true" disabled="true"
+                                                            value="#{pageFlowScope.InventoryBulkEditBean.selectedSpec}">
+                                            <f:selectItems binding="#{pageFlowScope.InventoryBulkEditBean.specifications}"
+                                                           id="si1"/>
+                                        </af:selectOneChoice>
+                                        <trh:tableLayout>
+                                            <af:forEach items="#{pageFlowScope.InventoryBulkEditBean.attributePairList}"
+                                                        var="pair" varStatus="vs">
+                                                <trh:rowLayout>
+                                                    <af:iterator id="i3" value="#{pair.attributes}" var="criterion"
+                                                                 varStatus="vs2">
+                                                        <af:switcher id="criteriaSwitcher2"
+                                                                     facetName="#{criterion.attribute.componentType}">
+                                                            <c:set var="compID" value="#{criterion.attribute.name}"/>
+                                                            <f:facet name="inputText">
+                                                                <af:group id="g3">
+                                                                    <trh:cellFormat halign="right">
+                                                                        <af:outputLabel value="#{criterion.attribute.label}"
+                                                                                        id="textLabe"
+                                                                                        inlineStyle="white-space:nowrap;"/>
+                                                                    </trh:cellFormat>
+                                                                    <trh:cellFormat valign="top">
+                                                                        <af:switcher id="switchForAutoSuggest"
+                                                                                     facetName="#{criterion.attribute.additionalInfo.behaviour}"
+                                                                                     defaultFacet="text">
+                                                                            <f:facet name="text">
+                                                                                <af:inputText id="text"
+                                                                                              value="#{criterion.values[0]}"
+                                                                                              disabled="#{criterion.attribute.additionalInfo.disableValue}"
+                                                                                              autoSubmit="true"
+                                                                                              shortDesc="#{pageFlowScope.InventoryResultsBean.displayInfo} #{criterion.attribute.label}"
+                                                                                              columns="#{pageFlowScope.InventoryQueryBean.inputTextWidth}"
+                                                                                              required="#{criterion.attribute.required}"
+                                                                                              readOnly="#{criterion.attribute.readOnly}"
+                                                                                              valueChangeListener="#{pageFlowScope.InventoryBulkEditBean.processValueChange}">
+                                                                                    <f:attribute name="compName"
+                                                                                                 value="#{criterion.attribute.name}"/>
+                                                                                </af:inputText>
+                                                                            </f:facet>
+                                                                            <f:facet name="popup">
+                                                                                <af:group id="g4">
+                                                                                    <af:spacer width="6" height="10"/>
+                                                                                    <af:inputText value="#{criterion.values[0]}"
+                                                                                                  id="popup"
+                                                                                                  simple="true"
+                                                                                                  columns="#{pageFlowScope.InventoryQueryBean.inputTextWidth}"
+                                                                                                  autoSubmit="true"
+                                                                                                  disabled="true"
+                                                                                                  required="#{criterion.attribute.required}"
+                                                                                                  readOnly="#{criterion.attribute.readOnly}"
+                                                                                                  valueChangeListener="#{pageFlowScope.InventoryBulkEditBean.processValueChange}">
+                                                                                        <f:attribute name="compName"
+                                                                                                     value="#{criterion.attribute.name}"/>
+                                                                                    </af:inputText>
+                                                                                    <trh:cellFormat id="cf17">
+                                                                                        <af:commandImageLink id="cil9"
+                                                                                                             icon="/images/search_ena.png"
+                                                                                                             shortDesc="#{inventoryUIBundle.BROWSE}"
+                                                                                                             actionListener="#{pageFlowScope.InventoryQueryBean.processPopupBehaviour}">
+                                                                                            <af:setPropertyListener type="action"
+                                                                                                                    from="#{criterion.attribute}"
+                                                                                                                    to="#{pageFlowScope.currentPopupDescriptor}"/>
+                                                                                        </af:commandImageLink>
+                                                                                    </trh:cellFormat>
+                                                                                </af:group>
+                                                                            </f:facet>
+                                                                        </af:switcher>
+                                                                    </trh:cellFormat>
+                                                                    <trh:cellFormat/>
+                                                                </af:group>
+                                                            </f:facet>
+                                                            <f:facet name="inputDate">
+                                                                <af:group id="g2">
+                                                                    <trh:cellFormat halign="right">
+                                                                        <af:outputLabel value="#{criterion.attribute.label}"
+                                                                                        id="dateLabel"/>
+                                                                    </trh:cellFormat>
+                                                                    <trh:cellFormat>
+                                                                        <af:inputDate id="dateInput"
+                                                                                      value="#{criterion.values[0]}"
+                                                                                      autoSubmit="true"
+                                                                                      shortDesc="#{pageFlowScope.InventoryResultsBean.displayInfo} #{criterion.attribute.label}"
+                                                                                      required="#{criterion.attribute.required}"
+                                                                                      readOnly="#{criterion.attribute.readOnly}"
+                                                                                      valueChangeListener="#{pageFlowScope.InventoryBulkEditBean.processValueChange}">
+                                                                            <f:attribute name="compName"
+                                                                                         value="#{criterion.attribute.name}"/>
+                                                                            <af:convertDateTime pattern="#{platformPrefs.dateFormatPattern}"/>
+                                                                        </af:inputDate>
+                                                                    </trh:cellFormat>
+                                                                </af:group>
+                                                            </f:facet>
+                                                            <f:facet name="selectOneChoice">
+                                                                <af:group id="g6">
+                                                                    <trh:cellFormat halign="right">
+                                                                        <af:outputLabel value="#{criterion.attribute.label}"
+                                                                                        id="selectOneChoiceLabel"
+                                                                                        inlineStyle="white-space:nowrap;"/>
+                                                                    </trh:cellFormat>
+                                                                    <trh:cellFormat columnSpan="2">
+                                                                        <af:switcher id="switchForPPR"
+                                                                                     facetName="#{criterion.attribute.additionalInfo.pprBehaviour}"
+                                                                                     defaultFacet="pprBehaviour">
+                                                                            <f:facet name="pprBehaviour">
+                                                                                <af:selectOneChoice id="selectOneChoiceInputWithoutDepCriteria"
+                                                                                                    value="#{criterion.values[0]}"
+                                                                                                    autoSubmit="true"
+                                                                                                    disabled="#{criterion.attribute.additionalInfo.disableValue}"
+                                                                                                    shortDesc="#{criterion.attribute.label}"
+                                                                                                    contentStyle="#{pageFlowScope.InventoryQueryBean.selectOneChoiceWidth}"
+                                                                                                    required="#{criterion.attribute.required}"
+                                                                                                    readOnly="#{criterion.attribute.readOnly}"
+                                                                                                    valueChangeListener="#{pageFlowScope.InventoryBulkEditBean.processValueChange}">
+                                                                                    <f:attribute name="compName"
+                                                                                                 value="#{criterion.attribute.name}"/>
+                                                                                    <af:clientAttribute name="componentName"
+                                                                                                        value="#{criterion.attribute.name}"/>
+                                                                                    <af:clientListener method="selectOneChange"
+                                                                                                       type="valueChange"/>
+                                                                                    <af:serverListener type="jsSelectOneChange"
+                                                                                                       method="#{pageFlowScope.InventoryQueryBean.handlePPRevent}"/>
+                                                                                    <f:selectItem id="si4" itemLabel=""
+                                                                                                  itemValue=""/>
+                                                                                    <f:selectItems id="si"
+                                                                                                   value="#{criterion.attribute.model}"/>
+                                                                                </af:selectOneChoice>
+                                                                            </f:facet>
+                                                                            <f:facet name="NOPPR">
+                                                                                <af:selectOneChoice id="selectOneChoiceInputWithoutDepCriteria1"
+                                                                                                    value="#{criterion.values[0]}"
+                                                                                                    autoSubmit="true"
+                                                                                                    disabled="#{criterion.attribute.additionalInfo.disableValue}"
+                                                                                                    shortDesc="#{criterion.attribute.label}"
+                                                                                                    contentStyle="#{pageFlowScope.InventoryQueryBean.selectOneChoiceWidth}"
+                                                                                                    required="#{criterion.attribute.required}"
+                                                                                                    readOnly="#{criterion.attribute.readOnly}"
+                                                                                                    valueChangeListener="#{pageFlowScope.InventoryBulkEditBean.processValueChange}">
+                                                                                    <f:attribute name="compName"
+                                                                                                 value="#{criterion.attribute.name}"/>
+                                                                                    <f:selectItem id="si2" itemLabel=""
+                                                                                                  itemValue=""/>
+                                                                                    <f:selectItems id="si3"
+                                                                                                   value="#{criterion.attribute.model}"/>
+                                                                                </af:selectOneChoice>
+                                                                            </f:facet>
+                                                                        </af:switcher>
+                                                                    </trh:cellFormat>
+                                                                </af:group>
+                                                            </f:facet>
+                                                            <f:facet name="selectManyChoice">
+                                                                <af:switcher id="switchForSelectManyChoice"
+                                                                             facetName="#{criterion.attribute.additionalInfo.allSelectDefaultManyChoice}"
+                                                                             defaultFacet="selectManyChoice">
+                                                                    <f:facet name="selectManyChoice">
+                                                                        <af:group id="gm1">
+                                                                            <trh:cellFormat halign="right">
+                                                                                <af:outputLabel value="#{criterion.attribute.label}"
+                                                                                                id="selectMChoiceLabel1"
+                                                                                                inlineStyle="white-space:nowrap;"/>
+                                                                            </trh:cellFormat>
+                                                                            <trh:cellFormat columnSpan="2">
+                                                                                <af:selectManyChoice id="selectMChoiceInputWithoutDepCriteria1"
+                                                                                                     value="#{criterion.values[0]}"
+                                                                                                     autoSubmit="true"
+                                                                                                     shortDesc="#{criterion.attribute.label}"
+                                                                                                     contentStyle="#{pageFlowScope.InventoryQueryBean.selectOneChoiceWidth}"
+                                                                                                     required="#{criterion.attribute.required}"
+                                                                                                     readOnly="#{criterion.attribute.readOnly}"
+                                                                                                     valueChangeListener="#{pageFlowScope.InventoryBulkEditBean.processValueChange}">
+                                                                                    <f:attribute name="compName"
+                                                                                                 value="#{criterion.attribute.name}"/>
+                                                                                    <af:clientAttribute name="componentName"
+                                                                                                        value="#{criterion.attribute.name}"/>
+                                                                                    <af:clientListener method="selectOneChange"
+                                                                                                       type="focus"/>
+                                                                                    <af:serverListener type="jsSelectOneChange"
+                                                                                                       method="#{pageFlowScope.InventoryQueryBean.handlePPRevent}"/>
+                                                                                    <f:selectItems id="sm1"
+                                                                                                   value="#{criterion.attribute.model}"/>
+                                                                                </af:selectManyChoice>
+                                                                            </trh:cellFormat>
+                                                                        </af:group>
+                                                                    </f:facet>
+                                                                    <f:facet name="allSelectDefaultManyChoice">
+                                                                        <af:group id="gm2">
+                                                                            <trh:cellFormat halign="right">
+                                                                                <af:outputLabel value="#{criterion.attribute.label}"
+                                                                                                id="selectMChoiceLabel2"
+                                                                                                inlineStyle="white-space:nowrap;"/>
+                                                                            </trh:cellFormat>
+                                                                            <trh:cellFormat columnSpan="2">
+                                                                                <af:selectManyChoice id="selectMChoiceInputWithoutDepCriteria2"
+                                                                                                     value="#{criterion.values[0]}"
+                                                                                                     autoSubmit="true"
+                                                                                                     contentStyle="#{pageFlowScope.InventoryQueryBean.selectOneChoiceWidth}"
+                                                                                                     shortDesc="#{criterion.attribute.label}"
+                                                                                                     contentDelivery="lazy"
+                                                                                                     lazySelectedLabels="_ALL_"
+                                                                                                     required="#{criterion.attribute.required}"
+                                                                                                     readOnly="#{criterion.attribute.readOnly}"
+                                                                                                     valueChangeListener="#{pageFlowScope.InventoryBulkEditBean.processValueChange}">
+                                                                                    <f:attribute name="compName"
+                                                                                                 value="#{criterion.attribute.name}"/>
+                                                                                    <f:selectItem itemLabel="None"
+                                                                                                  itemValue=""/>
+                                                                                    <f:selectItems id="sm2"
+                                                                                                   value="#{criterion.attribute.model}"/>
+                                                                                </af:selectManyChoice>
+                                                                            </trh:cellFormat>
+                                                                        </af:group>
+                                                                    </f:facet>
+                                                                </af:switcher>
+                                                            </f:facet>
+                                                            <f:facet name="inputComboboxListOfValues">
+                                                                <af:group id="g11">
+                                                                    <trh:cellFormat halign="right">
+                                                                        <af:outputLabel value="#{criterion.attribute.label}"
+                                                                                        id="iclvC"
+                                                                                        inlineStyle="white-space:nowrap;"/>
+                                                                    </trh:cellFormat>
+                                                                    <trh:cellFormat columnSpan="2">
+                                                                        <af:inputComboboxListOfValues xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                                                                                      id="iclv1"
+                                                                                                      autoSubmit="true"
+                                                                                                      searchDesc=" "
+                                                                                                      valueChangeListener="#{criterion.attribute.additionalInfo.charDetails.lovValueChangedBulkEdit}"
+                                                                                                      columns="#{pageFlowScope.InventoryQueryBean.lovWidth}"
+                                                                                                      model="#{criterion.attribute.additionalInfo.charDetails.listOfValuesModelBulkEdit}"
+                                                                                                      value="#{criterion.values[0]}"
+                                                                                                      required="#{criterion.attribute.required}"
+                                                                                                      readOnly="#{criterion.attribute.readOnly}">
+                                                                            <af:autoSuggestBehavior xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                                                                                    suggestItems="#{criterion.attribute.additionalInfo.charDetails.getSuggestItemsBulkEdit}"/>
+                                                                            <f:attribute name="compName"
+                                                                                         value="#{criterion.attribute.name}"/>
+                                                                        </af:inputComboboxListOfValues>
+                                                                    </trh:cellFormat>
+                                                                </af:group>
+                                                            </f:facet>
+                                                            <f:facet name="selectBooleanCheckbox">
+                                                                <af:group>
+                                                                    <trh:cellFormat halign="right">
+                                                                        <af:selectBooleanCheckbox id="selectBooleanCheckboxInput"
+                                                                                                  value="#{criterion.values[0]}"
+                                                                                                  autoSubmit="true"
+                                                                                                  shortDesc="#{criterion.attribute.label}"
+                                                                                                  required="#{criterion.attribute.required}"
+                                                                                                  readOnly="#{criterion.attribute.readOnly}"
+                                                                                                  valueChangeListener="#{pageFlowScope.InventoryBulkEditBean.processValueChange}">
+                                                                            <f:attribute name="compName"
+                                                                                         value="#{criterion.attribute.name}"/>
+                                                                        </af:selectBooleanCheckbox>
+                                                                    </trh:cellFormat>
+                                                                    <trh:cellFormat halign="left" columnSpan="2">
+                                                                        <af:spacer width="5" height="10" id="s25"/>
+                                                                        <af:outputLabel value="#{criterion.attribute.label}"
+                                                                                        id="selectBooleanCheckboxLabel"/>
+                                                                    </trh:cellFormat>
+                                                                </af:group>
+                                                            </f:facet>
+                                                            <f:facet name="inputNumberSpinbox">
+                                                                <af:group>
+                                                                    <trh:cellFormat halign="right">
+                                                                        <af:outputLabel value="#{criterion.attribute.label}"
+                                                                                        id="numberLabel"/>
+                                                                    </trh:cellFormat>
+                                                                    <trh:cellFormat>
+                                                                        <af:inputText id="numberInput"
+                                                                                      value="#{criterion.values [0]}"
+                                                                                      columns="#{pageFlowScope.InventoryQueryBean.inputTextWidth}"
+                                                                                      maximumLength="15"
+                                                                                      autoSubmit="true"
+                                                                                      shortDesc="#{pageFlowScope.InventoryResultsBean.displayInfo} #{criterion.attribute.label}"
+                                                                                      required="#{criterion.attribute.required}"
+                                                                                      readOnly="#{criterion.attribute.readOnly}"
+                                                                                      valueChangeListener="#{pageFlowScope.InventoryBulkEditBean.processValueChange}">
+                                                                            <f:attribute name="compName"
+                                                                                         value="#{criterion.attribute.name}"/>
+                                                                            <af:validateRegExp pattern="[0-9]{1,15}"
+                                                                                               messageDetailNoMatch="#{inventoryUIBundle.RANGE_NUMERIC_VALIDATION}"/>
+                                                                        </af:inputText>
+                                                                    </trh:cellFormat>
+                                                                    <trh:cellFormat/>
+                                                                </af:group>
+                                                            </f:facet>
+                                                        </af:switcher>
+                                                        <trh:cellFormat>
+                                                            <af:spacer width="100" height="10" id="s22"/>
+                                                        </trh:cellFormat>
+                                                    </af:iterator>
+                                                </trh:rowLayout>
+                                            </af:forEach>
+                                        </trh:tableLayout>
+                                    </af:panelFormLayout>
+                                </af:panelGroupLayout>
+                            </af:group>
+                        </af:showDetailHeader>
+                        <af:spacer width="50" height="10" id="s1"/>
+                        <af:commandToolbarButton id="addFieldsButtonSingle" text="#{inventoryUIBundle.ADD_FIELDS}..."
+                                                 actionDelivery="none" clientComponent="true">
+                            <af:clientAttribute name="srcSelectedSpec"
+                                                value="#{pageFlowScope.InventoryBulkEditBean.selectedSpec}"/>
+                            <af:clientAttribute name="srcBulkEditSelectList"
+                                                value="#{pageFlowScope.InventoryBulkEditBean.bulkEditSelectList}"/>
+                            <af:showPopupBehavior popupId="searchPopup" triggerType="mouseDown"/>
+                        </af:commandToolbarButton>
+                        <af:popup id="searchPopup" contentDelivery="lazyUncached" launcherVar="source"
+                                  eventContext="launcher">
+                            <af:setPropertyListener from="#{CharSearchPopupBean.popupTaskFlowId}"
+                                                    to="#{CharSearchPopupBean.dynamicTaskFlowId}" type="popupFetch"/>
+                            <af:setPropertyListener from="#{source.attributes.srcBulkEditSelectList}"
+                                                    to="#{pageFlowScope.charBulkEditSelectList}" type="popupFetch"/>
+                            <af:setPropertyListener from="#{source.attributes.srcSelectedSpec}"
+                                                    to="#{pageFlowScope.charSelectedSpec}" type="popupFetch"/>
+                            <af:panelWindow id="addFieldsPanelWindow" title="#{inventoryUIBundle.ADD_FIELDS}"
+                                            clientComponent="true" modal="true">
+                                <af:panelHeader text="#{pageFlowScope.InventoryBulkEditBean.popupLabel}"
+                                                helpTopicId="OHW_addFields" id="ph2">
+                                    <af:panelStretchLayout id="pt_ps21" inlineStyle="width:900px;height:450px;">
+                                        <f:facet name="center">
+                                            <af:region value="#{bindings.attributeSelector.regionModel}" id="IQ_r1"
+                                                       regionNavigationListener="#{pageFlowScope.InventoryBulkEditBean.navigationListener}"/>
+                                        </f:facet>
+                                    </af:panelStretchLayout>
+                                </af:panelHeader>
+                            </af:panelWindow>
+                            <af:clientListener method="popupClosedListener" type="popupClosed"/>
+                            <af:serverListener type="serverPopupClosed"
+                                               method="#{CharSearchPopupBean.swapEmptyTaskFlow}"/>
+                        </af:popup>
+                        <trh:script id="script1">
+                        function popupClosedListener(event) {
+                            var source = event.getSource();
+                            var popupId = source.getClientId();
+                            var params = {
+                            };
+                            params['popupId'] = popupId;
+                            var type = "serverPopupClosed";
+                            var immediate = true;
+                            AdfCustomEvent.queue(source, type, params, immediate);
+                        }
+						function selectOneChange(event){
+							var selectOne = event.getSource();
+							  var componentName = selectOne.getProperty('componentName');
+							 AdfCustomEvent.queue(selectOne, "jsSelectOneChange", {selectOne: selectOne,componentName:componentName}, true);      
+					    }
+                      </trh:script>
+                    </af:panelGroupLayout>
+                </af:panelHeader>
+            </af:panelGroupLayout>
+        </f:facet>
+    </af:pageTemplate>
+</jsp:root>

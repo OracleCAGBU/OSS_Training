@@ -1,0 +1,545 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:cui="/CommsUI"
+          xmlns:jvtf="http://www.ilog.com/jviews/tlds/jviews-tgo-faces.tld"
+          xmlns:jv="http://www.ilog.com/jviews/tlds/jviews-faces.tld"
+          xmlns:jvf="http://www.ilog.com/jviews/tlds/jviews-framework-faces.tld"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:h="http://java.sun.com/jsf/html" 
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+   <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                    id="pt1">
+      <f:facet name="localArea">
+        <af:panelGroupLayout id="pgl1" layout="scroll" binding="#{backingBeanScope.EHVB_view_panelGroupLayout}">
+             <af:resource source="script/view.js" type="javascript"/>
+            <!--af:panelGroupLayout id="pgl23" layout="scroll">
+                <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left">
+                    <af:outputText id="otbi" styleClass="invCommonText" noWrap="true" rendered="#{!(EquipmentHierarchyViewBean.popupMode)}"
+                                   value="#{EquipmentHierarchyViewBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+                    <af:menuBar id="menuBar1">
+                          <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invSearchMenu"
+                                   rendered="#{!(EquipmentHierarchyViewBean.popupMode)}"   />
+                    </af:menuBar>
+                    <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionView1}" contentDelivery="lazyUncached">
+                        <af:dialog id="BISearchPopup_d1" type="none"
+                                   title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                            <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                                <f:facet name="center">
+                                   <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                        <af:serverListener type="refreshEntity" method="#{EquipmentHierarchyViewBean.afterBusinessInteractionSelectionChange}"/>
+                    </af:popup>
+                </af:panelGroupLayout>
+            </af:panelGroupLayout-->
+         <af:panelHeader text="#{inventoryUIBundle.EQUIPMENT_VIEW}" helpTopicId="OHW_equipView">
+            <f:facet name="context"/>
+            <!-- Menu Items -->
+            <f:facet name="menuBar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>                        
+            <af:resource source="css/style.css" type="css"/>
+            
+            <jvf:zoomInteractor id="zoom" />
+            <jvf:panInteractor id="pan" />
+            <jvtf:clientSelectInteractor id="select" moveAllowed="true" /> 
+            
+            <af:panelGroupLayout id="pgl2" layout="horizontal" valign="top" halign="left">
+                  <af:commandButton id="updateADFComponents" binding="#{backingBeanScope.updateADFComponents}" partialSubmit="true" visible="false"
+                                    shortDesc="#{inventoryUIBundle.UPDATE}"/>
+                  <af:commandButton id="dummyCanvasButton" binding="#{backingBeanScope.dummyCanvasButton}" partialSubmit="true" visible="false"
+                                    actionListener="#{EquipmentHierarchyViewBean.canvasShowAll}"
+                                    shortDesc="#{inventoryUIBundle.CANVAS}"/>
+                  <trh:script id="vars1" text='var updateADFComponentsId = "#{EquipmentHierarchyViewBean.updateADFComponents}";'/>    
+                  <trh:script id="vars2" text='var dummyCanvasButtonId = "#{EquipmentHierarchyViewBean.dummyCanvasButton}";'/>  
+                  <af:resource type="javascript">  
+                       var firstTime = 0;                                              
+                       
+                       function refreshEquipmentView(){
+                          if(firstTime ==0){                                  
+                               equipView.showAll(true);
+                               firstTime=1;
+                          }                          
+                          equipView.updateImage();                            
+                          equipView.showAll(true);
+                          var dummyCanvasButton = document.getElementById(dummyCanvasButtonId);                        
+                          dummyCanvasButton.click();      
+                       }
+                       function refreshTreeFromVisual() 
+                       {                        
+                          var updateADFComponents = document.getElementById(updateADFComponentsId);                        
+                          updateADFComponents.click();      
+                          var p = '';
+                          var equipCanvas = AdfPage.PAGE.findComponentByAbsoluteId(equipCanvasId); 
+                          AdfCustomEvent.queue(equipCanvas, "jsCreateDetails",{props : p},true);   
+                       }                                    
+                  </af:resource>     
+                  
+                <af:panelStretchLayout binding="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.treeView}">
+                  <f:facet name="top"/>
+                  <f:facet name="center">   
+                  <af:panelCollection id="pc3" styleClass="invEquipmentTreeViewPanelCollection">
+                  <cui:WarningDialog id="wd" binding="#{backingBeanScope.navigationWarningDialog}"/>                  
+                      <f:facet name="menus">
+                            <af:menu id="pcMenu1" text="#{inventoryUIBundle.ACTIONS}" partialTriggers="EHTT" binding="#{backingBeanScope.actionsMenuBinding}">
+                                      <af:commandMenuItem text="#{inventoryUIBundle.REFRESH}"
+                                                      id="cmi1-1"
+                                                      icon="/images/refresh_ena.png"
+                                                      rendered="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.rackTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.shelfTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.cardTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.unknownTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.slotWithCardTreeNode}"
+                                                      actionListener="#{EquipmentHierarchyViewBean.refreshNode}" />                                      
+                                      <af:commandMenuItem text="#{inventoryUIBundle.OPEN_VISUAL}"
+                                                      id="cmi2-2" 
+                                                      icon="/images/folder_ena.png"
+                                                      rendered="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.rackTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.shelfTreeNode}"
+                                                      actionListener="#{EquipmentHierarchyViewBean.openVisual}"/>
+                                      <af:commandMenuItem text="#{inventoryUIBundle.CREATE}"
+                                                      id="cmi3-3" 
+                                                      icon="#{InventoryHelperBean.createIcon}"
+                                                      rendered="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.slotEmptyTreeNode &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Equipment.CREATE;action=view']}"
+                                                      actionListener="#{EquipmentHierarchyViewBean.createCardForHolder}">
+                                                      <af:showPopupBehavior triggerType="click" popupId="::createEquipmentPopup"/>                                                          
+                                      </af:commandMenuItem>
+                                      <af:commandMenuItem text="#{inventoryUIBundle.CREATE}"
+                                                      id="cmi21-21" 
+                                                      icon="#{InventoryHelperBean.createIcon}"
+                                                      rendered="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.rackTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.unknownTreeNode &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Equipment.CREATE;action=view']}"
+                                                      actionListener="#{EquipmentHierarchyViewBean.createEquipmentFromTree}">
+                                                      <af:showPopupBehavior triggerType="click" popupId="::createEquipmentPopup"/>
+                                      </af:commandMenuItem>
+                                      <af:commandMenuItem text="#{inventoryUIBundle.ADD}"
+                                                      id="cmi4-4" 
+                                                      icon="#{InventoryHelperBean.associateIcon}"
+                                                      rendered="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.rackTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.unknownTreeNode}"
+                                                      actionListener="#{EquipmentHierarchyViewBean.addEquipmentFromTree}">
+                                                      <af:showPopupBehavior triggerType="click" popupId="::addEquipmentPopup"/>                                                      
+                                      </af:commandMenuItem>
+                                      <af:commandMenuItem text="#{inventoryUIBundle.ADD}"
+                                                      id="cmi22-22" 
+                                                      icon="#{InventoryHelperBean.associateIcon}"
+                                                      rendered="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.slotEmptyTreeNode}"
+                                                      actionListener="#{EquipmentHierarchyViewBean.addCardFromTree}">
+                                                      <af:showPopupBehavior triggerType="click" popupId="::addEquipmentPopup"/>
+                                      </af:commandMenuItem>
+                                      
+                                      <af:commandMenuItem text="#{inventoryUIBundle.EDIT}"
+                                                      id="cmi5-5" 
+                                                      icon="#{InventoryHelperBean.editIcon}"
+                                                      rendered="#{(EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.rackTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.shelfTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.cardTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.unknownTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.slotWithCardTreeNode) &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Equipment.EDIT;action=view']}"                                                          
+                                                      actionListener="#{EquipmentHierarchyViewBean.editEquipmentFromTree}"
+                                                          accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">                                                          
+                                                      <af:showPopupBehavior triggerType="click" popupId="::editEquipmentPopup"/>
+                                      </af:commandMenuItem>
+                                      
+                                      <af:commandMenuItem text="#{inventoryUIBundle.PASTE}"
+                                                      id="cmi6-6" 
+                                                      rendered="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.rackTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.unknownTreeNode}"
+                                                      actionListener="#{EquipmentHierarchyViewBean.pasteShelf}"/>
+                                                      
+                                      <af:commandMenuItem text="#{inventoryUIBundle.PASTE}"
+                                                      id="cmi19-19" 
+                                                      rendered="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.slotEmptyTreeNode}"
+                                                      actionListener="#{EquipmentHierarchyViewBean.pasteCard}"/>                                                      
+                                                      
+                                      <af:commandMenuItem text="#{inventoryUIBundle.MOVE_TO}"
+                                                      id="cmi7-7" 
+                                                      rendered="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.rackTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.unknownTreeNode}"
+                                                      actionListener="#{EquipmentHierarchyViewBean.moveShelfTo}"/>
+                                                      
+                                      <af:commandMenuItem text="#{inventoryUIBundle.MOVE_TO}"
+                                                      id="cmi20-20" 
+                                                      rendered="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.slotEmptyTreeNode}"
+                                                      actionListener="#{EquipmentHierarchyViewBean.moveCardTo}"/>
+        
+                                      <af:commandMenuItem text="#{inventoryUIBundle.COPY}"
+                                                      id="cmi8-8" binding="#{backingBeanScope.copyEqBinding}"
+                                                      rendered="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.shelfTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.cardTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.unknownTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.slotWithCardTreeNode}"
+                                                      actionListener="#{EquipmentHierarchyViewBean.copyEquipment}"/>
+                                                      
+                                      <af:commandMenuItem text="#{inventoryUIBundle.MOVE}"
+                                                      id="cmi9-9" 
+                                                      rendered="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.shelfTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.cardTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.unknownTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.slotWithCardTreeNode}"
+                                                      actionListener="#{EquipmentHierarchyViewBean.moveEquipment}"/>
+        
+                                      <af:commandMenuItem text="#{inventoryUIBundle.CREATE_PORT}"
+                                                      id="cmi10-10" 
+                                                      icon="#{InventoryHelperBean.createIcon}"
+                                                      rendered="#{(EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.shelfTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.cardTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.unknownTreeNode) &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Equipment.CREATE;action=view']}"
+                                                      actionListener="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.createPortForEquipment}">                                                          
+                                                      <af:showPopupBehavior triggerType="click" popupId="::createPhysicalPortPopup"/>
+                                      </af:commandMenuItem>
+                                      
+                                      <af:commandMenuItem text="#{inventoryUIBundle.CREATE_CONNECTOR}"
+                                                      id="cmi11-11" 
+                                                      icon="#{InventoryHelperBean.createIcon}"
+                                                      rendered="#{(EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.shelfTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.cardTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.unknownTreeNode) &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Equipment.CREATE;action=view']}"
+                                                      actionListener="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.createConnectorForEquipment}"> 
+                                                      <af:showPopupBehavior triggerType="click" popupId="::createPhysicalConnectorPopup"/>
+                                      </af:commandMenuItem>
+                                      
+                                      <af:commandMenuItem text="#{inventoryUIBundle.CREATE_PORT}"
+                                                      id="cmi12-12" 
+                                                      icon="#{InventoryHelperBean.createIcon}"
+                                                      rendered="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.slotWithCardTreeNode &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Equipment.CREATE;action=view']}"
+                                                      actionListener="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.createPortForCard}">            
+                                                      <af:showPopupBehavior triggerType="click" popupId="::createPhysicalPortPopup"/>
+                                      </af:commandMenuItem>
+                                      
+                                      <af:commandMenuItem text="#{inventoryUIBundle.CREATE_CONNECTOR}"
+                                                      id="cmi14-14" 
+                                                      icon="#{InventoryHelperBean.createIcon}"
+                                                      rendered="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.slotWithCardTreeNode &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Equipment.CREATE;action=view']}"
+                                                      actionListener="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.createConnectorForCard}">
+                                                      <af:showPopupBehavior triggerType="click" popupId="::createPhysicalConnectorPopup"/>
+                                      </af:commandMenuItem>                                                                                                                                                                            
+                                      
+                                      <af:commandMenuItem text="#{inventoryUIBundle.REMOVE}"
+                                                      id="cmi15-15" 
+                                                      icon="/images/delete_ena.png"
+                                                      rendered="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.shelfTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.cardTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.unknownTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.slotWithCardTreeNode}"
+                                                      actionListener="#{EquipmentHierarchyViewBean.removeEquipment}">
+                                      </af:commandMenuItem>
+                                      
+                                      <af:commandMenuItem text="#{inventoryUIBundle.DELETE}"
+                                                      id="cmi16-16" binding="#{backingBeanScope.deleteEqBinding}"
+                                                      icon="/images/delete_ena.png"
+                                                      rendered="#{(EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.rackTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.shelfTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.cardTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.unknownTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.slotWithCardTreeNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.physicalConnectorNode or EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.physicalPortNode) &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Equipment.DELETE;action=view']}"
+                                                      actionListener="#{EquipmentHierarchyViewBean.deleteNodeAction}"/>
+                                                   
+        
+                                          <af:commandMenuItem text="#{inventoryUIBundle.REVERSE_NUMBERING}"
+                                                          id="cmi23-23" 
+                                                          icon="/images/sort_ena.png"
+                                                          rendered="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.shelfTreeNode}"
+                                                          actionListener="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.sortHolders}" />
+                                </af:menu>     
+                      </f:facet>     
+                      <af:treeTable value="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.treeModel}"
+                        var="node" rowSelection="single" id="EHTT"
+                        fetchSize="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.fetchSize}"
+                        contextMenuSelect="true" styleClass="AFStretchWidth"
+                        selectionListener="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.nodeSelectedEvent}"
+                        binding="#{backingBeanScope.EH_treeBinding}"
+                        disclosedRowKeys="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.treeDisclosedRowKeys}"
+                        rowBandingInterval="0" expandAllEnabled="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.expandAllEnabled}"
+                        columnStretching="last"                        
+                        horizontalGridVisible="false" contentDelivery="immediate" partialTriggers=":::updateADFComponents"
+                                    summary="#{inventoryUIBundle.EQUIPMENT_HIERARCHY_TREETABLE}">
+                        <f:facet name="nodeStamp">
+                          <af:column id="column2" width="600"
+                                     rowHeader="unstyled"
+                                     headerText="#{inventoryUIBundle.EQUIPMENT}">
+                            <af:panelGroupLayout id="pgl5" partialTriggers=":::updateADFComponents">
+                               <af:image id="nodeIcon" styleClass="invSummaryImage" shortDesc="icon" source="#{node.data.icon}"/>                               
+                               <af:outputText value="#{node.data.label}" id="ot4"/>     
+                               <af:outputText value=" - " id="ot45"
+                                              visible="#{EquipmentHierarchyViewBean.pipeDetail != null}"/>
+                                <af:commandImageLink  id="cl1" 
+                                                 text="#{EquipmentHierarchyViewBean.pipeDetail}"
+                                                 action="#{EquipmentHierarchyViewBean.getPipeAction}"
+                                                 actionListener="#{EquipmentHierarchyViewBean.viewPipe}">
+                                <!-- Put the objectId in request scope so that the task flow call can pass it as an input parm -->
+                                <af:setActionListener from="#{EquipmentHierarchyViewBean.pipeOid}" to="#{requestScope.oid}"/>
+                            </af:commandImageLink>
+                            </af:panelGroupLayout>
+                          </af:column>
+                        </f:facet>                       
+                      </af:treeTable>
+                  </af:panelCollection>
+                  </f:facet>
+                  <f:facet name="bottom"/>
+                </af:panelStretchLayout>
+               
+                <!--Create Equipment Popup Starts -->
+                <af:popup id="createEquipmentPopup"  contentDelivery="lazyUncached"
+                        binding="#{backingBeanScope.createEquipmentBinding}"
+                        clientComponent="true">
+                        <af:dialog title="#{inventoryUIBundle.EQUIPMENT}" id="createEquipmentDialog" type="none">
+                            <af:panelStretchLayout id="createEquipmentLayout" styleClass="invEditPanelStretchLayout">
+                                <f:facet name="center">
+                                  <af:region value="#{bindings.EquipmentEditFlow1.regionModel}" id="r1"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                  <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                  <af:serverListener type="refreshEntity" method="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.refreshTreeAfterCreate}"/>
+                </af:popup>
+                
+                <!--Edit Equipment Popup Starts -->
+                <af:popup id="editEquipmentPopup"  contentDelivery="lazyUncached"
+                        binding="#{backingBeanScope.editEquipmentBinding}"
+                        clientComponent="true">
+                        <af:dialog title="#{inventoryUIBundle.EQUIPMENT}" id="editEquipmentDialog" type="none">
+                            <af:panelStretchLayout id="editEquipmentLayout" styleClass="invEditPanelStretchLayout">
+                                <f:facet name="center">
+                              <af:region value="#{bindings.EquipmentEditFlow2.regionModel}" id="r5"/>
+                           </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                  <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                  <af:serverListener type="refreshEntity" method="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.refreshTreeAfterEdit}"/>
+                </af:popup>
+                
+                <!--Add Equipment Popup Starts -->
+                <af:popup id="addEquipmentPopup"  contentDelivery="lazyUncached"
+                        binding="#{backingBeanScope.addEquipmentBinding}"
+                        clientComponent="true">
+                        <af:dialog title="#{inventoryUIBundle.EQUIPMENT}" id="addEquipmentDialog" type="none">
+                          <af:panelStretchLayout id="addEquipmentLayout" styleClass="invSummaryPanelStretchLayout">
+                            <f:facet name="center">
+                                  <af:region value="#{bindings.EquipmentSearchResultsFlow1.regionModel}"
+                                             id="r2"/>
+                               </f:facet>
+                          </af:panelStretchLayout>
+                        </af:dialog>                                                          
+                  <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                  <af:serverListener type="refreshEntity" method="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.refreshTreeAfterAdd}"/>                                                      
+                </af:popup>
+                
+                <!--Create Physical Port for Equipment and Card Popup Starts -->
+                <af:popup id="createPhysicalPortPopup"  contentDelivery="lazyUncached"
+                        binding="#{backingBeanScope.createPhysicalPortBinding}"
+                        clientComponent="true">
+                        <af:dialog title="#{inventoryUIBundle.MENU_PHYSICAL_PORT}" id="createPhysicalPortDialog" type="none">
+                          <af:panelStretchLayout id="createPhysicalPortLayout" styleClass="invSummaryPanelStretchLayout">
+                            <f:facet name="center">
+                                  <af:region value="#{bindings.PhysicalPortEditFlow1.regionModel}"
+                                             id="r3"/>
+                               </f:facet>
+                          </af:panelStretchLayout>
+                        </af:dialog>
+                  <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                  <af:serverListener type="refreshEntity" method="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.refreshTreeAfterCreatePort}"/>
+                </af:popup>
+                
+                <!--Create Physical Connector for Equipment and Card Popup Starts -->
+                <af:popup id="createPhysicalConnectorPopup"  contentDelivery="lazyUncached"
+                        binding="#{backingBeanScope.createPhysicalConnectorBinding}"
+                        clientComponent="true">
+                        <af:dialog title="#{inventoryUIBundle.PHYSICAL_CONNECTOR}" id="createPhysicalConnectorDialog" type="none">
+                          <af:panelStretchLayout id="createPhysicalConnectorLayout" styleClass="invSummaryPanelStretchLayout">
+                            <f:facet name="center">
+                                  <af:region value="#{bindings.PhysicalConnectorEditFlow1.regionModel}"
+                                             id="r4"/>
+                               </f:facet>
+                          </af:panelStretchLayout>
+                        </af:dialog>
+                  <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                  <af:serverListener type="refreshEntity" method="#{EquipmentHierarchyViewBean.equipmentHierarchyTreeBean.refreshTreeAfterCreateConnector}"/>
+                </af:popup>                
+                <af:spacer width="10" height="10"/> 
+                <af:panelGroupLayout id="pgl4" layout="vertical">
+                    <h:panelGrid id="canvasName" binding="#{EquipmentHierarchyViewBean.canvasNameGrid}" border="0" columns="1" />                         
+                        <h:panelGrid styleClass="visualToolbar">  
+                            <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                <af:toolbar id="tb1">                            
+                                 <jv:imageButton  style="width: 16px;height: 16px;" 
+                                                  onclick="equipView.setInteractor(select)"
+                                                  title="#{inventoryUIBundle.SELECT}"
+                                                  buttonGroupId="interactors"
+                                                  selected="true"
+                                                  image="/images/selectobject_ena.png"
+                                                  rolloverImage="/images/selectobject_ovr.png"
+                                                  selectedImage="/images/selectobject_dwn.png"
+                                                  message="#{inventoryUIBundle.SELECT}"/>
+                                  <jv:imageButton style="width: 16px;height: 16px;" 
+                                                  onclick="equipView.setInteractor(zoom)"
+                                                  buttonGroupId="interactors"
+                                                  messageBoxId="messages"
+                                                  title="#{inventoryUIBundle.ZOOM}"
+                                                  message="#{inventoryUIBundle.ZOOM}"
+                                                  image="/images/zoomtoselection_ena.png"
+                                                  rolloverImage="/images/zoomtoselection_ovr.png"
+                                                  selectedImage="/images/zoomtoselection_dwn.png"
+                                                  id="ib2"/>
+                                  <jv:imageButton style="width: 16px;height: 16px;" 
+                                                  onclick="equipView.setInteractor(pan)"
+                                                  messageBoxId="messages"
+                                                  title="#{inventoryUIBundle.PAN}"
+                                                  message="#{inventoryUIBundle.PAN}"
+                                                  buttonGroupId="interactors"
+                                                  image="/images/pan_ena.png"
+                                                  rolloverImage="/images/pan_ovr.png"
+                                                  selectedImage="/images/pan_dwn.png"
+                                                  id="ib3"/>
+                                  <jv:imageButton style="width: 16px;height: 16px;" 
+                                                  onclick="equipView.showAll(true)"
+                                                  messageBoxId="messages"
+                                                  title="#{inventoryUIBundle.SHOW_ALL}"
+                                                  message="#{inventoryUIBundle.SHOW_ALL}"
+                                                  image="/images/zoombestfit_ena.png"
+                                                  rolloverImage="/images/zoombestfit_ovr.png"
+                                                  selectedImage="/images/zoombestfit_dwn.png"
+                                                  id="ib4"/>
+                                  <jv:imageButton style="width: 16px;height: 16px;" 
+                                                  onclick="equipView.zoomIn(true)"
+                                                  messageBoxId="messages"
+                                                  title="#{inventoryUIBundle.ZOOM_IN}"
+                                                  message="#{inventoryUIBundle.ZOOM_IN}"
+                                                  image="/images/zoomin_ena.png"
+                                                  rolloverImage="/images/zoomin_ovr.png"
+                                                  selectedImage="/images/zoomin_dwn.png"
+                                                  id="ib5"/>
+                                  <jv:imageButton style="width: 16px;height: 16px;" 
+                                                  onclick="equipView.zoomOut(true)"
+                                                  title="#{inventoryUIBundle.ZOOM_OUT}"
+                                                  message="#{inventoryUIBundle.ZOOM_OUT}"
+                                                  image="/images/zoomout_ena.png"
+                                                  rolloverImage="/images/zoomout_ovr.png"
+                                                  selectedImage="/images/zoomout_dwn.png"
+                                                  id="ib6"/>
+                                </af:toolbar>
+                                 <af:separator id="sep1" styleClass="toolbarSeparator"/>
+                                <af:toolbar id="tb2">
+                                 <jv:imageButton style="width: 16px;height: 16px;"
+                                                 onclick="equipView.performAction('editAction',['EquipmentVisualizationAdapter.saveShelfPositions']);"
+                                                 image="/images/save_ena.png"
+                                                 rolloverImage="/images/save_ovr.png"
+                                                 selectedImage="/images/save_dwn.png"
+                                                 messageBoxId="messages" title="#{inventoryUIBundle.SAVE_SHELF_POSITIONS}" message="#{inventoryUIBundle.SAVE_SHELF_POSITIONS}" />
+                               
+                                 <jv:imageButton style="width: 16px;height: 16px;"
+                                                 onclick="clearVisual()"
+                                                 image="/images/delete_ena.png"                                             
+                                                 messageBoxId="messages" title="#{inventoryUIBundle.CLEAR_VISUAL}" message="#{inventoryUIBundle.CLEAR_VISUAL}" /> 
+                                </af:toolbar>   
+                            </af:panelGroupLayout>
+                        </h:panelGrid>
+                        <af:panelGroupLayout layout="horizontal" id="canvasArea" binding="#{backingBeanScope.equipmentCanvasArea}"> 
+                              <af:serverListener type="jsCreateDetails" method="#{EquipmentHierarchyViewBean.createDetails}"/>
+                              <af:serverListener type="jsRefreshCanvasTitle" method="#{EquipmentHierarchyViewBean.refreshCanvasTitle}"/>
+                              <af:serverListener type="jsClearVisual" method="#{EquipmentVisualizationAdapter.clearVisual}"/>
+                              <af:serverListener type="jsSelectInTree" method="#{EquipmentHierarchyViewBean.selectInTree}"/>                              
+                                
+                              <!-- Canvas Menu Item Server Side Listeners - Start -->
+                              <af:serverListener type="jsCopyEquipmentVisual" method="#{EquipmentHierarchyViewBean.copyEquipmentVisual}"/>
+                              <af:serverListener type="jsMoveEquipmentVisual" method="#{EquipmentHierarchyViewBean.moveEquipmentVisual}"/>
+                              <af:serverListener type="jsRemoveEquipmentVisual" method="#{EquipmentHierarchyViewBean.removeEquipmentVisual}"/>
+                              <af:serverListener type="jsDeleteEquipmentVisual" method="#{EquipmentHierarchyViewBean.deleteEquipmentVisual}"/>
+                              <af:serverListener type="jsPasteCardVisual" method="#{EquipmentHierarchyViewBean.pasteCardVisual}"/>
+                              <af:serverListener type="jsMoveCardToVisual" method="#{EquipmentHierarchyViewBean.moveCardToVisual}"/>                                                            
+                              <af:serverListener type="jsPasteShelfVisual" method="#{EquipmentHierarchyViewBean.pasteShelfVisual}"/>
+                              <af:serverListener type="jsMoveShelfToVisual" method="#{EquipmentHierarchyViewBean.moveShelfToVisual}"/>
+                              <af:serverListener type="jsManageEquipmentFromVisual" method="#{EquipmentHierarchyViewBean.manageEquipmentFromVisual}"/>                                          
+                              <!-- Canvas Menu Item Server Side Listeners - End -->
+                              
+                              <h:panelGrid border="0" columns="1" styleClass="psheet">                                  
+                                  <jvtf:equipmentView id="equipView"
+                                                      context="#{defContext}"                                              
+                                                      width="400" 
+                                                      height="450"
+                                                      styleSheets="/css/equip_styles.css"
+                                                      binding="#{EquipmentHierarchyViewBean.equipmentView}"
+                                                      interactorId="select"
+                                                      waitingImage="images/waiting.gif"
+                                                      imageFormat="PNG"
+                                                      servlet="oracle.communications.inventory.ui.framework.visualization.servlet.EquipmentSyncImageServlet">                                     
+                                                <jvtf:selectionManager id="selectionManager"
+                                                                       imageMode="false"
+                                                                       propertyAccessor="#{EquipmentInteractorBean.propertyAccessor}"
+                                                                       lineColor="red"
+                                                                       lineWidth="2"
+                                                                       onSelectionChanged="displaySelection(selection)"/>
+                                                <jvf:contextualMenu factory="#{EquipmentPopupMenuFactory}"
+                                                                    itemStyleClass="menuItem" 
+                                                                    itemHighlightedStyleClass="menuItemHighlighted" 
+                                                                    itemDisabledStyleClass="menuItemDisabled" />                                                
+                                  </jvtf:equipmentView>                              
+                              </h:panelGrid>
+                              <af:spacer width="10" height="10" id="s2"/>
+                                <h:panelGrid border="1" columns="1" styleClass="psheet">  
+                                    <h:panelGrid border="0" columns="2" >
+                                      <h:graphicImage url="/images/attributegroup_ena.png"/>
+                                      <h:outputText value="#{inventoryUIBundle.DETAILS_OF_SELECTED_ITEM}" styleClass="text" style="font-weight: bold;"/>
+                                    </h:panelGrid>
+                                    <h:panelGrid id="pg15" binding="#{EquipmentHierarchyViewBean.equipmentDetailsGrid}" border="0"
+                                                 frame="border" width="100%" cellpadding="4" cellspacing="1" columnClasses="psheet-cell" 
+                                                 rowClasses="psheet-cell-bold" styleClass="tableStyle"/>  
+                                 
+                                    <trh:script id="clientId" text='var equipCanvasId = "#{EquipmentHierarchyViewBean.clientId}"; '/>                                     
+                                    <trh:script id="sc1">
+                                      var p = "";
+                                      // called by the onSelectionChanged attribute on EquipmentView.jsff file. It returns a map of attributes
+                                      // to a javascript variable. These attributes will be used to dynamically build the Details section
+                                      // in EquipmentHierarchyViewBean.                         
+                                      function displaySelection(selection) {                          
+                                          try {
+                                              if (selection.length == 1) {                              
+                                                  p = selection[0].getObjectProperties();                                
+                                              }    
+                                              var equipCanvas = AdfPage.PAGE.findComponentByAbsoluteId(equipCanvasId);                                 
+                                              AdfCustomEvent.queue(equipCanvas, "jsCreateDetails",{props : p},true);   
+                                              AdfCustomEvent.queue(equipCanvas, "jsRefreshCanvasTitle", {}, true);
+                                              p = ""; 
+                                              AdfCustomEvent.queue(equipCanvas, "jsSelectInTree", {}, true);
+                                          } catch (e) {
+                                              alert("An error occurred when building property sheet." + e);
+                                          }
+                                      }                     
+                                       
+                                      function clearVisual() {                        
+                                          var equipCanvas = AdfPage.PAGE.findComponentByAbsoluteId(equipCanvasId);
+                                          AdfCustomEvent.queue(equipCanvas, "jsClearVisual", {}, true);                                                  
+                                      }
+                                      
+                                      function copyEquipmentVisual(oid){
+                                          var equipCanvas = AdfPage.PAGE.findComponentByAbsoluteId(equipCanvasId);
+                                          AdfCustomEvent.queue(equipCanvas, "jsCopyEquipmentVisual",{props : oid},true);                             
+                                      }    
+                                      
+                                      function moveEquipmentVisual(oid){
+                                           var equipCanvas = AdfPage.PAGE.findComponentByAbsoluteId(equipCanvasId);
+                                           AdfCustomEvent.queue(equipCanvas, "jsMoveEquipmentVisual",{props : oid},true);                             
+                                      }
+                                      
+                                      function removeEquipmentVisual(oid){
+                                           var equipCanvas = AdfPage.PAGE.findComponentByAbsoluteId(equipCanvasId);
+                                           AdfCustomEvent.queue(equipCanvas, "jsRemoveEquipmentVisual",{props : oid},true);                             
+                                      }       
+                                      
+                                      function deleteEquipmentVisual(oid){
+                                           var equipCanvas = AdfPage.PAGE.findComponentByAbsoluteId(equipCanvasId);
+                                           AdfCustomEvent.queue(equipCanvas, "jsDeleteEquipmentVisual",{props : oid},true);                             
+                                      }   
+                                      
+                                      function pasteCardVisual(oid){
+                                           var equipCanvas = AdfPage.PAGE.findComponentByAbsoluteId(equipCanvasId);
+                                           AdfCustomEvent.queue(equipCanvas, "jsPasteCardVisual",{props : oid},true);                             
+                                      }
+                                      
+                                      function moveCardToVisual(oid){
+                                           var equipCanvas = AdfPage.PAGE.findComponentByAbsoluteId(equipCanvasId);
+                                           AdfCustomEvent.queue(equipCanvas, "jsMoveCardToVisual",{props : oid},true);                             
+                                      }
+                                      
+                                      function pasteShelfVisual(oid){
+                                           var equipCanvas = AdfPage.PAGE.findComponentByAbsoluteId(equipCanvasId);
+                                           AdfCustomEvent.queue(equipCanvas, "jsPasteShelfVisual",{props : oid},true);                             
+                                      }
+                                      
+                                      function moveShelfToVisual(oid){
+                                           var equipCanvas = AdfPage.PAGE.findComponentByAbsoluteId(equipCanvasId);
+                                           AdfCustomEvent.queue(equipCanvas, "jsMoveShelfToVisual",{props : oid},true);                             
+                                      }    
+                                      function manageEquipmentFromVisual(manageType, oid){
+                                           var equipCanvas = AdfPage.PAGE.findComponentByAbsoluteId(equipCanvasId);
+                                           AdfCustomEvent.queue(equipCanvas, "jsManageEquipmentFromVisual",{mType : manageType, id : oid},true);     
+                                      }
+                                      
+                                      function showPopup(popupId) {
+                                          var popup = AdfPage.PAGE.findComponentByAbsoluteId(popupId);
+                                          popup.show();
+                                      }                                                                            
+                                    </trh:script>
+                                </h:panelGrid>
+                           </af:panelGroupLayout>       
+                </af:panelGroupLayout>                    
+            </af:panelGroupLayout>   
+         </af:panelHeader>
+        </af:panelGroupLayout>
+      </f:facet>
+   </af:pageTemplate>
+</jsp:root>

@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" 
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"> 
+    <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:panelStretchLayout id="psl1" topHeight="#{pageFlowScope.ConfigSummaryBean.topHeight}" dimensionsFrom="auto" styleClass="AFStretchWidth"
+                           binding="#{backingBeanScope.NSCONFIG_summary_panelGroupLayout}" >
+        <f:facet name="center">
+            <af:panelHeader text="#{pageFlowScope.ConfigSummaryBean.entityInfo} #{inventoryUIBundle.CONFIGURATION}-#{pageFlowScope.ConfigSummaryBean.displayInfo}"
+                            id="PAGE_TITLE" styleClass="invSummaryPanelHeader" >
+                <af:panelGroupLayout id="pgl2" layout="scroll">
+                    <af:showDetailHeader text="#{pageFlowScope.ConfigSummaryBean.entityInfo} #{inventoryUIBundle.CONFIGURATION_INFORMATION}" disclosed="true" id="sdh1"
+                                         styleClass="invSummaryShowDetailHeader"
+                                         binding="#{backingBeanScope.infoShowDetailHeader}">
+                        <af:panelFormLayout id="pfl1" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.configPFBinding}">
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}" id="plam1">
+                                <af:outputText value="#{pageFlowScope.ConfigSummaryBean.specDisplayName}" id="ot1"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}" id="plam2">
+                                <af:outputText value="#{pageFlowScope.ConfigSummaryBean.id}" id="ot2"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="plam3">
+                                <af:outputText value="#{pageFlowScope.ConfigSummaryBean.name}" id="ot3"/>
+                            </af:panelLabelAndMessage>
+                            <af:selectOneChoice label="#{inventoryUIBundle.VERSION}" id="soc1" valueChangeListener="#{pageFlowScope.ConfigSummaryBean.versionChanged}" autoSubmit="true"
+                                value="#{pageFlowScope.ConfigSummaryBean.selectedVersion}">
+                                <f:selectItems id="si1" binding="#{pageFlowScope.ConfigSummaryBean.versions}"/> 
+                            </af:selectOneChoice>
+                            <af:panelLabelAndMessage label="#{pageFlowScope.ConfigSummaryBean.serviceType eq 'network' ? inventoryUIBundle.NS_REQUEST : inventoryUIBundle.VNF_REQUEST}" id="plam5" inlineStyle="text-align:center;">
+                                <af:link id="l1" action="OrchestrationRequestDetails" actionListener="#{bindings.openSubTaskForAssociatedBiSummary.execute}"
+                                   text="#{pageFlowScope.ConfigSummaryBean.associatedBiDisplayInfo}"
+                                   shortDesc="#{pageFlowScope.ConfigSummaryBean.associatedBi eq null ? '&#160;' : inventoryUIBundle.LINK_FOR_SUMMARY}">                                                    
+                                    <af:setActionListener from="#{pageFlowScope.ConfigSummaryBean.associatedBi.oid}" to="#{objectId}"/>
+                                    <af:setActionListener from="#{pageFlowScope.ConfigSummaryBean.associatedBi.displayInfo}" to="#{displayInfo}"/>
+                                </af:link>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.START_DATE}" id="plam6">
+                                <af:outputText value="#{pageFlowScope.ConfigSummaryBean.startDate}" id="ot6">
+                                    <af:convertDateTime pattern="#{pageFlowScope.ConfigSummaryBean.dateTimeFormat}"/>
+                                </af:outputText>             
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.STATUS}" id="plam7">
+                                <af:outputText value="#{pageFlowScope.ConfigSummaryBean.status}" id="ot7"/>
+                            </af:panelLabelAndMessage>
+                        </af:panelFormLayout>
+                    </af:showDetailHeader>
+                    <af:spacer width="10" height="10" id="s1"/>
+                    <af:showDetailHeader text="#{inventoryUIBundle.CONFIGURATION_ITEMS}" disclosed="true" id="sdh2"
+                                         styleClass="invSummaryShowDetailHeader">
+                        <!-- displaying Configuration Hierarchy -->
+                        <af:panelCollection id="pc1" featuresOff="freeze wrap"
+                                            styleClass="invSummaryPanelCollection">
+                            <af:treeTable rowBandingInterval="0" id="confTr"
+                                          value="#{pageFlowScope.ConfigurationTreeBean.treeModel}"
+                                          rowSelection="single" var="node" styleClass="invSummaryTree"
+                                          columnSelection="single"
+                                          fetchSize="#{pageFlowScope.ConfigSummaryBean.fetchSize}"
+                                          contextMenuSelect="true" contentDelivery="immediate"
+                                          expandAllEnabled="true"
+                                          selectionListener="#{pageFlowScope.ConfigurationTreeBean.nodeSelectedEvent}"
+                                          binding="#{backingBeanScope.CONFIG_treeBinding}"
+                                          disclosedRowKeys="#{pageFlowScope.ConfigurationTreeBean.treeDisclosedRowKeys}"
+                                          horizontalGridVisible="true"
+                                          summary="#{inventoryUIBundle.CONFIGURATION_HIERARCHY_TREETABLE}">
+                                <f:facet name="nodeStamp">
+                                    <!-- column to display Label -->
+                                    <af:column sortable="false" headerText="#{inventoryUIBundle.CONFIGURATION}" id="c1"
+                                               width="550" rowHeader="unstyled">
+                                        <af:panelGroupLayout id="pgl1">
+                                            <af:image id="nodeIcon" source="#{node.data.icon}"
+                                                      shortDesc="icon" styleClass="invSummaryImage"/>
+                                            <af:switcher id="idSwitcher" defaultFacet="false"
+                                                         facetName="#{node.data.disableNodeLink}">
+                                                <f:facet name="true">
+                                                    <af:link text="#{node.data.label}" id="l2"
+                                                             action="#{pageFlowScope.ConfigurationTreeBean.view}"
+                                                             shortDesc="#{inventoryUIBundle.TAG_SUMMARY_LINK}"/>
+                                                </f:facet>
+                                                <f:facet name="false">
+                                                    <af:outputText value="#{node.data.label}" id="ot5"/>
+                                                </f:facet>
+                                            </af:switcher>
+                                        </af:panelGroupLayout>
+                                    </af:column>
+                                </f:facet>
+                                
+                                <!-- column to display Specifications -->
+                                <af:column sortable="false"
+                                           headerText="#{inventoryUIBundle.RESOURCE_SPECIFICATION}" id="c2"
+                                           width="220">
+                                    <af:outputText value="#{node.data.specification1}" id="ot8"
+                                                   rendered="#{node.data.resource1 != null}"/>
+                                    <af:outputText value="#{node.data.specification2}" id="ot13"
+                                                   rendered="#{node.data.resource2 != null}"/>
+                                </af:column>
+                                
+                                <!-- column to display Assignment Status -->
+                                <af:column sortable="false"
+                                           headerText="#{inventoryUIBundle.ASSIGNMENT_REFERENCE_STATUS}" id="c3"
+                                           width="175">
+                                    <trh:tableLayout id="tl1">
+                                        <trh:rowLayout id="rl1">
+                                            <trh:cellFormat id="cf1">
+                                                <af:outputText value="#{node.data.assignmentReferenceStatus1}" id="ot9"
+                                                               rendered="#{node.data.assignmentReferenceStatus1 != null}"/>
+                                            </trh:cellFormat>
+                                        </trh:rowLayout>
+                                    </trh:tableLayout>
+                                    <trh:tableLayout id="tl2">
+                                        <trh:rowLayout id="rl2">
+                                            <trh:cellFormat id="cf2">
+                                                <af:outputText value="#{node.data.assignmentReferenceStatus2}" id="ot14"
+                                                               rendered="#{node.data.assignmentReferenceStatus2 != null}"/>
+                                            </trh:cellFormat>
+                                        </trh:rowLayout>
+                                    </trh:tableLayout>
+                                </af:column>
+                                
+                                <!-- column to display Resources -->
+                                <af:column sortable="false" headerText="#{inventoryUIBundle.RESOURCE}" id="c4"
+                                           width="375">
+                                    <trh:tableLayout id="tl3">
+                                        <trh:rowLayout id="rl3">
+                                            <trh:cellFormat id="cf3">
+                                                <af:link text="#{node.data.resource1.displayInfo}" id="l3"
+                                                         action="#{pageFlowScope.ConfigSummaryBean.getSummaryPage}"
+                                                         shortDesc="#{node.data.resource1.displayInfo eq null ? '&amp;#160;' : inventoryUIBundle.LINK_FOR_SUMMARY}"
+                                                         disabled="#{node.data.resource1.displayInfo eq null ? true : false}"
+                                                         rendered="#{node.data.resource1 != null}">
+                                                    <af:setActionListener from="#{node.data.resource1.oid}" to="#{objectId}"/>
+                                                    <af:setActionListener from="#{pageFlowScope.ConfigSummaryBean.entityTypeName}"
+                                                                          to="#{entityInfo}"/>
+                                                    <af:setActionListener from="#{node.data.resource1.displayInfo}"
+                                                                          to="#{displayInfo}"/>
+                                                </af:link>
+                                                <af:outputText value="(#{node.data.resource1InventoryStatus})" id="ot10"
+                                                               rendered="#{node.data.resource1InstalledBI != null}"/>
+                                                <af:outputText value="(#{node.data.resource1InstalledBIDueDate})" id="ot15"
+                                                               rendered="#{node.data.resource1InstalledBI != null}"/>
+                                                <af:link text="#{node.data.resource1InstalledBI.displayInfo})" id="l4"
+                                                         action="businessInteractionSummary"
+                                                         shortDesc="#{(node.data.resource1InstalledBI.oid eq null) ? '&#160;' : inventoryUIBundle.BUSINESS_INTERACTION}"
+                                                         disabled="#{(node.data.resource1InstalledBI.oid eq null) or (pageFlowScope.ConfigurationSummaryBean.popupMode) ? true : false}"
+                                                         rendered="#{(node.data.resource1 != null) and (node.data.resource1InstalledBI!=null)}"
+                                                         actionListener="#{bindings.openSubTaskForAssociatedBiSummary.execute}">
+                                                    <af:setActionListener from="#{node.data.resource1InstalledBI.oid}" to="#{objectId}"/>
+                                                </af:link>
+                                            </trh:cellFormat>
+                                        </trh:rowLayout>
+                                    </trh:tableLayout>
+                                    <trh:tableLayout id="tl4">
+                                        <trh:rowLayout id="rl4">
+                                            <trh:cellFormat id="cf4">
+                                                <af:link text="#{node.data.resource2.displayInfo}" id="l5"
+                                                         action="#{pageFlowScope.ConfigSummaryBean.getSummaryPage}"
+                                                         shortDesc="#{node.data.resource2.displayInfo eq null ? '&amp;#160;' : inventoryUIBundle.LINK_FOR_SUMMARY}"
+                                                         disabled="#{node.data.resource2.displayInfo eq null ? true : false}"
+                                                         rendered="#{node.data.resource2 != null}">
+                                                    <af:setActionListener from="#{node.data.resource2.oid}" to="#{objectId}"/>
+                                                    <af:setActionListener from="#{pageFlowScope.ConfigSummaryBean.entityTypeName}"
+                                                                          to="#{entityInfo}"/>
+                                                    <af:setActionListener from="#{node.data.resource2.displayInfo}"
+                                                                          to="#{displayInfo}"/>
+                                                </af:link>
+                                                <af:outputText value="(#{node.data.resource2InventoryStatus})" id="ot16"
+                                                               rendered="#{node.data.resource2InstalledBI != null}"/>
+                                                <af:outputText value="(#{node.data.resource2InstalledBIDueDate})" id="ot17"
+                                                               rendered="#{node.data.resource2InstalledBI != null}"/>
+                                                <af:link text="#{node.data.resource2InstalledBI.displayInfo})" id="l6"
+                                                         action="businessInteractionSummary"
+                                                         shortDesc="#{(node.data.resource2InstalledBI.oid eq null) ? '&#160;' : inventoryUIBundle.BUSINESS_INTERACTION}"
+                                                         disabled="#{(node.data.resource2InstalledBI.oid eq null) or (pageFlowScope.ConfigurationSummaryBean.popupMode) ? true : false}"
+                                                         rendered="#{(node.data.resource2 != null) and (node.data.resource1InstalledBI!=null)}"
+                                                         actionListener="#{bindings.openSubTaskForAssociatedBiSummary.execute}">
+                                                    <af:setActionListener from="#{node.data.resource2InstalledBI.oid}" to="#{objectId}"/>
+                                                </af:link>
+                                            </trh:cellFormat>
+                                        </trh:rowLayout>
+                                    </trh:tableLayout>
+                                </af:column>
+                                
+                                <!-- column to display Actions -->
+                                <af:column sortable="true" headerText="#{inventoryUIBundle.ACTIONS}" id="c5" filterable="true" width="100">
+                                    <!-- To display Allocate /Reference Actions -->
+                                    <af:link text="#{node.data.configItemAction1}" id="l7" partialSubmit="true"
+                                             actionListener="#{pageFlowScope.ConfigurationTreeBean.processAction1}"
+                                             shortDesc="#{node.data.configItemAction1 eq null ? '&amp;#160;' : inventoryUIBundle.ASSIGN_LINK}"
+                                             styleClass="invSummaryPanelLabelAndMessage" />
+                                    <af:link text="#{node.data.configItemAction2}" id="l8" partialSubmit="true"
+                                             actionListener="#{pageFlowScope.ConfigurationTreeBean.processAction2}"
+                                             shortDesc="#{node.data.configItemAction2 eq null ? '&amp;#160;' : inventoryUIBundle.ASSIGN_LINK}"
+                                             styleClass="invSummaryPanelLabelAndMessage" />
+                                </af:column>
+                            </af:treeTable>
+                        </af:panelCollection>
+                    </af:showDetailHeader>
+                </af:panelGroupLayout>
+            </af:panelHeader>
+        </f:facet>
+    </af:panelStretchLayout>
+</jsp:root>

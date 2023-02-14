@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='windows-1250'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+    <c:set var="inventoryuiBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:panelStretchLayout id="psl1" dimensionsFrom="auto" styleClass="AFStretchWidth">
+        <f:facet name="center">
+            <dvt:diagram id="d1" summary="#{inventoryUIBundle.NETWORK_FORWARDING_PATH}" layout="tierLayout" inlineStyle="width: 930px;height: 550px;" controlPanelBehavior="initExpanded"
+					contentDelivery="lazy">
+                <dvt:clientLayout name="tierLayout" method="DemoTierLayout.tierLayout" featureName="DemoTierLayout"/>
+                <dvt:overviewWindow id="ow1"/>
+				<dvt:diagramNodes id="dns1" value="#{pageFlowScope.NetworkForwardingPathBean.model.nodes}" var="node">
+                    <dvt:diagramNode id="dn1" nodeId="#{node.nodeId}" containerId="#{node.parentNodeId > -1?node.parentNodeId:null}" 
+                                label="#{node.nodeLabel}" rendered="#{(node.nodeType == 'VNFEP')}">
+                        <f:facet name="zoom100">
+							<dvt:marker shape="circle" fillColor="#ff0000" borderColor="#000000" borderStyle="none"/>
+                        </f:facet>
+                    </dvt:diagramNode>
+					<dvt:diagramNode id="dn2" nodeId="#{node.nodeId}" containerId="#{node.parentNodeId > -1?node.parentNodeId:null}" 
+                                rendered="#{(node.nodeType == 'VNF')}" label="#{node.nodeLabel}">
+                        <f:facet name="zoom100">
+							<dvt:marker id="step5_m1" width="120" height="60" shape="square" borderStyle="solid" borderColor="#abb3b9"
+                                fillColor="#f9f9f9" shortDesc="#{node.nodeLabel}"/>
+                        </f:facet>
+                    </dvt:diagramNode>
+                    <dvt:diagramNode id="dn3" nodeId="#{node.nodeId}" rendered="#{node.nodeType == 'EP'}" label="#{node.nodeLabel}">
+                        <f:facet name="zoom100">
+                            <af:panelGroupLayout layout="vertical">
+                                <af:image source="/images/qual_rectangletwodots_24_full.png"/>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                    </dvt:diagramNode>
+                </dvt:diagramNodes>
+                <dvt:diagramLinks id="dls1" value="#{pageFlowScope.NetworkForwardingPathBean.model.links}" var="link">
+                    <dvt:diagramLink id="dl1" startNode="#{link.sourceNodeId}" endNode="#{link.destinationNodeId}" linkStyle="solid" linkColor="#000000" linkWidth="1" />
+                </dvt:diagramLinks>
+            </dvt:diagram>
+        </f:facet>
+    </af:panelStretchLayout>
+</jsp:root>

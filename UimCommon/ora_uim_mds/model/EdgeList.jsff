@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    bbyellap    5/23/13 - Created     
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:tr="http://myfaces.apache.org/trinidad" xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+        <f:facet name="localArea" >
+        <af:panelStretchLayout id="psl1" styleClass="AFStretchWidth">
+                <f:facet name="center">
+                    <af:panelGroupLayout id="pgl6" layout="scroll">
+                        <af:panelGroupLayout id="pgl35" layout="horizontal" halign="center">
+                            <af:train value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}" id="t1" var="trainNode">
+                                <f:facet name="nodeStamp">
+                                    <af:commandNavigationItem id="cni1" textAndAccessKey="#{trainNode.textAndAccessKey}" disabled="#{trainNode.disabled}" visited="#{trainNode.visited}">
+                                        <f:attribute name="trainStopNode" value="#{trainNode}"/>
+                                    </af:commandNavigationItem>
+                                </f:facet>
+                            </af:train>
+                        </af:panelGroupLayout>
+                        <af:spacer width="10" height="5" id="s1"/>
+                        <af:separator id="s2"/>
+                        <af:panelHeader text="#{inventoryUIBundle.INSERT_NODE_LABEL}" id="ph1">
+                            <f:facet name="toolbar">
+                                <af:panelGroupLayout layout="vertical" halign="right" rendered="#{(pageFlowScope.TrainNavigationHandler.train)}" id="pgl1">
+                                    <af:panelGroupLayout id="pt_pgl2"
+                                                         layout="horizontal">
+                                        <af:commandButton text="#{inventoryUIBundle.BACK}" id="pt_cb1"
+                                                          partialSubmit="true"
+                                                          action="#{pageFlowScope.TrainNavigationHandler.navigatePreviousStop}"
+                                                          disabled="#{pageFlowScope.TrainNavigationHandler.firstStop}"/>
+                                        <af:spacer id="sp3" width="5"/>
+                                        <af:commandButton text="#{inventoryUIBundle.NEXT}" id="pt_cb2"
+                                                          partialSubmit="true"
+                                                          action="#{pageFlowScope.EdgesListBean.trainNextStop}"
+                                                          disabled="#{(pageFlowScope.TrainNavigationHandler.lastStop) or ( pageFlowScope.EdgesListBean.trainNextStopDisable)}"
+                                                          binding="#{pageFlowScope.EdgesListBean.trainNextButton}"/>
+                                        <af:spacer id="sp4" width="5"/>
+                                        <af:commandButton text="#{inventoryUIBundle.FINISH}" id="pt_cb3"
+                                                          partialSubmit="true"
+                                                          disabled="#{!(pageFlowScope.TrainNavigationHandler.lastStop)}"/>
+                                        <af:spacer id="sp5" width="5"/>
+                                        <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="pt_cb4"
+                                                          partialSubmit="true"
+                                                          actionListener="#{pageFlowScope.TrainNavigationHandler.cancel}"/>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                            </f:facet>
+                        </af:panelHeader>
+                        <af:spacer id="spacer2" width="5" height="5"/>
+                        <af:panelGroupLayout id="pgl4">
+                            <af:outputText value="#{inventoryUIBundle.INSERT_NODE_EDGE_LIST_LABEL}"
+                                           id="ot2" styleClass="bluetext"/>
+                        </af:panelGroupLayout>
+                        <af:spacer id="spacer1" width="5" height="5"/>
+                        <af:panelGroupLayout id="pgl7" layout="vertical">
+                            <af:panelBox text="#{inventoryUIBundle.NETWORK_EDGES}" id="pb1"
+                                         showDisclosure="false">
+                                <af:panelCollection id="pc2" styleClass="AFStretchWidth" featuresOff="">
+                                    <af:table id="t3"
+                                              value="#{bindings.NetworkEdge1.collectionModel}"
+                                              var="row"
+                                              rows="#{bindings.NetworkEdge1.rangeSize}"
+                                              emptyText="#{bindings.NetworkEdge1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              fetchSize="#{pageFlowScope.EdgesListBean.fetchSize}"
+                                              contentDelivery="immediate"
+                                              selectionListener="#{pageFlowScope.EdgesListBean.selectEdge}"
+                                              rowBandingInterval="0"
+                                              styleClass="AFStretchWidth"
+                                              rowSelection="single"
+                                              binding="#{pageFlowScope.EdgesListBean.edgeListTable}"
+                                              summary="#{inventoryUIBundle.NETWORK_EDGES_TABLE}"
+                                              columnStretching="column:c1"
+                                              partialTriggers="" inlineStyle="height:inherit;">
+                                        <af:column sortProperty="name"
+                                                   sortable="true"
+                                                   headerText="Edge Name"
+                                                   id="c1" width="100%"
+                                                   rowHeader="unstyled">
+                                            <af:outputText value="#{pageFlowScope.EdgesListBean.edgeName}"
+                                                           id="ot1"/>
+                                        </af:column>
+                                    </af:table>
+                                    <f:facet name="statusbar">
+                                        <af:toolbar id="t2">
+                                            <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(bindings.NetworkEdge1.collectionModel.rowCount lt 0) ? 0 :  bindings.NetworkEdge1.collectionModel.rowCount}"
+                                                           id="ol1"
+                                                           styleClass="invSearchOutputLabel"
+                                                           binding="#{backingBeanScope.totalResultsLabel}"
+                                                           partialTriggers="t3"/>
+                                        </af:toolbar>
+                                    </f:facet>
+                                </af:panelCollection>
+                            </af:panelBox>
+                        </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                </f:facet>
+            </af:panelStretchLayout>
+        </f:facet>
+    </af:pageTemplate>
+</jsp:root>

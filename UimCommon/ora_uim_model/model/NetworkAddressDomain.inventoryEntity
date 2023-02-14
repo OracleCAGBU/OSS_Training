@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xsi:type="BusinessEntityType" name="NetworkAddressDomain" realizeFromBusinessEntity="true">
+  <com:displayName lang="[default]">NetworkAddressDomain</com:displayName>
+  <com:saveVersion>8</com:saveVersion>
+  <com:id>E:inventoryEntity--NetworkAddressDomain</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>inventoryEntity--NetworkAddressDomain</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>NetworkAddressDomain</data:name>
+    <data:displayName lang="[default]">NetworkAddressDomain</data:displayName>
+    <data:dataElement virtual="false">
+      <com:id>name</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>name</data:name>
+      <data:displayName lang="[default]">name</data:displayName>
+      <data:displayName lang="[default]">name</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>name</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>name</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>description</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>description</data:name>
+      <data:displayName lang="[default]">description</data:displayName>
+      <data:displayName lang="[default]">description</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>description</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>description</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>aBdn--+L--+o--+jWN9G4Q</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>inventoryEntity--NetworkAddressDomain</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType" index="true" name="name">
+    <com:id>TZtLWyl0--+nTS1loXofYw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>--+lRm4Z--+0--+5MtwKkA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>chxcVCUk--+JgkoIZl5Wfw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType" name="description">
+    <com:id>4Ptn---0--+y---017xAlQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>---8MScA--++vWtytT4+MQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>npxz--+E--+2fupOnAM7uQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+    <data:information lang="[default]">A textual description of the network address domain.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>--+d--+j--+o---S--+AMw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <capability xsi:type="accessControlledType" enabled="true" id="oracle.communications.sce.poms.capabilities.AccessControlled"/>
+  <capability xsi:type="characteristicType" enabled="true" id="oracle.communications.sce.poms.capabilities.Characteristic" spec="CharacteristicSpecification">
+    <characteristicName interface="oracle.communications.inventory.api.entity.NetworkAddressDomainCharacteristic" name="NetworkAddressDomainCharacteristic" table="NETWORKADDRESSDOMAIN_CHAR"/>
+  </capability>
+  <implements interface="java.lang.Cloneable"/>
+  <implements interface="oracle.communications.inventory.api.entity.common.RootEntity"/>
+  <method name="getDisplayInfo">
+    <signature>String getDisplayInfo()</signature>
+    <body>
+                            return getName() == null ? &quot;&quot;: getName();                            
+                    </body>
+    <javadoc>Return an identifiable info String for this object.
+			</javadoc>
+  </method>
+  <method name="getId">
+    <signature>String getId()</signature>
+    <body>
+                              return getName();
+                        
+                    </body>
+    <javadoc>Return an identifiable info String for this object.
+			</javadoc>
+  </method>
+  <method name="setId">
+    <signature>void setId(java.lang.String id)</signature>
+    <body>
+                        
+                    </body>
+    <javadoc></javadoc>
+  </method>
+  <properties hierarchyStrategy="join" interface="oracle.communications.inventory.api.entity.NetworkAddressDomain" managedBy="oracle.communications.inventory.api.networkaddress.NetworkAddressDomainManager" type="ocim:NetworkAddressDomain"/>
+</com:modelEntity>

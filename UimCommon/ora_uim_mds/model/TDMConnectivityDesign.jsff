@@ -1,0 +1,899 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<af:panelStretchLayout id="pgl1" styleClass="AFStretchWidth" binding="#{backingBeanScope.TDM_Design_panelGroupLayout}" dimensionsFrom="auto" topHeight="75">
+    <f:facet name="center">
+        <af:panelGroupLayout layout="scroll">
+            <af:panelGroupLayout id="pgl41" layout="horizontal" styleClass="AFStretchWidth">
+                <af:panelGroupLayout layout="vertical" halign="left">
+                    <af:outputText value="#{inventoryUIBundle.CONNECTIVITY_DESIGN}: #{pageFlowScope.TDMConnectivityDesignBean.version}" binding="#{backingBeanScope.versionBinding}" id="ot1" 
+                                   inlineStyle="font-weight:bold;"/>
+                                   
+                       <af:panelGroupLayout layout="horizontal" halign="left">
+                        <af:panelLabelAndMessage label="#{inventoryUIBundle.START_DATE}" id="pla22"
+                            rendered="#{pageFlowScope.TDMConnectivityDesignBean.viewEffDate}">
+                            <af:outputText value="#{pageFlowScope.TDMConnectivityDesignBean.startDate}"
+                                           id="ot12">
+                              <af:convertDateTime pattern="#{pageFlowScope.TDMConnectivityDesignBean.dateTimeFormat}"/>
+                            </af:outputText>
+                       </af:panelLabelAndMessage>          
+                     
+                           <af:inputDate value="#{pageFlowScope.TDMConnectivityDesignBean.startDate}" immediate="true"
+                                label="#{inventoryUIBundle.START_DATE}" autoSubmit="true"  required="true"
+                                rendered="#{!pageFlowScope.TDMConnectivityDesignBean.viewEffDate}"
+                                id="inputDate2">
+                          <af:convertDateTime pattern="#{pageFlowScope.TDMConnectivityDesignBean.dateTimeFormat}"/>
+                          </af:inputDate>      
+                        
+                    <af:commandImageLink id="cile" 
+                            rendered="#{pageFlowScope.TDMConnectivityDesignBean.renderEditEffDate &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=TDMConnectivityDesign.EDIT;action=view']}"
+                            actionListener="#{pageFlowScope.TDMConnectivityDesignBean.editEffectveDate}"
+                                    icon="/images/update_ena.png"  shortDesc="#{inventoryUIBundle.EDIT}"/>
+                      <af:commandImageLink id="cils"
+                            rendered="#{pageFlowScope.TDMConnectivityDesignBean.renderSaveEffDate}"
+                            actionListener="#{pageFlowScope.TDMConnectivityDesignBean.saveEffectveDate}"
+                                    icon="/images/save_ena.png"  shortDesc="#{inventoryUIBundle.SAVE}"/>                
+                                    
+                          </af:panelGroupLayout>           
+                        <af:panelGroupLayout layout="horizontal" binding="#{backingBeanScope.associatedBiPanelBinding}">
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.ASSOCIATE}d To #{inventoryUIBundle.BUSINESS_INTERACTION}" inlineStyle="font-weight:bold;" id="plam26">
+                          <af:commandImageLink id="c223" action="#{pageFlowScope.TDMConnectivityDesignBean.getAction}" actionListener="#{pageFlowScope.TDMConnectivityDesignBean.getAssociatedBiAction}"
+                                               text="#{pageFlowScope.TDMConnectivityDesignBean.associatedBiDisplayInfo}"
+                                               shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                                    
+                            <af:setActionListener from="#{pageFlowScope.TDMConnectivityDesignBean.associatedBi.oid}"
+                                                  to="#{objectId}"/>
+                            <af:setActionListener from="#{pageFlowScope.TDMConnectivityDesignBean.associatedBi.displayInfo}"
+                              to="#{displayInfo}"/>
+                          </af:commandImageLink>
+                          </af:panelLabelAndMessage>
+                    </af:panelGroupLayout>
+               
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="vertical" halign="right" >
+                    <af:panelGroupLayout layout="horizontal">
+                        <af:outputText value="#{inventoryUIBundle.CONNECTIVITY_DESIGN_NOTE}" inlineStyle="font-weight:bold;" id="ot2"
+                                       rendered="#{!pageFlowScope.TDMConnectivityDesignBean.serviceConfigServiceConnDesignMode}"/>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout layout="horizontal">
+                        <af:menuBar id="mb1">
+                            <af:menu id="menu5" binding="#{pageFlowScope.TDMConnectivityDesignBean.versionsMenu}" styleClass="invSummaryMenu">
+                                <af:clientListener method="handleMenuClick" type="click"/>
+                                <af:serverListener type="MenuClickEvent" method="#{pageFlowScope.TDMConnectivityDesignBean.handleVersionsMenuClick}"/>
+                                <af:showPopupBehavior popupId="pcvpp" triggerType="click" align="afterEnd"/>
+                            </af:menu>
+                            <af:menu id="menu6" binding="#{pageFlowScope.TDMConnectivityDesignBean.actionsMenu}" styleClass="invSummaryMenu"
+                                     rendered="#{!pageFlowScope.TDMConnectivityDesignBean.serviceConfigServiceConnDesignMode}"/>
+                        </af:menuBar>
+                        <af:popup id="pcvpp" contentDelivery="lazyUncached">
+                            <af:dialog title="Design Versions" id="d2" stretchChildren="first" contentWidth="300" contentHeight="100" type="none" binding="#{backingBeanScope.versionDialog}">
+                                <f:facet name="buttonBar">
+                                    <af:toolbar id="tb7">
+                                        <af:group id="g41">
+                                            <af:commandToolbarButton text="#{inventoryUIBundle.CREATE_NEW_VERSION}" id="ctb8" partialTriggers="t9" 
+                                                                     disabled="#{pageFlowScope.TDMConnectivityDesignBean.disableCreateVersion}"
+													                 rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=TDMConnectivityDesign.CREATE;action=view']}"
+                                                                     actionListener="#{pageFlowScope.TDMConnectivityDesignBean.createNewVersion}"/>
+                                        </af:group>
+                                        <af:group id="g42">
+                                            <af:commandToolbarButton text="#{inventoryUIBundle.APPLY}" id="ctb18" actionListener="#{pageFlowScope.TDMConnectivityDesignBean.applyVersion}"
+                                                                     accessKey="I#{inventoryUIBundle.APPLY_ACCESS_KEY}"/>
+                                            <af:commandToolbarButton text="#{inventoryUIBundle.DONE}" id="ctb16" actionListener="#{pageFlowScope.TDMConnectivityDesignBean.okVersion}"
+                                                                     accessKey="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>
+                                            <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb28" actionListener="#{pageFlowScope.TDMConnectivityDesignBean.cancelVersion}"
+                                                                     accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                                        </af:group>
+                                    </af:toolbar>
+                                </f:facet>
+                                <af:panelStretchLayout id="pt_psl4" styleClass="invCommonPanelStretchLayout">
+                                    <f:facet name="center">
+                                        <af:table rowSelection="single" var="version" id="t9" summary="Configuration version popup"
+                                                  binding="#{pageFlowScope.TDMConnectivityDesignBean.versionTable}" autoHeightRows="10"
+                                                  selectionListener="#{pageFlowScope.TDMConnectivityDesignBean.versionSelectionListener}"
+                                                  value="#{pageFlowScope.TDMConnectivityDesignBean.connectivity.configurations}">
+                                              <af:column align="right" headerText="Version" id="d1"
+                                                         rowHeader="unstyled">
+                                                    <af:outputText value="#{version.versionNumber}" id="o1"/>
+                                              </af:column>
+                                              <af:column align="left" headerText="Status" sortable="true" id="d7">
+                                                    <af:outputText value="#{pageFlowScope.TDMConnectivityDesignBean.configState}" id="o2"/>
+                                              </af:column>
+                                              <af:column align="left" headerText="Effective Date" id="d4">
+                                                    <af:outputText value="#{version.effDate}" id="o4"/>
+                                              </af:column>
+                                        </af:table>
+                                    </f:facet>
+                                </af:panelStretchLayout>
+                            </af:dialog>
+                        </af:popup>
+                    </af:panelGroupLayout>
+                </af:panelGroupLayout>
+            </af:panelGroupLayout>
+            
+            <af:panelTabbed id="pt1" dimensionsFrom="auto" styleClass="AFStretchWidth" binding="#{backingBeanScope.designSubPanelTab}">
+                <af:showDetailItem text="#{inventoryUIBundle.DESIGN}" id="sdi1" binding="#{backingBeanScope.designSubTab}" disclosureListener="#{pageFlowScope.TDMConnectivityDesignBean.discloseDesignSubTab}">
+                  <af:panelGroupLayout id="pgl3" layout="horizontal" styleClass="AFStretchWidth">
+                    <af:panelSplitter id="ps1" styleClass="AFStretchWidth" orientation="horizontal" dimensionsFrom="auto" splitterPosition="100" binding="#{backingBeanScope.designPanel}">
+                
+                    <f:facet name="first">
+                        <af:panelGroupLayout id="pgl4" layout="scroll"
+                                             rendered="#{!pageFlowScope.TDMConnectivityDesignBean.serviceConfigServiceConnDesignMode}">
+                            <af:toolbar id="t3" binding="#{backingBeanScope.pathToolBarBinding}">
+                                <af:commandToolbarButton shortDesc="#{inventoryUIBundle.CREATE_PATH_TOOLTIP}" icon="/images/add_ena.png" id="ctb1" disabledIcon="/images/add_dis.png"
+                                                         disabled="#{pageFlowScope.TDMConnectivityDesignBean.disableAddPath}"
+                                                         actionListener="#{pageFlowScope.TDMConnectivityDesignBean.addPath}"/>
+                                <af:commandToolbarButton shortDesc="#{inventoryUIBundle.DUPLICATE_PATH_TOOLTIP}" icon="/images/duplicate.png" disabledIcon="/images/duplicate_dis.png" id="ctb2"
+                                                         disabled="#{(pageFlowScope.TDMConnectivityDesignBean.disableDuplicatePath) or (pageFlowScope.TDMConnectivityDesignBean.selectedPath eq null)}"
+                                                         actionListener="#{pageFlowScope.TDMConnectivityDesignBean.duplicatePath}"/>
+                                <af:commandToolbarButton shortDesc="#{inventoryUIBundle.DELETE_PATH_TOOLTIP}" icon="/images/delete_ena.png" disabledIcon="/images/delete_dis.png" id="ctb3"
+                                                         disabled="#{(pageFlowScope.TDMConnectivityDesignBean.disableDeletePath) or (pageFlowScope.TDMConnectivityDesignBean.selectedPath eq null)}">
+                                                    <af:showPopupBehavior popupId="delp" triggerType="action"/>     
+                                </af:commandToolbarButton>
+                                                         
+                                <af:popup id="delp" contentDelivery="lazyUncached">
+                                    <af:dialog title="#{inventoryUIBundle.DELETE_PATH_MESSAGE}" type="yesNo"
+                                               dialogListener="#{pageFlowScope.TDMConnectivityDesignBean.deleteConfirmation}" id="dd4"/>
+                                </af:popup>                                             
+                            </af:toolbar>
+                            <af:panelList id="ph1" binding="#{backingBeanScope.pathBinding}" listStyle="list-style-type:none" inlineStyle="margin:0px;padding:0px;">
+                                <af:iterator id="i1" value="#{pageFlowScope.TDMConnectivityDesignBean.pathNames}" var="path">
+                                    <af:link text="#{path}" id="cl1" actionListener="#{pageFlowScope.TDMConnectivityDesignBean.selectedPath}"/>
+                                    <br></br>
+                                </af:iterator>
+                            </af:panelList>
+                        </af:panelGroupLayout>
+                      </f:facet>
+                
+                      <f:facet name="second">
+                        <af:panelGroupLayout id="pgl5" styleClass="AFStretchWidth">
+                            <af:outputText value="#{pageFlowScope.TDMConnectivityDesignBean.selectedPathLabel}" id="ot3" inlineStyle="font-weight:bolder;"/>
+                            
+                            <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                            
+                                            <f:facet name="toolbar">
+                                                <af:toolbar id="t1" binding="#{backingBeanScope.segmentToolBar}"
+                                                            rendered="#{!pageFlowScope.TDMConnectivityDesignBean.serviceConfigServiceConnDesignMode}">
+                                                    <af:group id="g1">
+                                                        <af:commandToolbarButton shortDesc="#{inventoryUIBundle.DELETE}"
+                                                                                 icon="/images/delete_ena.png"
+                                                                                 disabledIcon="/images/delete_dis.png"
+                                                                                 id="ctb4"
+                                                                                 disabled="#{(pageFlowScope.TDMConnectivityDesignBean.disableDeleteSegments)}">
+                                                            <af:showPopupBehavior popupId="delsg" triggerType="action"/>
+                                                        </af:commandToolbarButton>
+                                                        <af:spacer width="10" height="10" id="s15"/>
+                                                        <af:commandToolbarButton shortDesc="#{inventoryUIBundle.CLEAR}"
+                                                                                 icon="/images/clear_ena.png"
+                                                                                 disabledIcon="/images/clear_dis.png"
+                                                                                 id="ctb5"
+                                                                                 disabled="#{(pageFlowScope.TDMConnectivityDesignBean.disableClearSegments)}"
+                                                                                 partialTriggers="t2">
+                                                            <af:showPopupBehavior popupId="clsg" triggerType="action"/>
+                                                        </af:commandToolbarButton>
+                                                    </af:group>
+                                                    <af:group id="g2">
+                                                        <af:commandToolbarButton shortDesc="#{inventoryUIBundle.REVERSE}"
+                                                                                 icon="/images/stp_ovr.png"
+                                                                                 disabledIcon="/images/stp_ovr_dis.png"
+                                                                                 id="ctb6"
+                                                                                 disabled="#{pageFlowScope.TDMConnectivityDesignBean.disableReverseSegments}"
+                                                                                 partialTriggers="t2"
+                                                                                 actionListener="#{pageFlowScope.TDMConnectivityDesignBean.reverseSegments}"/>
+                                                        <af:commandToolbarButton shortDesc="#{inventoryUIBundle.ASSIGN_FLOW_IDENTIFIER_BOTH_ENDS_TOOLTIP}"
+                                                                                 icon="/images/flowIdentifier_ena.png"
+                                                                                 disabledIcon="/images/flowIdentifier_dis.png"
+                                                                                 rendered="#{pageFlowScope.TDMConnectivityDesignBean.renderAssignFIToConnectivity}"
+                                                                                 disabled="#{pageFlowScope.TDMConnectivityDesignBean.disableAssignFIToConnectivity}"
+                                                                                 actionListener="#{pageFlowScope.TDMConnectivityDesignBean.invokeFlowIdentifierPopup}"
+                                                                                 id="ctb7" partialTriggers="t2">
+                                                            <af:setPropertyListener type="action" from="true"
+                                                                                    to="#{pageFlowScope.istrailMode}"/>
+                                                            <af:setPropertyListener type="action" from="true"
+                                                                                    to="#{pageFlowScope.invokeFlowIdentifier}"/>  
+                                                            <af:setPropertyListener type="action" from="both" to="#{pageFlowScope.endPoint}"/>
+                                                        </af:commandToolbarButton>
+                                                        <af:commandToolbarButton shortDesc="#{inventoryUIBundle.UNASSIGN_ALL_FLOW_IDENTIFIER_TOOLTIP}"
+                                                                                 icon="/images/flowIdentifier_delete_ena.png"
+                                                                                 disabledIcon="/images/flowIdentifier_delete_dis.png"
+                                                                                 rendered="#{pageFlowScope.TDMConnectivityDesignBean.renderUnassignFIToConnectivity}"
+                                                                                 disabled="#{pageFlowScope.TDMConnectivityDesignBean.disableUnassignFIToConnectivity}"
+                                                                                 id="ctb9" partialTriggers="t2"
+                                                                                 actionListener="#{pageFlowScope.TDMConnectivityDesignBean.unassignAllFlowIdentifierToConnectivity}"/>
+                                                    </af:group>
+                                                    <af:group id="g3">
+                                                        <af:commandToolbarButton text="#{inventoryUIBundle.EXPORT}" immediate="true"
+                                                                                 shortDesc="#{inventoryUIBundle.EXPORT_ALL_ROWS}"
+                                                                                 icon="/images/exporttoexcel_ena.png"
+                                                                                 disabledIcon="/images/exporttoexcel_dis.png"
+                                                                                 partialTriggers="t2">
+                                                            <af:setActionListener from="true"
+                                                                                  to="#{requestScope.exportMode}"/>
+                                                            <af:exportCollectionActionListener type="excelHTML"
+                                                                                               exportedId="t2"
+                                                                                               filename="export-#{pageFlowScope.TDMConnectivityDesignBean.connectivityIdentifier}-#{pageFlowScope.TDMConnectivityDesignBean.selectedPathLabel}.xls"
+                                                                                               title="Export"
+                                                                                               exportedRows="all"/>
+                                                        </af:commandToolbarButton>
+                                                        <af:commandToolbarButton text="Print" shortDesc="Print"
+                                                                                 icon="/images/print_ena.png"
+                                                                                 disabledIcon="/images/print_dis.png">
+                                                            <af:showPrintablePageBehavior/>
+                                                        </af:commandToolbarButton>
+                                                    </af:group>
+                                                    <af:popup id="delsg" contentDelivery="lazyUncached"
+                                                              binding="#{backingBeanScope.delSegmentPopup}">
+                                                        <af:dialog title="#{inventoryUIBundle.DELETE_SEGMENTS_MESSAGE}"
+                                                                   type="yesNo"
+                                                                   dialogListener="#{pageFlowScope.TDMConnectivityDesignBean.deleteConfirmation}"
+                                                                   id="dd2"/>
+                                                    </af:popup>
+                                                    <af:popup id="clsg" contentDelivery="lazyUncached">
+                                                        <af:dialog title="#{inventoryUIBundle.CLEAR_SEGMENTS_MESSAGE}"
+                                                                   type="yesNo"
+                                                                   dialogListener="#{pageFlowScope.TDMConnectivityDesignBean.deleteConfirmation}"
+                                                                   id="dd3"/>
+                                                    </af:popup>
+                                                </af:toolbar>
+                                            </f:facet>
+                                            <af:treeTable value="#{pageFlowScope.TDMConnectivityDesignBean.segmentsCollectionModel}"
+                                          var="model" autoHeightRows="200"
+                                          binding="#{pageFlowScope.TDMConnectivityDesignBean.segmentTable}" contentDelivery="immediate"
+                                          rowBandingInterval="0"
+                                          rowSelection="multiple" varStatus="vs"
+                                          styleClass="AFStretchWidth"
+                                          selectionListener="#{pageFlowScope.TDMConnectivityDesignBean.selectAction}" id="t2"
+                                          summary="#{inventoryUIBundle.CONNECTIVITY_DESIGN_TABLE}"
+                                          columnStretching="column:c5">
+                                          
+                                        <f:facet name ="nodeStamp">
+                                          <af:column sortable="false" headerText=" " width="15" id="nsc1" styleClass="#{model.styleClass}"
+                                                   rowHeader="unstyled">
+                                          </af:column>
+                                        </f:facet>
+                                        
+                                        <!-- Column to display the Segment Number. -->
+                                        <af:column sortable="false" headerText="#{inventoryUIBundle.SEGMENT_NUMBER}" width="35" id="c1" styleClass="#{model.styleClass}"
+                                                   rowHeader="unstyled">
+                                            <af:outputText value="#{model.serialNumber}" id="ot7"/>
+                                            <f:facet name="footer">
+                                                <af:panelGroupLayout id="pg85" halign="center" layout="horizontal">
+                                                  <af:outputText id="ot31" value="#{inventoryUIBundle.SEGMENT_NUMBER}"/>
+                                                </af:panelGroupLayout>
+                                            </f:facet>
+                                        </af:column>
+                                        
+                                        
+                                        <!-- Column to display the Gap. -->
+                                        <af:column sortable="false" headerText="#{inventoryUIBundle.GP}" width="20" id="c2" styleClass="#{model.styleClass}">
+                                            <af:selectBooleanCheckbox label=" " id="sbc1" rendered="#{pageFlowScope.TDMConnectivityDesignBean.transport and model.renderGapCheckbox}"
+                                                                      valueChangeListener="#{pageFlowScope.TDMConnectivityDesignBean.facilityValueChanged}"
+                                                                      value="#{model.facility}" autoSubmit="true"/>
+                                            <f:facet name="footer">
+                                                <af:panelGroupLayout id="pg89" halign="center" layout="horizontal">
+                                                  <af:outputText id="ot39" value="#{inventoryUIBundle.GP}"/>
+                                                </af:panelGroupLayout>
+                                            </f:facet>
+                                        </af:column>
+                                        
+                                        <!-- Column to display the A-Location. -->
+                                        <af:column sortable="true" inlineStyle="border-right: 0px;" width="180" styleClass="#{model.styleClass}"
+                                                   headerText="#{pageFlowScope.TDMConnectivityDesignBean.ALocationHeader}" id="c3">
+                                            <af:panelGroupLayout id="pgl8" layout="vertical">
+                                            <af:outputText value="#{model.ALocation}" id="fot9" rendered="#{model.renderALoc}"/>
+                                            <af:outputText value="#{model.AInterfaceIPAddress}" id="ipt1"/>
+                                                                                        
+                                            <af:outputText value=" " id="otspace1" rendered="#{adfFacesContext.outputMode ne 'printable'}"/>
+                                           
+                                            <af:panelGroupLayout id="pg1" layout="horizontal" rendered="#{model.renderAInterfaceIdentifier}">
+                                                <af:outputText value="#{model.AInterfaceIdentifier}" id="ot21"/>
+                                                <af:outputText value="#{model.AInterfaceDisplay}" id="ot22print" rendered="#{adfFacesContext.outputMode eq 'printable'}"/>
+                                                <af:commandImageLink id="cl7" action="#{pageFlowScope.TDMConnectivityDesignBean.getAction}"
+                                                                actionListener="#{pageFlowScope.TDMConnectivityDesignBean.getInterfaceAction}"
+                                                                     text="#{model.AInterfaceDisplay}"
+                                                                     disabled="#{model.AInterfaceDisplay eq null ? true : false}"
+                                                                     shortDesc="#{model.AInterfaceDisplay eq null ? '&#160;' : inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                                   
+                                                    <af:setPropertyListener type="action" from='true' to="#{pageFlowScope.aInterface}"/>
+                                                </af:commandImageLink>
+                                                
+                                               
+                                                
+                                                <!-- bug#16753248 start -->
+                                                <!--TODO: Merge CB - the terminate at a channel functionality needs to be examined for Packet -->
+                                               <af:menuBar id="mb3" rendered="#{model.renderLeftAssignDI}" shortDesc="#{inventoryUIBundle.ASSIGN_A_INTERFACE_TOOLTIP}">
+                                                    <af:menu id="m1" icon="#{model.leftIcon}">
+                                                        <af:commandMenuItem text="#{inventoryUIBundle.TERMINATE_AT_MEDIA_INTERFACE}" id="cmif5" shortDesc="#{inventoryUIBundle.SEARCH_A_INTERFACE_TOOLTIP}" >
+                                                            <af:showPopupBehavior popupId=":::diPopup" triggerType="click"/>
+                                                            <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.invokeDI}"/>
+                                                            <af:setPropertyListener type="action" from='true' to="#{pageFlowScope.endPoint}"/>
+                                                            <af:setPropertyListener type="action" from="false" to="#{pageFlowScope.createInterconnection}"/>
+                                                            <af:setPropertyListener type="action" from="#{model.ALocation}" to="#{pageFlowScope.networkEntityLocation}"/>
+                                                            <af:setPropertyListener type="action" from="#{model.AServiceLocation}" to="#{pageFlowScope.serviceLocation}"/>
+                                                            <af:setPropertyListener type="action" from="#{pageFlowScope.TDMConnectivityDesignBean.connectivity.rateCode.name}" to="#{pageFlowScope.rateCode}"/>
+                                                            <af:setPropertyListener type="action" from="false" to="#{pageFlowScope.terminateAtFlowInterface}"/>
+                                                        </af:commandMenuItem>
+                                                        <af:commandMenuItem text="#{inventoryUIBundle.TERMINATE_AT_FLOW_INTERFACE}" id="cmzi5" shortDesc="#{inventoryUIBundle.TERMINATE_AT_A_FLOW_INTERFACE_TOOLTIP}" rendered="#{pageFlowScope.TDMConnectivityDesignBean.showFlowInterfaceTermination}">
+                                                            <af:showPopupBehavior popupId=":::diPopup" triggerType="click"/>
+                                                            <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.invokeDI}"/>
+                                                            <af:setPropertyListener type="action" from='true' to="#{pageFlowScope.endPoint}"/>
+                                                            <af:setPropertyListener type="action" from="false" to="#{pageFlowScope.createInterconnection}"/>
+                                                            <af:setPropertyListener type="action" from="#{model.ALocation}" to="#{pageFlowScope.networkEntityLocation}"/>
+                                                            <af:setPropertyListener type="action" from="#{model.AServiceLocation}" to="#{pageFlowScope.serviceLocation}"/>
+                                                            <af:setPropertyListener type="action" from="#{pageFlowScope.TDMConnectivityDesignBean.connectivity.rateCode.name}" to="#{pageFlowScope.rateCode}"/>
+                                                            <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.terminateAtFlowInterface}"/>
+                                                        </af:commandMenuItem>
+                                                        <af:commandMenuItem text="#{inventoryUIBundle.TERMINATE_AT_CHANNEL}" id="cmi6" shortDesc="#{inventoryUIBundle.TERMINATE_AT_A_CHANNEL_TOOLTIP}" disabled="#{pageFlowScope.TDMConnectivityDesignBean.disableAsideVirtualTermination}" actionListener="#{pageFlowScope.TDMConnectivityDesignBean.assignVirtualTermination}">
+                                                            <af:setPropertyListener type="action" from='true' to="#{pageFlowScope.endPoint}"/>
+                                                            <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.invokeDI}"/>
+                                                            <af:setPropertyListener type="action" from="false" to="#{pageFlowScope.createInterconnection}"/>
+                                                            <af:setPropertyListener type="action" from="#{model.ALocation}" to="#{pageFlowScope.networkEntityLocation}"/>
+                                                            <af:setPropertyListener type="action" from="#{pageFlowScope.TDMConnectivityDesignBean.connectivity.rateCode.name}" to="#{pageFlowScope.rateCode}"/>
+                                                        </af:commandMenuItem>
+                                                    </af:menu>
+                                                </af:menuBar>
+                                                <af:spacer width="10" height="10" id="s1"/>
+                                                <!-- bug# 16753248 end -->
+                                               
+                                              
+                                              <af:outputText value=" " id="otspace2" rendered="#{adfFacesContext.outputMode ne 'printable'}"/>
+                                              <af:commandImageLink id="ci67" icon="#{model.leftIcon}" shortDesc="#{inventoryUIBundle.UNASSIGN_INTERFACE_TOOLTIP}" rendered="#{model.renderLeftUnassignDI}"
+                                                                   actionListener="#{pageFlowScope.TDMConnectivityDesignBean.unassignInterface}">
+                                                    <af:setPropertyListener type="action" from='true' to="#{pageFlowScope.endPoint}"/>
+                                              </af:commandImageLink>
+                                              
+                                               <af:commandImageLink shortDesc="#{inventoryUIBundle.ASSIGN_FLOW_IDENTIFIER_TOOLTIP}" 
+								    icon="#{model.assignFlowIdentifierIcon}"
+                                                                     disabledIcon="/images/flowIdentifier_dis.png"
+                                                                     disabled="#{pageFlowScope.TDMConnectivityDesignBean.disableAssignFIToConnectivity}"
+                                                                     rendered="#{model.renderAFlowIdentifier}" 
+                                                                     actionListener="#{pageFlowScope.TDMConnectivityDesignBean.invokeFlowIdentifierPopup}"
+                                                                     id="cil7" >
+                                                    <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.istrailMode}"/>					
+                                                    <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.invokeFlowIdentifier}"/>
+                                                    <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.endPoint}"/>
+                                                    
+                                                </af:commandImageLink>
+                                              
+                                              <!-- The below code is for Creating Interconnection for Gap. -->
+                                              <af:commandImageLink id="ci78" icon="#{model.leftIcon}" rendered="#{model.renderACCIcon}" shortDesc="#{inventoryUIBundle.CREATE_INTERCONNECTION_TOOLTIP}">
+                                                      <af:showPopupBehavior popupId=":::diPopup" triggerType="click"/>
+                                                      <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.invokeDI}"/>
+                                                      <af:setPropertyListener type="action" from='true' to="#{pageFlowScope.endPoint}"/>
+                                                      <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.createInterconnection}"/>
+                                                      <af:setPropertyListener type="action" from="#{model.ALocation}" to="#{pageFlowScope.networkEntityLocation}"/>
+                                                      <af:setPropertyListener type="action" from="#{model.AServiceLocation}" to="#{pageFlowScope.serviceLocation}"/>
+                                                      <af:setPropertyListener type="action"
+                                                                              from="#{pageFlowScope.TDMConnectivityDesignBean.connectivity.rateCode.name}" to="#{pageFlowScope.rateCode}"/>
+                                                      <af:setPropertyListener type="action" from="#{pageFlowScope.TDMConnectivityDesignBean.selectedModel.AInterface}" to="#{pageFlowScope.existingDI}"/>
+                                                      <af:setPropertyListener type="action" from="#{pageFlowScope.TDMConnectivityDesignBean.selectedModel}" to="#{pageFlowScope.selectedModel}"/>
+                                                      <af:setPropertyListener type="action" from="#{pageFlowScope.TDMConnectivityDesignBean.selectedModel.pipe}" to="#{pageFlowScope.gapItem}"/>
+                                              </af:commandImageLink>
+                                            </af:panelGroupLayout>
+                                                  <af:panelGroupLayout id="pgl141" layout="horizontal" halign="left"  >
+                                                
+                                               <af:outputText value="(#{model.AInterfaceStatus}" rendered="#{model.AInterfaceInstallingBi != null}" id="aifIs" />
+                                               <af:spacer width="5"  rendered="#{model.AInterfaceInstallingBi != null}"/>
+                                                 <af:commandImageLink action="#{pageFlowScope.TDMConnectivityDesignBean.getPendingBiSummaryAction}" 
+                                                                    rendered="#{model.AInterfaceInstallingBi != null}"
+                                                                  id="isCMI" actionListener="#{pageFlowScope.TDMConnectivityDesignBean.registerPendingBiRecentItem}"
+                                                                   text="#{model.AInterfaceBiDueDate})"
+                                                                   shortDesc="#{model.AInterfaceInstallingBi != null ? inventoryUIBundle.BUSINESS_INTERACTION : '&#160;'}"
+                                                                   disabled="#{model.AInterfaceInstallingBi != null ? false : true}">                        
+                                                    <af:setActionListener from="#{model.AInterfaceInstallingBi.oid}" to="#{objectId}"/>
+                                                </af:commandImageLink>
+                                              
+                                              </af:panelGroupLayout>
+                                            <af:panelGroupLayout id="pgl9" layout="horizontal">
+                                                    <af:commandImageLink id="ci68" icon="/images/port.png" shortDesc="Maps" rendered="#{model.renderAPort}"/>
+                                                    <af:commandImageLink id="ci69" shortDesc="Port" rendered="#{model.renderAPort}" text="#{model.APortDisplay}" action="#{pageFlowScope.TDMConnectivityDesignBean.getAction}"
+                                                                        actionListener="#{pageFlowScope.TDMConnectivityDesignBean.getPPAction}">
+                                                        <af:setPropertyListener type="action" from='true' to="#{pageFlowScope.aPort}"/>
+                                                    </af:commandImageLink>
+                                            </af:panelGroupLayout>
+                                            
+                                            <af:panelGroupLayout id="pgl14" layout="horizontal" halign="left"  >
+                                                <af:panelGroupLayout id="pgl15" layout="vertical" halign="left">
+                                                    <af:iterator id="i2" value="#{model.aflowIdentifiers}" var="aflowIdentifier">
+                                                     <af:outputText value=" " id="otexport2" rendered="#{requestScope.exportMode}"/>
+                                                     <af:panelGroupLayout id="pgl16" layout="horizontal" halign="left">
+                                                    <af:commandImageLink text="#{aflowIdentifier.specification.name} : #{aflowIdentifier.displayInfo}"
+                                                                         id="cil2" inlineStyle="text-align:left;" 
+                                                                         action="#{pageFlowScope.TDMConnectivityDesignBean.getAction}" 
+                                                                         actionListener="#{pageFlowScope.TDMConnectivityDesignBean.getFlowIdentifierAction}"> 
+                                                   <af:setPropertyListener type="action" from="#{aflowIdentifier}" to="#{pageFlowScope.flowIdentifier}"/>  
+                                                    </af:commandImageLink>
+                                                      <af:commandImageLink icon="#{model.unassignFlowIdentifierIcon}" shortDesc="#{inventoryUIBundle.UNASSIGN_FLOW_IDENTIFIER_TOOLTIP}"
+                                                                           id="cil3" actionListener="#{pageFlowScope.TDMConnectivityDesignBean.unassignFlowIdentifierToConnectivity}" 
+                                                                           rendered="#{model.renderUnassignAFlowIdentifier}" >                                                                       
+                                                         <af:setPropertyListener type="action" from="#{aflowIdentifier}" to="#{pageFlowScope.flowIdentifier}"/>    
+                                                         <af:setPropertyListener type="action" from='true' to="#{pageFlowScope.endPoint}"/>
+                                                    </af:commandImageLink> 
+                                                    </af:panelGroupLayout>
+                                                    </af:iterator>
+                                                </af:panelGroupLayout>
+                                            </af:panelGroupLayout>
+                                            </af:panelGroupLayout>
+                                            
+                                            <f:facet name="footer">
+                                                <af:panelGroupLayout id="pg81" halign="left" layout="horizontal">
+                                                  <af:outputText id="ot38" value="#{pageFlowScope.TDMConnectivityDesignBean.ALocationHeader}"/>
+                                                </af:panelGroupLayout>
+                                            </f:facet>
+                                        </af:column>
+                                        
+                                        <!-- Column to display the Segment Network Information. -->
+                                        <af:column sortable="true" inlineStyle="border-right: 0px;" width="150" align="left" id="c4" styleClass="#{model.styleClass}" headerText="#{inventoryUIBundle.NETWORK}">
+                                            <af:panelGroupLayout id="pg57" layout="horizontal" halign="left">
+                                                <af:commandImageLink id="ci87" icon="/images/Network_16.png" action="#{pageFlowScope.TDMConnectivityDesignBean.getAction}"
+                                                                     actionListener="#{pageFlowScope.TDMConnectivityDesignBean.getNetworkAction}"
+                                                                     rendered="#{(model.networkIcon)}" inlineStyle="text-align:left;">
+                                                </af:commandImageLink>
+                                                <af:spacer width="10" id="sp17"/>
+                                                <af:outputText value="#{model.networkName}" id="ot33"/>
+                                            </af:panelGroupLayout>
+                                            
+                                            <af:panelGroupLayout id="pgl7" layout="horizontal" halign="left"  
+                                            rendered="#{(adfFacesContext.outputMode ne 'printable') and 
+                                            (pageFlowScope.TDMConnectivityDesignBean.serviceConfigServiceConnDesignMode)}">
+                                                <af:spacer height="16px" width="26px" id="s2"/>
+                                                <af:panelGroupLayout id="pgl13" layout="vertical" halign="left">
+                                                    <af:iterator id="it123" value="#{model.flowIdentifiers}" var="flowIdentifier">
+                                                    <af:commandImageLink text="#{flowIdentifier.specification.name} : #{flowIdentifier.displayInfo}" id="ot4" inlineStyle="text-align:left;" action="#{pageFlowScope.TDMConnectivityDesignBean.getAction}" actionListener="#{pageFlowScope.TDMConnectivityDesignBean.getFlowIdentifierAction}"> 
+                                                   <af:setPropertyListener type="action" from="#{flowIdentifier}" to="#{pageFlowScope.flowIdentifier}"/>    
+                                                    </af:commandImageLink>
+                                                    </af:iterator>
+                                                </af:panelGroupLayout>
+                                            </af:panelGroupLayout>
+
+                                            <f:facet name="footer">
+                                                <af:panelGroupLayout id="pg82" halign="left" layout="horizontal">
+                                                  <af:outputText id="ot37" value="#{inventoryUIBundle.NETWORK}"/>
+                                                </af:panelGroupLayout>
+                                            </f:facet>
+                                        </af:column>
+                                        
+                                        <!-- Column to display the Segment Details. -->
+                                        <af:column sortable="true" filterable="true" inlineStyle="border-right: 0px;" width="400" align="center" id="c5" styleClass="#{model.styleClass}"
+											headerText="#{inventoryUIBundle.SEGMENT}">
+                                            <f:facet name="header">
+                                                <af:panelGroupLayout id="pg12" halign="center" layout="horizontal">
+                                                  <!--af:outputText id="ot77" value="#{inventoryUIBundle.SEGMENT}"/>
+                                                  <af:spacer width="10" id="sp12"/-->
+                                                  <af:commandImageLink id="img1" icon="/images/qbe_ena.png" shortDesc="#{inventoryUIBundle.SEGMENTS_FILTER}">
+                                                        <af:showPopupBehavior align="endBefore" popupId=":::sfp" />
+                                                  </af:commandImageLink>
+                                                </af:panelGroupLayout>
+                                            </f:facet>
+                                            <af:panelGroupLayout id="pg26" layout="horizontal" halign="center" rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                                                        <af:outputText value="#{model.pipeDisplayInfo}" id="ot6print_new"/>
+                                                
+                                            </af:panelGroupLayout>
+                                            
+                                            <af:panelGroupLayout id="pgl6" layout="horizontal" halign="center" rendered="#{adfFacesContext.outputMode ne 'printable'}">
+                                                <af:commandImageLink icon="#{model.acceptedGapIcon}" shortDesc="#{inventoryUIBundle.ACCEPTED_GAP_ICON_TOOLTIP}" id="i87"
+                                                                     actionListener="#{pageFlowScope.TDMConnectivityDesignBean.reverseAcceptedGap}" rendered="#{model.renderAcceptedGapIcon}"/>
+                                                <af:commandImageLink icon="#{model.resolveGapIcon}" shortDesc="#{inventoryUIBundle.UNACCEPTED_GAP_ICON_TOOLTIP}" id="i88"
+                                                                     actionListener="#{pageFlowScope.TDMConnectivityDesignBean.clearPopupSelection}" rendered="#{model.renderResolveGapIcon}">
+                                                    <af:showPopupBehavior align="endBefore" popupId=":::agp"/>
+                                                </af:commandImageLink>
+                                                <af:image source="#{model.pipeLeftIcon}" shortDesc="" id="i89" rendered="#{model.renderPipeLeftIcon}"/>
+                                                <af:spacer width="10" id="sp67"/>
+                                                
+                                                <af:switcher id="links" defaultFacet="false" facetName="#{model.renderLink}">
+                                                    <f:facet name="false">
+                                                        <af:outputText value="#{model.pipeDisplayInfo}" id="ot17"/>
+                                                    </f:facet>
+                                                    <f:facet name="true">
+                                                        <!-- The Link is displayed only for Pipe and TDMChannel -->
+                                                        <af:commandImageLink id="cl5" action="#{pageFlowScope.TDMConnectivityDesignBean.getAction}"
+                                                                        actionListener="#{pageFlowScope.TDMConnectivityDesignBean.getNavigationAction}"
+                                                                        text="#{model.pipeDisplayInfo}"
+                                                                             shortDesc="#{inventoryUIBundle.LINK_FOR_NAVIGATION}">
+                                                            
+                                                            <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.designMode}"/>
+                                                        </af:commandImageLink>
+                                                    </f:facet>
+                                                </af:switcher>
+                                                 
+                                                <af:spacer width="10" id="sp69"/>
+                                                <af:menuBar id="mb2" rendered="#{model.renderGapRightIcon}" partialTriggers="::t2">
+                                                    <af:menu id="m2" icon="/images/assign-conn_ena.png" shortDesc="#{inventoryUIBundle.ASSIGN_CONNECTIVITY}">
+                                                        <af:commandMenuItem id="cmi1" text="#{inventoryUIBundle.CONNECTIVITY}"
+                                                                            actionListener="#{pageFlowScope.TDMConnectivityDesignBean.invokeConnectivitySearch}">
+                                                            <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.invokeTDM}"/>
+                                                            <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.designMode}"/>
+                                                            <af:setPropertyListener type="action"
+                                                                                    from="#{pageFlowScope.TDMConnectivityDesignBean.connectivity}" to="#{pageFlowScope.tdmFacility}"/> 
+                                                        </af:commandMenuItem>
+                                                        <af:commandMenuItem id="cmi2" text="#{inventoryUIBundle.PIPE}"
+                                                                            actionListener="#{pageFlowScope.TDMConnectivityDesignBean.invokePipeSearch}">
+                                                            <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.invokePipe}"/>
+                                                            <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.designMode}"/>
+                                                        </af:commandMenuItem>
+                                                    </af:menu>
+                                                    <af:menu id="m3" icon="/images/analyze_ena.png" shortDesc="#{inventoryUIBundle.GAP_ANALYSIS_TOOLTIP}">
+                                                        <af:commandMenuItem id="cmi3" text="#{inventoryUIBundle.CONNECTIVITY}"
+                                                                            actionListener="#{pageFlowScope.TDMConnectivityDesignBean.invokeGapAnalysis}">
+                                                            <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.invokeGapAnalysis}"/>
+                                                            <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.designMode}"/>
+                                                        </af:commandMenuItem>
+                                                        <af:commandMenuItem id="cmi4" text="#{inventoryUIBundle.PIPE}"
+                                                                            actionListener="#{pageFlowScope.TDMConnectivityDesignBean.invokePipePathAnalysis}">
+                                                            <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.invokePipeAnalysis}"/>
+                                                            <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.designMode}"/>
+                                                        </af:commandMenuItem>
+                                                    </af:menu>
+                                                </af:menuBar>
+                                                
+                                                <!-- Icon for Removing Connectivity / Pipe. -->
+                                                <af:commandImageLink icon="#{model.pipeRightIcon}" shortDesc="#{inventoryUIBundle.UNASSIGN_CONNECTIVITY_TOOLTIP}" id="i57" 
+                                                                      rendered="#{model.renderPipeRightIcon}" 
+                                                                     actionListener="#{pageFlowScope.TDMConnectivityDesignBean.unassignConnectivity}"/>
+                                                
+                                                <!--A Spacer added to ensure that the disclosed rows line up correctly with the parent row -->                     
+                                                <af:spacer height="16px" width="16px" rendered="#{model.renderDisclosedRowAlignmentSpacer}"/> 
+                                                                                                        
+                                                <!-- Icon for Removing Jumper. -->
+                                                <af:commandImageLink icon="#{model.pipeRightIcon}" shortDesc="#{inventoryUIBundle.UNASSIGN_JUMPER_TOOLTIP}" id="i58" rendered="#{model.renderRemoveJumperIcon}"
+                                                                     actionListener="#{pageFlowScope.TDMConnectivityDesignBean.removeInterconnection}"/>
+                                                
+                                                <!-- Icon for Removing CrossConnect. -->
+                                                <af:commandImageLink id="ci79" icon="#{model.pipeRightIcon}" rendered="#{model.renderRemoveCCIcon}" shortDesc="#{inventoryUIBundle.UNASSIGN_CROSS_CONNECT_TOOLTIP}"
+                                                                     actionListener="#{pageFlowScope.TDMConnectivityDesignBean.removeInterconnection}"/>
+                                                
+                                                <!-- Flow Identifier assignment popup icon -->
+                                                <af:commandImageLink shortDesc="#{inventoryUIBundle.ASSIGN_FLOW_IDENTIFIER_TOOLTIP}" 
+								    icon="#{model.assignFlowIdentifierIcon}"
+                                                                     disabledIcon="/images/flowIdentifier_dis.png"
+                                                                     disabled="#{pageFlowScope.TDMConnectivityDesignBean.disableAssignFIToConnectivity}"
+                                                                     rendered="#{model.renderAssignFlowIdentifierIcon}" 
+                                                                     actionListener="#{pageFlowScope.TDMConnectivityDesignBean.invokeFlowIdentifierPopup}"
+                                                                     id="cil1" >
+                                                    <af:setPropertyListener type="action" from="false" to="#{pageFlowScope.istrailMode}"/>					
+                                                    <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.invokeFlowIdentifier}"/>
+                                                    <af:setPropertyListener type="action" from="#{model.pipe}" to="#{pageFlowScope.selectedPipe}"/>
+                                                    
+                                                    
+                                                </af:commandImageLink>
+                                                
+                                                
+                                            </af:panelGroupLayout>
+                                              <af:panelGroupLayout id="pgl21" layout="horizontal" halign="left"  >
+                                                
+                                               <af:outputText value="(#{model.segmentStatus}" rendered="#{model.segmentInstallingBi != null}" id="sifIs" />
+                                               <af:spacer width="5" rendered="#{model.segmentInstallingBi != null}"/>
+                                                 <af:commandImageLink action="#{pageFlowScope.TDMConnectivityDesignBean.getPendingBiSummaryAction}" 
+                                                                    rendered="#{model.segmentInstallingBi != null}"
+                                                                  id="ssCMI" actionListener="#{pageFlowScope.TDMConnectivityDesignBean.registerPendingBiRecentItem}"
+                                                                   text="#{model.segemntBiDueDate})"
+                                                                   shortDesc="#{model.segmentInstallingBi != null ? inventoryUIBundle.BUSINESS_INTERACTION : '&#160;'}"
+                                                                   disabled="#{model.segmentInstallingBi != null ? false : true}">                        
+                                                    <af:setActionListener from="#{model.segmentInstallingBi.oid}" to="#{objectId}"/>
+                                                </af:commandImageLink>
+                                              
+                                              </af:panelGroupLayout>
+                                            <af:panelGroupLayout id="pgl30" layout="horizontal" halign="left"  >
+                                                <af:spacer height="16px" width="26px" id="s4"/>
+                                                <af:panelGroupLayout id="pgl19" layout="vertical" halign="left">
+                                                    <af:iterator id="i3" value="#{model.flowIdentifiers}" var="flowIdentifier">
+                                                     <af:outputText value=" " id="otexport1" rendered="#{requestScope.exportMode}"/>
+                                                     <af:panelGroupLayout id="pgl32" layout="horizontal" halign="left">
+                                                    <af:commandImageLink text="#{flowIdentifier.specification.name} : #{flowIdentifier.displayInfo}"
+                                                                         id="cil4" inlineStyle="text-align:left;" 
+                                                                         action="#{pageFlowScope.TDMConnectivityDesignBean.getAction}" 
+                                                                         actionListener="#{pageFlowScope.TDMConnectivityDesignBean.getFlowIdentifierAction}"> 
+                                                   <af:setPropertyListener type="action" from="#{flowIdentifier}" to="#{pageFlowScope.flowIdentifier}"/>    
+                                                    </af:commandImageLink>
+                                                      <af:commandImageLink icon="#{model.unassignFlowIdentifierIcon}" shortDesc="#{inventoryUIBundle.UNASSIGN_FLOW_IDENTIFIER_TOOLTIP}"
+                                                                           id="cil5" actionListener="#{pageFlowScope.TDMConnectivityDesignBean.unassignFlowIdentifierToConnectivityConfig}"
+                                                                           rendered="#{pageFlowScope.TDMConnectivityDesignBean.renderUnassignFIToConnectivityConfig}">
+                                                         <af:setPropertyListener type="action" from="#{flowIdentifier}" to="#{pageFlowScope.flowIdentifier}"/>    
+                                                    </af:commandImageLink>
+                                                    </af:panelGroupLayout>
+                                                    </af:iterator>
+                                                </af:panelGroupLayout>
+                                            </af:panelGroupLayout>
+                                            
+                                            <f:facet name="footer">
+                                                <af:panelGroupLayout id="pg52" halign="center" layout="horizontal">
+                                                  <af:outputText id="ot97" value="#{inventoryUIBundle.SEGMENT}"/>
+                                                </af:panelGroupLayout>
+                                            </f:facet>
+                                            
+                                        </af:column>
+                                        
+                                        <!-- Column to display the Z-Location. -->
+                                        <af:column sortable="true" id="c6" inlineStyle="text-align:right; " width="180" styleClass="#{model.styleClass}"
+											headerText="#{pageFlowScope.TDMConnectivityDesignBean.ZLocationHeader}">
+                                            <af:panelGroupLayout id="pgl10" layout="vertical">
+                                                <af:outputText value="#{model.ZLocation}" id="ot19" rendered="#{model.renderZLoc}"/>
+                                                <af:outputText value="#{model.ZInterfaceIPAddress}" id="ipt2"/>
+                                            
+                                                <af:outputText value=" " id="otspace4" rendered="#{adfFacesContext.outputMode ne 'printable'}"/>
+                                                <af:panelGroupLayout id="pg7" layout="horizontal" halign="right" rendered="#{model.renderZInterfaceIdentifier}">
+                                                 
+                                                   <af:commandImageLink shortDesc="#{inventoryUIBundle.ASSIGN_FLOW_IDENTIFIER_TOOLTIP}" 
+								    icon="#{model.assignFlowIdentifierIcon}"
+                                                                     disabledIcon="/images/flowIdentifier_dis.png"
+                                                                     disabled="#{pageFlowScope.TDMConnectivityDesignBean.disableAssignFIToConnectivity}"
+                                                                     rendered="#{model.renderZFlowIdentifier}" 
+                                                                     actionListener="#{pageFlowScope.TDMConnectivityDesignBean.invokeFlowIdentifierPopup}"
+                                                                     id="ci197" >
+                                                    <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.istrailMode}"/>					
+                                                    <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.invokeFlowIdentifier}"/>
+                                                     <af:setPropertyListener type="action" from="false" to="#{pageFlowScope.endPoint}"/>
+                                                    
+                                                </af:commandImageLink>
+                                                  <af:commandImageLink id="ci57" icon="#{model.rightIcon}" rendered="#{model.renderRightUnassignDI}" shortDesc="#{inventoryUIBundle.UNASSIGN_INTERFACE_TOOLTIP}"
+                                                                       actionListener="#{pageFlowScope.TDMConnectivityDesignBean.unassignInterface}">
+                                                        <af:setPropertyListener type="action" from='false' to="#{pageFlowScope.endPoint}"/>
+                                                  </af:commandImageLink>
+                                                                              
+                                                  <!-- The below code is for Creating Interconnection for Gap. -->
+                                                  <af:commandImageLink id="ci77" icon="#{model.rightIcon}" rendered="#{model.renderZCCIcon}" shortDesc="#{inventoryUIBundle.CREATE_INTERCONNECTION_TOOLTIP}">
+                                                        <af:showPopupBehavior popupId=":::diPopup" triggerType="click"/>
+                                                        <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.invokeDI}"/>
+                                                        <af:setPropertyListener type="action" from='false' to="#{pageFlowScope.endPoint}"/>
+                                                        <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.createInterconnection}"/>
+                                                        <af:setPropertyListener type="action" from="#{model.ZLocation}" to="#{pageFlowScope.networkEntityLocation}"/>
+                                                        <af:setPropertyListener type="action" from="#{model.ZServiceLocation}" to="#{pageFlowScope.serviceLocation}"/>
+                                                        <af:setPropertyListener type="action" from="#{pageFlowScope.TDMConnectivityDesignBean.connectivity.rateCode.name}" to="#{pageFlowScope.rateCode}"/>
+                                                        <af:setPropertyListener type="action" from="#{pageFlowScope.TDMConnectivityDesignBean.selectedModel.ZInterface}" to="#{pageFlowScope.existingDI}"/>
+                                                        <af:setPropertyListener type="action" from="#{pageFlowScope.TDMConnectivityDesignBean.selectedModel}" to="#{pageFlowScope.selectedModel}"/>
+                                                        <af:setPropertyListener type="action" from="#{pageFlowScope.TDMConnectivityDesignBean.selectedModel.pipe}" to="#{pageFlowScope.gapItem}"/>
+                                                  </af:commandImageLink>
+                                                  
+                                                  <af:spacer width="10" id="sp7"/>
+                                                  <!-- bug# 16753248 start -->
+                                                    <af:menuBar id="mb4" rendered="#{model.renderRightAssignDI}" shortDesc="#{inventoryUIBundle.ASSIGN_Z_INTERFACE_TOOLTIP}">
+                                                        <af:menu id="m4" icon="#{model.rightIcon}">
+                                                            <af:commandMenuItem text="#{inventoryUIBundle.TERMINATE_AT_MEDIA_INTERFACE}" id="cmi7" shortDesc="#{inventoryUIBundle.SEARCH_Z_INTERFACE_TOOLTIP}">
+                                                                <af:showPopupBehavior popupId=":::diPopup" triggerType="click"/>
+                                                                <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.invokeDI}"/>
+                                                                <af:setPropertyListener type="action"  from="false" to="#{pageFlowScope.endPoint}"/>
+                                                                <af:setPropertyListener type="action" from="false" to="#{pageFlowScope.createInterconnection}"/>
+                                                                <af:setPropertyListener type="action" from="#{model.ZLocation}" to="#{pageFlowScope.networkEntityLocation}"/>
+                                                                <af:setPropertyListener type="action" from="#{model.ZServiceLocation}" to="#{pageFlowScope.serviceLocation}"/>
+                                                                <af:setPropertyListener type="action" from="#{pageFlowScope.TDMConnectivityDesignBean.connectivity.rateCode.name}" to="#{pageFlowScope.rateCode}"/>
+                                                                <af:setPropertyListener type="action" from="false" to="#{pageFlowScope.terminateAtFlowInterface}"/>
+                                                            </af:commandMenuItem>
+                                                          <af:commandMenuItem text="#{inventoryUIBundle.TERMINATE_AT_FLOW_INTERFACE}" id="cmi5" shortDesc="#{inventoryUIBundle.TERMINATE_AT_Z_FLOW_INTERFACE_TOOLTIP}" rendered="#{pageFlowScope.TDMConnectivityDesignBean.showFlowInterfaceTermination}">
+                                                                <af:showPopupBehavior popupId=":::diPopup" triggerType="click"/>
+                                                                <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.invokeDI}"/>
+                                                                <af:setPropertyListener type="action"  from="false" to="#{pageFlowScope.endPoint}"/>
+                                                                <af:setPropertyListener type="action" from="false" to="#{pageFlowScope.createInterconnection}"/>
+                                                                <af:setPropertyListener type="action" from="#{model.ZLocation}" to="#{pageFlowScope.networkEntityLocation}"/>
+                                                                <af:setPropertyListener type="action" from="#{model.ZServiceLocation}" to="#{pageFlowScope.serviceLocation}"/>
+                                                                <af:setPropertyListener type="action" from="#{pageFlowScope.TDMConnectivityDesignBean.connectivity.rateCode.name}" to="#{pageFlowScope.rateCode}"/>
+                                                                <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.terminateAtFlowInterface}"/>
+                                                        </af:commandMenuItem>
+                                                            <af:commandMenuItem text="#{inventoryUIBundle.TERMINATE_AT_CHANNEL}" id="cmi8" shortDesc="#{inventoryUIBundle.TERMINATE_AT_Z_CHANNEL_TOOLTIP}" disabled="#{pageFlowScope.TDMConnectivityDesignBean.disableZsideVirtualTermination}" actionListener="#{pageFlowScope.TDMConnectivityDesignBean.assignVirtualTermination}">
+                                                                <af:setPropertyListener type="action" from="false" to="#{pageFlowScope.endPoint}"/>
+                                                                <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.invokeDI}"/>
+                                                                <af:setPropertyListener type="action" from="false" to="#{pageFlowScope.createInterconnection}"/>
+                                                                <af:setPropertyListener type="action" from="#{model.ZLocation}" to="#{pageFlowScope.networkEntityLocation}"/>
+                                                                <af:setPropertyListener type="action" from="#{pageFlowScope.TDMConnectivityDesignBean.connectivity.rateCode.name}" to="#{pageFlowScope.rateCode}"/>
+                                                            </af:commandMenuItem>
+                                                        </af:menu>
+                                                    </af:menuBar>
+                                                    <!-- bug# 16753248 end -->
+
+                                                  <af:commandImageLink id="cl8" action="#{pageFlowScope.TDMConnectivityDesignBean.getAction}"
+                                                                        actionListener="#{pageFlowScope.TDMConnectivityDesignBean.getInterfaceAction}"
+                                                                  text="#{model.ZInterfaceDisplay}"
+                                                                       disabled="#{model.ZInterfaceDisplay eq null ? true : false}"
+                                                                       shortDesc="#{model.ZInterfaceDisplay eq null ? '&#160;' : inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                                       <!-- <af:outputText value="" id="ot27" noWrap="true"/>-->
+                                                        <af:setPropertyListener type="action" from='false' to="#{pageFlowScope.aInterface}"/>
+                                                  </af:commandImageLink>
+                                                  <af:outputText value="#{model.ZInterfaceDisplay}" id="ot27print" rendered="#{adfFacesContext.outputMode eq 'printable'}"/>
+                                                  <af:outputText value="#{model.ZInterfaceIdentifier}" id="ot28"/>
+                                                </af:panelGroupLayout>
+                                                
+                                                <af:panelGroupLayout id="pgl1411" layout="horizontal" halign="right"  >
+                                              
+                                               <af:outputText value="(#{model.ZInterfaceStatus} " id="zifIs" rendered="#{model.ZInterfaceInstallingBi != null}"/>
+                                               <af:spacer width="5"  rendered="#{model.ZInterfaceInstallingBi != null}"/>
+                                                 <af:commandImageLink action="#{pageFlowScope.TDMConnectivityDesignBean.getPendingBiSummaryAction}" 
+                                                 rendered="#{model.ZInterfaceInstallingBi != null}"
+                                                                  id="isCMI1" actionListener="#{pageFlowScope.TDMConnectivityDesignBean.registerPendingBiRecentItem}"
+                                                                   text="#{model.ZInterfaceBiDueDate})"
+                                                                   shortDesc="#{model.ZInterfaceInstallingBi != null ? inventoryUIBundle.BUSINESS_INTERACTION : '&#160;'}"
+                                                                   disabled="#{model.ZInterfaceInstallingBi != null ? false : true}">                        
+                                                    <af:setActionListener from="#{model.ZInterfaceInstallingBi.oid}" to="#{objectId}"/>
+                                                </af:commandImageLink>
+                                            
+                                              </af:panelGroupLayout>
+                                                
+                                                <af:panelGroupLayout id="pgl11" layout="horizontal" halign="right">
+                                                      <af:commandImageLink id="ci59" shortDesc="Port" rendered="#{model.renderZPort}" text="#{model.ZPortDisplay}" action="#{pageFlowScope.TDMConnectivityDesignBean.getAction}"
+                                                                        actionListener="#{pageFlowScope.TDMConnectivityDesignBean.getPPAction}">
+                                                            <af:setPropertyListener type="action" from='false' to="#{pageFlowScope.aPort}"/>
+                                                      </af:commandImageLink>
+                                                      <af:outputText value=" " id="otspace3" rendered="#{adfFacesContext.outputMode ne 'printable'}"/>
+                                                      <af:commandImageLink id="ci58" icon="/images/port.png" shortDesc="#{inventoryUIBundle.MAPS}" rendered="#{model.renderZPort}"/>
+                                                </af:panelGroupLayout>	
+                                                
+                                                <af:panelGroupLayout id="pgl17" layout="horizontal" halign="right" >
+                                                 <af:panelGroupLayout id="pgl18" layout="vertical" halign="right">
+                                                    <af:iterator id="i4" value="#{model.zflowIdentifiers}" var="zflowIdentifier">
+                                                     <af:outputText value=" " id="otexport3" rendered="#{requestScope.exportMode}"/>
+                                                     <af:panelGroupLayout id="pgl20" layout="horizontal" halign="right">
+                                                      <af:commandImageLink icon="#{model.unassignFlowIdentifierIcon}" 
+                                                      shortDesc="#{inventoryUIBundle.UNASSIGN_FLOW_IDENTIFIER_TOOLTIP}" id="cil8" 
+                                                      rendered="#{model.renderUnassignZFlowIdentifier}"
+                                                       actionListener="#{pageFlowScope.TDMConnectivityDesignBean.unassignFlowIdentifierToConnectivity}">
+                                                                           
+                                                         <af:setPropertyListener type="action" from="#{zflowIdentifier}" to="#{pageFlowScope.flowIdentifier}"/>    
+                                                         <af:setPropertyListener type="action" from='false' to="#{pageFlowScope.endPoint}"/>
+                                                    </af:commandImageLink> 
+                                                    <af:commandImageLink text="#{zflowIdentifier.specification.name} : #{zflowIdentifier.displayInfo}"
+                                                                         id="cil6" inlineStyle="text-align:left;" 
+                                                                         action="#{pageFlowScope.TDMConnectivityDesignBean.getAction}" 
+                                                                         actionListener="#{pageFlowScope.TDMConnectivityDesignBean.getFlowIdentifierAction}"> 
+                                                    <af:setPropertyListener type="action" from="#{zflowIdentifier}" to="#{pageFlowScope.flowIdentifier}"/>    
+                                                    </af:commandImageLink>
+                                                   
+                                                    </af:panelGroupLayout>
+                                                    </af:iterator>
+                                                </af:panelGroupLayout>
+                                            </af:panelGroupLayout>
+                                            </af:panelGroupLayout>
+                                                
+                                            <f:facet name="footer">
+                                                <af:panelGroupLayout halign="left" layout="horizontal" id="pg5">
+                                                  <af:outputText value="#{pageFlowScope.TDMConnectivityDesignBean.ZLocationHeader}" id="ot24" 
+                                                                 inlineStyle="text-align:right;" noWrap="true"/>
+                                                </af:panelGroupLayout>
+                                            </f:facet>
+                                        </af:column>
+                                        
+                                </af:treeTable>
+                            </af:panelCollection>
+                            <af:spacer width="10" height="10" id="s5"/>
+                            <!-- TDM Connectivity search -->
+                            <af:panelStretchLayout id="pgl2" visible="#{pageFlowScope.TDMConnectivityDesignBean.searchRendered}" partialTriggers="pc1:t2:cmi1" dimensionsFrom="auto">
+                                <f:facet name="center">
+                                    <af:region value="#{bindings.TDMConnectivitySearchResultsFlow1.regionModel}" id="rd2" binding="#{pageFlowScope.TDMConnectivityDesignBean.searchRegion}"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        
+                            <!-- Pipe search -->
+                            <af:panelStretchLayout id="psl3" visible="#{pageFlowScope.TDMConnectivityDesignBean.searchPipeRendered}" partialTriggers="pc1:t2:cmi2" dimensionsFrom="auto">
+                                <f:facet name="center">
+                                    <af:region value="#{bindings.PipeSearchResultsFlow1.regionModel}" id="rd3" binding="#{pageFlowScope.TDMConnectivityDesignBean.searchPipeRegion}"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        
+                            <!-- Gap Analysis -->
+                            <af:panelStretchLayout id="ps44" visible="#{pageFlowScope.TDMConnectivityDesignBean.renderGapAnalysis}" partialTriggers="pc1:t2:cmi3" dimensionsFrom="auto">
+                                <f:facet name="center">
+                                    <af:region value="#{bindings.ConnectivityGapAnalysisFlow1.regionModel}" id="rd5" binding="#{pageFlowScope.TDMConnectivityDesignBean.gapAnalysisRegion}"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        
+                            <!-- Pipe Path Analysis -->
+                            <af:panelStretchLayout id="ps43" visible="#{pageFlowScope.TDMConnectivityDesignBean.renderPipeAnalysis}" partialTriggers="pc1:t2:cmi4" dimensionsFrom="auto">
+                                <f:facet name="center">
+                                    <af:region value="#{bindings.PathAnalysisFlow1.regionModel}" id="rd4" binding="#{pageFlowScope.TDMConnectivityDesignBean.pathAnalysisRegion}"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                            
+                            <!-- Segments Filter popup -->
+                            <af:popup id="sfp" contentDelivery="lazyUncached">
+                            <!-- @pskalaga_bug_19052830v1 removed from dialog [resize="on" ] to see if sized better -->
+                                  <af:dialog id="di7" title="#{inventoryUIBundle.SEGMENTS_FILTER}"  dialogListener="#{pageFlowScope.TDMConnectivityDesignBean.handleFilterDialog}"
+                                             cancelTextAndAccessKey="&amp;#{inventoryUIBundle.CANCEL}"
+                                             affirmativeTextAndAccessKey="O&amp;K">
+                                    <af:selectManyCheckbox label="#{inventoryUIBundle.SEGMENTS_FILTER}" id="smc1" valueChangeListener="#{pageFlowScope.TDMConnectivityDesignBean.segmentSelectionListener}"
+                                                           value="#{pageFlowScope.TDMConnectivityDesignBean.selectedSegmentFilter}" binding="#{backingBeanScope.filterBinding}">
+                                          <af:selectItem label="#{inventoryUIBundle.CROSS_CONNECT}" value="CrossConnect" id="si8"/>
+                                          <af:selectItem label="#{inventoryUIBundle.GAP}" value="Gap" id="si5"/>
+                                          <af:selectItem label="#{inventoryUIBundle.JUMPER}" value="Jumper" id="si7"/>
+                                          <af:selectItem label="#{inventoryUIBundle.TRANSPORT}" value="Transport" id="si6"/>
+                                    </af:selectManyCheckbox>
+                                  </af:dialog>
+                            </af:popup>
+                            
+                            <!-- Accept Gap popup -->
+                            <af:popup id="agp" contentDelivery="lazyUncached">
+                            <!-- @pskalaga_bug_19052830v1 removed from dialog [resize="on" ] to see if sized better -->
+                                <af:dialog id="di8" title="#{inventoryUIBundle.ACCEPT_GAP}"  type="none" binding="#{backingBeanScope.gapDialog}">
+                                    <f:facet name="buttonBar">
+                                        <af:toolbar id="tb5" binding="#{backingBeanScope.gapTBBinding}">
+                                            <af:commandToolbarButton text="#{inventoryUIBundle.DONE}" id="ctb26" disabled="#{pageFlowScope.TDMConnectivityDesignBean.disableGap}"
+                                                                     actionListener="#{pageFlowScope.TDMConnectivityDesignBean.okGap}"
+                                                                     accessKey="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>
+                                            <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb27" actionListener="#{pageFlowScope.TDMConnectivityDesignBean.cancelGap}"
+                                                                     accessKey="#{inventoryUIBundle.CANCEL_ACCESS_kEY}"/>
+                                        </af:toolbar>
+                                    </f:facet>
+                                    <af:inputText label="#{inventoryUIBundle.REASON}" value="#{pageFlowScope.TDMConnectivityDesignBean.gapReason}" autoSubmit="true"
+                                                  showRequired="true" id="it1">
+                                            <af:clientListener method="handleGapClick" type="keyUp"/>
+                                            <af:serverListener type="KeyDownEvent" method="#{pageFlowScope.TDMConnectivityDesignBean.gapValueChanged}"/>
+                                    </af:inputText>
+                                </af:dialog>
+                            </af:popup>
+                            
+                            <!-- DeviceInterface search popup -->
+                            <af:popup id="diPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.popupDIBinding}">
+                              <af:dialog id="d3" title="#{inventoryUIBundle.DEVICE_INTERFACE_SEARCH}" type="none">
+                              <af:panelStretchLayout id="pt_psl3" styleClass="invCommonPanelStretchLayout">
+                                    <f:facet name="center">
+                                        <af:region value="#{bindings.DeviceInterfaceSearchResultsFlow1.regionModel}" id="rd1"/>
+                                    </f:facet>
+                              </af:panelStretchLayout>
+                              </af:dialog>
+                              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                              <af:serverListener type="refreshEntity" method="#{pageFlowScope.TDMConnectivityDesignBean.refresh}"/>
+                            </af:popup>
+                            
+                            <!--  Flow Identifier search popup -->
+                            
+                            <af:popup id="fiPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.popupFIBinding}">
+                              <af:dialog id="d6" title="#{inventoryUIBundle.FLOW_IDENTIFIER_SEARCH}" type="none">
+                              <af:panelStretchLayout id="psl2" styleClass="invCommonPanelStretchLayout">
+                                    <f:facet name="center">
+                                        <af:region value="#{bindings.FlowIdentifierSearchResultsFlow1.regionModel}" id="r2"/>
+                                     </f:facet>
+                              </af:panelStretchLayout>
+                              </af:dialog>
+                              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                              <af:serverListener type="refreshEntity" method="#{pageFlowScope.TDMConnectivityDesignBean.refresh}"/>
+                            </af:popup>
+                            
+                        </af:panelGroupLayout>
+                      </f:facet>
+                    </af:panelSplitter>
+            
+                    <af:resource type="javascript">
+                      <!-- The below javascript code is defined to handle the click event on Versions Menu. -->
+                      function handleMenuClick(evt){   
+                         var menu = evt.getSource();
+                         AdfCustomEvent.queue(menu, "MenuClickEvent",{}, true);         
+                         evt.cancel();
+                      }
+                      
+                      <!-- The below javascript code is defined to handle the click event on Accept Gap Popup . -->
+                      function handleGapClick(evt){   
+                         var gap = evt.getSource();
+                         AdfCustomEvent.queue(gap, "KeyDownEvent",{}, false);
+                         evt.cancel();
+                      }
+                    </af:resource>
+        
+                  </af:panelGroupLayout>
+                    <af:popup id="delsg4" contentDelivery="lazyUncached" binding="#{backingBeanScope.associateBIToConfigVersions}">
+                    <af:dialog title="#{inventoryUIBundle.ASSOCIATE_BITOCONFIG_EFFDATE_MESSAGE}" type="yesNo"
+                               dialogListener="#{pageFlowScope.TDMConnectivityDesignBean.associateBIToConfigConfirmation}" id="dd24"/>
+                  </af:popup>
+                </af:showDetailItem>
+                <!--TODO: Merge CB will need to test the schematic for Packet Connectivity -->
+                <af:showDetailItem text="#{inventoryUIBundle.SCHEMATIC}" id="sdi2" binding="#{backingBeanScope.schematicSubTab}" disclosureListener="#{pageFlowScope.TDMConnectivityDesignBean.discloseSchematicSubTab}">
+                  <af:panelGroupLayout id="pgl12" layout="scroll">
+                    <af:panelStretchLayout id="psl1" styleClass="AFStretchWidth" dimensionsFrom="auto">                        
+                        <f:facet name="center">
+                          <af:region value="#{bindings.ConnectivityVisualFlow1.regionModel}" id="r1" binding="#{pageFlowScope.TDMConnectivityDesignBean.schematicRegion}"/>                        
+                        </f:facet>
+                    </af:panelStretchLayout>
+                        </af:panelGroupLayout>
+                </af:showDetailItem>               
+                <af:showDetailItem text="#{inventoryUIBundle.MAP_VIEW}" id="sdi3" binding="#{backingBeanScope.mapviewSubTab}" disclosureListener="#{pageFlowScope.TDMConnectivityDesignBean.discloseMapviewSubTab}">
+                        <af:panelGroupLayout id="pgl22" layout="scroll">
+                            <af:panelStretchLayout id="psl4" styleClass="AFStretchWidth" dimensionsFrom="auto">
+                                <f:facet name="center">
+                                    <af:region value="#{bindings.ConnectivityMapViewFlow1.regionModel}" id="r3"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:panelGroupLayout>
+                    </af:showDetailItem>
+                </af:panelTabbed>
+        </af:panelGroupLayout>
+    </f:facet>
+</af:panelStretchLayout>
+</jsp:root>

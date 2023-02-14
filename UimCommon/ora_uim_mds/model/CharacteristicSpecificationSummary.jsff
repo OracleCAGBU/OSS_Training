@@ -1,0 +1,196 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2015, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    2/25/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelStretchLayout>
+        
+        <f:facet name="center">
+         
+          <af:panelHeader text="#{inventoryUIBundle.MENU_SPECIFICATION_CHARACTERISTICS}" styleClass="invSummaryPanelHeader" helpTopicId="OHW_specCharSummary">
+          <af:panelGroupLayout layout="scroll" id="pgl23">
+          <af:showDetailHeader text="#{inventoryUIBundle.CHARACTERISTIC_SPECIFICATION_INFORMATION}" styleClass="invSummaryShowDetailHeader"
+                               disclosed="true">
+            <af:panelFormLayout maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}">
+                  <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.name}"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LABEL}">
+                  <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.displayLabel}"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CONTROL_TYPE}">
+                  <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.controlType}"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}" styleClass="invSummaryPanelLabelAndMessage">
+                  <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.description}"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.START_DATE}">
+                  <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.validFor.startDate}">
+                    <af:convertDateTime pattern="#{pageFlowScope.CharacteristicSpecificationSummaryBean.dateTimeFormat}"/>
+                  </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.END_DATE}">
+                  <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.validFor.endDate}">
+                    <af:convertDateTime pattern="#{pageFlowScope.CharacteristicSpecificationSummaryBean.dateTimeFormat}"/>
+                  </af:outputText>
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.SORT_TYPE}" rendered="#{pageFlowScope.CharacteristicSpecificationSummaryBean.dropDownList}">
+                  <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.valueType.value}"/>
+                </af:panelLabelAndMessage>
+
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.EDIT_MASK}" rendered="#{(pageFlowScope.CharacteristicSpecificationSummaryBean.alphaNumericTextField || pageFlowScope.CharacteristicSpecificationSummaryBean.numericTextField) and !pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.passwordType}">
+                  <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.editMask}"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.DISPLAY_MASK}" rendered="#{(pageFlowScope.CharacteristicSpecificationSummaryBean.alphaNumericTextField || pageFlowScope.CharacteristicSpecificationSummaryBean.numericTextField) and !pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.passwordType}">
+                  <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.displayMask}"/>
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.DATA_TYPE}" rendered="#{pageFlowScope.CharacteristicSpecificationSummaryBean.textField}">
+                  <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.valueType.value}"/>
+                </af:panelLabelAndMessage>
+                
+                <af:selectBooleanCheckbox value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.passwordType}" text="#{inventoryUIBundle.PASSWORD}" disabled="true" rendered="#{pageFlowScope.CharacteristicSpecificationSummaryBean.alphaNumericTextField || pageFlowScope.CharacteristicSpecificationSummaryBean.numericTextField}"/>
+
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.TEXT_CASE}" rendered="#{pageFlowScope.CharacteristicSpecificationSummaryBean.alphaNumericTextField}">
+                  <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.textCase.value}"/>
+                </af:panelLabelAndMessage>                
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.MIN_LENGTH}" rendered="#{pageFlowScope.CharacteristicSpecificationSummaryBean.alphaNumericTextField}">
+                  <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.minLength}"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.MAX_LENGTH}" rendered="#{pageFlowScope.CharacteristicSpecificationSummaryBean.alphaNumericTextField}">
+                  <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.maxLength}"/>
+                </af:panelLabelAndMessage>
+
+            </af:panelFormLayout>
+          </af:showDetailHeader>
+
+        <af:spacer width="10" height="10" rendered="#{!pageFlowScope.CharacteristicSpecificationSummaryBean.dropDownList and !pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.passwordType}"/>
+          <af:showDetailHeader text="#{inventoryUIBundle.DEFAULT_VALUE}" rendered="#{!pageFlowScope.CharacteristicSpecificationSummaryBean.dropDownList and !pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.passwordType}"
+                               disclosed="true">
+            <af:panelLabelAndMessage label="#{inventoryUIBundle.DEFAULT_VALUE}">
+              <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.defaultValue}"/>
+            </af:panelLabelAndMessage>
+          </af:showDetailHeader>
+        
+         <af:spacer width="10" height="10"/>
+          <af:showDetailHeader text="#{inventoryUIBundle.VALUES}" rendered="#{pageFlowScope.CharacteristicSpecificationSummaryBean.dropDownList}"
+                               disclosed="true">
+            <af:panelCollection styleClass="AFStretchWidth">
+              <af:table var="row" rowBandingInterval="0"
+                        contentDelivery="immediate" autoHeightRows="#{pageFlowScope.CharacteristicSpecificationSummaryBean.portletHeight}"
+                        value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.discreteCharSpecValue}"
+                        summary="#{inventoryUIBundle.CHARACTERISTIC_SPECIFICATION_SUMMARY}">
+                <af:column headerText="#{inventoryUIBundle.VALUE}"
+                           rowHeader="unstyled">
+                  <af:outputText value="#{row.value}"/>
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.LABEL}">
+                  <af:outputText value="#{row.label}"/>
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.DEFAULT_VALUE}">
+                  <af:selectBooleanCheckbox value="#{row.defaultValue}" readOnly="true"
+                                            label="#{inventoryUIBundle.DEFAULT_VALUE}"/>
+                </af:column>                
+              </af:table>
+            </af:panelCollection>
+          </af:showDetailHeader>
+        
+         <af:spacer width="10" height="10"/>
+          <af:showDetailHeader text="#{inventoryUIBundle.VALID_VALUE_RANGES}" rendered="#{pageFlowScope.CharacteristicSpecificationSummaryBean.rangeValuesRendered}"
+                               disclosed="true">
+            <af:panelCollection  styleClass="invSummaryShowDetailHeader">
+              <af:table var="row" rowBandingInterval="0"
+                        contentDelivery="immediate" autoHeightRows="#{pageFlowScope.CharacteristicSpecificationSummaryBean.portletHeight}"
+                        value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.rangeValues}"
+                        summary="#{inventoryUIBundle.VALID_VALUE_RANGES_TABLE}">
+                <af:column headerText="#{inventoryUIBundle.FROM}"
+                           rowHeader="unstyled">
+                  <af:outputText value="#{row.valueFrom}"/>
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.TO}">
+                  <af:outputText value="#{row.valueTo}"/>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:showDetailHeader>
+        
+         
+          <af:showDetailHeader text="#{inventoryUIBundle.QUERY}" rendered="#{pageFlowScope.CharacteristicSpecificationSummaryBean.dropDownList}"
+                               disclosed="true"  styleClass="invSummaryShowDetailHeader">
+            <f:facet name="toolbar">
+              <af:toolbar>
+                <af:commandToolbarButton text="#{inventoryUIBundle.TEST}"
+                                         disabled="#{pageFlowScope.CharacteristicSpecificationSummaryBean.testDisabled}"
+                                         action="queryPopup">
+                  <af:showPopupBehavior popupId="queryPopup"/>
+                </af:commandToolbarButton>
+              </af:toolbar>
+            </f:facet>
+            <af:popup id="queryPopup">
+              <af:dialog type="cancel" id="csd"
+                         title="#{inventoryUIBundle.CONFIRM_QUERY}"
+                         cancelTextAndAccessKey="&amp;#{inventoryUIBundle.CANCEL}">
+                <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="csqp">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.CharacteristicSpecificationQueryPopup.regionModel}" id="csdr"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+            </af:popup>
+            <af:panelFormLayout>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.QUERY_SOURCE_TYPE}">
+                <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.querySourceType}"/>
+              </af:panelLabelAndMessage>  
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.QUERY_PARAM_CHAR}">
+                <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.queryParamChar}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.QUERY_STRING}">
+                <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.queryString}"/>
+              </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+          </af:showDetailHeader>
+        
+         <af:spacer width="10" height="10"/>
+          <af:showDetailHeader text="#{inventoryUIBundle.ENTITY_LINK_INFORMATION}" rendered="#{pageFlowScope.CharacteristicSpecificationSummaryBean.dropDownList}"
+                               disclosed="true" styleClass="invSummaryShowDetailHeader">
+            <af:panelFormLayout>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.ENTITY_NAME}">
+                <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.entityLinkClass}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION_NAME}">
+                <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.entityObject.entityLinkSpec}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.QUERY_STRING}">
+                <af:outputText value="#{pageFlowScope.CharacteristicSpecificationSummaryBean.entityLinkQueryString}"/>
+              </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+          </af:showDetailHeader>
+         <af:spacer width="10" height="10"/>
+        
+          <af:region value="#{bindings.SpecificationListFlow1.regionModel}"/>
+        </af:panelGroupLayout>
+        </af:panelHeader>
+      
+      </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

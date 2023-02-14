@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2016, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+                                                                                                                                                                                                                                                                                                                                                                                                    /*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    pvusuvan    05/19/16 - Created
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core">
+    <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+    <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1" value="#{bindings.pageTemplateBinding}">
+        <f:facet name="localArea">
+            <af:panelGroupLayout id="pgl1" layout="scroll" binding="#{backingBeanScope.NS_summary_panelGroupLayout}">
+                <af:panelHeader text="#{inventoryUIBundle.NETWORK_SERVICE_SUMMARY} - #{pageFlowScope.NetworkServiceSummaryBean.displayInfo}"
+                                helpTopicId="OHW_netsvcDetailsPage" id="ph1">
+                    <f:facet name="menuBar">
+                        <af:group id="g1">
+                            <af:menuBar id="mb1">
+                                <af:menu id="m1" styleClass="invSummaryMenu" binding="#{pageFlowScope.NetworkServiceSummaryBean.actionsMenu}">
+                                    <af:clientListener type="propertyChange" method="goRefreshEntity"/>
+                                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.NetworkServiceSummaryBean.refresh}"/>
+                                </af:menu>
+                            </af:menuBar>
+                        </af:group>
+                    </f:facet>
+                    <af:panelGroupLayout id="pgl23" layout="scroll">
+                        <af:messages id="m2" inline="true"/>
+                        <!--<af:outputText value="#{pageFlowScope.NetworkServiceSummaryBean.notificationText}" id="ot9" binding="#{pageFlowScope.NetworkServiceSummaryBean.notificationBinding}"/>-->
+                        <af:showDetailHeader text="#{inventoryUIBundle.NETWORK_SERVICE_INFORMATION}" disclosed="true" id="sdh1"
+                                             styleClass="invSummaryShowDetailHeader">
+                            <f:facet name="toolbar">
+                                <af:button text="#{inventoryUIBundle.EDIT}" id="b1" disabled="#{pageFlowScope.NetworkServiceSummaryBean.disableEditButton}"
+                                           action="edit" actionListener="#{bindings.openSubTaskForEdit.execute}">
+                                    <af:setActionListener from="#{pageFlowScope.NetworkServiceSummaryBean.service.oid}" to="#{objectId}"/>
+                                </af:button>
+                            </f:facet>
+                            <af:panelFormLayout id="pfl1" maxColumns="2" labelWidth="33%" fieldWidth="67%" rows="2">
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTOR}" id="networkservice-specification">
+                                    <af:link id="l1" action="SpecificationSummary" actionListener="#{bindings.openSubTaskForSpec.execute}"
+                                             text="#{pageFlowScope.NetworkServiceSummaryBean.specDisplayName}"
+                                             shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+                                        <af:setActionListener from="#{pageFlowScope.NetworkServiceSummaryBean.entityObject.specification.oid}"
+                                                              to="#{specObjectId}"/>
+                                    </af:link>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}" id="networkservice-id">
+                                    <af:outputText value="#{pageFlowScope.NetworkServiceSummaryBean.entityObject.id}" id="ot1"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="networkservice-name">
+                                    <af:outputText value="#{pageFlowScope.NetworkServiceSummaryBean.entityObject.name}" id="ot2"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.STATUS}" id="networkservice-adminstate">
+                                    <af:panelGroupLayout id="pgl24" layout="horizontal">
+                                        <af:spacer id="sp1" width="7"/>
+                                        <af:outputText value="#{pageFlowScope.NetworkServiceSummaryBean.adminState}" id="ot4"
+                                                       binding="#{backingBeanScope.statusBinding}"/>
+                                        <af:spacer id="sp2" width="10"/>
+                                        <af:progressIndicator id="si1" binding="#{backingBeanScope.runningIndicator}"
+                                                              value="#{pageFlowScope.NetworkServiceSummaryBean.runningModel}"
+                                                              rendered="#{pageFlowScope.NetworkServiceSummaryBean.displayRunningModel}"/>
+                                        <af:progressIndicator id="si2" binding="#{backingBeanScope.finishedIndicator}"
+                                                              value="#{pageFlowScope.NetworkServiceSummaryBean.finishedModel}"
+                                                              rendered="#{pageFlowScope.NetworkServiceSummaryBean.displayFinishedModel &amp;&amp; !pageFlowScope.NetworkServiceSummaryBean.displayRunningModel}"/>
+                                    </af:panelGroupLayout>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.STATUS_DATE}" id="networkservice-statusdate">
+                                    <af:outputText value="#{pageFlowScope.NetworkServiceSummaryBean.entityObject.statusDate}" id="ot5">
+                                        <af:convertDateTime pattern="#{pageFlowScope.NetworkServiceSummaryBean.dateTimeFormat}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:outputText value="#{pageFlowScope.NetworkServiceSummaryBean.nsNotification.message}" id="ot8"
+                                               inlineStyle="font-weight:bold; font-size:14px; padding-top:2px;"/>
+                            </af:panelFormLayout>
+                            <af:panelFormLayout id="nschar" binding="#{backingBeanScope.uiHintsViewPanel}" fieldWidth="67%" labelWidth="33%" maxColumns="2"
+                                                rows="2">
+                                <af:iterator id="it1" value="#{pageFlowScope.NetworkServiceSummaryBean.characteristics}" var="characteristicDetails">
+                                    <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="plam1"
+                                                             rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'ALPHANUMERIC' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'CALENDAR' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'DROPDOWN_LIST' || characteristicDetails.characteristic.characteristicSpecification.valueType == 'NUMERIC'}">
+                                        <af:outputText id="ot6"
+                                                       value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="plam2"
+                                                             rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'URL'}">
+                                        <af:link id="l2" targetFrame="_blank"
+                                                 destination="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                                 inlineStyle="padding-left:6px;">
+                                            <af:outputText id="ot7" truncateAt="50"
+                                                           value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                                        </af:link>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="" id="plam3"
+                                                             rendered="#{characteristicDetails.characteristic.characteristicSpecification.controlType == 'CHECKBOX'}">
+                                        <af:selectBooleanCheckbox id="sbc1" disabled="true"
+                                                                  value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                                                  text="#{characteristicDetails.label}" simple="true"/>
+                                    </af:panelLabelAndMessage>
+                                </af:iterator>
+                            </af:panelFormLayout>
+                        </af:showDetailHeader>
+                        <af:popup childCreation="deferred" autoCancel="disabled" id="p1" binding="#{pageFlowScope.NetworkServiceSummaryBean.notificationPopup}">
+                            <af:dialog id="d1">
+                                <f:facet name="buttonBar"/>
+                                <af:panelGroupLayout id="pgl4">
+                                    <af:outputText value="#{pageFlowScope.NetworkServiceSummaryBean.nsNotification.id}" id="ot3"/>
+                                </af:panelGroupLayout>
+                            </af:dialog>
+                        </af:popup>
+                    </af:panelGroupLayout>
+                </af:panelHeader>
+                <af:spacer width="10" height="10" id="s1"/>
+                <af:panelStretchLayout id="psl1" dimensionsFrom="auto">
+                    <f:facet name="center">
+                        <af:panelTabbed id="pt2" dimensionsFrom="auto" styleClass="AFStretchWidth" binding="#{backingBeanScope.panelTab}">
+                            <af:showDetailItem id="nsconfig" text="#{inventoryUIBundle.CONFIGURATION}" stretchChildren="first"
+                                               disclosureListener="#{pageFlowScope.NetworkServiceSummaryBean.invokeConfiguration}"
+                                               binding="#{backingBeanScope.networkServiceconfigTab}">
+                                <af:panelStretchLayout id="psl2" styleClass="AFStretchWidth" dimensionsFrom="auto">
+                                    <f:facet name="center">
+                                        <af:region value="#{bindings.NetworkServiceConfigSummary1.regionModel}" id="r1"
+                                                   binding="#{pageFlowScope.NetworkServiceSummaryBean.configRegion}"/>
+                                    </f:facet>
+                                </af:panelStretchLayout>
+                            </af:showDetailItem>
+							<af:showDetailItem id="fgsd" text="#{inventoryUIBundle.FORWARDING_GRAPH}" stretchChildren="first"
+                                               binding="#{backingBeanScope.vnffgTab}" disabled="#{pageFlowScope.NetworkServiceSummaryBean.disableFGTab}">
+                                <af:panelStretchLayout id="pslf2" styleClass="AFStretchWidth" dimensionsFrom="auto">
+                                    <f:facet name="center">
+                                        <af:panelCollection id="pcl1">
+											<af:treeTable value="#{pageFlowScope.NetworkServiceSummaryBean.fgTreeModel}" var="fg"
+														  rowBandingInterval="0" rowSelection="single" columnStretching="last"
+														  selectionListener="#{pageFlowScope.NetworkServiceSummaryBean.handlefgSelection}"
+														  binding="#{backingBeanScope.fgTreeBinding}"
+														  id="tt1">
+												<f:facet name="nodeStamp">
+													<af:column sortable="false" headerText="#{inventoryUIBundle.FORWARDING_GRAPH_HIERARCHY}" id="c2">
+														<af:switcher id="sw1" defaultFacet="false" facetName="#{fg.childNode}">
+															<f:facet name="false">
+																<af:outputText value="#{fg.name}" id="ofg2"/>
+															</f:facet>
+															<f:facet name="true">
+																<af:link id="l3" text="#{fg.name}"> 
+                                                                    <af:setPropertyListener type="action" from="true" to="#{pageFlowScope.invokeNFP}"/>
+                                                                    <af:showPopupBehavior popupId=":::nfpp" triggerType="click"/>
+																</af:link>
+															</f:facet>
+														</af:switcher> 
+													</af:column>
+												</f:facet>
+											</af:treeTable>
+										</af:panelCollection>
+                                    </f:facet>
+                                </af:panelStretchLayout>
+                            </af:showDetailItem>
+                            <af:showDetailItem id="ep" text="#{inventoryUIBundle.END_POINTS}" binding="#{backingBeanScope.epvTab}" stretchChildren="first">
+                                <af:panelStretchLayout dimensionsFrom="auto" id="psl21" styleClass="AFStretchWidth" binding="#{backingBeanScope.epvBinding}">
+                                    <f:facet name="center">
+                                        <af:panelGroupLayout id="pgl2" layout="scroll" styleClass="AFStretchWidth">
+                                            <af:forEach items="#{bindings.eptf.taskFlowBindingList}" var="tf" varStatus="status">
+                                                <af:panelBox text="#{tf.name}" showDisclosure="false" id="pb1${status.index}">
+                                                    <af:region value="#{tf.regionModel}" id="reg1${status.index}"/>
+                                                </af:panelBox>
+                                                <af:spacer width="4" height="5" id="s6"/>
+                                            </af:forEach>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </af:panelStretchLayout>
+                            </af:showDetailItem>
+                            <af:showDetailItem id="vnf" text="#{inventoryUIBundle.VIRTUAL_NETWORK_FUNCTIONS}" binding="#{backingBeanScope.vnfvTab}"
+                                               stretchChildren="first">
+                                <af:panelStretchLayout dimensionsFrom="auto" id="psl22" styleClass="AFStretchWidth" binding="#{backingBeanScope.vnfvBinding}">
+                                    <f:facet name="center">
+                                        <af:panelGroupLayout id="pgl8" layout="scroll" styleClass="AFStretchWidth">
+                                            <af:forEach items="#{bindings.vnftf.taskFlowBindingList}" var="vnftf" varStatus="vnfstatus">
+                                                <af:panelBox text="#{vnftf.name}" showDisclosure="false" id="pb2${vnfstatus.index}">
+                                                    <af:region value="#{vnftf.regionModel}" id="reg2${vnfstatus.index}"/>
+                                                </af:panelBox>
+                                                <af:spacer width="4" height="5" id="s7"/>
+                                            </af:forEach>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </af:panelStretchLayout>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="#{inventoryUIBundle.PHYSICAL_NETWORK_FUNCTIONS}" id="sdi1" binding="#{backingBeanScope.pnfvTab}"
+                                               stretchChildren="first" disabled="#{pageFlowScope.NetworkServiceSummaryBean.isPNFTabDisabled}">
+                                <af:panelStretchLayout id="psl3" styleClass="AFStretchWidth" binding="#{backingBeanScope.pnfvBinding}">
+                                    <f:facet name="center">
+                                        <af:panelGroupLayout id="pgl3" layout="scroll" styleClass="AFStretchWidth">
+                                            <af:forEach items="#{bindings.pnftf.taskFlowBindingList}" var="pnftf" varStatus="pnfstatus">
+                                                <af:panelBox text="#{pnftf.name}" id="pb3${pnfstatus.index}" showDisclosure="false">
+                                                    <af:region value="#{pnftf.regionModel}" id="reg3${pnfstatus.index}"/>
+                                                </af:panelBox>
+                                            </af:forEach>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </af:panelStretchLayout>
+                            </af:showDetailItem>
+                            <af:iterator id="it123" value="#{pageFlowScope.NetworkServiceSummaryBean.characteristics}" var="charDetails">
+                                <af:showDetailItem id="sdi101" text="#{charDetails.label}" binding="#{backingBeanScope.dynamicTab}" styleClass="AFStretchWidth"
+                                                   inlineStyle="height:600px;"
+                                                   disclosureListener="#{pageFlowScope.NetworkServiceSummaryBean.discloseExternalURL}" stretchChildren="first"
+                                                   rendered="#{(charDetails.characteristic.characteristicSpecification.valueType == 'URL' || charDetails.characteristic.characteristicSpecification.isEntityReference) &amp;&amp; (charDetails.characteristic.value ne null)}">
+                                    <af:popup id="pd" contentDelivery="lazyUncached">
+                                        <af:panelWindow modal="true" title="#{charDetails.label}" id="pw1" contentHeight="600" contentWidth="800" resize="on"
+                                                        stretchChildren="first">
+                                            <af:panelGroupLayout id="pg2">
+                                                <af:inlineFrame source="#{charDetails.characteristic.value}" shortDesc="#{charDetails.label}"
+                                                                styleClass="AFStretchWidth" id="if2"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelWindow>
+                                    </af:popup>
+                                    <af:panelGroupLayout id="pg3" layout="horizontal">
+                                        <af:toolbar id="tb3342">
+                                            <af:button text="Detach" id="bd">
+                                                <af:showPopupBehavior popupId="pd"/>
+                                            </af:button>
+                                        </af:toolbar>
+                                    </af:panelGroupLayout>
+                                    <af:panelStretchLayout id="psle2" dimensionsFrom="auto" styleClass="AFStretchWidth">
+                                        <f:facet name="center">
+                                            <af:inlineFrame source="#{charDetails.characteristic.value}" styleClass="AFStretchWidth" id="if1"
+                                                            shortDesc="#{inventoryUIBundle.INLINE_FRAME_DESCRIPTION}" inlineStyle="height:600px;"/>
+                                        </f:facet>
+                                    </af:panelStretchLayout>
+                                </af:showDetailItem>
+                            </af:iterator>
+                        </af:panelTabbed>
+                    </f:facet>
+                </af:panelStretchLayout>
+                <af:resource type="javascript">
+                                          <!-- The below javascript code is defined to Block the user operations while Save operation is in progress. -->
+                  function queueEvent(event) {
+                       event.cancel(); // cancel action event
+                       var source = event.getSource();
+                       var params = {};
+                       var type = "customListener";
+                       var immediate = true;
+                       var isPartial = true;
+                       var customEvent =  new AdfCustomEvent(source, type, params, immediate);
+                       customEvent.preventUserInput();
+                       customEvent.queue(isPartial);
+                  }
+               </af:resource>
+               
+               <af:popup id="nfpp" binding="#{backingBeanScope.nfpPopup}" contentDelivery="lazyUncached">
+                    <af:dialog id="nfpd" type="none" title="#{inventoryUIBundle.NETWORK_FORWARDING_PATH} - #{pageFlowScope.NetworkServiceSummaryBean.selectedNFP.name}" inlineStyle="width: 950px;height: 600px;">
+                        <af:panelStretchLayout id="psl_1" styleClass="AFStretchWidth" dimensionsFrom="auto">
+                            <f:facet name="center">
+                                <af:region value="#{bindings.NetworkForwardingPathFlow1.regionModel}" id="r2"/>
+                            </f:facet>
+                        </af:panelStretchLayout>
+                    </af:dialog>
+                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.NetworkServiceSummaryBean.refresh}"/>
+                </af:popup>
+               
+                <af:poll id="p3" interval="#{pageFlowScope.NetworkServiceSummaryBean.pollerInterval}"
+                         pollListener="#{pageFlowScope.NetworkServiceSummaryBean.pollerListener}"
+                         rendered="#{pageFlowScope.NetworkServiceSummaryBean.pollEnabled}" binding="#{pageFlowScope.NetworkServiceSummaryBean.pollComponent}"/>
+            </af:panelGroupLayout>
+        </f:facet>
+    </af:pageTemplate>
+</jsp:root>

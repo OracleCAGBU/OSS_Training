@@ -1,0 +1,227 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" value="#{bindings.pageTemplateBinding}" id="pt1">
+    <f:facet name="localArea">          
+            <af:panelStretchLayout id="pgl1" styleClass="AFStretchWidth" binding="#{backingBeanScope.activityListBinding}" dimensionsFrom="auto">
+                <f:facet name="center">
+                    <af:panelCollection id="pc1" styleClass="AFStretchWidth" featuresOff="viewMenu">
+                        <f:facet name="menus">
+                            <af:menu id="menu6" binding="#{pageFlowScope.ActivityListBean.actionsMenu}" disabled="#{pageFlowScope.ActivityListBean.disableActionsMenu}" text="#{inventoryUIBundle.ACTIONS}">
+                                <af:commandMenuItem id="SUBMIT" text="#{inventoryUIBundle.SUBMIT}" actionListener="#{pageFlowScope.ActivityListBean.processMenuItem}"/> 
+                                <af:commandMenuItem id="VALIDATE" text="#{inventoryUIBundle.VALIDATE}" actionListener="#{pageFlowScope.ActivityListBean.processMenuItem}"/>
+                                <af:commandMenuItem id="CANCEL" text="#{inventoryUIBundle.CANCEL}" actionListener="#{pageFlowScope.ActivityListBean.processMenuItem}"/>
+                            </af:menu>
+                        </f:facet>
+                        <f:facet name="toolbar">
+                            <af:toolbar id="t8" binding="#{backingBeanScope.activityTBBinding}">
+                                <af:commandToolbarButton id="ctb2" shortDesc="#{inventoryUIBundle.CREATE}" icon="#{InventoryHelperBean.createIcon}" disabledIcon="#{InventoryHelperBean.disCreateIcon}" 
+                                                         disabled="#{pageFlowScope.ActivityListBean.disableCreateButton}"
+														 rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Activity.CREATE;action=view']}">
+                                    <af:showPopupBehavior popupId="ctp" triggerType="action"/>
+                                </af:commandToolbarButton>
+                                
+                                <af:commandToolbarButton shortDesc="#{inventoryUIBundle.EDIT}" id="ctb4" icon="#{InventoryHelperBean.editIcon}" disabledIcon="#{InventoryHelperBean.disEditIcon}"
+                                                         disabled="#{pageFlowScope.ActivityListBean.disableEditButton}" partialTriggers="al"
+														 rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Activity.EDIT;action=view']}">
+                                    <af:showPopupBehavior popupId="uap" triggerType="action"/>
+                                </af:commandToolbarButton>
+                                
+                                <af:commandToolbarButton id="ctb3" shortDesc="#{inventoryUIBundle.DELETE}" icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                                         disabled="#{pageFlowScope.ActivityListBean.disableDeleteButton}" partialTriggers="al">
+                                    <af:showPopupBehavior popupId="dela" triggerType="action"/>     
+                                </af:commandToolbarButton>
+                                                         
+                                <af:popup id="dela" contentDelivery="lazyUncached">
+                                    <af:dialog title="#{inventoryUIBundle.DELETE_ACTIVITY_MESSAGE}" type="yesNo" dialogListener="#{pageFlowScope.ActivityListBean.deleteConfirmation}" id="dd4"/>
+                                </af:popup>
+                                                         
+                            </af:toolbar>
+                        </f:facet>
+                        
+                        <af:popup id="ctp" contentDelivery="lazyUncached">
+                        <!-- @pskalaga_bug_19052830v1 removed from dialog [resize="on" ] to see if sized better -->
+                            <af:dialog title="#{inventoryUIBundle.ADD_ACTIVITY}" id="d2" 
+                                        stretchChildren="first" 
+                                        contentWidth="300" 
+                                        contentHeight="80" 
+                                        type="none" 
+                                        binding="#{backingBeanScope.createActivityBinding}">
+                                <f:facet name="buttonBar">
+                                    <af:panelGroupLayout id="pgl4" halign="right" layout="scroll">
+                                        <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                            <af:toolbar id="tb7" binding="#{backingBeanScope.activityPopupBinding}">
+                                            
+                                                <af:commandToolbarButton text="#{inventoryUIBundle.DONE}" id="ctb16" actionListener="#{pageFlowScope.ActivityListBean.createActivity}"
+                                                                         disabled="#{pageFlowScope.ActivityListBean.disableOK}" accessKey="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>
+                                                
+                                                <af:spacer width="4" id="s11"/>
+                                                
+                                                <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb28" actionListener="#{pageFlowScope.ActivityListBean.cancelPopup}"
+                                                                         accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}" immediate="true"/>
+                                                                         
+                                            </af:toolbar>
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </f:facet>
+                                <af:panelStretchLayout id="pt_psl4" styleClass="AFStretchWidth">
+                                    <f:facet name="center">
+                                        <af:panelFormLayout id="pf12" maxColumns="1" rows="2">
+                                            <af:selectOneChoice id="ty1" label="#{inventoryUIBundle.TYPE}" autoSubmit="true" required="true" immediate="true" value="#{pageFlowScope.ActivityListBean.activityTypeValue}">
+                                                <f:selectItems binding="#{pageFlowScope.ActivityListBean.activityTypes}" id="si2"/>
+                                            </af:selectOneChoice>
+                                          
+                                            <af:inputText label="#{inventoryUIBundle.NAME}" id="it3" value="#{pageFlowScope.ActivityListBean.activityName}" showRequired="true" immediate="true" maximumLength="50">
+                                                    <af:clientListener method="handleActivityClick" type="keyUp"/>
+                                                    <af:serverListener type="KeyDownEvent" method="#{pageFlowScope.ActivityListBean.activityNameChanged}"/>
+                                            </af:inputText>
+                                        </af:panelFormLayout>
+                                    </f:facet>
+                                </af:panelStretchLayout>
+                            </af:dialog>
+                        </af:popup>
+                        
+                        <af:popup id="uap" contentDelivery="lazyUncached">
+                        <!-- @pskalaga_bug_19052830v1 removed from dialog [resize="on" ] to see if sized better -->
+                            <af:dialog title="#{inventoryUIBundle.EDIT_ACTIVITY}" id="d3" 
+                                        stretchChildren="first" 
+                                        contentWidth="250" 
+                                        contentHeight="50" 
+                                        type="none"
+                                        binding="#{backingBeanScope.editActivityBinding}">
+                                <f:facet name="buttonBar">
+                                    <af:panelGroupLayout id="pgl5" halign="right" layout="scroll">
+                                        <af:panelGroupLayout id="pgl6" layout="horizontal">
+                                            <af:toolbar id="tb8" binding="#{backingBeanScope.editToolbarBinding}">
+                                            
+                                                <af:commandToolbarButton text="#{inventoryUIBundle.DONE}" id="ctb17" actionListener="#{pageFlowScope.ActivityListBean.updateActivity}"
+                                                                         disabled="#{pageFlowScope.ActivityListBean.disableOK}" accessKey="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>
+                                                
+                                                <af:spacer width="4" id="s12"/>
+                                                
+                                                <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb29" actionListener="#{pageFlowScope.ActivityListBean.cancelPopup}"
+                                                                         accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}" immediate="true"/>
+                                                                         
+                                            </af:toolbar>
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </f:facet>
+                                <af:panelStretchLayout id="pt_psl5" styleClass="AFStretchWidth">
+                                    <f:facet name="center">
+                                        <af:panelFormLayout id="pf13" maxColumns="1" rows="2">
+                                            <af:inputText label="#{inventoryUIBundle.NAME}" id="it4" value="#{pageFlowScope.ActivityListBean.selectedActivityName}" showRequired="true" immediate="true" maximumLength="50">
+                                                <af:clientListener method="handleActivityClick" type="keyUp"/>
+                                                <af:serverListener type="KeyDownEvent" method="#{pageFlowScope.ActivityListBean.nameChanged}"/>
+                                            </af:inputText>
+                                        </af:panelFormLayout>
+                                    </f:facet>
+                                </af:panelStretchLayout>
+                            </af:dialog>
+                        </af:popup>
+                        
+                        <f:facet name="statusbar">
+                            <af:toolbar id="tb2">
+                                <af:outputText  value="#{inventoryUIBundle.ROW_COUNT} #{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount lt 0) ? 0 : bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount}"
+                                                styleClass="invSearchOutputLabel" binding="#{backingBeanScope.totalResultsLabel}" partialTriggers="al" id="ot32"/>
+                            </af:toolbar>
+                        </f:facet>
+                        
+                        <af:table id="al"
+                                  value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}" var="row"
+                                  emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                                  fetchSize="#{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount &lt; 25) ? bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount : 25}"
+                                  selectionListener="#{pageFlowScope.ActivityListBean.selectAction}"
+                                  queryListener="#{InventoryHelperBean.processQuery}" columnStretching="multiple"
+                                  filterVisible="false" varStatus="vs" contentDelivery="immediate"
+                                  sortListener="#{bindings.searchResultsIterator.dataControl.dataProvider.processSort}"
+                                  rowSelection="#{pageFlowScope.ActivityListBean.rowSelection}" styleClass="AFStretchWidth"
+                                  selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                                  binding="#{pageFlowScope.ActivityListBean.resultsTable}"
+                                  summary="#{inventoryUIBundle.ACTIVITY_LIST_SUMMARY}">
+                                  
+                            <af:column headerText="#{inventoryUIBundle.TYPE}" id="c3" width="30%" rowHeader="unstyled">
+                                <af:outputText value="#{pageFlowScope.ActivityListBean.activityTypeName}" id="ot3"/>
+                            </af:column>
+                            
+                            <af:column headerText="#{inventoryUIBundle.NAME}" id="c4" width="70%">
+                                <af:outputText value="#{pageFlowScope.ActivityListBean.name}" id="ot4"/>
+                            </af:column>
+                            
+                            <af:column headerText="#{inventoryUIBundle.START_DATE_TIME}" id="c2" width="50%">
+                                <af:outputText value="#{row.activityStartDate}" id="ot6">
+                                    <af:convertDateTime pattern="#{pageFlowScope.ActivityListBean.dateTimeFormat}"/>
+                                </af:outputText>
+                            </af:column>
+                            
+                            <af:column headerText="#{inventoryUIBundle.END_DATE_TIME}" id="c1" width="50%">
+                                <af:outputText value="#{row.activityEndDate}" id="ot5">
+                                    <af:convertDateTime pattern="#{pageFlowScope.ActivityListBean.dateTimeFormat}"/>
+                                </af:outputText>
+                            </af:column>
+                            
+                            <af:column headerText="#{inventoryUIBundle.DURATION}" id="c7" width="25%">
+                                <af:outputText value="#{pageFlowScope.ActivityListBean.duration}" id="ot7">
+                                    <af:convertDateTime pattern="#{pageFlowScope.ActivityListBean.durationFormat}"/>
+                                </af:outputText>
+                            </af:column>
+                            
+                            <af:column headerText="#{inventoryUIBundle.STATUS}" id="c5" width="25%">
+                                <af:panelGroupLayout id="pgl7" layout="horizontal" halign="left">
+                                    <af:image source="#{pageFlowScope.ActivityListBean.statusIcon}" shortDesc="" id="i89"/>
+                                    <af:spacer width="5" id="sp67"/>
+                                    <af:switcher id="state" defaultFacet="false" facetName="#{pageFlowScope.ActivityListBean.displayLink}">
+                                        <f:facet name="false">
+                                            <af:outputText value="#{pageFlowScope.ActivityListBean.status}" id="ot2"/>
+                                        </f:facet>
+                                        <f:facet name="true">
+                                            <af:link id="cl1">
+                                                <af:outputText value="#{pageFlowScope.ActivityListBean.status}" id="ot9"/>
+                                                <af:showPopupBehavior popupId="p9" triggerType="click" align="afterEnd"/>
+                                            </af:link>
+                                        </f:facet>
+                                    </af:switcher>
+                                    
+                                    <af:popup id="p9">
+                                    <!-- @pskalaga_bug_19052830v1 removed from dialog [resize="on" ] to see if sized better -->
+                                        <af:dialog title="#{inventoryUIBundle.COMMENTS}" id="d4" 
+                                                    stretchChildren="first" contentWidth="300" contentHeight="80" 
+                                                    type="none" 
+                                                    binding="#{backingBeanScope.activityReasonBinding}">
+                                            <af:panelStretchLayout id="psl4" styleClass="AFStretchWidth">
+                                                <f:facet name="center">
+                                                    <af:outputText id="ot13" value="#{pageFlowScope.ActivityListBean.selectedActivityReason}"/>
+                                                </f:facet>
+                                            </af:panelStretchLayout>
+                                        </af:dialog>
+                                    </af:popup>
+                                </af:panelGroupLayout>
+                            </af:column>
+                            
+                            <af:column headerText="#{inventoryUIBundle.PERCENT_COMPLETE}" id="c6" width="60%">
+                                <af:progressIndicator value="#{pageFlowScope.ActivityListBean.progressUpdate}" id="pi2"/>
+                                 <af:poll id="p2" pollListener="#{pageFlowScope.ActivityListBean.pollerListener}" rendered="#{pageFlowScope.ActivityListBean.pollEnabled}"
+                                          binding="#{pageFlowScope.ActivityListBean.pollActivity}" interval="#{pageFlowScope.ActivityListBean.pollerInterval}"/>
+                            </af:column>
+                            
+                        </af:table>
+                        
+                        
+                        
+                    </af:panelCollection>
+                </f:facet>
+            </af:panelStretchLayout>
+           
+    </f:facet>
+    <af:resource type="javascript">
+          <!-- The below javascript code is defined to handle the click event on Create Activity Popup . -->
+          function handleActivityClick(evt){   
+             var name = evt.getSource();
+             AdfCustomEvent.queue(name, "KeyDownEvent",{}, false);
+             evt.cancel();
+          }
+    </af:resource>
+</af:pageTemplate>
+
+</jsp:root>

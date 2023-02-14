@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout id="pgl1" layout="scroll">
+        <af:panelHeader text="#{pageFlowScope.InventoryResultsBean.displayInfo}" id="ph1">
+          <jsp:include page= "/oracle/communications/inventory/ui/framework/page/InventoryQuery.jsff" /> 
+          <af:spacer width="10" height="10" id="s1"/>
+          <af:showDetailHeader text="#{inventoryUIBundle.SEARCH_RESULTS}" disclosed="true" id="resultsComponent">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:panelCollection id="pc1" styleClass="invSearchPanelCollection">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar"/>
+              <f:facet name="statusbar">
+                 <af:toolbar id="t2">
+                     <af:outputText value="#{pageFlowScope.InventoryResultsBean.displayTotalResults}"
+                                    id="ol1" styleClass="invSearchOutputLabel" partialTriggers="resultsTableId" binding="#{backingBeanScope.totalResultsLabel}"/>
+                 </af:toolbar>
+              </f:facet>
+              <af:table id="resultsTableId"
+                        value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}"
+                        var="row"
+                        emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                        fetchSize="#{pageFlowScope.InventoryResultsBean.fetchSize}"
+                        filterModel="#{pageFlowScope.InventoryQueryBean.filterModel}"
+                        queryListener="#{InventoryHelperBean.processQuery}"
+                        filterVisible="false" varStatus="vs"
+                        selectionListener="#{pageFlowScope.InventoryResultsBean.selectAction}"
+                        selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                        sortListener="#{bindings.searchResultsIterator.dataControl.dataProvider.processSort}"
+                        rowSelection="single" styleClass="invSearchTable"
+                        binding="#{pageFlowScope.InventoryResultsBean.resultsTable}"
+                        summary="#{inventoryUIBundle.SIGNAL_TERMINATION_SEARCH_TABLE}">
+                <af:column headerText="#{inventoryUIBundle.NAME}" id="c3" 
+                           rowHeader="unstyled">
+                  <af:link action="viewspecsummary" id="cl2">
+                      <af:outputText value="#{row.name}" id="ot2"/>
+                  </af:link>
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.ENTITY_TYPE}" id="c2">
+                  <af:outputText value="#{pageFlowScope.InventoryResultsBean.entityType}" id="ot1"/>
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.START_DATE}" id="c4">
+                  <af:outputText value="#{pageFlowScope.InventoryResultsBean.startDate}" id="ot4">
+                   <af:convertDateTime pattern="#{pageFlowScope.InventoryResultsBean.dateTimeFormat}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.END_DATE}" id="c5">
+                  <af:outputText value="#{pageFlowScope.InventoryResultsBean.endDate}" id="ot5">
+                   <af:convertDateTime pattern="#{pageFlowScope.InventoryResultsBean.dateTimeFormat}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.DESCRIPTION}" id="c1" >
+                  <af:outputText value="#{row.description}" id="ot3"/>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:showDetailHeader>
+          <af:panelGroupLayout id="pgl2" halign="right" layout="scroll">
+              <af:panelGroupLayout id="pgl3" layout="horizontal">
+                <af:toolbar id="t4">
+                    <af:commandToolbarButton text="#{inventoryUIBundle.DONE}" id="ctb1" actionListener="#{pageFlowScope.InventoryResultsBean.associate}"
+                                             disabled="#{pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size lt 1}"
+                                             partialTriggers="pc1:resultsTableId"/>
+                    <af:spacer width="10" height="10" id="s2"/>
+                    <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb2" actionListener="#{pageFlowScope.InventoryResultsBean.cancel}"/>
+                </af:toolbar>
+              </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </af:panelHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

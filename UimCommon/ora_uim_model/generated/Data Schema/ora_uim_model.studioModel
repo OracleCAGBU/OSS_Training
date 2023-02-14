@@ -1,0 +1,2480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:data="http://xmlns.oracle.com/communications/studio/model/data" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="data:DataSchema" id="ds=ora_uim_model" type="ds" typeName="Data Schema" name="ora_uim_model" resource="\ora_uim_model\dataDictionary\ora_uim_model.xsd">
+    <displayName lang="default">ora_uim_model</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="omprj=ora_uim_model" type="OCIM Model Project" name="Dependency">
+        <target name="ora_uim_model" typeName="OCIM Model Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="ds=ora_uim_model+dataElement=InventoryState" type="dataElement" typeName="Schema Element" kind="Element" name="InventoryState" path="/InventoryState">
+        <note lang="default">Inventory Status</note>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <enum literal="END_OF_LIFE" default="false" inherited="false" excluded="false">
+          <name lang="default">END_OF_LIFE</name>
+        </enum>
+        <enum literal="INSTALLED" default="false" inherited="false" excluded="false">
+          <name lang="default">INSTALLED</name>
+        </enum>
+        <enum literal="PENDING_AVAILABLE" default="false" inherited="false" excluded="false">
+          <name lang="default">PENDING_AVAILABLE</name>
+        </enum>
+        <enum literal="PENDING_INSTALL" default="false" inherited="false" excluded="false">
+          <name lang="default">PENDING_INSTALL</name>
+        </enum>
+        <enum literal="PENDING_REMOVE" default="false" inherited="false" excluded="false">
+          <name lang="default">PENDING_REMOVE</name>
+        </enum>
+        <enum literal="PENDING_UNAVAILABLE" default="false" inherited="false" excluded="false">
+          <name lang="default">PENDING_UNAVAILABLE</name>
+        </enum>
+        <enum literal="PLANNED" default="false" inherited="false" excluded="false">
+          <name lang="default">PLANNED</name>
+        </enum>
+        <enum literal="UNAVAILABLE" default="false" inherited="false" excluded="false">
+          <name lang="default">UNAVAILABLE</name>
+        </enum>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=AttachmentType" type="dataElement" typeName="Schema Element" kind="Element" name="AttachmentType" path="/AttachmentType">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <enum literal="PRECONFIGURED" default="false" inherited="false" excluded="false">
+          <name lang="default">PRECONFIGURED</name>
+        </enum>
+        <enum literal="PRODUCT" default="false" inherited="false" excluded="false">
+          <name lang="default">PRODUCT</name>
+        </enum>
+        <enum literal="PRODUCTSERVICE" default="false" inherited="false" excluded="false">
+          <name lang="default">PRODUCTSERVICE</name>
+        </enum>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=Medium" type="dataElement" typeName="Schema Element" kind="Element" name="Medium" path="/Medium">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <enum literal="WIRELESS" default="false" inherited="false" excluded="false">
+          <name lang="default">WIRELESS</name>
+        </enum>
+        <enum literal="METALLIC" default="false" inherited="false" excluded="false">
+          <name lang="default">METALLIC</name>
+        </enum>
+        <enum literal="FIBER" default="false" inherited="false" excluded="false">
+          <name lang="default">FIBER</name>
+        </enum>
+        <enum literal="SOFTWARE" default="false" inherited="false" excluded="false">
+          <name lang="default">SOFTWARE</name>
+        </enum>
+        <enum literal="UNKNOWN" default="false" inherited="false" excluded="false">
+          <name lang="default">UNKNOWN</name>
+        </enum>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=TransmissionSignalType" type="dataElement" typeName="Schema Element" kind="Element" name="TransmissionSignalType" path="/TransmissionSignalType">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <enum literal="ELECTRICAL" default="false" inherited="false" excluded="false">
+          <name lang="default">ELECTRICAL</name>
+        </enum>
+        <enum literal="ELECTROMAGNETIC" default="false" inherited="false" excluded="false">
+          <name lang="default">ELECTROMAGNETIC</name>
+        </enum>
+        <enum literal="OPTICAL" default="false" inherited="false" excluded="false">
+          <name lang="default">OPTICAL</name>
+        </enum>
+        <enum literal="UNKNOWN" default="false" inherited="false" excluded="false">
+          <name lang="default">UNKNOWN</name>
+        </enum>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=NodeType" type="dataElement" typeName="Schema Element" kind="Element" name="NodeType" path="/NodeType">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <enum literal="CUSTOM_NETWORK_ADDRESS" default="false" inherited="false" excluded="false">
+          <name lang="default">CUSTOM_NETWORK_ADDRESS</name>
+        </enum>
+        <enum literal="CUSTOM_OBJECT" default="false" inherited="false" excluded="false">
+          <name lang="default">CUSTOM_OBJECT</name>
+        </enum>
+        <enum literal="DEVICE_INTERFACE" default="false" inherited="false" excluded="false">
+          <name lang="default">DEVICE_INTERFACE</name>
+        </enum>
+        <enum literal="EQUIPMENT" default="false" inherited="false" excluded="false">
+          <name lang="default">EQUIPMENT</name>
+        </enum>
+        <enum literal="LOGICAL_DEVICE" default="false" inherited="false" excluded="false">
+          <name lang="default">LOGICAL_DEVICE</name>
+        </enum>
+        <enum literal="NETWORK" default="false" inherited="false" excluded="false">
+          <name lang="default">NETWORK</name>
+        </enum>
+        <enum literal="NODE" default="false" inherited="false" excluded="false">
+          <name lang="default">NODE</name>
+        </enum>
+        <enum literal="PARTY" default="false" inherited="false" excluded="false">
+          <name lang="default">PARTY</name>
+        </enum>
+        <enum literal="PHYSICAL_DEVICE" default="false" inherited="false" excluded="false">
+          <name lang="default">PHYSICAL_DEVICE</name>
+        </enum>
+        <enum literal="PHYSICAL_PORT" default="false" inherited="false" excluded="false">
+          <name lang="default">PHYSICAL_PORT</name>
+        </enum>
+        <enum literal="PLACE" default="false" inherited="false" excluded="false">
+          <name lang="default">PLACE</name>
+        </enum>
+        <enum literal="PROPERTY_LOCATION" default="false" inherited="false" excluded="false">
+          <name lang="default">PROPERTY_LOCATION</name>
+        </enum>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=EdgeAssocType" type="dataElement" typeName="Schema Element" kind="Element" name="EdgeAssocType" path="/EdgeAssocType">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <enum literal="CUSTOM_OBJECT" default="false" inherited="false" excluded="false">
+          <name lang="default">CUSTOM_OBJECT</name>
+        </enum>
+        <enum literal="EDGE" default="false" inherited="false" excluded="false">
+          <name lang="default">EDGE</name>
+        </enum>
+        <enum literal="PIPE" default="false" inherited="false" excluded="false">
+          <name lang="default">PIPE</name>
+        </enum>
+        <enum literal="CONNECTIVITY" default="false" inherited="false" excluded="false">
+          <name lang="default">CONNECTIVITY</name>
+        </enum>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=NetworkTopology" type="dataElement" typeName="Schema Element" kind="Element" name="NetworkTopology" path="/NetworkTopology">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <enum literal="BUS" default="false" inherited="false" excluded="false">
+          <name lang="default">BUS</name>
+        </enum>
+        <enum literal="CHAIN" default="false" inherited="false" excluded="false">
+          <name lang="default">CHAIN</name>
+        </enum>
+        <enum literal="HYBRID" default="false" inherited="false" excluded="false">
+          <name lang="default">HYBRID</name>
+        </enum>
+        <enum literal="LINEAR_ADD_DROP" default="false" inherited="false" excluded="false">
+          <name lang="default">LINEAR_ADD_DROP</name>
+        </enum>
+        <enum literal="MESH" default="false" inherited="false" excluded="false">
+          <name lang="default">MESH</name>
+        </enum>
+        <enum literal="POINT_TO_POINT" default="false" inherited="false" excluded="false">
+          <name lang="default">POINT_TO_POINT</name>
+        </enum>
+        <enum literal="RING" default="false" inherited="false" excluded="false">
+          <name lang="default">RING</name>
+        </enum>
+        <enum literal="SINGLETON" default="false" inherited="false" excluded="false">
+          <name lang="default">SINGLETON</name>
+        </enum>
+        <enum literal="STAR" default="false" inherited="false" excluded="false">
+          <name lang="default">STAR</name>
+        </enum>
+        <enum literal="TREE" default="false" inherited="false" excluded="false">
+          <name lang="default">TREE</name>
+        </enum>
+        <enum literal="UNKNOWN" default="false" inherited="false" excluded="false">
+          <name lang="default">UNKNOWN</name>
+        </enum>
+        <enum literal="MULTIPOINT_TO_MULTIPOINT" default="false" inherited="false" excluded="false">
+          <name lang="default">MULTIPOINT_TO_MULTIPOINT</name>
+        </enum>
+        <enum literal="ROOTED_MULTIPOINT" default="false" inherited="false" excluded="false">
+          <name lang="default">ROOTED_MULTIPOINT</name>
+        </enum>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=RingType" type="dataElement" typeName="Schema Element" kind="Element" name="RingType" path="/RingType">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <enum literal="DUAL_HOME_SUBETENDED" default="false" inherited="false" excluded="false">
+          <name lang="default">DUAL_HOME_SUBETENDED</name>
+        </enum>
+        <enum literal="SIMPLE_RING" default="false" inherited="false" excluded="false">
+          <name lang="default">SIMPLE_RING</name>
+        </enum>
+        <enum literal="SINGLE_HOME_SUBTENDED" default="false" inherited="false" excluded="false">
+          <name lang="default">SINGLE_HOME_SUBTENDED</name>
+        </enum>
+        <enum literal="UNKNOWN" default="false" inherited="false" excluded="false">
+          <name lang="default">UNKNOWN</name>
+        </enum>
+        <enum literal="VIRTUAL" default="false" inherited="false" excluded="false">
+          <name lang="default">VIRTUAL</name>
+        </enum>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=ProtectionType" type="dataElement" typeName="Schema Element" kind="Element" name="ProtectionType" path="/ProtectionType">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <enum literal="BLSR_2" default="false" inherited="false" excluded="false">
+          <name lang="default">BLSR_2</name>
+        </enum>
+        <enum literal="BLSR_4" default="false" inherited="false" excluded="false">
+          <name lang="default">BLSR_4</name>
+        </enum>
+        <enum literal="MS_SPRING_2" default="false" inherited="false" excluded="false">
+          <name lang="default">MS_SPRING_2</name>
+        </enum>
+        <enum literal="MS_SPRING_4" default="false" inherited="false" excluded="false">
+          <name lang="default">MS_SPRING_4</name>
+        </enum>
+        <enum literal="MSP1_1" default="false" inherited="false" excluded="false">
+          <name lang="default">MSP1_1</name>
+        </enum>
+        <enum literal="SNCP" default="false" inherited="false" excluded="false">
+          <name lang="default">SNCP</name>
+        </enum>
+        <enum literal="UNKNOWN" default="false" inherited="false" excluded="false">
+          <name lang="default">UNKNOWN</name>
+        </enum>
+        <enum literal="UPSR" default="false" inherited="false" excluded="false">
+          <name lang="default">UPSR</name>
+        </enum>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=EMSServiceState" type="dataElement" typeName="Schema Element" kind="Element" name="EMSServiceState" path="/EMSServiceState">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <enum literal="IN_MAINTENANCE" default="false" inherited="false" excluded="false">
+          <name lang="default">IN_MAINTENANCE</name>
+        </enum>
+        <enum literal="IN_SERVICE" default="false" inherited="false" excluded="false">
+          <name lang="default">IN_SERVICE</name>
+        </enum>
+        <enum literal="OUT_OF_SERVICE" default="false" inherited="false" excluded="false">
+          <name lang="default">OUT_OF_SERVICE</name>
+        </enum>
+        <enum literal="TESTING" default="false" inherited="false" excluded="false">
+          <name lang="default">TESTING</name>
+        </enum>
+        <enum literal="UNKNOWN" default="false" inherited="false" excluded="false">
+          <name lang="default">UNKNOWN</name>
+        </enum>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=ProcessingSignalType" type="dataElement" typeName="Schema Element" kind="Element" name="ProcessingSignalType" path="/ProcessingSignalType">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <enum literal="ADMINISTRATIVE_UNIT_GROUP" default="false" inherited="false" excluded="false">
+          <name lang="default">ADMINISTRATIVE_UNIT_GROUP</name>
+        </enum>
+        <enum literal="ADMINISTRATIVE_UNIT" default="false" inherited="false" excluded="false">
+          <name lang="default">ADMINISTRATIVE_UNIT</name>
+        </enum>
+        <enum literal="TRIBUTARY_UNIT_GROUP" default="false" inherited="false" excluded="false">
+          <name lang="default">TRIBUTARY_UNIT_GROUP</name>
+        </enum>
+        <enum literal="TRIBUTARY_UNIT" default="false" inherited="false" excluded="false">
+          <name lang="default">TRIBUTARY_UNIT</name>
+        </enum>
+        <enum literal="VIRTUAL_CONTAINER" default="false" inherited="false" excluded="false">
+          <name lang="default">VIRTUAL_CONTAINER</name>
+        </enum>
+        <enum literal="VIRTUAL_TRIBUTARY_GROUP" default="false" inherited="false" excluded="false">
+          <name lang="default">VIRTUAL_TRIBUTARY_GROUP</name>
+        </enum>
+        <enum literal="VIRTUAL_TRIBUTARY" default="false" inherited="false" excluded="false">
+          <name lang="default">VIRTUAL_TRIBUTARY</name>
+        </enum>
+        <enum literal="SYNCHRONOUS_TRANSPORT_SIGNAL" default="false" inherited="false" excluded="false">
+          <name lang="default">SYNCHRONOUS_TRANSPORT_SIGNAL</name>
+        </enum>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=SignalRelType" type="dataElement" typeName="Schema Element" kind="Element" name="SignalRelType" path="/SignalRelType">
+        <note lang="default">This enumeration is used on SpecificationRel to distinguish between types of signal specification relationships in the Signal Architecture. It is also used on ProcessingSignalProcessingSignalRel and ProcessingSignalSignalTPRel to distinguish the relationships between signals created from the signal specifications.</note>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <enum literal="MAPS" default="false" inherited="false" excluded="false">
+          <name lang="default">MAPS</name>
+        </enum>
+        <enum literal="ALIGNS" default="false" inherited="false" excluded="false">
+          <name lang="default">ALIGNS</name>
+        </enum>
+        <enum literal="MULTIPLEXES" default="false" inherited="false" excluded="false">
+          <name lang="default">MULTIPLEXES</name>
+        </enum>
+        <enum literal="SUPPORTS" default="false" inherited="false" excluded="false">
+          <name lang="default">SUPPORTS</name>
+        </enum>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=TerminationPointSignalType" type="dataElement" typeName="Schema Element" kind="Element" name="TerminationPointSignalType" path="/TerminationPointSignalType">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <enum literal="SYNCHRONOUS_TRANSPORT_MODULE" default="false" inherited="false" excluded="false">
+          <name lang="default">SYNCHRONOUS_TRANSPORT_MODULE</name>
+        </enum>
+        <enum literal="VIRTUAL_CONTAINER" default="false" inherited="false" excluded="false">
+          <name lang="default">VIRTUAL_CONTAINER</name>
+        </enum>
+        <enum literal="CONTAINER" default="false" inherited="false" excluded="false">
+          <name lang="default">CONTAINER</name>
+        </enum>
+        <enum literal="OPTICAL_CARRIER" default="false" inherited="false" excluded="false">
+          <name lang="default">OPTICAL_CARRIER</name>
+        </enum>
+        <enum literal="OPTICAL_WAVE" default="false" inherited="false" excluded="false">
+          <name lang="default">OPTICAL_WAVE</name>
+        </enum>
+        <enum literal="SYNCHRONOUS_TRANSPORT_SIGNAL" default="false" inherited="false" excluded="false">
+          <name lang="default">SYNCHRONOUS_TRANSPORT_SIGNAL</name>
+        </enum>
+        <enum literal="SYNCHRONOUS_PAYLOAD_ENVELOPE" default="false" inherited="false" excluded="false">
+          <name lang="default">SYNCHRONOUS_PAYLOAD_ENVELOPE</name>
+        </enum>
+        <enum literal="PDH_SIGNAL" default="false" inherited="false" excluded="false">
+          <name lang="default">PDH_SIGNAL</name>
+        </enum>
+        <enum literal="DSRM_SIGNAL" default="false" inherited="false" excluded="false">
+          <name lang="default">DSRM_SIGNAL</name>
+        </enum>
+        <enum literal="PACKET" default="false" inherited="false" excluded="false">
+          <name lang="default">PACKET</name>
+        </enum>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=id" type="dataElement" typeName="Schema Element" kind="Element" name="id" path="/id">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=name" type="dataElement" typeName="Schema Element" kind="Element" name="name" path="/name">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=description" type="dataElement" typeName="Schema Element" kind="Element" name="description" path="/description">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=effDate" type="dataElement" typeName="Schema Element" kind="Element" name="effDate" path="/effDate">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>dateTime</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=workflowTemplate" type="dataElement" typeName="Schema Element" kind="Element" name="workflowTemplate" path="/workflowTemplate">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=unit" type="dataElement" typeName="Schema Element" kind="Element" name="unit" path="/unit">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=toEntityRoleKey" type="dataElement" typeName="Schema Element" kind="Element" name="toEntityRoleKey" path="/toEntityRoleKey">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=fromEntityRoleKey" type="dataElement" typeName="Schema Element" kind="Element" name="fromEntityRoleKey" path="/fromEntityRoleKey">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=direction" type="dataElement" typeName="Schema Element" kind="Element" name="direction" path="/direction">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=fromEntityId" type="dataElement" typeName="Schema Element" kind="Element" name="fromEntityId" path="/fromEntityId">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=fromEntityName" type="dataElement" typeName="Schema Element" kind="Element" name="fromEntityName" path="/fromEntityName">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=fromEntitySpecName" type="dataElement" typeName="Schema Element" kind="Element" name="fromEntitySpecName" path="/fromEntitySpecName">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=toEntityId" type="dataElement" typeName="Schema Element" kind="Element" name="toEntityId" path="/toEntityId">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=toEntityName" type="dataElement" typeName="Schema Element" kind="Element" name="toEntityName" path="/toEntityName">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=toEntitySpecName" type="dataElement" typeName="Schema Element" kind="Element" name="toEntitySpecName" path="/toEntitySpecName">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=versioned" type="dataElement" typeName="Schema Element" kind="Element" name="versioned" path="/versioned">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=gapPipe" type="dataElement" typeName="Schema Element" kind="Element" name="gapPipe" path="/gapPipe">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=minTrailPaths" type="dataElement" typeName="Schema Element" kind="Element" name="minTrailPaths" path="/minTrailPaths">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>integer</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=maxTrailPaths" type="dataElement" typeName="Schema Element" kind="Element" name="maxTrailPaths" path="/maxTrailPaths">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>integer</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=nativeEMSName" type="dataElement" typeName="Schema Element" kind="Element" name="nativeEMSName" path="/nativeEMSName">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=physicalLocation" type="dataElement" typeName="Schema Element" kind="Element" name="physicalLocation" path="/physicalLocation">
+        <displayName lang="default">Physical Location</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <tag>
+          <name>Non-Discoverable in Network Integrity</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=connectivityIdentifier" type="dataElement" typeName="Schema Element" kind="Element" name="connectivityIdentifier" path="/connectivityIdentifier">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=serial" type="dataElement" typeName="Schema Element" kind="Element" name="serial" path="/serial">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>integer</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=aNetworkLocationEntityCode" type="dataElement" typeName="Schema Element" kind="Element" name="aNetworkLocationEntityCode" path="/aNetworkLocationEntityCode">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">15</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=zNetworkLocationEntityCode" type="dataElement" typeName="Schema Element" kind="Element" name="zNetworkLocationEntityCode" path="/zNetworkLocationEntityCode">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">15</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=isConfiguredForUse" type="dataElement" typeName="Schema Element" kind="Element" name="isConfiguredForUse" path="/isConfiguredForUse">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=serialNumber" type="dataElement" typeName="Schema Element" kind="Element" name="serialNumber" path="/serialNumber">
+        <displayName lang="default">Serial Number</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">32</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <tag>
+          <name>Non-Discoverable in Network Integrity</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=networkLocationCode" type="dataElement" typeName="Schema Element" kind="Element" name="networkLocationCode" path="/networkLocationCode">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">10</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=isRootElement" type="dataElement" typeName="Schema Element" kind="Element" name="isRootElement" path="/isRootElement">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=portNumber" type="dataElement" typeName="Schema Element" kind="Element" name="portNumber" path="/portNumber">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>integer</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=vendorPortName" type="dataElement" typeName="Schema Element" kind="Element" name="vendorPortName" path="/vendorPortName">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=customerPortName" type="dataElement" typeName="Schema Element" kind="Element" name="customerPortName" path="/customerPortName">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=physicalAddress" type="dataElement" typeName="Schema Element" kind="Element" name="physicalAddress" path="/physicalAddress">
+        <displayName lang="default">Physical Address</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <tag>
+          <name>Non-Discoverable in Network Integrity</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=deviceIdentifier" type="dataElement" typeName="Schema Element" kind="Element" name="deviceIdentifier" path="/deviceIdentifier">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">32</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=networkLocationEntityCode" type="dataElement" typeName="Schema Element" kind="Element" name="networkLocationEntityCode" path="/networkLocationEntityCode">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">15</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=deviceIdentifierSuffixNbr" type="dataElement" typeName="Schema Element" kind="Element" name="deviceIdentifierSuffixNbr" path="/deviceIdentifierSuffixNbr">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>integer</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=interfaceNumber" type="dataElement" typeName="Schema Element" kind="Element" name="interfaceNumber" path="/interfaceNumber">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=vendorInterfaceNumber" type="dataElement" typeName="Schema Element" kind="Element" name="vendorInterfaceNumber" path="/vendorInterfaceNumber">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=customerInterfaceNumber" type="dataElement" typeName="Schema Element" kind="Element" name="customerInterfaceNumber" path="/customerInterfaceNumber">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=ifType" type="dataElement" typeName="Schema Element" kind="Element" name="ifType" path="/ifType">
+        <displayName lang="default">Interface Type</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <tag>
+          <name>Non-Discoverable in Network Integrity</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=maxSpeed" type="dataElement" typeName="Schema Element" kind="Element" name="maxSpeed" path="/maxSpeed">
+        <displayName lang="default">Maximum Speed</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <tag>
+          <name>Non-Discoverable in Network Integrity</name>
+          <description></description>
+        </tag>
+        <primitiveType>decimal</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=minSpeed" type="dataElement" typeName="Schema Element" kind="Element" name="minSpeed" path="/minSpeed">
+        <displayName lang="default">Minimum Speed</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <tag>
+          <name>Non-Discoverable in Network Integrity</name>
+          <description></description>
+        </tag>
+        <primitiveType>decimal</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=nominalSpeed" type="dataElement" typeName="Schema Element" kind="Element" name="nominalSpeed" path="/nominalSpeed">
+        <displayName lang="default">Nominal Speed</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <tag>
+          <name>Non-Discoverable in Network Integrity</name>
+          <description></description>
+        </tag>
+        <primitiveType>decimal</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=rateCodeNominalBitRate" type="dataElement" typeName="Schema Element" kind="Element" name="rateCodeNominalBitRate" path="/rateCodeNominalBitRate">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>decimal</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=enforceSameChannelAssignment" type="dataElement" typeName="Schema Element" kind="Element" name="enforceSameChannelAssignment" path="/enforceSameChannelAssignment">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=isWorkspaceNetwork" type="dataElement" typeName="Schema Element" kind="Element" name="isWorkspaceNetwork" path="/isWorkspaceNetwork">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=xpos" type="dataElement" typeName="Schema Element" kind="Element" name="xpos" path="/xpos">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>integer</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=ypos" type="dataElement" typeName="Schema Element" kind="Element" name="ypos" path="/ypos">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>integer</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=formattedIdentifier" type="dataElement" typeName="Schema Element" kind="Element" name="formattedIdentifier" path="/formattedIdentifier">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=latitude" type="dataElement" typeName="Schema Element" kind="Element" name="latitude" path="/latitude">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=longitude" type="dataElement" typeName="Schema Element" kind="Element" name="longitude" path="/longitude">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=vertical" type="dataElement" typeName="Schema Element" kind="Element" name="vertical" path="/vertical">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=horizontal" type="dataElement" typeName="Schema Element" kind="Element" name="horizontal" path="/horizontal">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=propertyLocationIdentifier" type="dataElement" typeName="Schema Element" kind="Element" name="propertyLocationIdentifier" path="/propertyLocationIdentifier">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=isUserNamed" type="dataElement" typeName="Schema Element" kind="Element" name="isUserNamed" path="/isUserNamed">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=isNetworkLocationNamed" type="dataElement" typeName="Schema Element" kind="Element" name="isNetworkLocationNamed" path="/isNetworkLocationNamed">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=areGeocoordinatesLocked" type="dataElement" typeName="Schema Element" kind="Element" name="areGeocoordinatesLocked" path="/areGeocoordinatesLocked">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=hasNonValidatedAddress" type="dataElement" typeName="Schema Element" kind="Element" name="hasNonValidatedAddress" path="/hasNonValidatedAddress">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=hasNonAcceptedAddress" type="dataElement" typeName="Schema Element" kind="Element" name="hasNonAcceptedAddress" path="/hasNonAcceptedAddress">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=dueDate" type="dataElement" typeName="Schema Element" kind="Element" name="dueDate" path="/dueDate">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>dateTime</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=completedActivityCount" type="dataElement" typeName="Schema Element" kind="Element" name="completedActivityCount" path="/completedActivityCount">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>integer</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=signalAddress" type="dataElement" typeName="Schema Element" kind="Element" name="signalAddress" path="/signalAddress">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">20</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=xPos" type="dataElement" typeName="Schema Element" kind="Element" name="xPos" path="/xPos">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>integer</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=yPos" type="dataElement" typeName="Schema Element" kind="Element" name="yPos" path="/yPos">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>integer</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=toEntity" type="dataElement" typeName="Schema Element" kind="Element" name="toEntity" path="/toEntity">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=fromEntity" type="dataElement" typeName="Schema Element" kind="Element" name="fromEntity" path="/fromEntity">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=changedEntity" type="dataElement" typeName="Schema Element" kind="Element" name="changedEntity" path="/changedEntity">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=geometry" type="dataElement" typeName="Schema Element" kind="Element" name="geometry" path="/geometry">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=AZLocationType" type="dataElement" typeName="Schema Element" kind="Element" name="AZLocationType" path="/AZLocationType">
+        <displayName lang="default">AZLocation Type</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <enum literal="A_LOCATION" default="false" inherited="false" excluded="false">
+          <name lang="default">A_LOCATION</name>
+        </enum>
+        <enum literal="Z_LOCATION" default="false" inherited="false" excluded="false">
+          <name lang="default">Z_LOCATION</name>
+        </enum>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=ConnectivityIdentifierFormat" type="dataElement" typeName="Schema Element" kind="Element" name="ConnectivityIdentifierFormat" path="/ConnectivityIdentifierFormat">
+        <displayName lang="default">Connectivity Identifier Format</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <enum literal="LOCATION_BASED" default="false" inherited="false" excluded="false">
+          <name lang="default">LOCATION_BASED</name>
+        </enum>
+        <enum literal="SERVICE_BASED" default="false" inherited="false" excluded="false">
+          <name lang="default">SERVICE_BASED</name>
+        </enum>
+        <enum literal="CUSTOM_IDENTIFICATION" default="false" inherited="false" excluded="false">
+          <name lang="default">CUSTOM_IDENTIFICATION</name>
+        </enum>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=IPAddressVersion" type="dataElement" typeName="Schema Element" kind="Element" name="IPAddressVersion" path="/IPAddressVersion">
+        <displayName lang="default">IPAddress Version</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <enum literal="IPV4" default="false" inherited="false" excluded="false">
+          <name lang="default">IPV4</name>
+        </enum>
+        <enum literal="IPV6" default="false" inherited="false" excluded="false">
+          <name lang="default">IPV6</name>
+        </enum>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=MacAddressType" type="dataElement" typeName="Schema Element" kind="Element" name="MacAddressType" path="/MacAddressType">
+        <displayName lang="default">Mac Address Type</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <enum literal="ETHERNET" default="false" inherited="false" excluded="false">
+          <name lang="default">ETHERNET</name>
+        </enum>
+        <enum literal="ATM" default="false" inherited="false" excluded="false">
+          <name lang="default">ATM</name>
+        </enum>
+        <enum literal="BLUETOOTH" default="false" inherited="false" excluded="false">
+          <name lang="default">BLUETOOTH</name>
+        </enum>
+        <enum literal="FIBRE_CHANNEL" default="false" inherited="false" excluded="false">
+          <name lang="default">FIBRE_CHANNEL</name>
+        </enum>
+        <enum literal="MAC_TYPE_80211" default="false" inherited="false" excluded="false">
+          <name lang="default">MAC_TYPE_80211</name>
+        </enum>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=IPv6AddressType" type="dataElement" typeName="Schema Element" kind="Element" name="IPv6AddressType" path="/IPv6AddressType">
+        <displayName lang="default">IPv 6 Address Type</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <enum literal="GLOBAL_UNICAST" default="false" inherited="false" excluded="false">
+          <name lang="default">GLOBAL_UNICAST</name>
+        </enum>
+        <enum literal="UNIQUE_LOCAL_UNICAST" default="false" inherited="false" excluded="false">
+          <name lang="default">UNIQUE_LOCAL_UNICAST</name>
+        </enum>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=identifierFormat" type="dataElement" typeName="Schema Element" kind="Element" name="identifierFormat" path="/identifierFormat">
+        <displayName lang="default">Identifier Format</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">50</maxLength>
+        <enum literal="LOCATION_BASED" default="false" inherited="true" excluded="false">
+          <name lang="default">LOCATION_BASED</name>
+        </enum>
+        <enum literal="SERVICE_BASED" default="false" inherited="true" excluded="false">
+          <name lang="default">SERVICE_BASED</name>
+        </enum>
+        <enum literal="CUSTOM_IDENTIFICATION" default="false" inherited="true" excluded="false">
+          <name lang="default">CUSTOM_IDENTIFICATION</name>
+        </enum>
+        <base>
+          <relation ref="ds=ora_uim_model+dataElement=ConnectivityIdentifierFormat" type="Schema Element" name="Type" kind="Element">
+            <target name="ConnectivityIdentifierFormat" typeName="Schema Element"/>
+            <inEntity name="ora_uim_model" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=isInternetwork" type="dataElement" typeName="Schema Element" kind="Element" name="isInternetwork" path="/isInternetwork">
+        <displayName lang="default">Is Internetwork</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=isInternetworkExternal" type="dataElement" typeName="Schema Element" kind="Element" name="isInternetworkExternal" path="/isInternetworkExternal">
+        <displayName lang="default">Is Internetwork External</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false">false</defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=isAllToOneBundling" type="dataElement" typeName="Schema Element" kind="Element" name="isAllToOneBundling" path="/isAllToOneBundling">
+        <displayName lang="default">Is All To One Bundling</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false">false</defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=isBundling" type="dataElement" typeName="Schema Element" kind="Element" name="isBundling" path="/isBundling">
+        <displayName lang="default">Is Bundling</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false">true</defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=isServiceMultiplexing" type="dataElement" typeName="Schema Element" kind="Element" name="isServiceMultiplexing" path="/isServiceMultiplexing">
+        <displayName lang="default">Is Service Multiplexing</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false">true</defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=isVLANBased" type="dataElement" typeName="Schema Element" kind="Element" name="isVLANBased" path="/isVLANBased">
+        <displayName lang="default">Is VLANBased</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false">true</defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=maxPacketVirtualNetworkCount" type="dataElement" typeName="Schema Element" kind="Element" name="maxPacketVirtualNetworkCount" path="/maxPacketVirtualNetworkCount">
+        <displayName lang="default">Max Packet Virtual Network Count</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>integer</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=identifier" type="dataElement" typeName="Schema Element" kind="Element" name="identifier" path="/identifier">
+        <displayName lang="default">Identifier</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">30</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=flowInterfaceBitRate" type="dataElement" typeName="Schema Element" kind="Element" name="flowInterfaceBitRate" path="/flowInterfaceBitRate">
+        <displayName lang="default">Flow Interface Bit Rate</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>decimal</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=prefix" type="dataElement" typeName="Schema Element" kind="Element" name="prefix" path="/prefix">
+        <displayName lang="default">Prefix</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=prefixLength" type="dataElement" typeName="Schema Element" kind="Element" name="prefixLength" path="/prefixLength">
+        <displayName lang="default">Prefix Length</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>integer</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=addressVersion" type="dataElement" typeName="Schema Element" kind="Element" name="addressVersion" path="/addressVersion">
+        <displayName lang="default">Address Version</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">50</maxLength>
+        <enum literal="IPV4" default="false" inherited="true" excluded="false">
+          <name lang="default">IPV4</name>
+        </enum>
+        <enum literal="IPV6" default="false" inherited="true" excluded="false">
+          <name lang="default">IPV6</name>
+        </enum>
+        <base>
+          <relation ref="ds=ora_uim_model+dataElement=IPAddressVersion" type="Schema Element" name="Type" kind="Element">
+            <target name="IPAddressVersion" typeName="Schema Element"/>
+            <inEntity name="ora_uim_model" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=ipv6AddressType" type="dataElement" typeName="Schema Element" kind="Element" name="ipv6AddressType" path="/ipv6AddressType">
+        <displayName lang="default">Ipv 6 Address Type</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">50</maxLength>
+        <enum literal="GLOBAL_UNICAST" default="false" inherited="true" excluded="false">
+          <name lang="default">GLOBAL_UNICAST</name>
+        </enum>
+        <enum literal="UNIQUE_LOCAL_UNICAST" default="false" inherited="true" excluded="false">
+          <name lang="default">UNIQUE_LOCAL_UNICAST</name>
+        </enum>
+        <base>
+          <relation ref="ds=ora_uim_model+dataElement=IPv6AddressType" type="Schema Element" name="Type" kind="Element">
+            <target name="IPv6AddressType" typeName="Schema Element"/>
+            <inEntity name="ora_uim_model" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=otherProviderDemarcationPoint" type="dataElement" typeName="Schema Element" kind="Element" name="otherProviderDemarcationPoint" path="/otherProviderDemarcationPoint">
+        <displayName lang="default">Other Provider Demarcation Point</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">50</maxLength>
+        <enum literal="A_LOCATION" default="false" inherited="true" excluded="false">
+          <name lang="default">A_LOCATION</name>
+        </enum>
+        <enum literal="Z_LOCATION" default="false" inherited="true" excluded="false">
+          <name lang="default">Z_LOCATION</name>
+        </enum>
+        <base>
+          <relation ref="ds=ora_uim_model+dataElement=AZLocationType" type="Schema Element" name="Type" kind="Element">
+            <target name="AZLocationType" typeName="Schema Element"/>
+            <inEntity name="ora_uim_model" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=allowHostAtSubnetBoundaries" type="dataElement" typeName="Schema Element" kind="Element" name="allowHostAtSubnetBoundaries" path="/allowHostAtSubnetBoundaries">
+        <displayName lang="default">Allow Host At Subnet Boundaries</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false">false</defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=lowerValue" type="dataElement" typeName="Schema Element" kind="Element" name="lowerValue" path="/lowerValue">
+        <displayName lang="default">Lower Value</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=upperValue" type="dataElement" typeName="Schema Element" kind="Element" name="upperValue" path="/upperValue">
+        <displayName lang="default">Upper Value</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">50</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=availableHostCount" type="dataElement" typeName="Schema Element" kind="Element" name="availableHostCount" path="/availableHostCount">
+        <displayName lang="default">Available Host Count</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>integer</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=isIPNetwork" type="dataElement" typeName="Schema Element" kind="Element" name="isIPNetwork" path="/isIPNetwork">
+        <displayName lang="default">Is IPNetwork</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=numericLowerAddress" type="dataElement" typeName="Schema Element" kind="Element" name="numericLowerAddress" path="/numericLowerAddress">
+        <displayName lang="default">Numeric Lower Address</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>integer</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=numericUpperAddress" type="dataElement" typeName="Schema Element" kind="Element" name="numericUpperAddress" path="/numericUpperAddress">
+        <displayName lang="default">Numeric Upper Address</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>integer</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=address" type="dataElement" typeName="Schema Element" kind="Element" name="address" path="/address">
+        <displayName lang="default">Address</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">45</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=macAddress" type="dataElement" typeName="Schema Element" kind="Element" name="macAddress" path="/macAddress">
+        <displayName lang="default">Mac Address</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">17</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=macAddressType" type="dataElement" typeName="Schema Element" kind="Element" name="macAddressType" path="/macAddressType">
+        <displayName lang="default">Mac Address Type</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">50</maxLength>
+        <enum literal="ETHERNET" default="false" inherited="true" excluded="false">
+          <name lang="default">ETHERNET</name>
+        </enum>
+        <enum literal="ATM" default="false" inherited="true" excluded="false">
+          <name lang="default">ATM</name>
+        </enum>
+        <enum literal="BLUETOOTH" default="false" inherited="true" excluded="false">
+          <name lang="default">BLUETOOTH</name>
+        </enum>
+        <enum literal="FIBRE_CHANNEL" default="false" inherited="true" excluded="false">
+          <name lang="default">FIBRE_CHANNEL</name>
+        </enum>
+        <enum literal="MAC_TYPE_80211" default="false" inherited="true" excluded="false">
+          <name lang="default">MAC_TYPE_80211</name>
+        </enum>
+        <base>
+          <relation ref="ds=ora_uim_model+dataElement=MacAddressType" type="Schema Element" name="Type" kind="Element">
+            <target name="MacAddressType" typeName="Schema Element"/>
+            <inEntity name="ora_uim_model" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=numericAddress" type="dataElement" typeName="Schema Element" kind="Element" name="numericAddress" path="/numericAddress">
+        <displayName lang="default">Numeric Address</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>integer</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=isServiceLocation" type="dataElement" typeName="Schema Element" kind="Element" name="isServiceLocation" path="/isServiceLocation">
+        <displayName lang="default">Is Service Location</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>boolean</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=committedInformationRate" type="dataElement" typeName="Schema Element" kind="Element" name="committedInformationRate" path="/committedInformationRate">
+        <displayName lang="default">Committed Information Rate</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>decimal</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=maxInformationRate" type="dataElement" typeName="Schema Element" kind="Element" name="maxInformationRate" path="/maxInformationRate">
+        <displayName lang="default">Max Information Rate</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>decimal</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=segment" type="dataElement" typeName="Schema Element" kind="Element" name="segment" path="/segment">
+        <displayName lang="default">Segment</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">4</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=activityStartDate" type="dataElement" typeName="Schema Element" kind="Element" name="activityStartDate" path="/activityStartDate">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>dateTime</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=activityEndDate" type="dataElement" typeName="Schema Element" kind="Element" name="activityEndDate" path="/activityEndDate">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>dateTime</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=actualStartDate" type="dataElement" typeName="Schema Element" kind="Element" name="actualStartDate" path="/actualStartDate">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>dateTime</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=actualEndDate" type="dataElement" typeName="Schema Element" kind="Element" name="actualEndDate" path="/actualEndDate">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>dateTime</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=assignedTo" type="dataElement" typeName="Schema Element" kind="Element" name="assignedTo" path="/assignedTo">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=assignedDate" type="dataElement" typeName="Schema Element" kind="Element" name="assignedDate" path="/assignedDate">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>dateTime</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=percentComplete" type="dataElement" typeName="Schema Element" kind="Element" name="percentComplete" path="/percentComplete">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>integer</primitiveType>
+      </element>
+      <element id="ds=ora_uim_model+dataElement=failedReason" type="dataElement" typeName="Schema Element" kind="Element" name="failedReason" path="/failedReason">
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">255</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+    </dataElements>
+  </entity>
+</model:Model>

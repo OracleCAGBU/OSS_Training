@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:pf="/platform/functions"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+		  
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout layout="scroll" id="pgl1" binding="#{backingBeanScope.edit_panelGroupLayout}">
+        <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered ="#{!pageFlowScope.PhysicalPortEditBean.previewLayout}">
+            <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                           rendered="#{!(pageFlowScope.PhysicalPortEditBean.popupMode)}"
+                           value="#{pageFlowScope.PhysicalPortEditBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+            <af:menuBar id="menuBar1">
+                  <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invEditMenu"
+                           rendered="#{!(pageFlowScope.PhysicalPortEditBean.popupMode)}"   />
+            </af:menuBar>
+            <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch3}" contentDelivery="lazyUncached">
+                <af:dialog id="BISearchPopup_d1" type="none"
+                           title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                    <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                        <f:facet name="center">
+                           <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                        </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.PhysicalPortEditBean.afterBusinessInteractionSelectionChange}"/>
+            </af:popup>
+        </af:panelGroupLayout>
+        <af:panelHeader text="#{inventoryUIBundle.PHYSICAL_PORT} - #{pageFlowScope.PhysicalPortEditBean.displayInfo}" id="ph1"
+				 helpTopicId="#{pageFlowScope.PhysicalPortEditBean.helpTopic}">
+          <f:facet name="toolbar">
+            <af:panelGroupLayout id="pgl3" layout="horizontal" rendered="#{!pageFlowScope.PhysicalPortEditBean.previewLayout}">  
+              <af:commandToolbarButton text="#{inventoryUIBundle.SAVE_AND_CONTINUE}" id="cb1" actionListener="#{pageFlowScope.PhysicalPortEditBean.save}"
+                                action="#{pageFlowScope.PhysicalPortEditBean.saveOutcome}"
+                                rendered="#{pageFlowScope.PhysicalPortEditBean.addMode and !pageFlowScope.PhysicalPortEditBean.popupMode }"
+                                       accessKey="#{inventoryUIBundle.SAVE_AND_CONTINUE_ACCESS_KEY}">
+                <af:setActionListener from="summary" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandToolbarButton>
+              <af:commandToolbarButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb4" actionListener="#{pageFlowScope.PhysicalPortEditBean.save}"
+                                action="#{pageFlowScope.PhysicalPortEditBean.saveOutcome}"
+                                rendered="#{!pageFlowScope.PhysicalPortEditBean.addMode || pageFlowScope.PhysicalPortEditBean.popupMode}"
+                                       accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+                <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandToolbarButton>
+              <af:spacer width="10" height="10" id="s2"/>
+              <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="cb2" actionListener="#{pageFlowScope.PhysicalPortEditBean.cancel}"
+                                action="cancel" immediate="true" accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+            </af:panelGroupLayout>
+          </f:facet>
+          <af:showDetailHeader text="#{inventoryUIBundle.PHYSICAL_PORT_INFORMATION}" disclosed="true" id="PAGE_TITLE">
+            <af:panelGroupLayout id="pgl2">
+              <af:panelFormLayout id="phyprt" maxColumns="2" rows="3" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsPanel}">
+                <af:selectOneChoice id="phyprt-specification" label="#{inventoryUIBundle.SPECIFICATION}" autoSubmit="true"
+                                    value="#{pageFlowScope.PhysicalPortEditBean.selectedSpec}" required="true"
+                                    valueChangeListener="#{pageFlowScope.PhysicalPortEditBean.specChanged}"
+                                    disabled="#{!(pageFlowScope.PhysicalPortEditBean.addMode)}">
+                  <f:selectItems value="#{pageFlowScope.PhysicalPortEditBean.specDropdown}" id="si2"/>
+                </af:selectOneChoice>
+                <af:inputText value="#{(pageFlowScope.PhysicalPortEditBean.addMode &amp;&amp; pageFlowScope.PhysicalPortEditBean.specificationCount > 0)  ? 
+                                    (pageFlowScope.PhysicalPortEditBean.enterIdManually ? pageFlowScope.PhysicalPortEditBean.entityObject.id : inventoryUIBundle.AUTO_GENERATE) : (pageFlowScope.PhysicalPortEditBean.entityObject.id)}"
+                              label="#{inventoryUIBundle.ID}"
+                              disabled="#{(pageFlowScope.PhysicalPortEditBean.specificationCount > 0) &amp;&amp; (!(pageFlowScope.PhysicalPortEditBean.addMode &amp;&amp; pageFlowScope.PhysicalPortEditBean.enterIdManually))}"
+                              maximumLength="50" columns="53" id="phyprt-id" binding="#{backingBeanScope.idBinding}"/>
+                <af:inputText value="#{pageFlowScope.PhysicalPortEditBean.entityObject.name}" label="#{inventoryUIBundle.NAME}" maximumLength="50"
+                              columns="53" id="phyprt-name"/>
+                <af:inputText value="#{pageFlowScope.PhysicalPortEditBean.entityObject.description}" label="#{inventoryUIBundle.DESCRIPTION}"
+                              maximumLength="255" rows="5" columns="50" id="phyprt-description"/>
+                <af:inputText value="#{pageFlowScope.PhysicalPortEditBean.entityObject.portNumber}" label="#{inventoryUIBundle.PORT_NUMBER}"
+                              id="phyprt-portNumber" required="true"/>
+                <af:inputText value="#{pageFlowScope.PhysicalPortEditBean.entityObject.vendorPortName}" label="#{inventoryUIBundle.VENDOR_PORT_NAME}"
+                              id="phyprt-vendorPortNumber"/>
+                <af:inputText value="#{pageFlowScope.PhysicalPortEditBean.entityObject.customerPortName}"
+                              label="#{inventoryUIBundle.CUSTOMER_PORT_NAME}" id="phyprt-customerPortName"/>
+			      
+                <af:panelLabelAndMessage id="phyprt-inventoryStatus" label="#{inventoryUIBundle.INVENTORY_STATUS}">
+                    <af:outputText id="ot7" value="#{pageFlowScope.PhysicalPortEditBean.inventoryStatus}"/>
+		<!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.PhysicalPortEditBean.popupMode}" id="swis618">
+		<f:facet name="false">
+		<af:commandImageLink action="#{pageFlowScope.PhysicalPortEditBean.getSummaryAction}" actionListener="#{pageFlowScope.PhysicalPortEditBean.registerRecentItem}" disabled="#{(pageFlowScope.PhysicalPortEditBean.installingBI_OID eq null) ? true : false}" id="bid3" shortDesc="#{(pageFlowScope.PhysicalPortEditBean.installingBI_OID eq null) ? '&amp;#160;' : inventoryUIBundle.BUSINESS_INTERACTION}" text="#{pageFlowScope.PhysicalPortEditBean.installingBILabel}">
+		<af:setActionListener from="#{pageFlowScope.PhysicalPortEditBean.inventoryStatusBI.oid}" to="#{objectId}"/>
+		</af:commandImageLink>
+		</f:facet>
+		<f:facet name="true">
+		<af:outputText id="swftis618" value="#{pageFlowScope.PhysicalPortEditBean.installingBILabel}"/>
+		</f:facet>
+		</af:switcher>
+		<af:outputText id="installingBIDueDate" value="#{pageFlowScope.PhysicalPortEditBean.installingBIEffectiveDate}"/>
+		<!--RMI 618 End-->
+	      </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="phyprt-resourceAssignmentStatus">
+                    <af:outputText value="#{pageFlowScope.PhysicalPortEditBean.resourceAssignmentStatus}" id="ot8"/>
+		<!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.PhysicalPortEditBean.popupMode}" id="swas618">
+		<f:facet name="false">
+		<af:commandImageLink action="#{pageFlowScope.PhysicalPortEditBean.getSummaryAction}" actionListener="#{pageFlowScope.PhysicalPortEditBean.registerRecentItem}" disabled="#{(pageFlowScope.PhysicalPortEditBean.consumerBI_OID eq null) ? true : false}" id="bid4" shortDesc="#{(pageFlowScope.PhysicalPortEditBean.consumerBI_OID eq null) ? '&amp;#160;' : inventoryUIBundle.BUSINESS_INTERACTION}" text="#{pageFlowScope.PhysicalPortEditBean.consumerBILabel}">
+		<af:setActionListener from="#{pageFlowScope.PhysicalPortEditBean.assignmentBI.oid}" to="#{objectId}"/>
+		</af:commandImageLink>
+		</f:facet>
+		<f:facet name="true">
+		<af:outputText id="swftas618" value="#{pageFlowScope.PhysicalPortEditBean.consumerBILabel}"/>
+		</f:facet>
+		</af:switcher>
+		<af:outputText id="consumerBIDueDate" value="#{pageFlowScope.PhysicalPortEditBean.consumerBIEffectiveDate}"/>
+		<!--RMI 618 End-->
+                </af:panelLabelAndMessage>
+                <af:inputText label="#{inventoryUIBundle.QUANTITY}" value="#{pageFlowScope.PhysicalPortEditBean.quantity}"
+                              visible="#{pageFlowScope.PhysicalPortEditBean.addMode}" autoSubmit="true" id="phyprt-quantity" required="true"/>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="phyprt-lmd" rendered="false" visible="#{pageFlowScope.PhysicalPortEditBean.lastModifiedDate != null}">
+                    <af:outputText value="#{pageFlowScope.PhysicalPortEditBean.lastModifiedDate}" id="ot9">
+                        <af:convertDateTime pattern="#{pageFlowScope.PhysicalPortEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="phyprt-lmu" rendered="false" visible="#{pageFlowScope.PhysicalPortEditBean.entityObject.lastModifiedUser != null}">
+                    <af:outputText value="#{pageFlowScope.PhysicalPortEditBean.entityObject.lastModifiedUser}" id="ot10"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="phyprt-crd" rendered="false" visible="#{pageFlowScope.PhysicalPortEditBean.createdDate != null}">
+                    <af:outputText value="#{pageFlowScope.PhysicalPortEditBean.createdDate}" id="ot11">
+                        <af:convertDateTime pattern="#{pageFlowScope.PhysicalPortEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+		<af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="phyprt-cru" rendered="false" visible="#{pageFlowScope.PhysicalPortEditBean.entityObject.createdUser != null}">
+                    <af:outputText value="#{pageFlowScope.PhysicalPortEditBean.entityObject.createdUser}" id="ot12"/>
+                </af:panelLabelAndMessage>
+                </af:panelFormLayout>
+            </af:panelGroupLayout>
+          </af:showDetailHeader>
+        </af:panelHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

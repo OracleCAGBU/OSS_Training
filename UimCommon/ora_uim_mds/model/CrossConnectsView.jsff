@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" 
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html" 
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:jvf="http://www.ilog.com/jviews/tlds/jviews-framework-faces.tld"
+          xmlns:jvtf="http://www.ilog.com/jviews/tlds/jviews-tgo-faces.tld"
+          xmlns:jv="http://www.ilog.com/jviews/tlds/jviews-faces.tld"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"  id="pt1">
+    <f:facet name="localArea">
+        <af:panelGroupLayout layout="scroll" id="pgl1" binding="#{backingBeanScope.CC_view_panelGroupLayout}">
+            <af:resource source="css/style.css" type="css"/>
+            <af:resource source="script/view.js" type="javascript"/>
+            <af:panelHeader text="#{inventoryUIBundle.CROSS_CONNECT}" id="panelHeader1" helpTopicId="OHW_equipCrossConnVisual">     
+                <jvf:zoomInteractor id="zoom"/>
+                <jvf:panInteractor id="pan"/>
+                <jvtf:clientSelectInteractor id="select" menuModelId="selectItr" /> 
+                <af:commandButton id="updateADFComponents" binding="#{backingBeanScope.updateADFComponentBinding}" partialSubmit="true" visible="false" styleClass="invisibleComponent"
+                                  accessKey="#{inventoryUIBundle.UPDATE}"/>  
+                <af:panelGroupLayout id="pgl2">
+                            <af:panelFormLayout id="pfl1" maxColumns="2" rows="2">
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.FROM}" id="ccv-f">
+                                    <af:outputText value="#{CrossConnectsViewBean.networkLocationCode}" id="ot1"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="" id="ccv-fdi">
+                                    <af:outputText value="#{CrossConnectsViewBean.fromDetails}" id="ot2"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.TO}" id="ccv-t">
+                                    <af:outputText value="#{CrossConnectsViewBean.networkLocationCode}" id="ot3"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="" id="ccv-tdi">
+                                    <af:outputText value="#{CrossConnectsViewBean.toDetails}" id="ot4"/>
+                                </af:panelLabelAndMessage>                            
+                            </af:panelFormLayout>
+                            
+                            <af:panelGroupLayout id="pgl5" layout="horizontal" styleClass="visualToolbar">
+                                <!-- Declare a grid with six columns to accomodate the buttons -->
+                                <af:toolbar id="tb2">
+                                         <!-- Declare the image buttons -->
+                                         <!-- Notice how 'onclick' tag attribute is used -->           
+                                         <af:group id="g1">
+                                        <af:commandToolbarButton id="ctb1" icon="/images/selectobject_ovr.png"
+                                                                     shortDesc="#{inventoryUIBundle.SELECT}"
+                                                                     hoverIcon="/images/selectobject_ovr.png"
+                                                                     depressedIcon="/images/selectobject_dwn.png">
+                                                <af:clientListener method="selectItem" type="click" />
+                                         </af:commandToolbarButton>                             
+                                         <af:commandToolbarButton id="ctb2" icon="/images/zoomtoselection_ena.png"
+                                                                     shortDesc="#{inventoryUIBundle.ZOOM}"
+                                                                     hoverIcon="/images/zoomtoselection_ovr.png"
+                                                                     depressedIcon="/images/zoomtoselection_dwn.png">
+                                                <af:clientListener method="zoomCanvas" type="click" />
+                                         </af:commandToolbarButton>                             
+                                         <af:commandToolbarButton id="ctb3" icon="/images/pan_ena.png"
+                                                                     shortDesc="#{inventoryUIBundle.PAN}"
+                                                                     hoverIcon="/images/pan_ovr.png"
+                                                                     depressedIcon="/images/pan_dwn.png" >
+                                                <af:clientListener method="panCanvas" type="click" />
+                                         </af:commandToolbarButton>  
+                                         <af:commandToolbarButton id="ctb4" icon="/images/zoombestfit_ena.png"
+                                                                     shortDesc="#{inventoryUIBundle.SHOW_ALL}"
+                                                                     hoverIcon="/images/zoombestfit_ovr.png"
+                                                                     depressedIcon="/images/zoombestfit_dwn.png">
+                                                <af:clientListener method="showAll" type="click" />
+                                         </af:commandToolbarButton>                                                                                                           
+                                    
+                                         <af:commandToolbarButton id="ctb5" icon="/images/zoomin_ena.png"
+                                                                     shortDesc="#{inventoryUIBundle.ZOOM_IN}"
+                                                                     hoverIcon="/images/zoomin_ovr.png"
+                                                                     depressedIcon="/images/zoomin_dwn.png">
+                                                <af:clientListener method="zoomIn" type="click" />
+                                         </af:commandToolbarButton>  
+                                         
+                                         <af:commandToolbarButton id="ctb6" icon="/images/zoomout_ena.png"
+                                                                     shortDesc="#{inventoryUIBundle.ZOOM_OUT}"
+                                                                     hoverIcon="/images/zoomout_ovr.png"
+                                                                     depressedIcon="/images/zoomout_dwn.png">
+                                                <af:clientListener method="zoomOut" type="click" />
+                                         </af:commandToolbarButton>  
+                                         </af:group>
+                                    
+                                <af:group id="tb3">
+                                    <af:commandToolbarButton id="ctb7" icon="/images/delete_ena.png"
+                                             shortDesc="#{inventoryUIBundle.DELETE_CROSS_CONNECT}"
+                                             hoverIcon="/images/delete_ena.png"
+                                             depressedIcon="/images/delete_ena.png"
+                                             disabledIcon="/images/delete_dis.png"
+                                             rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=CrossConnectsView.DELETE;action=view']}">
+                                        <af:clientListener method="deleteCrossConnect" type="click" />    
+                                    </af:commandToolbarButton>  
+                                     
+                                     <af:commandToolbarButton id="ctb8" icon="/images/linkobject_ena.png"
+                                             shortDesc="#{inventoryUIBundle.CREATE_CROSS_CONNECTS}"
+                                             hoverIcon="/images/linkobject_ovr.png"
+                                             depressedIcon="/images/linkobject_ena.png"
+                                             disabledIcon="/images/linkobject_dis.png"
+                                             rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=CrossConnectsView.CREATE_CROSS_CONNECTS;action=view']}">
+                                            <af:clientListener method="createCrossConnects" type="click" />
+                                     </af:commandToolbarButton>
+                                     </af:group>
+                                </af:toolbar>                                
+                            </af:panelGroupLayout>                            
+                           
+                        <af:panelGroupLayout  id="pgl4" binding="#{backingBeanScope.crossConnectsCanvasArea}">
+                            <!-- <af:serverListener type="jsCreateCrossConnectsDetails" method="#{CrossConnectsViewBean.createCrossConnectsDetails}"/> -->
+                            <h:panelGrid border="0" columns="1" styleClass="psheet">
+                               <jvtf:networkView id="networkCanvas" 
+                                                 context="#{defContext}" width="900" height="525"
+                                                 interactorId="select" 
+                                                 binding="#{CrossConnectsViewBean.crossConnectsView}" imageFormat="PNG"       
+                                                 scrollBar="need" 
+                                                 servlet="oracle.communications.inventory.ui.framework.visualization.servlet.NetworkSyncImageServlet"                                             
+                                                 waitingImage="images/waiting.gif"
+                                                 >
+                                     <jvtf:selectionManager id="selectionManager" imageMode="true" lineColor="black" lineWidth="2" /> 
+                                                            <!-- TODO - Below attributes are not required to be set as there is no need for PropertyInspector updates. 
+                                                            propertyAccessor="#{CrossConnectsInteractorBean.propertyAccessor}"
+                                                            onSelectionChanged="displaySelection(selection)" 
+                                                            -->
+                                   <!-- Declare the contextual menu with given popup menu factory  -->
+                                  <jvf:contextualMenu factory="#{CrossConnectsPopupMenuFactoryBean}" itemStyleClass="menuItem"
+                                                      itemHighlightedStyleClass="menuItemHighlighted"
+                                                      itemDisabledStyleClass="menuItemDisabled" id="cm1"/>                                                           
+                               </jvtf:networkView>                           
+                            </h:panelGrid>        
+                        </af:panelGroupLayout>
+                        <!-- <trh:script id="vars" text='var crossConnectsCanvasId = "#{CrossConnectsViewBean.clientId}"; '/>  -->
+                        <trh:script id="vars2" text='var updateADFComponentsId = "#{CrossConnectsViewBean.updateADFComponentId}"; '/> 
+                        <trh:script id="sc1">
+                              var p = "";
+                              function displaySelection(selection) {
+                                // TODO - Below code to be uncommencted if the Property Inspector is to be implemented for this page. 
+                                // try {
+                                //  if (selection.length == 1) {                              
+                                //      p = selection[0].getObjectProperties();                                
+                                //  }else if(selection.length == 0){
+                                //      p = "NOTHING_IS_SELECTED";
+                                //  }else if(selection.length > 1){
+                                //      p = "MULTIPLE_OBJECTS_ARE_SELECTED";                                    
+                                //  }                                                             
+                                //  var crossConnectsCanvas = AdfPage.PAGE.findComponentByAbsoluteId(crossConnectsCanvasId);                                     
+                                //  AdfCustomEvent.queue(crossConnectsCanvas, "jsCreateCrossConnectsDetails",{props : p},true);                                  
+                                //  p = "";
+                                // }catch (e) {
+                                //  alert("An error occurred when building property sheet." + e);
+                                //}
+                              }
+                              function deleteCrossConnect(){
+                                    networkCanvas.performAction('editAction',['CrossConnectsViewBean.deleteCrossConnect'], true);
+                                    clickInvisibleButton(updateADFComponentsId);
+                              }
+                              
+                              function createCrossConnects(){
+                                    networkCanvas.performAction('editAction',['CrossConnectsViewBean.createCrossConnects'], true);
+                                    clickInvisibleButton(updateADFComponentsId);
+                              }
+                              function zoomCanvas(){
+                                    networkCanvas.setInteractor(zoom);
+                              }
+                              function panCanvas(){
+                                    networkCanvas.setInteractor(pan);
+                              }
+                              function showAll(){
+                                    networkCanvas.showAll(true);
+                              }
+                              function zoomIn(){
+                                    networkCanvas.zoomIn(true);
+                              }
+                              function zoomOut(){
+                                    networkCanvas.zoomOut(true);
+                              } 
+                              function selectItem(){
+                                    networkCanvas.setInteractor(select);
+                              }
+                        </trh:script>                        
+                </af:panelGroupLayout>
+            </af:panelHeader>
+        </af:panelGroupLayout>
+    </f:facet>
+</af:pageTemplate>
+</jsp:root>

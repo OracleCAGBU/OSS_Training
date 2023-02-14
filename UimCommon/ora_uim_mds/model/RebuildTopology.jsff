@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved. */
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    3/12/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout layout="scroll" id="pgId">
+        <af:panelHeader text="#{inventoryUIBundle.MENU_TOPOLOGY}" helpTopicId="OHW_rebuildTopo"
+                        styleClass="invSummaryPanelHeader">
+          <af:showDetailHeader text="#{inventoryUIBundle.REBUILD_TOPOLOGY}"
+                               disclosed="true"
+                               styleClass="invSummaryShowDetailHeader">
+            <f:facet name="toolbar">
+              <af:commandButton text="#{inventoryUIBundle.REBUILD_TOPOLOGY}"
+                                id="cb1"
+                                action="#{pageFlowScope.RebuildTopologyBean.rebuildTopology}"
+                                shortDesc="#{pageFlowScope.RebuildTopologyBean.buttonToolTip}"
+                                disabled="#{pageFlowScope.RebuildTopologyBean.disableRebuild}"
+                                partialTriggers="pgId" iconPosition="trailing"
+                                accessKey="#{inventoryUIBundle.REBUILD_TOPOLOGY_ACCESS_KEY}"/>
+            </f:facet>
+            <af:group id="g1">
+              <af:outputText value="#{pageFlowScope.RebuildTopologyBean.topologyMode}"
+                             id="ot1"/>
+              <af:spacer height="10"/>
+              <af:outputText partialTriggers="cb1"
+                             value="#{pageFlowScope.RebuildTopologyBean.rebuildTopologyInfoMsg}"
+                             id="ot2"/>
+            </af:group>
+          </af:showDetailHeader>
+        </af:panelHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>
+

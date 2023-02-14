@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2016, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    4/02/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:showDetailHeader text="#{inventoryUIBundle.BUSINESS_INTERACTIONS}" disclosed="true" id="sdh1">
+    <f:facet name="context"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:panelCollection id="BIList" styleClass="AFStretchWidth">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar"/>
+      <f:facet name="statusbar">
+        <af:toolbar id="t2">
+          <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount lt 0) ? 0 : bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount}"
+                         id="ol2" styleClass="invSearchOutputLabel"
+                         binding="#{backingBeanScope.totalResultsLabel}"
+                         partialTriggers="tabId"/>
+        </af:toolbar>
+      </f:facet>
+      <af:table id="tabId"
+                        value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}"
+                        var="row"
+                        emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                        fetchSize="#{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount &lt; 25) ? bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount : 25}"
+                        filterModel="#{pageFlowScope.BusinessInteractionQueryBean.filterModel}"
+                        selectionListener="#{pageFlowScope.BusinessInteractionListBean.selectAction}"
+                        queryListener="#{InventoryHelperBean.processBIListQuery}"
+                        filterVisible="false" varStatus="vs"
+                        autoHeightRows="#{pageFlowScope.BusinessInteractionListBean.portletHeight}" contentDelivery="immediate"
+                        selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                        sortListener="#{bindings.searchResultsIterator.dataControl.dataProvider.processSort}"
+                        rowSelection="multiple" styleClass="AFStretchWidth"
+                        binding="#{pageFlowScope.BusinessInteractionListBean.resultsTable}"
+                summary="#{inventoryUIBundle.BUSINESS_INTERACTIONS_LIST}">
+        <af:column sortProperty="businessInteraction.id" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.ID}"
+                   id="c1" rowHeader="unstyled">
+          <af:commandImageLink action="businessInteractionSummary" id = "cl1" actionListener="#{bindings.openSubTaskForBISummary.execute}"
+                               text="#{row.businessInteraction.id}"
+                               shortDesc="#{inventoryUIBundle.BUSINESS_INTERACTION_SUMMARY_LINK}">
+          
+            <af:setActionListener from="#{row.businessInteraction.oid}" to="#{objectId}"/>
+          </af:commandImageLink>
+        </af:column>
+        <af:column sortProperty="businessInteraction.name" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.NAME}"
+                   id="c2">
+          <af:outputText value="#{row.businessInteraction.name}" id="ot2"/>
+        </af:column>
+        <af:column sortProperty="businessInteraction.specification.name" sortable="true"
+                   filterable="true"
+                   headerText="#{inventoryUIBundle.SPECIFICATION}"
+                   id="c3">
+          <af:outputText value="#{pageFlowScope.BusinessInteractionListBean.specDisplayName}" id="ot3"/>
+        </af:column>
+        <af:column sortProperty="businessInteraction.adminState" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.STATUS}"
+                   id="c4">
+          <af:outputText value="#{pageFlowScope.BusinessInteractionListBean.inventoryStatus}" id="ot4"/>
+        </af:column>
+        <af:column headerText="#{inventoryUIBundle.EFFECTIVE_DATE}"
+                   id="c5">
+          <af:outputText value="#{row.businessInteraction.effDate}" id="ot5">
+           <af:convertDateTime pattern="#{pageFlowScope.BusinessInteractionListBean.dateAndTimeFormat}"/>
+          </af:outputText>
+        </af:column>
+        
+        <af:column headerText="#{inventoryUIBundle.EXTERNAL_SYSTEM}" align="center" id="colos">
+          <af:column headerText="#{inventoryUIBundle.EXTERNAL_MANAGEMENT_DOMAIN}" id="coldmn">
+            <af:outputText value="#{row.businessInteraction.externalManagementDomain}" id="otdmn"/>
+          </af:column>
+          <af:column headerText="#{inventoryUIBundle.EXTERNAL_NAME}" id="colnm">
+            <af:outputText value="#{row.businessInteraction.externalName}" id="otname"/>
+          </af:column>
+          <af:column headerText="#{inventoryUIBundle.EXTERNAL_OBJECT_ID}" id="coloId">
+            <af:outputText value="#{row.businessInteraction.externalObjectId}" id="otoid"/>
+          </af:column>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+  </af:showDetailHeader>
+</jsp:root>

@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2016, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    3/25/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:showDetailHeader text="#{inventoryUIBundle.NETWORK_NODES}" disclosed="true"
+                       id="sdh1">
+    <af:panelCollection id="NWList" styleClass="AFStretchWidth">
+      <f:facet name="statusbar">
+        <af:toolbar id="t2">
+                  <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount lt 0) ? 0 : bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount}"
+                                  id="ol1" styleClass="invSearchOutputLabel" partialTriggers="resultsTableId"
+                                  binding="#{backingBeanScope.totalResultsLabel}"/>
+        </af:toolbar>
+      </f:facet>
+      <af:table id="resultsTableId"
+                value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}"
+                var="row"
+                emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                fetchSize="#{pageFlowScope.NetworkListBean.fetchSize}"
+                filterModel="#{pageFlowScope.NetworkQueryBean.filterModel}"
+                queryListener="#{InventoryHelperBean.processQuery}"
+                filterVisible="false" varStatus="vs"
+                autoHeightRows="#{pageFlowScope.NetworkListBean.portletHeight}" contentDelivery="immediate"
+                selectionListener="#{pageFlowScope.NetworkListBean.selectAction}"
+                sortListener="#{bindings.searchResultsIterator.dataControl.dataProvider.processSort}"
+                rowSelection="#{pageFlowScope.NetworkListBean.rowSelection}" styleClass="AFStretchWidth"
+                selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                binding="#{pageFlowScope.NetworkListBean.resultsTable}"
+                summary="#{inventoryUIBundle.NETWORK_NODES_TABLE}">
+        <af:column sortProperty="name" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.NAME}" rowHeader="unstyled">
+          <af:commandImageLink action="#{pageFlowScope.NetworkListBean.getSummaryPage}" actionListener="#{bindings.openSubTaskForSummary.execute}"
+                               text="#{pageFlowScope.NetworkListBean.networkName}"
+                               shortDesc="#{inventoryUIBundle.LINK_FOR_NETWORK_SUMMARY}">
+           
+            <af:setActionListener from="#{pageFlowScope.NetworkListBean.networkOid}"
+                                  to="#{requestScope.oid}"/>
+          </af:commandImageLink>
+        </af:column>
+        <af:column sortProperty="description" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.DESCRIPTION}">
+          <af:outputText value="#{pageFlowScope.NetworkListBean.networkDescription}"/>
+        </af:column>
+        <af:column sortProperty="networkTopology" headerText="#{inventoryUIBundle.NETWORK_TOPOLOGY}">
+          <af:outputText value="#{pageFlowScope.NetworkListBean.networkTopology}"/>
+        </af:column>
+        <af:column sortProperty="ringType" headerText="#{inventoryUIBundle.RING_TYPE}">
+          <af:outputText value="#{pageFlowScope.NetworkListBean.ringType}"/>
+        </af:column>
+        <af:column sortProperty="protectionType" headerText="#{inventoryUIBundle.PROTECTION_TYPE}">
+          <af:outputText value="#{pageFlowScope.NetworkListBean.protectionType}"/>
+        </af:column>        
+        <af:column sortProperty="name" sortable="false"
+                   headerText="#{inventoryUIBundle.NODE_NAME}">
+          <af:outputText value="#{pageFlowScope.NetworkListBean.networkNodeName}"/>
+        </af:column>
+        <af:column sortProperty="name" sortable="false"
+                   headerText="#{inventoryUIBundle.NODE_DESC}">
+          <af:outputText value="#{pageFlowScope.NetworkListBean.networkNodeDescription}"/>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+  </af:showDetailHeader>
+</jsp:root>

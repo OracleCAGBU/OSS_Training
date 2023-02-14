@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='windows-1250'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="inventoryuiBundle"
+           value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:panelStretchLayout id="psl1" dimensionsFrom="auto" styleClass="AFStretchWidth">
+        <f:facet name="center">
+            <af:panelHeader text="#{pageFlowScope.NetworkServiceCreateBean.displayInfo}" id="ph1" styleClass="AFStretchWidth" 
+                            helpTopicId="#{pageFlowScope.NetworkServiceCreateBean.helpTopic}" >
+                <f:facet name="toolbar">
+                    <af:toolbar id="t1">
+                        <af:button text="#{inventoryUIBundle.SAVE_AND_CONTINUE}" id="b1" accessKey="#{inventoryUIBundle.SAVE_AND_CONTINUE_ACCESS_KEY}" rendered="#{pageFlowScope.NetworkServiceCreateBean.addMode}"
+                                   disabled="#{pageFlowScope.NetworkServiceCreateBean.disableSaveButtons}"
+                                   actionListener="#{pageFlowScope.NetworkServiceCreateBean.save}" action="#{pageFlowScope.NetworkServiceCreateBean.saveOutcome}">
+                                   <af:setActionListener from="summary" to="#{pageFlowScope.saveActionOutcome}"/>
+                                   <af:clientListener method="queueEvent" type="click"/>
+                        </af:button>
+                        <af:spacer width="4" id="s51"/>
+                        <af:button text="#{inventoryUIBundle.SAVE_AND_SEND_REQUEST}" id="b2" accessKey="#{inventoryUIBundle.SAVE_AND_SEND_REQUEST_ACCESS_KEY}" rendered="#{pageFlowScope.NetworkServiceCreateBean.addMode}"
+                                   disabled="#{pageFlowScope.NetworkServiceCreateBean.disableSaveButtons}"                                   
+                                   actionListener="#{pageFlowScope.NetworkServiceCreateBean.save}" action="#{pageFlowScope.NetworkServiceCreateBean.saveOutcome}">
+                                   <af:setActionListener from="summary" to="#{pageFlowScope.saveActionOutcome}"/>
+                                   <af:setActionListener from="true" to="#{pageFlowScope.saveOperation}"/>
+                                   <af:clientListener method="queueEvent" type="click"/>
+                        </af:button>
+                        <af:button text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="b3" accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}" rendered="#{!(pageFlowScope.NetworkServiceCreateBean.addMode)}"
+                                   actionListener="#{pageFlowScope.NetworkServiceCreateBean.save}" action="#{pageFlowScope.NetworkServiceCreateBean.saveOutcome}">
+                                   <af:setActionListener from="summary" to="#{pageFlowScope.saveActionOutcome}"/>
+                        </af:button>
+                        <af:spacer width="4" id="s5"/>
+                        <af:button text="#{inventoryUIBundle.CANCEL}" id="cb2" actionListener="#{bindings.closeSubTask.execute}" action="cancel" immediate="true"
+                                   accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                    </af:toolbar>
+                </f:facet>
+                <af:panelStretchLayout id="psl2" dimensionsFrom="auto" styleClass="AFStretchWidth">
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="pgl1" layout="scroll" styleClass="AFStretchWidth">
+                            <af:showDetailHeader text="#{inventoryUIBundle.NETWORK_SERVICE_LABEL}" disclosed="true" id="sdh1" styleClass="AFStretchWidth">
+                                <af:panelGroupLayout layout="horizontal" halign="left" valign="top" id="pgl23">
+                                    <af:panelFormLayout id="ns" binding="#{backingBeanScope.uiHintsPanel}">
+                                        <af:selectOneChoice id="ns-specification" label="#{inventoryUIBundle.DESCRIPTOR}" autoSubmit="true"
+                                                            disabled="#{!(pageFlowScope.NetworkServiceCreateBean.addMode)}"
+                                                            value="#{pageFlowScope.NetworkServiceCreateBean.selectedSpec}" contentStyle="width:170px"
+                                                            valueChangeListener="#{pageFlowScope.NetworkServiceCreateBean.specChanged}" showRequired="true">
+                                            <f:selectItems binding="#{pageFlowScope.NetworkServiceCreateBean.specifications}" id="si1"/>
+                                        </af:selectOneChoice>
+                                        <af:inputText value="#{pageFlowScope.NetworkServiceCreateBean.id}" label="#{inventoryUIBundle.ID}" required="true"
+                                                      id="ns-id"
+                                                      disabled="#{(pageFlowScope.NetworkServiceCreateBean.specificationCount > 0) &amp;&amp; (!(pageFlowScope.NetworkServiceCreateBean.addMode &amp;&amp; pageFlowScope.NetworkServiceCreateBean.enterIdManually))}"
+                                                      maximumLength="25" binding="#{backingBeanScope.idBinding}"/>
+                                        <af:inputText value="#{pageFlowScope.NetworkServiceCreateBean.entityObject.name}" id="ns-name"
+                                                      label="#{inventoryUIBundle.NAME}"
+                                                      valueChangeListener="#{pageFlowScope.NetworkServiceCreateBean.nameChanged}" showRequired="true"
+                                                      maximumLength="255"/>
+                                        <af:spacer height="8" id="s31"/>
+                                        <af:selectManyChoice id="ns-fg" label="#{inventoryUIBundle.VNF_FG_DESCRIPTOR}" autoSubmit="true"
+                                                             disabled="#{!(pageFlowScope.NetworkServiceCreateBean.addMode) || (pageFlowScope.NetworkServiceCreateBean.vnffgDisabled)}"
+                                                             value="#{pageFlowScope.NetworkServiceCreateBean.selectedFg}" contentStyle="width:170px"
+                                                             valueChangeListener="#{pageFlowScope.NetworkServiceCreateBean.fgChanged}"
+                                                             binding="#{pageFlowScope.NetworkServiceCreateBean.vnffgDescBndg}">
+                                            <f:selectItems binding="#{pageFlowScope.NetworkServiceCreateBean.fgDescriptors}" id="si2"/>
+                                        </af:selectManyChoice>
+                                    </af:panelFormLayout>
+                                    <af:spacer width="300" id="s32"/>
+                                    
+                                    <af:panelFormLayout id="elcpf" binding="#{backingBeanScope.uiHintsNSPanel}"/>
+                                </af:panelGroupLayout>
+                            </af:showDetailHeader>
+                            
+                            <af:spacer id="s1" height="10"/>
+                            <af:panelTabbed id="pt2" styleClass="AFStretchWidth" binding="#{backingBeanScope.childtabBinding}" dimensionsFrom="auto"
+                                            partialTriggers="ns-specification">
+                                <af:showDetailItem id="sdi2" text="#{inventoryUIBundle.END_POINTS}" styleClass="AFStretchWidth" binding="#{backingBeanScope.epBinding}" disclosed="true" immediate="true">
+                                    <af:panelStretchLayout dimensionsFrom="auto" id="psl21" styleClass="AFStretchWidth" binding="#{backingBeanScope.psBinding}">
+                                        <f:facet name="center">
+                                            <af:panelGroupLayout id="pgl2" layout="scroll" styleClass="AFStretchWidth">
+                                                <af:panelGroupLayout id="pgl3" layout="horizontal" halign="right" styleClass="AFStretchWidth">
+                                                    <af:toolbar id="tbar">
+                                                      <af:button icon="#{InventoryHelperBean.addNewIcon}" partialSubmit="true" shortDesc="#{inventoryUIBundle.NEW}" id="new" immediate="true" disabledIcon="#{InventoryHelperBean.disAddNewIcon}"
+                                                                 binding="#{backingBeanScope.addEndpointButton}" disabled="#{pageFlowScope.NetworkServiceCreateBean.disableEndpointAdd}"
+                                                                 actionListener="#{pageFlowScope.NetworkServiceCreateBean.addEndPointRegion}"/>
+                                                    </af:toolbar>
+                                                </af:panelGroupLayout>
+                                                <af:forEach items="#{bindings.mtf.taskFlowBindingList}" var="tf" varStatus="status">
+                                                    <af:panelBox text="#{tf.name}" showDisclosure="false" id="pb1${status.index}">
+                                                        <f:facet name="toolbar">
+                                                            <af:toolbar id="tb1">
+                                                                <af:button icon="#{InventoryHelperBean.deleteIcon}" partialSubmit="true" shortDesc="#{inventoryUIBundle.DELETE}" id="del" immediate="true" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                                                           actionListener="#{pageFlowScope.NetworkServiceCreateBean.deleteEndPointRegion}" disabled="#{pageFlowScope.NetworkServiceCreateBean.disableEndpointDelete}"/>
+                                                            </af:toolbar>
+                                                        </f:facet>
+                                                        <af:region value="#{tf.regionModel}" id="reg1${status.index}"/>
+                                                    </af:panelBox>
+                                                    <af:spacer width="4" height="5" id="s6"/>
+                                                </af:forEach>
+                                            </af:panelGroupLayout>
+                                        </f:facet>
+                                    </af:panelStretchLayout>
+                                </af:showDetailItem>
+                                <af:showDetailItem id="sdi3" text="#{inventoryUIBundle.VIRTUAL_NETWORK_FUNCTIONS}" styleClass="AFStretchWidth" binding="#{backingBeanScope.vnfBinding}" immediate="true">
+                                    <af:panelStretchLayout dimensionsFrom="auto" id="psl22" styleClass="AFStretchWidth" binding="#{backingBeanScope.psvnfBinding}">
+                                        <f:facet name="center">
+                                            <af:panelGroupLayout id="pgl4" layout="scroll" styleClass="AFStretchWidth">
+                                                <af:panelGroupLayout id="pgl5" layout="horizontal" halign="right" styleClass="AFStretchWidth">
+                                                    <af:toolbar id="tb2">
+                                                      <af:button icon="#{InventoryHelperBean.addNewIcon}" partialSubmit="true" shortDesc="#{inventoryUIBundle.NEW}" id="n1" immediate="true" disabledIcon="#{InventoryHelperBean.disAddNewIcon}"
+                                                                 binding="#{backingBeanScope.addVNFButton}" disabled="#{pageFlowScope.NetworkServiceCreateBean.disableVNFAdd}"
+                                                                 actionListener="#{pageFlowScope.NetworkServiceCreateBean.addVNFRegion}"/>
+                                                    </af:toolbar>
+                                                </af:panelGroupLayout>
+                                                <af:forEach items="#{bindings.vnf.taskFlowBindingList}" var="vnf" varStatus="vnfstatus">
+                                                    <af:panelBox text="#{vnf.name}" showDisclosure="false" id="vn1${vnfstatus.index}">
+                                                        <f:facet name="toolbar">
+                                                            <af:toolbar id="tb3">
+                                                                <af:button icon="#{InventoryHelperBean.deleteIcon}" partialSubmit="true" shortDesc="#{inventoryUIBundle.DELETE}" id="d1" immediate="true" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                                                           actionListener="#{pageFlowScope.NetworkServiceCreateBean.deleteVNFRegion}" disabled="#{pageFlowScope.NetworkServiceCreateBean.disableVNFDelete}"/>
+                                                            </af:toolbar>
+                                                        </f:facet>
+                                                        <af:region value="#{vnf.regionModel}" id="vnf1${vnfstatus.index}"/>
+                                                    </af:panelBox>
+                                                    <af:spacer width="4" height="5" id="s7"/>
+                                                </af:forEach>
+                                            </af:panelGroupLayout>
+                                        </f:facet>
+                                    </af:panelStretchLayout>
+                                </af:showDetailItem>
+                                <af:showDetailItem text="#{inventoryuiBundle.PHYSICAL_NETWORK_FUNCTIONS}" id="sdi1" immediate="true"
+                                                   binding="#{backingBeanScope.pnfBinding}" styleClass="AFStretchWidth"
+                                                   partialTriggers="ns-specification"
+                                                   disabled="#{pageFlowScope.NetworkServiceCreateBean.isPNFTabDisabled}">
+                                    <af:panelStretchLayout id="psl3" binding="#{backingBeanScope.pspnfBinding}"
+                                                           dimensionsFrom="auto" styleClass="AFStretchWidth">
+                                        <f:facet name="center">
+                                            <af:panelGroupLayout id="pgl6" layout="scroll" styleClass="AFStretchWidth">
+                                                <af:panelGroupLayout id="pgl7" layout="horizontal" halign="right"
+                                                                     styleClass="AFStretchWidth">
+                                                    <af:toolbar id="t2">
+                                                        <af:button id="b4"
+                                                                   icon="#{InventoryHelperBean.addNewIcon}"
+                                                                   shortDesc="#{inventoryuiBundle.NEW}"
+                                                                   actionListener="#{pageFlowScope.NetworkServiceCreateBean.addPNFRegion}"
+                                                                   partialSubmit="true"
+                                                                   binding="#{backingBeanScope.addPNFButton}" disabledIcon="#{InventoryHelperBean.disAddNewIcon}"
+                                                                   disabled="#{pageFlowScope.NetworkServiceCreateBean.disablePNFAdd}"/>
+                                                    </af:toolbar>
+                                                </af:panelGroupLayout>
+                                                <af:forEach items="#{bindings.pnf.taskFlowBindingList}" var="pnf"
+                                                            varStatus="pnfstatus">
+                                                    <af:panelBox text="#{pnf.name}" id="pn1${pnfstatus.index}"
+                                                                 showDisclosure="false" partialTriggers="b4">
+                                                        <f:facet name="toolbar">
+                                                            <af:toolbar id="t3">
+                                                                <af:button id="b5"
+                                                                           icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                                                           actionListener="#{pageFlowScope.NetworkServiceCreateBean.deletePNFRegion}"
+                                                                           disabled="#{pageFlowScope.NetworkServiceCreateBean.disablePNFDelete}"
+                                                                           partialSubmit="true"/>
+                                                            </af:toolbar>
+                                                        </f:facet>
+                                                        <af:region value="#{pnf.regionModel}" id="pnf1${pnfstatus.index}"/>
+                                                    </af:panelBox>
+                                                    <af:spacer width="4" height="5" id="s2"/>
+                                                </af:forEach>
+                                            </af:panelGroupLayout>
+                                        </f:facet>
+                                    </af:panelStretchLayout>
+                                </af:showDetailItem>
+                            </af:panelTabbed>
+                            <af:popup childCreation="deferred" autoCancel="disabled" id="p1" binding="#{pageFlowScope.NetworkServiceCreateBean.nsFlavorWarningPopup}">
+                                <af:dialog id="d2" dialogListener="#{pageFlowScope.NetworkServiceCreateBean.nsFlavorChangeWarningDialog}"
+                                           title="#{inventoryuiBundle.WARNING}" titleIconSource="/images/warning_16_ena.png" type="yesNo">
+                                    <f:facet name="buttonBar"/>
+                                    <af:panelGroupLayout id="pgl8">
+                                        <af:outputText id="ot1" value="#{pageFlowScope.NetworkServiceCreateBean.warningMessage}"/>
+                                    </af:panelGroupLayout>
+                                </af:dialog>
+                            </af:popup>
+                            <af:resource type="javascript">
+                                <!-- The below javascript code is defined to Block the user operations while Save operation is in progress. -->
+                                function queueEvent(event) {
+                                   event.cancel(); // cancel action event
+                                   var source = event.getSource();
+                                   var params = {};
+                                   var type = "customListener";
+                                   var immediate = true;
+                                   var isPartial = true;
+                                   var customEvent =  new AdfCustomEvent(source, type, params, immediate);
+                                   customEvent.preventUserInput();
+                                   customEvent.queue(isPartial);
+                               }
+                            </af:resource>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                </af:panelStretchLayout>
+                    
+            </af:panelHeader>
+        </f:facet>
+    </af:panelStretchLayout>
+</jsp:root>

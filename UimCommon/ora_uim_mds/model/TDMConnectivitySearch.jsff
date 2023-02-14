@@ -1,0 +1,698 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2015, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+       avsubram  03/04/15 - Changes for Numeric Validation - 20479925
+       rnaguban  01/22/15 - Bug 20381354
+    raattulu    3/24/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" 
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"  
+          xmlns:cui="/CommsUI"> 
+    
+   <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>		  
+   <c:set var="queryModel" value="${pageFlowScope.InventoryQueryBean.queryModel}"/>
+   <c:set var="attributeMap"
+          value="#{pageFlowScope.InventoryQueryBean.hardAttributeMap}"/>
+   <af:panelStretchLayout id="pgl1" dimensionsFrom="auto" binding="#{backingBeanScope.TDM_Results_panelGroupLayout}" topHeight="#{pageFlowScope.InventoryResultsBean.topHeight}"
+                          bottomHeight="#{pageFlowScope.InventoryResultsBean.bottomHeight}">
+      <f:facet name="top">
+    <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left">
+                    <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                                   rendered="#{!(pageFlowScope.InventoryResultsBean.popupMode) and !(pageFlowScope.InventoryResultsBean.designMode)}"
+                                   value="#{pageFlowScope.InventoryResultsBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+            <af:menuBar id="menuBar1">
+                          <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invSearchMenu"
+                                   rendered="#{!(pageFlowScope.InventoryResultsBean.popupMode) and !(pageFlowScope.InventoryResultsBean.designMode)}"   />
+            </af:menuBar>                    <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch1}" contentDelivery="lazyUncached">
+                        <af:dialog id="BISearchPopup_d1" type="none"
+                                   title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                            <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                                <f:facet name="center">
+                                   <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                        <af:serverListener type="refreshEntity" method="#{pageFlowScope.InventoryResultsBean.afterBusinessInteractionSelectionChange}"/>
+                    </af:popup>
+                </af:panelGroupLayout>
+    </f:facet>                    
+      <f:facet name="center">
+         <af:panelGroupLayout layout="scroll">
+                  <cui:WarningDialog id="wd" binding="#{backingBeanScope.navigationWarningDialog}"/>
+                  <af:panelHeader text="#{pageFlowScope.InventoryResultsBean.displayInfo}" id="php1" helpTopicId="OHW_search">
+                   <af:showDetailHeader text="#{inventoryUIBundle.SEARCH}"
+                                        disclosed="true" id="CHeader"
+                                        binding="#{pageFlowScope.InventoryQueryBean.queryShowDetailHeader}">
+                        <f:facet name="toolbar">
+                          <af:toolbar id="t9">
+                            <jsp:include page="/oracle/communications/inventory/ui/framework/page/InventoryQuerySavedSearch.jsff"/>
+                          </af:toolbar>
+                        </f:facet>
+                        <af:panelGroupLayout layout="scroll">
+                         
+                           <af:panelFormLayout id="CPFL"
+                                               binding="#{pageFlowScope.InventoryQueryBean.queryPanelFormLayout}"
+                                               maxColumns="1" fieldWidth="100%">
+                              <af:outputText value="#{inventoryUIBundle.CONNECTIVITY}" id="ot4" inlineStyle="font-weight:bold;"/>
+                              <af:panelGroupLayout layout="horizontal" halign="left" valign="top">
+                                 <af:panelGroupLayout layout="vertical">
+                                    <trh:tableLayout>
+                                       <trh:rowLayout>
+                                          <trh:cellFormat halign="right">
+                                             <af:outputLabel value="#{inventoryUIBundle.IDENTIFICATION}" id="idLab"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat>
+                                             <af:selectOneChoice id="idoper" value="#{attributeMap.IDENTIFICATION.operator}"
+                                                                 shortDesc="#{inventoryUIBundle.IDENTIFICATION}">
+                                                <f:selectItems value="#{attributeMap.IDENTIFICATION.operators}" id="idopers"/>
+                                             </af:selectOneChoice>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat valign="top">
+                                             <af:inputText id="idText"  value="#{attributeMap.IDENTIFICATION.values[0]}"
+                                                           shortDesc="#{inventoryUIBundle.CONNECTIVITY} #{inventoryUIBundle.IDENTIFICATION}"/>
+                                          </trh:cellFormat>
+                                       </trh:rowLayout>
+                                       <trh:rowLayout>
+                                          <trh:cellFormat halign="right">
+                                             <af:outputLabel value="#{inventoryUIBundle.A_NETWORK_ENTITY_LOCATION}" id="nel"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat>
+                                             <af:selectOneChoice id="neloper" value="#{attributeMap.NETWORK_ENTITY_LOCATION.operator}"
+                                                                 shortDesc="#{inventoryUIBundle.A_NETWORK_ENTITY_LOCATION}">
+                                                <f:selectItems value="#{attributeMap.NETWORK_ENTITY_LOCATION.operators}" id="nelopers"/>
+                                             </af:selectOneChoice>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat valign="top">
+                                             <af:inputText id="nelText" disabled ="#{attributeMap.NETWORK_ENTITY_LOCATION.attribute.additionalInfo.disableValue}"
+                                                           autoSubmit="true" value="#{attributeMap.NETWORK_ENTITY_LOCATION.values[0]}"
+                                                           shortDesc="#{inventoryUIBundle.CONNECTIVITY} #{inventoryUIBundle.A_NETWORK_ENTITY_LOCATION}">
+                                                <af:clientAttribute name="componentName"  value="#{attributeMap.NETWORK_ENTITY_LOCATION.attribute.name}"/>
+                                                <af:clientListener method="setComponentName" type="focus"/>
+                                                <af:serverListener type="jsSetComponentName" method="#{pageFlowScope.InventoryQueryBean.setComponentName}"/>
+                                                <af:autoSuggestBehavior suggestItems="#{pageFlowScope.InventoryQueryBean.getSuggestItems}"/>
+                                             </af:inputText>
+                                          </trh:cellFormat>
+                                       </trh:rowLayout>
+                                       <trh:rowLayout>
+                                         <trh:cellFormat halign="right">
+                                             <af:outputLabel value="#{inventoryUIBundle.Z_NETWORK_ENTITY_LOCATION}" id="ne2"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat>
+                                             <af:selectOneChoice id="nel2Oper"  value="#{attributeMap.NETWORK_ENTITY_LOCATION2.operator}"
+                                                                 shortDesc="#{inventoryUIBundle.Z_NETWORK_ENTITY_LOCATION}">
+                                                <f:selectItems value="#{attributeMap.NETWORK_ENTITY_LOCATION2.operators}" id="nel2Opers"/>
+                                             </af:selectOneChoice>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat valign="top">
+                                             <af:inputText id="nel2Text" autoSubmit="true" value="#{attributeMap.NETWORK_ENTITY_LOCATION2.values[0]}"
+                                                           shortDesc="#{inventoryUIBundle.CONNECTIVITY} #{inventoryUIBundle.Z_NETWORK_ENTITY_LOCATION}">
+                                                <af:clientAttribute name="componentName" value="#{attributeMap.NETWORK_ENTITY_LOCATION2.attribute.name}"/>
+                                                <af:clientListener method="setComponentName" type="focus"/>
+                                                <af:serverListener type="jsSetComponentName" method="#{pageFlowScope.InventoryQueryBean.setComponentName}"/>
+                                                <af:autoSuggestBehavior suggestItems="#{pageFlowScope.InventoryQueryBean.getSuggestItems}"/>
+                                             </af:inputText>
+                                          </trh:cellFormat>
+                                       </trh:rowLayout>
+                                       <trh:rowLayout>
+                                          <trh:cellFormat halign="right">
+                                             <af:outputLabel value="#{inventoryUIBundle.A_SERVICE_LOCATION}" id="serLoc"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat>
+                                             <af:selectOneChoice id="serLocS1" value="#{attributeMap.SERVICE_LOCATION1.operator}" shortDesc="#{inventoryUIBundle.A_SERVICE_LOCATION}">
+                                                <f:selectItems value="#{attributeMap.SERVICE_LOCATION1.operators}" id="serviceLocOpers"/>
+                                             </af:selectOneChoice>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat valign="top">
+                                             <af:inputText id="serLocText" disabled ="#{attributeMap.SERVICE_LOCATION1.attribute.additionalInfo.disableValue}"
+                                                           autoSubmit="true" value="#{attributeMap.SERVICE_LOCATION1.values[0]}" shortDesc="#{inventoryUIBundle.CONNECTIVITY} #{inventoryUIBundle.A_SERVICE_LOCATION}">>
+                                                <af:clientAttribute name="componentName"  value="#{attributeMap.SERVICE_LOCATION1.attribute.name}"/>
+                                                <af:clientListener method="setComponentName" type="focus"/>
+                                                <af:serverListener type="jsSetComponentName" method="#{pageFlowScope.InventoryQueryBean.setComponentName}"/>
+                                               </af:inputText>
+                                          </trh:cellFormat>
+                                       </trh:rowLayout>
+                                       <trh:rowLayout>
+                                          <trh:cellFormat halign="right">
+                                             <af:outputLabel value="#{inventoryUIBundle.Z_SERVICE_LOCATION}"
+                                                             id="ol2"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat>
+                                             <af:selectOneChoice id="soc1" value="#{attributeMap.SERVICE_LOCATION2.operator}" shortDesc="#{inventoryUIBundle.Z_SERVICE_LOCATION}">
+                                                <f:selectItems value="#{attributeMap.SERVICE_LOCATION2.operators}"
+                                                               id="si12"/>
+                                             </af:selectOneChoice>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat valign="top">
+                                             <af:inputText id="it1" disabled ="#{attributeMap.SERVICE_LOCATION2.attribute.additionalInfo.disableValue}"
+                                                           autoSubmit="true" value="#{attributeMap.SERVICE_LOCATION2.values[0]}" shortDesc="#{inventoryUIBundle.CONNECTIVITY} #{inventoryUIBundle.Z_SERVICE_LOCATION}">>
+                                                <af:clientAttribute name="componentName"  value="#{attributeMap.SERVICE_LOCATION2.attribute.name}"/>
+                                                <af:clientListener method="setComponentName" type="focus"/>
+                                                <af:serverListener type="jsSetComponentName" method="#{pageFlowScope.InventoryQueryBean.setComponentName}"/>
+                                               </af:inputText>
+                                          </trh:cellFormat>
+                                       </trh:rowLayout> 
+                                       <trh:rowLayout>
+                                          <trh:cellFormat halign="right">
+                                             <af:outputLabel value="#{inventoryUIBundle.DESCRIPTION}" id="dLab"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat>
+                                             <af:selectOneChoice id="dOper" value="#{attributeMap.DESCRIPTION.operator}"
+                                                                 shortDesc="#{inventoryUIBundle.DESCRIPTION}">
+                                                <f:selectItems value="#{attributeMap.DESCRIPTION.operators}" id="dOpers"/>
+                                             </af:selectOneChoice>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat valign="top">
+                                             <af:inputText id="dText" value="#{attributeMap.DESCRIPTION.values[0]}"
+                                                           shortDesc="#{inventoryUIBundle.CONNECTIVITY} #{inventoryUIBundle.DESCRIPTION}"/>
+                                          </trh:cellFormat>
+                                       </trh:rowLayout>
+                                       <trh:rowLayout>
+                                          <trh:cellFormat halign="right">
+                                             <af:outputLabel value="#{inventoryUIBundle.STATUS}"  id="sLab"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat columnSpan="2">
+                                             <af:selectOneChoice id="staSel" value="#{attributeMap.INVENTORY_STATUS.values[0]}" autoSubmit="true"
+                                                                 shortDesc="#{inventoryUIBundle.STATUS}">
+                                                <f:selectItem id="tdmsi1" itemLabel="" itemValue=""/>                              
+                                                <f:selectItems id="si" value="#{attributeMap.INVENTORY_STATUS.attribute.model}"/>
+                                             </af:selectOneChoice>
+                                          </trh:cellFormat>
+                                       </trh:rowLayout>
+                                       <trh:rowLayout>
+                                          <trh:cellFormat halign="right">
+                                              <af:outputLabel value="#{inventoryUIBundle.TECHNOLOGY}" id="techLabel"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat columnSpan="2">
+                                             <af:inputText id="techText" autoSubmit="true" value="#{attributeMap.TECHNOLOGY.values[0]}"
+                                                           shortDesc="#{inventoryUIBundle.TECHNOLOGY}">
+                                                <af:clientAttribute name="componentName" value="#{attributeMap.TECHNOLOGY.attribute.name}"/>
+                                                <af:clientListener method="setComponentName" type="focus"/>
+                                                <af:serverListener type="jsSetComponentName" method="#{pageFlowScope.InventoryQueryBean.setComponentName}"/>
+                                                <af:autoSuggestBehavior suggestItems="#{pageFlowScope.InventoryQueryBean.getSuggestItems}"/>
+                                             </af:inputText>
+                                          </trh:cellFormat>
+                                       </trh:rowLayout>
+                                       <trh:rowLayout>
+                                          <trh:cellFormat halign="right">
+                                             <af:outputLabel value="#{inventoryUIBundle.SPECIFICATION}"  id="specText"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat columnSpan="2">
+                                             <af:selectOneChoice id="specs" value="#{attributeMap.SPECIFICATION.values[0]}" autoSubmit="true" shortDesc="#{inventoryUIBundle.SPECIFICATION}">
+                                                <f:selectItem id="tdmsi2" itemLabel="" itemValue=""/>          
+                                                <f:selectItems id="spec-items" value="#{attributeMap.SPECIFICATION.attribute.model}"/>
+                                             </af:selectOneChoice>
+                                          </trh:cellFormat>
+                                       </trh:rowLayout> 
+                                       <trh:rowLayout>
+                                          <trh:cellFormat halign="right">
+                                             <af:outputLabel value="#{inventoryUIBundle.RATE_CODE}" id="rcLab"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat columnSpan="2">
+                                             <af:inputText id="rcText" autoSubmit="true" value="#{attributeMap.RATE_CODE.values[0]}"
+                                                           shortDesc="#{inventoryUIBundle.RATE_CODE}">
+                                                <af:clientAttribute name="componentName" value="#{attributeMap.RATE_CODE.attribute.name}"/>
+                                                <af:clientListener method="setComponentName" type="focus"/>
+                                                <af:serverListener type="jsSetComponentName" method="#{pageFlowScope.InventoryQueryBean.setComponentName}"/>
+                                                <af:autoSuggestBehavior suggestItems="#{pageFlowScope.InventoryQueryBean.getSuggestItems}"/>
+                                             </af:inputText>
+                                          </trh:cellFormat>
+                                       </trh:rowLayout>
+                                       <trh:rowLayout>
+                                          <trh:cellFormat halign="right">
+                                             <af:outputLabel value="#{inventoryUIBundle.FUNCTION}" id="fnLab"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat columnSpan="2">
+                                             <af:inputText id="fnText" autoSubmit="true" value="#{attributeMap.FUNCTION.values[0]}"
+                                                           shortDesc="#{inventoryUIBundle.FUNCTION}">
+                                                <af:clientAttribute name="componentName"  value="#{attributeMap.FUNCTION.attribute.name}"/>
+                                                <af:clientListener method="setComponentName" type="focus"/>
+                                                <af:serverListener type="jsSetComponentName"  method="#{pageFlowScope.InventoryQueryBean.setComponentName}"/>
+                                                <af:autoSuggestBehavior suggestItems="#{pageFlowScope.InventoryQueryBean.getSuggestItems}"/>
+                                             </af:inputText>
+                                          </trh:cellFormat>
+                                       </trh:rowLayout>
+                                       <trh:rowLayout>
+                                          <trh:cellFormat halign="right">
+                                             <af:outputLabel value="#{inventoryUIBundle.SERIAL_NUMBER}" id="serLab"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat columnSpan="2">
+                                             <af:inputText id="serText" value="#{attributeMap.SERIAL.values[0]}"
+                                                           shortDesc="#{inventoryUIBundle.SERIAL_NUMBER}"/>
+                                          </trh:cellFormat>
+                                       </trh:rowLayout>
+                                       <trh:rowLayout>
+                                          <trh:cellFormat halign="right">
+                                             <af:outputLabel value="#{inventoryUIBundle.TRANSMISSION_SIGNAL_TYPE}" id="serialLab"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat columnSpan="2">
+                                             <af:selectOneChoice id="tstSel" value="#{attributeMap.TRANSMISSION_SIGNAL_TYPE.values[0]}" autoSubmit="true"
+                                                                 shortDesc="#{inventoryUIBundle.TRANSMISSION_SIGNAL_TYPE}">
+                                                <f:selectItem id="tdmsi3" itemLabel="" itemValue=""/>          
+                                                <f:selectItems id="tsti" value="#{attributeMap.TRANSMISSION_SIGNAL_TYPE.attribute.model}"/>
+                                             </af:selectOneChoice>
+                                          </trh:cellFormat>
+                                       </trh:rowLayout>
+                                       <trh:rowLayout>
+                                          <trh:cellFormat halign="right">
+                                             <af:outputLabel value="#{inventoryUIBundle.NETWORK_NAME}" id="nwLabel"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat>
+                                             <af:selectOneChoice id="netoper" value="#{attributeMap.NETWORK.operator}"
+                                                                 shortDesc="#{inventoryUIBundle.NETWORK}">
+                                                <f:selectItems value="#{attributeMap.NETWORK.operators}" id="netopers"/>
+                                             </af:selectOneChoice>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat valign="top">
+                                             <af:inputText id="nwText" value="#{attributeMap.NETWORK.values[0]}"
+                                                           shortDesc="#{inventoryUIBundle.CONNECTIVITY} #{inventoryUIBundle.NETWORK}"/>
+                                          </trh:cellFormat>
+                                       </trh:rowLayout>
+                                       <trh:rowLayout>
+                                          <trh:cellFormat halign="right">
+                                             <af:outputLabel value="#{inventoryUIBundle.NETWORK_EDGE_NAME}" id="nweLabel"/>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat>
+                                             <af:selectOneChoice id="nweoper" value="#{attributeMap.NETWORK_EDGE_NAME.operator}"
+                                                                 shortDesc="#{inventoryUIBundle.NETWORK_EDGE_NAME}">
+                                                <f:selectItems value="#{attributeMap.NETWORK_EDGE_NAME.operators}" id="nweopers"/>
+                                             </af:selectOneChoice>
+                                          </trh:cellFormat>
+                                          <trh:cellFormat valign="top">
+                                             <af:inputText id="nweText" value="#{attributeMap.NETWORK_EDGE_NAME.values[0]}"
+                                                           shortDesc="#{inventoryUIBundle.CONNECTIVITY} #{inventoryUIBundle.NETWORK_EDGE_NAME}"/>
+                                          </trh:cellFormat>
+                                       </trh:rowLayout>
+                                    </trh:tableLayout>
+                                 </af:panelGroupLayout>
+                                 <af:panelGroupLayout layout="vertical">
+                                    <af:spacer width="100" height="10" id="s22"/>
+                                 </af:panelGroupLayout>
+                                 <af:panelGroupLayout layout="vertical">
+                                 <af:panelGroupLayout layout="vertical"  rendered="#{pageFlowScope.InventoryResultsBean.designMode}">
+                                       <af:panelHeader text="#{inventoryUIBundle.CHANNEL_CAPACITY}">
+                                         <trh:tableLayout>
+                                             <trh:rowLayout>
+                                                <trh:cellFormat halign="left">
+                                                   <af:outputLabel value="#{inventoryUIBundle.CONNECTIVITIES_SUPPORTED_BY}" id="noOfCL1"/>
+                                                </trh:cellFormat> 
+                                                <trh:cellFormat halign="left">
+                                                   <af:selectOneChoice id="sup2" value="#{attributeMap.SUPPORTED_BY.values[0]}"  autoSubmit="true" shortDesc="#{inventoryUIBundle.CONNECTIVITIES_SUPPORTED_BY}">
+                                                      <f:selectItem id="tdmsi4" itemLabel="" itemValue=""/>          
+                                                      <f:selectItems id="sup3" value="#{attributeMap.SUPPORTED_BY.attribute.model}"/>
+                                                   </af:selectOneChoice>
+                                                </trh:cellFormat>
+                                                <trh:cellFormat halign="left">
+                                                    <af:spacer width="10"/>
+                                                   <af:outputLabel value="#{inventoryUIBundle.CHANNELS}" id="noOfCL23"/>
+                                                </trh:cellFormat> 
+                                                </trh:rowLayout>
+                                                <trh:rowLayout>                                              
+                                                 <trh:cellFormat halign="left">
+                                                   <af:outputLabel value="#{inventoryUIBundle.CONTIGUOUS_CHANNELS}" id="noOfCL1ot" for="conn-ascn"/>
+                                                </trh:cellFormat>
+                                                 <trh:cellFormat halign="left">
+                                                  <af:selectBooleanCheckbox id="conn-ascn" label="" shortDesc="#{inventoryUIBundle.CONTIGUOUS_CHANNELS}"
+                                                  value="#{attributeMap.CONTIGUOUS_CHANNELS.values[0]}"/> 
+                                                  </trh:cellFormat>
+                                                </trh:rowLayout>
+                                              <af:spacer height="10" width="10"/>
+                                              </trh:tableLayout>
+                                       </af:panelHeader>
+                                      </af:panelGroupLayout>                                     
+                                    <af:panelGroupLayout layout="vertical" rendered="#{!pageFlowScope.InventoryResultsBean.designMode}">
+                                       <af:panelHeader text="#{inventoryUIBundle.CHANNEL_CAPACITY}">
+                                          <trh:tableLayout>
+                                             <trh:rowLayout>
+                                                <trh:cellFormat halign="right">
+                                                   <af:outputLabel value="#{inventoryUIBundle.FACILITIES_MUST_HAVE}" id="noOfCL"/>
+                                                </trh:cellFormat>
+                                                <trh:cellFormat>
+                                                   <af:inputText id="noOfCT" value="#{attributeMap.FACILITIES_MUST_HAVE.values[0]}"
+                                                                 shortDesc="#{inventoryUIBundle.FACILITIES_MUST_HAVE}" maximumLength="9">
+                                                      <af:validateRegExp pattern="[0-9]{1,15}" messageDetailNoMatch="#{inventoryUIBundle.CHANNEL_COUNT_NUMERIC_VALIDATION}" />   
+                                                    </af:inputText>
+                                                </trh:cellFormat>
+                                                <trh:cellFormat halign="left">
+                                                   <af:outputLabel value="#{inventoryUIBundle.CHANNELS_WITH}" id="noOfCL2"/>
+                                                </trh:cellFormat>
+                                             </trh:rowLayout>
+                                             <trh:rowLayout>
+                                                <trh:cellFormat halign="right">
+                                                   <af:outputLabel value="#{inventoryUIBundle.STATUS}" id="csLab"/>
+                                                </trh:cellFormat>
+                                                <trh:cellFormat>
+                                                   <af:selectOneChoice id="cstaSel" value="#{attributeMap.CHANNEL_STATUS.values[0]}"  autoSubmit="true"
+                                                                       shortDesc="#{inventoryUIBundle.CHANNEL_CAPACITY} #{inventoryUIBundle.STATUS}">
+                                                      <f:selectItem id="tdmsi5" itemLabel="" itemValue=""/>
+                                                      <f:selectItems id="csi" value="#{attributeMap.CHANNEL_STATUS.attribute.model}"/>
+                                                   </af:selectOneChoice>
+                                                </trh:cellFormat>
+                                                <trh:cellFormat halign="left">
+                                                   <af:outputLabel value="#{inventoryUIBundle.AND}" id="csLab2"/>
+                                                </trh:cellFormat>
+                                             </trh:rowLayout>
+                                             <trh:rowLayout>
+                                                <trh:cellFormat halign="right">
+                                                   <af:outputLabel value="#{inventoryUIBundle.RATE_CODE}" id="crcLab"/>
+                                                </trh:cellFormat>
+                                                <trh:cellFormat>
+                                                   <af:inputText id="crcText" value="#{attributeMap.CHANNEL_RATECODE.values[0]}" autoSubmit="true"
+                                                                 shortDesc="#{inventoryUIBundle.CHANNEL_CAPACITY} #{inventoryUIBundle.RATE_CODE}">
+                                                        <af:clientAttribute name="componentName"  value="#{attributeMap.CHANNEL_RATECODE.attribute.name}"/>
+                                                        <af:clientListener method="setComponentName"  type="focus"/>
+                                                        <af:serverListener type="jsSetComponentName" method="#{pageFlowScope.InventoryQueryBean.setComponentName}"/>
+                                                       <af:autoSuggestBehavior suggestItems="#{pageFlowScope.InventoryQueryBean.getSuggestItems}"/>
+                                                   </af:inputText>
+                                                </trh:cellFormat>
+                                                <trh:cellFormat></trh:cellFormat>
+                                             </trh:rowLayout>
+                                             <af:spacer height="10" width="10"/>
+                                          </trh:tableLayout>
+                                       </af:panelHeader>
+                                    </af:panelGroupLayout>
+                                    <af:spacer height="10" id="s220"/>
+                                    <af:panelGroupLayout layout="vertical">
+                                     <f:subview id="sv2">
+                                        <jsp:include page="/oracle/communications/inventory/ui/framework/page/InventoryQueryCharacteristics.jsff"/>
+                                     </f:subview>
+                                  </af:panelGroupLayout>
+                                 </af:panelGroupLayout>
+                              </af:panelGroupLayout>
+                           </af:panelFormLayout>
+                        </af:panelGroupLayout>
+                      <f:subview id="sv1">
+                         <jsp:include page="/oracle/communications/inventory/ui/framework/page/InventoryQueryButtons.jsff"/>
+                         <af:separator id="sp1"/>
+                      </f:subview>
+                   </af:showDetailHeader>
+                     <af:spacer width="10" height="10" id="s1"/>
+                     <af:showDetailHeader text="#{inventoryUIBundle.SEARCH_RESULTS}" disclosed="true" id="resComp">
+                        <!--Tree Component -->
+                        <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                           <f:facet name="menus">
+                            <af:menu binding="#{backingBeanScope.connectivityActionsMenu}" id="am1" text="#{inventoryUIBundle.ACTIONS}"
+                                      rendered="#{!(pageFlowScope.InventoryResultsBean.popupMode || pageFlowScope.InventoryResultsBean.designMode)}" partialTriggers="TDMTree"
+                                      disabled="#{(pageFlowScope.InventoryTreeBean.treeTable.selectedRowKeys.size!=1) || (!pageFlowScope.InventoryTreeBean.rootNodePopupMenu)}">
+                                <af:commandMenuItem id="cmi11" text="#{inventoryUIBundle.VIEW_CONNECTIVITY_DETAILS}" action="viewConnectivityDetails"
+                                                disabled="#{!(pageFlowScope.InventoryTreeBean.rootNodePopupMenu)}" actionListener="#{bindings.openSubTaskForConnectivityDetails.execute}">
+                                        <af:setActionListener from="#{pageFlowScope.InventoryTreeBean.selectedTreeNode.object.oid}" to="#{objectId}"/>
+                                        <af:setActionListener from="#{pageFlowScope.InventoryTreeBean.selectedTreeNode.object.displayInfo}" to="#{displayInfo}"/>
+                                </af:commandMenuItem>                
+                                
+                                <af:commandMenuItem id="cmi22" text="#{inventoryUIBundle.VIEW_ASSIGNED_CONNECTIVITY_DETAILS}" action="viewConnectivityDetails" 
+                                                disabled="#{!(pageFlowScope.InventoryTreeBean.viewConnectivityPopupMenu)}" actionListener="#{bindings.openSubTaskForConnectivityDetails.execute}">
+                                        <af:setActionListener from="#{pageFlowScope.InventoryTreeBean.selectedTreeNode.consumer eq null ? pageFlowScope.InventoryTreeBean.selectedTreeNode.object.oid : pageFlowScope.InventoryTreeBean.selectedTreeNode.consumer.oid}"
+                                                              to="#{objectId}"/>
+                                        <af:setActionListener from="#{pageFlowScope.InventoryTreeBean.selectedTreeNode.consumer eq null ? pageFlowScope.InventoryTreeBean.selectedTreeNode.object.displayInfo : pageFlowScope.InventoryTreeBean.selectedTreeNode.consumer.displayInfo}"
+                                                              to="#{displayInfo}"/>
+                                </af:commandMenuItem>
+                                                
+                                <af:commandMenuItem id="cmi33" text="#{inventoryUIBundle.VIEW_ASSIGNED_PIPE_SUMMARY}" action="viewPipeSummary" 
+                                                disabled="#{!(pageFlowScope.InventoryTreeBean.viewPipePopupMenu)}" actionListener="#{bindings.openSubTaskForPipeSummary.execute}">
+                                        <af:setActionListener from="#{pageFlowScope.InventoryTreeBean.selectedTreeNode.consumer eq null ? pageFlowScope.InventoryTreeBean.selectedTreeNode.object.oid : pageFlowScope.InventoryTreeBean.selectedTreeNode.consumer.oid}"
+                                                              to="#{objectId}"/>
+                                        <af:setActionListener from="#{pageFlowScope.InventoryTreeBean.selectedTreeNode.consumer eq null ? pageFlowScope.InventoryTreeBean.selectedTreeNode.object.displayInfo : pageFlowScope.InventoryTreeBean.selectedTreeNode.consumer.displayInfo}"
+                                                              to="#{displayInfo}"/>
+                                </af:commandMenuItem>
+                            </af:menu> 
+                           </f:facet>
+                           <f:facet name="toolbar">
+                              <af:toolbar id="tdmToolbar">
+                                
+                                 <af:commandToolbarButton id="cb1Create"
+                                                          text="#{inventoryUIBundle.CREATE}"
+                                                          icon="#{InventoryHelperBean.createIcon}"
+                                                          rendered="#{!(pageFlowScope.InventoryResultsBean.designMode)&amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=TDMConnectivity.CREATE;action=view']}"
+                                                          action="create"
+                                                          actionListener="#{pageFlowScope.InventoryResultsBean.registerRecentItemForCreate}">
+                                                        <af:setActionListener from="true" to="#{addMode}"/>
+                                  </af:commandToolbarButton>     
+                                  <af:commandToolbarButton text="#{inventoryUIBundle.EDIT}" id="cb2Edit" 
+                                                           binding="#{backingBeanScope.editButton}" disabledIcon="#{InventoryHelperBean.disEditIcon}"
+                                                           rendered="#{!(pageFlowScope.InventoryResultsBean.popupMode || pageFlowScope.InventoryResultsBean.designMode)&amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=TDMConnectivity.EDIT;action=view']}"
+                                                           disabled="#{(pageFlowScope.InventoryTreeBean.treeTable.selectedRowKeys.size!=1) || 
+                                                                    (!pageFlowScope.InventoryTreeBean.rootNodePopupMenu)}"
+                                                           actionListener="#{bindings.openSubTaskForConnectivityDetails.execute}"
+                                                           icon="#{InventoryHelperBean.editIcon}" action="edit" partialTriggers="TDMTree"
+                                                           accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                                                        <af:setActionListener from="false" to="#{addMode}"/>
+                                                        <af:setActionListener from="#{pageFlowScope.InventoryTreeBean.selectedTreeNode.object.oid}" to="#{objectId}"/>
+                                                        <af:setActionListener from="#{pageFlowScope.InventoryTreeBean.selectedTreeNode.object.displayInfo}" to="#{displayInfo}"/>
+                                    </af:commandToolbarButton>
+                                  <af:commandToolbarButton id="cb3Delete"
+                                                          text="#{inventoryUIBundle.DISCONNECT}"
+                                                          binding="#{backingBeanScope.delIconButton}"
+                                                          disabled="#{(pageFlowScope.InventoryTreeBean.treeTable.selectedRowKeys.size lt 1) ||
+                                                                (!pageFlowScope.InventoryTreeBean.rootNodePopupMenu)}"
+                                                          partialTriggers="TDMTree"
+                                                          rendered="#{!(pageFlowScope.InventoryResultsBean.designMode || pageFlowScope.InventoryResultsBean.popupMode)&amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=TDMConnectivity.DELETE;action=view']}"
+                                                          disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                                          actionListener="#{pageFlowScope.InventoryTreeBean.deleteAction}"
+                                                          icon="#{InventoryHelperBean.deleteIcon}">
+                                 </af:commandToolbarButton>
+                                 
+                                 <af:commandToolbarButton text="#{inventoryUIBundle.EXPORT}" immediate="true" shortDesc="#{inventoryUIBundle.EXPORT_ALL_ROWS}" icon="/images/exporttoexcel_ena.png" disabledIcon="/images/exporttoexcel_dis.png" partialTriggers="TDMTree"
+                                             id="cb4Export" rendered="#{!(pageFlowScope.InventoryResultsBean.popupMode)}">
+                        <af:exportCollectionActionListener type="excelHTML" exportedId="TDMTree"
+                                    filename="#{pageFlowScope.InventoryResultsBean.displayInfo}.xls" title="Export" exportedRows="all"/>
+                    </af:commandToolbarButton>
+                                 
+                              </af:toolbar>
+                           </f:facet>
+                           <f:facet name="statusbar">
+                                <af:toolbar id="t2">
+                                     <af:outputText value="#{pageFlowScope.InventoryTreeBean.displayTotalResults}"
+                                                       id="ol1" styleClass="invSearchOutputLabel" partialTriggers="TDMTree" binding="#{backingBeanScope.totalResultsLabel}"/>
+                                </af:toolbar>
+                          </f:facet>
+                           <af:treeTable value="#{pageFlowScope.InventoryTreeBean.treeModel}"
+                                         var="node" id="TDMTree"
+                                         rowSelection="#{pageFlowScope.InventoryResultsBean.rowSelection}"
+                                         fetchSize="#{pageFlowScope.InventoryTreeBean.fetchSize}"
+                                         contextMenuSelect="true"
+                                         styleClass="AFStretchWidth"
+                                         contentDelivery="immediate"
+                                         expandAllEnabled="#{pageFlowScope.InventoryTreeBean.expandAllEnabled}"
+                                         selectionListener="#{pageFlowScope.InventoryTreeBean.nodeSelectedEvent}"
+                                         binding="#{backingBeanScope.TDM_treeBinding}"
+                                         disclosedRowKeys="#{pageFlowScope.InventoryTreeBean.treeDisclosedRowKeys}"
+                                         rowBandingInterval="0"
+                                         horizontalGridVisible="false"
+                                         summary="#{inventoryUIBundle.TDM_CONNECTIVITY_SEARCH_TREETABLE}">
+                              <f:facet name="nodeStamp">
+                                 <af:column id="col2" 
+                                            rowHeader="unstyled"
+                                            headerText="#{inventoryUIBundle.CONNECTIVITY}">
+                                    <af:panelGroupLayout id="pgl5">
+                                       <af:image source="#{node.data.icon}" id="nodeIcon"
+                                                 shortDesc="#{inventoryUIBundle.ICON}"/>
+                                       <af:outputText value="#{node.data.label}" id="ot2"/>
+                                     
+                                        <af:switcher id="cbsw" defaultFacet="false" facetName="#{pageFlowScope.InventoryResultsBean.popupMode || pageFlowScope.InventoryResultsBean.designMode}">
+                                        <f:facet name="false">
+                                       <af:commandImageLink action="#{pageFlowScope.InventoryTreeBean.getPendingBiSummaryAction}"
+                                                   actionListener="#{pageFlowScope.InventoryTreeBean.registerPendingBiRecentItem}"
+                                                   id="cBCL" 
+                                                   rendered="#{node.data.consumerBi !=null}"
+                                                   shortDesc="#{inventoryUIBundle.BUSINESS_INTERACTION}"
+                                                   text=" (#{node.data.consumerBiDueDate})">
+                                       <af:setActionListener from="#{node.data.consumerBi.oid}" to="#{objectId}"/>
+                                       </af:commandImageLink> 
+                                        </f:facet>
+                                        <f:facet name="true">
+                                          <af:outputText value=" (#{node.data.consumerBiDueDate})" rendered="#{node.data.consumerBi !=null}" id="cBot2"
+                                          />
+                                        </f:facet>
+                                      </af:switcher>
+                                      
+                                       <af:outputText value=" - #{node.data.secondaryLabel}" id="sL1" rendered="#{node.data.rendersecondaryLabel}"
+                                       /> 
+                                       
+                                        <af:switcher id="ibsw" defaultFacet="false" facetName="#{pageFlowScope.InventoryResultsBean.popupMode || pageFlowScope.InventoryResultsBean.designMode}">
+                                        <f:facet name="false">
+                                       <af:commandImageLink action="#{pageFlowScope.InventoryTreeBean.getPendingBiSummaryAction}"
+                                                   actionListener="#{pageFlowScope.InventoryTreeBean.registerPendingBiRecentItem}"
+                                                   id="iBCL" 
+                                                   rendered="#{node.data.installingBi !=null}"
+                                                   shortDesc="#{inventoryUIBundle.BUSINESS_INTERACTION}"
+                                                   text="(#{node.data.installingBiDueDate})">
+                                       <af:setActionListener from="#{node.data.installingBi.oid}" to="#{objectId}"/>
+                                       </af:commandImageLink> 
+                                        </f:facet>
+                                        <f:facet name="true">
+                                          <af:outputText value=" (#{node.data.installingBiDueDate})"  rendered="#{node.data.installingBi !=null}" id="iBot2"
+                                          />
+                                        </f:facet>
+                                      </af:switcher>
+                                    </af:panelGroupLayout>
+                                 </af:column>
+
+                              </f:facet>
+                                                               
+                                  <af:column id="col3" 
+                                            rowHeader="unstyled"
+                                            headerText="#{inventoryUIBundle.A_LOCATION}">
+                                    <af:panelGroupLayout id="pgl51">
+
+                                       <af:outputText value="#{node.data.ALocation}" id="ot121" />
+                                    </af:panelGroupLayout>
+                                 </af:column>
+                                 
+                                  <af:column id="col4" 
+                                            rowHeader="unstyled"
+                                            headerText="#{inventoryUIBundle.Z_LOCATION}">
+                                    <af:panelGroupLayout id="pgl511">
+
+                                       <af:outputText value="#{node.data.ZLocation}" id="ot123"/>
+                                    </af:panelGroupLayout>
+                                    
+                                    
+                                 </af:column>
+                                 
+                                  <af:column id="col5" 
+                                            rowHeader="unstyled"
+                                            headerText="#{inventoryUIBundle.BIT_RATE}"
+                                               inlineStyle="#{node.data.backGroundColor}">
+                                    <af:panelGroupLayout id="pgl513">
+
+                                       <af:outputText value="#{node.data.bitRate}" id="ot124" inlineStyle="#{node.data.inlineTextStyleColor}"/>
+                                    </af:panelGroupLayout>
+                                 </af:column>
+                                 
+                                 
+                              <f:facet name="contextMenu" >
+                                 <af:popup contentDelivery="lazy" id="popupContext">
+                                    <!--Physical Device menu Starts -->
+                                    <af:menu id="cMenu" binding="#{backingBeanScope.menuBinding}" contentDelivery="lazy">
+                                       <af:commandMenuItem text="#{inventoryUIBundle.VIEW_CONNECTIVITY_DETAILS}"
+                                                           id="tdmcmi1"
+                                                           rendered="#{(pageFlowScope.InventoryTreeBean.rootNodePopupMenu) and 
+                                                           !(pageFlowScope.InventoryResultsBean.popupMode || pageFlowScope.InventoryResultsBean.designMode)}"
+                                                           action="viewConnectivityDetails"
+                                                           actionListener="#{bindings.openSubTaskForConnectivityDetails.execute}">
+                                          <af:setActionListener from="#{pageFlowScope.InventoryTreeBean.selectedTreeNode.object.oid}"
+                                                                to="#{objectId}"/>
+                                          <af:setActionListener from="#{pageFlowScope.InventoryTreeBean.selectedTreeNode.object.displayInfo}"
+                                                                to="#{displayInfo}"/>
+                                       </af:commandMenuItem>
+                                       <af:commandMenuItem text="#{inventoryUIBundle.VIEW_ASSIGNED_CONNECTIVITY_DETAILS}"
+                                                           id="tdmcmi2"
+                                                           rendered="#{(pageFlowScope.InventoryTreeBean.viewConnectivityPopupMenu) and 
+                                                           !(pageFlowScope.InventoryResultsBean.popupMode || pageFlowScope.InventoryResultsBean.designMode)}"
+                                                           action="viewConnectivityDetails"
+                                                           actionListener="#{bindings.openSubTaskForConnectivityDetails.execute}">
+                                          <af:setActionListener from="#{pageFlowScope.InventoryTreeBean.selectedTreeNode.consumer eq null ? pageFlowScope.InventoryTreeBean.selectedTreeNode.object.oid : pageFlowScope.InventoryTreeBean.selectedTreeNode.consumer.oid}"
+                                                                to="#{objectId}"/>
+                                          <af:setActionListener from="#{pageFlowScope.InventoryTreeBean.selectedTreeNode.consumer eq null ? pageFlowScope.InventoryTreeBean.selectedTreeNode.object.displayInfo : pageFlowScope.InventoryTreeBean.selectedTreeNode.consumer.displayInfo}"
+                                                                to="#{displayInfo}"/>
+                                       </af:commandMenuItem>
+                                       <af:commandMenuItem text="#{inventoryUIBundle.VIEW_ASSIGNED_PIPE_SUMMARY}"
+                                                           id="tdmcmi3"
+                                                           rendered="#{(pageFlowScope.InventoryTreeBean.viewPipePopupMenu) and 
+                                                           !(pageFlowScope.InventoryResultsBean.popupMode || pageFlowScope.InventoryResultsBean.designMode)}"
+                                                           action="viewPipeSummary"
+                                                           actionListener="#{bindings.openSubTaskForPipeSummary.execute}">
+                                          <af:setActionListener from="#{pageFlowScope.InventoryTreeBean.selectedTreeNode.consumer eq null ? pageFlowScope.InventoryTreeBean.selectedTreeNode.object.oid : pageFlowScope.InventoryTreeBean.selectedTreeNode.consumer.oid}"
+                                                                to="#{objectId}"/>
+                                          <af:setActionListener from="#{pageFlowScope.InventoryTreeBean.selectedTreeNode.consumer eq null ? pageFlowScope.InventoryTreeBean.selectedTreeNode.object.displayInfo : pageFlowScope.InventoryTreeBean.selectedTreeNode.consumer.displayInfo}"
+                                                                to="#{displayInfo}"/>
+                                       </af:commandMenuItem>
+                                    </af:menu>
+                                 </af:popup>
+                              </f:facet>
+                              <f:facet name="pathStamp">
+                                 <af:panelGroupLayout id="pgl2">
+                                    <af:image source="#{node.data.icon}" inlineStyle="vertical-align:middle;" id="i1"
+                                              shortDesc="#{inventoryUIBundle.ICON}"/>
+                                    <af:outputText value="#{node.data.label}" id="psot1"/>
+                                 </af:panelGroupLayout>
+                              </f:facet>
+                           </af:treeTable>
+                        </af:panelCollection>
+                        <trh:script>
+                          function setComponentName(event){
+                                         var txtField = event.getSource();
+                                         var componentName = txtField.getProperty('componentName');
+                                         AdfCustomEvent.queue(txtField, "jsSetComponentName", {componentName: componentName}, true);                 
+                                      }
+                        </trh:script>
+                     </af:showDetailHeader>
+                     <!--
+                     <af:panelGroupLayout id="pgl9" halign="right"
+                                          layout="scroll">
+                        <af:panelGroupLayout id="pgl3" layout="horizontal">
+                           <af:toolbar id="t4">
+                              <af:commandToolbarButton text="#{inventoryUIBundle.ASSIGN}"
+                                                       id="ctb11"
+                                                       disabled="#{pageFlowScope.InventoryResultsBean.disableAssignButton}"
+                                                       actionListener="#{pageFlowScope.InventoryResultsBean.associate}"
+                                                       rendered="#{pageFlowScope.InventoryResultsBean.designMode}"
+                                                       partialTriggers="pc1:TDMTree"/>
+                              <af:commandToolbarButton text="#{inventoryUIBundle.DONE}" id="ctb1" 
+                                                             rendered="#{(pageFlowScope.InventoryResultsBean.popupMode)}"
+                                                             disabled="#{!(pageFlowScope.InventoryResultsBean.disableButtons)}"
+                                                             partialTriggers="pc1:TDMTree" actionListener="#{pageFlowScope.InventoryResultsBean.associate}"/>
+                              <af:spacer width="10" height="10" id="s4"/>
+                              <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb2" 
+                                                             rendered="#{(pageFlowScope.InventoryResultsBean.designMode)||(pageFlowScope.InventoryResultsBean.popupMode)}"   
+                                                             partialTriggers="pc1:TDMTree" actionListener="#{pageFlowScope.InventoryResultsBean.cancel}"/>
+                           </af:toolbar>
+                        </af:panelGroupLayout>
+                     </af:panelGroupLayout>
+                     -->
+                  </af:panelHeader>
+               </af:panelGroupLayout>
+           </f:facet> 
+           <!-- KM - there seems to be some issue with this code and IE. It works fine in other browsers
+           <af:panelGroupLayout halign="right" layout="Horizontal"></af:panelGroupLayout>
+           Adding Spacer to work around this
+           -->
+           <f:facet name="bottom">
+             <af:panelGroupLayout id="pgl9" halign="right" layout="scroll">
+                <af:panelGroupLayout id="pgl3" layout="horizontal">
+                    <af:toolbar id="t4">
+                              <!--af:spacer width="650" height="10"/-->
+                          <af:commandToolbarButton text="#{inventoryUIBundle.ASSIGN}"
+                                                   id="ctb11"
+                                                   disabled="#{pageFlowScope.InventoryResultsBean.disableAssignButton}"
+                                                   actionListener="#{pageFlowScope.InventoryResultsBean.associate}"
+                                                   rendered="#{pageFlowScope.InventoryResultsBean.designMode}"
+                                                   partialTriggers="pc1:TDMTree"/>
+                        <af:spacer width="10" height="10" id="s41"/>
+                          <af:commandToolbarButton text="#{inventoryUIBundle.INVOLVE}" 
+                                                   id="ctb12" 
+                                                   action="CustomInvolvementEdit" actionListener="#{pageFlowScope.InventoryResultsBean.involve}" 
+                                                   disabled="#{(pageFlowScope.InventoryTreeBean.treeTable.selectedRowKeys.size lt 1)}"
+                                                   partialTriggers="pc1:TDMTree" 
+                                                   rendered="#{pageFlowScope.InventoryResultsBean.involvementMode}"/>
+                          <af:commandToolbarButton text="#{inventoryUIBundle.DONE}" id="ctb1" 
+                                                         rendered="#{(pageFlowScope.InventoryResultsBean.popupMode) &amp;&amp; !pageFlowScope.InventoryResultsBean.involvementMode}"
+                                                         disabled="#{(pageFlowScope.InventoryResultsBean.disableButtons)}"
+                                                         partialTriggers="pc1:TDMTree" actionListener="#{pageFlowScope.InventoryResultsBean.associate}"
+                                                   accessKey="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>
+                          <af:spacer width="10" height="10" id="s43"/>
+                          <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb2" 
+                                                         rendered="#{(pageFlowScope.InventoryResultsBean.designMode)||(pageFlowScope.InventoryResultsBean.popupMode)}"   
+                                                         partialTriggers="pc1:TDMTree" actionListener="#{pageFlowScope.InventoryResultsBean.cancel}"
+                                                   accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                    </af:toolbar>
+                </af:panelGroupLayout>
+            </af:panelGroupLayout>
+            
+        </f:facet>
+            
+   </af:panelStretchLayout>
+</jsp:root>

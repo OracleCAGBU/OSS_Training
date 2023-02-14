@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xsi:type="BusinessEntityType" name="IPv4Address" realizeFromBusinessEntity="false">
+  <com:displayName lang="[default]">IPv4Address</com:displayName>
+  <com:saveVersion>8</com:saveVersion>
+  <com:baseEntityRef>
+    <com:entity>IPAddress</com:entity>
+    <com:entityType>inventoryEntity</com:entityType>
+    <com:relationship>oracle.communications.studio.model.baseEntity</com:relationship>
+  </com:baseEntityRef>
+  <com:id>E:inventoryEntity--IPv4Address</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>inventoryEntity--IPv4Address</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>IPv4Address</data:name>
+    <data:displayName lang="[default]">IPv4Address</data:displayName>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>NCRQnLc1--+P----pfcZ4A</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>inventoryEntity--IPv4Address</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <properties interface="oracle.communications.inventory.api.entity.IPv4Address"/>
+</com:modelEntity>

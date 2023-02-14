@@ -1,0 +1,506 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2014, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    rswamir      05/27/14 - 18517326 - P-18465838 - QA:Related Pages drop down disappears,traversing from DI spec page to DI summary.
+    apigeon      11/06/13 - Adding support for Inventory Group Type
+    raattulu     2/22/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>         
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelStretchLayout>
+          <f:facet name="center">
+          <af:panelHeader text="#{pageFlowScope.SpecificationSummaryBean.displayInfo}" helpTopicId="OHW_specSummary" styleClass="invSummaryPanelHeader">
+          <f:facet name="menuBar">
+            <af:group>
+              <af:menuBar id="menuBar2" rendered="#{pageFlowScope.SpecificationSummaryBean.renderRelatedPagesMenu}">
+                <!-- Menus Start-->
+                <af:menu id="menu5"
+                         binding="#{backingBeanScope.InventoryMenuBean.relatedPagesMenu}" styleClass="invSummaryMenu"/>
+              </af:menuBar>
+              <!-- Menus Ends-->
+            </af:group>
+          </f:facet>
+           <!-- Specification Information starts here -->
+           <af:panelGroupLayout layout="scroll" id="pgl23">
+          <af:showDetailHeader text="#{inventoryUIBundle.SPECIFICATION_INFORMATION}" styleClass="invSummaryShowDetailHeader"
+                               disclosed="true">
+            <af:panelFormLayout maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}">
+                <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.specDisplayName}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.ENTITY_TYPE}">
+                <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.entityType}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.START_DATE}">
+                <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.entityObject.validFor.startDate}">
+                <af:convertDateTime pattern="#{pageFlowScope.SpecificationSummaryBean.dateTimeFormat}"/>
+                </af:outputText>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.END_DATE}">
+                <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.entityObject.validFor.endDate}">
+                <af:convertDateTime pattern="#{pageFlowScope.SpecificationSummaryBean.dateTimeFormat}"/>
+                </af:outputText>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}">
+                <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.entityObject.description}"/>
+              </af:panelLabelAndMessage>
+
+              <af:selectBooleanCheckbox value="#{pageFlowScope.SpecificationSummaryBean.enterIdManually}" text="#{inventoryUIBundle.ENTER_ID_MANUALLY}" disabled="true" rendered="#{pageFlowScope.SpecificationSummaryBean.enterIdManuallyVisible}"/>                       
+              <af:selectBooleanCheckbox value="#{pageFlowScope.SpecificationSummaryBean.systemDefinedSpec}" text="#{inventoryUIBundle.SYSTEM_DEFINED_SPEC}" disabled="true" />                       
+              <af:selectBooleanCheckbox value="#{pageFlowScope.SpecificationSummaryBean.consumableMayBeShared}" text="#{inventoryUIBundle.CAN_BE_ASSIGNED_TO_MULTIPLE_EN}" disabled="true" rendered="#{pageFlowScope.SpecificationSummaryBean.consumableMayBeSharedVisible}"/>
+              <af:selectBooleanCheckbox value="#{pageFlowScope.SpecificationSummaryBean.consumerAllowSharedConsumption}" text="#{inventoryUIBundle.CAN__ASSIGN__ENTITIES}" disabled="true" rendered="#{pageFlowScope.SpecificationSummaryBean.consumerAllowSharedConsumptionVisible}"/>
+              <af:selectBooleanCheckbox value="#{pageFlowScope.SpecificationSummaryBean.serviceConfigurationControlled}" text="#{inventoryUIBundle.SERVICE_CONFIGURATION_CONTROLLED}" disabled="true" rendered="#{pageFlowScope.SpecificationSummaryBean.serviceConfigurationControlledVisible}"/>
+
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.ENTITY_ID_SPECIFICATION}"
+                                        rendered="#{pageFlowScope.SpecificationSummaryBean.entityIdSpecVisible}">
+                <af:commandImageLink action="init" actionListener="#{bindings.openSubTaskForEntityIdSpecSummary.execute}"
+				text="#{pageFlowScope.SpecificationSummaryBean.entityIdSpecification.name}" 
+                                shortDesc="#{pageFlowScope.SpecificationSummaryBean.entityIdSpecification.name eq null ? '&#160;' : inventoryUIBundle.LINK_FOR_NAVIGATION}"
+                                     disabled="#{pageFlowScope.SpecificationSummaryBean.entityIdSpecification.name eq null ? true : false}">
+                  <af:setActionListener from="#{pageFlowScope.SpecificationSummaryBean.entityIdSpecification.oid}" to="#{pageFlowScope.objectId}"/>
+                
+                </af:commandImageLink>
+              </af:panelLabelAndMessage>
+              
+              <!-- Connectivity Classification-->
+               <af:panelLabelAndMessage label="#{inventoryUIBundle.CONNECTIVITY_CLASSIFICATION}"
+                                       rendered="#{pageFlowScope.SpecificationSummaryBean.technologyEnabled}">
+                <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.connectivityClassification}"/>
+              </af:panelLabelAndMessage>              
+             
+               <!--Technology -->
+               <af:panelLabelAndMessage label="#{inventoryUIBundle.TECHNOLOGY}"
+                                       rendered="#{pageFlowScope.SpecificationSummaryBean.technologyEnabled}">
+                <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.technology}"/>
+              </af:panelLabelAndMessage>
+              
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_GROUP_TYPE}"
+                                       rendered="#{pageFlowScope.SpecificationSummaryBean.inventoryGroupTypeVisible}">
+                <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.inventoryGroupTypeName}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.VENDOR_NAME}"
+                                       rendered="#{pageFlowScope.SpecificationSummaryBean.vendorNameVisible}">
+                <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.vendorName}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.MODEL_NUMBER}"
+                                       rendered="#{pageFlowScope.SpecificationSummaryBean.modelNumberVisible}">
+                <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.modelNumber}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.PART_NUMBER}"
+                                       rendered="#{pageFlowScope.SpecificationSummaryBean.partNumberVisible}">
+                <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.partNumber}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.PREFIX}"
+                                       rendered="#{pageFlowScope.SpecificationSummaryBean.prefixVisible}">
+                <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.prefix}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.SUFFIX}"
+                                       rendered="#{pageFlowScope.SpecificationSummaryBean.suffixVisible}">
+                <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.suffix}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.SEQUENCE_SPECIFICATION}"
+                                       rendered="#{pageFlowScope.SpecificationSummaryBean.sequenceSpecVisible}">
+                <af:commandImageLink action="sequenceSummary" actionListener="#{bindings.openSubTaskForSeqSpecSummary.execute}"
+                                     text="#{pageFlowScope.SpecificationSummaryBean.sequenceSpec}"
+                                     shortDesc="#{inventoryUIBundle.SEQUENCE_SPECIFICATION_SUMMARY_LINK}">
+                  
+                </af:commandImageLink>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.NO_OF_HOLDERS_REQ}"
+                                       rendered="#{pageFlowScope.SpecificationSummaryBean.numberOfHoldersRequiredVisible}">
+                <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.numberOfHoldersRequired}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.FRONT_MEDIA}" rendered="#{pageFlowScope.SpecificationSummaryBean.frontMediaVisible}">
+                <af:image id="i1" source="/images/config-item_ena.png"
+                          shortDesc="#{inventoryUIBundle.FRONT_MEDIA}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.ROLE_TYPE}"
+                                       rendered="#{pageFlowScope.SpecificationSummaryBean.roleTypeVisible}">
+                <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.roleType}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.SELECTED_ROLE_ENABLED}"
+                                       rendered="#{pageFlowScope.SpecificationSummaryBean.selectedRoleEnabledVisible}">
+                <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.selectedRoleEnabled}"/>
+              </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+            
+             <af:showDetail disclosed="true" id="dispec"
+                             disclosedText="#{inventoryUIBundle.RATE_CODE}" undisclosedText="#{inventoryUIBundle.RATE_CODE}"
+                             rendered="#{pageFlowScope.SpecificationSummaryBean.rateCodeSectionVisible}" styleClass="AFStretchWidth" >
+                <af:panelFormLayout id="di-ldlayout" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">                             
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="rc-name">
+                                    <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.rateCodeName}" id="rc-nameId"/>
+                    </af:panelLabelAndMessage>
+                    
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.BIT_RATE}" id="rc-bitrate">
+                                    <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.rateCodeBitRate}" id="rc-bitrateId"/>
+                    </af:panelLabelAndMessage>
+                    
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.TECHNOLOGY}" id="rc-technology">
+                                    <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.rateCodeTechnology}" id="rc-technologyId"/>
+                    </af:panelLabelAndMessage>
+                    
+                     <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}" id="rc-description">
+                                    <af:outputText value="#{pageFlowScope.SpecificationSummaryBean.rateCodeDescription}" id="rc-descriptionId"/>
+                    </af:panelLabelAndMessage>
+
+                </af:panelFormLayout>
+              </af:showDetail>
+          </af:showDetailHeader>
+        
+        <!-- Specification Information ends here -->
+        
+        <!-- Inventory Group Type starts here -->
+        <af:spacer width="10" height="10" id="s9"/>
+          <af:showDetailHeader text="#{inventoryUIBundle.ALLOWED_GROUP_ENABLED_ENTITY}" rendered="#{pageFlowScope.SpecificationSummaryBean.inventoryGroupTypeVisible}"
+                               disclosed="true" styleClass="invSummaryShowDetailHeader">
+            <af:panelCollection styleClass="AFStretchWidth">
+              <af:table var="row" rowBandingInterval="0"
+                        contentDelivery="immediate" autoHeightRows="#{pageFlowScope.SpecificationSummaryBean.portletHeight}" 
+                        value="#{pageFlowScope.SpecificationSummaryBean.groupEnabledEntityList}"
+                        summary="#{inventoryUIBundle.INVENTORY_GROUP_TYPE}">
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.ENTITY_NAME}"
+                           rowHeader="unstyled">
+                  <af:outputText value="#{row}"/>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:showDetailHeader>
+        <!-- Inventory Group Type ends here -->
+        
+        
+        <!-- Capacity Provided starts here -->
+       
+          <af:showDetailHeader text="#{inventoryUIBundle.CAPACITY_PRO_SPEC}" rendered="#{pageFlowScope.SpecificationSummaryBean.capacityProvidedSpecsListVisible}"
+                               disclosed="true" styleClass="invSummaryShowDetailHeader">
+            <af:panelCollection styleClass="AFStretchWidth">
+              <af:table var="row" rowBandingInterval="0"
+                        contentDelivery="immediate" autoHeightRows="#{pageFlowScope.SpecificationSummaryBean.portletHeight}" 
+                        value="#{pageFlowScope.SpecificationSummaryBean.capacityProvidedSpecsList}"
+                        summary="#{inventoryUIBundle.CAPACITY_PRO_SPEC}">
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.NAME}"
+                           rowHeader="unstyled">
+                  <af:outputText value="#{row.name}"/>
+                </af:column>
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.DESCRIPTION}">
+                  <af:outputText value="#{row.description}"/>
+                </af:column>
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.CAPACITY_TYPE}">
+                  <af:outputText value="#{row.capacityType.name}"/>
+                </af:column>
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.TOTAL_AMOUNT_PROVIDED}">
+                  <af:outputText value="#{row.totalAmountProvided}"/>
+                </af:column>
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.UNIT_OF_MEASURE}">
+                  <af:outputText value="#{row.unitOfMeasure.name}"/>
+                </af:column>
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.TOTAL_CONSUMABLE_PERCENT}">
+                  <af:outputText value="#{row.totalConsumablePercent}"/>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:showDetailHeader>
+        <!-- Capacity Provided ends here -->
+        <!-- Capacity Required starts here -->
+        
+          <af:showDetailHeader text="#{inventoryUIBundle.CAPACITY_REQ_SPEC}" rendered="#{pageFlowScope.SpecificationSummaryBean.capacityRequiredSpecsListVisible}"
+                               disclosed="true" styleClass="invSummaryShowDetailHeader">
+            <af:panelCollection styleClass="AFStretchWidth">
+              <af:table var="row" rowBandingInterval="0"
+                        contentDelivery="immediate" autoHeightRows="#{pageFlowScope.SpecificationSummaryBean.portletHeight}" 
+                        value="#{pageFlowScope.SpecificationSummaryBean.capacityRequiredSpecsList}"
+                        summary="#{inventoryUIBundle.CAPACITY_REQ_SPEC}">
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.NAME}"
+                           rowHeader="unstyled">
+                  <af:outputText value="#{row.name}"/>
+                </af:column>
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.DESCRIPTION}">
+                  <af:outputText value="#{row.description}"/>
+                </af:column>
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.CAPACITY_TYPE}">
+                  <af:outputText value="#{row.capacityType.name}"/>
+                </af:column>
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.AMOUNT_REQUIRED}">
+                  <af:outputText value="#{row.amountRequired}"/>
+                </af:column>
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.UNIT_OF_MEASURE}">
+                  <af:outputText value="#{row.unitOfMeasure.name}"/>
+                </af:column>
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.QUANTITY}">
+                  <af:outputText value="#{row.capacityQuantity}"/>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:showDetailHeader>
+        <!-- Capacity Required ends here -->
+        <!-- Signal Structure starts here -->
+        
+          <af:showDetailHeader text="#{inventoryUIBundle.SIGNAL_STRUCTURE}" rendered="#{pageFlowScope.SpecificationSummaryBean.signalStructureListVisible}"
+                               disclosed="true" styleClass="invSummaryShowDetailHeader">
+            <af:panelCollection styleClass="AFStretchWidth">
+              <af:table var="row" rowBandingInterval="0"
+                        contentDelivery="immediate" autoHeightRows="#{pageFlowScope.SpecificationSummaryBean.portletHeight}" 
+                        value="#{pageFlowScope.SpecificationSummaryBean.signalStructureList}"
+                        summary="#{inventoryUIBundle.SIGNAL_STRUCTURE_RESULTS}">
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.NAME}">
+                  <af:commandImageLink action="init" text="#{row.name}"
+                                       shortDesc="#{inventoryUIBundle.SIGNAL_STRUCTURE_SUMMARY_LINK}">
+            
+                    <af:setActionListener from="#{row.oid}" to="#{pageFlowScope.objectId}"/>
+                  </af:commandImageLink>  
+                </af:column>
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.CAPACITY_PROVIDED_NAME}"
+                           rowHeader="unstyled">
+                  <af:outputText value="#{row.capacityProvidedName}"/>
+                </af:column>
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.TOTAL_AMOUNT_PROVIDED}">
+                  <af:outputText value="#{row.totalAmountProvided}"/>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:showDetailHeader>
+        <!-- Signal Structure ends here -->
+        <!-- Layout starts here -->
+        
+          <af:showDetailHeader text="#{inventoryUIBundle.LAYOUTS}"
+                               rendered="#{!(pageFlowScope.SpecificationSummaryBean.configSpec || pageFlowScope.SpecificationSummaryBean.entityIdSpec) &amp;&amp; (pageFlowScope.SpecificationSummaryBean.formLayoutEnabled || pageFlowScope.SpecificationSummaryBean.summaryLayoutEnabled) &amp;&amp; (pageFlowScope.displayInfo eq null)}"
+                               disclosed="true" styleClass="invSummaryShowDetailHeader">
+            <af:panelGroupLayout>
+              <af:outputText value="#{inventoryUIBundle.LAYOUT_MESSAGE}"/>
+              <af:spacer height="15"/>
+              <af:panelGroupLayout layout="horizontal" rendered="#{pageFlowScope.SpecificationSummaryBean.formLayoutEnabled}">
+                <af:outputText value="#{inventoryUIBundle.THE}"/>
+                <af:spacer width="5"/>
+                <af:commandImageLink action="previewLayoutEdit" actionListener="#{pageFlowScope.SpecificationSummaryBean.openEditPreview}"
+                                     text="#{inventoryUIBundle.FORM_LAYOUT}"
+                                     shortDesc="#{inventoryUIBundle.FORM_LAYOUT_LINK}">
+                
+                </af:commandImageLink>
+                <af:spacer width="5"/>
+                <af:outputText value="#{inventoryUIBundle.FORM_MESSAGE}"/>
+              </af:panelGroupLayout>
+              <af:panelGroupLayout layout="horizontal" rendered="#{pageFlowScope.SpecificationSummaryBean.summaryLayoutEnabled}">
+                <af:outputText value="#{inventoryUIBundle.THE}"/>
+                <af:spacer width="5"/>
+                <af:commandImageLink action="previewLayoutSummary" actionListener="#{pageFlowScope.SpecificationSummaryBean.openSummaryPreview}"
+                                     text="#{inventoryUIBundle.SUMMARY_LAYOUT}"
+                                     shortDesc="#{inventoryUIBundle.SUMMARY_LAYOUT_LINK}">
+                
+                </af:commandImageLink>
+                <af:spacer width="5"/>
+                <af:outputText value="#{inventoryUIBundle.SUMMARY_MESSAGE}"/>
+              </af:panelGroupLayout>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout layout="horizontal" id="pglp" rendered="#{pageFlowScope.SpecificationSummaryBean.renderPreviewLayout}">
+                <af:outputText value="#{inventoryUIBundle.THE}" id="otlp"/>
+                <af:spacer width="5"/>
+                <af:commandImageLink actionListener="#{pageFlowScope.SpecificationSummaryBean.openListPreview}" id="cllp"
+                                     text="#{inventoryUIBundle.LIST_LAYOUT}"
+                                     shortDesc="#{inventoryUIBundle.LIST_LAYOUT_LINK}">
+                  
+                </af:commandImageLink>
+                <af:spacer width="5"/>
+                <af:outputText value="#{inventoryUIBundle.LIST_MESSAGE}" id="otm"/>
+              </af:panelGroupLayout>
+            <af:spacer height="10"/>
+          </af:showDetailHeader>
+        <!-- Layout ends here -->
+        <!-- Characteristics starts here -->
+        <af:spacer width="10" height="10" id="s4"/>
+          <af:region value="#{bindings.CharacteristicSpecificationListFlow1.regionModel}" rendered="#{!(pageFlowScope.SpecificationSummaryBean.configSpec || pageFlowScope.SpecificationSummaryBean.entityIdSpec)}"
+                     id="r1"/>
+        <!-- Characteristics ends here -->
+        <!-- Rulesets starts here -->
+        <af:spacer width="10" height="10" id="s2"/>
+          <af:showDetailHeader text="#{inventoryUIBundle.EXTENSION_POINT_RULE_SETS}" rendered="#{!pageFlowScope.SpecificationSummaryBean.entityIdSpec}"
+                               disclosed="true" styleClass="invSummaryShowDetailHeader">
+            <af:panelCollection styleClass="AFStretchWidth">
+              <af:table var="row" rowBandingInterval="0"
+                        contentDelivery="immediate" autoHeightRows="#{pageFlowScope.SpecificationSummaryBean.portletHeight}" 
+                        value="#{pageFlowScope.SpecificationSummaryBean.relatedExtensionPointRuleSets}"
+                        summary="#{inventoryUIBundle.EXTENSION_POINT_RULE_SETS}">
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.MENU_RULE_SET}">
+                  <af:commandImageLink action="ruleSummary" actionListener="#{bindings.openSubTaskForRuleSummary.execute}"
+                                       shortDesc="#{inventoryUIBundle.RULE_SETS_SUMMARY_LINK}"
+                                       text="#{row.ruleSetEntity.name}">         
+            
+                    <af:setActionListener from="#{row.ruleSetEntity.oid}" to="#{ruleOid}"/>
+                    <af:setActionListener from="#{row.ruleSetEntity.name}" to="#{DisplayInfo}"/>
+                  </af:commandImageLink>
+                </af:column>
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.EXTENSION_POINT}"
+                           rowHeader="unstyled">
+                  <af:outputText value="#{row.extensionPoint.name}"/>
+                </af:column>
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.TYPE}">
+                  <af:outputText value="#{row.type}"/>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:showDetailHeader>
+        <!-- Rulesets ends here -->
+        <!-- Transition Groups starts here -->
+        <af:spacer width="10" height="10" id="s5"/>
+          <af:showDetailHeader text="#{inventoryUIBundle.TRANSITION_GROUPS}" rendered="#{!(pageFlowScope.SpecificationSummaryBean.configSpec || pageFlowScope.SpecificationSummaryBean.entityIdSpec)}"
+                               disclosed="true" styleClass="invSummaryShowDetailHeader">
+            <af:panelCollection styleClass="AFStretchWidth">
+              <af:table var="row" rowBandingInterval="0"
+                        contentDelivery="immediate" autoHeightRows="#{pageFlowScope.SpecificationSummaryBean.portletHeight}" 
+                        value="#{pageFlowScope.SpecificationSummaryBean.transitionGroups}"
+                        summary="#{inventoryUIBundle.TRANSITION_GROUPS_TABLE}">
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.GROUP}"
+                           rowHeader="unstyled">
+                  <af:outputText value="#{row.name}"/>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:showDetailHeader>
+        <!-- Transition Groups ends here -->
+        <!-- Composition starts here -->
+        <af:spacer width="10" height="10" id="s6"/>
+          <af:showDetailHeader text="#{inventoryUIBundle.COMPOSITION}" rendered="#{!(pageFlowScope.SpecificationSummaryBean.configSpec)}"
+                               disclosed="true" styleClass="invSummaryShowDetailHeader">
+            <af:panelCollection styleClass="AFStretchWidth">
+                  <af:treeTable value="#{pageFlowScope.SpecificationTreeBean.treeModel}" var="node"
+                                rowSelection="multiple" styleClass="invSummaryTreeTable"
+                                id="specificationTreeTable" contextMenuSelect="true"
+                                contentDelivery="immediate"
+                                binding="#{backingBeanScope.SPEC_treeBinding}"
+                                disclosedRowKeys="#{pageFlowScope.SpecificationTreeBean.treeDisclosedRowKeys}"
+                                expandAllEnabled="#{pageFlowScope.SpecificationTreeBean.expandAllEnabled}"
+                                selectionListener="#{pageFlowScope.SpecificationTreeBean.nodeSelectedEvent}"
+                                fetchSize="#{pageFlowScope.SpecificationSummaryBean.fetchSize}"
+                                summary="#{inventoryUIBundle.COMPOSITION}">
+                    <f:facet name="nodeStamp">
+                      <af:column sortable="false" id="c1" width="500"
+                                 rowHeader="unstyled" headerText="#{inventoryUIBundle.COMPOSITION}">
+                        <af:panelGroupLayout id="pgl5">
+                          <af:image source="#{node.data.icon}" id="nodeIcon"
+                                    styleClass="invSummaryImage" shortDesc="icon"/>
+                          <af:outputText value="#{node.data.label}" id="ot1"/>
+                        </af:panelGroupLayout>
+                      </af:column>
+                    </f:facet>
+                    <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.RATE_CODE}" id="ratecodeId" filterable="false" rendered="#{pageFlowScope.SpecificationSummaryBean.rateCodeColumnVisible}">
+                  <!-- Start For displaying the RateCode -->
+                        <af:outputText value="#{node.data.rateCode}" id="rateCodeID"/>
+                  <!-- End For displaying the RateCode -->
+                    </af:column>
+                    <f:facet name="contextMenu">
+                      <af:popup contentDelivery="lazyUncached" id="popupContext"
+                                partialTriggers="::specificationTreeTable">
+                        <af:menu text="childNodeMenu" id="childNodeMenu"
+                                 rendered="#{pageFlowScope.SpecificationTreeBean.childNodePopupMenu}">
+                          <af:commandMenuItem text="#{inventoryUIBundle.RELATIONSHIP_PROPERTIES}"
+                                              id="relPropertiesMenuItem" selected="true">
+                            <af:setActionListener from="true" to="#{pageFlowScope.invokeSR}"/>
+                            <af:showPopupBehavior triggerType="click" popupId="::popupSpecRelationId"/>
+                          </af:commandMenuItem>
+                        </af:menu>
+                      </af:popup>
+                    </f:facet>
+                  </af:treeTable>
+                  <af:popup id="popupSpecRelationId"
+                        binding="#{backingBeanScope.popupSpecRelation}"
+                        contentDelivery="lazyUncached">
+                <af:dialog id="specRelDialog" type="none"
+                           title="#{inventoryUIBundle.MAINTAIN} #{inventoryUIBundle.SPECIFICATION_RELATIONSHIP}">
+                  <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.SpecificationRelationshipMaintFlow1.regionModel}"
+                                 id="specRel"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+              </af:popup>
+            </af:panelCollection>
+          </af:showDetailHeader>
+        <!-- Composition ends here -->
+        <!-- Config Spec Tree starts here -->
+        <af:spacer width="10" height="10" id="s7"/>
+          <af:showDetailHeader text="#{inventoryUIBundle.CONFIGURATION} #{inventoryUIBundle.SPECIFICATION}" disclosed="true" rendered="#{pageFlowScope.SpecificationSummaryBean.configSpec}"
+          styleClass="invSummaryShowDetailHeader" id="sdh1">
+            <af:panelCollection styleClass="AFStretchWidth" id="pc1">
+                <af:treeTable value="#{pageFlowScope.ConfigSpecTreeBean.treeModel}" 
+                              var="node" 
+                              rowSelection="single"
+                              styleClass="invSummaryTreeTable"
+                              id="configSpecTreeTable"
+                              binding="#{backingBeanScope.CONFIGSPEC_treeBinding}"
+                              disclosedRowKeys="#{pageFlowScope.ConfigSpecTreeBean.treeDisclosedRowKeys}"
+                              expandAllEnabled="#{pageFlowScope.ConfigSpecTreeBean.expandAllEnabled}"
+                              contextMenuSelect="true" contentDelivery="immediate"
+                              selectionListener="#{pageFlowScope.ConfigSpecTreeBean.nodeSelectedEvent}"
+                              fetchSize="#{pageFlowScope.ConfigSpecTreeBean.fetchSize}"
+                              rowBandingInterval="0"
+                              horizontalGridVisible="false" columnStretching="last"
+                              summary="#{inventoryUIBundle.CONFIGURATION_SPEC_TREETABLE}">
+                   <f:facet name="nodeStamp">
+                    <af:column sortable="false" id="c2"
+                               headerText="configspec" rowHeader="unstyled">
+                        <af:panelGroupLayout id="pgl1">
+                           <af:image source="#{node.data.icon}" id="i2"
+                                     inlineStyle="margin-right:3px; vertical-align:middle; height:16px; width:16px;"
+                                     shortDesc="icon"/>
+                         <af:switcher id="idSwitcher" defaultFacet="false" facetName="#{pageFlowScope.ConfigSpecTreeBean.disableNodeLink}">
+                            <f:facet name="false">           
+                                <af:commandImageLink action="#{pageFlowScope.ConfigSpecTreeBean.view}" id="cl1"
+                                                     shortDesc="#{inventoryUIBundle.CONFIGURATION_SPEC_SUMMARY_LINK}"
+                                                     text="#{node.data.label}">
+                                
+                                </af:commandImageLink>
+                            </f:facet> 
+                            <f:facet name="true">           
+                                <af:outputText value="#{node.data.label}" id="ot2"/>
+                            </f:facet> 
+                         </af:switcher>
+                        </af:panelGroupLayout>                                  
+                    </af:column>
+                  </f:facet>
+              </af:treeTable></af:panelCollection>
+          </af:showDetailHeader>
+          </af:panelGroupLayout>
+         </af:panelHeader>
+      
+      <!-- Config Spec Tree ends here -->
+      </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

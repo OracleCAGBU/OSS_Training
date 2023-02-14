@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:pf="/platform/functions"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+		   
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+    <af:panelGroupLayout id="pgl1" layout="scroll">
+        
+          
+          <af:panelHeader text="#{pageFlowScope.ProductEditBean.message}" id="ph45" messageType="confirmation" rendered="#{pageFlowScope.ProductEditBean.addAnotherMode}"/>
+          
+          <af:panelHeader text="#{inventoryUIBundle.PRODUCT} - #{pageFlowScope.ProductEditBean.displayInfo}" id="ph1" helpTopicId="#{pageFlowScope.ProductEditBean.helpTopic}">
+         
+          <f:facet name="toolbar">
+             <af:panelGroupLayout layout="horizontal" id="pgl3" rendered ="#{!pageFlowScope.ProductEditBean.previewLayout}">
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CONTINUE}" id="cb1" 
+                                actionListener="#{pageFlowScope.ProductEditBean.save}"
+                                action="#{pageFlowScope.ProductEditBean.saveOutcome}" 
+                                rendered="#{pageFlowScope.ProductEditBean.addMode and !pageFlowScope.ProductEditBean.popupMode }"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_CONTINUE_ACCESS_KEY}">
+                        <af:setActionListener from="summary" to="#{pageFlowScope.saveActionOutcome}"/> 
+              </af:commandButton>
+              <af:spacer width="10" height="10" id="s2"/>
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER}" 
+                                actionListener="#{pageFlowScope.ProductEditBean.save}" id="cb3"
+                                action="#{pageFlowScope.ProductEditBean.saveOutcome}" 
+                                rendered="#{pageFlowScope.ProductEditBean.addMode and !pageFlowScope.ProductEditBean.popupMode}"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER_ACCESS_KEY}">
+                                <af:setActionListener from="init" to="#{pageFlowScope.saveActionOutcome}"/>               
+              </af:commandButton>
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb4" 
+                                actionListener="#{pageFlowScope.ProductEditBean.save}"
+                                action="#{pageFlowScope.ProductEditBean.saveOutcome}" 
+                                rendered="#{!pageFlowScope.ProductEditBean.addMode || pageFlowScope.ProductEditBean.popupMode}"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+                                <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>               
+              </af:commandButton>
+              <af:spacer width="10" height="10" id="s3"/>
+              <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2" actionListener="#{pageFlowScope.ProductEditBean.cancel}" action="cancel" immediate="true"
+                                accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+          </af:panelGroupLayout>
+          </f:facet>
+          <af:panelGroupLayout layout="scroll" id="pgl23">
+          <af:showDetailHeader text="#{inventoryUIBundle.PRODUCT_INFORMATION}"
+                               disclosed="true" id="sdh1">
+            <af:panelGroupLayout id="pgl2">
+              <af:panelFormLayout maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" id="pdt" binding="#{backingBeanScope.uiHintsPanel}" >
+                <af:selectOneChoice id="pdt-specification" label="#{inventoryUIBundle.SPECIFICATION}" autoSubmit="true"
+                                    value="#{pageFlowScope.ProductEditBean.selectedSpec}"
+                                    valueChangeListener="#{pageFlowScope.ProductEditBean.specChanged}"
+                                    disabled="#{!(pageFlowScope.ProductEditBean.addMode)}" required="true">
+                  <f:selectItems value="#{pageFlowScope.ProductEditBean.specDropdown}" id="si1"/>
+                </af:selectOneChoice>
+                <af:inputText value="#{(pageFlowScope.ProductEditBean.addMode &amp;&amp; pageFlowScope.ProductEditBean.specificationCount > 0)  ? 
+                                    (pageFlowScope.ProductEditBean.enterIdManually ? pageFlowScope.ProductEditBean.entityObject.id : inventoryUIBundle.AUTO_GENERATE) : (pageFlowScope.ProductEditBean.entityObject.id)}"
+                              label="#{inventoryUIBundle.ID}" required="true"
+                              disabled="#{(pageFlowScope.ProductEditBean.specificationCount > 0) &amp;&amp; (!(pageFlowScope.ProductEditBean.addMode &amp;&amp; pageFlowScope.ProductEditBean.enterIdManually))}"
+                              maximumLength="50" columns="53" id="pdt-id" binding="#{backingBeanScope.idBinding}"/>
+                <af:inputText value="#{pageFlowScope.ProductEditBean.entityObject.name}" label="#{inventoryUIBundle.NAME}" required="true"
+                              maximumLength="50" columns="53" id="pdt-name"/>
+                <af:inputText value="#{pageFlowScope.ProductEditBean.entityObject.description}" label="#{inventoryUIBundle.DESCRIPTION}"
+                              maximumLength="255" rows="5" columns="50" id="pdt-description"/>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="pdt-lmd" rendered="false" visible="#{pageFlowScope.ProductEditBean.lastModifiedDate != null}">
+                    <af:outputText value="#{pageFlowScope.ProductEditBean.lastModifiedDate}" id="ot9">
+                        <af:convertDateTime pattern="#{pageFlowScope.ProductEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="pdt-lmu" rendered="false" visible="#{pageFlowScope.ProductEditBean.entityObject.lastModifiedUser != null}">
+                    <af:outputText value="#{pageFlowScope.ProductEditBean.entityObject.lastModifiedUser}" id="ot10"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="pdt-crd" rendered="false" visible="#{pageFlowScope.ProductEditBean.createdDate != null}">
+                    <af:outputText value="#{pageFlowScope.ProductEditBean.createdDate}" id="ot11">
+                        <af:convertDateTime pattern="#{pageFlowScope.ProductEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="pdt-cru" rendered="false" visible="#{pageFlowScope.ProductEditBean.entityObject.createdUser != null}">
+                    <af:outputText value="#{pageFlowScope.ProductEditBean.entityObject.createdUser}" id="ot12"/>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+            </af:panelGroupLayout>
+          </af:showDetailHeader>
+          </af:panelGroupLayout>
+        </af:panelHeader>
+      
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

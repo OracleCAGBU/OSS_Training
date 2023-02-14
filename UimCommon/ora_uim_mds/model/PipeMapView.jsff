@@ -1,0 +1,1665 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" 
+xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html">
+    <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                     value="#{bindings.ptb1}" id="pt1">
+        <f:facet name="localArea">
+        <af:panelStretchLayout id="psll1" styleClass="AFStretchWidth" binding="#{backingBeanScope.mapViewLayout}" dimensionsFrom="auto" topHeight="800px;">
+	<f:facet name="top">
+				<af:panelHeader text="#{pageFlowScope.PipeMapViewbean.displayInfo}" id="ph1">
+					<f:facet name="context"/>
+					<f:facet name="menuBar"/>
+					<f:facet name="toolbar"/>
+					<f:facet name="legend"/>
+					<f:facet name="info"/>
+					<af:clientListener method="goMap()" type="load"/>
+				  </af:panelHeader>
+	</f:facet>
+        <f:facet name="center">
+        <af:panelGroupLayout id="pgl1" layout="scroll">
+         <af:popup id="dynapop2" rendered="true" contentDelivery="lazyUncached"
+							  animate="false" clientComponent="true"
+							  binding= "#{backingBeanScope.dynapopMenu2}" >
+					  <af:clientListener method="interrupt" type="popupOpened"/>
+					  <af:menu text="menu 1" id="m1" clientComponent="true">
+						<af:commandMenuItem text="#{inventoryUIBundle.LOCATION_DETAILS}" 
+                                                                    id="cmi1" 
+                                                                    visible="#{pageFlowScope.PipeMapViewbean.locationVisible}"
+                                                                    action ="locationDetails"
+                                                                    actionListener="#{bindings.openSubTaskForLocationDetails.execute}">
+						  <af:setActionListener from="#{pageFlowScope.PipeMapViewbean.placeId}" to="#{requestScope.oid}"/>
+						</af:commandMenuItem>
+                                                
+                                                
+                                                <af:commandMenuItem text="#{inventoryUIBundle.PLACE_SUMMARY}" 
+                                                                    id="cmi10"
+                                                                    visible="#{pageFlowScope.PipeMapViewbean.placeVisible}"
+                                                                    action="placeSummary"
+                                                                    actionListener="#{bindings.openSubTaskForPlaceSummary.execute}">
+                                                <af:setActionListener from="#{pageFlowScope.PipeMapViewbean.placeId}" to="#{requestScope.oid}"/>
+                                                </af:commandMenuItem>
+						
+						<af:commandMenuItem text="#{inventoryUIBundle.LOGICAL_DEVICE_SUMMARY}" 
+                                                                    id="cmi7" 
+                                                                    visible="#{pageFlowScope.PipeMapViewbean.logicalDeviceVisible}"
+                                                                    action="logicalDeviceSummary"
+                                                                    actionListener="#{bindings.openSubTaskForLogicalDeviceSummary.execute}">
+						  <af:setActionListener from="#{pageFlowScope.PipeMapViewbean.foiId}" to="#{requestScope.oid}"/>
+						</af:commandMenuItem>
+                                                
+                                                <af:commandMenuItem text="#{inventoryUIBundle.DEVICE_INTERFACE_SUMMARY}" 
+                                                                    id="cmi2" 
+                                                                    visible="#{pageFlowScope.PipeMapViewbean.deviceInterfaceVisible}"
+                                                                    action="deviceInterfaceSummary"
+                                                                    actionListener="#{bindings.openSubTaskForDeviceInterfaceSummary.execute}">
+						  <af:setActionListener from="#{pageFlowScope.PipeMapViewbean.foiId}" to="#{requestScope.oid}"/>
+						</af:commandMenuItem>
+                                                
+                                                <af:commandMenuItem text="#{inventoryUIBundle.EQUIPMENT_SUMMARY}" 
+                                                                    id="cmi3" 
+                                                                    visible="#{pageFlowScope.PipeMapViewbean.equipmentVisible}"
+                                                                    action="equipmentSummary"
+                                                                    actionListener="#{bindings.openSubTaskForEquipmentSummary.execute}">
+						  <af:setActionListener from="#{pageFlowScope.PipeMapViewbean.foiId}" to="#{requestScope.oid}"/>
+						</af:commandMenuItem>
+                                                
+                                                 <af:commandMenuItem text="#{inventoryUIBundle.PHYSICAL_DEVICE_SUMMARY}" 
+                                                                    id="cmi4" 
+                                                                    visible="#{pageFlowScope.PipeMapViewbean.physicalDeviceVisible}"
+                                                                    action="physicalDeviceSummary"
+                                                                    actionListener="#{bindings.openSubTaskForPhysicalDeviceSummary.execute}">
+						  <af:setActionListener from="#{pageFlowScope.PipeMapViewbean.foiId}" to="#{requestScope.oid}"/>
+						</af:commandMenuItem>
+                                                
+                                                <af:commandMenuItem text="#{inventoryUIBundle.PHYSICAL_PORT_SUMMARY}" 
+                                                                    id="cmi5" 
+                                                                    visible="#{pageFlowScope.PipeMapViewbean.physicalPortVisible}"
+                                                                    action="physicalPortSummary"
+                                                                    actionListener="#{bindings.openSubTaskForPhysicalPortSummary.execute}">
+						  <af:setActionListener from="#{pageFlowScope.PipeMapViewbean.foiId}" to="#{requestScope.oid}"/>
+						</af:commandMenuItem>
+                                                
+                                                <af:commandMenuItem text="#{inventoryUIBundle.PHYSICAL_CONNECTOR_SUMMARY}" 
+                                                                    id="cmi6" 
+                                                                    visible="#{pageFlowScope.PipeMapViewbean.physicalConnectorVisible}"
+                                                                    action="physicalConnectorSummary"
+                                                                    actionListener="#{bindings.openSubTaskForPhysicalConnectorSummary.execute}">
+						  <af:setActionListener from="#{pageFlowScope.PipeMapViewbean.foiId}" to="#{requestScope.oid}"/>
+						</af:commandMenuItem>
+                                                
+                                                 <af:commandMenuItem text="#{inventoryUIBundle.NETWORK_SUMMARY}" 
+                                                                    id="cmi8" 
+                                                                    visible="#{pageFlowScope.PipeMapViewbean.networkVisible}"
+                                                                    action="networkSummary"
+                                                                    actionListener="#{bindings.openSubTaskForNetworkSummary.execute}">
+						  <af:setActionListener from="#{pageFlowScope.PipeMapViewbean.foiId}" to="#{requestScope.oid}"/>
+						</af:commandMenuItem>
+						 
+						<af:commandMenuItem text="#{inventoryUIBundle.PIPE_SUMMARY}" 
+                                                                    id="cmia" 
+                                                                    visible="#{pageFlowScope.PipeMapViewbean.pipesVisible}" 
+                                                                    action="pipeSummary"
+                                                                    actionListener="#{bindings.openSubTaskForPipeSummary.execute}">
+                                                <af:setActionListener from="#{pageFlowScope.PipeMapViewbean.foiId}" to="#{requestScope.oid}"/>
+						</af:commandMenuItem>
+                                                
+                                                <af:commandMenuItem text="#{inventoryUIBundle.CONNECTIVITY_SUMMARY}" 
+                                                                    id="cmi9" 
+                                                                    visible="#{pageFlowScope.PipeMapViewbean.connectivityVisible}" 
+                                                                    action="connectivitySummary"
+                                                                    actionListener="#{bindings.openSubTaskForTDMSummary.execute}">
+                                                <af:setActionListener from="#{pageFlowScope.PipeMapViewbean.foiId}" to="#{requestScope.oid}"/>
+						</af:commandMenuItem>
+                                                                      
+						<af:commandMenuItem text="#{inventoryUIBundle.ASSOCIATED_NODES}" 
+                                                                    id="cmib" 
+                                                                    visible="#{pageFlowScope.PipeMapViewbean.multiNodePlaceVisible}"
+                                                                    actionListener="#{pageFlowScope.PipeMapViewbean.associatedNodesAction}" >  
+							<af:showPopupBehavior triggerType="click" popupId="inventoryAssociationListPopup"/>
+						</af:commandMenuItem>
+                                               
+                                                
+                                                <af:group id="g1" rendered="#{pageFlowScope.PipeMapViewbean.zoomEnabled}">
+                                                <af:commandMenuItem text="#{inventoryUIBundle.ZOOM} #{inventoryUIBundle.TO} #{inventoryUIBundle.COUNTRY}" id="cmi13"
+                                                visible="#{pageFlowScope.PipeMapViewbean.zoomEnabled}">
+							<af:clientListener method="setZoomLevelToCountry" type="click"/>
+						</af:commandMenuItem>
+                                                <af:commandMenuItem text="#{inventoryUIBundle.ZOOM} #{inventoryUIBundle.TO} #{inventoryUIBundle.CITY}" id="cmi14" 
+                                                visible="#{pageFlowScope.PipeMapViewbean.zoomEnabled}">
+							<af:clientListener method="setZoomLevelToCity" type="click"/>
+						</af:commandMenuItem>
+                                                <af:commandMenuItem text="#{inventoryUIBundle.ZOOM} #{inventoryUIBundle.TO} #{inventoryUIBundle.STREET}" id="cmi15" 
+                                                visible="#{pageFlowScope.PipeMapViewbean.zoomEnabled}">
+							<af:clientListener method="setZoomLevelToStreet" type="click"/>
+						</af:commandMenuItem>
+                                                 <af:commandMenuItem text="#{inventoryUIBundle.ZOOM_OUT}"  id="cmi16" 
+                                                 visible="#{pageFlowScope.PipeMapViewbean.zoomEnabled}">
+							<af:clientListener method="setZoomLevelToDefault" type="click"/>
+						</af:commandMenuItem>
+                                                       </af:group>                                         
+						<af:commandMenuItem text="#{inventoryUIBundle.CLOSE_MENU}" id="cmi12"/>
+
+					  </af:menu>
+					   <af:serverListener type="jsSendInfo" method="#{pageFlowScope.PipeMapViewbean.sendInfo}"/>
+					</af:popup>
+                                        
+                                        <af:popup id="inventoryAssociationListPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.inventoryAssociationListBinding}">
+							<af:dialog id="inventoryAssociationListDialog" contentWidth="600"
+											closeIconVisible="true" type="none"
+									   title="#{inventoryUIBundle.INV_ASSOCIATION_LIST}">
+							   <af:panelStretchLayout id="pt_psl100" styleClass="invMVPanelStretchLayout">
+								  <f:facet name="center">
+                                        <af:table value="#{pageFlowScope.PipeMapViewbean.multiNodeResourceList}"
+                                                  var="row" rowBandingInterval="0" id="t1" columnStretching="last">
+                                            <af:column sortable="false" headerText="#{inventoryUIBundle.ID}" id="c1">
+                                                <af:link text="#{row.id}" id="cl1"
+                                                         action="#{pageFlowScope.PipeMapViewbean.getAssociatedNodeAction}"
+                                                         shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                                    <af:setActionListener from="#{row.oid}" to="#{requestScope.oid}"/>
+                                                    <af:setActionListener from="#{row.entityClass}" to="#{requestScope.entityClass}"/>
+                                                </af:link>
+                                            </af:column>
+                                            <af:column sortable="false" headerText="#{inventoryUIBundle.NAME}" id="c2">
+                                                <af:outputText value="#{row.name}" id="ot1"/>
+                                            </af:column>
+                                             <af:column sortable="false" headerText="#{inventoryUIBundle.DESCRIPTION}" id="c3">
+                                                <af:outputText value="#{row.description}" id="ot2"/>
+                                             </af:column>
+                                         <af:column sortable="false" headerText="#{inventoryUIBundle.SPECIFICATION}" id="c4">
+                                             <af:outputText value="#{row.specification.name}" id="ot3"/>
+                                        </af:column>
+                                         <af:column sortable="false" headerText="#{inventoryUIBundle.ASSOCIATED_ENTITY}" id="c5">
+                                             <af:outputText value="#{pageFlowScope.PipeMapViewbean.associatedEntityType}" id="ot4"/>
+                                        </af:column>
+                                        
+                                        
+                                        </af:table>
+                                    </f:facet>
+				</af:panelStretchLayout>              
+				</af:dialog>                
+				</af:popup>
+        <!-- here all pop up code will come -->
+     <f:verbatim>
+	<div id="map" style="position: absolute; height: auto; top: 50px; left: 0px; bottom: 10px; right: 10px; width: auto; border-style:solid; border-color:Gray; border-width:medium;"/>
+	</f:verbatim> 
+        <af:resource source="/resources/mapview/whiteboard/jquery-ui.min.css" type="css"/>
+        <af:resource source="/resources/mapview/whiteboard/colorpicker.css" type="css"/>
+                                        
+	<trh:script source="/resources/oraclemapsv2.js" id="res1"><?audit suppress oracle.adf.faces.verbatimScript?></trh:script>
+        <trh:script source="/resources/mapview/whiteboard/jquery-ui.min.js" id="res2"><?audit suppress oracle.adf.faces.verbatimScript?></trh:script>
+        <trh:script source="/resources/mapview/whiteboard/colorpicker.js" id="res3"><?audit suppress oracle.adf.faces.verbatimScript?></trh:script>
+        <trh:script source="/resources/mapview/whiteboard/eye.js" id="res4"><?audit suppress oracle.adf.faces.verbatimScript?></trh:script>
+        <trh:script source="/resources/mapview/whiteboard/layout.js" id="res5"><?audit suppress oracle.adf.faces.verbatimScript?></trh:script>
+        <trh:script source="/resources/mapview/whiteboard/utils.js" id="res6"><?audit suppress oracle.adf.faces.verbatimScript?></trh:script>
+         
+		   <trh:script id="vars" text='
+                                                  
+                                                   
+						   var mapCenterLon = parseFloat("#{pageFlowScope.PipeMapViewbean.centerMapLongitude}");
+						   var mapCenterLat = parseFloat("#{pageFlowScope.PipeMapViewbean.centerMapLatitude}");
+						   var mapZoom      = parseInt("#{pageFlowScope.PipeMapViewbean.zoomLevel}"); 
+						   var baseMapName  = "#{pageFlowScope.PipeMapViewbean.baseMap}";
+						   var datasource   = "#{pageFlowScope.PipeMapViewbean.datasource}";
+						   var mapTileServer = "#{pageFlowScope.PipeMapViewbean.mapTileServerUrl}"; 
+						   var copyright    = "#{pageFlowScope.PipeMapViewbean.copyright}"; 
+						   var infoStr = "#{pageFlowScope.PipeMapViewbean.displayLatLon}";
+						   var legendTitle = "#{pageFlowScope.PipeMapViewbean.legendTitle}";  
+						   var overviewMapTitle = "#{pageFlowScope.PipeMapViewbean.overviewMapTitle}"; 
+						   var legendName = "#{inventoryUIBundle.MAP_LEGEND}";
+						   var overviewName = "#{inventoryUIBundle.OVERVIEW_MAP}"; 
+						   var coordinates = "#{inventoryUIBundle.COORDINATES}"; 
+						   var baseURL = "#{pageFlowScope.PipeMapViewbean.mapviewerUrl}";
+						   var dynapop2 = "#{pageFlowScope.PipeMapViewbean.dynapop2Ref}";
+                                                   var mapLegend    = "#{pageFlowScope.PipeMapViewbean.mapLegend}";
+                                                   var pipeEntityId = parseInt("#{pageFlowScope.PipeMapViewbean.pipeEntityId}");
+                                                   var pipeId = parseInt("#{pageFlowScope.PipeMapViewbean.pipeId}");
+                                                   
+                                                   var tpResourcesString =&apos;#{pageFlowScope.PipeMapViewbean.tpResourcesString}&apos;;
+                                                   var tpResourcesStringLD = &apos;#{pageFlowScope.PipeMapViewbean.tpResourcesStringLD}&apos;;
+                                                   var tpResourcesStringDI = &apos;#{pageFlowScope.PipeMapViewbean.tpResourcesStringDI}&apos;;
+                                                   var tpResourcesStringPP = &apos;#{pageFlowScope.PipeMapViewbean.tpResourcesStringPP}&apos;;
+                                                   var tpResourcesStringPC = &apos;#{pageFlowScope.PipeMapViewbean.tpResourcesStringPC}&apos;;
+                                                   var tpResourcesStringEQP = &apos;#{pageFlowScope.PipeMapViewbean.tpResourcesStringEQP}&apos;;
+                                                   var tpResourcesStringPD = &apos;#{pageFlowScope.PipeMapViewbean.tpResourcesStringPD}&apos;;
+                                                   var tpResourcesStringNetwork = &apos;#{pageFlowScope.PipeMapViewbean.tpResourcesStringNetwork}&apos;;
+                                                   
+                                                   
+                                                   var tpResourcesForSegmentsString = &apos;#{pageFlowScope.PipeMapViewbean.tpResourcesForSegmentsString}&apos;;
+                                                   var tpResourcesForSegmentsStringLD = &apos;#{pageFlowScope.PipeMapViewbean.tpResourcesForSegmentsStringLD}&apos;;
+                                                   var tpResourcesForSegmentsStringDI = &apos;#{pageFlowScope.PipeMapViewbean.tpResourcesForSegmentsStringDI}&apos;;
+                                                   var tpResourcesForSegmentsStringPP = &apos;#{pageFlowScope.PipeMapViewbean.tpResourcesForSegmentsStringPP}&apos;;
+                                                   var tpResourcesForSegmentsStringPC = &apos;#{pageFlowScope.PipeMapViewbean.tpResourcesForSegmentsStringPC}&apos;;
+                                                   var tpResourcesForSegmentsStringEQP = &apos;#{pageFlowScope.PipeMapViewbean.tpResourcesForSegmentsStringEQP}&apos;;
+                                                   var tpResourcesForSegmentsStringPD = &apos;#{pageFlowScope.PipeMapViewbean.tpResourcesForSegmentsStringPD}&apos;;
+                                                   var tpResourcesForSegmentsStringNetwork = &apos;#{pageFlowScope.PipeMapViewbean.tpResourcesForSegmentsStringNetwork}&apos;;
+                                                   
+                                                    var ldSpecCustomImage_SegmentString = &apos;#{pageFlowScope.PipeMapViewbean.ldSpecCustomImage_SegmentString}&apos;;
+                                                    var ldSpecLD_SegmentString = &apos;#{pageFlowScope.PipeMapViewbean.ldSpecLD_SegmentString}&apos;;
+                                                    var diSpecCustomImage_SegmentString = &apos;#{pageFlowScope.PipeMapViewbean.diSpecCustomImage_SegmentString}&apos;;
+                                                    var diSpecDI_SegmentString = &apos;#{pageFlowScope.PipeMapViewbean.diSpecDI_SegmentString}&apos;;
+                                                    var ppSpecCustomImage_SegmentString = &apos;#{pageFlowScope.PipeMapViewbean.ppSpecCustomImage_SegmentString}&apos;;
+                                                    var ppSpecPP_SegmentString = &apos;#{pageFlowScope.PipeMapViewbean.ppSpecPP_SegmentString}&apos;;
+                                                    var pcSpecCustomImage_SegmentString = &apos;#{pageFlowScope.PipeMapViewbean.pcSpecCustomImage_SegmentString}&apos;;
+                                                    var pcSpecPC_SegmentString = &apos;#{pageFlowScope.PipeMapViewbean.pcSpecPC_SegmentString}&apos;;
+                                                    var eqpSpecCustomImage_SegmentString = &apos;#{pageFlowScope.PipeMapViewbean.eqpSpecCustomImage_SegmentString}&apos;;
+                                                    var eqpSpecEQP_SegmentString = &apos;#{pageFlowScope.PipeMapViewbean.eqpSpecEQP_SegmentString}&apos;;
+                                                    var pdSpecCustomImage_SegmentString = &apos;#{pageFlowScope.PipeMapViewbean.pdSpecCustomImage_SegmentString}&apos;;
+                                                    var pdSpecPD_SegmentString = &apos;#{pageFlowScope.PipeMapViewbean.pdSpecPD_SegmentString}&apos;;
+                                                    var networkSpecCustomImage_SegmentString = &apos;#{pageFlowScope.PipeMapViewbean.networkSpecCustomImage_SegmentString}&apos;;
+                                                    var networkSpecNetwork_SegmentString = &apos;#{pageFlowScope.PipeMapViewbean.networkSpecNetwork_SegmentString}&apos;;
+                                                    
+                                                    var ldSpecCustomImage_TrailString = &apos;#{pageFlowScope.PipeMapViewbean.ldSpecCustomImage_TrailString}&apos;;
+                                                    var ldSpecLD_TrailString = &apos;#{pageFlowScope.PipeMapViewbean.ldSpecLD_TrailString}&apos;;
+                                                    var diSpecCustomImage_TrailString = &apos;#{pageFlowScope.PipeMapViewbean.diSpecCustomImage_TrailString}&apos;;
+                                                    var diSpecDI_TrailString = &apos;#{pageFlowScope.PipeMapViewbean.diSpecDI_TrailString}&apos;;
+                                                    var ppSpecCustomImage_TrailString = &apos;#{pageFlowScope.PipeMapViewbean.ppSpecCustomImage_TrailString}&apos;;
+                                                    var ppSpecPP_TrailString = &apos;#{pageFlowScope.PipeMapViewbean.ppSpecPP_TrailString}&apos;;
+                                                    var pcSpecCustomImage_TrailString = &apos;#{pageFlowScope.PipeMapViewbean.pcSpecCustomImage_TrailString}&apos;;
+                                                    var pcSpecPC_TrailString = &apos;#{pageFlowScope.PipeMapViewbean.pcSpecPC_TrailString}&apos;;
+                                                    var eqpSpecCustomImage_TrailString = &apos;#{pageFlowScope.PipeMapViewbean.eqpSpecCustomImage_TrailString}&apos;;
+                                                    var eqpSpecEQP_TrailString = &apos;#{pageFlowScope.PipeMapViewbean.eqpSpecEQP_TrailString}&apos;;
+                                                    var pdSpecCustomImage_TrailString = &apos;#{pageFlowScope.PipeMapViewbean.pdSpecCustomImage_TrailString}&apos;;
+                                                    var pdSpecPD_TrailString = &apos;#{pageFlowScope.PipeMapViewbean.pdSpecPD_TrailString}&apos;;
+                                                    var networkSpecCustomImage_TrailString = &apos;#{pageFlowScope.PipeMapViewbean.networkSpecCustomImage_TrailString}&apos;;
+                                                    var networkSpecNetwork_TrailString = &apos;#{pageFlowScope.PipeMapViewbean.networkSpecNetwork_TrailString}&apos;;
+                                                    var gapPipe_GeoDetailsJsonString = &apos;#{pageFlowScope.PipeMapViewbean.gapPipe_GeoDetailsJsonString}&apos;;
+                                                    
+                                                    var multiNodes = &apos;#{pageFlowScope.PipeMapViewbean.multiNodePlaceList}&apos;;   
+                                                   ' ><?audit suppress oracle.adf.faces.verbatimScript?>
+						   </trh:script>
+						
+                                                
+						   
+					  <trh:script id="scr2"><?audit suppress oracle.adf.faces.verbatimScript?>
+					   <![CDATA[
+                                        var mapview;
+                                        /** Look in the same domain if a URL is not passed in. */
+                                        if (!baseURL) {
+                                            baseURL = document.location.protocol+"//" + document.location.host + "/mapviewer/";
+                                        }
+                                        var imgURL = document.location.protocol+"//" + document.location.host + "/Inventory/images/";
+                                        var customImgURL = document.location.protocol+"//" + document.location.host + "/Inventory/";
+                                        var mpoint = new OM.geometry.Point(mapCenterLon, mapCenterLat, 8307);
+                                         
+                            
+                                        var pulse = new OM.style.PulseAnimation({
+                                            stroke: "#3333ff",
+                                            duration: 1,
+                                            beginSize: 8,
+                                            endSize: 50
+                                        });
+                                     //custom image code starts  
+                                          function parseCustomImageJSON(customImageJSON) {
+                                                return JSON.parse(customImageJSON || '{}');
+                                        }    
+                                    //create foi layers here
+				    //TRAIL_PIPE
+                                    function getTrailPipeData(pipeEntityId) {
+                                        
+                                            var pipeFOI = new OM.layer.VectorLayer("pipe"+pipeId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_MV_TRAIL_PIPE",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            pipeFOI.setQueryParameters(pipeEntityId);
+                                            pipeFOI.setVisible(true);
+                                            pipeFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            mapview.addLayer(pipeFOI);
+                                        }
+                                        
+                                         //PIPE_MV_PIPE_SEGMENTS
+                                         function getPipeSegmentsData() {
+                                            var pipeSegmentsCommaList= JSON.parse(tpResourcesForSegmentsString|| "[]").join(); 
+                                            var pipeSegmentsFOI = new OM.layer.VectorLayer("pipeSegment"+pipeId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_MV_PIPE_SEGMENTS",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            pipeSegmentsFOI.setQueryParameters(pipeSegmentsCommaList,pipeSegmentsCommaList);
+                                            pipeSegmentsFOI.setVisible(true);
+                                            pipeSegmentsFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            mapview.addLayer(pipeSegmentsFOI);
+                                        }
+                                        
+                                         //PIPE_MV_CONNECTIVITY_SEGMENTS
+                                         function getConnectivitySegmentsData() {
+                                            var connectivitySegmentsCommaList= Array.from(new Set(JSON.parse(tpResourcesForSegmentsString|| "[]"))).join(); 
+                                            var conSegmentsFOI = new OM.layer.VectorLayer("conSegment"+pipeId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_MV_CONNECTIVITY_SEGMENTS",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            conSegmentsFOI.setQueryParameters(connectivitySegmentsCommaList,connectivitySegmentsCommaList);
+                                            conSegmentsFOI.setVisible(true);
+                                            conSegmentsFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            mapview.addLayer(conSegmentsFOI);
+                                        }
+                                        
+                                        //PIPE_MV_GAP_SEGMENTS
+                                         function getGapSegmentsData() {
+                                           
+                                            var gapSegmentsFOI = new OM.layer.VectorLayer("gapSegment"+pipeId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_MV_GAP_SEGMENTS",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            gapSegmentsFOI.setQueryParameters(gapPipe_GeoDetailsJsonString);
+                                            gapSegmentsFOI.setVisible(true);
+                                            mapview.addLayer(gapSegmentsFOI);
+                                        }
+					
+                                        
+                                         //PIPE_MV_TRAIL_LD - normal icon
+                                         function getTrailDataLD() {
+                                         
+                                             var ldCommaList= Array.from(new Set(JSON.parse(tpResourcesStringLD|| "[]"))).join(); 
+                                            var ldTrailMarker = new OM.style.Marker({ src: imgURL + "logical_device_mv.png", width: 16, height: 16 });
+                                            var ldTrailFOI = new OM.layer.VectorLayer("logicalDeviceTrailLD"+pipeId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_MV_TRAIL_LD",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            ldTrailFOI.setQueryParameters(ldCommaList,ldCommaList,ldCommaList,ldCommaList);
+                                            ldTrailFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            ldTrailFOI.setRenderingStyle(ldTrailMarker);
+                                            ldTrailFOI.setHoverStyle(pulse);
+                                            mapview.addLayer(ldTrailFOI);
+                                        }
+                                     
+                                     //PIPE_MV_TRAIL_EQP
+                                     function getTrailDataEQP() {
+                                     
+                                            var eqCommaList= Array.from(new Set(JSON.parse(tpResourcesStringEQP|| "[]"))).join(); 
+                                            var eqTrailMarker = new OM.style.Marker({ src: imgURL + "equipment_ena.png", width: 16, height: 16 });
+                                            var eqTrailFOI = new OM.layer.VectorLayer("equipmentTrailLD"+pipeId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_MV_TRAIL_EQP",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            eqTrailFOI.setQueryParameters(eqCommaList,eqCommaList,eqCommaList,eqCommaList);
+                                            eqTrailFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            eqTrailFOI.setRenderingStyle(eqTrailMarker);
+                                            eqTrailFOI.setHoverStyle(pulse);
+                                            mapview.addLayer(eqTrailFOI);
+                                        }
+										
+                                    //PIPE_MV_TRAIL_DI
+                                     function getTrailDataDI() {
+                                     
+                                             var diCommaList= Array.from(new Set(JSON.parse(tpResourcesStringDI|| "[]"))).join(); 
+                                            var diTrailMarker = new OM.style.Marker({ src: imgURL + "interface_ena.png", width: 16, height: 16 });
+                                            var diTrailFOI = new OM.layer.VectorLayer("diTrailLD"+pipeId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_MV_TRAIL_DI",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            diTrailFOI.setQueryParameters(diCommaList,diCommaList,diCommaList,diCommaList);
+                                            diTrailFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            diTrailFOI.setRenderingStyle(diTrailMarker);
+                                            diTrailFOI.setHoverStyle(pulse);
+                                            mapview.addLayer(diTrailFOI);
+                                        }
+										
+									
+										
+                                //PIPE_MV_TRAIL_PP
+                                     function getTrailDataPP() {
+                                     
+                                            var ppCommaList= Array.from(new Set(JSON.parse(tpResourcesStringPP|| "[]"))).join(); 
+                                            var ppTrailMarker = new OM.style.Marker({ src: imgURL + "port_ena.png", width: 16, height: 16 });
+                                            var ppTrailFOI = new OM.layer.VectorLayer("ppTrailLD"+pipeId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_MV_TRAIL_PP",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            ppTrailFOI.setQueryParameters(ppCommaList,ppCommaList,ppCommaList,ppCommaList);
+                                            ppTrailFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            ppTrailFOI.setRenderingStyle(ppTrailMarker);
+                                            ppTrailFOI.setHoverStyle(pulse);
+                                            mapview.addLayer(ppTrailFOI);
+                                        }
+										
+                                    //PIPE_MV_TRAIL_PC
+                                     function getTrailDataPC() {
+                                     
+                                            var pcCommaList= Array.from(new Set(JSON.parse(tpResourcesStringPC|| "[]"))).join(); 
+                                            var pcTrailMarker = new OM.style.Marker({ src: imgURL + "Connector_16.png", width: 16, height: 16 });
+                                            var pcTrailFOI = new OM.layer.VectorLayer("pcTrailLD"+pipeId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_MV_TRAIL_PC",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            pcTrailFOI.setQueryParameters(pcCommaList,pcCommaList,pcCommaList,pcCommaList);
+                                            pcTrailFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            pcTrailFOI.setRenderingStyle(pcTrailMarker);
+                                            pcTrailFOI.setHoverStyle(pulse);
+                                            mapview.addLayer(pcTrailFOI);
+                                        }
+										
+                                    //PIPE_MV_TRAIL_PD
+                                     function getTrailDataPD() {
+                                     
+                                            var pdCommaList= Array.from(new Set(JSON.parse(tpResourcesStringPD|| "[]"))).join(); 
+                                            var pdTrailMarker = new OM.style.Marker({ src: imgURL + "physical-device_ena.png", width: 16, height: 16 });
+                                            var pdTrailFOI = new OM.layer.VectorLayer("pdTrailLD"+pipeId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_MV_TRAIL_PD",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            pdTrailFOI.setQueryParameters(pdCommaList,pdCommaList,pdCommaList,pdCommaList);
+                                            pdTrailFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            pdTrailFOI.setRenderingStyle(pdTrailMarker);
+                                            pdTrailFOI.setHoverStyle(pulse);
+                                            mapview.addLayer(pdTrailFOI);
+                                        }
+										
+                                    //PIPE_MV_TRAIL_NETWORK
+                                     function getTrailDataNetwork() {
+                                     
+                                            var networkCommaList= Array.from(new Set(JSON.parse(tpResourcesStringNetwork|| "[]"))).join(); 
+                                            var networkTrailMarker = new OM.style.Marker({ src: imgURL + "cloud_ena.png", width: 16, height: 16 });
+                                            var networkTrailFOI = new OM.layer.VectorLayer("networkTrailLD"+pipeId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_MV_TRAIL_NETWORK",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            networkTrailFOI.setQueryParameters(networkCommaList,networkCommaList);
+                                            networkTrailFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            networkTrailFOI.setRenderingStyle(networkTrailMarker);
+                                            networkTrailFOI.setHoverStyle(pulse);
+                                            mapview.addLayer(networkTrailFOI);
+                                        }
+                                        
+                                        //-------------------------------------------------------------------------------
+                                         //PIPE_MV_PS_LD - normal icon
+                                         function getPSDataLD() {
+                                         
+                                            var ldCommaList1= Array.from(new Set(JSON.parse(tpResourcesForSegmentsStringLD|| "[]"))).join(); 
+                                            var ldTrailMarker1 = new OM.style.Marker({ src: imgURL + "logical_device_mv.png", width: 16, height: 16 });
+                                            var ldTrailFOI1 = new OM.layer.VectorLayer("logicalDevicePSLD"+pipeId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_MV_PS_LD",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            ldTrailFOI1.setQueryParameters(ldCommaList1,ldCommaList1,ldCommaList1,ldCommaList1);
+                                            ldTrailFOI1.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            ldTrailFOI1.setRenderingStyle(ldTrailMarker1);
+                                            ldTrailFOI1.setHoverStyle(pulse);
+                                            mapview.addLayer(ldTrailFOI1);
+                                        }
+                                     
+                                     //PIPE_MV_PS_EQP
+                                     function getPSDataEQ() {
+                                     
+                                            var eqCommaList1= Array.from(new Set(JSON.parse(tpResourcesForSegmentsStringEQP|| "[]"))).join(); 
+                                            var eqTrailMarker1 = new OM.style.Marker({ src: imgURL + "equipment_ena.png", width: 16, height: 16 });
+                                            var eqTrailFOI1 = new OM.layer.VectorLayer("equipmentPSLD"+pipeId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_MV_PS_EQP",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            eqTrailFOI1.setQueryParameters(eqCommaList1,eqCommaList1,eqCommaList1,eqCommaList1);
+                                            eqTrailFOI1.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            eqTrailFOI1.setRenderingStyle(eqTrailMarker1);
+                                            eqTrailFOI1.setHoverStyle(pulse);
+                                            mapview.addLayer(eqTrailFOI1);
+                                        }
+										
+                                    //PIPE_MV_PS_DI
+                                     function getPSDataDI() {
+                                     
+                                             var diCommaList1= Array.from(new Set(JSON.parse(tpResourcesForSegmentsStringDI|| "[]"))).join(); 
+                                            var diTrailMarker1 = new OM.style.Marker({ src: imgURL + "interface_ena.png", width: 16, height: 16 });
+                                            var diTrailFOI1 = new OM.layer.VectorLayer("diPSLD"+pipeId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_MV_PS_DI",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            diTrailFOI1.setQueryParameters(diCommaList1,diCommaList1,diCommaList1,diCommaList1);
+                                            diTrailFOI1.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            diTrailFOI1.setRenderingStyle(diTrailMarker1);
+                                            diTrailFOI1.setHoverStyle(pulse);
+                                            mapview.addLayer(diTrailFOI1);
+                                        }
+										
+									
+										
+                                //PIPE_MV_PS_PP
+                                     function getPSDataPP() {
+                                     
+                                            var ppCommaList1= Array.from(new Set(JSON.parse(tpResourcesForSegmentsStringPP|| "[]"))).join(); 
+                                            var ppTrailMarker1 = new OM.style.Marker({ src: imgURL + "port_ena.png", width: 16, height: 16 });
+                                            var ppTrailFOI1 = new OM.layer.VectorLayer("ppPSLD"+pipeId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_MV_PS_PP",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            ppTrailFOI1.setQueryParameters(ppCommaList1,ppCommaList1,ppCommaList1,ppCommaList1);
+                                            ppTrailFOI1.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            ppTrailFOI1.setRenderingStyle(ppTrailMarker1);
+                                            ppTrailFOI1.setHoverStyle(pulse);
+                                            mapview.addLayer(ppTrailFOI1);
+                                        }
+										
+                                    //PIPE_MV_PS_PC
+                                     function getPSDataPC() {
+                                     
+                                            var pcCommaList1= Array.from(new Set(JSON.parse(tpResourcesForSegmentsStringPC|| "[]"))).join(); 
+                                            var pcTrailMarker1 = new OM.style.Marker({ src: imgURL + "Connector_16.png", width: 16, height: 16 });
+                                            var pcTrailFOI1 = new OM.layer.VectorLayer("pcPSLD"+pipeId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_MV_PS_PC",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            pcTrailFOI1.setQueryParameters(pcCommaList1,pcCommaList1,pcCommaList1,pcCommaList1);
+                                            pcTrailFOI1.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            pcTrailFOI1.setRenderingStyle(pcTrailMarker1);
+                                            pcTrailFOI1.setHoverStyle(pulse);
+                                            mapview.addLayer(pcTrailFOI1);
+                                        }
+										
+                                    //PIPE_MV_PS_PD
+                                     function getPSDataPD() {
+                                     
+                                            var pdCommaList1= Array.from(new Set(JSON.parse(tpResourcesForSegmentsStringPD|| "[]"))).join(); 
+                                            var pdTrailMarker1 = new OM.style.Marker({ src: imgURL + "physical-device_ena.png", width: 16, height: 16 });
+                                            var pdTrailFOI1 = new OM.layer.VectorLayer("pdPSLD"+pipeId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_MV_PS_PD",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            pdTrailFOI1.setQueryParameters(pdCommaList1,pdCommaList1,pdCommaList1,pdCommaList1);
+                                            pdTrailFOI1.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            pdTrailFOI1.setRenderingStyle(pdTrailMarker1);
+                                            pdTrailFOI1.setHoverStyle(pulse);
+                                            mapview.addLayer(pdTrailFOI1);
+                                        }
+										
+                                    //PIPE_MV_PS_NETWORK
+                                     function getPSDataNetwork() {
+                                     
+                                            var networkCommaList1= Array.from(new Set(JSON.parse(tpResourcesForSegmentsStringNetwork|| "[]"))).join(); 
+                                            var networkTrailMarker1 = new OM.style.Marker({ src: imgURL + "cloud_ena.png", width: 16, height: 16 });
+                                            var networkTrailFOI1 = new OM.layer.VectorLayer("networkPSLD"+pipeId,
+                                                {
+                                                    def:
+                                                    {
+                                                        type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                        dataSource: datasource, theme: "PIPE_MV_PS_NETWORK",
+                                                        url: baseURL,
+                                                        loadOnDemand: false
+                                                    }
+                                                });
+                                            networkTrailFOI1.setQueryParameters(networkCommaList1,networkCommaList1);
+                                            networkTrailFOI1.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                            networkTrailFOI1.setRenderingStyle(networkTrailMarker1);
+                                            networkTrailFOI1.setHoverStyle(pulse);
+                                            mapview.addLayer(networkTrailFOI1);
+                                        }
+                                        
+                                        
+                                       // ------------------------------------------------
+                                       //custom image code starts  for pipe segment terminations
+                                          function parseCustomImageJSON(customImageJSON) {
+                                                return JSON.parse(customImageJSON || '{}');
+                                        }
+                                        
+                                        //PIPE_MV_PS_NETWORK_SPEC
+                                        function getPSNetworkCustomData(){
+                                            var networkImagesArray = parseCustomImageJSON(networkSpecCustomImage_SegmentString || "{}");
+                                                    for (var specIDCustomImage in networkImagesArray) {
+                                                            var psNetworkCustomImageMarker = new OM.style.Marker({ src: customImgURL + networkImagesArray[specIDCustomImage] + "&width=16&height=16", width: 16, height: 16 });
+                                                            var psNetworkCustomImageFOI = new OM.layer.VectorLayer("psNetworkCustomImage" + specIDCustomImage+pipeId,
+                                                                    {
+                                                                            def:
+                                                                            {
+                                                                                    type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                                                    dataSource: datasource, theme: "PIPE_MV_PS_NETWORK_SPEC",
+                                                                                    url: baseURL,
+                                                                                    loadOnDemand: false
+                                                                            }
+                                                                    });
+                                                            var networkList = JSON.parse(networkSpecNetwork_SegmentString || "{}")[specIDCustomImage];	
+                                                            psNetworkCustomImageFOI.setQueryParameters(networkList,networkList,specIDCustomImage);
+                                                            psNetworkCustomImageFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                            psNetworkCustomImageFOI.setRenderingStyle(psNetworkCustomImageMarker);
+                                                            psNetworkCustomImageFOI.setHoverStyle(pulse);
+                                                            mapview.addLayer(psNetworkCustomImageFOI);
+                                                    }	
+                                            }
+                                        
+					//PIPE_MV_PS_EQP_SPEC
+                                        function getPSEQPCustomData(){
+                                            var eqpImagesArray = parseCustomImageJSON(eqpSpecCustomImage_SegmentString || "{}");
+                                                    for (var specIDCustomImage in eqpImagesArray) {
+                                                            var psEQPCustomImageMarker = new OM.style.Marker({ src: customImgURL + eqpImagesArray[specIDCustomImage] + "&width=16&height=16", width: 16, height: 16 });
+                                                            var psEQPCustomImageFOI = new OM.layer.VectorLayer("psEQPCustomImage" + specIDCustomImage+pipeId,
+                                                                    {
+                                                                            def:
+                                                                            {
+                                                                                    type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                                                    dataSource: datasource, theme: "PIPE_MV_PS_EQP_SPEC",
+                                                                                    url: baseURL,
+                                                                                    loadOnDemand: false
+                                                                            }
+                                                                    });
+                                                            var eqpList = JSON.parse(eqpSpecEQP_SegmentString || "{}")[specIDCustomImage];	
+                                                            psEQPCustomImageFOI.setQueryParameters(eqpList,eqpList,specIDCustomImage,eqpList,eqpList,specIDCustomImage);
+                                                            psEQPCustomImageFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                            psEQPCustomImageFOI.setRenderingStyle(psEQPCustomImageMarker);
+                                                            psEQPCustomImageFOI.setHoverStyle(pulse);
+                                                            mapview.addLayer(psEQPCustomImageFOI);
+                                                    }	
+                                            }
+                                        
+                                        
+                                        
+                                        
+                                        //PIPE_MV_PS_LD_SPEC
+                                        function getPSLDCustomData() {
+                                            var ldImagesArray = parseCustomImageJSON(ldSpecCustomImage_SegmentString || "{}");
+                                                    for (var specIDCustomImage in ldImagesArray) {
+                                                            var psLDCustomImageMarker = new OM.style.Marker({ src: customImgURL + ldImagesArray[specIDCustomImage] + "&width=16&height=16", width: 16, height: 16 });
+                                                            var psLDCustomImageFOI = new OM.layer.VectorLayer("psLDCustomImage" + specIDCustomImage+pipeId,
+                                                                    {
+                                                                            def:
+                                                                            {
+                                                                                    type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                                                    dataSource: datasource, theme: "PIPE_MV_PS_LD_SPEC",
+                                                                                    url: baseURL,
+                                                                                    loadOnDemand: false
+                                                                            }
+                                                                    });
+                                                            var ldList = JSON.parse(ldSpecLD_SegmentString || "{}")[specIDCustomImage];	
+                                                            psLDCustomImageFOI.setQueryParameters(ldList,ldList,specIDCustomImage,ldList,ldList,specIDCustomImage);
+                                                            psLDCustomImageFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                            psLDCustomImageFOI.setRenderingStyle(psLDCustomImageMarker);
+                                                            psLDCustomImageFOI.setHoverStyle(pulse);
+                                                            mapview.addLayer(psLDCustomImageFOI);
+                                                    }	
+                                            }
+											
+                                            //PIPE_MV_PS_DI_SPEC
+                                            function getPSDICustomData(){
+                                            var diImagesArray = parseCustomImageJSON(diSpecCustomImage_SegmentString || "{}");
+                                                    for (var specIDCustomImage in diImagesArray) {
+                                                            var psDICustomImageMarker = new OM.style.Marker({ src: customImgURL + diImagesArray[specIDCustomImage] + "&width=16&height=16", width: 16, height: 16 });
+                                                            var psDICustomImageFOI = new OM.layer.VectorLayer("psDICustomImage" + specIDCustomImage+pipeId,
+                                                                    {
+                                                                            def:
+                                                                            {
+                                                                                    type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                                                    dataSource: datasource, theme: "PIPE_MV_PS_DI_SPEC",
+                                                                                    url: baseURL,
+                                                                                    loadOnDemand: false
+                                                                            }
+                                                                    });
+                                                            var diList = JSON.parse(diSpecDI_SegmentString || "{}")[specIDCustomImage];	
+                                                            psDICustomImageFOI.setQueryParameters(diList,diList,specIDCustomImage,diList,diList,specIDCustomImage);
+                                                            psDICustomImageFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                            psDICustomImageFOI.setRenderingStyle(psDICustomImageMarker);
+                                                            psDICustomImageFOI.setHoverStyle(pulse);
+                                                            mapview.addLayer(psDICustomImageFOI);
+                                                    }	
+                                            }
+											
+					//PIPE_MV_PS_PP_SPEC
+                                        function getPSPPCustomData(){
+                                            var ppImagesArray = parseCustomImageJSON(ppSpecCustomImage_SegmentString || "{}");
+                                                    for (var specIDCustomImage in ppImagesArray) {
+                                                            var psPPCustomImageMarker = new OM.style.Marker({ src: customImgURL + ppImagesArray[specIDCustomImage] + "&width=16&height=16", width: 16, height: 16 });
+                                                            var psPPCustomImageFOI = new OM.layer.VectorLayer("psPPCustomImage" + specIDCustomImage+pipeId,
+                                                                    {
+                                                                            def:
+                                                                            {
+                                                                                    type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                                                    dataSource: datasource, theme: "PIPE_MV_PS_PP_SPEC",
+                                                                                    url: baseURL,
+                                                                                    loadOnDemand: false
+                                                                            }
+                                                                    });
+                                                            var ppList = JSON.parse(ppSpecPP_SegmentString || "{}")[specIDCustomImage];	
+                                                            psPPCustomImageFOI.setQueryParameters(ppList,ppList,specIDCustomImage,ppList,ppList,specIDCustomImage);
+                                                            psPPCustomImageFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                            psPPCustomImageFOI.setRenderingStyle(psPPCustomImageMarker);
+                                                            psPPCustomImageFOI.setHoverStyle(pulse);
+                                                            mapview.addLayer(psPPCustomImageFOI);
+                                                    }	
+                                            }
+											
+					//PIPE_MV_PS_PC_SPEC
+					function getPSPCCustomData(){
+                                            var pcImagesArray = parseCustomImageJSON(pcSpecCustomImage_SegmentString || "{}");
+                                                    for (var specIDCustomImage in pcImagesArray) {
+                                                            var psPCCustomImageMarker = new OM.style.Marker({ src: customImgURL + pcImagesArray[specIDCustomImage] + "&width=16&height=16", width: 16, height: 16 });
+                                                            var psPCCustomImageFOI = new OM.layer.VectorLayer("psPCCustomImage" + specIDCustomImage+pipeId,
+                                                                    {
+                                                                            def:
+                                                                            {
+                                                                                    type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                                                    dataSource: datasource, theme: "PIPE_MV_PS_PC_SPEC",
+                                                                                    url: baseURL,
+                                                                                    loadOnDemand: false
+                                                                            }
+                                                                    });
+                                                            var pcList = JSON.parse(pcSpecPC_SegmentString || "{}")[specIDCustomImage];	
+                                                            psPCCustomImageFOI.setQueryParameters(pcList,pcList,specIDCustomImage,pcList,pcList,specIDCustomImage);
+                                                            psPCCustomImageFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                            psPCCustomImageFOI.setRenderingStyle(psPCCustomImageMarker);
+                                                            psPCCustomImageFOI.setHoverStyle(pulse);
+                                                            mapview.addLayer(psPCCustomImageFOI);
+                                                    }	
+                                            }
+										
+					//PIPE_MV_PS_PD_SPEC
+                                        function getPSPDCustomData()	{
+                                            var pdImagesArray = parseCustomImageJSON(pdSpecCustomImage_SegmentString || "{}");
+                                                    for (var specIDCustomImage in pdImagesArray) {
+                                                            var psPDCustomImageMarker = new OM.style.Marker({ src: customImgURL + pdImagesArray[specIDCustomImage] + "&width=16&height=16", width: 16, height: 16 });
+                                                            var psPDCustomImageFOI = new OM.layer.VectorLayer("psPDCustomImage" + specIDCustomImage+pipeId,
+                                                                    {
+                                                                            def:
+                                                                            {
+                                                                                    type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                                                    dataSource: datasource, theme: "PIPE_MV_PS_PD_SPEC",
+                                                                                    url: baseURL,
+                                                                                    loadOnDemand: false
+                                                                            }
+                                                                    });
+                                                            var pdList = JSON.parse(pdSpecPD_SegmentString || "{}")[specIDCustomImage];	
+                                                            psPDCustomImageFOI.setQueryParameters(pdList,pdList,specIDCustomImage,pdList,pdList,specIDCustomImage);
+                                                            psPDCustomImageFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                            psPDCustomImageFOI.setRenderingStyle(psPDCustomImageMarker);
+                                                            psPDCustomImageFOI.setHoverStyle(pulse);
+                                                            mapview.addLayer(psPDCustomImageFOI);
+                                                    }	
+                                            }
+                                        
+                                        
+                                //-------------------------------------------------------------------------------
+                                //Custom icons for Trail terminations
+                                        
+                                        //PIPE_MV_TRAIL_NETWORK_SPEC
+                                        function getTrailNetworkCustomData(){
+                                            var networkImagesArray = parseCustomImageJSON(networkSpecCustomImage_TrailString || "{}");
+                                                    for (var specIDCustomImage in networkImagesArray) {
+                                                            var trailNetworkCustomImageMarker = new OM.style.Marker({ src: customImgURL + networkImagesArray[specIDCustomImage] + "&width=16&height=16", width: 16, height: 16 });
+                                                            var trailNetworkCustomImageFOI = new OM.layer.VectorLayer("trailNetworkCustomImage" + specIDCustomImage+pipeId,
+                                                                    {
+                                                                            def:
+                                                                            {
+                                                                                    type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                                                    dataSource: datasource, theme: "PIPE_MV_TRAIL_NETWORK_SPEC",
+                                                                                    url: baseURL,
+                                                                                    loadOnDemand: false
+                                                                            }
+                                                                    });
+                                                            var networkList = JSON.parse(networkSpecNetwork_TrailString || "{}")[specIDCustomImage];	
+                                                            trailNetworkCustomImageFOI.setQueryParameters(networkList,networkList,specIDCustomImage);
+                                                            trailNetworkCustomImageFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                            trailNetworkCustomImageFOI.setRenderingStyle(trailNetworkCustomImageMarker);
+                                                            trailNetworkCustomImageFOI.setHoverStyle(pulse);
+                                                            mapview.addLayer(trailNetworkCustomImageFOI);
+                                                    }	
+                                            }
+                                        
+					//PIPE_MV_TRAIL_EQP_SPEC
+                                        function getTrailEQPCustomData(){
+                                            var eqpImagesArray = parseCustomImageJSON(eqpSpecCustomImage_TrailString || "{}");
+                                                    for (var specIDCustomImage in eqpImagesArray) {
+                                                            var trailEQPCustomImageMarker = new OM.style.Marker({ src: customImgURL + eqpImagesArray[specIDCustomImage] + "&width=16&height=16", width: 16, height: 16 });
+                                                            var trailEQPCustomImageFOI = new OM.layer.VectorLayer("trailEQPCustomImage" + specIDCustomImage+pipeId,
+                                                                    {
+                                                                            def:
+                                                                            {
+                                                                                    type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                                                    dataSource: datasource, theme: "PIPE_MV_TRAIL_EQP_SPEC",
+                                                                                    url: baseURL,
+                                                                                    loadOnDemand: false
+                                                                            }
+                                                                    });
+                                                            var eqpList = JSON.parse(eqpSpecEQP_TrailString || "{}")[specIDCustomImage];	
+                                                            trailEQPCustomImageFOI.setQueryParameters(eqpList,eqpList,specIDCustomImage,eqpList,eqpList,specIDCustomImage);
+                                                            trailEQPCustomImageFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                            trailEQPCustomImageFOI.setRenderingStyle(trailEQPCustomImageMarker);
+                                                            trailEQPCustomImageFOI.setHoverStyle(pulse);
+                                                            mapview.addLayer(trailEQPCustomImageFOI);
+                                                    }	
+                                            }
+                                        
+                                        
+                                        
+                                        
+                                        //PIPE_MV_TRAIL_LD_SPEC
+                                        function getTrailLDCustomData() {
+                                            var ldImagesArray = parseCustomImageJSON(ldSpecCustomImage_TrailString || "{}");
+                                                    for (var specIDCustomImage in ldImagesArray) {
+                                                            var trailLDCustomImageMarker = new OM.style.Marker({ src: customImgURL + ldImagesArray[specIDCustomImage] + "&width=16&height=16", width: 16, height: 16 });
+                                                            var trailLDCustomImageFOI = new OM.layer.VectorLayer("trailLDCustomImage" + specIDCustomImage+pipeId,
+                                                                    {
+                                                                            def:
+                                                                            {
+                                                                                    type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                                                    dataSource: datasource, theme: "PIPE_MV_TRAIL_LD_SPEC",
+                                                                                    url: baseURL,
+                                                                                    loadOnDemand: false
+                                                                            }
+                                                                    });
+                                                            var ldList = JSON.parse(ldSpecLD_TrailString || "{}")[specIDCustomImage];	
+                                                            trailLDCustomImageFOI.setQueryParameters(ldList,ldList,specIDCustomImage,ldList,ldList,specIDCustomImage);
+                                                            trailLDCustomImageFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                            trailLDCustomImageFOI.setRenderingStyle(trailLDCustomImageMarker);
+                                                            trailLDCustomImageFOI.setHoverStyle(pulse);
+                                                            mapview.addLayer(trailLDCustomImageFOI);
+                                                    }	
+                                            }
+											
+                                            //PIPE_MV_TRAIL_DI_SPEC
+						function getTrailDICustomData(){
+                                            var diImagesArray = parseCustomImageJSON(diSpecCustomImage_TrailString || "{}");
+                                                    for (var specIDCustomImage in diImagesArray) {
+                                                            var trailDICustomImageMarker = new OM.style.Marker({ src: customImgURL + diImagesArray[specIDCustomImage] + "&width=16&height=16", width: 16, height: 16 });
+                                                            var trailDICustomImageFOI = new OM.layer.VectorLayer("trailDICustomImage" + specIDCustomImage+pipeId,
+                                                                    {
+                                                                            def:
+                                                                            {
+                                                                                    type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                                                    dataSource: datasource, theme: "PIPE_MV_TRAIL_DI_SPEC",
+                                                                                    url: baseURL,
+                                                                                    loadOnDemand: false
+                                                                            }
+                                                                    });
+                                                            var diList = JSON.parse(diSpecDI_TrailString || "{}")[specIDCustomImage];	
+                                                            trailDICustomImageFOI.setQueryParameters(diList,diList,specIDCustomImage,diList,diList,specIDCustomImage);
+                                                            trailDICustomImageFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                            trailDICustomImageFOI.setRenderingStyle(trailDICustomImageMarker);
+                                                            trailDICustomImageFOI.setHoverStyle(pulse);
+                                                            mapview.addLayer(trailDICustomImageFOI);
+                                                    }	
+                                            }
+											
+					//PIPE_MV_TRAIL_PP_SPEC
+                                        function getTrailPPCustomData(){
+                                            var ppImagesArray = parseCustomImageJSON(ppSpecCustomImage_TrailString || "{}");
+                                                    for (var specIDCustomImage in ppImagesArray) {
+                                                            var trailPPCustomImageMarker = new OM.style.Marker({ src: customImgURL + ppImagesArray[specIDCustomImage] + "&width=16&height=16", width: 16, height: 16 });
+                                                            var trailPPCustomImageFOI = new OM.layer.VectorLayer("trailPPCustomImage" + specIDCustomImage+pipeId,
+                                                                    {
+                                                                            def:
+                                                                            {
+                                                                                    type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                                                    dataSource: datasource, theme: "PIPE_MV_TRAIL_PP_SPEC",
+                                                                                    url: baseURL,
+                                                                                    loadOnDemand: false
+                                                                            }
+                                                                    });
+                                                            var ppList = JSON.parse(ppSpecPP_TrailString || "{}")[specIDCustomImage];	
+                                                            trailPPCustomImageFOI.setQueryParameters(ppList,ppList,specIDCustomImage,ppList,ppList,specIDCustomImage);
+                                                            trailPPCustomImageFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                            trailPPCustomImageFOI.setRenderingStyle(trailPPCustomImageMarker);
+                                                            trailPPCustomImageFOI.setHoverStyle(pulse);
+                                                            mapview.addLayer(trailPPCustomImageFOI);
+                                                    }	
+                                            }
+											
+					//PIPE_MV_TRAIL_PC_SPEC
+                                        function getTrailPCCustomData(){
+                                            var pcImagesArray = parseCustomImageJSON(pcSpecCustomImage_TrailString || "{}");
+                                                    for (var specIDCustomImage in pcImagesArray) {
+                                                            var trailPCCustomImageMarker = new OM.style.Marker({ src: customImgURL + pcImagesArray[specIDCustomImage] + "&width=16&height=16", width: 16, height: 16 });
+                                                            var trailPCCustomImageFOI = new OM.layer.VectorLayer("trailPCCustomImage" + specIDCustomImage+pipeId,
+                                                                    {
+                                                                            def:
+                                                                            {
+                                                                                    type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                                                    dataSource: datasource, theme: "PIPE_MV_TRAIL_PC_SPEC",
+                                                                                    url: baseURL,
+                                                                                    loadOnDemand: false
+                                                                            }
+                                                                    });
+                                                            var pcList = JSON.parse(pcSpecPC_TrailString || "{}")[specIDCustomImage];	
+                                                            trailPCCustomImageFOI.setQueryParameters(pcList,pcList,specIDCustomImage,pcList,pcList,specIDCustomImage);
+                                                            trailPCCustomImageFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                            trailPCCustomImageFOI.setRenderingStyle(trailPCCustomImageMarker);
+                                                            trailPCCustomImageFOI.setHoverStyle(pulse);
+                                                            mapview.addLayer(trailPCCustomImageFOI);
+                                                    }	
+                                            }
+										
+					//PIPE_MV_TRAIL_PD_SPEC
+                                        function getTrailPDCustomData()	{
+                                            var pdImagesArray = parseCustomImageJSON(pdSpecCustomImage_TrailString || "{}");
+                                                    for (var specIDCustomImage in pdImagesArray) {
+                                                            var trailPDCustomImageMarker = new OM.style.Marker({ src: customImgURL + pdImagesArray[specIDCustomImage] + "&width=16&height=16", width: 16, height: 16 });
+                                                            var trailPDCustomImageFOI = new OM.layer.VectorLayer("trailPDCustomImage" + specIDCustomImage+pipeId,
+                                                                    {
+                                                                            def:
+                                                                            {
+                                                                                    type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                                                    dataSource: datasource, theme: "PIPE_MV_TRAIL_PD_SPEC",
+                                                                                    url: baseURL,
+                                                                                    loadOnDemand: false
+                                                                            }
+                                                                    });
+                                                            var pdList = JSON.parse(pdSpecPD_TrailString || "{}")[specIDCustomImage];	
+                                                            trailPDCustomImageFOI.setQueryParameters(pdList,pdList,specIDCustomImage,pdList,pdList,specIDCustomImage);
+                                                            trailPDCustomImageFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                            trailPDCustomImageFOI.setRenderingStyle(trailPDCustomImageMarker);
+                                                            trailPDCustomImageFOI.setHoverStyle(pulse);
+                                                            mapview.addLayer(trailPDCustomImageFOI);
+                                                    }	
+                                            }
+					
+                                        //MULTINODEPLACE_PIPE
+                                        function getMultiNodeData(){
+                                            if (multiNodes != "false") {
+                                        
+                                                    var multiNodeCustomImageMarker = new OM.style.Marker({ src: imgURL + "group_ena.png", width: 16, height: 16 });
+                                        
+                                                    var multiNodeFOI = new OM.layer.VectorLayer("multiNodes"+pipeId,
+                                                        {
+                                                            def:
+                                                            {
+                                                                type: OM.layer.VectorLayer.TYPE_PREDEFINED,
+                                                                dataSource: datasource, theme: "MULTINODEPLACE_PIPE",
+                                                                url: baseURL,
+                                                                loadOnDemand: false
+                                                            }
+                                                        });
+                                                    multiNodeFOI.setQueryParameters(multiNodes,multiNodes);
+                                                    multiNodeFOI.on(OM.event.MouseEvent.MOUSE_RIGHT_CLICK, showContextMenu);
+                                                    multiNodeFOI.setRenderingStyle(multiNodeCustomImageMarker);
+                                                    multiNodeFOI.setHoverStyle(pulse);
+                                                    mapview.addLayer(multiNodeFOI);
+                                        
+                                                
+                                            }
+                                        }
+											
+											
+											
+                                        
+					function loadAndDisplayLayers() {
+                                        //call the edges data first
+                                        getPipeSegmentsData();
+                                        getConnectivitySegmentsData();
+                                        getGapSegmentsData();
+                                        getTrailPipeData(pipeEntityId);
+                                        
+                                        //For pipe segments terminations
+                                        getPSDataLD();
+                                        getPSDataPD();
+                                        getPSDataEQ();
+                                        getPSDataDI();
+                                        getPSDataNetwork();
+                                        getPSDataPP();
+                                        getPSDataPC();
+                                       
+                                        
+                                        
+                                        //For pipe segments terminations - custom icon
+                                        getPSLDCustomData();
+                                        getPSPDCustomData();
+                                        getPSEQPCustomData();
+                                         getPSDICustomData();
+                                        getPSNetworkCustomData();
+					getPSPPCustomData();
+					getPSPCCustomData();
+                                       
+                                        
+                                        //for trail terminations
+                                        getTrailDataLD();
+                                        getTrailDataPD();
+                                        getTrailDataEQP();
+                                        getTrailDataDI();
+                                        getTrailDataNetwork();
+					getTrailDataPP();
+					getTrailDataPC();
+                                    
+                                        //custom icons for Trail terminations
+                                        getTrailLDCustomData();
+					getTrailPDCustomData();
+					getTrailEQPCustomData();
+                                        getTrailDICustomData();
+					getTrailNetworkCustomData();
+					getTrailPPCustomData();
+					getTrailPCCustomData();
+                                        
+                                        //Multinode
+                                        getMultiNodeData();
+										
+					mapview.getFeatureLayers().forEach(function (layer) {
+                                                layer.on(OM.event.LayerEvent.FEATURES_LOADED,
+                                                    function () {
+                                                        this.getAllFeatures().forEach(function (feature) {
+                                                            feature.setInfoWindowContent(getInfoWindowHtml(feature.getAttributes(), layer.getAttributeNames(), layer.getName()))
+                                                        });
+                                                    });
+                                            });
+					}
+							
+					var lastClickedPoint = null;
+                                        function goMap() {
+                                        
+                                            // Create an OM.Map instance to display the map
+                                            mapview = new OM.Map(document.getElementById("map"),
+                                                {
+                                                    mapviewerURL: baseURL,
+                                                    disableOverviewMap: false
+                                                });
+                                        
+                                            //Double click zoom is disabled on map
+                                            mapview.enableDoubleClick(false);
+                                        
+                                            //Enable zoom animation
+                                            mapview.enableZoomAnimation(true);
+                                        
+                                            //set defauly style of info windows
+                                            var infoStyle = {
+                                                infoWindowStyle: { "background-color": "#e5f9ff", width: 280 },
+                                                titleStyle: { background: "#F5F5F9", "font-size": "12px", "font-family": "Tahoma" },
+                                                contentStyle: { background: "#F5F5F9", "font-size": "12px", "font-family": "Tahoma" },
+                                                "tailStyle": { "offset": "25", "background": "#ccf3ff" },
+                                                "closeButtonStyle": {
+                                                    "mouseOutButton": { "src": "resources/mapview/infoWindow/close_en.png" },
+                                                    "mouseOverButton": { "src": "resources/mapview/infoWindow/close_ov.png" }
+                                                }
+                                            }
+                                            mapview.setInfoWindowStyle(infoStyle);
+                                        
+                                            //Create the Tile layer object             
+                                            var tileLayer = new OM.layer.TileLayer(
+                                                baseMapName,
+                                                {
+                                                    dataSource: datasource,
+                                                    tileLayer: baseMapName,
+                                                    tileServerURL: baseURL + "/mcserver"
+                                                });
+                                            mapview.addLayer(tileLayer);
+                                            mapview.setMapCenter(mpoint);
+                                            mapview.setMapZoomLevel(mapZoom);
+                                        
+                                            //Display Navigation Panel bar at top left of the map             
+                                            var navigationPanelBar = new OM.control.NavigationPanelBar({ style: 1, anchorPosition: 1 });
+                                            navigationPanelBar.setStyle({ backgroundColor: "#FFFFFF", buttonColor: "#008000", size: 12 });
+                                            mapview.addMapDecoration(navigationPanelBar);
+                                        
+                                            //Display Scale bar               
+                                            var mapScaleBar = new OM.control.ScaleBar({ anchorPosition: 4 });
+                                            mapview.addMapDecoration(mapScaleBar);
+                                        
+                                            //Display copyright on top right corner of map	  
+                                            var note = new OM.control.CopyRight({ textValue: copyright, anchorPosition: 5 });
+                                            mapview.addMapDecoration(note);
+                                        
+                                            //Display lat long on mouse double click anywhere on the map                         
+                                            mapview.on(OM.event.MouseEvent.MOUSE_DOUBLE_CLICK, displayLatLong);
+                                        
+                                            //Display Toolbar with new features
+                                            var toolbar = null;
+                                            toolbar = new OM.control.ToolBar("toolbar1", { builtInButtons: [OM.control.ToolBar.BUILTIN_ALL], orientation: 2, enableClear: true });
+                                            toolbar.setPosition(0.70, 0.004);
+                                        
+                                            //Add custom buttons to the toolbar 
+                                        
+                                            //Magnifier
+                                            var md = new OM.control.Magnifier({
+                                                width: 200,
+                                                height: 150,
+                                                zoomIncrement: 2,
+                                                collapsible: true
+                                            });
+                                            md.setVisible(false);
+                                        
+                                            mapview.addMapDecoration(md);
+                                            //custom button for magnifier     
+                                            var tb_bt1 = new OM.control.ToolButton(
+                                                "tb_bt1", OM.control.ToolButton.TOGGLE,
+                                                {
+                                                    buttonIcon: imgURL + "zoomtoselection_ena.png",
+                                                    buttonSelectedIcon: imgURL + "zoomtoselection_ena.png",
+                                                    width: 16,
+                                                    height: 16,
+                                                    tooltip: "Magnifier"
+                                                });
+                                        
+                                        
+                                            //Overview Map
+                                            var options = {
+                                                display: false,
+                                                collapse: false,
+                                                overviewLayer: tileLayer
+                                            };
+                                            mapview.setOverviewMapOptions(options);
+                                        
+                                            var tb_bt2 = new OM.control.ToolButton(
+                                                "tb_bt2", OM.control.ToolButton.TOGGLE,
+                                                {
+                                                    buttonIcon: imgURL + "geographicmap_ena.png",
+                                                    buttonSelectedIcon: imgURL + "geographicmap_ena.png",
+                                                    width: 16,
+                                                    height: 16,
+                                                    tooltip: "Overview Map"
+                                                });
+                                            //Legend
+                                            //Display map legend		   
+                                            var legend = new OM.control.MapDecoration(mapLegend, { width: 200, height: 340, collapsible: false, title: legendTitle });
+                                            legend.setVisible(false);
+                                            legend.setPosition(0.8, 0.069);
+                                            mapview.addMapDecoration(legend);
+                                        
+                                            var tb_bt3 = new OM.control.ToolButton(
+                                                "tb_bt3", OM.control.ToolButton.TOGGLE,
+                                                {
+                                                    buttonIcon: imgURL + "filenode_ena.png",
+                                                    buttonSelectedIcon: imgURL + "filenode_ena.png",
+                                                    width: 16,
+                                                    height: 16,
+                                                    tooltip: "Legend"
+                                                });
+                                        
+                                            //Print map or save as pdf
+                                            var tb_bt4 = new OM.control.ToolButton(
+                                                "tb_bt4", OM.control.ToolButton.COMMAND,
+                                                {
+                                                    buttonIcon: imgURL + "print_ena.png",
+                                                    buttonSelectedIcon: imgURL + "print_ena.png",
+                                                    width: 16,
+                                                    height: 16,
+                                                    tooltip: "Print Map"
+                                                });
+                                        
+                                            //Whiteboard Tool
+                                            var wb = new OM.tool.WhiteBoardTool(mapview);
+                                            var tb_bt7 = new OM.control.ToolButton(
+                                                "tb_bt7", OM.control.ToolButton.TOGGLE,
+                                                {
+                                                    buttonIcon: imgURL + "task_ena.png",
+                                                    buttonSelectedIcon: imgURL + "taskerrored_ena.png",
+                                                    width: 16,
+                                                    height: 16,
+                                                    tooltip: "White Board"
+                                                });
+                                            
+                                        
+                                            //Add buttons with separators to the toolbar
+                                            toolbar.addSeparator("sp1");
+                                            toolbar.addButton(tb_bt1);
+                                            toolbar.addSeparator("sp2");
+                                            toolbar.addButton(tb_bt2);
+                                            toolbar.addSeparator("sp3");
+                                            toolbar.addButton(tb_bt3);
+                                            toolbar.addSeparator("sp4");
+                                            toolbar.addButton(tb_bt4);
+                                            toolbar.addSeparator("sp7");
+                                            toolbar.addButton(tb_bt7);
+                                            
+                                            
+                                            //Add Event listeners to respective buttons
+                                            tb_bt1.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, displayMagnifier);
+                                            tb_bt1.addListener(OM.event.ToolbarEvent.BUTTON_UP, hideMagnifier);
+                                            tb_bt2.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, displayOverviewMap);
+                                            tb_bt2.addListener(OM.event.ToolbarEvent.BUTTON_UP, hideOverviewMap);
+                                            tb_bt3.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, displayLegend);
+                                            tb_bt3.addListener(OM.event.ToolbarEvent.BUTTON_UP, hideLegend);
+                                            tb_bt4.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, printMap);
+                                            tb_bt7.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, displayWhiteBoard);
+                                            tb_bt7.addListener(OM.event.ToolbarEvent.BUTTON_UP, hideWhiteBoard);
+                                            
+                                        
+                                            function displayMagnifier() {
+                                                //Display Magnifier , to be added in toolbar  
+                                                md.setVisible(true);
+                                                md.setPosition(0.8, 0.069);
+                                            }
+                                        
+                                            function hideMagnifier() {
+                                                md.setVisible(false);
+                                            }
+                                        
+                                            function displayOverviewMap() {
+                                                // Overview map is defined here again to manage the default panel after the map is initialized.
+                                                var options = {
+                                                    display: true,
+                                                    collapse: false,
+                                                    overviewLayer: tileLayer
+                                                };
+                                                mapview.setOverviewMapOptions(options);
+                                                mapview.showOverviewMap();
+                                            }
+                                        
+                                            function hideOverviewMap() {
+                                                mapview.hideOverviewMap();
+                                            }
+                                        
+                                            function displayLegend() {
+                                                legend.setVisible(true);
+                                            }
+                                        
+                                            function hideLegend() {
+                                                legend.setVisible(false);
+                                            }
+                                        
+                                            function printMap() {
+                                                mapview.print();
+                                            }
+                                        
+                                            function displayWhiteBoard() {
+                                                wb.start();
+                                            }
+                                        
+                                            function hideWhiteBoard() {
+                                                wb.finish();
+                                            }
+                                        
+                                            function clearWhiteBoard() {
+                                                wb.clear();
+                                            }
+                                           
+                                            //Add the toolbar to mapview.           
+                                            mapview.addToolBar(toolbar);
+                                        
+                                            //Pulse Animation - create style for all entities
+                                        
+                                            var pulse = new OM.style.PulseAnimation({
+                                                stroke: "#3333ff",
+                                                duration: 1,
+                                                beginSize: 8,
+                                                endSize: 50
+                                            });
+                                        
+                                          var centeredFirstTime = false;
+                                            mapview.on(OM.event.MapEvent.MAP_INITIALIZED , function() {
+                                                    
+                                                            mapview.getLayerByName("pipe"+pipeId).on(OM.event.LayerEvent.FEATURES_DISPLAYED, function(){
+                                                                if(mapview.getLayerByName("pipe"+pipeId).getAllFeatures().length>0 && !centeredFirstTime){
+                                                            mapview.setMapCenter(mapview.getLayerByName("pipe"+pipeId).getAllFeatures()[0].getGeometry().getMBR().getCenter());
+                                                            mapview.zoomToExtent(mapview.getLayerByName("pipe"+pipeId).getAllFeatures()[0].getGeometry().getMBR());
+                                                            centeredFirstTime = true;
+                                                    }
+                                                         
+                                                    })
+                                            });   
+                                           
+                                            //Display data
+                                            loadAndDisplayLayers();
+                                            mapview.init();
+                                            mapview.setInfoWindowStyle({width:"250px" , contentStyle :{"font-size":"12px"} , titleStyle :{"font-size":"13px"} });
+                                            
+                                        
+                                            //get the toolbar button for circle.
+                                            var circleBtn = toolbar.getBuiltInToolButton(OM.control.ToolBar.BUILTIN_CIRCLE);
+                                            circleBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, addCircleFilter);
+                                        
+                                            //get the rectangle button from toolbar
+                                            var rectangleBtn = toolbar.getBuiltInToolButton(OM.control.ToolBar.BUILTIN_RECTANGLE);
+                                            rectangleBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, addRectangleFilter);
+											rectangleBtn.addListener(OM.event.ToolbarEvent.BUTTON_UP, clearRectangle);
+											
+											//get the redline button from toolbar
+                                            var redLineBtn = toolbar.getBuiltInToolButton(OM.control.ToolBar.BUILTIN_REDLINE);
+                                            redLineBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, addRedLineFilter);
+											redLineBtn.addListener(OM.event.ToolbarEvent.BUTTON_UP, clearRedLine);
+                                        
+                                        
+                                            // get the clear button , add the code to remove the styling from map.
+                                            var clearBtn = toolbar.getBuiltInToolButton(OM.control.ToolBar.BUILTIN_CLEAR);
+                                            clearBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, removeCircleFilter);
+                                            clearBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, removeRectangleFilter);
+											clearBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, removeRedLineFilter);
+                                            clearBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, hideLegend);
+                                            clearBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, hideOverviewMap);
+                                            clearBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, hideMagnifier);
+                                            clearBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, hideWhiteBoard);
+                                            clearBtn.addListener(OM.event.ToolbarEvent.BUTTON_DOWN, clearWhiteBoard);
+                                        
+                                        
+                                            //get the circle tool from toolbar
+                                            var circleTool = toolbar.getBuiltInTool(OM.control.ToolBar.BUILTIN_CIRCLE);
+                                            circleTool.on(OM.event.ToolEvent.TOOL_END, circleEndAction);
+                                        
+                                            //get the rectangle tool from toolbar
+                                            var rectangleTool = toolbar.getBuiltInTool(OM.control.ToolBar.BUILTIN_RECTANGLE);
+                                            rectangleTool.on(OM.event.ToolEvent.TOOL_END, rectangleEndAction);
+											
+											//get the redline tool from toolbar
+                                            var redLineTool = toolbar.getBuiltInTool(OM.control.ToolBar.BUILTIN_REDLINE);
+                                            redLineTool.on(OM.event.ToolEvent.TOOL_END, redLineEndAction);
+                                        
+                                            // define the selection/highlight style
+                                            var glowFilter = new OM.visualfilter.Glow({ color: "#0000ff", strength: 20, applyToLayer: false });
+                                        
+                                        
+                                            //Circle Highlight related functions
+                                            function addCircleFilter() {
+                                                removeCircleFilter();
+                                                circleTool.start();
+                                            }
+                                        
+                                            var visualLayers = [];
+                                            function circleEndAction() {
+                                                var circle = circleTool.getGeometry();
+                                                var allLayers = mapview.getFeatureLayers();
+                                        
+                                                //apply marker style to all vector layers within the circle. 
+                                                var filter1 = new OM.filter.InsidePolygon(circle);
+                                        
+                                                var i = 0;
+                                                allLayers.forEach(function (currentLayer) {
+                                                    if (!(currentLayer.getName().startsWith("visualLayer") || (currentLayer.getName()) == "edge" || (currentLayer.getName()) == "connectivity" || (currentLayer.getName()) == "pipe")) {
+                                                        var newLayer = currentLayer.applyFilter(filter1, false);
+                                                        newLayer.setName("visualLayer" + i);
+                                                        i = i + 1;
+                                                        visualLayers.push(newLayer);
+                                                        mapview.addLayer(newLayer);
+                                                        newLayer.setVisualFilter(glowFilter);
+                                                    } //end if
+                                                })//end for loop
+                                            } //end function
+                                        
+                                            function removeCircleFilter() {
+                                                visualLayers.forEach(function (layer) {
+                                                    mapview.removeLayer(layer);
+                                                })
+                                            }
+                                        
+                                            //Rectangle Highlight related functions
+                                            function addRectangleFilter() {
+                                                removeRectangleFilter();
+                                                rectangleTool.start();
+                                            }
+                                        
+                                            var visualRectLayers = [];
+                                        
+                                            function rectangleEndAction() {
+                                                var rectangle = rectangleTool.getGeometry();
+                                                var allLayers = mapview.getFeatureLayers();
+                                        
+                                                //apply marker style to all vector layers within the rectangle. 
+                                                var filter1 = new OM.filter.InsidePolygon(rectangle);
+                                        
+                                                var i = 0;
+                                                allLayers.forEach(function (currentLayer) {
+                                                    if (!(currentLayer.getName().startsWith("visualRectLayers") || (currentLayer.getName()) == "edge" || (currentLayer.getName()) == "connectivity" || (currentLayer.getName()) == "pipe")) {
+                                                        var newLayer = currentLayer.applyFilter(filter1, false);
+                                                        newLayer.setName("visualRectLayers" + i);
+                                                        i = i + 1;
+                                                        visualRectLayers.push(newLayer);
+                                                        mapview.addLayer(newLayer);
+                                                        newLayer.setVisualFilter(glowFilter);
+                                        
+                                                    } //end if
+                                                }) //end for loop
+                                            } //end function
+                                        
+                                            function removeRectangleFilter() {
+                                                visualRectLayers.forEach(function (layer) {
+                                                    mapview.removeLayer(layer);
+                                                })
+                                            }
+											function clearRectangle() {
+												if(rectangleTool.getStatus()==1)
+													rectangleTool.clear();
+                                            }
+											
+											//Redline Highlight related functions
+                                            function addRedLineFilter() {
+                                                removeRedLineFilter();
+                                                redLineTool.start();
+                                            }
+                                        
+                                            var visualRedLayers = [];
+                                        
+                                            function redLineEndAction() {
+                                                var redLine = redLineTool.getGeometry();
+                                                var allLayers = mapview.getFeatureLayers();
+                                        
+                                                //apply marker style to all vector layers within the redLine. 
+                                                var filter1 = new OM.filter.InsidePolygon(redLine);
+                                        
+                                                var i = 0;
+                                                allLayers.forEach(function (currentLayer) {
+                                                    if (!(currentLayer.getName().startsWith("visualRedLayers") || (currentLayer.getName()) == "edge" || (currentLayer.getName()) == "connectivity" || (currentLayer.getName()) == "pipe")) {
+                                                        var newLayer = currentLayer.applyFilter(filter1, false);
+                                                        newLayer.setName("visualRedLayers" + i);
+                                                        i = i + 1;
+                                                        visualRedLayers.push(newLayer);
+                                                        mapview.addLayer(newLayer);
+                                                        newLayer.setVisualFilter(glowFilter);
+                                        
+                                                    } //end if
+                                                }) //end for loop
+                                            } //end function
+                                        
+                                            function removeRedLineFilter() {
+                                                visualRedLayers.forEach(function (layer) {
+                                                    mapview.removeLayer(layer);
+                                                })
+                                            }
+											
+											function clearRedLine() {
+												if(redLineTool.getStatus()==1)
+													redLineTool.clear();
+                                            }
+                                        
+                                        
+                                            function processMultiNode() {
+                                        
+                                            }
+                                        
+                                            function displayLatLong(event) {
+                                                var location = mapview.getCursorLocation();
+                                                var locX;
+                                                var locY;
+                                                if (mapview.getUniverse().getSRID() == 8307) {
+                                                    locX = location.getX().toFixed(4);
+                                                    locY = location.getY().toFixed(4);
+                                                } else {
+                                                    var transform = location.transform(8307);
+                                                    locX = transform.getX().toFixed(4);
+                                                    locY = transform.getY().toFixed(4);
+                                                }
+                                        
+                                                //display it inside the info windowm +
+                                                var displayStr = infoStr.replace("locX", locX);
+                                                displayStr = displayStr.replace("locY", locY);
+                                                //set defauly style of info windows
+                                                var infoStyle1 = {
+                                                    infoWindowStyle: { "background-color": "#e5f9ff" },
+                                                    titleStyle: { background: "#F5F5F9", "font-size": "12px", "font-family": "Tahoma" },
+                                                    contentStyle: { background: "#F5F5F9", "font-size": "12px", "font-family": "Tahoma" },
+                                                    "tailStyle": { "offset": "25", "background": "#ccf3ff" },
+                                                    "closeButtonStyle": {
+                                                        "mouseOutButton": { "src": "resources/mapview/infoWindow/close_en.png" },
+                                                        "mouseOverButton": { "src": "resources/mapview/infoWindow/close_ov.png" }
+                                                    }
+                                                }
+                                                mapview.setInfoWindowStyle(infoStyle1);
+                                                mapview.displayInfoWindow(location, displayStr, { title: coordinates, width: "200px", height: "80px" });
+                                            }
+                                        
+                                            
+                                        
+                                        } //end of goMap
+										
+									function setCenter() {
+                                            if (lastClickedPoint) {
+                                                mapview.setMapCenter(lastClickedPoint);
+                                                lastClickedPoint = null;
+                                            }
+                                            else {
+                                                mapview.setMapCenter(mapview.getCursorLocation(), true);
+                                            }
+                                        }
+                                        function setZoomLevelToCountry() {
+                                            setCenter();
+                                            mapview.setMapZoomLevel(3);
+                                        
+                                        }
+                                        function setZoomLevelToCity() {
+                                            setCenter();
+                                            mapview.setMapZoomLevel(7);
+                                        }
+                                        function setZoomLevelToStreet() {
+                                            setCenter();
+                                            mapview.setMapZoomLevel(10);
+                                        }
+                                        
+                                        function setZoomLevelToDefault() {
+                                            setCenter();
+                                            mapview.setMapZoomLevel(mapZoom);
+                                        }
+                                        
+                                        
+                                        function getInfoWindowHtml(attribs, attrSeq, deviceType) {
+                                            var oddColor = "#f7f9fc";
+                                            var evenColor = "#d9e7fc";
+                                            var count = 0;
+                                            var htmlStr = "<table>";
+                                            for (var attrIndex in attrSeq) {
+                                                var attr= attrSeq[attrIndex];
+                                                if (attr == "_LABEL_" || attr =="ENTITYID" || attribs[attr]=="" || attr == "PARENTDEVICETYPE") continue;
+                                                htmlStr += "<tr><td width=\"350\" style=\"border:solid 1px #545e5e ; font-weight:bold;\" bgcolor=\"" + ((count % 2 == 0) ? evenColor : oddColor) + "\">";
+                                                htmlStr += (attr == "PARENTDEVICE")? ((attribs["PARENTDEVICETYPE"] == "PHYSICALDEVICE")? "PHYSICAL DEVICE": "EQUIPMENT") : attr;
+                                                htmlStr += "</td><td width=\"750\" style=\"border:solid 1px #545e5e\" bgcolor=\"" + ((count % 2 == 0) ? evenColor : oddColor) + "\">";
+                                                htmlStr += attribs[attr];
+                                                htmlStr += "</td>";
+                                                count++;
+                                                htmlStr += "</tr>";
+                                            }
+                                            htmlStr += "</table>";
+                                            return htmlStr;
+                                        }
+                                        
+                                        ]]> 	
+										
+					   </trh:script>					  
+		  
+                       <trh:script id="rightclickmenus"><?audit suppress oracle.adf.faces.verbatimScript?>
+						  var foiId = "false";
+						  var msgpop;
+						  var rtx = null; 
+						  var rty = null; 
+						  
+						 /** This function is called when the user right clicks on the map.
+						   *  It displays a context menu at the mouse right click location  */ 
+						  function showContextMenu(point) {    
+							 var foiId = point.feature.id;
+							 var rtx = point.evt.clientX; 
+							 var rty = point.evt.clientY; 
+                                                         lastClickedPoint = point.feature.geo;
+							 msgpop = AdfPage.PAGE.findComponent(dynapop2);
+							 AdfCustomEvent.queue(msgpop, "jsSendInfo", {foiId:foiId ,x: rtx, y: rty}, true);
+        			
+						  } 
+						  
+						  // This method is added as a fix to the problem of bubbling of the IE browser specific 
+						  // popup menu, upon right clicking on the canvas. 
+						  // The clientCliener is added just before the ilog canvas tag (Ex: networkView, equipmentView and diagrammerView tags)
+						  // All this does is capture the user right-click (contextMenu) action and then
+						  // prevent it from bubbling up to the browser by canceling the event.                                  
+						  function interrupt(event) {                
+							  event.cancel(); 
+							  return false;
+						  }
+						  
+					</trh:script>                  
+        </af:panelGroupLayout>
+        </f:facet>
+			
+        
+        </af:panelStretchLayout>
+        </f:facet>
+        <f:facet name="contextualArea"/>
+        <f:facet name="localAreaScroll"></f:facet>
+    </af:pageTemplate>
+</jsp:root>

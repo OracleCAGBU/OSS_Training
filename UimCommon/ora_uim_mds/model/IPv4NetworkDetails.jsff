@@ -1,0 +1,290 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+            xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:cui="/CommsUI">
+		  
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle"
+         value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+ 
+  <af:group id="g1">
+    <af:panelGroupLayout id="pgl1" binding="#{backingBeanScope.IPv4Network_details_panelGroupLayout}" layout="scroll">
+      <af:panelHeader id="ph1" styleClass="invSummaryPanelHeader" helpTopicId="OHW_ipv4NetworkSummary" partialTriggers="ctb6 ctb1 ctb2" binding="#{backingBeanScope.generalInfoTab}"
+                      text="#{inventoryUIBundle.IPv4_NETWORK}- #{pageFlowScope.IPv4NetworkDetailsBean.entityObject.addressRange.lowerValue}/#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.prefixLength}">
+        <f:facet name="toolbar">
+                <af:toolbar id="t1">
+                    <af:group id="gr1" rendered="#{!pageFlowScope.IPv4NetworkDetailsBean.previewLayout}">
+                        <af:menuBar id="mb1">
+                            <af:menu id="menu6" binding="#{pageFlowScope.IPv4NetworkDetailsBean.actionsMenu}" 
+									 disabled="#{pageFlowScope.IPv4NetworkDetailsBean.renderEditPanel}" styleClass="invSummaryMenu">
+                                <af:clientListener method="goRefreshEntity" type="propertyChange"/>
+                                <af:serverListener type="refreshEntity" method="#{pageFlowScope.IPv4NetworkDetailsBean.refresh}"/>
+                            </af:menu>
+                        </af:menuBar>
+                    </af:group>
+                    <af:group id="gr2">
+                        <af:commandToolbarButton text="#{inventoryUIBundle.SAVE}" id="ctb1" disabled="#{pageFlowScope.IPv4NetworkDetailsBean.disableSaveButtons}"
+                                                 accessKey="#{inventoryUIBundle.SAVE_ACCESS_KEY}" actionListener="#{pageFlowScope.IPv4NetworkDetailsBean.save}" 
+                                                 binding="#{backingBeanScope.saveButtonBinding}"
+                                                 rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=IPv4NetworkDetails.SAVE;action=view']}">
+                            <af:setActionListener from="viewing"
+                                                  to="#{pageFlowScope.saveActionOutcome}"/>
+                        </af:commandToolbarButton>
+                        <af:spacer width="10" height="10" id="s11"/>
+                        <af:commandToolbarButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="ctb2" disabled="#{pageFlowScope.IPv4NetworkDetailsBean.disableSaveButtons}"
+                                                 actionListener="#{pageFlowScope.IPv4NetworkDetailsBean.save}" accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}" 
+                                                 binding="#{backingBeanScope.saveAndCloseButtonBinding}"
+                                                 action="#{pageFlowScope.IPv4NetworkDetailsBean.saveOutcome}"
+                                                 rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=IPv4NetworkDetails.SAVE_AND_CLOSE;action=view']}">
+                            <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+                        </af:commandToolbarButton>
+                        <af:spacer width="10" height="10" id="s12"/>
+                        <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb3"
+                                                accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}" immediate="true" 
+                                                action="#{pageFlowScope.IPv4NetworkDetailsBean.view}"
+                                                actionListener="#{pageFlowScope.IPv4NetworkDetailsBean.cancel}"/>
+                    </af:group>
+                </af:toolbar>
+        </f:facet>       
+        <af:spacer width="10" height="10" id="s3"/>
+        <af:panelGroupLayout id="pgl3" binding="#{pageFlowScope.IPv4NetworkDetailsBean.detailsEditViewPanel}">
+          <af:panelGroupLayout id="pgl4" layout="scroll" rendered="#{pageFlowScope.IPv4NetworkDetailsBean.renderEditPanel}">
+            <af:showDetailHeader text="#{inventoryUIBundle.IPv4_NETWORK_INFORMATION}"
+                                 disclosed="true" id="sdh1">
+              <f:facet name="toolbar">
+                <af:toolbar id="t2">
+                    <af:commandToolbarButton id="ctb5" text="#{inventoryUIBundle.EDIT}" actionListener="#{pageFlowScope.IPv4NetworkDetailsBean.edit}"
+                                             disabled="#{!pageFlowScope.IPv4NetworkDetailsBean.disableSaveButtons}"
+                                             accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}"
+                                             rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=IPv4NetworkDetails.EDIT;action=view']}"/>
+                </af:toolbar>
+              </f:facet>
+               <af:spacer width="10" height="10" id="s1"/>
+              <af:panelFormLayout id="netview" maxColumns="2" rows="2"
+                                  labelWidth="33%" fieldWidth="67%"
+                                  partialTriggers="ctb5">
+   
+                <af:inputText label="#{inventoryUIBundle.NAME}" value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.name}"
+                              id="netview-name" columns="35" maximumLength="50"/>
+                              
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.IPV4_ADDRESS}" id="netview-startaddress">
+                  <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.addressRange.lowerValue}" id="ot3_1"/>
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage id="netview-ownedby" label="#{inventoryUIBundle.OWNED_BY}">
+                    <af:inputText value="#{pageFlowScope.IPv4NetworkDetailsBean.ownedByName}" simple="true"
+                                  id="ownedby" binding="#{backingBeanScope.ownedByNameBinding}" columns="35"
+                                  valueChangeListener="#{pageFlowScope.IPv4NetworkDetailsBean.partyChanged}"
+                                  label='"#{inventoryUIBundle.OWNED_BY}"'>
+                        <af:autoSuggestBehavior suggestItems="#{pageFlowScope.IPv4NetworkDetailsBean.getPartyHandler}"/>
+                    </af:inputText>
+                    <af:link id="commandImageLink2" icon="/images/search_ena.png" actionListener="#{pageFlowScope.IPv4NetworkDetailsBean.launchPartyPopup}"
+                                         shortDesc="#{inventoryUIBundle.BROWSE}">
+                    </af:link>
+                </af:panelLabelAndMessage>
+                
+                <af:inputText value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.description}"
+                              label="#{inventoryUIBundle.DESCRIPTION}" id="netview-description"
+                              maximumLength="255" rows="5" columns="35"/>
+                
+                <af:panelLabelAndMessage id="netview-ipdom" label="#{inventoryUIBundle.IP_ADDRESS_DOMAIN}">
+                  <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.ipAddressDomain.name}" id="ipdom" />
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.PREFIX_LENGTH}" id="netview-prefixlength">
+                  <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.prefixLength}" id="ot5_1"/>
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="netview-adminstate">
+                  <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.inventoryStatus}" id="ot6"/>
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="netview-lmd" rendered="false">
+                  <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.lastModifiedDate}" id="ot9"/>
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="netview-lmu" rendered="false">
+                  <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.lastModifiedUser}" id="ot12"/>
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="netview-crd" rendered="false">
+                    <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.createdDate}" id="ot15">
+                        <af:convertDateTime pattern="#{pageFlowScope.IPv4NetworkDetailsBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+              
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="netview-cru" rendered="false">
+                    <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.createdUser}" id="ot16"/>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+              <af:spacer width="300" id="s32"/>
+             <!-- The Below PanelFormLayout will be used to render the Entity-Level Characteristics for IPv4Network. -->
+            <af:panelFormLayout id="ipv4netedit" maxColumns="2" rows="2"
+                                  labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsEditPanel}"/>
+																	
+            </af:showDetailHeader>
+            <af:popup id="searchPartyPopup" binding="#{backingBeanScope.searchParty}"
+                      contentDelivery="lazyUncached" rendered="true">
+              <af:dialog id="d1" type="none" title="#{inventoryUIBundle.PARTY_SEARCH}">
+                <af:panelStretchLayout id="psl_2"
+                                       styleClass="invCommonPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.PartySearchResultsFlow1.regionModel}"
+                               id="r1"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{pageFlowScope.IPv4NetworkDetailsBean.refresh}"/>
+            </af:popup>
+          </af:panelGroupLayout>
+          
+          <af:panelGroupLayout id="pgl5" layout="scroll" rendered="#{pageFlowScope.IPv4NetworkDetailsBean.renderViewPanel}">
+            <af:showDetailHeader text="#{inventoryUIBundle.IPv4_NETWORK_INFORMATION}" disclosed="true"
+                                 id="showDetailHeader1">
+              <f:facet name="toolbar">
+                <af:toolbar id="t3">
+                  <af:commandToolbarButton id="ctb6" text="#{inventoryUIBundle.EDIT}"
+                                           actionListener="#{pageFlowScope.IPv4NetworkDetailsBean.edit}"
+                                           accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}"
+                                           rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=IPv4NetworkDetails.EDIT;action=view']}"/>
+                </af:toolbar>
+              </f:facet>
+              <af:panelFormLayout id="netedit" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="netedit-name">
+                  <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.name}" id="outputText1"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.IPV4_ADDRESS}" id="netedit-startaddress">
+                  <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.addressRange.lowerValue}"
+                                 id="outputText2"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage id="netedit-ownedby" label="#{inventoryUIBundle.OWNED_BY}">
+                  <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.ipSubnetOwnedBy.name}"
+                                 id="ldacc-idb"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}" id="netedit-description">
+                  <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.description}"
+                                 id="outputText6"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage id="netedit-ipdom" label="#{inventoryUIBundle.IP_ADDRESS_DOMAIN}">
+                  <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.ipAddressDomain.name}"
+                                 id="inputText2"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.PREFIX_LENGTH}" id="netedit-pl">
+                  <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.prefixLength}"
+                                 id="outputText5"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="netedit-astate">
+                  <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.inventoryStatus}" id="outputText7"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="netedit-lmd"
+                                         rendered="false">
+                  <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.lastModifiedDate}"
+                                 id="outputText8"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="netedit-lmu"
+                                         rendered="false">
+                  <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.lastModifiedUser}"
+                                 id="outputText9"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="netedit-crd" rendered="false">
+                  <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.createdDate}" id="ot18">
+                    <af:convertDateTime pattern="#{pageFlowScope.IPv4NetworkDetailsBean.dateTimeFormat}"/>
+                  </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="netedit-cru" rendered="false">
+                  <af:outputText value="#{pageFlowScope.IPv4NetworkDetailsBean.entityObject.createdUser}" id="ot17"/>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+              <!-- The Below PanelFormLayout will be used to render the Entity-Level Characteristics for IPv4Network. -->
+              <af:panelFormLayout id="elcpfl" maxColumns="2" rows="1"
+                                  labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsViewPanel}">
+                <af:iterator id="it123" value="#{pageFlowScope.IPv4NetworkDetailsBean.characteristics}"
+                             var="characteristicDetails">
+                  <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="onn312"
+                                           rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'ALPHANUMERIC' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'CALENDAR' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'DROPDOWN_LIST' || characteristicDetails.characteristic.characteristicSpecification.valueType == 'NUMERIC'}">
+                    <af:outputText id="ote3"
+                                   value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="onn317"
+                                           rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'URL'}">
+                    <af:link id="oth3" targetFrame="_blank"
+                               destination="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                               inlineStyle="padding-left:6px;">
+                      <af:outputText id="ot28" truncateAt="50"
+                                     value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                    </af:link>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="" id="onn318"
+                                           rendered="#{characteristicDetails.characteristic.characteristicSpecification.controlType == 'CHECKBOX'}">
+                    <af:selectBooleanCheckbox id="sbc1" readOnly="true"
+                                              value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                              text="#{characteristicDetails.label}" simple="true"/>
+                  </af:panelLabelAndMessage>
+                </af:iterator>
+              </af:panelFormLayout>
+            </af:showDetailHeader>
+          </af:panelGroupLayout>
+        </af:panelGroupLayout>
+        <af:spacer width="10" height="10" id="s5"/>
+        <af:showDetailHeader text="#{inventoryUIBundle.IPv4_NETWORK_HIERARCHY}"
+                             disclosed="true" id="sdh5" 
+							 rendered="#{!pageFlowScope.IPv4NetworkDetailsBean.disableIPv4NetworkHierarchyPortlet}">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:panelCollection id="pc2" styleClass="AFStretchWidth"
+                              featuresOff="freeze wrap detach">
+            <f:facet name="menus"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="statusbar"/>
+            <af:treeTable id="ipv4NetworkTreeTable"
+                          value="#{pageFlowScope.IPv4NetworkTreeBean.treeModel}"
+                          binding="#{backingBeanScope.IPAM_detailsTreeBinding}"
+                          rowDisclosureListener="#{pageFlowScope.IPv4NetworkTreeBean.rowDisclosureListener}"
+                          disclosedRowKeys="#{pageFlowScope.IPv4NetworkTreeBean.treeDisclosedRowKeys}"
+                          var="node" rowSelection="single" columnStretching="multiple"
+                          expandAllEnabled="#{pageFlowScope.IPv4NetworkTreeBean.expandAllEnabled}"
+                          columnSelection="multiple" styleClass="AFStretchWidth"
+                          fetchSize="#{pageFlowScope.IPv4NetworkDetailsBean.fetchSize}"
+                          contextMenuSelect="true" contentDelivery="immediate"
+                          selectionListener="#{pageFlowScope.IPv4NetworkTreeBean.nodeSelectedEvent}"
+                          horizontalGridVisible="false"
+                          summary="#{inventoryUIBundle.IPv4_NETWORK_DETAILS_TREETABLE}">
+              <f:facet name="nodeStamp">
+                <af:column id="c9" rowHeader="unstyled" headerText="#{inventoryUIBundle.IPV4_ADDRESS}" width="25%" minimumWidth="100">
+                  <af:panelGroupLayout id="pgl2">
+                    <af:image source="#{node.data.icon}" styleClass="invSummaryImage" shortDesc="icon" id="i1"/>
+                     <af:switcher id="idSwitcher" defaultFacet="false" facetName="#{pageFlowScope.IPv4NetworkTreeBean.treeModel.depth le 0}">
+                      <f:facet name="false">
+                        <af:link action="#{pageFlowScope.IPv4NetworkTreeBean.view}" id="cl1" actionListener="#{pageFlowScope.IPv4NetworkTreeBean.registerRecentItem}">
+                          <af:outputText value="#{node.data.label}" id="outputText22"/>
+                        </af:link>
+                      </f:facet>
+                      <f:facet name="true">
+                        <af:outputText value="#{node.data.label}" id="ot8"/>
+                      </f:facet> 
+                     </af:switcher>
+                  </af:panelGroupLayout>
+                </af:column>
+              </f:facet>
+              <af:column headerText="#{inventoryUIBundle.INVENTORY_STATUS}" id="column6" width="25%" minimumWidth="100">
+                    <af:outputText value="#{node.data.invStatus}" id="ot313"/>
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="column7" width="25%" minimumWidth="100">
+                     <af:outputText value="#{node.data.raStatus}" id="ot324"/>
+                </af:column> 
+              <f:facet name="contextMenu"/> 
+            </af:treeTable>
+          </af:panelCollection>
+        </af:showDetailHeader>
+      </af:panelHeader>
+
+    </af:panelGroupLayout> 
+  </af:group>
+</jsp:root>

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   id="pt1">
+    <f:facet name="localArea">
+      <af:panelHeader text="#{pageFlowScope.InventoryAssignmentListBean.displayInfo}"
+                      id="ph1" type="stretch">
+        <f:facet name="info"/>
+        <f:facet name="legend"/>
+         <f:facet name="toolbar">             
+            <af:toolbar id="t2">
+            <af:commandToolbarButton text="#{inventoryUIBundle.DISASSOCIATE}" id="ctb1" rendered="true"
+                                     actionListener="#{pageFlowScope.InventoryAssignmentListBean.remove}" visible="#{(pageFlowScope.viewMode)}"/>
+            <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}"
+                                     id="ctb2"
+                                     actionListener="#{pageFlowScope.InventoryAssignmentListBean.cancel}" visible="#{(pageFlowScope.viewMode)}"
+                                     accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+          </af:toolbar>
+        </f:facet>
+        <f:facet name="context"/>
+        <af:showDetailHeader text="#{inventoryUIBundle.ASSIGNMENT_LIST}"
+                               disclosed="true" id="resultsComponent" binding="#{backingBeanScope.panelGroupLayout}"
+                             type="stretch">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>            
+      <af:panelCollection id="pc1">
+            <af:table var="row" rowBandingInterval="0"
+                      value="#{pageFlowScope.InventoryAssignmentListBean.flowIdentifierList}"
+                      binding="#{pageFlowScope.InventoryAssignmentListBean.resultsTable}" rowSelection="multiple"
+                      id="inventoryAssignmentListTable" summary="#{inventoryUIBundle.INVENTORY_ASSIGNMENT_LIST}"
+                      selectionListener="#{pageFlowScope.InventoryAssignmentListBean.selectAction}" width="100%"
+                      autoHeightRows="10">
+              <af:column sortable="false" headerText="#{inventoryUIBundle.ID}">
+                <af:outputText value="#{row.id}" id="ot2"/>
+              </af:column>
+              <af:column sortable="false" headerText="#{inventoryUIBundle.NAME}" rowHeader="unstyled">
+                <af:outputText value="#{row.name}"/>
+              </af:column>
+              <af:column sortable="false" headerText="#{inventoryUIBundle.DESCRIPTION}">
+                <af:outputText value="#{row.description}"/>
+              </af:column>
+              <af:column sortable="false" headerText="#{inventoryUIBundle.SPECIFICATION}">
+                <af:outputText value="#{row.specification}"/>
+              </af:column>
+            </af:table>
+            <f:facet name="statusbar"/>      
+      </af:panelCollection>
+      </af:showDetailHeader>
+      <af:popup id="flowIdentifierUnassignmentWarning" contentDelivery="lazyUncached" binding="#{backingBeanScope.flowIdentifierUnassignmentWarning}">
+                    <af:dialog title="#{inventoryUIBundle.UNASSOCIATE_FLOWIDENTIFIER_MESSAGE}" type="yesNo"
+                               dialogListener="#{pageFlowScope.InventoryAssignmentListBean.unassignFlowIdentifierFromNetworkCanvas}" id="dd24"/>
+      </af:popup>
+      </af:panelHeader>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

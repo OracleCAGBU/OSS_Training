@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:cui="/CommsUI">
+		  
+    <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <c:set var="bundle"
+           value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+<af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"  value="#{bindings.pageTemplateBinding}" id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout id="pgl">
+        <af:panelHeader id="ph1" styleClass="invSummaryPanelHeader" text="#{inventoryUIBundle.PARTITION_DETAILS}"
+                        helpTopicId="OHW_ipv4SubnetPartition">
+            <f:facet name="toolbar">
+                <af:panelGroupLayout layout="horizontal"
+                                     rendered="#{!pageFlowScope.IPv4SubnetPartitionBean.previewLayout}">
+                    <af:commandToolbarButton text="#{inventoryUIBundle.SUBNET_PARTITION}" id="ctb1"
+                                             actionListener="#{pageFlowScope.IPv4SubnetPartitionBean.createPartition}"
+                                             action="summary"  
+                                             rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=IPv4SubnetPartition.PARTITION;action=view']}"
+                                             accessKey="#{inventoryUIBundle.PARTITION_ACCESS_KEY}">
+                        <af:setActionListener from="#{pageFlowScope.IPv4SubnetPartition.entityObject}"
+                                              to="#{pageFlowScope.objectId}"/>
+                        <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+                    </af:commandToolbarButton>
+                    <af:spacer width="10" height="10" id="s11"/>
+                    <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb2" action="cancel"
+                                             immediate="true"
+                                             actionListener="#{pageFlowScope.IPv4SubnetPartitionBean.cancel}"
+                                             accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                </af:panelGroupLayout>
+            </f:facet>
+       <af:spacer width="10" height="10" id="s1"/>
+        <af:panelGroupLayout layout="scroll" id="pgl23">
+                        <af:panelGroupLayout>
+                            <af:panelFormLayout id="pfl" maxColumns="2" rows="2" labelWidth="43%" fieldWidth="57%"
+                                                binding="#{backingBeanScope.uiHintsPanel}">
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.IPv4_NETWORK}"
+                                                         id="ipv4sub-startaddress">
+                                    <af:outputText value="#{pageFlowScope.IPv4SubnetPartitionBean.entityObject.parentBlock.addressRange.lowerValue}"
+                                                   id="ot1"/>
+                                </af:panelLabelAndMessage>
+                               
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.IPV4_SUBNET_START}"
+                                                         id="sub-start">
+                                    <af:outputText value="#{pageFlowScope.IPv4SubnetPartitionBean.entityObject.addressRange.lowerValue}"
+                                                   id="ot21"/>
+                                </af:panelLabelAndMessage>
+                               
+                                <af:selectOneChoice id="ctb4" autoSubmit="true"
+                                                    label="#{inventoryUIBundle.NEW_CIDR_NUMBER}" showRequired="true"
+                                                    valueChangeListener="#{pageFlowScope.IPv4SubnetPartitionBean.prefixLengthListener}"
+                                                    value="#{pageFlowScope.IPv4SubnetPartitionBean.itsCidrNumber}"
+                                                    binding="#{backingBeanScope.prefixLengthBinding}">
+                                    <f:selectItems id="ctb5" value="#{pageFlowScope.IPv4SubnetPartitionBean.prefixLengthList}"/>
+                                </af:selectOneChoice>
+                               
+                                 <af:panelLabelAndMessage label="#{inventoryUIBundle.IPv4_SUBNET_MASK}" id="plm-mask">
+                                    <af:outputText value="#{pageFlowScope.IPv4SubnetPartitionBean.itsMask}"
+                                                   binding="#{backingBeanScope.subnetMaskBinding}" 
+                                                   partialTriggers="ctb4"/>
+                                </af:panelLabelAndMessage>
+                               
+                                 <af:panelLabelAndMessage label="#{inventoryUIBundle.IPV4_SUBNET_END}" id="panelLabelAndMessage4">
+                                <af:outputText value="#{pageFlowScope.IPv4SubnetPartitionBean.entityObject.addressRange.upperValue}"
+                                id="sub-end"/>
+                                </af:panelLabelAndMessage>
+                               
+                                <af:inputNumberSpinbox label="#{inventoryUIBundle.NEW_IPv4_SUBNETS}"
+                                                       value="#{pageFlowScope.IPv4SubnetPartitionBean.itsNumSubnets}"
+                                                       binding="#{backingBeanScope.numSubnetsBinding}"
+                                                       id="ips-numSubnet" partialTriggers="ctb4"/>
+                                                       
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.MAX_HOSTS_PER_SUBNET}" id="plm-maxHost">
+                                    <af:outputText value="#{pageFlowScope.IPv4SubnetPartitionBean.itsMaxHosts}"
+                                                   binding="#{backingBeanScope.maxHostsBinding}" id="ot4"
+                                                   partialTriggers="ctb4"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="plm-lmd"
+                                                         rendered="false">
+                                    <af:outputText value="#{pageFlowScope.IPv4SubnetPartitionBean.lastModifiedDate}"
+                                                   id="ot3">
+                                        <af:convertDateTime pattern="#{pageFlowScope.IPv4SubnetPartitionBean.dateTimeFormat}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="plm-lmu"
+                                                         rendered="false">
+                                    <af:outputText value="#{pageFlowScope.IPv4SubnetPartitionBean.entityObject.lastModifiedUser}"
+                                                   id="ot41"/>
+                                </af:panelLabelAndMessage>
+                            </af:panelFormLayout>
+                        </af:panelGroupLayout>
+                 </af:panelGroupLayout>
+          </af:panelHeader>
+         </af:panelGroupLayout>
+        </f:facet>
+    </af:pageTemplate>
+ </jsp:root>
+
+

@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='windows-1250'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="inventoryUIBundle"
+           value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <c:set var="bundle"
+           value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+    <af:panelBox text="#{inventoryUIBundle.APPLICATION_PREFERENCES}" id="pb1" disclosed="true" showDisclosure="false"
+                 background="medium" partialTriggers="ctb1">
+        <f:facet name="toolbar">
+            <af:toolbar id="t1">
+                <af:button text="#{inventoryUIBundle.SET_TO_DEFAULT}" id="ctb1"
+                           actionListener="#{pageFlowScope.GeneralPreferencesPageBean.setDefaults}"/>
+            </af:toolbar>
+        </f:facet>
+        <af:panelFormLayout id="pfl1">
+            <af:selectOneChoice label="#{inventoryUIBundle.LANDING_PAGE}" id="soc1"
+                                value="#{pageFlowScope.GeneralPreferencesPageBean.landingPage}">
+                <f:selectItems value="#{pageFlowScope.GeneralPreferencesPageBean.landingPageItems}" id="si1"/>
+            </af:selectOneChoice>
+        </af:panelFormLayout>
+        <af:spacer width="10" height="10"/>
+        <af:panelBox text="#{inventoryUIBundle.SUMMARY_PAGE_PREFERENCES}" id="pb2" disclosed="true"
+                     showDisclosure="false" background="medium">
+            <af:selectOneChoice label="#{inventoryUIBundle.ENTITY_TYPE}" id="soc2"
+                                value="#{pageFlowScope.GeneralPreferencesPageBean.selectedEntity}" autoSubmit="true"
+                                valueChangeListener="#{pageFlowScope.GeneralPreferencesPageBean.entityTypeChanged}">
+                <f:selectItems value="#{pageFlowScope.GeneralPreferencesPageBean.entityList}" id="si2"/>
+            </af:selectOneChoice>
+            <af:spacer width="5" height="5"/>
+            <af:panelFormLayout id="pfl2" maxColumns="3" rows="6" labelWidth="33%" fieldWidth="67%"
+                                binding="#{backingBeanScope.ppBinding}">
+                <af:selectBooleanCheckbox value="#{pageFlowScope.GeneralPreferencesPageBean.disableLDAPortlet}"
+                                          text="#{inventoryUIBundle.DEACTIVATE_LDA}" id="sbc1"
+                                          disabled="#{pageFlowScope.GeneralPreferencesPageBean.disablePreferences}"
+										  rendered="#{pageFlowScope.GeneralPreferencesPageBean.renderLDA}"
+                                          partialTriggers="soc2"/>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.GeneralPreferencesPageBean.disableRolesPortlet}"
+                                          text="#{inventoryUIBundle.DEACTIVATE_ROLE}" id="sbc2"
+                                          disabled="#{pageFlowScope.GeneralPreferencesPageBean.disablePreferences}"
+										  rendered="#{pageFlowScope.GeneralPreferencesPageBean.renderRole}"
+                                          partialTriggers="soc2"/>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.GeneralPreferencesPageBean.disableMediaPortlet}"
+                                          text="#{inventoryUIBundle.DEACTIVATE_MEDIA}" id="sbc3"
+                                          disabled="#{pageFlowScope.GeneralPreferencesPageBean.disablePreferences}"
+										  rendered="#{pageFlowScope.GeneralPreferencesPageBean.renderMS}"
+                                          partialTriggers="soc2"/>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.GeneralPreferencesPageBean.disableBIPortlet}"
+                                          text="#{inventoryUIBundle.DEACTIVATE_BI}" id="sbc4"
+                                          disabled="#{pageFlowScope.GeneralPreferencesPageBean.disablePreferences}"
+										  rendered="#{pageFlowScope.GeneralPreferencesPageBean.renderBI}"
+                                          partialTriggers="soc2"/>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.GeneralPreferencesPageBean.disableNetworkNodesPortlet}"
+                                          text="#{inventoryUIBundle.DEACTIVATE_NN}" id="sbc5"
+                                          disabled="#{pageFlowScope.GeneralPreferencesPageBean.disablePreferences}"
+										  rendered="#{pageFlowScope.GeneralPreferencesPageBean.renderNN}"
+                                          partialTriggers="soc2"/>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.GeneralPreferencesPageBean.disableServicePortlet}"
+                                          text="#{inventoryUIBundle.DEACTIVATE_SERVICE}" id="sbc6"
+                                          disabled="#{pageFlowScope.GeneralPreferencesPageBean.disablePreferences}"
+										  rendered="#{pageFlowScope.GeneralPreferencesPageBean.renderService}"
+                                          partialTriggers="soc2"/>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.GeneralPreferencesPageBean.disableAssignmentsPortlet}"
+                                          text="#{inventoryUIBundle.DEACTIVATE_ASSIGNMENTS}" id="sbc7"
+                                          disabled="#{pageFlowScope.GeneralPreferencesPageBean.disablePreferences}"
+										  rendered="#{pageFlowScope.GeneralPreferencesPageBean.renderAssignments}"
+                                          partialTriggers="soc2"/>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.GeneralPreferencesPageBean.disableReferencesPortlet}"
+                                          text="#{inventoryUIBundle.DEACTIVATE_REFERENCES}" id="sbc8"
+                                          disabled="#{pageFlowScope.GeneralPreferencesPageBean.disablePreferences}"
+										  rendered="#{pageFlowScope.GeneralPreferencesPageBean.renderReferences}"
+                                          partialTriggers="soc2"/>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.GeneralPreferencesPageBean.disableIpResourcesPortlet}"
+                                          text="#{inventoryUIBundle.DEACTIVATE_IP_RESOURCES}" id="sbc9"
+                                          disabled="#{pageFlowScope.GeneralPreferencesPageBean.disablePreferences}"
+										  rendered="#{pageFlowScope.GeneralPreferencesPageBean.renderIP}"
+                                          partialTriggers="soc2"/>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.GeneralPreferencesPageBean.disableCustomInvolvementsPortlet}"
+                                          text="#{inventoryUIBundle.DEACTIVATE_CI}" id="sbc10"
+                                          disabled="#{pageFlowScope.GeneralPreferencesPageBean.disablePreferences}"
+										  rendered="#{pageFlowScope.GeneralPreferencesPageBean.renderCI}"
+                                          partialTriggers="soc2"/>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.GeneralPreferencesPageBean.disableIGPortlet}"
+                                          text="#{inventoryUIBundle.DEACTIVATE_IG}" id="sbc11"
+                                          disabled="#{pageFlowScope.GeneralPreferencesPageBean.disablePreferences}"
+										  rendered="#{pageFlowScope.GeneralPreferencesPageBean.renderIG}"
+                                          partialTriggers="soc2"/>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.GeneralPreferencesPageBean.disablePlacesPortlet}"
+                                          text="#{inventoryUIBundle.DEACTIVATE_PLACE}" id="sbc12"
+                                          disabled="#{pageFlowScope.GeneralPreferencesPageBean.disablePreferences}"
+										  rendered="#{pageFlowScope.GeneralPreferencesPageBean.renderPlace}"
+                                          partialTriggers="soc2"/>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.GeneralPreferencesPageBean.disableEquipmentPortlet}"
+                                          text="#{inventoryUIBundle.DEACTIVATE_EQ}" id="sbc13"
+                                          disabled="#{pageFlowScope.GeneralPreferencesPageBean.disablePreferences}"
+										  rendered="#{pageFlowScope.GeneralPreferencesPageBean.renderEQ}"
+                                          partialTriggers="soc2"/>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.GeneralPreferencesPageBean.disablePartyPortlet}"
+                                          text="#{inventoryUIBundle.DEACTIVATE_PARTY}" id="sbc14"
+                                          disabled="#{pageFlowScope.GeneralPreferencesPageBean.disablePreferences}"
+										  rendered="#{pageFlowScope.GeneralPreferencesPageBean.renderParty}"
+                                          partialTriggers="soc2"/>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.GeneralPreferencesPageBean.disablePDPortlet}"
+                                          text="#{inventoryUIBundle.DEACTIVATE_PD}" id="sbc15"
+                                          disabled="#{pageFlowScope.GeneralPreferencesPageBean.disablePreferences}"
+										  rendered="#{pageFlowScope.GeneralPreferencesPageBean.renderPD}"
+                                          partialTriggers="soc2"/>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.GeneralPreferencesPageBean.disableLDPortlet}"
+                                          text="#{inventoryUIBundle.DEACTIVATE_LD}" id="sbc16"
+                                          disabled="#{pageFlowScope.GeneralPreferencesPageBean.disablePreferences}"
+										  rendered="#{pageFlowScope.GeneralPreferencesPageBean.renderLD}"
+                                          partialTriggers="soc2"/>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.GeneralPreferencesPageBean.disablePipesPortlet}"
+                                          text="#{inventoryUIBundle.DEACTIVATE_PIPE}" id="sbc17"
+                                          disabled="#{pageFlowScope.GeneralPreferencesPageBean.disablePreferences}"
+										  rendered="#{pageFlowScope.GeneralPreferencesPageBean.renderPipe}"
+                                          partialTriggers="soc2"/>
+            </af:panelFormLayout>
+        </af:panelBox>
+    </af:panelBox>
+</jsp:root>

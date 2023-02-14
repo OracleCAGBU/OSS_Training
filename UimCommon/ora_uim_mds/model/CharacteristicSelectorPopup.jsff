@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved. */
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    2/26/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+        <af:panelGroupLayout id="pgl1" layout="scroll">
+           <af:panelFormLayout id="pfl1">
+              <af:selectManyShuttle id="sms1" binding="#{backingBeanScope.shuttle}" contentStyle="width:400px;"
+                                leadingHeader="#{inventoryUIBundle.AVAILABLE_FIELDS}"
+                                trailingHeader="#{inventoryUIBundle.SELECTED_FIELDS}"
+                                value="#{pageFlowScope.characteristicSelectorBean.selectedAttributes}" 
+                                valueChangeListener="#{pageFlowScope.characteristicSelectorBean.valueChangeListener}"
+                                size="20" shortDesc="#{inventoryUIBundle.SELECT_REQUIRED_FIELDS}"/>
+               <f:facet name="footer">
+                 <af:panelGroupLayout id="pgl2" halign="right" layout="scroll">
+                   <af:panelGroupLayout id="pgl3" layout="horizontal">
+                     <af:toolbar id="t1" inlineStyle="text-align:right;">
+                        <af:commandToolbarButton text="#{inventoryUIBundle.DONE}"
+                                                 id="ctb1" action="OK"
+                                                 accessKey="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>
+                        <af:spacer width="5" height="10" id="s22"/>
+                        <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}"
+                                                 id="ctb2" action="cancel"
+                                                 actionListener="#{pageFlowScope.characteristicSelectorBean.cancelActionListener}"
+                                                 accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                     </af:toolbar>
+                  </af:panelGroupLayout>
+                </af:panelGroupLayout>
+               </f:facet>
+            </af:panelFormLayout>
+        </af:panelGroupLayout>
+     </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

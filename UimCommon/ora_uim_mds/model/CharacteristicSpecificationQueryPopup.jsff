@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved. */
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    2/26/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout layout="vertical">
+        <af:panelHeader text="#{inventoryUIBundle.ADD_VALUE_QUERY}">
+          <af:showDetailHeader text="#{inventoryUIBundle.QUERY}" disclosed="true">
+            <af:panelFormLayout>
+              <f:facet name="footer"/>
+              <af:inputText simple="true"
+                            rows="1" columns="50"
+                            value="#{pageFlowScope.CharacteristicSpecificationQueryPopupBean.queryString}"
+                            readOnly="true" label="#{inventoryUIBundle.QUERY}"/>
+            </af:panelFormLayout>
+          </af:showDetailHeader>
+          <af:separator/>
+          <af:showDetailHeader text="#{inventoryUIBundle.QUERY_RESULTS}" disclosed="true">
+            <af:panelFormLayout>
+              <f:facet name="footer">
+              </f:facet>
+              <af:inputText rows="15" columns="50"
+                            value="#{pageFlowScope.CharacteristicSpecificationQueryPopupBean.queryResults}"
+                            simple="true"
+                            readOnly="true"
+                            label="#{inventoryUIBundle.QUERY_RESULTS}"/>
+            </af:panelFormLayout>
+          </af:showDetailHeader>
+        </af:panelHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

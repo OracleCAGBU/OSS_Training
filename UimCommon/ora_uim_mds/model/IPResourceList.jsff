@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:showDetailHeader text="#{inventoryUIBundle.IP_RESOURCES}" disclosed="true" id="sdh1">
+        <af:panelCollection id="IGList" styleClass="AFStretchWidth">
+            <f:facet name="statusbar">
+                <af:toolbar id="tb1">
+                    <af:outputText  value="#{inventoryUIBundle.ROW_COUNT} #{(pageFlowScope.IPResourceListBean.ipResourceListCollectionModel.rowCount lt 0) ? 0 : pageFlowScope.IPResourceListBean.ipResourceListCollectionModel.rowCount}"
+                                    styleClass="invSearchOutputLabel" binding="#{backingBeanScope.totalResultsLabel}" id="ot5"/>
+                </af:toolbar>
+            </f:facet>
+            
+            <f:facet name="toolbar">
+              <af:toolbar id="t129">
+                <af:button id="cb1d" partialTriggers="ipId" icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}" shortDesc="#{inventoryUIBundle.DE_ALLOCATE_ACTION}"
+                        disabled="#{backingBeanScope.ipListTable.selectedRowKeys == null || backingBeanScope.ipListTable.selectedRowKeys.size lt 1}" text="#{inventoryUIBundle.UNASSIGN}"
+                        binding="#{backingBeanScope.deleteButton}" rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=IPResource.DELETE;action=view']}"
+                        actionListener="#{pageFlowScope.IPResourceListBean.unassignResource}">
+                </af:button>
+              </af:toolbar>
+            </f:facet>
+            
+            <f:facet name="menus">
+                <af:menu id="menu6" binding="#{backingBeanScope.assignMenu}" text="#{inventoryUIBundle.ASSIGN}">
+                    <af:commandMenuItem id="ipv4subnet" text="#{inventoryUIBundle.ASSIGN_IPV4_SUBNET}" actionListener="#{pageFlowScope.IPResourceListBean.processMenuItem}"/> 
+                    <af:commandMenuItem id="ipv4address" text="#{inventoryUIBundle.ASSIGN_IPV4_ADDRESS}" actionListener="#{pageFlowScope.IPResourceListBean.processMenuItem}"
+                                        rendered="#{pageFlowScope.IPResourceListBean.renderAddressMenu}"/>
+                    <af:commandMenuItem id="ipv6subnet" text="#{inventoryUIBundle.ASSIGN_IPV6_SUBNET}" actionListener="#{pageFlowScope.IPResourceListBean.processMenuItem}"/> 
+                    <af:commandMenuItem id="ipv6address" text="#{inventoryUIBundle.ASSIGN_IPV6_ADDRESS}" actionListener="#{pageFlowScope.IPResourceListBean.processMenuItem}"
+                                        rendered="#{pageFlowScope.IPResourceListBean.renderAddressMenu}"/>
+                </af:menu>
+            </f:facet>
+            
+            <af:table id="ipId"
+                      value="#{pageFlowScope.IPResourceListBean.ipResourceListCollectionModel}"
+                      var="row" autoHeightRows="#{pageFlowScope.IPResourceListBean.portletHeight}" contentDelivery="immediate" 
+                      emptyText="#{inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET}" rowBandingInterval="0"
+                      rowSelection="multiple" styleClass="AFStretchWidth" binding="#{backingBeanScope.ipListTable}"
+                      summary="#{inventoryUIBundle.IP_RESOURCES_LIST_TABLE}"
+                      selectionListener="#{pageFlowScope.IPResourceListBean.selectResourceListener}">
+                
+                <af:column headerText="#{inventoryUIBundle.IP_RESOURCE}" id="c1" rowHeader="unstyled">
+                    <af:link id="l11" action="#{pageFlowScope.IPResourceListBean.getAction}"
+                             actionListener="#{pageFlowScope.IPResourceListBean.navigate}">
+                        <af:outputText value="#{pageFlowScope.IPResourceListBean.IPAddress}" id="ot1"/>
+                    </af:link>
+                </af:column>
+                
+                <af:column headerText="#{inventoryUIBundle.SPECIFICATION}" id="c2">
+                    <af:outputText value="#{row.specification.name}" id="ot2"/>
+                </af:column>
+                
+                <af:column headerText="#{inventoryUIBundle.ENTITY_TYPE}" id="c3">
+                    <af:outputText value="#{pageFlowScope.IPResourceListBean.entityType}" id="ot3"/>
+                </af:column>
+                
+                <af:column headerText="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="c4">
+                    <af:outputText value="#{pageFlowScope.IPResourceListBean.resourceAssignmentStatus}" id="ot4"/>
+                    <!-- RMI 618 Start -->
+                    <af:outputText value="#{pageFlowScope.IPResourceListBean.assignmentBIDueDate}" id="pendingBIDueDate2"/>
+                    <af:switcher id="swaspd618" defaultFacet="false"
+                                 facetName="#{pageFlowScope.IPResourceListBean.popupMode}">
+                        <f:facet name="false">
+                            <af:commandImageLink text="#{pageFlowScope.IPResourceListBean.assignmentBILabel}"
+                                               disabled="#{pageFlowScope.IPResourceListBean.asnStatusDisabled}"
+                                               id="asCI"
+                                               shortDesc="#{pageFlowScope.IPResourceListBean.asnStatusShortDesc}"
+                                               action="#{pageFlowScope.IPResourceListBean.getPendingBiSummaryAction}"
+                                               actionListener="#{pageFlowScope.IPResourceListBean.registerPendingBiRecentItem}">
+                            <af:setActionListener from="#{pageFlowScope.IPResourceListBean.asnStatusBIOid}"
+                                                  to="#{objectId}"/>
+                          </af:commandImageLink>
+                        </f:facet>
+                        <f:facet name="true">
+                            <af:outputText value="#{pageFlowScope.IPResourceListBean.assignmentBILabel}"
+                                           id="swftaspd618"/>
+                        </f:facet>
+                    </af:switcher>
+                    <!-- RMI 618 End -->  
+                </af:column>
+                
+            </af:table>
+            
+            <af:popup id="assignIPv4AddressPopup" binding="#{backingBeanScope.ipv4AddressPopupBinding}"
+                    clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="ipAdlg" type="none" title="#{inventoryUIBundle.IPV4_ADDRESS}">
+                  <af:panelStretchLayout id="pt_ps34" styleClass="invConfigResourceStretchLayout">
+                      <f:facet name="center">
+                            <af:region value="#{bindings.IPv4AddressSearchResultsFlow1.regionModel}" id="r1"/>
+                      </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.IPResourceListBean.refresh}"/>
+              </af:popup>
+              
+              <af:popup id="assignIPv4SubnetPopup" binding="#{backingBeanScope.ipv4SubnetPopupBinding}"
+                    clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="ipv4SubnetConfig" type="none" title="#{inventoryUIBundle.IPv4_SUBNET}">
+                  <af:panelStretchLayout id="pt_ps35" styleClass="invConfigResourceStretchLayout">
+                      <f:facet name="center">
+                          <af:region value="#{bindings.IPv4SubnetSearchResultsFlow1.regionModel}" id="r2"/>
+                      </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.IPResourceListBean.refresh}"/>
+              </af:popup>
+              
+              <af:popup id="assignIPv6AddressPopup" binding="#{backingBeanScope.ipv6AddressPopupBinding}"
+                    clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="ipv6Adlg" type="none" title="#{inventoryUIBundle.IPv6_ADDRESS}">
+                  <af:panelStretchLayout id="pt_ps37" styleClass="invConfigResourceStretchLayout">
+                      <f:facet name="center">
+                            <af:region value="#{bindings.IPv6AddressSearchResultsFlow1.regionModel}" id="r3"/>
+                        </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.IPResourceListBean.refresh}"/>
+              </af:popup>
+              
+              <af:popup id="assignIPv6SubnetPopup" binding="#{backingBeanScope.ipv6SubnetPopupBinding}"
+                    clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="ipv6SubnetConfig" type="none" title="#{inventoryUIBundle.IPv6_SUBNET}">
+                  <af:panelStretchLayout id="pt_ps38" styleClass="invConfigResourceStretchLayout">
+                      <f:facet name="center">
+                            <af:region value="#{bindings.IPv6SubnetSearchResultsFlow1.regionModel}" id="r4"/>
+                        </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.IPResourceListBean.refresh}"/>
+              </af:popup>
+          
+        </af:panelCollection>
+    </af:showDetailHeader>
+</jsp:root>

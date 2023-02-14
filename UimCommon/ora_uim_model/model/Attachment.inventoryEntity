@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xsi:type="BusinessEntityType" name="Attachment" realizeFromBusinessEntity="true">
+  <com:displayName lang="[default]">Attachment</com:displayName>
+  <com:saveVersion>12</com:saveVersion>
+  <com:id>E:inventoryEntity--Attachment</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>inventoryEntity--Attachment</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>Attachment</data:name>
+    <data:displayName lang="[default]">Attachment</data:displayName>
+    <data:dataElement virtual="false">
+      <com:id>id</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>id</data:name>
+      <data:displayName lang="[default]">id</data:displayName>
+      <data:displayName lang="[default]">id</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>id</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>id</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>name</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>name</data:name>
+      <data:displayName lang="[default]">name</data:displayName>
+      <data:displayName lang="[default]">name</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>name</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>name</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>description</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>description</data:name>
+      <data:displayName lang="[default]">description</data:displayName>
+      <data:displayName lang="[default]">description</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>description</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>description</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>toEntityRoleKey</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>toEntityRoleKey</data:name>
+      <data:displayName lang="[default]">toEntityRoleKey</data:displayName>
+      <data:displayName lang="[default]">toEntityRoleKey</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>toEntityRoleKey</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>toEntityRoleKey</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>fromEntityRoleKey</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>fromEntityRoleKey</data:name>
+      <data:displayName lang="[default]">fromEntityRoleKey</data:displayName>
+      <data:displayName lang="[default]">fromEntityRoleKey</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>fromEntityRoleKey</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>fromEntityRoleKey</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>attachmentType</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>attachmentType</data:name>
+      <data:displayName lang="[default]">attachmentType</data:displayName>
+      <data:displayName lang="[default]">attachmentType</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>AttachmentType</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>AttachmentType</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>direction</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>direction</data:name>
+      <data:displayName lang="[default]">direction</data:displayName>
+      <data:displayName lang="[default]">direction</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>direction</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>direction</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>fromEntityId</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>fromEntityId</data:name>
+      <data:displayName lang="[default]">fromEntityId</data:displayName>
+      <data:displayName lang="[default]">fromEntityId</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>fromEntityId</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>fromEntityId</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>fromEntityName</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>fromEntityName</data:name>
+      <data:displayName lang="[default]">fromEntityName</data:displayName>
+      <data:displayName lang="[default]">fromEntityName</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>fromEntityName</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>fromEntityName</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>fromEntitySpecName</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>fromEntitySpecName</data:name>
+      <data:displayName lang="[default]">fromEntitySpecName</data:displayName>
+      <data:displayName lang="[default]">fromEntitySpecName</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>fromEntitySpecName</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>fromEntitySpecName</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>toEntityId</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>toEntityId</data:name>
+      <data:displayName lang="[default]">toEntityId</data:displayName>
+      <data:displayName lang="[default]">toEntityId</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>toEntityId</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>toEntityId</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>toEntityName</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>toEntityName</data:name>
+      <data:displayName lang="[default]">toEntityName</data:displayName>
+      <data:displayName lang="[default]">toEntityName</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>toEntityName</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>toEntityName</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>toEntitySpecName</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>toEntitySpecName</data:name>
+      <data:displayName lang="[default]">toEntitySpecName</data:displayName>
+      <data:displayName lang="[default]">toEntitySpecName</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>toEntitySpecName</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>toEntitySpecName</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>fromEntity</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>fromEntity</data:name>
+      <data:displayName lang="[default]">fromEntity</data:displayName>
+      <data:displayName lang="[default]">fromEntity</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>fromEntity</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>fromEntity</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>toEntity</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>toEntity</data:name>
+      <data:displayName lang="[default]">toEntity</data:displayName>
+      <data:displayName lang="[default]">toEntity</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>toEntity</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>toEntity</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>KK8ffFcQ--+1TVUg--+1Dw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>inventoryEntity--Attachment</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>---lNM16--+j9LQIJoE8Nw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>id</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>SFt4---4--+S2IZqdYZftQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>id</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>N+Zu---8--++--+VyeZsgg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>id</data:dataElementId>
+    <data:information lang="[default]">Attachment Id</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>7FMrtpYu--+v--+B---9Kg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>id</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>3asrmrMu--+O---z---I7w</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>--+----9--+W---Y--+HKg~id</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>---t--+Q--+----Q---VQQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>--+4--+l--+M---G-b5y3g</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+    <data:maxLength>50</data:maxLength>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>ZbAPBjwp--+5--+VXJlPig</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+    <data:information lang="[default]">Attachment Name</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>Yogg--+j--+rhqI39nc09Q</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>---coukF--+d0rQgEpJG2A</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>--+----9--+W---Y--+HKg~name</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>tr0s--+3--+g---D7J18ew</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>--+D---w--+m--+h-ZIt0w</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>Pgco--+8--+P---Z---KSg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+    <data:information lang="[default]">Attachement description</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>---0---q--+e--+E---XBg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>--+u--+8--+BcyQuEXAgag</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>--+----9--+W---Y--+HKg~description</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>--+i--+9--+dqER1--+1nQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>toEntityRoleKey</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>--+YgwIO--+mylIa--+jtQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>toEntityRoleKey</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>----TqNq--+z---K---HOQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>toEntityRoleKey</data:dataElementId>
+    <data:information lang="[default]">To entity Role Key</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>Ls5Xpc4A--+orGQa--+HCQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>toEntityRoleKey</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>adZkgqU1--+H--+zzWprng</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>--+----9--+W---Y--+HKg~toEntityRoleKey</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>--+Z4vZA--+O---N---8QA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>fromEntityRoleKey</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>GaldEtAU--+t---NQyUJug</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>fromEntityRoleKey</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>--+v3tMR--+vxYkwEs4REA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>fromEntityRoleKey</data:dataElementId>
+    <data:information lang="[default]">from Entity Role Key</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>---tTEE+--+DN587AJBEvQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>fromEntityRoleKey</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>---AO0xe--+8---ndgVilQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>--+----9--+W---Y--+HKg~fromEntityRoleKey</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>---x--+D--+H---+lgk96g</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>attachmentType</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>---u---r--+V31cLGJprbg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>attachmentType</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>xFcSDMM6--+F--+4--+7Mg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>attachmentType</data:dataElementId>
+    <data:information lang="[default]">The attachmentType property drives repeatable processing logic.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>--+n0ydb--+F--+vs9d6sA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>attachmentType</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>xlQX---p--+4---0---Dgg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>--+----9--+W---Y--+HKg~attachmentType</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType" hidden="true" name="direction">
+    <com:id>---r---E--+k---cG6oqoA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>direction</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>--+0--+x--+xEBwDRw1jFg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>direction</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>I79OFRV8--+k--+QA1sRSA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>direction</data:dataElementId>
+    <data:information lang="[default]">The direction is a hidden property used for managing database partition.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>jJlV--+a--+9mwBoN4h1RQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>direction</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>---G---p--+p--+GVnIotQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>--+----9--+W---Y--+HKg~direction</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>svc6---p--+m---n--+afg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>fromEntityId</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>oq4J--+n--+p---lvCQ0RQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>fromEntityId</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>---6---j--+e---W--+ibg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>fromEntityId</data:dataElementId>
+    <data:information lang="[default]">The Entity ID of the entity(from relationship) that is associated with Attachment.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>nckj---H--+fWwRi---rXA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>fromEntityId</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>--+s--+O--+5s89d---B8g</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>--+----9--+W---Y--+HKg~fromEntityId</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>fiZM--+h--+tbDxpIIoUDg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>fromEntityName</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>--+f--+M--+NYiIc8gZDeg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>fromEntityName</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>---+---T--+3YNNIaU1vTA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>fromEntityName</data:dataElementId>
+    <data:information lang="[default]">The Entity Name of the entity(from relationship) that is associated with Attachment.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>Z7BA--+9--+CRusYzT5FdA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>fromEntityName</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>nCE0--+R--+PLuUflOE16A</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>--+----9--+W---Y--+HKg~fromEntityName</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>--+43b1l--+PPWBXPZA-3A</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>fromEntitySpecName</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>---Mq8Qs--+nv+Vj---uZQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>fromEntitySpecName</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>2EUfjl1H--+M---RmGcTrQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>fromEntitySpecName</data:dataElementId>
+    <data:information lang="[default]">The Entity Spec of the entity(from relationship) that is associated with Attachment.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>AJkF--+O--+Gawpb--+0Zw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>fromEntitySpecName</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>---PWCU9--+QffRHqtce6w</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>--+----9--+W---Y--+HKg~fromEntitySpecName</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>mTU9---c--+y--+xy5lzdA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>toEntityId</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>nCUt--+H--+i3WcSZ0wZww</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>toEntityId</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>rEpSDadv--+g---H---WxQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>toEntityId</data:dataElementId>
+    <data:information lang="[default]">The Entity ID of the entity(from relationship) that is associated with Attachment.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>PB441FAE--+E--+bWKY5iA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>toEntityId</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>---6VxBP--+2u1hlJwEE-w</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>--+----9--+W---Y--+HKg~toEntityId</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>---G---i--+o----0ZI+Hw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>toEntityName</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>--+y2DIn--+H--+r--+vGA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>toEntityName</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>mac3---3--+2---C---9UA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>toEntityName</data:dataElementId>
+    <data:information lang="[default]">The Entity Name of the entity(from relationship) that is associated with Attachment.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>f7p+--+t--+P--+4---mVw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>toEntityName</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>--+xEE4O--+H--+-VJIDvQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>--+----9--+W---Y--+HKg~toEntityName</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>---P--+g--+H---x---Xtg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>toEntitySpecName</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>---M---S--+g--+G6XlMSA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>toEntitySpecName</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>---55aw0--+j--+Dnp9g5A</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>toEntitySpecName</data:dataElementId>
+    <data:information lang="[default]">The Entity Spec of the entity(from relationship) that is associated with Attachment.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>PhJYpVYY--+v--+wP1ESKw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>toEntitySpecName</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>y+84---C--+19Wdr--+qiQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>--+----9--+W---Y--+HKg~toEntitySpecName</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType" name="fromEntity" weakReference="true">
+    <com:id>hE91Po4Z--+kZ0EqXa4taw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>fromEntity</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>--+---+M--+o---4mIM7Zg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>fromEntity</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>---pRLxV--+l---a---VHQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>fromEntity</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>--+qTzEY--+J---T7GU3dg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>--+----9--+W---Y--+HKg~fromEntity</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>---mMJUz--+mp8ld--+NRg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>fromEntity</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType" name="toEntity" weakReference="true">
+    <com:id>---3MEoG--+b---3nesRxA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>toEntity</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>---6P7xH--+k--+U--+CCg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>toEntity</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>IqRdEVsz--+e---jmds+6g</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>toEntity</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>oBAQ--+4--++5bRaH04F2Q</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>--+----9--+W---Y--+HKg~toEntity</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>Nx44q9td--+M---A---tdg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>toEntity</data:dataElementId>
+  </data:dataElementDetails>
+  <capability xsi:type="characteristicType" enabled="true" id="oracle.communications.sce.poms.capabilities.Characteristic" spec="CharacteristicSpecification">
+    <characteristicName interface="oracle.communications.inventory.api.entity.CustomInvolvementCharacteristic" name="CustomInvolvementCharacteristic" table="CUSTOMINVOLVEMENT_CHAR"/>
+  </capability>
+  <capability xsi:type="bIEnabledType" enabled="true" id="oracle.communications.sce.poms.capabilities.BusinessInteractionEnabled" history="true" visibilityState="HIDE"/>
+  <implements interface="oracle.communications.inventory.api.entity.common.CustomInvolvement"/>
+  <method name="getSpecification">
+    <signature>oracle.communications.inventory.api.entity.Specification getSpecification()</signature>
+    <body>
+			return (oracle.communications.inventory.api.entity.Specification) this.getCustomInvolvementSpecification();	
+			</body>
+    <javadoc>getSpecification.</javadoc>
+  </method>
+  <method name="setSpecification">
+    <signature>void setSpecification(oracle.communications.inventory.api.entity.Specification specification)</signature>
+    <body>
+			this.setCustomInvolvementSpecification( (oracle.communications.inventory.api.entity.CustomInvolvementSpecification)specification );	
+			</body>
+    <javadoc>setSpecification.</javadoc>
+  </method>
+  <properties interface="oracle.communications.inventory.api.entity.common.Attachment" type="ocim:Attachment"/>
+</com:modelEntity>

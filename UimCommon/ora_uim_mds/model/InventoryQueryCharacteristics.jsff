@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved. */
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    2/28/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad/html">
+		   
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <c:set var="queryModel"
+           value="#{pageFlowScope.InventoryQueryBean.queryModel}"/>
+    <af:panelFormLayout id="queryPFL"
+                        binding="#{pageFlowScope.InventoryQueryBean.charPanelFormLayout}"
+                        maxColumns="1" fieldWidth="100%">
+        <trh:tableLayout>
+            <af:forEach items="#{pageFlowScope.InventoryQueryBean.pairOfAttributes}"
+                        var="pair" varStatus="vs">
+                <af:iterator id="i3" value="#{pair.attributes}"
+                         var="criterion" varStatus="vs2">
+                <trh:rowLayout>
+                    <af:switcher id="criteriaSwitcher2"
+                                 facetName="#{criterion.attribute.componentType}"
+                                 rendered='#{criterion.additionalInfo.type == "attribute" &amp;&amp; criterion.attribute.dynamicAttribute}'>
+                        <f:facet name="inputText">
+                            <af:group id="g3">
+                                <trh:cellFormat halign="right">
+                                    <af:outputLabel value=""
+                                                    id="textLabeC"/>
+                                </trh:cellFormat>
+                                <trh:cellFormat>
+                                    <af:selectOneChoice id="textCriterionOperatorC"
+                                                        value="#{criterion.operator}"
+                                                        label="#{criterion.attribute.label}">
+                                        <f:selectItems value="#{criterion.operators}"
+                                                       id="nameCriterionOperatorsC"/>
+                                    </af:selectOneChoice>
+                                </trh:cellFormat>
+                                <trh:cellFormat>
+                                    <af:inputText id="textInputC"
+                                                  value="#{criterion.values[0]}"
+                                                  shortDesc="#{criterion.attribute.label}"/>
+                                </trh:cellFormat>
+                            </af:group>
+                        </f:facet>
+                        <f:facet name="inputDate">
+                            <af:group id="g2">
+                                <trh:cellFormat halign="right">
+                                    <af:outputLabel value=""
+                                                    id="dateLabelC"/>
+                                </trh:cellFormat>
+                                <trh:cellFormat>
+                                    <af:selectOneChoice id="dateCriterionOperatorC"
+                                                        value="#{criterion.operator}"
+                                                        label="#{criterion.attribute.label}">
+                                        <f:selectItems value="#{criterion.operators}"
+                                                       id="dateCriterionOperatorsC"/>
+                                    </af:selectOneChoice>
+                                </trh:cellFormat>
+                                <trh:cellFormat>
+                                    <af:inputDate id="dateInputC"
+                                                  value="#{criterion.values[0]}"
+                                                  shortDesc="#{criterion.attribute.label},date"/>
+                                </trh:cellFormat>
+                            </af:group>
+                        </f:facet>
+                        <f:facet name="selectOneChoice">
+                            <af:group id="g1">
+                                <trh:cellFormat halign="right">
+                                    <af:outputLabel value=""
+                                                    id="selectOneChoiceLabelC"/>
+                                </trh:cellFormat>
+                                <trh:cellFormat columnSpan="2">
+                                    <af:selectOneChoice id="selectOneChoiceInputWithoutDepCriteriaC"
+                                     valueChangeListener="#{criterion.attribute.additionalInfo.charDetails.lovValueChanged}"
+                                                        value="#{criterion.values[0]}"
+                                                        autoSubmit="true"
+                                                        disabled="#{criterion.attribute.additionalInfo.disableValue}"
+                                                        label="#{criterion.attribute.label}">
+                                        <f:selectItems id="siC"
+                                                       value="#{criterion.attribute.model}"/>
+                                    </af:selectOneChoice>
+                                </trh:cellFormat>
+                            </af:group>
+                        </f:facet>
+                        <f:facet name="inputComboboxListOfValues">
+                            <af:group id="g11">
+                                <trh:cellFormat halign="right">
+                                    <af:outputLabel value="#{criterion.attribute.label}" id="iclvC1" inlineStyle="white-space:nowrap;"/>
+                                </trh:cellFormat>
+                                <trh:cellFormat columnSpan="2">
+                                    <af:inputComboboxListOfValues xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="iclv11" autoSubmit="true" searchDesc=" "
+                                            valueChangeListener="#{criterion.attribute.additionalInfo.charDetails.lovValueChanged}" columns="#{pageFlowScope.InventoryQueryBean.lovWidth}"
+                                            model="#{criterion.attribute.additionalInfo.charDetails.listOfValuesModel}" value="#{criterion.values[0]}" >
+                                         <af:autoSuggestBehavior xmlns:af="http://xmlns.oracle.com/adf/faces/rich" suggestItems="#{criterion.attribute.additionalInfo.charDetails.getSuggestItems}"/>
+                                    </af:inputComboboxListOfValues>
+                                </trh:cellFormat> 
+                            </af:group>
+                        </f:facet>
+                        <f:facet name="selectBooleanCheckbox">
+                            <af:group>
+                                <trh:cellFormat halign="right">
+                                    <af:selectBooleanCheckbox id="selectBooleanCheckboxInputC"
+                                                              value="#{criterion.values[0]}"
+                                                              label="#{criterion.attribute.label}"/>
+                                </trh:cellFormat>
+                                <trh:cellFormat halign="left" columnSpan="2">
+                                    <af:spacer width="5" height="10" id="s25"/>
+                                    <af:outputLabel value=""
+                                                    id="selectBooleanCheckboxLabelC"/>
+                                </trh:cellFormat>
+                            </af:group>
+                        </f:facet>
+                        <f:facet name="inputNumberSpinbox">
+                            <af:group>
+                                <trh:cellFormat halign="right">
+                                    <af:outputLabel value=""
+                                                    id="numberLabelC"/>
+                                </trh:cellFormat>
+                                <trh:cellFormat>
+                                    <af:selectOneChoice id="numberCriterionOperatorC"
+                                                        value="#{criterion.operator}"
+                                                        label="#{criterion.attribute.label}">
+                                        <f:selectItems value="#{criterion.operators}"
+                                                       id="numberCriterionOperatorsC"/>
+                                    </af:selectOneChoice>
+                                </trh:cellFormat>
+                                <trh:cellFormat>
+                                    <af:inputText id="numberInputC"
+                                                  value="#{criterion.values [0]}"
+                                                  columns="20"
+                                                  maximumLength="15"
+                                                  shortDesc="#{inventoryUIBundle.RANGE_NUMERIC_VALIDATION}">
+                                        <af:validateRegExp pattern="[0-9]{1,15}"
+                                                           messageDetailNoMatch="#{inventoryUIBundle.RANGE_NUMERIC_VALIDATION}"/>
+                                    </af:inputText>
+                                </trh:cellFormat>
+                            </af:group>
+                        </f:facet>
+                    </af:switcher>
+                </trh:rowLayout>
+              </af:iterator>
+            </af:forEach>
+        </trh:tableLayout>
+    </af:panelFormLayout>
+</jsp:root>

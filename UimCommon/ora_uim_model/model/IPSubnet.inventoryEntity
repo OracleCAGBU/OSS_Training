@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xsi:type="BusinessEntityType" name="IPSubnet" realizeFromBusinessEntity="false">
+  <com:displayName lang="[default]">IPSubnet</com:displayName>
+  <com:saveVersion>12</com:saveVersion>
+  <com:baseEntityRef>
+    <com:entity>NetworkAddressBlock</com:entity>
+    <com:entityType>inventoryEntity</com:entityType>
+    <com:relationship>oracle.communications.studio.model.baseEntity</com:relationship>
+  </com:baseEntityRef>
+  <com:id>E:inventoryEntity--IPSubnet</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>inventoryEntity--IPSubnet</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>IPSubnet</data:name>
+    <data:displayName lang="[default]">IPSubnet</data:displayName>
+    <data:dataElement virtual="false">
+      <com:id>addressVersion</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>addressVersion</data:name>
+      <data:displayName lang="[default]">Address Version</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>IPAddressVersion</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>IPAddressVersion</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>ipv6AddressType</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>ipv6AddressType</data:name>
+      <data:displayName lang="[default]">IPv6 Address Type</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>IPv6AddressType</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>IPv6AddressType</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>allowHostAtSubnetBoundaries</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>allowHostAtSubnetBoundaries</data:name>
+      <data:displayName lang="[default]">Allow Host At Subnet Boundaries</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>allowHostAtSubnetBoundaries</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>allowHostAtSubnetBoundaries</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>boolean</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>availableHostCount</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>availableHostCount</data:name>
+      <data:displayName lang="[default]">Available Host Count</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>availableHostCount</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>availableHostCount</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>int</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>isIPNetwork</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>isIPNetwork</data:name>
+      <data:displayName lang="[default]">Is IPNetwork</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>isIPNetwork</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>isIPNetwork</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>boolean</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>numericLowerAddress</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>numericLowerAddress</data:name>
+      <data:displayName lang="[default]">Numeric Lower Address</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>numericLowerAddress</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>numericLowerAddress</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>int</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>numericUpperAddress</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>numericUpperAddress</data:name>
+      <data:displayName lang="[default]">Numeric Upper Address</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>numericUpperAddress</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>numericUpperAddress</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>int</data:primitiveType>
+    </data:dataElement>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>5ckkZNAb--+SMOIG---14Q</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>inventoryEntity--IPSubnet</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>H+AH--+a--+C--+LkrBj+g</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>addressVersion</data:dataElementId>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>2EcJ---6--+lqR1lhMYEHA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>addressVersion</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>--+b--+e--+WSO4S---phQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>uQRs--+Z--+eguJQ--++7Q</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>--+K--+h--+liVFAofsEEA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>addressVersion</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>---8------+UbjBl--+egg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>addressVersion</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>CYJ8BAMp--+O9Hkw---yeQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>ipv6AddressType</data:dataElementId>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>--+p--+l--+ooQUf9T8ipQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>LXlJQHMF--+D--+G--+x3Q</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>---MGaER--+a---ZEjciNg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>ipv6AddressType</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>6+AdhlQI--+yhS41--+l+A</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>ipv6AddressType</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>dZ0sUz9G--+9---M3bA9rQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>allowHostAtSubnetBoundaries</data:dataElementId>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>Kd9Mw79v--+xb3RNBaQktw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>YnB2--+t--+8fPd2prBxIg</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>f-5m--+v--+yLcd6sXYrJA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>allowHostAtSubnetBoundaries</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>6bcAittf--++g2obMW5Dew</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>allowHostAtSubnetBoundaries</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>---HwZQD--+uTFwZ---VfQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>availableHostCount</data:dataElementId>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>---R---g--+v---iWoUxbA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>isIPNetwork</data:dataElementId>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>JyAWyaxP--+H--+mbVtwOw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>isIPNetwork</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>2Ol8---j--+F--+ZDmZ5ag</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>isIPNetwork</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>---6+LNB--+I---OfYFhbg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>isIPNetwork</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>Y1Aton91--+q8cksK4cZNQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>numericLowerAddress</data:dataElementId>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>pAcFvhoe--+zspcTdnZ1Hg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>numericUpperAddress</data:dataElementId>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <properties interface="oracle.communications.inventory.api.entity.IPSubnet"/>
+  <capability xsi:type="GroupEnabledType" enabled="true" id="oracle.communications.sce.poms.capabilities.GroupEnabled"/>
+  <capability xsi:type="referenceEnabledType" enabled="true" id="oracle.communications.sce.poms.capabilities.ReferenceEnabled" attribute="IPSubnet" prefix="IPSubnet"/>
+</com:modelEntity>

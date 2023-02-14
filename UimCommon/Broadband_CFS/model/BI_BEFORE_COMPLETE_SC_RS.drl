@@ -1,0 +1,34 @@
+package com.broadband.ci;
+
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointContext;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.exception.ValidationException;
+import oracle.communications.inventory.api.entity.ServiceConfigurationVersion;
+import oracle.communications.inventory.xmlbeans.BusinessInteractionItemType;
+
+import com.broadband.ci.BaseDesigner;
+
+global Log log;
+
+rule "BI_BEFORE_COMPLETE_SC_RS"
+        salience 0
+    when
+        config : ServiceConfigurationVersion()
+        context : ExtensionPointContext()
+    then
+    	log.debug("","=============================== BI_BEFORE_COMPLETE_SC_RS Start ===============================");
+	    
+	    log.debug("", new Object[] { "BI_BEFORE_COMPLETE_SC_RS" });
+
+        if (config != null) {
+            BaseDesigner designer = new BaseDesigner();
+            try {
+            	 designer.beforeComplete(config);
+        	}
+        	catch(ValidationException x) {
+        	    throw x; // pass this through as a fault message
+        	}
+        }
+        
+    	log.debug("","=============================== BI_BEFORE_COMPLETE_SC_RS End =================================");
+   	end

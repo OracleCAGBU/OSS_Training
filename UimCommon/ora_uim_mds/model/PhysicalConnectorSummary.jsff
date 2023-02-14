@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:pf="/platform/functions">
+		   
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+ <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+  <f:facet name="localArea">
+   <af:panelStretchLayout id="pgl2" topHeight="#{pageFlowScope.PhysicalConnectorSummaryBean.topHeight}" binding="#{backingBeanScope.PC_summary_panelGroupLayout}">
+    <f:facet name="top">
+        <af:panelGroupLayout id="pgsl23" layout="scroll">
+            <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered="#{!pageFlowScope.PhysicalConnectorSummaryBean.previewLayout}">
+                <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                               value="#{pageFlowScope.PhysicalConnectorSummaryBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+                <af:menuBar id="menuBar1">
+                      <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invSummaryMenu"
+                               rendered="#{!(pageFlowScope.PhysicalConnectorSummaryBean.popupMode)}"   />
+                </af:menuBar>
+                <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch9}" contentDelivery="lazyUncached">
+                    <af:dialog id="BISearchPopup_d1" type="none"
+					title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                        <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                            <f:facet name="center">
+                               <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                            </f:facet>
+                        </af:panelStretchLayout>
+                    </af:dialog>
+                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.PhysicalConnectorSummaryBean.afterBusinessInteractionSelectionChange}"/>
+                </af:popup>
+            </af:panelGroupLayout>
+            
+           
+        </af:panelGroupLayout>
+     </f:facet>
+    <f:facet name="center">
+    
+      <af:panelHeader text="#{inventoryUIBundle.PHYSICAL_CONNECTOR_SUMMARY} - #{pageFlowScope.PhysicalConnectorSummaryBean.displayInfo}" id="PAGE_TITLE"
+                            styleClass="invSummaryPanelHeader" helpTopicId="OHW_pcSummary">
+                 <f:facet name="menuBar">
+                   <af:group id="g2" rendered="#{!pageFlowScope.PhysicalConnectorSummaryBean.previewLayout}">
+                      <af:menuBar id="menuBar2">
+                          <af:menu id="menu5" binding="#{backingBeanScope.InventoryMenuBean.relatedPagesMenu}" styleClass="invSummaryMenu"/>
+                      </af:menuBar>
+                    </af:group>
+                 </f:facet>
+                 <af:panelGroupLayout id="pgl245" layout="scroll">
+     <af:showDetailHeader text="#{inventoryUIBundle.PHYSICAL_CONNECTOR_INFORMATION}" 
+                          disclosed="true" id="sdh1" styleClass="invSummaryShowDetailHeader">
+      <f:facet name="toolbar">
+        <af:commandToolbarButton text="#{inventoryUIBundle.EDIT}" action="edit" id="ctb1" actionListener="#{bindings.openSubTaskForEdit.execute}"
+        disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/physicalconnector/flow/PhysicalConnectorEditFlow.xml#PhysicalConnectorEditFlow']}"
+        rendered="#{!pageFlowScope.PhysicalConnectorSummaryBean.previewLayout &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=PhysicalConnector.EDIT;action=view']}"
+		accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+         <af:setActionListener from="#{pageFlowScope.PhysicalConnectorSummaryBean.entityObject.oid}" to="#{objectId}"/>
+         <af:setActionListener from="false" to="#{addMode}"/>
+        </af:commandToolbarButton>
+      </f:facet>
+      <f:facet name="context"/>
+      <af:panelFormLayout id="phycon" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+       <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}" id="phycon-id">
+        <af:outputText value="#{pageFlowScope.PhysicalConnectorSummaryBean.entityObject.id}" id="ot1"/>
+       </af:panelLabelAndMessage>
+       <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="phycon-name">
+        <af:outputText value="#{pageFlowScope.PhysicalConnectorSummaryBean.entityObject.name}" id="ot2"/>
+       </af:panelLabelAndMessage>
+       <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}" styleClass="invSummaryPanelLabelAndMessage" id="phycon-description">
+        <af:outputText value="#{pageFlowScope.PhysicalConnectorSummaryBean.entityObject.description}" id="ot3"/>
+       </af:panelLabelAndMessage>
+       <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="phycon-inventoryStatus">
+        <af:outputText value="#{pageFlowScope.PhysicalConnectorSummaryBean.inventoryStatus}" id="ot4"/>
+	<!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.PhysicalConnectorSummaryBean.popupMode}" id="swis618">
+	<f:facet name="false">
+            <af:commandImageLink action="#{pageFlowScope.PhysicalConnectorSummaryBean.getSummaryAction}"
+                                 actionListener="#{pageFlowScope.PhysicalConnectorSummaryBean.registerRecentItem}"
+                                 disabled="#{pageFlowScope.PhysicalConnectorSummaryBean.installingBIDisabled}"
+                                 id="bid3"
+                                 shortDesc="#{pageFlowScope.PhysicalConnectorSummaryBean.installingBIShortDesc}"
+                                 text="#{pageFlowScope.PhysicalConnectorSummaryBean.installingBILabel}">
+             <af:setActionListener from="#{pageFlowScope.PhysicalConnectorSummaryBean.inventoryStatusBI.oid}"
+                                   to="#{objectId}"/>
+            </af:commandImageLink>
+           </f:facet>
+	<f:facet name="true">
+	<af:outputText id="swftis618" value="#{pageFlowScope.PhysicalConnectorSummaryBean.installingBILabel}"/>
+	</f:facet>
+	</af:switcher>
+	<af:outputText id="installingBIDueDate" value="#{pageFlowScope.PhysicalConnectorSummaryBean.installingBIEffectiveDate}"/>
+	<!--RMI 618 End-->
+       </af:panelLabelAndMessage>
+       <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="phycon-resourceAssignmentStatus">
+        <af:outputText value="#{pageFlowScope.PhysicalConnectorSummaryBean.resourceAssignmentStatus}" id="ot5"/>
+	<!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.PhysicalConnectorSummaryBean.popupMode}" id="swas618">
+	<f:facet name="false">
+            <af:commandImageLink action="#{pageFlowScope.PhysicalConnectorSummaryBean.getSummaryAction}"
+                                 actionListener="#{pageFlowScope.PhysicalConnectorSummaryBean.registerRecentItem}"
+                                 disabled="#{pageFlowScope.PhysicalConnectorSummaryBean.consumerBIDisabled}"
+                                 id="bid4"
+                                 shortDesc="#{pageFlowScope.PhysicalConnectorSummaryBean.consumerBIShortDesc}"
+                                 text="#{pageFlowScope.PhysicalConnectorSummaryBean.consumerBILabel}">
+             <af:setActionListener from="#{pageFlowScope.PhysicalConnectorSummaryBean.assignmentBI.oid}"
+                                   to="#{objectId}"/>
+            </af:commandImageLink>
+           </f:facet>
+	<f:facet name="true">
+	<af:outputText id="swftas618" value="#{pageFlowScope.PhysicalConnectorSummaryBean.consumerBILabel}"/>
+	</f:facet>
+	</af:switcher>
+	<af:outputText id="consumerBIDueDate" value="#{pageFlowScope.PhysicalConnectorSummaryBean.consumerBIEffectiveDate}"/>
+	<!--RMI 618 End-->
+       </af:panelLabelAndMessage>
+       <af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}" id="phycon-specification">
+        <af:commandImageLink action="SpecificationSummary" id="cl221" actionListener="#{bindings.openSubTaskForSpecSummary.execute}"
+		text="#{pageFlowScope.PhysicalConnectorSummaryBean.entityObject.specification.name}"
+		shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+         
+         <af:setActionListener from="#{pageFlowScope.PhysicalConnectorSummaryBean.entityObject.specification.oid}" to="#{specObjectId}"/>
+        </af:commandImageLink>
+       </af:panelLabelAndMessage>       
+      <af:panelLabelAndMessage label="#{inventoryUIBundle.PHYSICAL_DEVICE}" id="phycon-pd" rendered="#{pageFlowScope.PhysicalConnectorSummaryBean.entityObject.physicalDevice != null}">
+                    <af:commandImageLink action="PhysicalDeviceSummary" id="pdSummary" actionListener="#{bindings.openSubTaskForPDSummary.execute}"
+                    shortDesc="#{inventoryUIBundle.PHYSICAL_DEVICE_SUMMARY_LINK}"
+					text="#{pageFlowScope.PhysicalConnectorSummaryBean.entityObject.physicalDevice.displayInfo}">
+                        
+                        <af:setActionListener from="#{pageFlowScope.PhysicalConnectorSummaryBean.entityObject.physicalDevice.oid}" to="#{requestScope.oid}"/>
+                    </af:commandImageLink>
+      </af:panelLabelAndMessage>
+      <af:panelLabelAndMessage label="#{inventoryUIBundle.EQUIPMENT}" id="phycon-eq" rendered="#{pageFlowScope.PhysicalConnectorSummaryBean.entityObject.equipment != null}">
+                    <af:commandImageLink action="EquipmentSummary" id="eqSummary" actionListener="#{bindings.openSubTaskForEQSummary.execute}"
+                    text="#{pageFlowScope.PhysicalConnectorSummaryBean.entityObject.equipment.displayInfo}"					
+					shortDesc="#{inventoryUIBundle.LINK} #{inventoryUIBundle.FOR} #{inventoryUIBundle.EQUIPMENT_SUMMARY}">
+                        <af:outputText value="#{pageFlowScope.PhysicalConnectorSummaryBean.entityObject.equipment.displayInfo}" id="ot101"/>
+                        <af:setActionListener from="#{pageFlowScope.PhysicalConnectorSummaryBean.entityObject.equipment.oid}" to="#{requestScope.oid}"/>
+                    </af:commandImageLink>
+      </af:panelLabelAndMessage>    
+       <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="phycon-lmd" rendered="false">
+                <af:outputText value="#{pageFlowScope.PhysicalConnectorSummaryBean.entityObject.lastModifiedDate}" id="ot9">
+                    <af:convertDateTime pattern="#{pageFlowScope.PhysicalConnectorSummaryBean.dateTimeFormat}"/>
+                </af:outputText>
+       </af:panelLabelAndMessage>
+       <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="phycon-lmu" rendered="false">
+                <af:outputText value="#{pageFlowScope.PhysicalConnectorSummaryBean.entityObject.lastModifiedUser}" id="ot6"/>
+       </af:panelLabelAndMessage>
+       <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="phycon-crd" rendered="false">
+                <af:outputText value="#{pageFlowScope.PhysicalConnectorSummaryBean.entityObject.createdDate}" id="ot11">
+                        <af:convertDateTime pattern="#{pageFlowScope.PhysicalConnectorSummaryBean.dateTimeFormat}"/>
+                </af:outputText>
+       </af:panelLabelAndMessage>
+       <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="phycon-cru" rendered="false">
+                    <af:outputText value="#{pageFlowScope.PhysicalConnectorSummaryBean.entityObject.createdUser}" id="ot12"/>
+       </af:panelLabelAndMessage>
+      </af:panelFormLayout>
+     </af:showDetailHeader>
+     <af:group rendered="#{!pageFlowScope.PhysicalConnectorSummaryBean.previewLayout}" id ="group2" >
+       <af:spacer width="10" height="10" id="s1"/>
+       <!-- Custom Involvement Portlet -->
+       <af:region value="#{bindings.CustomInvolvementListFlow1.regionModel}" id="r1"/>
+     <!-- Custom Involvement Portlet -->
+     </af:group>
+      </af:panelGroupLayout>
+    </af:panelHeader>
+   
+    </f:facet>
+   </af:panelStretchLayout>
+  </f:facet>
+  <f:facet name="contextualArea"/>
+ </af:pageTemplate>
+</jsp:root>

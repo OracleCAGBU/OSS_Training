@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xsi:type="BusinessEntityType" name="Project" realizeFromBusinessEntity="true">
+  <com:displayName lang="[default]">Project</com:displayName>
+  <com:saveVersion>9</com:saveVersion>
+  <com:id>E:inventoryEntity--Project</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>inventoryEntity--Project</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>Project</data:name>
+    <data:displayName lang="[default]">Project</data:displayName>
+    <data:dataElement virtual="false">
+      <com:id>name</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>name</data:name>
+      <data:displayName lang="[default]">name</data:displayName>
+      <data:displayName lang="[default]">name</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>name</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>name</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>description</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>description</data:name>
+      <data:displayName lang="[default]">description</data:displayName>
+      <data:displayName lang="[default]">description</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>description</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>description</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>dueDate</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>dueDate</data:name>
+      <data:displayName lang="[default]">dueDate</data:displayName>
+      <data:displayName lang="[default]">dueDate</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>dueDate</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>dueDate</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>dateTime</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>completedActivityCount</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>completedActivityCount</data:name>
+      <data:displayName lang="[default]">completedActivityCount</data:displayName>
+      <data:displayName lang="[default]">completedActivityCount</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>completedActivityCount</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>completedActivityCount</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>int</data:primitiveType>
+    </data:dataElement>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>nnkl--+5--+u---FzdlaxA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>inventoryEntity--Project</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>--+U--+S--+9KE8H---9Jw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>Twov--+1--+zGZBN--+1Fg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+    <data:maxLength>50</data:maxLength>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>3joy98V6--+HYo5qzrFMnw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+    <data:information lang="[default]">A short, unique, descriptive name of a project. Use this name to find and identify a project throughout UIM. A name is a required attribute and must be unique across projects.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>9xUzKJpn--+S---Ov5ZZcg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>--+w--+Y--+cfNRA--+XJw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>---t--+0--+Lh1Fc---RXA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>p3BSxbQt--+H--+L--+gYQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>8rpU---K--+gkH1S--+O6w</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+    <data:information lang="[default]">Descriptive text about the Project.  A longer description than name for the project element. Can be up to 255 characters long.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>--+e--+0--+H--+n---wYA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>--+B---5--+hHNAWzbQ38Q</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>dueDate</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>0VRW---u--+2XrhO8pxbXA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>dueDate</data:dataElementId>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>--+uZjYf--+PPY8WhjJC9Q</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>dueDate</data:dataElementId>
+    <data:information lang="[default]">The date by which the project is due to complete</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>--+L---G--+k---9--+rBg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>dueDate</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>--+P--+c--+2tD5N---WRw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>completedActivityCount</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>--+oASox--+5Srt+--+qsg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>completedActivityCount</data:dataElementId>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>4FQXzpcc--+LP55J9T9PXg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>completedActivityCount</data:dataElementId>
+    <data:information lang="[default]">Number of activities that have been already completed</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>b-Yv--+o--+x---2---Udw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>completedActivityCount</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <capability xsi:type="accessControlledType" enabled="true" id="oracle.communications.sce.poms.capabilities.AccessControlled"/>
+  <capability xsi:type="lifecycleType" enabled="true" id="oracle.communications.sce.poms.capabilities.Lifecycle" stateType="ocim:ProjectState"/>
+  <implements interface="oracle.communications.inventory.api.entity.common.ProjectElement"/>
+  <compositeIndex name="IDX_PROJECT_NAME" unique="true">
+    <attributeName>name</attributeName>
+  </compositeIndex>
+  <properties hierarchyStrategy="single" interface="oracle.communications.inventory.api.entity.Project" table="PROJECT" type="ocim:Project"/>
+  <identifier>
+    <attribute>name</attribute>
+  </identifier>
+</com:modelEntity>

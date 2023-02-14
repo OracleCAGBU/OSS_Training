@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved. */
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    4/15/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   id="pt1">
+    <f:facet name="localArea">
+      <af:panelHeader text="#{inventoryUIBundle.RENAMECONFIGITEM}" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar">
+           <af:toolbar id="tb1">
+            <af:commandToolbarButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}"
+                              id="cb1"
+                              actionListener="#{pageFlowScope.ConfigurationItemRenameBean.renameConfigurationItem}"
+                              action="summary" accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}"/>
+            <af:spacer width="10" height="10" id="s11"/>
+            <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="cb2"
+                              action="cancel" immediate="true"
+                              actionListener="#{pageFlowScope.ConfigurationItemRenameBean.cancel}"
+                                     accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+          </af:toolbar>
+        </f:facet>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:showDetailHeader text="#{inventoryUIBundle.RENAMECONFIGITEM}"
+                             disclosed="true" id="PAGE_TITLE">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:group id="g1">
+            <af:panelGroupLayout id="pgl1" layout="scroll">
+              <af:panelFormLayout id="pfl1">
+                <af:inputText value="#{pageFlowScope.ConfigurationItemRenameBean.invConfigItemLabel}"
+                              label="#{inventoryUIBundle.ITEM_RENAME}"
+                              required="#{bindings.id.hints.mandatory}"
+                              id="it1" maximumLength="255">              
+                </af:inputText>
+              </af:panelFormLayout>
+            </af:panelGroupLayout>
+          </af:group>   
+        </af:showDetailHeader>   
+      </af:panelHeader>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

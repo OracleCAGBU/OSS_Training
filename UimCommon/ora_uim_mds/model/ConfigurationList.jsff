@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2016, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    4/16/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:showDetailHeader text="Configurations" id="sdh1" 
+                       styleClass="invListShowDetailHeader" disclosed="true" size="-1">
+    <f:facet name="context"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar">
+        <af:toolbar id="t1">
+          <af:commandToolbarButton text="#{inventoryUIBundle.CREATE}"
+                                   id="create" action="createConfig"
+                                   icon="#{InventoryHelperBean.createIcon}"
+                                   disabled="#{sessionScope.disableCreateButton}"
+                                   immediate="true"
+                                   rendered="#{(securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/configuration/flow/ConfigurationEditFlow.xml#ConfigurationEditFlow']) &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Configuration.CREATE;action=view']}"
+                                   partialTriggers="tabId">
+                <af:setActionListener from="true" to="#{addMode}"/>
+                </af:commandToolbarButton>
+        </af:toolbar>
+      </f:facet>
+     <f:facet name="statusbar">
+        <af:toolbar id="t2">
+          <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount lt 0) ? 0 : bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount}"
+                         id="ol2" styleClass="invSearchOutputLabel" binding="#{backingBeanScope.totalResultsLabel}" partialTriggers="tabId"/>                         
+        </af:toolbar>
+      </f:facet>
+      <af:table id="tabId"
+                value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}"
+                var="row"
+                fetchSize="#{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount &lt; 25) ? bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount : 25}"
+                filterModel="#{pageFlowScope.ConfigurationQueryBean.filterModel}"
+                selectionListener="#{pageFlowScope.ConfigurationListBean.selectAction}"
+                queryListener="#{InventoryHelperBean.processQuery}"
+                filterVisible="false" varStatus="vs"
+                sortListener="#{bindings.searchResultsIterator.dataControl.dataProvider.processSort}"
+                rowSelection="#{pageFlowScope.ConfigurationListBean.rowSelection}" styleClass="AFStretchWidth"
+                autoHeightRows="#{pageFlowScope.ConfigurationListBean.portletHeight}" contentDelivery="immediate"
+                binding="#{pageFlowScope.ConfigurationListBean.resultsTable}"
+                summary="#{inventoryUIBundle.CONFIGURATION_LIST}">
+        <af:column  headerText="#{inventoryUIBundle.VERSION}" id="c1" width="40"
+                   rowHeader="unstyled">
+          <af:commandImageLink action="#{pageFlowScope.ConfigurationListBean.getSummary}" id="c21"
+                          disabled="#{pageFlowScope.ConfigurationListBean.disbleVersionLink}"
+                               text="#{row.versionNumber}"
+                               shortDesc="#{inventoryUIBundle.CONFIGURATION_SUMMARY_LINK}"> 
+           
+            <af:setActionListener from="#{row.oid}" to="#{objectId}"/>
+          </af:commandImageLink>
+        </af:column>
+        <af:column sortProperty="id" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.ID}" id="c3">
+          <af:outputText value="#{row.id}" id="ot2"/>
+        </af:column>
+        <af:column sortProperty="name" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.NAME}" id="c231" width="200">
+          <af:outputText value="#{row.name}" id="ot1"/>
+        </af:column>
+        <af:column sortProperty="configSpec.name" sortable="false" filterable="false"
+                   headerText="#{inventoryUIBundle.SPECIFICATION}" id="c34" width="200">
+          <af:commandImageLink id="c221" action="SpecificationSummary" actionListener="#{bindings.openSubTaskForSpec.execute}"
+                               text="#{pageFlowScope.ConfigurationListBean.specDisplayName}"
+                               shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}"> 
+         
+            <af:setActionListener from="#{pageFlowScope.ConfigurationListBean.configurationSpecification.oid}" to="#{specObjectId}"/>
+          </af:commandImageLink>
+        </af:column>
+        <af:column sortProperty="configState" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.STATUS}" id="c345">
+          <af:outputText value="#{pageFlowScope.ConfigurationListBean.configStatus}"
+                               id="ot298"/>
+         </af:column>
+        <af:column   headerText="#{inventoryUIBundle.START_DATE}" id="c35">
+          <af:outputText value="#{row.effDate}" id="ot19">
+            <af:convertDateTime pattern="#{pageFlowScope.ConfigurationListBean.dateTimeFormat}"/>
+          </af:outputText>
+        </af:column>
+        <af:column  headerText="#{inventoryUIBundle.END_DATE}" id="c36">
+          <af:outputText value="#{row.validFor.endDate}" id="ot18">
+            <af:convertDateTime pattern="#{pageFlowScope.ConfigurationListBean.dateTimeFormat}"/>
+          </af:outputText>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+  </af:showDetailHeader>
+</jsp:root>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="model:Project" id="ivprj=ora_uim_baseextpts" type="ivprj" typeName="Inventory Project" name="ora_uim_baseextpts" resource="/ora_uim_baseextpts/ora_uim_baseextpts.inventoryCartridge">
+    <note lang="default"/>
+    <version>
+      <major>7</major>
+      <minor>4</minor>
+      <maintenance>1</maintenance>
+      <servicePack>0</servicePack>
+      <efix>0</efix>
+      <build>0</build>
+    </version>
+    <targetVersion xsi:type="model:BuildVersion">
+      <major>7</major>
+      <minor>4</minor>
+      <maintenance>1</maintenance>
+      <servicePack>0</servicePack>
+      <efix>0</efix>
+      <build>0</build>
+    </targetVersion>
+    <propertyCategory name="Cartridge_Management">
+      <property defaultValue="localhost" name="wladmin.host.name"/>
+      <property defaultValue="7001" name="wladmin.host.port"/>
+    </propertyCategory>
+    <dependencies>
+      <element id="ivprj=ora_uim_baseextpts+prjd=ora_uim_model" type="prjd" typeName="Project Dependency" name="ora_uim_model">
+        <supportedVersion>
+          <minVersion exclusive="false">7.4.1</minVersion>
+          <maxVersion exclusive="true"></maxVersion>
+        </supportedVersion>
+        <project>
+          <relation ref="omprj=ora_uim_model" type="OCIM Model Project" name="Dependency">
+            <target name="ora_uim_model" typeName="OCIM Model Project"/>
+          </relation>
+        </project>
+      </element>
+    </dependencies>
+    <tagDetails>
+      <name>Base Project</name>
+      <description></description>
+    </tagDetails>
+    <identifier>ora_uim_baseextpts</identifier>
+    <provider>Oracle Communications</provider>
+    <sealed>false</sealed>
+    <copyright>Copyright (c) 2008, 2020, Oracle. All rights reserved. Oracle is a registered trademark of Oracle Corporation and/or its affiliates. Other names may be trademarks of their respective owners.&#xD;
+.&#xD;
+Oracle and Java are registered trademarks of Oracle and/or its affiliates.  Other names may be trademarks of their respective owners.&#xD;
+.&#xD;
+This software and related documentation are provided under a license agreement containing restrictions on use and disclosure and are protected by intellectual property laws. Except as expressly permitted in your license agreement or allowed by law, you may not use, copy, reproduce, translate, broadcast, modify, license, transmit, distribute, exhibit, perform, publish or display any part, in any form, or by any means. Reverse engineering, disassembly, or decompilation of this software, unless required by law for interoperability, is prohibited.&#xD;
+.&#xD;
+The information contained herein is subject to change without notice and is not warranted to be error-free. If you find any errors, please report them to us in writing.&#xD;
+.&#xD;
+If this is software or related documentation that is delivered to the U.S. Government or anyone licensing it on behalf of the U.S. Government, the following notice is applicable:&#xD;
+.&#xD;
+U.S. GOVERNMENT END USERS: Oracle programs, including any operating system, integrated software, any programs installed on the hardware, and/or documentation, delivered to U.S. Government end users are &quot;commercial computer software&quot; pursuant to the applicable Federal Acquisition Regulation and agency-specific supplemental regulations. As such, use, duplication, disclosure, modification, and adaptation of the programs, including any operating system, integrated software, any programs installed on the hardware, and/or documentation, shall be subject to license terms and license restrictions applicable to the programs. No other rights are granted to the U.S. Government.&#xD;
+.&#xD;
+This software or hardware is developed for general use in a variety of information management applications. It is not developed or intended for use in any inherently dangerous applications, including applications that may create a risk of personal injury. If you use this software or hardware in dangerous applications, then you shall be responsible to take all appropriate failsafe, backup, redundancy, and other measures to ensure its safe use. Oracle Corporation and its affiliates disclaim any liability for any damages caused by use of this software or hardware in dangerous applications.&#xD;
+.&#xD;
+This software or hardware and documentation may provide access to or information on content, products and services from third parties. Oracle Corporation and its affiliates are not responsible for and expressly disclaim all warranties of any kind with respect to third-party content, products, and services. Oracle Corporation and its affiliates will not be responsible for any loss, costs, or damages incurred due to your access to or use of third-party content, products, or services. </copyright>
+    <license>Usage of this software product is governed by the terms and conditions of the software license agreement between your company and Oracle.  Use of this software product in any manner inconsistent with such software license agreement would be considered a violation of the agreement.  Also, use of this Software by unauthorized persons is a violation of applicable copyright laws.</license>
+    <package></package>
+  </entity>
+</model:Model>

@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:group id="g1">
+        <af:panelGroupLayout id="pgl1" layout="scroll">
+            <af:showDetailHeader text="#{inventoryUIBundle.TERMINATION_POINT}" disclosed="true" id="sdh1">
+              <f:facet name="context"/>
+              <f:facet name="menuBar"/>
+              <f:facet name="toolbar"/>
+              <f:facet name="legend"/>
+              <f:facet name="info"/>
+              <af:panelCollection id="pc1" styleClass="invSearchPanelCollection">
+                 <f:facet name="menus"/>
+                 <f:facet name="toolbar"/>
+                 <f:facet name="statusbar"/>
+                 <af:table value="#{pageFlowScope.PipeTerminationPointListBean.terminationPoints}"
+                           var="row" binding="#{pageFlowScope.PipeTerminationPointListBean.resultsTable}"
+                           rowBandingInterval="0" rowSelection="single" id="t1"
+                           summary="#{inventoryUIBundle.PIPE_TERMINATION_POINT_LIST}">
+                      <af:column headerText="#{inventoryUIBundle.ID}" id="c2"
+                                 rowHeader="unstyled">
+                          <af:outputText value="#{row.id}" id="ot2"/>
+                      </af:column>
+                      <af:column headerText="#{inventoryUIBundle.NAME}" id="c1">
+                          <af:outputText value="#{row.name}" id="ot1"/>
+                      </af:column>
+                      <af:column headerText="#{inventoryUIBundle.SPECIFICATION}" id="c4">
+                          <af:outputText value="#{row.specification.name}" id="ot4"/>
+                      </af:column>
+                      <af:column headerText="#{inventoryUIBundle.INVENTORY_STATUS}" id="c6">
+                          <af:outputText value="#{pageFlowScope.PipeTerminationPointListBean.adminState}" id="ot3"/>
+                      </af:column>
+                       <af:column headerText="#{inventoryUIBundle.END_POINT}" id="c3" rendered="#{pageFlowScope.PipeTerminationPointListBean.renderEndPoints}">
+                         <af:outputText value="#{pageFlowScope.PipeTerminationPointListBean.endPointDispaly}" id="ot5"/>
+                        </af:column>
+                        <af:column headerText="#{inventoryUIBundle.PTP_LD}" id="c5" rendered="#{pageFlowScope.PipeTerminationPointListBean.renderLDPL}">
+                          <af:outputText value="#{pageFlowScope.PipeTerminationPointListBean.logicalDevice}" id="ot6"/>
+                      </af:column>
+                      <af:column headerText="#{inventoryUIBundle.PROPERTY_LOCATION}" id="c7" rendered="#{pageFlowScope.PipeTerminationPointListBean.renderLDPL}">
+                          <af:outputText value="#{pageFlowScope.PipeTerminationPointListBean.propertyLocation}" id="ot7"/>
+                      </af:column>
+                 </af:table>
+             </af:panelCollection>
+          </af:showDetailHeader>
+          <af:panelGroupLayout id="pgl2" halign="right" layout="scroll">
+              <af:panelGroupLayout id="pgl3" layout="horizontal">
+                <af:toolbar id="t4">
+                    <af:commandToolbarButton text="#{inventoryUIBundle.DONE}" id="ctb1" actionListener="#{pageFlowScope.PipeTerminationPointListBean.onChoose}"
+                                             accessKey="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>
+                    <af:spacer width="10" height="10" id="s3"/>                                           
+                    <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb2" actionListener="#{pageFlowScope.PipeTerminationPointListBean.cancel}"
+                                             accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                </af:toolbar>
+              </af:panelGroupLayout>
+          </af:panelGroupLayout>
+      </af:panelGroupLayout>
+    </af:group>
+  </f:facet>
+</af:pageTemplate>
+</jsp:root>

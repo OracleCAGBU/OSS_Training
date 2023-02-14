@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xsi:type="BusinessEntityType" name="MultiplexedConnectivity" realizeFromBusinessEntity="true">
+  <com:displayName lang="[default]">MultiplexedConnectivity</com:displayName>
+  <com:saveVersion>9</com:saveVersion>
+  <com:baseEntityRef>
+    <com:entity>NetworkConnectivity</com:entity>
+    <com:entityType>inventoryEntity</com:entityType>
+    <com:relationship>oracle.communications.sce.business.entity.baseEntity</com:relationship>
+  </com:baseEntityRef>
+  <com:id>E:inventoryEntity--MultiplexedConnectivity</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>inventoryEntity--MultiplexedConnectivity</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>MultiplexedConnectivity</data:name>
+    <data:displayName lang="[default]">MultiplexedConnectivity</data:displayName>
+    <data:dataElement virtual="false">
+      <com:id>isConfiguredForUse</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>isConfiguredForUse</data:name>
+      <data:displayName lang="[default]">isConfiguredForUse</data:displayName>
+      <data:displayName lang="[default]">isConfiguredForUse</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>isConfiguredForUse</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>isConfiguredForUse</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>boolean</data:primitiveType>
+    </data:dataElement>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>zxky--+h--+jf08D7n0bZw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>inventoryEntity--MultiplexedConnectivity</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>--+z--+R--+p--+9pw4Yfw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>isConfiguredForUse</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>fb45---o--+m--+p---LtQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>isConfiguredForUse</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>32gQKHcr--+nHNYt--+WVA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>isConfiguredForUse</data:dataElementId>
+    <data:information lang="[default]">Identifies a channel as being included in the current channel configuration for a facility. Applies to channels only. Set to true if the channel is currently configured for use on the parent facility. Defaults to 'true'. Set to 'false' if the facility is reconfigured and the channel is no longer included in the configuration. The channel is not deleted because it may have assignment history and could be used again if the facility is reconfigured.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>-------z--+9QhEl---tyA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>isConfiguredForUse</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>---cmNRr--+n---w---IdA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>isConfiguredForUse</data:dataElementId>
+  </data:dataElementDetails>
+  <capability xsi:type="bIEnabledType" enabled="true" id="oracle.communications.sce.poms.capabilities.BusinessInteractionEnabled" history="true" visibilityState="HIDE"/>
+  <implements interface="java.lang.Cloneable"/>
+  <properties abstract="true" hierarchyStrategy="single" interface="oracle.communications.inventory.api.entity.MultiplexedConnectivity" type="ocim:MultiplexedConnectivity"/>
+</com:modelEntity>

@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+         xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core">
+		  
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>  
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   value="#{bindings.pageTemplateBinding}" id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout id="pgl1" layout="scroll">
+        <!--<af:panelGroupLayout id="pgl8" layout="scroll">
+          <af:panelHeader text="#{pageFlowScope.NetworkAddressDomainCreateBean.displayInfo}" id="ph3"/>
+        </af:panelGroupLayout-->
+        <af:panelHeader text="#{pageFlowScope.NetworkAddressDomainCreateBean.message}" id="ph45" messageType="confirmation" rendered="#{pageFlowScope.NetworkAddressDomainCreateBean.addAnotherMode}"/>
+        <af:panelHeader text="#{inventoryUIBundle.NETWORK_ADDRESS_DOMAIN} - #{pageFlowScope.NetworkAddressDomainCreateBean.displayInfo}"
+                        id="ph1"  helpTopicId="#{pageFlowScope.NetworkAddressDomainCreateBean.helpTopic}">
+          <f:facet name="toolbar">
+            <af:panelGroupLayout id="pgl4" layout="horizontal"
+                                 rendered="#{!pageFlowScope.NetworkAddressDomainCreateBean.previewLayout}">
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CONTINUE}" id="cb1"
+                                accessKey="#{inventoryUIBundle.SAVE_ACCESS_KEY}"
+                                action="#{pageFlowScope.NetworkAddressDomainCreateBean.saveOutcome}"
+                                rendered="#{pageFlowScope.NetworkAddressDomainCreateBean.addMode and !pageFlowScope.NetworkAddressDomainCreateBean.popupMode}"
+                                actionListener="#{pageFlowScope.NetworkAddressDomainCreateBean.save}">
+                <af:setActionListener from="summary" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandButton>
+              <af:spacer width="10" height="10" id="s1"/>
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb3"
+                                actionListener="#{pageFlowScope.NetworkAddressDomainCreateBean.save}"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}"
+                                rendered="#{!pageFlowScope.NetworkAddressDomainCreateBean.addMode || pageFlowScope.NetworkAddressDomainCreateBean.popupMode}"
+                                action="#{pageFlowScope.NetworkAddressDomainCreateBean.saveOutcome}">
+                <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandButton>
+              <af:spacer width="10" height="10" id="s11"/>
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER}" id="cb2"
+                                actionListener="#{pageFlowScope.NetworkAddressDomainCreateBean.save}"
+                                action="#{pageFlowScope.NetworkAddressDomainCreateBean.saveOutcome}"
+                                rendered="#{pageFlowScope.NetworkAddressDomainCreateBean.addMode and !pageFlowScope.NetworkAddressDomainCreateBean.popupMode}"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER_ACCESS_KEY}">
+                <af:setActionListener from="init" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandButton>
+              <af:spacer width="10" height="10" id="s2"/>
+              <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb4" action="cancel"
+                                accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"
+                                actionListener="#{bindings.closeSubTask.execute}" immediate="true"/>
+            </af:panelGroupLayout>
+          </f:facet>
+          <af:spacer width="10" height="10" id="s4"/>
+          <af:showDetailHeader text="#{inventoryUIBundle.NETWORK_ADDRESS_DOMAIN_INFORMATION}" disclosed="true"
+                               id="sdh1">
+            <af:group id="group1">
+              <af:spacer width="10" height="10" id="s3"/>
+              <af:panelGroupLayout id="pgl5">
+                <af:panelFormLayout id="nadc" maxColumns="2" rows="2" fieldWidth="67%"
+                                    binding="#{backingBeanScope.uiHintsPanel}">
+                  <af:selectOneChoice id="nadc-nadt" label="#{inventoryUIBundle.NETWORK_ADDRESS_TYPE}" autoSubmit="true"
+                                      disabled="#{pageFlowScope.NetworkAddressDomainCreateBean.popupMode}"
+                                      value="#{pageFlowScope.NetworkAddressDomainCreateBean.networkAddressType}"
+                                      valueChangeListener="#{pageFlowScope.NetworkAddressDomainCreateBean.networkAddressTypeChanged}"
+                                      required="true" contentStyle="width:14em">
+                    <f:selectItems binding="#{pageFlowScope.NetworkAddressDomainCreateBean.networkAddressTypeList}"
+                                   id="si1"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice id="nadc-specification" label="#{inventoryUIBundle.SPECIFICATION}"
+                                      autoSubmit="true" showRequired="true" contentStyle="width:14em"
+                                      disabled="#{!(pageFlowScope.NetworkAddressDomainCreateBean.addMode)}"
+                                      value="#{pageFlowScope.NetworkAddressDomainCreateBean.selectedSpec}"
+                                      valueChangeListener="#{pageFlowScope.NetworkAddressDomainCreateBean.specChanged}"
+                                      partialTriggers="nadc-nadt">
+                    <f:selectItems binding="#{pageFlowScope.NetworkAddressDomainCreateBean.specifications}" id="si2"/>
+                  </af:selectOneChoice>
+                  <af:inputText value="#{pageFlowScope.NetworkAddressDomainCreateBean.entityObject.name}"
+                                label="#{inventoryUIBundle.NAME}" maximumLength="50" columns="40" id="nadc-name"
+                                showRequired="true" required="true"/>
+                  <af:panelLabelAndMessage id="nadc-ownedby" label="#{inventoryUIBundle.OWNED_BY}">
+                    <af:inputText value="#{pageFlowScope.NetworkAddressDomainCreateBean.ownedByName}" simple="true"
+                                  id="nad-ownedby" binding="#{backingBeanScope.ownedByNameCreateBinding}" columns="30"
+                                  valueChangeListener="#{pageFlowScope.NetworkAddressDomainCreateBean.ownedByPartyChanged}"
+                                  label="#{inventoryUIBundle.OWNED_BY}">
+                      <af:autoSuggestBehavior suggestItems="#{pageFlowScope.NetworkAddressDomainCreateBean.getPartyHandler}"/>
+                    </af:inputText>
+                    <af:commandImageLink id="ldacc-ldcreate" icon="/images/search_ena.png"
+                                         shortDesc="#{inventoryUIBundle.BROWSE}"
+                                         actionListener="#{pageFlowScope.NetworkAddressDomainCreateBean.launchOwnedByPopup}">
+                    </af:commandImageLink>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage id="nadc-managed" label="#{inventoryUIBundle.MANAGED_BY}">
+                    <af:inputText value="#{pageFlowScope.NetworkAddressDomainCreateBean.managedByName}" simple="true"
+                                  id="nad-managedby" binding="#{backingBeanScope.managedByNameCreateBinding}"
+                                  valueChangeListener="#{pageFlowScope.NetworkAddressDomainCreateBean.managedByPartyChanged}"
+                                  columns="30" label="#{inventoryUIBundle.MANAGED_BY}">
+                      <af:autoSuggestBehavior suggestItems="#{pageFlowScope.NetworkAddressDomainCreateBean.getPartyHandler}"/>
+                    </af:inputText>
+                    <af:commandImageLink id="ldacc-managedcreate" icon="/images/search_ena.png"
+                                         shortDesc="#{inventoryUIBundle.BROWSE}"
+                                         actionListener="#{pageFlowScope.NetworkAddressDomainCreateBean.launchManagedByPopup}">
+                    </af:commandImageLink>
+                  </af:panelLabelAndMessage>
+                  <af:inputText value="#{pageFlowScope.NetworkAddressDomainCreateBean.entityObject.description}"
+                                label="#{inventoryUIBundle.DESCRIPTION}" maximumLength="255" rows="5" columns="40"
+                                id="nadc-description"/>
+                </af:panelFormLayout>
+                <af:popup id="searchOwnedByPartyPopup" binding="#{backingBeanScope.searchOwnedByParty}"
+                          contentDelivery="lazyUncached" rendered="true">
+                  <af:dialog id="d1" type="none" title="#{inventoryUIBundle.PARTY_SEARCH}">
+                    <af:panelStretchLayout id="psl_2" styleClass="invCommonPanelStretchLayout">
+                      <f:facet name="center">
+                        <af:region value="#{bindings.PartySearchResultsFlow1.regionModel}" id="r1"/>
+                      </f:facet>
+                    </af:panelStretchLayout>
+                  </af:dialog>
+                  <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                  <af:serverListener type="refreshEntity"
+                                     method="#{pageFlowScope.NetworkAddressDomainCreateBean.refresh}"/>
+                </af:popup>
+                
+                <af:popup id="searchManagedByPartyPopup" binding="#{backingBeanScope.searchManagedByParty}"
+                          contentDelivery="lazyUncached" rendered="true">
+                  <af:dialog id="d3" type="none" title="#{inventoryUIBundle.PARTY_SEARCH}">
+                    <af:panelStretchLayout id="psl_3" styleClass="invCommonPanelStretchLayout">
+                      <f:facet name="center">
+                        <af:region value="#{bindings.PartySearchResultsFlow2.regionModel}" id="r2"/>
+                      </f:facet>
+                    </af:panelStretchLayout>
+                  </af:dialog>
+                  <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                  <af:serverListener type="refreshEntity"
+                                     method="#{pageFlowScope.NetworkAddressDomainCreateBean.refresh}"/>
+                </af:popup>
+              </af:panelGroupLayout>
+            </af:group>
+          </af:showDetailHeader>
+        </af:panelHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+    <f:facet name="localAreaScroll"/>
+  </af:pageTemplate>
+</jsp:root>

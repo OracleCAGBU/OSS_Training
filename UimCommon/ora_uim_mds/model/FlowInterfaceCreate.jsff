@@ -1,0 +1,237 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2015, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+       cbrassil  06/03/14 - Acessibility fix
+    raattulu    4/05/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/> 
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1"> 
+    <f:facet name="localArea"> 
+      <af:panelStretchLayout id="pgl1" binding="#{backingBeanScope.LD_Results_panelGroupLayout}" topHeight="45">
+          <f:facet name="center">
+          <af:panelGroupLayout id="pg232" layout="scroll">
+          <af:panelHeader text="#{inventoryUIBundle.LOGICAL_DEVICE}" id="phld1" helpTopicId="OHW_equipFlowIntfNew">
+          <f:subview id="InventoryQuery" binding="#{backingBeanScope.Query_subViewBinding}">
+            <jsp:include page="/oracle/communications/inventory/ui/framework/page/InventoryQuery.jsff"/>
+          </f:subview>
+          
+          <af:spacer width="10" height="10" id="s1"/>
+          
+     <af:showDetailHeader text="#{inventoryUIBundle.LOGICAL_DEVICE_HIERARCHY}"
+                                 disclosed="true" id="sdh31" styleClass="invSummaryShowDetailHeader">
+              <f:facet name="context"/>
+              <f:facet name="menuBar">
+                <af:menuBar id="mb1">
+                </af:menuBar>
+              </f:facet>
+              <f:facet name="toolbar"/>
+              <f:facet name="legend"/>
+              <f:facet name="info"/>
+              <af:panelCollection id="pc21" styleClass="AFStretchWidth">
+                <f:facet name="menus"></f:facet>
+                <f:facet name="toolbar"></f:facet>
+                <f:facet name="statusbar"/>
+                <af:treeTable value="#{pageFlowScope.InventoryTreeBean.treeModel}"
+                              var="node" 
+                              rowSelection="multiple"
+                              styleClass="AFStretchWidth"
+                              id="ldHT"
+                              fetchSize="#{pageFlowScope.InventoryTreeBean.fetchSize}"
+                              contextMenuSelect="true" contentDelivery="immediate"
+                              selectionListener="#{pageFlowScope.FlowInterfaceCreateBean.nodeSelectedEvent}"
+                              binding="#{backingBeanScope.LD_treeBinding}"
+                              rowDisclosureListener="#{pageFlowScope.InventoryTreeBean.rowDisclosureListener}"
+                              disclosedRowKeys="#{pageFlowScope.InventoryTreeBean.treeDisclosedRowKeys}"
+                              rowBandingInterval="0" expandAllEnabled="#{pageFlowScope.InventoryTreeBean.expandAllEnabled}"
+                              horizontalGridVisible="false"
+                              summary="#{inventoryUIBundle.LOGICAL_DEVICE_HIERARCHY_TREETABLE}">
+                  <f:facet name="nodeStamp">                 
+                  <af:column sortable="false" id="column2"
+                               width="500" rowHeader="unstyled"
+                             headerText="#{inventoryUIBundle.LOGICAL_DEVICE}">
+                      <af:panelGroupLayout id="pgl5">
+                        <af:image source="#{node.data.icon}" id="nodeIcon"
+                                  styleClass="invSummaryImage"
+                                  shortDesc="icon"/>       
+                                <af:outputText value="#{node.data.label}" id="ot42"/>
+                          
+                          <af:commandImageLink action="mappedPhysicalDeviceList" visible="#{node.data.mappedToPhysicalDevice}" actionListener="#{bindings.openSubTaskForPDList.execute}"
+                                          id="cl2"
+                                          shortDesc="#{inventoryUIBundle.ASSOCIATED_PHYSICAL_DEVICES_LINK}"
+                                               text=" ( PhysicalDeviceList">
+                             <af:setActionListener from="#{pageFlowScope.InventoryTreeBean.selectedTreeNode.object.oid}" to="#{objectId}"/>
+                           
+                         </af:commandImageLink>
+                         <af:image source="/images/open_submenu_ena.png" id="pdIcon"
+                                   shortDesc="icon" visible="#{node.data.mappedToPhysicalDevice}"/>
+                         <af:outputText value=")" id="outputText346" visible="#{node.data.mappedToPhysicalDevice}"/>     
+                      </af:panelGroupLayout>
+                    </af:column>
+                  </f:facet>
+                  
+                <!--10285312  changes starting  -->
+                <af:column sortable="false" headerText="#{inventoryUIBundle.SPECIFICATION}" id="column3" filterable="false">
+                 <af:outputText value="#{node.data.specName}" id="ot314"/>
+                 
+                </af:column> 
+                
+                <af:column sortable="false" headerText="#{inventoryUIBundle.RESERVATION}" id="column4" filterable="false">
+                  <af:outputText value="#{node.data.reservation}" id="ot1"/>
+                </af:column>
+                
+                <af:column sortable="false" headerText="#{inventoryUIBundle.CONDITION}" id="column5" filterable="false">
+                  <af:outputText value="#{node.data.condition}" id="ot315"/>
+                </af:column>
+                
+                <af:column sortable="false" headerText="#{inventoryUIBundle.INVENTORY_STATUS}" id="column6" filterable="false">
+                  <af:outputText value="#{node.data.invStatus}" id="ot313"/>
+                </af:column>
+                  
+                <af:column sortable="false" headerText="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="column7" filterable="false">
+                  <af:outputText value="#{node.data.raStatus}" id="ot324"/>
+                </af:column>
+                
+                <af:column sortable="false" headerText="#{inventoryUIBundle.CONSUMERS}" id="colun3" filterable="false">
+                   <af:iterator id="it123" value="#{node.data.consumers}" var="consumer">
+                     
+                        <af:outputText value="#{consumer.label}" id="onn312" binding="#{pageFlowScope.consumer}"/>
+                     <af:switcher id="consumerSwitcher" defaultFacet="false" facetName="#{consumer.invStatus != null}">
+                            <f:facet name="true">           
+                              <af:outputText value=" (#{consumer.invStatus})" />
+                            </f:facet> 
+                             <f:facet name="false">           
+                                <af:outputText value=" " />
+                            </f:facet> 
+                    </af:switcher>  
+                     <br></br>
+                   </af:iterator>  
+                </af:column>
+
+                <af:column sortable="false" headerText="#{inventoryUIBundle.MAPPED_TO}" id="colun4" filterable="false">
+                   <af:iterator id="it124" value="#{node.data.mappedResources}" var="mappedresource">
+                        <af:outputText value="#{mappedresource.displayInfo}" id="onn313" />
+                     <br></br>
+                   </af:iterator>  
+                </af:column>
+                
+                </af:treeTable>
+              </af:panelCollection>
+              
+            </af:showDetailHeader>
+            
+            <af:spacer width="10" height="10" id="s2"/> 
+              
+          <af:showDetailHeader id="rc2" disclosed="true" text="#{inventoryUIBundle.FLOW_INTERFACE_DETAILS}" rendered="true">
+           
+           <af:panelGroupLayout id="pgl4" layout="horizontal" halign="left" valign="top"> 
+             <af:panelFormLayout id="pfl1"  binding="#{backingBeanScope.flowInterfaceDetailsPanel}">              
+               
+               <trh:tableLayout id="tl1">
+                  
+                  <trh:rowLayout id="rl1">
+                     <trh:cellFormat  halign="right" id="cf1">
+                        <af:outputLabel value="#{inventoryUIBundle.FLOW_INTERFACE_BIT_RATE}"
+                                        id="textLabe" inlineStyle="white-space:nowrap;" for="it3"/>
+                      </trh:cellFormat>
+                    
+                      <trh:cellFormat id="cf2">                 
+                        <af:inputText autoSubmit="true" id="it3" columns = "15" value="#{pageFlowScope.FlowInterfaceCreateBean.bitRateAmount}"
+                        valueChangeListener="#{pageFlowScope.FlowInterfaceCreateBean.bitRateAmountChanged}"/>
+                      </trh:cellFormat>
+                   
+                      <trh:cellFormat id="cf3">
+                        <af:selectOneChoice id="s1tt" autoSubmit="true" value="#{pageFlowScope.FlowInterfaceCreateBean.selectedUnitOfMeasure}" shortDesc="#{inventoryUIBundle.UNIT_OF_MEASURE}">
+                          <f:selectItems binding="#{pageFlowScope.FlowInterfaceCreateBean.unitOfMeasureList}" id="si1"/>
+                        </af:selectOneChoice>
+                      </trh:cellFormat>
+                  </trh:rowLayout>
+                  
+                   <trh:rowLayout id="rl3">                
+                
+                    <trh:cellFormat  halign="right" id="cf6">
+                        <af:outputLabel value="#{inventoryUIBundle.TECHNOLOGY}"
+                                        id="ol3" inlineStyle="white-space:nowrap;" for="s1tech"/>
+                    </trh:cellFormat>
+                    
+                     <trh:cellFormat id="cf7">   
+                      <af:selectOneChoice id="s1tech"  autoSubmit="true" value="#{pageFlowScope.FlowInterfaceCreateBean.selectedTechnology}" >
+                        <f:selectItems binding="#{pageFlowScope.FlowInterfaceCreateBean.technologyList}" id="si2"/>
+                     </af:selectOneChoice> 
+                    </trh:cellFormat>
+               
+               </trh:rowLayout>                 
+
+                <trh:rowLayout id="rl2">
+
+                   <trh:cellFormat  halign="right" id="cf5">
+                    <af:outputLabel value="#{inventoryUIBundle.TERMINATION_TYPE}"
+                                    id="ol2" inlineStyle="white-space:nowrap;" for="soc1"/>
+                    </trh:cellFormat>
+                
+                <trh:cellFormat id="cf4">               
+                  <af:selectOneChoice id="soc1" autoSubmit="true" value="#{pageFlowScope.FlowInterfaceCreateBean.selectedTerminationType}" valueChangeListener="#{pageFlowScope.FlowInterfaceCreateBean.terminationTypeChanged}">
+                    <f:selectItems binding="#{pageFlowScope.FlowInterfaceCreateBean.terminationTypeList}" id="si4" />
+                 </af:selectOneChoice>               
+               </trh:cellFormat>
+               
+               </trh:rowLayout>                
+             </trh:tableLayout>
+             
+             </af:panelFormLayout>
+           </af:panelGroupLayout>
+          </af:showDetailHeader>
+
+          
+        </af:panelHeader>
+        
+        <af:spacer width="10" height="10" id="s3"/> 
+              
+        <af:panelGroupLayout id="pgl2" layout="horizontal" halign="right">
+            <af:toolbar id="t1">
+            
+             <af:commandToolbarButton text="#{inventoryUIBundle.CREATE}"
+                                       id="ctb322"
+                                       actionListener="#{pageFlowScope.FlowInterfaceCreateBean.create}"
+                                       disabled="#{pageFlowScope.FlowInterfaceCreateBean.disableCreateButton}"
+									   rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=FlowInterface.CREATE;action=view']}"
+                                       binding="#{backingBeanScope.createBinding}"
+                                       accessKey="#{inventoryUIBundle.CREATE_ACCESS_KEY}"/>
+               <af:spacer width="10" height="10" id="s4"/>
+
+              <af:commandToolbarButton text="#{inventoryUIBundle.CREATE_AND_CLOSE}"
+                                       id="ctb1"
+                                       actionListener="#{pageFlowScope.FlowInterfaceCreateBean.createAndClose}"
+                                       disabled="#{pageFlowScope.FlowInterfaceCreateBean.disableCreateButton}"
+									   rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=FlowInterface.CREATE;action=view']}"
+                                       binding="#{backingBeanScope.createAndCloseBinding}"
+                                       accessKey="#{inventoryUIBundle.CREATE_AND_CLOSE_ACCESS_KEY}"/>
+              <af:spacer width="10" height="10" id="s6"/>
+              
+              <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb233" actionListener="#{pageFlowScope.FlowInterfaceCreateBean.cancel}" 
+                                       accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+            </af:toolbar>
+          </af:panelGroupLayout> 
+        </af:panelGroupLayout>
+        
+        
+        </f:facet>
+
+      </af:panelStretchLayout>
+    </f:facet>
+    
+  </af:pageTemplate>
+</jsp:root>

@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces"
+		   xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+	<af:pageTemplate viewId="/oracle/communications/inventory/ui/framework/templates/InventoryUIShellMainArea.jspx"  id="pt1">
+   <f:facet name="localArea">
+   <af:panelHeader text="#{pageFlowScope.InventoryResultsBean.groupText}" id="ph1" icon="#{pageFlowScope.InventoryResultsBean.groupIcon}" helpTopicId="#{pageFlowScope.InventoryResultsBean.groupHelpId}">
+    <af:popup id="assignAction" contentDelivery="lazyUncached">
+        <af:dialog type="none" title="#{inventoryUIBundle.ASSIGN_USER}" binding="#{backingBeanScope.assignUserDialog}">
+           <f:facet name="buttonBar">
+                <af:toolbar id="tb12">
+                    <af:group id="g42">
+                        <af:button text="#{inventoryUIBundle.ASSIGN_USER}" id="ctb16" actionListener="#{pageFlowScope.InventoryResultsBean.assignActivities}"
+                                                 accessKey="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>
+                        <af:button text="#{inventoryUIBundle.CANCEL}" id="ctb28" actionListener="#{pageFlowScope.InventoryResultsBean.assignActivities}"
+                                                 accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}" />
+                    </af:group>
+                </af:toolbar>
+            </f:facet>
+            <af:panelGroupLayout>
+             <af:panelFormLayout maxColumns="1" rows="2" labelWidth="50%" fieldWidth="50%">
+               <af:spacer height="20"/>
+               <af:selectOneChoice id="userDropdownEdit"
+                                  autoSubmit="true"
+                                  value="#{pageFlowScope.InventoryResultsBean.currentSelectedUser}"
+                                  label="Select User"
+                                  shortDesc="User" showRequired="true">
+                      <f:selectItems value="#{pageFlowScope.InventoryResultsBean.usersList}"/>
+               </af:selectOneChoice>
+               <af:spacer height="20"/>
+             </af:panelFormLayout>
+            </af:panelGroupLayout>
+         </af:dialog>
+    </af:popup>
+    <f:facet name="context"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="toolbar">
+        <af:toolbar id="wlt1" binding="#{backingBeanScope.myActivitiesTBBinding}">
+            <af:commandToolbarButton   binding="#{backingBeanScope.start}" actionListener="#{pageFlowScope.InventoryResultsBean.startActivities}"
+                    disabled="#{pageFlowScope.InventoryResultsBean.disableStart}" id="wlb21" shortDesc="#{inventoryUIBundle.START}"
+                    icon="/images/func_circlearrowheadright_24_act.png" disabledIcon="/images/func_circlearrowheadright_24_dis.png" 
+                    rendered="#{pageFlowScope.isGroupList == null}"/>
+            <af:commandToolbarButton binding="#{backingBeanScope.complete}" actionListener="#{pageFlowScope.InventoryResultsBean.completeActivities}"
+                    disabled="#{pageFlowScope.InventoryResultsBean.disableComplete}" shortDesc="#{inventoryUIBundle.COMPLETE}"
+                    id="ctb42" icon="/images/checkmark_ena.png" disabledIcon="/images/checkmark_dis.png" rendered="#{pageFlowScope.isGroupList == null &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Activity.COMPLETE;action=view']}"/>
+            <af:commandToolbarButton disabled="#{pageFlowScope.InventoryResultsBean.disableAssign}" id="ctb2" shortDesc="#{inventoryUIBundle.ASSIGN}" icon="/images/func_persontickmark_16_act.png" disabledIcon="/images/func_persontickmark_16_dis.png" partialTriggers="userDropdownEdit">
+                <af:showPopupBehavior popupId="assignAction" triggerType="action"/>
+            </af:commandToolbarButton>
+        </af:toolbar>
+    </f:facet>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:spacer width="10" height="10"/>
+    <af:spacer width="10" height="10"/>
+ <jsp:include page="/oracle/communications/inventory/ui/framework/page/InventoryQuery.jsff"/>
+ <af:spacer width="10" height="30"/>
+ 	<af:showDetailHeader disclosed="false" text="Activity Graph" id="sh1">
+	   <trh:tableLayout  width="100%" binding="#{backingBeanScope.activityStatusVisualizations}">
+		  <trh:rowLayout halign="left" >
+              <trh:cellFormat width="50%" >
+			 
+                <dvt:pieGraph id="graph1"  shortDesc="Recent Work Order Summary" subType="PIE" value="#{pageFlowScope.InventoryResultsBean.graphData}">
+                <dvt:background>
+                    <dvt:specialEffects/>
+                </dvt:background>
+                <dvt:graphPieFrame/>
+                <dvt:seriesSet>
+                    <dvt:series/>
+                </dvt:seriesSet>
+                <dvt:legendTitle text="#{inventoryUIBundle.ACTIVITIES}"/>
+                
+                <dvt:sliceLabel/>
+                <dvt:pieLabel rendered="true"/>
+                
+                <dvt:graphTitle text="#{inventoryUIBundle.RECENT_ACTIVITIES}"/>
+			</dvt:pieGraph>
+			
+            </trh:cellFormat>
+			  <trh:cellFormat width="50%">
+			  
+			   <dvt:lineGraph id="lineGraph1"
+                              subType="LINE_VERT_ABS"
+                              shortDesc="Work Order Trend"
+                              tabularData="#{pageFlowScope.InventoryResultsBean.tabularDataForLineGraph}"
+                              threeDEffect="true">
+                                          <dvt:background>
+                                                <dvt:specialEffects/>
+                                          </dvt:background>
+                                          <dvt:graphPlotArea/>
+                                          <dvt:seriesSet>
+                                                <dvt:series/>
+                                          </dvt:seriesSet>
+                                          <dvt:o1Axis/>
+                                          <dvt:y1Axis/>
+                                          <dvt:legendArea automaticPlacement="AP_NEVER"/>
+							<dvt:graphTitle text="#{inventoryUIBundle.ACTIVITY_TREND}"/>
+                        </dvt:lineGraph>
+            </trh:cellFormat>
+         </trh:rowLayout>
+	  </trh:tableLayout>
+	  </af:showDetailHeader>
+	<af:spacer width="10" height="30"/>
+	<af:showDetailHeader disclosed="true" text="#{inventoryUIBundle.WORK_ITEM_LIST}" id="ph12">
+            <af:panelCollection id="pc1" styleClass="invSearchPanelCollection">
+                <f:facet name="toolbar">
+                    <af:toolbar id="tb1">
+                        <af:commandToolbarButton text="#{inventoryUIBundle.SELECTALL}" 
+                                         id="ctb1All" 
+                                         rendered="#{!(pageFlowScope.InventoryResultsBean.popupMode)}"
+                                         icon="#{InventoryHelperBean.selectAllIcon}" 
+                                         actionListener="#{pageFlowScope.InventoryResultsBean.selectAllAction}"
+                                         partialTriggers="t3"
+                                         binding="#{backingBeanScope.selectAllButton}">                         
+                          </af:commandToolbarButton>
+                          <af:spacer width="10" height="10" id="s1"/>
+                          <af:button text="#{inventoryUIBundle.BULKEDIT}" 
+                               id="btnBulkEdit"
+                               icon="#{InventoryHelperBean.editIcon}"
+                               disabledIcon="#{InventoryHelperBean.disEditIcon}"
+                               rendered="#{!(pageFlowScope.InventoryResultsBean.popupMode) &amp;&amp; 
+                               securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Activity.EDIT;action=view']}"
+                               partialTriggers="t3"
+                               disabled="#{pageFlowScope.InventoryResultsBean.disableBulkEditButton 
+                                                                            || (pageFlowScope.InventoryResultsBean.selectedRowsSize lt 1 or pageFlowScope.InventoryResultsBean.selectedRowsSize eq null)}"
+                               action="bulkEdit" actionListener="#{pageFlowScope.InventoryResultsBean.bulkEditAction}"                                             
+                               binding="#{backingBeanScope.bulkEditButton}">
+                          </af:button>
+                    </af:toolbar>
+                </f:facet>
+                <f:facet name="statusbar">
+                    <af:toolbar id="wlsb">
+                        <af:outputText value="#{pageFlowScope.InventoryResultsBean.displayTotalResults}"
+                                     id="wl1" styleClass="invSearchOutputLabel" binding="#{backingBeanScope.totalResultsLabel}" partialTriggers="t3"/>				
+                    </af:toolbar>
+                </f:facet>
+         <af:table id="t3" value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}" var="row"
+                emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                fetchSize="#{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount &lt; 25) ? bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount : 25}"
+                filterModel="#{pageFlowScope.InventoryQueryBean.filterModel}"
+                selectionListener="#{pageFlowScope.InventoryResultsBean.selectAction}"
+                queryListener="#{InventoryHelperBean.processQuery}"
+                autoHeightRows="10" contentDelivery="immediate"
+                columnStretching="last"
+                sortListener="#{bindings.searchResultsIterator.dataControl.dataProvider.processSort}"
+                rowSelection="multiple" styleClass="invListTable"
+                selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                binding="#{pageFlowScope.InventoryResultsBean.resultsTable}"
+                summary="Work List">
+              <af:column sortProperty="name" sortable="true" filterable="true" headerText="#{inventoryUIBundle.ACTIVITY_NAME}" id="c5" >
+ 				<af:commandImageLink actionListener="#{bindings.openSubTaskForActivitySummary.execute}" action="activity" text="#{row.name}" id="cl1">
+ 				  <af:setActionListener from="#{row.oid}" to="#{objectId}"/>
+ 				  <af:setActionListener from="#{row.businessInteraction.oid}" to="#{workOrder}"/>
+ 				</af:commandImageLink>
+ 			  </af:column>
+ 			  <af:column sortProperty="businessInteraction.name" sortable="true" filterable="true" headerText="#{inventoryUIBundle.WORKORDER_NAME}" id="c11" >
+ 				<af:commandImageLink actionListener="#{bindings.openSubTaskForBISummary.execute}"  action="businessinteraction" id="cl22" text="#{row.businessInteraction.name}">
+ 					<af:setActionListener from="#{row.businessInteraction.oid}" to="#{objectId}"/>
+ 				</af:commandImageLink>
+ 			  </af:column>
+ 			  
+ 			  <af:column sortable="false" headerText="#{inventoryUIBundle.ORGANIZATION}" id="c3" >
+ 				<af:outputText value="#{row.businessInteraction.characteristicMap['organization'].value}" id="ot5"/>
+ 			  </af:column>
+ 			  <af:column sortable="false" headerText="#{inventoryUIBundle.TYPE}" id="c7" >
+ 				<af:outputText value="#{row.businessInteraction.characteristicMap['type'].value}" id="ot6"/>
+ 			  </af:column>
+ 			 
+ 			  <af:column sortProperty="businessInteraction.characteristicMap['desiredDueDate'].value" sortable="false" headerText="#{inventoryUIBundle.DESIRED_DUE_DATE}" id="c4" >
+ 				<af:outputText value="#{row.businessInteraction.characteristicMap['desiredDueDate'].value}" id="ot4"/>
+ 			  </af:column> 
+
+      <af:column sortable="false" headerText="#{inventoryUIBundle.ACTIVITY_SPECIFICATION}" id="c1" >
+ 				<af:outputText value="#{row.specification.name}" id="ot1"/>
+ 			  </af:column>
+ 			  <af:column sortProperty="activityStartDate" sortable="true" filterable="true" headerText="#{inventoryUIBundle.START_DATE}" id="c2" >
+ 				<af:outputText value="#{pageFlowScope.InventoryResultsBean.formattedStartDate}" id="ot7"/>
+ 			  </af:column>
+ 			  <af:column sortProperty="activityEndDate" sortable="true" filterable="true" headerText="#{inventoryUIBundle.END_DATE}" id="c8" >
+ 				<af:outputText value="#{pageFlowScope.InventoryResultsBean.formattedEndDate}" id="ot9"/>
+ 			  </af:column>
+ 			  <af:column sortable="false" headerText="#{inventoryUIBundle.DURATION}" id="c6" >
+ 				<af:outputText value="#{pageFlowScope.InventoryResultsBean.formattedDuration}" id="ot3"/>
+ 			  </af:column> 
+ 			  <af:column sortProperty="adminState" sortable="true" filterable="true" headerText="#{inventoryUIBundle.STATUS}" id="c10" >
+ 					<af:panelGroupLayout id="pgl7" layout="horizontal" halign="left">
+ 							<af:image source="#{pageFlowScope.InventoryResultsBean.statusIcon}" shortDesc="" id="i89"/>
+ 							<af:spacer width="5" id="sp67"/>
+ 					<af:outputText value="#{row.adminState}" id="ot29"/>
+ 					</af:panelGroupLayout>
+ 			  </af:column>
+ 			  
+ 			   <af:column rendered="#{pageFlowScope.isGroupList != null}" sortProperty="assignedTo" sortable="false" headerText="#{inventoryUIBundle.ASSIGNED_TO}" id="c18" >
+ 				<af:outputText value="#{row.assignedTo}" id="ot19"/>
+ 			  </af:column> 
+ 			  <af:column headerText="#{inventoryUIBundle.PERCENT_COMPLETE}" id="c76" >
+ 				   <af:progressIndicator value="#{pageFlowScope.InventoryResultsBean.progressUpdate}" id="pi2"/>
+ 			  </af:column>
+         </af:table>
+		</af:panelCollection>
+    </af:showDetailHeader>
+ </af:panelHeader>
+ </f:facet>
+  </af:pageTemplate>
+</jsp:root>

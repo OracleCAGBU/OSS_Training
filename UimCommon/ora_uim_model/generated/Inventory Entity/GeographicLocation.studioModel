@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:inventory="http://xmlns.oracle.com/communications/studio/model/inventory" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="inventory:Inventory" id="ie=GeographicLocation" type="ie" typeName="Inventory Entity" name="GeographicLocation" resource="\ora_uim_model\model\GeographicLocation.inventoryEntity">
+    <displayName lang="default">GeographicLocation</displayName>
+    <note lang="default"/>
+    <extends>
+      <relation ref="ie=GeographicPlace" type="Inventory Entity" name="Dependency" kind="Entity">
+        <target name="GeographicPlace" typeName="Inventory Entity"/>
+      </relation>
+    </extends>
+    <project>
+      <relation ref="omprj=ora_uim_model" type="OCIM Model Project" name="Dependency">
+        <target name="ora_uim_model" typeName="OCIM Model Project"/>
+      </relation>
+    </project>
+  </entity>
+</model:Model>

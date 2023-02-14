@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:showDetailHeader text="#{inventoryUIBundle.SERVICES}" disclosed="true" id="sdh1">
+    <af:panelCollection styleClass="AFStretchWidth">
+    <f:facet name="statusbar">
+        <af:toolbar id="t2">
+          <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount lt 0) ? 0 : bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount}"
+                         id="o22" styleClass="invSearchOutputLabel"
+                         binding="#{backingBeanScope.totalResultsLabel}"
+                         partialTriggers="t1"/>
+        </af:toolbar>
+      </f:facet>
+      <af:table var="row" id="t1"
+                emptyText="#{inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET}"
+                autoHeightRows="#{pageFlowScope.ServiceBean.portletHeight}"
+                value="#{pageFlowScope.ServiceBean.consumers}"
+                rowBandingInterval="0" contentDelivery="immediate"
+                summary="#{inventoryUIBundle.SERVICE_LIST}">
+        <af:column id="c2" sortProperty="id" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.ID}" rowHeader="unstyled">
+          <af:link action="ServiceSummary"
+                          actionListener="#{pageFlowScope.ServiceBean.registerRecentItem}"
+                          id="cl1">
+            <af:outputText value="#{row.consumer.id}" id="ot5"/>
+            <af:setActionListener from="#{row.consumerOID}" to="#{requestScope.oid}"/>
+            <af:setActionListener from="#{row.consumer.displayInfo}"
+                                  to="#{displayInfo}"/>
+          </af:link>
+        </af:column>
+        <af:column id="c4" sortProperty="consumer.name" sortable="true"
+                   filterable="true" headerText="#{inventoryUIBundle.NAME}">
+          <af:outputText value="#{row.consumer.name}" id="ot9"/>
+        </af:column>
+        <af:column sortProperty="consumer.description" sortable="true"
+                   filterable="true"
+                   headerText="#{inventoryUIBundle.DESCRIPTION}" id="c41"
+                   width="120">
+          <af:outputText value="#{row.consumer.description}" id="ot91"/>
+        </af:column>
+        <af:column id="c5" sortProperty="consumer.specification.name"
+                   sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.SPECIFICATION}">
+          <af:outputText value="#{pageFlowScope.ServiceBean.specDisplayName}" id="ot1"/>
+        </af:column>
+        <af:column headerText="#{inventoryUIBundle.RELATIONSHIP}" id="c42" width="120">
+          <af:outputText value="#{row.assignmentState}" id="ot92"/>
+        </af:column>
+         <af:column headerText="#{inventoryUIBundle.STATUS}" id="c142" width="120">
+          <af:outputText value="#{pageFlowScope.ServiceBean.inventoryStatus}" id="ot192"/>          
+        </af:column>
+        <af:column sortProperty="startDate" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.ASSIGNMENTS_TABLE_COLUMN_START_DATE}"
+                   id="c1">
+          <af:outputText value="#{row.startDate}" id="ot8"/>
+        </af:column>
+        <af:column sortProperty="endDate" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.ASSIGNMENTS_TABLE_COLUMN_END_DATE}"
+                   id="c3">
+          <af:outputText value="#{row.endDate}" id="ot7"/>
+        </af:column>
+        <af:column headerText="#{inventoryUIBundle.NO_OF_PARTY}"
+                   sortable="false" filterable="false">
+          <af:link action="servicePartyList" id="c12" actionListener="#{pageFlowScope.ServiceBean.registerRecentItemForPartyList}">
+            
+            <af:outputText value="#{pageFlowScope.ServiceBean.servicePartyCount}"
+                           id="ot17" binding="#{pageFlowScope.ServiceBean.otb}">
+              <af:clientAttribute name="service" value="#{row.consumerOID}"/>
+              <af:showPopupBehavior popupId="::p1" align="endAfter"
+                                    alignId="ot17" triggerType="mouseHover"/>
+            </af:outputText>
+            <af:setActionListener from="#{row.consumer}" to="#{relatedEntity}"/>
+          </af:link>
+        </af:column>
+      </af:table>
+      <af:popup id="p1" launcherVar="source" contentDelivery="lazyUncached"
+                eventContext="launcher"
+                popupFetchListener="#{pageFlowScope.ServiceBean.fetchServiceForPopupTable}">
+        <af:noteWindow id="nw1">
+          <af:panelGroupLayout id="pg13" layout="horizontal" valign="top">
+            <af:panelGroupLayout id="pgl1" layout="vertical"
+                                 inlineStyle="padding:10.0px;" valign="top">
+              <af:outputLabel value="#{inventoryUIBundle.PARTY_NAME}" id="ol1"/>
+              <af:separator/>
+              <af:iterator id="it123"
+                           value="#{pageFlowScope.ServiceBean.currentPartySet}"
+                           var="party">
+                <af:outputText value="#{pageFlowScope.ServiceBean.partyName}"
+                               id="ot6"/>
+              </af:iterator>
+            </af:panelGroupLayout>
+            <af:spacer id="vspace1" width="10"/>
+            <af:panelGroupLayout id="pg12" layout="vertical" inlineStyle="padding:10.0px;"
+                                 valign="top">
+              <af:outputLabel value="#{inventoryUIBundle.ROLE}" id="ol2"/>
+              <af:separator/>
+              <af:iterator id="it124"
+                           value="#{pageFlowScope.ServiceBean.currentPartySet}"
+                           var="party">
+                <af:outputText value="#{pageFlowScope.ServiceBean.partyRole}"
+                               id="ot10"/>
+              </af:iterator>
+            </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </af:noteWindow>
+      </af:popup>
+    </af:panelCollection>
+  </af:showDetailHeader>
+
+</jsp:root>

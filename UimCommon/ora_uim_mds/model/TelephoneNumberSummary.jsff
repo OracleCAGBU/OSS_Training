@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core">
+		  
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>  
+<af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelStretchLayout id="pgl1" binding="#{backingBeanScope.TN_summary_panelGroupLayout}" topHeight="#{pageFlowScope.TelephoneNumberSummaryBean.topHeight}">
+        <f:facet name="top">
+        <af:panelGroupLayout id="pgsl23" layout="scroll">
+            <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered="#{!pageFlowScope.TelephoneNumberSummaryBean.previewLayout}">
+                <af:outputText id="otbi" styleClass="invCommonText"  noWrap="true"
+                               value="#{pageFlowScope.TelephoneNumberSummaryBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+                <af:menuBar id="menuBar1">
+                      <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invSummaryMenu"
+                               rendered="#{!(pageFlowScope.TelephoneNumberSummaryBean.popupMode)}"/>
+                </af:menuBar>
+                <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch2}" contentDelivery="lazyUncached">
+                    <af:dialog id="BISearchPopup_d1" type="none"
+                               title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                        <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                            <f:facet name="center">
+                               <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                            </f:facet>
+                        </af:panelStretchLayout>
+                    </af:dialog>
+                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.TelephoneNumberSummaryBean.afterBusinessInteractionSelectionChange}"/>
+                </af:popup>
+            </af:panelGroupLayout>
+        
+          
+          </af:panelGroupLayout>
+          </f:facet>
+          <f:facet name="center">
+          
+          <af:panelHeader text="#{inventoryUIBundle.TELEPHONE_NUMBER_SUMMARY} - #{pageFlowScope.TelephoneNumberSummaryBean.displayInfo}" 
+                             id="PAGE_TITLE" styleClass="invSummaryPanelHeader" helpTopicId="OHW_telephoneSummary">
+          <f:facet name="context"/>
+          <f:facet name="menuBar">
+                 <af:group rendered="#{!pageFlowScope.TelephoneNumberSummaryBean.previewLayout}" id="grmenu">
+                     <af:menuBar id="menuBar2">
+                             <af:menu id="menu5" binding="#{backingBeanScope.InventoryMenuBean.relatedPagesMenu}" styleClass="invSummaryMenu"/>
+                             <af:menu id="menu6" binding="#{backingBeanScope.InventoryMenuBean.actionsMenu}" styleClass="invSummaryMenu">
+                                      <af:clientListener method="goRefreshEntity" type="propertyChange"/>
+                                      <af:serverListener type="refreshEntity" method="#{pageFlowScope.TelephoneNumberSummaryBean.refresh}"/>
+                             </af:menu>
+                     </af:menuBar>
+                </af:group>
+           </f:facet>
+           <af:panelGroupLayout layout="scroll" id="pgl23">
+		   <af:panelTabbed id="pt7" dimensionsFrom="auto" styleClass="AFStretchWidth" binding="#{backingBeanScope.tnTabPanel}">
+			<af:showDetailItem text="#{inventoryUIBundle.GENERAL_INFORMATION}" id="GeneralInfoTab" styleClass="AFStretchWidth" binding="#{backingBeanScope.telephonenumber_generalInfoTab}"  
+				rendered="#{pageFlowScope.TelephoneNumberSummaryBean.renderGeneralInfoTab}" disclosureListener="#{pageFlowScope.TelephoneNumberSummaryBean.discloseTab}" 
+				disclosed="#{pageFlowScope.TelephoneNumberSummaryBean.selectedTab == inventoryUIBundle.GENERAL_INFORMATION}">
+				<af:showDetailHeader text="#{inventoryUIBundle.TELEPHONE_NUMBER_INFORMATION}" disclosed="true" id="sdh2" styleClass="invSummaryShowDetailHeader" 
+				rendered="#{!pageFlowScope.TelephoneNumberSummaryBean.disableTNInfoPortlet and pageFlowScope.TelephoneNumberSummaryBean.selectedTab == inventoryUIBundle.GENERAL_INFORMATION}">
+				<f:facet name="context"/>
+				<f:facet name="menuBar"/>
+				<f:facet name="toolbar">
+					 <af:commandToolbarButton text="#{inventoryUIBundle.EDIT}" action="edit" actionListener="#{bindings.openSubTaskForEdit.execute}" id="cb1"
+							rendered="#{!pageFlowScope.TelephoneNumberSummaryBean.previewLayout &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=TelephoneNumber.EDIT;action=view']}"
+							disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/number/flow/TelephoneNumberEditFlow.xml#TelephoneNumberEditFlow']}"
+											  accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+							<af:setActionListener from="false" to="#{addMode}"/>         
+					 </af:commandToolbarButton>
+				</f:facet>
+				<f:facet name="legend"/>
+				<f:facet name="info"/>
+				<af:panelFormLayout id="number" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+					<af:panelLabelAndMessage label="#{inventoryUIBundle.PHONE_NUMBER}" id="number-phonenumber">
+					  <af:outputText value="#{pageFlowScope.TelephoneNumberSummaryBean.entityObject.name}" id="ot2">
+					  </af:outputText>
+					</af:panelLabelAndMessage>
+					<af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}" id="number-description">
+					  <af:outputText value="#{pageFlowScope.TelephoneNumberSummaryBean.entityObject.description}" id="ot1"/>
+					</af:panelLabelAndMessage>
+					<af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="number-adminstate">
+						 <af:outputText value="#{pageFlowScope.TelephoneNumberSummaryBean.inventoryStatus}" id="ot6"/>
+			 <!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.TelephoneNumberSummaryBean.popupMode}" id="swis618">
+			<f:facet name="false">
+													<af:commandImageLink action="#{pageFlowScope.TelephoneNumberSummaryBean.getSummaryAction}"
+																		 actionListener="#{pageFlowScope.TelephoneNumberSummaryBean.registerRecentItem}"
+																		 disabled="#{pageFlowScope.TelephoneNumberSummaryBean.installingBIDisabled}"
+																		 id="bid3"
+																		 shortDesc="#{pageFlowScope.TelephoneNumberSummaryBean.installingBIShortDesc}"
+																		 text="#{pageFlowScope.TelephoneNumberSummaryBean.installingBILabel}">
+														<af:setActionListener from="#{pageFlowScope.TelephoneNumberSummaryBean.inventoryStatusBI.oid}"
+																			  to="#{objectId}"/>
+													</af:commandImageLink>
+												</f:facet>
+			<f:facet name="true">
+			<af:outputText id="swftis618" value="#{pageFlowScope.TelephoneNumberSummaryBean.installingBILabel}"/>
+			</f:facet>
+			</af:switcher>
+			<af:outputText id="installingBIDueDate" value="#{pageFlowScope.TelephoneNumberSummaryBean.installingBIEffectiveDate}"/>
+			<!--RMI 618 End-->
+					</af:panelLabelAndMessage>
+					<af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="number-ras">
+						 <af:outputText value="#{pageFlowScope.TelephoneNumberSummaryBean.resourceAssignmentStatus}" id="ot3"/>
+			<!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.TelephoneNumberSummaryBean.popupMode}" id="swas618">
+			<f:facet name="false">
+													<af:commandImageLink action="#{pageFlowScope.TelephoneNumberSummaryBean.getSummaryAction}"
+																		 actionListener="#{pageFlowScope.TelephoneNumberSummaryBean.registerRecentItem}"
+																		 disabled="#{pageFlowScope.TelephoneNumberSummaryBean.consumerBIDisabled}"
+																		 id="bid4"
+																		 shortDesc="#{pageFlowScope.TelephoneNumberSummaryBean.consumerBIShortDesc}"
+																		 text="#{pageFlowScope.TelephoneNumberSummaryBean.consumerBILabel}">
+														<af:setActionListener from="#{pageFlowScope.TelephoneNumberSummaryBean.assignmentBI.oid}"
+																			  to="#{objectId}"/>
+													</af:commandImageLink>
+												</f:facet>
+			<f:facet name="true">
+			<af:outputText id="swftas618" value="#{pageFlowScope.TelephoneNumberSummaryBean.consumerBILabel}"/>
+			</f:facet>
+			</af:switcher>
+			<af:outputText id="consumerBIDueDate" value="#{pageFlowScope.TelephoneNumberSummaryBean.consumerBIEffectiveDate}"/>
+			<!--RMI 618 End-->
+					</af:panelLabelAndMessage>
+					<af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}" id="number-specification">
+						<af:commandImageLink action="SpecificationSummary" actionListener="#{bindings.openSubTaskForSpec.execute}" id="spc1"
+											 text="#{pageFlowScope.TelephoneNumberSummaryBean.entityObject.specification.name}"
+											 shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+							
+							<af:setActionListener from="#{pageFlowScope.TelephoneNumberSummaryBean.entityObject.specification.oid}" to="#{specObjectId}"/>
+						</af:commandImageLink>                        
+					</af:panelLabelAndMessage>
+					<af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="number-lmd" rendered="false">
+						<af:outputText value="#{pageFlowScope.TelephoneNumberSummaryBean.entityObject.lastModifiedDate}" id="ot9">
+						   <af:convertDateTime pattern="#{pageFlowScope.TelephoneNumberSummaryBean.dateTimeFormat}"/>
+						</af:outputText>
+					</af:panelLabelAndMessage>
+					<af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="number-lmu" rendered="false">
+						<af:outputText value="#{pageFlowScope.TelephoneNumberSummaryBean.entityObject.lastModifiedUser}" id="ot10"/>
+					</af:panelLabelAndMessage>
+					<af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="number-crd" rendered="false">
+						  <af:outputText value="#{pageFlowScope.TelephoneNumberSummaryBean.entityObject.createdDate}" id="ot11">
+							<af:convertDateTime pattern="#{pageFlowScope.TelephoneNumberSummaryBean.dateTimeFormat}"/>
+						  </af:outputText>
+					</af:panelLabelAndMessage>
+					<af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="number-cru" rendered="false">
+						  <af:outputText value="#{pageFlowScope.TelephoneNumberSummaryBean.entityObject.createdUser}" id="ot12"/>
+					</af:panelLabelAndMessage>
+				</af:panelFormLayout>
+			  </af:showDetailHeader>		
+			</af:showDetailItem>
+			
+			<af:showDetailItem text="#{inventoryUIBundle.ASSOCIATED_RESOURCES}" id="AssocResourcesTab" styleClass="AFStretchWidth" binding="#{backingBeanScope.telephonenumber_resourcesTab}"  
+				rendered="#{pageFlowScope.TelephoneNumberSummaryBean.renderAssociatedResourcesTab}" disclosureListener="#{pageFlowScope.TelephoneNumberSummaryBean.discloseTab}" 
+				disclosed="#{pageFlowScope.TelephoneNumberSummaryBean.selectedTab == inventoryUIBundle.ASSOCIATED_RESOURCES}">
+				<!-- CUSTOM INVOLVEMENTS -->
+				<af:region value="#{bindings.CustomInvolvementListFlow1.regionModel}" id="r3"/>		
+			</af:showDetailItem>
+			
+			<af:showDetailItem text="#{inventoryUIBundle.CONSUMERS}" id="AssignmentsTab" styleClass="AFStretchWidth" binding="#{backingBeanScope.telephonenumber_consumersTab}"  
+				rendered="#{pageFlowScope.TelephoneNumberSummaryBean.renderConsumersTab}" disclosureListener="#{pageFlowScope.TelephoneNumberSummaryBean.discloseTab}" 
+				disclosed="#{pageFlowScope.TelephoneNumberSummaryBean.selectedTab == inventoryUIBundle.CONSUMERS}">
+				<!-- ASSIGNMENTS -->
+				<af:region value="#{bindings.ConsumerListFlow1.regionModel}" id="r5"/>
+				<af:spacer width="10" height="10" id="s4"/>
+				<!-- BUSINESS INTERACTIONS -->
+				<af:region value="#{bindings.BusinessInteractionListFlow1.regionModel}" id="r2"/>
+			</af:showDetailItem>
+			
+			<af:showDetailItem text="#{inventoryUIBundle.GROUPS_AND_INFRASTRUCTURE}" id="GroupsTab" styleClass="AFStretchWidth" binding="#{backingBeanScope.telephonenumber_groupInfraTab}"  
+				rendered="#{pageFlowScope.TelephoneNumberSummaryBean.renderGroupsTab}" disclosureListener="#{pageFlowScope.TelephoneNumberSummaryBean.discloseTab}" 
+				disclosed="#{pageFlowScope.TelephoneNumberSummaryBean.selectedTab == inventoryUIBundle.GROUPS_AND_INFRASTRUCTURE}">
+				<!-- INVENTORY GROUPS -->
+				<af:region value="#{bindings.InventoryGroupListFlow1.regionModel}" id="r1"/>		
+			</af:showDetailItem>
+		   </af:panelTabbed>          
+          </af:panelGroupLayout>
+        </af:panelHeader>      
+      </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

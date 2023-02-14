@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2014, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    3/6/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<af:panelStretchLayout id="psl9" styleClass="AFStretchWidth">          
+    <f:facet name="center">          
+      <af:panelGroupLayout id="pgl1">
+        <af:spacer height="10" id="s12"/>
+        <dvt:hierarchyViewer id="hierarchyViewer1" layout="hier_vert_top"
+                             value="#{pageFlowScope.CapacityConfigurationTreeBean.treeModel}"
+                             inlineStyle="width:100%;height:600px;" var="node"
+                             summary="Hierarchy viewer to show and express configuration"
+                             levelFetchSize="8" controlPanelBehavior="initExpanded"
+                             partialTriggers="cil1 cil2"
+                             binding="#{pageFlowScope.CapacityConfigurationTreeBean.hierarchyViewerBinding}"
+                             panning="tilt">
+          <dvt:link id="l1"/>
+          <dvt:node width="150" height="145" id="n1"
+                    inlineStyle="color:#{node.data.color};">
+            <f:facet name="zoom100">
+              <dvt:panelCard effect="slide_horz"
+                             inlineStyle="border-width:1px; font-size:16px; color:#{node.data.color};"
+                             id="pc1">
+                <!-- *********************************************Panel Card 1 to express configuration ********************************************* -->
+                <af:showDetailItem text="#{node.data.label}"
+                                   inlineStyle="font-weight:bold; color:#5a6a7a; text-align:center; font-size:small;"
+                                   id="sdi1"
+                                   shortDesc="#{node.data.label} Capacity Summary">
+                  <af:panelFormLayout id="pfl1">
+                    <af:spacer height="20" id="s1211" width="50"
+                               inlineStyle="background-color:Black;"/>
+                    <af:panelGroupLayout id="pgl4" layout="horizontal"
+                                         halign="right" valign="middle">
+                      <af:commandImageLink text="#{node.data.associatedSignalAddress}" icon="/images/unchannelized.png"
+                                           id="cil1"
+                                           rendered="#{node.data.nodeOperationStatus eq 'Channelize'}"
+                                           actionListener="#{pageFlowScope.CapacityConfigurationBean.toggleNodeStatus}"
+                                           inlineStyle="color:#{node.data.color};">
+                        <af:setActionListener from="#{node.data.capacityNode}"
+                                              to="#{capacityNode}"/>
+                      </af:commandImageLink>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgl41" layout="horizontal"
+                                         halign="right" valign="middle">
+                      <af:commandImageLink text="#{node.data.associatedSignalAddress}" icon="/images/channelized.png"
+                                           id="cil2" inlineStyle="color:#{node.data.color};"
+                                           rendered="#{node.data.nodeOperationStatus eq 'Un-Channelize'}"
+                                           actionListener="#{pageFlowScope.CapacityConfigurationBean.toggleNodeStatus}">
+                        <af:setActionListener from="#{node.data.capacityNode}"
+                                              to="#{capacityNode}"/>
+                      </af:commandImageLink>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgl42" layout="horizontal"
+                                         halign="right" valign="middle">
+                      <af:commandImageLink text="#{node.data.associatedSignalAddress}" icon="/images/unchannelizable.png"
+                                           id="cil3" inlineStyle="color:#{node.data.color};"
+                                           rendered="#{node.data.nodeOperationStatus eq 'Not Available'}"
+                                           disabled="false"/>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgl421" layout="horizontal"
+                                         halign="right" valign="middle">
+                      <af:commandImageLink text="#{node.data.associatedSignalAddress}"
+                                           icon="/images/notunchannelizable.png"
+                                           id="cil31" inlineStyle="color:#{node.data.color};"
+                                           rendered="#{node.data.nodeOperationStatus eq 'Un-Channelize_gaurded'}"
+                                           disabled="false"/>
+                    </af:panelGroupLayout>
+                    <af:spacer height="20" id="s1212" width="50"
+                               inlineStyle="background-color:Black;"/>
+                    <af:panelGroupLayout id="pgl43" layout="horizontal"
+                                         halign="right" valign="middle">
+                      <af:commandLink id="cl1" inlineStyle="color:#{node.data.color};"
+                                      actionListener="#{pageFlowScope.CapacityConfigurationBean.invokeExpressConfigurationPopup}"
+                                      disabled="#{node.data.expressConfigurationDisabled}">
+                        <af:outputText value=" Express Configuration" id="ot6"
+                                       inlineStyle="text-align:center; color:#{node.data.expressConfLinkColor}; font-size:small;"/>
+                        <af:setActionListener from="#{node.data.capacityNode}"
+                                              to="#{capacityNode}"/>
+                      </af:commandLink>
+                    </af:panelGroupLayout>
+                    <af:spacer height="20" id="s1213" width="50"
+                               inlineStyle="background-color:Black;"/>
+                  </af:panelFormLayout>
+                </af:showDetailItem>
+                <!-- *********************************************panelCard 2 to show availability status.*********************************************-->
+                <af:showDetailItem text="#{node.data.label}"
+                                   id="sdi2"
+                                   shortDesc="Configured Capacity Availability">
+                 <!--  <af:outputText value="Configured Capacity Availability" id="ot2"
+                                 inlineStyle="font-size:x-small; text-align:left; color:Black"/>-->
+                  <af:spacer height="10" id="s13"/>
+                  <af:outputText value="#{node.data.availabilityStatus}"
+                                 inlineStyle="font-size:xx-small; text-align:left;"/>
+                </af:showDetailItem>
+              </dvt:panelCard>
+            </f:facet>
+          </dvt:node>
+        </dvt:hierarchyViewer>
+        <af:outputText value="#{pageFlowScope.CapacityConfigurationTreeBean.refreshTree}"
+                       id="ot1" visible="false"/>
+        <af:popup id="expressConfigurationPopup"
+                  binding="#{backingBeanScope.expressConfigurationPopup}"
+                  clientComponent="true" contentDelivery="lazyUncached">
+          <af:dialog id="d23" type="okCancel" stretchChildren="first"
+                     contentWidth="300" contentHeight="300"
+                     title="Express Configuration - #{capacityNode.mappedSTPSpec.rateCode.name}"
+                     dialogListener="#{pageFlowScope.CapacityConfigurationBean.expressNewConfiguration}"
+                     cancelTextAndAccessKey="&amp;#{inventoryUIBundle.CANCEL}"
+                     affirmativeTextAndAccessKey="O&amp;K">
+            <af:panelStretchLayout id="psl1" dimensionsFrom="auto"
+                                   styleClass="invCommonPanelStretchLayout"
+                                   startLandmark="contentinfo"
+                                   centerLandmark="contentinfo"
+                                   bottomLandmark="banner"
+                                   inlineStyle="background-color:White;">
+              <f:facet name="top">
+                <af:outputText id="otxt"
+                               value="Express Channel Configuration Options :"
+                               inlineStyle="color:Black;"/>
+              </f:facet>
+              <f:facet name="center">
+                <af:panelGroupLayout id="pglaout" layout="scroll">
+                  <af:panelFormLayout maxColumns="2" rows="0" id="pflout">
+                    <af:selectOneRadio label="#{rateCode.name}" id="sbr1" autoSubmit="true"
+                                       valueChangeListener="#{pageFlowScope.CapacityConfigurationBean.setExpressedConfigurationRateCode}" value=""
+                                       binding="#{pageFlowScope.CapacityConfigurationBean.rateCodeSelectionBinding}">
+                      <af:forEach var="rateCode" 
+                                  items="#{pageFlowScope.expressConfData}" >                                  
+                                      <af:selectItem label="#{rateCode.name}"
+                                           value="#{rateCode.name}" id="si12" 
+                                           disabled="#{pageFlowScope.CapacityConfigurationBean.rateCodeDisabled}" />
+                      </af:forEach>
+                      <af:selectItem label="Remove Configuration" value="NONE"
+                                     id="si121"
+                                     disabled="#{pageFlowScope.CapacityConfigurationBean.removeDisabled}"/>
+                    </af:selectOneRadio>
+                        <af:selectOneChoice id="ctp-quantity" label="#{inventoryUIBundle.QUANTITY}" required = "true"
+                                        autoSubmit="true" valueChangeListener="#{pageFlowScope.CapacityConfigurationBean.quantityChanged}"
+                                        rendered="#{pageFlowScope.CapacityConfigurationBean.renderQuantity}"
+                                        value="#{pageFlowScope.CapacityConfigurationBean.selectedQuantity}"
+                                        binding="#{backingBeanScope.quantityBinding}"
+                                        disabled="#{pageFlowScope.CapacityConfigurationBean.quantityDisabled}">                                    
+                       <f:selectItems binding="#{pageFlowScope.CapacityConfigurationBean.quantityList}"
+                                      />
+                    </af:selectOneChoice>
+                  </af:panelFormLayout>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:panelStretchLayout>
+          </af:dialog>
+        </af:popup>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:panelStretchLayout>
+</jsp:root>
+

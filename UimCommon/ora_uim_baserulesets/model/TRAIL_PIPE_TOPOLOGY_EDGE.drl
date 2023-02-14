@@ -1,0 +1,32 @@
+// Name:         TOPOLOGYRULE_TRAIL_PIPE_TOPOLOGY_EDGE
+// Description:  Provides a mechanism for a trail pipe to become a topology edge.
+
+package oracle.communications.inventory.rules
+
+//list any import classes here.
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+import oracle.communications.inventory.extensibility.rules.impl.RuleDebug;
+import oracle.communications.inventory.api.framework.logging.LogFactory;
+import oracle.communications.platform.persistence.PersistenceHelper;
+
+import oracle.communications.inventory.api.entity.PipeSpecification;
+import oracle.communications.inventory.api.entity.Specification;
+import oracle.communications.inventory.api.exception.ValidationException;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.specification.SpecManager;
+
+//declare any global variables here
+
+global Log log;
+
+
+
+rule "Trail Pipe Topology Edge"
+	salience 0
+	when
+            context    : ExtensionPointRuleContext() 
+
+	then 
+			//return true;
+			context.setReturnValue(true);			
+    end

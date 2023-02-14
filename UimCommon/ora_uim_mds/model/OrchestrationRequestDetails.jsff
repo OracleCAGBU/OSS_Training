@@ -1,0 +1,319 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core">
+    <c:set var="inventoryuiBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+    <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" value="#{bindings.ptb2}" id="pt1">
+        <f:facet name="localArea">
+            <af:panelStretchLayout id="psl1" binding="#{backingBeanScope.OR_summary_panelGroupLayout}">
+                <f:facet name="bottom"/>
+                <f:facet name="center">
+                    <af:panelHeader text="#{pageFlowScope.OrchestrationRequestDetailsBean.displayInfo}" id="ph1" styleClass="invSummaryPanelHeader"
+                                    helpTopicId="#{pageFlowScope.OrchestrationRequestDetailsBean.workOrder?'OHW_ewoSummary':'OHW_orchreqDetailsPage'}">
+                        <f:facet name="menuBar">
+                            <af:group id="g1" rendered="#{!pageFlowScope.BusinessInteractionSummaryBean.previewLayout}">
+                                <af:menuBar id="mb1">
+                                    <af:menu id="m1" binding="#{pageFlowScope.OrchestrationRequestDetailsBean.actionsMenu}"
+                                             disabled="#{pageFlowScope.OrchestrationRequestDetailsBean.actionsMenuDisabled}" styleClass="invSummaryMenu"/>
+                                </af:menuBar>
+                            </af:group>
+                        </f:facet>
+                        <af:panelGroupLayout id="pgl1" layout="scroll">
+                            <af:messages id="m2" inline="true"/>
+                            <af:showDetailHeader text="#{inventoryuiBundle.ORCHESTRATION_REQUEST_INFORMATION}" disclosed="true" id="sdh1">
+                                <f:facet name="context"/>
+                                <f:facet name="menuBar"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t1">
+                                        <af:commandButton text="#{inventoryuiBundle.EDIT}" action="edit" id="cb1666"
+                                                          actionListener="#{bindings.openSubTaskForEdit.execute}"
+                                                          rendered="#{!pageFlowScope.OrchestrationRequestDetailsBean.previewLayout}"
+                                                          disabled="#{pageFlowScope.OrchestrationRequestDetailsBean.editButtonDisabled or !securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/businessinteraction/flow/BusinessInteractionEditFlow.xml#BusinessInteractionEditFlow']}"
+                                                          accessKey="#{inventoryuiBundle.EDIT_ACCESS_KEY}">
+                                            <af:setActionListener from="#{pageFlowScope.OrchestrationRequestDetailsBean.entityObject.oid}" to="#{objectId}"/>
+                                            <af:setActionListener from="false" to="#{addMode}"/>
+                                        </af:commandButton>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="legend"/>
+                                <f:facet name="info"/>
+                                <af:panelFormLayout id="pfl1" fieldWidth="67%" labelWidth="33%" maxColumns="2" rows="2">
+                                    <af:panelLabelAndMessage label="#{inventoryuiBundle.SPECIFICATION}" id="bi-specification">
+                                        <af:commandImageLink action="SpecificationSummary" id="clSpec" actionListener="#{bindings.openSubTaskForSpec.execute}"
+                                                             text="#{pageFlowScope.OrchestrationRequestDetailsBean.entityObject.specification.name}"
+                                                             shortDesc="#{inventoryuiBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+                                            <af:setActionListener from="#{pageFlowScope.OrchestrationRequestDetailsBean.entityObject.specification.oid}"
+                                                                  to="#{specObjectId}"/>
+                                            <af:setActionListener from="#{inventoryuiBundle.ORCHESTRATION_REQUEST}" to="#{displayInfo}"/>
+                                        </af:commandImageLink>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{inventoryuiBundle.ID}" id="bi-id">
+                                        <af:outputText value="#{pageFlowScope.OrchestrationRequestDetailsBean.entityObject.id}" id="ot4"/>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{inventoryuiBundle.NAME}" id="bi-name">
+                                        <af:outputText value="#{pageFlowScope.OrchestrationRequestDetailsBean.entityObject.name}" id="ot3"/>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{inventoryuiBundle.DESCRIPTION}" id="bi-description">
+                                        <af:outputText value="#{pageFlowScope.OrchestrationRequestDetailsBean.entityObject.description}" id="ot2"/>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{inventoryuiBundle.STATUS}" id="bi-adminstate">
+                                        <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                            <af:spacer width="7" id="s5"/>
+                                            <af:outputText value="#{pageFlowScope.OrchestrationRequestDetailsBean.inventoryStatus}" id="ot6"/>
+                                            <af:spacer width="10" height="10" id="s7"/>
+                                            <af:progressIndicator id="si1" binding="#{backingBeanScope.runningIndicator}"
+                                                                  value="#{pageFlowScope.OrchestrationRequestDetailsBean.runningModel}"
+                                                                  rendered="#{pageFlowScope.OrchestrationRequestDetailsBean.displayRunningModel}"/>
+                                            <af:progressIndicator id="si2" binding="#{backingBeanScope.finishedIndicator}"
+                                                                  value="#{pageFlowScope.OrchestrationRequestDetailsBean.finishedModel}"
+                                                                  rendered="#{pageFlowScope.OrchestrationRequestDetailsBean.displayFinishedModel &amp;&amp; !pageFlowScope.OrchestrationRequestDetailsBean.displayRunningModel}"/>
+                                        </af:panelGroupLayout>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{inventoryuiBundle.EFFECTIVE_DATE}" id="bi-effdate" binding="#{backingBeanScope.effDate}">
+                                        <af:outputText value="#{pageFlowScope.OrchestrationRequestDetailsBean.entityObject.effDate}" id="ot1">
+                                            <af:convertDateTime pattern="#{pageFlowScope.OrchestrationRequestDetailsBean.dateTimeFormat}"/>
+                                        </af:outputText>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{inventoryuiBundle.PARENT_REQUEST}" id="plam4"
+                                                             rendered="#{pageFlowScope.OrchestrationRequestDetailsBean.parentBI !=null}">
+                                        <af:link text="#{pageFlowScope.OrchestrationRequestDetailsBean.parentBI.id}" id="l3" action="init">
+                                            <af:setActionListener from="#{pageFlowScope.OrchestrationRequestDetailsBean.parentBI.oid}" to="#{oid}"/>
+                                        </af:link>
+                                    </af:panelLabelAndMessage>
+                                    <af:iterator id="it1" value="#{pageFlowScope.OrchestrationRequestDetailsBean.characteristics}" var="characteristicDetails">
+                                        <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="plam1"
+                                                                 rendered="#{(characteristicDetails.characteristic.characteristicSpecification.valueType == 'ALPHANUMERIC' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'CALENDAR' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'DROPDOWN_LIST' || characteristicDetails.characteristic.characteristicSpecification.valueType == 'NUMERIC')  || (characteristicDetails.characteristic.characteristicSpecification.name eq 'serviceId' &amp;&amp; pageFlowScope.OrchestrationRequestDetailsBean.inventoryStatus eq 'Created')}">
+                                            <af:outputText id="ot61"
+                                                           value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                                        </af:panelLabelAndMessage>
+                                        <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="plam2"
+                                                                 rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'URL'}">
+                                            <af:link id="l2"
+                                                     destination="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                                     inlineStyle="padding-left:6px;">
+                                                <af:outputText id="ot7" truncateAt="50"
+                                                               value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                                            </af:link>
+                                        </af:panelLabelAndMessage>
+                                        <af:panelLabelAndMessage label="" id="plam3"
+                                                                 rendered="#{characteristicDetails.characteristic.characteristicSpecification.controlType == 'CHECKBOX'}">
+                                            <af:selectBooleanCheckbox id="sbc1" disabled="true"
+                                                                      value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                                                      text="#{characteristicDetails.label}" simple="true"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:iterator>
+                                </af:panelFormLayout>
+                                <af:panelFormLayout id="or" maxColumns="2" rows="1" labelWidth="33%" fieldWidth="67%" visible="false"/>
+                                <!-- <af:panelFormLayout id="pfl1" maxColumns="2" rows="1" fieldWidth="67%" labelWidth="33%">
+                                    <f:facet name="footer"/>
+                                    <af:panelLabelAndMessage label="#{inventoryuiBundle.NETWORK_SERVICE}" id="plam4"
+                                                             rendered="#{pageFlowScope.OrchestrationRequestDetailsBean.entityObject.specification.name eq 'Network Service Request'}">
+                                        <af:link text="#{pageFlowScope.OrchestrationRequestDetailsBean.service.id}"
+                                                 id="l4" action="NetworkServiceSummaryFlow">
+                                            <af:setActionListener from="#{pageFlowScope.OrchestrationRequestDetailsBean.service.oid}"
+                                                                  to="#{objectId}"/>
+                                        </af:link>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{inventoryuiBundle.VIRTUAL_NETWORK_FUNCTION}" id="plam5"
+                                                             rendered="#{pageFlowScope.OrchestrationRequestDetailsBean.entityObject.specification.name eq 'VNF Request'}">
+                                        <af:link text="#{pageFlowScope.OrchestrationRequestDetailsBean.logicalDevice.id}" id="l3"
+                                                 action="VNFSummaryFlow">
+                                            <af:setActionListener from="#{pageFlowScope.OrchestrationRequestDetailsBean.logicalDevice.oid}"
+                                                                  to="#{objectId}"/>
+                                        </af:link>
+                                    </af:panelLabelAndMessage>
+                                    <af:inputText label="Label 1" id="it2" visible="false"/>
+                                </af:panelFormLayout>-->
+                                <!-- show detail collapsible section for external identity -->
+                                <af:showDetail disclosed="#{pageFlowScope.OrchestrationRequestDetailsBean.externalIdentityPopulated}" id="sd1"
+                                               disclosedText="#{inventoryuiBundle.EXTERNAL_SYSTEM}" undisclosedText="#{inventoryuiBundle.EXTERNAL_SYSTEM}"
+                                               inlineStyle="width:50%;">
+                                    <af:panelFormLayout id="pfl101" maxColumns="1" rows="2" fieldWidth="69%" labelWidth="31%">
+                                        <af:panelLabelAndMessage label="#{inventoryuiBundle.EXTERNAL_MANAGEMENT_DOMAIN}" id="plam101">
+                                            <af:outputText value="#{pageFlowScope.OrchestrationRequestDetailsBean.entityObject.externalManagementDomain}"
+                                                           id="ot101"/>
+                                        </af:panelLabelAndMessage>
+                                        <af:panelLabelAndMessage label="#{inventoryuiBundle.EXTERNAL_NAME}" id="plam102">
+                                            <af:outputText value="#{pageFlowScope.OrchestrationRequestDetailsBean.entityObject.externalName}" id="ot102"/>
+                                        </af:panelLabelAndMessage>
+                                        <af:panelLabelAndMessage label="#{inventoryuiBundle.EXTERNAL_OBJECT_ID}" id="plam103">
+                                            <af:outputText value="#{pageFlowScope.OrchestrationRequestDetailsBean.entityObject.externalObjectId}" id="ot103"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelFormLayout>
+                                </af:showDetail>
+                                <af:spacer width="10" height="10" id="s6"/>
+                                <af:poll pollListener="#{pageFlowScope.OrchestrationRequestDetailsBean.pollerListener}"
+                                         rendered="#{pageFlowScope.OrchestrationRequestDetailsBean.pollEnabled}"
+                                         binding="#{pageFlowScope.OrchestrationRequestDetailsBean.pollComponent}"
+                                         interval="#{pageFlowScope.OrchestrationRequestDetailsBean.pollerInterval}" id="p1"/>
+                            </af:showDetailHeader>
+                            <af:spacer width="10" height="10" id="s1"/>
+                            <af:group id="g2" rendered="#{!pageFlowScope.BusinessInteractionSummaryBean.previewLayout}">
+                                <af:showDetailHeader text="#{inventoryuiBundle.ORCHESTRATION_REQUEST_HIERARCHY}" disclosed="true" id="sdh2">
+                                    <f:facet name="context"/>
+                                    <f:facet name="menuBar"/>
+                                    <f:facet name="toolbar"/>
+                                    <f:facet name="legend"/>
+                                    <f:facet name="info"/>
+                                    <af:panelCollection id="pc2" styleClass="invSummaryPanelCollection" featuresOff="freeze wrap">
+                                        <f:facet name="menus"/>
+                                        <f:facet name="toolbar"/>
+                                        <f:facet name="statusbar"/>
+                                        <af:treeTable id="biTreeTable" value="#{pageFlowScope.OrchestrationRequestTreeBean.treeModel}"
+                                                      binding="#{backingBeanScope.BI_treeBinding}"
+                                                      rowDisclosureListener="#{pageFlowScope.OrchestrationRequestTreeBean.rowDisclosureListener}"
+                                                      disclosedRowKeys="#{pageFlowScope.OrchestrationRequestTreeBean.treeDisclosedRowKeys}" var="node"
+                                                      rowSelection="single" styleClass="invSummaryTree"
+                                                      fetchSize="#{pageFlowScope.OrchestrationRequestDetailsBean.fetchSize}" contextMenuSelect="true"
+                                                      contentDelivery="immediate"
+                                                      selectionListener="#{pageFlowScope.OrchestrationRequestTreeBean.nodeSelectedEvent}" rowBandingInterval="0"
+                                                      expandAllEnabled="#{pageFlowScope.OrchestrationRequestTreeBean.expandAllEnabled}"
+                                                      horizontalGridVisible="false" summary="#{inventoryUIBundle.BUSINESS_INTERACTION_HIERARCHY_TREETABLE}">
+                                            <f:facet name="nodeStamp">
+                                                <af:column id="c9" width="500" rowHeader="unstyled"
+                                                           headerText="#{pageFlowScope.OrchestrationRequestDetailsBean.biLabel}">
+                                                    <af:panelGroupLayout id="pgl2">
+                                                        <af:image source="#{node.data.icon}" id="nodeIcon" styleClass="invSummaryImage" shortDesc="icon"/>
+                                                        <af:switcher id="idSwitcher" defaultFacet="false"
+                                                                     facetName="#{pageFlowScope.OrchestrationRequestTreeBean.treeModel.depth le 0}">
+                                                            <f:facet name="false">
+                                                                <af:commandImageLink action="#{pageFlowScope.OrchestrationRequestTreeBean.view}" id="cl1"
+                                                                                     actionListener="#{pageFlowScope.OrchestrationRequestTreeBean.registerRecentItem}"
+                                                                                     text="#{node.data.label}">
+                                                                    <af:setActionListener from="#{pageFlowScope.OrchestrationRequestTreeBean.selectedTreeNode.object.oid}"
+                                                                                          to="#{pageFlowScope.objectId}"/>
+                                                                </af:commandImageLink>
+                                                            </f:facet>
+                                                            <f:facet name="true">
+                                                                <af:outputText value="#{node.data.label}" id="ot8"/>
+                                                            </f:facet>
+                                                        </af:switcher>
+                                                    </af:panelGroupLayout>
+                                                </af:column>
+                                            </f:facet>
+                                            <f:facet name="contextMenu">
+                                                <af:popup contentDelivery="lazyUncached" id="popupContext" partialTriggers="::biTreeTable">
+                                                    <af:menu id="rootNodeMenu" text="rootNodeMenu">
+                                                        <af:commandMenuItem text="#{inventoryuiBundle.ADD_CHILD}" id="treeMenuItem1" selected="true"
+                                                                            rendered="#{(pageFlowScope.OrchestrationRequestTreeBean.rootNodePopupMenu || pageFlowScope.OrchestrationRequestTreeBean.childNodePopupMenu) and securityContext.userGrantedResource['resourceType=PAGE_ACTION,resourceName=BusinessInteraction.ASSOCIATE_CHILD_BI;action=view']}"
+                                                                            disabled="#{pageFlowScope.OrchestrationRequestDetailsBean.inventoryStatus eq 'Cancelled' || pageFlowScope.OrchestrationRequestDetailsBean.inventoryStatus eq 'Completed'  || pageFlowScope.OrchestrationRequestDetailsBean.bi.specification.name eq 'Network Service Request' || pageFlowScope.OrchestrationRequestDetailsBean.bi.specification.name eq 'VNF Request' || pageFlowScope.OrchestrationRequestDetailsBean.bi.specification.name eq 'PNF Request'}">
+                                                            <af:setActionListener from="true" to="#{pageFlowScope.invokeBI}"/>
+                                                            <af:showPopupBehavior popupId="::childBIPopup" triggerType="click"/>
+                                                        </af:commandMenuItem>
+                                                        <af:commandMenuItem text="#{inventoryuiBundle.REMOVE}" id="treeMenuItem2"
+                                                                            actionListener="#{pageFlowScope.OrchestrationRequestTreeBean.removeFromBusinessInteraction}"
+                                                                            rendered="#{pageFlowScope.OrchestrationRequestTreeBean.childNodePopupMenu and securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=BusinessInteraction.DISASSOCIATE_CHILD_BI;action=view']}"
+                                                                            disabled="#{pageFlowScope.OrchestrationRequestDetailsBean.inventoryStatus eq 'Cancelled' || pageFlowScope.OrchestrationRequestDetailsBean.inventoryStatus eq 'Completed' || pageFlowScope.OrchestrationRequestDetailsBean.bi.specification.name eq 'Network Service Request' || pageFlowScope.OrchestrationRequestDetailsBean.bi.specification.name eq 'VNF Request' || pageFlowScope.OrchestrationRequestDetailsBean.bi.specification.name eq 'PNF Request'}">
+                                                            <af:clientListener method="goRefreshEntity" type="click"/>
+                                                            <af:serverListener type="refreshEntity"
+                                                                               method="#{pageFlowScope.OrchestrationRequestTreeBean.refreshTree}"/>
+                                                        </af:commandMenuItem>
+                                                    </af:menu>
+                                                </af:popup>
+                                            </f:facet>
+                                            <af:column id="c2" headerText="#{inventoryuiBundle.SPECIFICATION}" width="200">
+                                                <af:switcher id="s4" defaultFacet="false">
+                                                    <f:facet name="false">
+                                                        <af:link text="#{node.data.object.specification.name}" id="l1" action="SpecificationSummary"
+                                                                 actionListener="#{bindings.openSubTaskForSpec.execute}">
+                                                            <af:setActionListener from="#{pageFlowScope.OrchestrationRequestTreeBean.selectedTreeNode.object.specification.oid}"
+                                                                                  to="#{specObjectId}"/>
+                                                            <af:setActionListener from="#{inventoryuiBundle.ORCHESTRATION_REQUEST}" to="#{displayInfo}"/>
+                                                        </af:link>
+                                                    </f:facet>
+                                                    <f:facet name="true">
+                                                        <af:outputText value="#{node.data.object.specification.name}" id="ot5"/>
+                                                    </f:facet>
+                                                </af:switcher>
+                                            </af:column>
+                                            <af:column id="c3" headerText="#{inventoryuiBundle.STATUS}">
+                                                <af:outputText value="#{node.data.status}" id="ot71"/>
+                                            </af:column>
+                                        </af:treeTable>
+                                        <af:popup id="childBIPopup" binding="#{backingBeanScope.popupChildBIBinding}" contentDelivery="lazyUncached">
+                                            <af:dialog title="#{inventoryuiBundle.BUSINESS_INTERACTION_ASSOCIATE_CHILDREN}" id="d1" type="none">
+                                                <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                                                    <f:facet name="center">
+                                                        <af:region value="#{bindings.OrchestrationRequestSearchResultsFlow1.regionModel}" id="r2"/>
+                                                    </f:facet>
+                                                </af:panelStretchLayout>
+                                            </af:dialog>
+                                            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                            <af:serverListener type="refreshEntity" method="#{pageFlowScope.OrchestrationRequestTreeBean.refreshTree}"/>
+                                        </af:popup>
+                                    </af:panelCollection>
+                                </af:showDetailHeader>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:region value="#{bindings.BusinessInteractionItemListFlow1.regionModel}" id="r1"/>
+                                <af:spacer width="10" height="10" id="s3"/>
+                                <af:showDetailHeader text="#{inventoryUIBundle.ENTITY_ATTACHMENTS}" disclosed="true" id="sdh32"
+                                                     styleClass="invSummaryShowDetailHeader">
+                                    <f:facet name="legend"/>
+                                    <f:facet name="info"/>
+                                    <f:facet name="menuBar"/>
+                                    <f:facet name="toolbar"/>
+                                    <f:facet name="context"/>
+                                    <af:panelCollection id="pc16" styleClass="invSummaryPanelCollection">
+                                        <f:facet name="menus"/>
+                                        <f:facet name="toolbar"/>
+                                        <f:facet name="statusbar">
+                                            <af:toolbar id="tb23">
+                                                <af:outputText value="#{inventoryuiBundle.ROW_COUNT} #{(pageFlowScope.OrchestrationRequestDetailsBean.attachmentCollectionModel.rowCount lt 0) ? 0 :  pageFlowScope.OrchestrationRequestDetailsBean.attachmentCollectionModel.rowCount}"
+                                                               id="ol134" styleClass="invSearchOutputLabel" noWrap="true" partialTriggers="attTab"
+                                                               binding="#{backingBeanScope.totalResultsLabel}"/>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <af:table value="#{pageFlowScope.OrchestrationRequestDetailsBean.attachmentCollectionModel}" var="row"
+                                                  emptyText="#{inventoryuiBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET}"
+                                                  binding="#{pageFlowScope.OrchestrationRequestDetailsBean.attachmentTable}"
+                                                  autoHeightRows="#{pageFlowScope.OrchestrationRequestDetailsBean.portletHeight}" contentDelivery="immediate"
+                                                  rowBandingInterval="0" styleClass="invSummaryTable" rowSelection="single" id="attTab"
+                                                  summary="#{inventoryuiBundle.ENTITY_ATTACHMENTS}">
+                                            <af:column headerText="#{inventoryuiBundle.SEQUENCE_NUMBER}" id="x1" rowHeader="unstyled">
+                                                <af:commandImageLink id="xl1" action="BusinessInteractionAttachmentSummary"
+                                                                     actionListener="#{bindings.openSubTaskForBIAttachment.execute}"
+                                                                     text="#{row.sequenceNumber}"
+                                                                     shortDesc="#{inventoryuiBundle.BUSINESS_INTERACTION_ATTACHMENT_SUMMARY_LINK}">
+                                                    <af:setActionListener from="#{row.biAttachmentObjectID}" to="#{pageFlowScope.objectId}"/>
+                                                </af:commandImageLink>
+                                            </af:column>
+                                            <af:column headerText="#{inventoryuiBundle.NAME}" id="x3">
+                                                <af:commandImageLink id="xl2" action="BusinessInteractionAttachmentSummary"
+                                                                     actionListener="#{bindings.openSubTaskForBIAttachment.execute}" text="#{row.name}"
+                                                                     shortDesc="#{inventoryuiBundle.BUSINESS_INTERACTION_ATTACHMENT_SUMMARY_LINK}">
+                                                    <af:setActionListener from="#{row.biAttachmentObjectID}" to="#{pageFlowScope.objectId}"/>
+                                                </af:commandImageLink>
+                                            </af:column>
+                                            <af:column headerText="#{inventoryuiBundle.TIMESTAMP}" id="x4">
+                                                <af:outputText value="#{row.timestamp}" id="xot5"/>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                </af:showDetailHeader>
+                                <af:spacer width="10" height="10" id="s8"/>
+                                <af:showDetailHeader text="#{inventoryuiBundle.EVENTS}" disclosed="true" id="sdh3">
+                                    <af:panelGroupLayout id="pgl4">
+                                        <af:listView id="lv1" binding="#{pageFlowScope.OrchestrationRequestDetailsBean.txnLogListView}"
+                                                     value="#{pageFlowScope.OrchestrationRequestDetailsBean.transactionLog}" var="row">
+                                            <f:facet name="groupHeaderStamp"/>
+                                            <af:listItem id="li1">
+                                                <af:panelGroupLayout id="pgl5">
+                                                    <af:outputText value="#{row.date} - #{row.message}" id="ot9"/>
+                                                </af:panelGroupLayout>
+                                            </af:listItem>
+                                        </af:listView>
+                                    </af:panelGroupLayout>
+                                </af:showDetailHeader>
+                            </af:group>
+                        </af:panelGroupLayout>
+                    </af:panelHeader>
+                </f:facet>
+                <f:facet name="start"/>
+                <f:facet name="end"/>
+                <f:facet name="top"/>
+            </af:panelStretchLayout>
+        </f:facet>
+        <f:facet name="contextualArea"/>
+        <f:facet name="localAreaScroll"/>
+    </af:pageTemplate>
+</jsp:root>

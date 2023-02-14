@@ -1,0 +1,315 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+		   
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<c:set var="bundle"
+         value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}" />
+  <af:panelGroupLayout id="pgl1" binding="#{backingBeanScope.IPv6Address_details_panelGroupLayout}" layout="scroll">
+    <af:panelHeader id="ph1" styleClass="invSummaryPanelHeader" helpTopicId="OHW_ipv4AddressSummary"
+                    partialTriggers="ctb6 ctb1 ctb2 pt2"
+                    text="#{inventoryUIBundle.IPv6_ADDRESS} - #{pageFlowScope.IPv6AddressDetailsBean.entityObject.shortNotationAddress}">
+      <f:facet name="toolbar">
+        <af:toolbar id="t1">
+          <af:group id="gr1">
+            <af:menuBar id="mb1">
+              <af:menu id="menu6" binding="#{backingBeanScope.InventoryMenuBean.actionsMenu}"
+                       styleClass="invSummaryMenu" disabled="#{pageFlowScope.IPv6AddressDetailsBean.renderEditPanel}">
+                <af:clientListener method="goRefreshEntity" type="propertyChange"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.IPv6AddressDetailsBean.refresh}"/>
+              </af:menu>
+            </af:menuBar>
+          </af:group>
+          <af:group id="gr2">
+            <af:button text="#{inventoryUIBundle.SAVE}" id="ctb1"
+                                     disabled="#{pageFlowScope.IPv6AddressDetailsBean.disableSaveButtons}"
+                                     accessKey="#{inventoryUIBundle.SAVE_ACCESS_KEY}"
+                                     actionListener="#{pageFlowScope.IPv6AddressDetailsBean.save}"
+                                     binding="#{backingBeanScope.saveButtonBinding}"
+                                     rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=IPv6AddressDetails.SAVE;action=view']}">
+              <af:setActionListener from="viewing" to="#{pageFlowScope.saveActionOutcome}"/>
+            </af:button>
+            <af:spacer width="10" height="10" id="s11"/>
+            <af:button text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="ctb2"
+                                     disabled="#{pageFlowScope.IPv6AddressDetailsBean.disableSaveButtons}"
+                                     actionListener="#{pageFlowScope.IPv6AddressDetailsBean.save}"
+                                     accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}"
+                                     binding="#{backingBeanScope.saveAndCloseButtonBinding}"
+                                     action="#{pageFlowScope.IPv6AddressDetailsBean.saveOutcome}"
+                                     rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=IPv6NetworkDetails.SAVE_AND_CLOSE;action=view']}">
+              <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+            </af:button>
+            <af:spacer width="10" height="10" id="s12"/>
+            <af:button text="#{inventoryUIBundle.CANCEL}" id="ctb3"
+                                     action="#{pageFlowScope.IPv6AddressDetailsBean.view}"
+                                     accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}" immediate="true"
+                                     actionListener="#{pageFlowScope.IPv6AddressDetailsBean.cancel}"/>
+          </af:group>
+        </af:toolbar>
+      </f:facet>
+      <af:spacer width="10" height="10" id="s5"/>
+      <af:panelGroupLayout id="pgl3">
+        <af:panelGroupLayout id="pgl6" layout="scroll"
+                             rendered="#{pageFlowScope.IPv6AddressDetailsBean.renderEditPanel}">
+          <af:showDetailHeader text="#{inventoryUIBundle.IPv6_ADDRESS_INFORMATION}" disclosed="true" id="sdh1">
+            <f:facet name="toolbar">
+              <af:toolbar id="t2">
+                <af:button id="ctb5" text="#{inventoryUIBundle.EDIT}"
+                                         actionListener="#{pageFlowScope.IPv6AddressDetailsBean.edit}"
+                                         accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}"
+                                         disabled="#{!pageFlowScope.IPv6AddressDetailsBean.disableSaveButtons}"
+                                         rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=IPv6NetworkDetails.EDIT;action=view']}"/>
+              </af:toolbar>
+            </f:facet>
+            <af:panelFormLayout id="ipv6add" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%"
+                                partialTriggers="ctb6">
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="ipv6add-name">
+                <af:inputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.name}" id="outputText1"
+                              maximumLength="50" label="Name" simple="true"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.IPv6_ADDRESS}" id="ipv6add-address">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.address}" id="outputText2"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.MAC_ADDRESS}" id="ipv6add-macAddress">
+                <af:inputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.macAddress}" id="outputText12"
+                              simple="true" label="MacAddress"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.IPv6_SUBNET_START}" id="panelLabelAndMessage3">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.parentBlock.addressRange.lowerValue}"
+                               id="outputText3"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.IPv6_NETWORK}" id="panelLabelAndMessage9">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.parentBlock.rootParentBlock.addressRange.lowerValue}"
+                               id="outputText6"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage id="ldacc-ldaldid" label="#{inventoryUIBundle.OWNED_BY}">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.ownedByName}" id="ldacc-idb"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="panelLabelAndMessage6">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.inventoryStatus}" id="outputText7"/>             
+              </af:panelLabelAndMessage>
+              <af:inputText label="#{inventoryUIBundle.DESCRIPTION}"
+                            value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.description}" id="outputText4"
+                            maximumLength="175" rows="3" columns="35"/>
+              <af:panelLabelAndMessage id="panelLabelAndMessage5_1" label="#{inventoryUIBundle.IP_ADDRESS_DOMAIN}">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.parentBlock.ipAddressDomain.name}"
+                               id="inputText2"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.PREFIX_LENGTH}" id="ipv6add-pl">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.parentBlock.prefixLength}"
+                               id="outputText5"/>
+              </af:panelLabelAndMessage>
+              <af:selectOneChoice id="ipv6add-mat" label="#{inventoryUIBundle.MAC_ADDRESS_TYPE}" autoSubmit="true"
+                                  value="#{pageFlowScope.IPv6AddressDetailsBean.macAddressType}">
+                <f:selectItems binding="#{pageFlowScope.IPv6AddressDetailsBean.macAddressTypeList}" id="si1"/>
+              </af:selectOneChoice>
+              <af:panelLabelAndMessage id="panelLabelAndMessage13" label="#{inventoryUIBundle.IPv6_SUBNET_END}">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.parentBlock.addressRange.upperValue}"
+                               id="outputText13"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.IPv6_ADDRESS_TYPE}" id="ipv6add-type">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.ipv6AddressType}" id="ot5_2"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage id="ldacc-ldaldid_2" label="#{inventoryUIBundle.MANAGED_BY}">
+                <af:inputText value="#{pageFlowScope.IPv6AddressDetailsBean.managedByName}" simple="true"
+                              id="ipv6add-mb" binding="#{backingBeanScope.managedByNameBinding}" columns="35"
+                              label="#{inventoryUIBundle.MANAGED_BY}"
+                              valueChangeListener="#{pageFlowScope.IPv6AddressDetailsBean.partyChanged}">
+                  <af:autoSuggestBehavior suggestItems="#{pageFlowScope.IPv6AddressDetailsBean.getPartyHandler}"/>
+                </af:inputText>
+                <af:link id="ldacc-ldcreate_2" icon="/images/search_ena.png"
+                         actionListener="#{pageFlowScope.IPv6AddressDetailsBean.launchPartyPopup}"
+                         shortDesc="#{inventoryUIBundle.BROWSE}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}"
+                                       id="panelLabelAndMessage15">
+                <af:outputText id="outputText16" value="#{pageFlowScope.IPv6AddressDetailsBean.resourceAssignmentStatus}"/>              
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="panelLabelAndMessage7"
+                                       rendered="false">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.lastModifiedDate}"
+                               id="outputText8"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="panelLabelAndMessage8"
+                                       rendered="false">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.lastModifiedUser}"
+                               id="outputText9"/>
+              </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+            <af:popup id="searchPartyPopup" binding="#{backingBeanScope.searchPartyAddDetails}" contentDelivery="lazyUncached"
+                      rendered="true">
+              <af:dialog id="d1" type="none">
+                <af:panelStretchLayout id="psl_2" styleClass="invCommonPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.PartySearchResultsFlow1.regionModel}" id="r6"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity" method="#{pageFlowScope.IPv6AddressDetailsBean.refresh}"/>
+            </af:popup>
+            <!-- show detail collapsible section for external identity -->
+            <!-- The Below PanelFormLayout will be used to render the Entity-Level Characteristics for IPv6Address. -->
+            <af:panelFormLayout id="ipv6addredit" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%"
+                                binding="#{backingBeanScope.uiHintsEditPanel}"/>
+          </af:showDetailHeader>
+        </af:panelGroupLayout>
+        <af:panelGroupLayout id="pgl5" layout="scroll"
+                             rendered="#{pageFlowScope.IPv6AddressDetailsBean.renderViewPanel}">
+          <af:showDetailHeader text="#{inventoryUIBundle.IPv6_ADDRESS_INFORMATION}" disclosed="true"
+                               id="showDetailHeader1">
+            <f:facet name="toolbar">
+              <af:toolbar id="t3">
+                <af:button id="ctb6" text="#{inventoryUIBundle.EDIT}"
+                                     actionListener="#{pageFlowScope.IPv6AddressDetailsBean.edit}"
+                                     accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}"
+                                     rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=IPv6NetworkDetails.EDIT;action=view']}"/>
+              </af:toolbar>
+            </f:facet>
+            <af:panelFormLayout id="panelFormLayout1" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="panelLabelAndMessage16">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.name}" id="outputText14"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.IPv6_ADDRESS}" id="panelLabelAndMessage14">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.address}" id="outputText15"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.MAC_ADDRESS}" id="panelLabelAndMessage17">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.macAddress}"
+                               id="outputText117"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.IPv6_SUBNET_START}" id="panelLabelAndMessage18">
+                <af:commandImageLink action="toParent" id="subnetDetails"
+                                     text="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.parentBlock.addressRange.lowerValue}"
+                                     shortDesc="#{inventoryUIBundle.IPv6_SUBNET}"
+                                     actionListener="#{pageFlowScope.IPv6AddressDetailsBean.toSubnetDetails}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.IPv6_NETWORK}" id="panelLabelAndMessage19">
+                <af:commandImageLink action="toParent" id="networkDetails"
+                                     text="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.parentBlock.rootParentBlock.addressRange.lowerValue}"
+                                     shortDesc="#{inventoryUIBundle.IPv6_NETWORK}"
+                                     actionListener="#{pageFlowScope.IPv6AddressDetailsBean.toNetworkDetails}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage id="ldacc-ldaldid26" label="#{inventoryUIBundle.OWNED_BY}">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.ownedByName}" id="ldacc-idb26"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="panelLabelAndMessage27">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.inventoryStatus}" id="outputText27"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}" id="panelLabelAndMessage28">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.description}"
+                               id="outputText28"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage id="panelLabelAndMessage22" label="#{inventoryUIBundle.IP_ADDRESS_DOMAIN}">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.parentBlock.ipAddressDomain.name}"
+                               id="inputText22"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.PREFIX_LENGTH}" id="panelLabelAndMessage23">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.parentBlock.prefixLength}"
+                               id="outputText23"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.MAC_ADDRESS_TYPE}" id="panelLabelAndMessage26">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.macAddressType1}" id="outputText26"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage id="panelLabelAndMessage25" label="#{inventoryUIBundle.IPv6_SUBNET_END}">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.parentBlock.addressRange.upperValue}"
+                               id="outputText25"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.IPv6_ADDRESS_TYPE}" id="ot-type">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.ipv6AddressType}"
+                               id="ot_2"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.MANAGED_BY}" id="panelLabelAndMessage20">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.ipAddressManagedBy.name}"
+                               id="outputText20"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}"
+                                       id="panelLabelAndMessage21">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.resourceAssignmentStatus}"
+                               id="outputText21"/>
+            <!--RMI 618 Start-->
+                <af:switcher defaultFacet="false" facetName="#{pageFlowScope.IPv6AddressDetailsBean.popupMode}"
+                             id="swas618">
+                  <f:facet name="false">
+                    <af:commandImageLink action="#{pageFlowScope.IPv6AddressDetailsBean.getSummaryAction}"
+                                         actionListener="#{pageFlowScope.IPv6AddressDetailsBean.registerRecentItem}"
+                                         disabled="#{pageFlowScope.IPv6AddressDetailsBean.consumerBIDisabled}"
+                                         id="bid4"
+                                         shortDesc="#{pageFlowScope.IPv6AddressDetailsBean.consumerBIShortDesc}"
+                                         text="#{pageFlowScope.IPv6AddressDetailsBean.consumerBILabel}">
+                      <af:setActionListener from="#{pageFlowScope.IPv6AddressDetailsBean.assignmentBI.oid}"
+                                            to="#{objectId}"/>
+                    </af:commandImageLink>
+                  </f:facet>
+                  <f:facet name="true">
+                    <af:outputText id="swftas618" value="#{pageFlowScope.IPv6AddressDetailsBean.consumerBILabel}"/>
+                  </f:facet>
+                </af:switcher>
+                <af:outputText id="consumerBIDueDate" value="#{pageFlowScope.IPv6AddressDetailsBean.consumerBIEffectiveDate}"/>
+            <!--RMI 618 End-->
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="panelLabelAndMessage29"
+                                       rendered="false">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.lastModifiedDate}"
+                               id="outputText29"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="panelLabelAndMessage30"
+                                       rendered="false">
+                <af:outputText value="#{pageFlowScope.IPv6AddressDetailsBean.entityObject.lastModifiedUser}"
+                               id="outputText30"/>
+              </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+            <!-- The Below PanelFormLayout will be used to render the Entity-Level Characteristics for IPv6Address. -->
+            <af:panelFormLayout id="elcpf" maxColumns="2" rows="1" labelWidth="33%" fieldWidth="67%"
+                                binding="#{backingBeanScope.uiHintsViewPanel}">
+              <af:iterator id="it123" value="#{pageFlowScope.IPv6AddressDetailsBean.characteristics}"
+                           var="characteristicDetails">
+                <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="onn312"
+                                         rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'ALPHANUMERIC' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'CALENDAR' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'DROPDOWN_LIST' || characteristicDetails.characteristic.characteristicSpecification.valueType == 'NUMERIC'}">
+                  <af:outputText id="ote3"
+                                 value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="onn317"
+                                         rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'URL'}">
+                  <af:link id="oth3" targetFrame="_blank"
+                           destination="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                           inlineStyle="padding-left:6px;">
+                    <af:outputText id="ot18" truncateAt="50"
+                                   value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                  </af:link>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="" id="onn318"
+                                         rendered="#{characteristicDetails.characteristic.characteristicSpecification.controlType == 'CHECKBOX'}">
+                  <af:selectBooleanCheckbox id="sbc1" readOnly="true"
+                                            value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                            text="#{characteristicDetails.label}" simple="true"/>
+                </af:panelLabelAndMessage>
+              </af:iterator>
+            </af:panelFormLayout>
+          </af:showDetailHeader>
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <af:spacer width="10" height="10" id="s1"/>
+      <af:panelTabbed id="pt2" dimensionsFrom="disclosedChild" styleClass="AFStretchWidth"
+                      rendered="#{pageFlowScope.IPv6AddressDetailsBean.renderViewPanel}">
+        <af:showDetailItem text="#{inventoryUIBundle.IPv6_ADDRESS_DETAILS}" id="sdi1" rendered="#{pageFlowScope.IPv6AddressDetailsBean.renderIPAddressDetailsTab}"
+				disclosureListener="#{pageFlowScope.IPv6AddressDetailsBean.discloseAddressChildTab}" disclosed="true" binding="#{backingBeanScope.ipv6ADBinding}">
+          <af:spacer width="10" height="10" id="s2"/>
+          <af:region value="#{bindings.InventoryGroupListFlow1.regionModel}" id="r1" immediate="true"/>
+          <af:spacer width="10" height="10" id="s3"/>
+          <af:region value="#{bindings.CustomInvolvementListFlow1.regionModel}" id="r2"/>
+        </af:showDetailItem>
+        <af:showDetailItem text="Consumers" id="sdi2" rendered="#{pageFlowScope.IPv6AddressDetailsBean.renderConsumersTab}" binding="#{backingBeanScope.ipv6ACBinding}"
+			disclosureListener="#{pageFlowScope.IPv6AddressDetailsBean.discloseAddressChildTab}">
+          <af:spacer width="10" height="10" id="s6"/>
+          <af:region value="#{bindings.ConsumerListFlow1.regionModel}" id="r3"/>
+          <af:spacer width="10" height="10" id="spacer1"/>
+          <af:region value="#{bindings.ReservationListFlow1.regionModel}" id="r4"/>
+          <af:spacer width="10" height="10" id="spacer2"/>
+          <af:region value="#{bindings.ConditionListFlow1.regionModel}" id="r5"/>
+        </af:showDetailItem>
+      </af:panelTabbed>
+    </af:panelHeader>
+  </af:panelGroupLayout>
+</jsp:root>

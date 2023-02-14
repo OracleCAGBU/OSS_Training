@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<af:panelStretchLayout id="psl1" styleClass="AFStretchWidth" dimensionsFrom="auto" bottomHeight="10" topHeight="70">      
+    <f:facet name="top">
+        <af:panelGroupLayout id="pgl44" layout="scroll">
+            <af:outputText value="#{pageFlowScope.TDMConnectivityChannelTreeBean.headerLabel}" id="ph1" inlineStyle="color:Black; font-weight:bolder;"/>
+            <af:spacer height="10" id="s11"/>
+            <af:panelLabelAndMessage label="#{inventoryUIBundle.A_TERMINATION_DEVICE}" id="plm3" inlineStyle="color:Black;">
+                <af:outputText value="#{pageFlowScope.TDMConnectivityChannelTreeBean.ATerminationDevice}" id="ot1"/>
+            </af:panelLabelAndMessage>
+            
+            <af:panelLabelAndMessage label="#{inventoryUIBundle.Z_TERMINATION_DEVICE}" id="plm4" inlineStyle="color:Black;">
+                <af:outputText value="#{pageFlowScope.TDMConnectivityChannelTreeBean.ZTerminationDevice}" id="ot2"/>
+            </af:panelLabelAndMessage>
+            
+            <af:spacer height="10" id="s12"/>
+        </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="center">
+        <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+            <af:treeTable value="#{pageFlowScope.TDMConnectivityChannelTreeBean.treeModel}"
+                          var="node" rowSelection="single" id="tdm"
+                          fetchSize="#{pageFlowScope.TDMConnectivityChannelTreeBean.fetchSize}"
+                          contextMenuSelect="true" styleClass="AFStretchWidth"
+                          contentDelivery="immediate" expandAllEnabled="#{pageFlowScope.TDMConnectivityChannelTreeBean.expandAllEnabled}"
+                          selectionListener="#{pageFlowScope.TDMConnectivityChannelTreeBean.nodeSelectedEvent}"
+                          binding="#{backingBeanScope.TDMChannelBinding}"
+                          disclosedRowKeys="#{pageFlowScope.TDMConnectivityChannelTreeBean.treeDisclosedRowKeys}"
+                          rowBandingInterval="0"
+                          summary="#{inventoryUIBundle.TDM_CONNECTIVITY_TREETABLE}">
+                <f:facet name="nodeStamp">
+                  <af:column sortable="false" headerText="#{inventoryUIBundle.CONNECTIVITY}" id="c2" width="500"
+                             rowHeader="unstyled">
+                    <af:panelGroupLayout id="pgl5">
+                        <af:image source="#{node.data.icon}" id="nodeIcon" styleClass="invSummaryImage"
+                                  shortDesc="#{inventoryUIBundle.ICON}"/>
+                        <af:outputText value="#{node.data.label}" id="ot9"/>
+                    </af:panelGroupLayout>
+                  </af:column>
+                </f:facet>
+                <f:facet name="contextMenu">
+                   <af:popup contentDelivery="lazyUncached" id="mp" partialTriggers="::tdm">
+                      <af:menu id="rnm" text="rootNodeMenu">
+                         <af:commandMenuItem text="#{inventoryUIBundle.VIEW_ASSIGNED_CONNECTIVITY_DETAILS}"
+                                             id="cmi2"
+                                             rendered="#{pageFlowScope.TDMConnectivityChannelTreeBean.viewConnectivityPopupMenu}"
+                                             actionListener="#{pageFlowScope.TDMConnectivityChannelTreeBean.viewConsumer}"
+                                             action="TDMConnectivityDetails">
+                         </af:commandMenuItem>
+                         <af:commandMenuItem text="#{inventoryUIBundle.VIEW_ASSIGNED_PIPE_SUMMARY}"
+                                             id="cmi3"
+                                             rendered="#{pageFlowScope.TDMConnectivityChannelTreeBean.viewPipePopupMenu}"
+                                             actionListener="#{pageFlowScope.TDMConnectivityChannelTreeBean.viewConsumer}"
+                                             action="PipeSummary">
+                         </af:commandMenuItem>
+                      </af:menu>
+                   </af:popup>
+                </f:facet>
+                
+                <af:column sortable="false" headerText="#{inventoryUIBundle.A_INTERFACE_ADDRESS}" id="c5" width="150" filterable="false">
+                    <af:iterator id="it124" value="#{node.data.AInterfaceAddresses}" var="ainterfaceAddress">
+                        <af:outputText value="#{ainterfaceAddress}" id="onn313" />
+                        <br></br>
+                    </af:iterator>
+                </af:column>
+                
+                <af:column sortable="false" headerText="#{inventoryUIBundle.Z_INTERFACE_ADDRESS}" id="c6" width="150" filterable="false">
+                    <af:iterator id="it125" value="#{node.data.ZInterfaceAddresses}" var="zinterfaceAddress">
+                        <af:outputText value="#{zinterfaceAddress}" id="onn315" />
+                        <br></br>
+                    </af:iterator>
+                </af:column>
+                <af:column sortable="false" headerText="#{inventoryUIBundle.SERVICES}" id="c7" width="300" filterable="false">
+                   <af:iterator id="it123" value="#{node.data.consumers}" var="consumer">
+                     <af:link actionListener="#{pageFlowScope.TDMConnectivityChannelTreeBean.viewConsumerService}" action="ServiceSummary" id="cn16">
+                        <af:outputText value="#{consumer.label}" id="onn312" binding="#{pageFlowScope.consumer}"/>
+                        <f:param name="consumerOid" value="#{consumer.object.oid}" id="par222"/>
+                     </af:link>
+                     <af:switcher id="consumerSwitcher" defaultFacet="false" facetName="#{consumer.invStatus != null}">
+                            <f:facet name="true">           
+                              <af:outputText value=" (#{consumer.invStatus})" />
+                            </f:facet> 
+                             <f:facet name="false">           
+                                <af:outputText value=" " />
+                            </f:facet> 
+                    </af:switcher>  
+                     <br></br>
+                   </af:iterator>  
+                </af:column>
+            </af:treeTable>
+        </af:panelCollection>
+    </f:facet>
+</af:panelStretchLayout>    
+</jsp:root>

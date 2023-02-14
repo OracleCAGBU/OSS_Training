@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2014, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     UI Summary page for the Tag Entity.
+
+    MODIFIED    (MM/DD/YY)
+    rswamir    11/04/13 - Created.
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   id="pt1">
+    <f:facet name="localArea">
+      <af:panelStretchLayout>
+        <f:facet name="center">
+          <af:panelHeader text="#{pageFlowScope.TagSummaryBean.displayInfo}"
+                          styleClass="invSummaryPanelHeader"
+                          helpTopicId="OHW_specCharSummary">
+            <af:panelGroupLayout layout="scroll" id="pgl23">
+              <af:showDetailHeader text="#{inventoryUIBundle.TAG_INFORMATION}"
+                                   styleClass="invSummaryShowDetailHeader"
+                                   disclosed="true">
+                <af:panelFormLayout>
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}">
+                    <af:outputText value="#{pageFlowScope.TagSummaryBean.entityObject.name}"/>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}"
+                                           styleClass="invSummaryPanelLabelAndMessage">
+                    <af:outputText value="#{pageFlowScope.TagSummaryBean.entityObject.description}"/>
+                  </af:panelLabelAndMessage>
+                  <af:inputText label="#{inventoryUIBundle.TAG_ADDITIONAL_INFO}" columns="240" rows="20"
+                            readOnly="true" value="#{pageFlowScope.TagSummaryBean.entityObject.otherInformation}"/>
+                  </af:panelFormLayout>
+              </af:showDetailHeader>
+              <af:spacer width="10" height="10"/>
+              <!--RELATED SPECIFICATIONS-->
+              <af:showDetailHeader text="#{inventoryUIBundle.SPECIFICATIONS}"
+                                   disclosed="true" id="sdh3">
+                <af:panelCollection id="RelatedSpecList"
+                                    styleClass="AFStretchWidth">
+                  <f:facet name="toolbar">
+                    <af:toolbar id="t129"></af:toolbar>
+                  </f:facet>
+                  <f:facet name="statusbar">
+                    <af:toolbar id="t4">
+                      <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(pageFlowScope.TagSummaryBean.relatedSpecsCollectionModel.rowCount lt 0) ? 0 :  pageFlowScope.TagSummaryBean.relatedSpecsCollectionModel.rowCount}"
+                                     id="ol2" styleClass="invSearchOutputLabel"
+                                     binding="#{backingBeanScope.totalResultsLabel}"
+                                     partialTriggers="relatedSpecTableId"/>
+                    </af:toolbar>
+                  </f:facet>
+                  <af:table id="relatedSpecTableId"
+                            value="#{pageFlowScope.TagSummaryBean.relatedSpecsCollectionModel}"
+                            var="row" rows="1" contentDelivery="immediate"
+                            emptyText="#{inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET}"
+                            fetchSize="10" rowBandingInterval="0"
+                            selectionListener="#{pageFlowScope.TagSummaryBean.relatedSpecSelectionListener}"
+                            rowSelection="#{pageFlowScope.TagSummaryBean.rowSelection}"
+                            width="100%"
+                            binding="#{pageFlowScope.TagSummaryBean.resultsTable}"
+                            summary="#{inventoryUIBundle.RELATED_SPEC_LIST_TABLE}">
+                    <af:column sortProperty="name" sortable="true"
+                               filterable="true"
+                               headerText="#{inventoryUIBundle.NAME}"
+                               rowHeader="unstyled">
+                      <af:commandImageLink action="specSummary"
+                                           actionListener="#{pageFlowScope.TagSummaryBean.registerRecentItemForSummary}"
+                                           text="#{row.name}"
+                                           shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+                        <af:setActionListener from="#{row.oid}"
+                                              to="#{specObjectId}"/>
+                      </af:commandImageLink>
+                    </af:column>
+                    <af:column sortable="true" sortProperty="description"
+                               filterable="true"
+                               headerText="#{inventoryUIBundle.DESCRIPTION}"
+                               id="c4">
+                      <af:outputText value="#{row.description}" id="ot3"/>
+                    </af:column>
+                    <af:column headerText="#{inventoryUIBundle.ENTITY_TYPE}"
+                               id="c3">
+                      <af:outputText value="#{pageFlowScope.TagSummaryBean.entityType}"
+                                     id="ot4"/>
+                    </af:column>
+                  </af:table>
+                </af:panelCollection>
+              </af:showDetailHeader>
+            </af:panelGroupLayout>
+          </af:panelHeader>
+        </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

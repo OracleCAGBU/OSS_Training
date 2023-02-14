@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:showDetailHeader text="#{inventoryUIBundle.PARTIES}" disclosed="true"
+                       id="sdh1">
+    <af:popup id="ascpp13" binding="#{backingBeanScope.associateParty}"
+              contentDelivery="lazyUncached">
+      <af:dialog id="d3" type="none" title="#{inventoryUIBundle.PARTY_SEARCH}">
+        <af:panelStretchLayout id="psl1"
+                               styleClass="invCommonPanelStretchLayout">
+          <f:facet name="center">
+            <af:region value="#{bindings.PartySearchResultsFlow1.regionModel}"
+                       id="r1"/>
+          </f:facet>
+        </af:panelStretchLayout>
+      </af:dialog>
+      <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+      <af:serverListener type="refreshEntity"
+                         method="#{pageFlowScope.PartyListBean.refresh}"/>
+    </af:popup>
+    <af:panelCollection id="parLst" styleClass="AFStretchWidth">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar">
+        <af:toolbar id="t1">
+          <af:commandToolbarButton text="#{inventoryUIBundle.ASSOCIATE}"
+                                   disabled="#{pageFlowScope.PartyListBean.disableAssociateButton}"
+                                   id="cb1Crt" binding="#{backingBeanScope.associateButton}"
+                                   rendered="#{!(pageFlowScope.PartyListBean.disableAssociateButton) and securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Party.ASSOCIATE;action=view']}"
+                                   icon="#{InventoryHelperBean.associateIcon}">
+            <af:setActionListener from="true" to="#{pageFlowScope.invokeParty}"/>                                   
+            <af:showPopupBehavior popupId="::ascpp13" triggerType="click"/>
+            <af:setActionListener from="true" to="#{pageFlowScope.associateParty}"/> 
+          </af:commandToolbarButton>
+          <af:spacer width="10" height="10" id="s4"/>
+          <af:commandToolbarButton text="#{inventoryUIBundle.UPDATE}"
+                                   id="cb3Up" binding="#{backingBeanScope.editButton}"
+                                   icon="#{InventoryHelperBean.editIcon}" disabledIcon="#{InventoryHelperBean.disEditIcon}"
+                                   actionListener="#{pageFlowScope.PartyListBean.updateParty}"
+                                   partialTriggers="rtId"
+                                   rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Party.EDIT;action=view']}"
+                                   disabled="#{pageFlowScope.PartyListBean.resultsTable.selectedRowKeys.size lt 1 or pageFlowScope.PartyListBean.resultsTable.selectedRowKeys.size eq null || pageFlowScope.PartyListBean.disableAssociateButton}">
+         </af:commandToolbarButton>
+          <af:spacer width="10" height="10" id="s1"/>
+          <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}"
+                                   id="cb3De" binding="#{backingBeanScope.deleteButton}"
+                                   icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                   partialTriggers="rtId"
+                                   rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Party.DELETE;action=view']}"
+                                   disabled="#{pageFlowScope.PartyListBean.resultsTable.selectedRowKeys.size lt 1 or pageFlowScope.PartyListBean.resultsTable.selectedRowKeys.size eq null || pageFlowScope.PartyListBean.disableAssociateButton}"
+                                   actionListener="#{pageFlowScope.PartyListBean.disassociateParty}"></af:commandToolbarButton>
+        </af:toolbar>
+      </f:facet>
+      <f:facet name="statusbar">
+        <af:toolbar id="t2">
+          <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount lt 0) ? 0 :     bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount}"
+                         id="ol2" styleClass="invSearchOutputLabel"
+                         binding="#{backingBeanScope.totalResultsLabel}"
+                         partialTriggers="rtId"/>
+        </af:toolbar>
+      </f:facet>
+      <af:table id="rtId"
+                value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}"
+                var="row"
+                emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                fetchSize="#{pageFlowScope.PartyListBean.fetchSize}"
+                filterModel="#{pageFlowScope.PartyQueryBean.filterModel}"
+                selectionListener="#{pageFlowScope.PartyListBean.selectAction}"
+                queryListener="#{InventoryHelperBean.processQuery}"
+                filterVisible="false" varStatus="vs"
+                sortListener="#{bindings.searchResultsIterator.dataControl.dataProvider.processSort}"
+                selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                rowSelection="#{pageFlowScope.PartyListBean.rowSelection}"
+                autoHeightRows="#{pageFlowScope.PartyListBean.portletHeight}"
+                contentDelivery="immediate" styleClass="AFStretchWidth"
+                binding="#{pageFlowScope.PartyListBean.resultsTable}"
+                summary="#{inventoryUIBundle.PARTY_LIST}">
+        <af:column sortProperty="party.id" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.ID}" id="c1"
+                   rowHeader="unstyled">
+          <af:commandImageLink action="#{pageFlowScope.PartyListBean.getPartySummaryAction}" id="cl1"
+                               text="#{pageFlowScope.PartyListBean.partyId}"
+                               shortDesc="#{inventoryUIBundle.PARTY_SUMMARY_LINK}">
+            
+            <af:setActionListener from="#{row.party.oid}"
+                                  to="#{requestScope.oid}"/>
+          </af:commandImageLink>
+        </af:column>
+        <af:column sortProperty="party.name" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.NAME}" id="c2" width="200px">
+          <af:outputText value="#{pageFlowScope.PartyListBean.partyName}"
+                         id="ot2"/>
+        </af:column>
+        <af:column headerText="#{inventoryUIBundle.PARTY_ROLE}" id="c3" width="200px">
+          <af:selectOneChoice id="c13"
+                              value="#{pageFlowScope.PartyListBean.selectedRole}"
+                              autoSubmit="true" valueChangeListener="#{pageFlowScope.PartyListBean.onChangeFromEntityRole}"
+                              label="#{inventoryUIBundle.PARTY_ROLE}">
+            <f:selectItems value="#{pageFlowScope.PartyListBean.partyRoles}"
+                           id="sc13"/>
+          </af:selectOneChoice>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+  </af:showDetailHeader>
+</jsp:root>

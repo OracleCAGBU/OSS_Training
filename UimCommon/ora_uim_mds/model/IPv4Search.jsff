@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   value="#{bindings.pageTemplateBinding}" id="pt1">
+    <f:facet name="localArea">
+        <af:group>
+        <af:panelTabbed id="pt3" dimensionsFrom="disclosedChild" styleClass="AFStretchWidth"
+                        binding="#{pageFlowScope.IPNavigationBean.panelTabbed}">
+          <af:showDetailItem text="#{inventoryUIBundle.IPv4_NETWORK}" id="sdi3"
+                             binding="#{pageFlowScope.IPNavigationBean.networkTab}"
+                             disclosed="#{pageFlowScope.IPNavigationBean.networkTabDisclosed}"
+                             disclosureListener="#{pageFlowScope.IPNavigationBean.discloseNetworkTab}">
+            <af:panelStretchLayout id="psl3" styleClass="AFStretchWidth" dimensionsFrom="auto">
+              <f:facet name="center">
+                <af:panelGroupLayout layout="scroll" id="pgl1">
+                  <af:switcher id="s3" facetName="#{pageFlowScope.IPNavigationBean.navigateTo}" defaultFacet="NetworkSearch">
+                    <f:facet name="NetworkSearch">
+                      <af:region value="#{bindings.IPv4NetworkSearchResultsFlow1.regionModel}" id="r1" binding="#{backingBeanScope.ipNetworkSearchBinding}"/>
+                    </f:facet>
+                    <f:facet name="NetworkDetails">
+                      <af:region value="#{bindings.IPv4NetworkDetailsFlow1.regionModel}" id="r6" binding="#{backingBeanScope.ipNetworkDetailsBinding}"/>
+                    </f:facet>
+                    <f:facet name="NetworkCreate">
+                      <af:region value="#{bindings.IPv4NetworkCreateFlow1.regionModel}" id="r8" binding="#{backingBeanScope.ipNetworkCreateBinding}"/>
+                    </f:facet>
+                  </af:switcher>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:panelStretchLayout>
+          </af:showDetailItem>
+          
+          <af:showDetailItem text="#{inventoryUIBundle.IPv4_SUBNET}" id="sdi4"
+                             binding="#{pageFlowScope.IPNavigationBean.subnetTab}"
+                             disclosed="#{pageFlowScope.IPNavigationBean.subnetTabDisclosed}"
+                             disclosureListener="#{pageFlowScope.IPNavigationBean.discloseSubnetTab}">
+            <af:panelStretchLayout id="psl2" styleClass="AFStretchWidth" dimensionsFrom="auto">
+              <f:facet name="center">
+                <af:panelGroupLayout layout="scroll" id="pgl2">
+                  <af:switcher id="s1" facetName="#{pageFlowScope.IPNavigationBean.navigateTo}" defaultFacet="SubnetSearch">
+                    <f:facet name="SubnetSearch">
+                      <af:region value="#{bindings.IPv4SubnetSearchResultsFlow1.regionModel}" id="r3" binding="#{backingBeanScope.ipSubnetSearchBinding}"/>
+                    </f:facet>
+                    <f:facet name="SubnetDetails">
+                      <af:region value="#{bindings.IPv4SubnetDetailsFlow1.regionModel}" id="r4" binding="#{backingBeanScope.ipSubnetDetailsBinding}"/>
+                    </f:facet>
+                  </af:switcher>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:panelStretchLayout>
+          </af:showDetailItem>
+          
+          <af:showDetailItem text="#{inventoryUIBundle.IPv4_ADDRESS}" id="sdi5"
+                             binding="#{pageFlowScope.IPNavigationBean.hostTab}"
+                             disclosed="#{pageFlowScope.IPNavigationBean.hostTabDisclosed}"
+                             disclosureListener="#{pageFlowScope.IPNavigationBean.discloseHostTab}">
+            <af:panelStretchLayout id="psl1" styleClass="AFStretchWidth" dimensionsFrom="auto">
+              <f:facet name="center">
+                <af:panelGroupLayout layout="scroll" id="pgl3">
+                  <af:switcher id="s2" facetName="#{pageFlowScope.IPNavigationBean.navigateTo}" defaultFacet="HostSearch">
+                    <f:facet name="HostSearch">
+                      <af:region value="#{bindings.IPv4AddressSearchResultsFlow1.regionModel}" id="r2" binding="#{backingBeanScope.ipHostSearchBinding}"/>
+                    </f:facet>
+                    <f:facet name="HostDetails">
+                      <af:region value="#{bindings.IPv4AddressDetailsFlow1.regionModel}" id="r5" binding="#{backingBeanScope.ipHostDetailsBinding}"/>
+                    </f:facet>
+                    <f:facet name="HostCreate">
+                      <af:region value="#{bindings.IPv4AddressCreateFlow1.regionModel}" id="r7" binding="#{backingBeanScope.ipHostCreateBinding}"/>
+                    </f:facet>
+                  </af:switcher>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:panelStretchLayout>
+          </af:showDetailItem>
+        </af:panelTabbed>
+        </af:group>
+      </f:facet>
+    </af:pageTemplate>
+</jsp:root>

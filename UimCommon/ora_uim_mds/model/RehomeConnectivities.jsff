@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:cui="/CommsUI"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<af:panelStretchLayout id="psl1" styleClass="AFStretchWidth" dimensionsFrom="auto" bottomHeight="auto">
+<f:facet name="center">
+    <af:panelGroupLayout layout="scroll" id="pgl1" styleClass="AFStretchWidth">
+        <af:panelSplitter id="ps2" orientation="vertical" styleClass="AFStretchWidth" dimensionsFrom="auto" positionedFromEnd="true">
+            <f:facet name="first">
+                <af:panelStretchLayout id="psl2" styleClass="AFStretchWidth" dimensionsFrom="auto" bottomHeight="auto" topHeight="auto">
+                   <f:facet name="top">
+                            <af:outputText id="ot19" value="#{inventoryUIBundle.REHOME_CONNECTIVITIES_MESSAGE}"/>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelSplitter id="ps1" orientation="horizontal" splitterPosition="800" styleClass="AFStretchWidth" positionedFromEnd="true">
+                            <f:facet name="first">
+                                <af:panelGroupLayout id="pgl9" layout="scroll" valign="top">
+                                    <af:spacer width="10" id="s14"/>
+                                      <af:panelCollection id="pcs" styleClass="AFStretchWidth" >
+                                    <af:treeTable value="#{pageFlowScope.SourceDeviceTreeBean.treeModel}"
+                                          var="sourceNode" rowSelection="multiple" id="sourceTree"  rowBandingInterval="0" 
+                                          fetchSize="#{pageFlowScope.SourceDeviceTreeBean.fetchSize}"
+                                          contextMenuSelect="true" styleClass="AFStretchWidth" contentDelivery="immediate"
+                                          expandAllEnabled="#{pageFlowScope.SourceDeviceTreeBean.expandAllEnabled}"
+                                          selectionListener="#{pageFlowScope.SourceDeviceTreeBean.nodeSelectedEvent}"
+                                          binding="#{backingBeanScope.sourceDevice_TreeBinding}"
+                                          disclosedRowKeys="#{pageFlowScope.SourceDeviceTreeBean.treeDisclosedRowKeys}"
+                                          summary="#{inventoryUIBundle.SOURCE_DEVICE_TREE}" columnStretching="multiple">
+                                        <f:facet name="nodeStamp">
+                                            <af:column sortable="false" rowHeader="unstyled" headerText="#{inventoryUIBundle.SOURCE_DEVICES}" id="c2" width="40%"  minimumWidth="100" >
+                                                <af:panelGroupLayout id="pgl5">
+                                                    <af:image source="#{sourceNode.data.icon}" id="nodeIcon" styleClass="invSummaryImage" shortDesc="#{inventoryUIBundle.DEVICE_NODE_IMAGE}"/>
+                                                    <af:outputText value="#{sourceNode.data.label}" id="ot9"/>
+                                                </af:panelGroupLayout>
+                                            </af:column>
+                                        </f:facet>
+                                                <af:column sortable="false" headerText="#{inventoryUIBundle.CONSUMERS}" minimumWidth="200" width="60%"
+                                                          id="c6" filterable="false">
+                                               <af:iterator id="i3" value="#{sourceNode.data.consumers}" var="sourceConsumer">
+                                                    <af:outputText value="#{sourceConsumer.label}"
+                                                                   id="ot4" binding="#{pageFlowScope.sourceConsumer}"/>
+                                                <af:switcher id="s2" defaultFacet="false" facetName="#{sourceConsumer.invStatus != null}">
+                                                        <f:facet name="true">           
+                                                          <af:outputText value=" (#{sourceConsumer.invStatus})" />
+                                                        </f:facet> 
+                                                         <f:facet name="false">           
+                                                            <af:outputText value=" " />
+                                                        </f:facet> 
+                                                </af:switcher>  
+                                                 <br></br>
+                                               </af:iterator>  
+                                            </af:column>
+                                    </af:treeTable>
+                                    </af:panelCollection>
+                                </af:panelGroupLayout>
+                            </f:facet>
+                            <f:facet name="second">
+                                <af:panelGroupLayout id="pgl19" layout="scroll" valign="top">
+                                  <af:panelCollection id="pct" styleClass="AFStretchWidth" >
+                                    <af:treeTable value="#{pageFlowScope.TargetDeviceTreeBean.treeModel}"
+                                                  var="targetNode" rowSelection="multiple" id="targetTree"
+                                                  fetchSize="#{pageFlowScope.TargetDeviceTreeBean.fetchSize}"
+                                                  contextMenuSelect="true"
+                                                  styleClass="AFStretchWidth"
+                                                  contentDelivery="immediate"
+                                                  expandAllEnabled="#{pageFlowScope.TargetDeviceTreeBean.expandAllEnabled}"
+                                                  selectionListener="#{pageFlowScope.TargetDeviceTreeBean.nodeSelectedEvent}"
+                                                  binding="#{backingBeanScope.targetDevice_TreeBinding}"
+                                                  disclosedRowKeys="#{pageFlowScope.TargetDeviceTreeBean.treeDisclosedRowKeys}"
+                                                  rowBandingInterval="0" columnStretching="multiple"
+                                                  summary="#{inventoryUIBundle.TARGET_DEVICE_TREE}">
+                                            <f:facet name="nodeStamp">
+                                                <af:column sortable="false" rowHeader="unstyled" headerText="#{inventoryUIBundle.TARGET_DEVICES}" id="c72" minimumWidth="100" width="40%" >
+                                                    <af:panelGroupLayout id="pgl6">
+                                                        <af:image source="#{targetNode.data.icon}" id="tnodeIcon" styleClass="invSummaryImage" shortDesc="#{inventoryUIBundle.DEVICE_NODE_IMAGE}"/>
+                                                        <af:outputText value="#{targetNode.data.label}" id="ott9"/>
+                                                    </af:panelGroupLayout>
+                                                </af:column>
+                                            </f:facet>
+                                               <af:column sortable="false" headerText="#{inventoryUIBundle.CONSUMERS}" minimumWidth="200" width="60%"
+                                                          id="c1" filterable="false">
+                                               <af:iterator id="i1" value="#{targetNode.data.consumers}" var="targetConsumer">
+                                                    <af:outputText value="#{targetConsumer.label}"
+                                                                   id="ot1" binding="#{pageFlowScope.targetConsumer}"/>
+                                                <af:switcher id="s1" defaultFacet="false" facetName="#{targetConsumer.invStatus != null}">
+                                                        <f:facet name="true">           
+                                                          <af:outputText value=" (#{targetConsumer.invStatus})" />
+                                                        </f:facet> 
+                                                         <f:facet name="false">           
+                                                            <af:outputText value=" " />
+                                                        </f:facet> 
+                                                </af:switcher>  
+                                                 <br></br>
+                                               </af:iterator>  
+                                            </af:column>
+                                    </af:treeTable>
+                                    </af:panelCollection>
+                                    <af:spacer width="10" id="s141"/>
+                                </af:panelGroupLayout>
+                            </f:facet>
+                        </af:panelSplitter>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <af:panelGroupLayout id="pg39" halign="right" layout="scroll">
+                            <af:panelGroupLayout id="pg75" layout="horizontal">
+                                <af:toolbar id="t5">
+                                      <af:commandToolbarButton text="#{inventoryUIBundle.ADD_TO_REHOME}" id="ctb3"
+                                                               actionListener="#{pageFlowScope.RehomeConnectivitiesBean.addToReview}"
+                                                               disabled="#{pageFlowScope.RehomeConnectivitiesBean.disableAddToRehome}"
+                                                               binding="#{backingBeanScope.addToRehomeBinding}"
+                                                  partialTriggers="pcs:sourceTree pct:targetTree"/>
+                                </af:toolbar>
+                            </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </f:facet>
+            <f:facet name="second">
+               <af:panelHeader text="#{inventoryUIBundle.PROPOSED_CHANGES}" id="sdh12" styleClass="AFStretchWidth">
+                    <af:panelCollection id="pc2" styleClass="AFStretchWidth" featuresOff="viewMenu detach">
+                        <f:facet name="toolbar">
+                            <af:toolbar id="tdmToolbar">
+                              <af:commandToolbarButton id="ctb" shortDesc="#{inventoryUIBundle.REMOVE}" text="#{inventoryUIBundle.REMOVE}"
+                                                             icon="/images/delete_ena.png" disabledIcon="/images/delete_dis.png"
+                                                             disabled="#{pageFlowScope.RehomeConnectivitiesBean.disableRemove}"
+                                                             binding="#{backingBeanScope.removeButton}" partialTriggers="ptbl" 
+                                                             actionListener="#{pageFlowScope.RehomeConnectivitiesBean.removeItem}"/>
+                               </af:toolbar>
+                        </f:facet>
+                        <af:table summary="#{inventoryUIBundle.PROPOSED_CHANGES_SUMMARY}" var="row"
+                                  value="#{pageFlowScope.RehomeConnectivitiesBean.proposedChanges}"
+                                  rowBandingInterval="0" id="ptbl" rowSelection="multiple"
+                                  selectionListener="#{pageFlowScope.RehomeConnectivitiesBean.selectItemListener}"
+                                  emptyText="#{inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET}"
+                                  styleClass="AFStretchWidth" contentDelivery="immediate" columnStretching="multiple"
+                                  binding="#{pageFlowScope.RehomeConnectivitiesBean.reviewTable}" >
+                            <af:column sortable="false" headerText="#{inventoryUIBundle.CONNECTION}" rowHeader="unstyled" id="c3" width="34%">
+                                <af:outputText value="#{pageFlowScope.RehomeConnectivitiesBean.consumerLabel}" id="ot2"/>
+                            </af:column>
+                            <af:column sortable="false" headerText="#{inventoryUIBundle.UNASSIGN_FROM_DEVICE}" width="33%" id="c4">
+                                <af:iterator id="i2" value="#{row.sourceChildItems}" var="source">
+                                    <af:outputText value="#{pageFlowScope.RehomeConnectivitiesBean.sourceLabel}"
+                                                   id="ot3"/>
+                                    <br></br>
+                                </af:iterator>
+                            </af:column>
+                            <af:column sortable="false" headerText="#{inventoryUIBundle.ASSIGN_TO_DEVICE}" width="33%" id="c5">
+                                <af:iterator id="it13" value="#{row.targetChildItems}" var="target">
+                                    <af:outputText value="#{pageFlowScope.RehomeConnectivitiesBean.targetLabel}" id="on12"/>
+                                    <br></br>
+                                </af:iterator>
+                            </af:column>
+                        </af:table>
+                        </af:panelCollection>
+                    </af:panelHeader>
+                  </f:facet>  
+            </af:panelSplitter>
+        </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="bottom">
+        <af:panelGroupLayout id="pg29" halign="right" layout="scroll">
+            <af:panelGroupLayout id="pgl3" layout="horizontal">
+                <af:toolbar id="t4">
+                      <af:commandToolbarButton text="#{inventoryUIBundle.DONE}" id="ctb1" 
+                                               binding="#{backingBeanScope.okButton}" 
+                                               actionListener="#{pageFlowScope.RehomeConnectivitiesBean.createActivityItems}"
+                                               disabled="#{pageFlowScope.RehomeConnectivitiesBean.disableOk}"
+                                               partialTriggers="pc2:ptbl"/>
+                      <af:spacer width="5" height="4" id="s4"/>
+                      <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb2" actionListener="#{pageFlowScope.RehomeConnectivitiesBean.cancel}"/>
+                         <cui:WarningDialog id="wd" binding="#{backingBeanScope.navigationWarningDialog}"/>
+                </af:toolbar>
+            </af:panelGroupLayout>
+        </af:panelGroupLayout>
+    </f:facet>
+</af:panelStretchLayout>    
+</jsp:root>

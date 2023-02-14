@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:inventory="http://xmlns.oracle.com/communications/studio/model/inventory" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="inventory:EnabledExtensionPoint" id="eep=EquipmentHolderSpecification__TransitionManager_validateObjectStateTransition" type="eep" typeName="Enabled Extension Point" name="EquipmentHolderSpecification__TransitionManager_validateObjectStateTransition" resource="/ora_uim_baseextpts/model/EquipmentHolderSpecification__TransitionManager_validateObjectStateTransition.rstpscope">
+    <note lang="default"/>
+    <project>
+      <relation ref="ivprj=ora_uim_baseextpts" type="Inventory Project" name="Dependency">
+        <target name="ora_uim_baseextpts" typeName="Inventory Project"/>
+      </relation>
+    </project>
+    <point>
+      <relation ref="ep=TransitionManager_validateObjectStateTransition" type="Extension Point" name="Point" kind="Entity">
+        <target name="TransitionManager_validateObjectStateTransition" typeName="Extension Point"/>
+      </relation>
+    </point>
+  </entity>
+</model:Model>

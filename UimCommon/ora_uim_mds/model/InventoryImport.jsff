@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2014, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    3/12/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:cui="/CommsUI">
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout id="pgl1" binding="#{backingBeanScope.InventoryImport_panelGroupLayout}">
+      <cui:WarningDialog id="wd" binding="#{backingBeanScope.navigationWarningDialog}"/>
+      <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left">
+            <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                           value="#{pageFlowScope.InventoryImportResultBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+            <af:menuBar id="menuBar1">
+              <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invEditMenu"/>
+            </af:menuBar>
+            <af:popup id="BISearchPopup" binding="#{backingBeanScope.execRule_businessInteractionSearch}" contentDelivery="lazyUncached">
+                <af:dialog id="BISearchPopup_d1" type="none"
+                           title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                    <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                        <f:facet name="center">
+                           <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                        </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.InventoryImportResultBean.afterBusinessInteractionSelectionChange}"/>
+            </af:popup>
+        </af:panelGroupLayout>
+        <af:panelHeader text="#{inventoryUIBundle.EXECUTE_RULE}"
+                        id="ph1" helpTopicId="OHW_invImportExport">
+          <f:facet name="toolbar">
+            <af:panelGroupLayout layout="horizontal">
+            
+              <af:commandButton text="#{inventoryUIBundle.PROCESS}" id="cb1"
+                                action="#{pageFlowScope.InventoryImportEditBean.onProcess}"/>
+            </af:panelGroupLayout>
+          </f:facet>
+      
+        <af:panelGroupLayout layout="scroll" id="pgl23">
+                 <af:showDetailHeader text="#{inventoryUIBundle.EXECUTE_RULE_INFORMATION}"
+                                 disclosed="true">
+              <af:panelGroupLayout>
+                <af:panelFormLayout id="pfl1" maxColumns="2" rows="2"
+                                    labelWidth="33%" fieldWidth="67%">
+                  <af:selectOneChoice id="rulesetDropdown"
+                                      label="#{inventoryUIBundle.RULESET}:"
+                                      value="#{pageFlowScope.InventoryImportEditBean.selectedRuleset}"
+                                      showRequired="true">
+                    <f:selectItems binding="#{pageFlowScope.InventoryImportEditBean.ruleSetEntities}"
+                                   id="si1"/>
+                  </af:selectOneChoice>
+                  <af:inputFile label="#{inventoryUIBundle.FILE}:" id="if1"
+                                value="#{pageFlowScope.InventoryImportEditBean.inputFile}"/>
+                </af:panelFormLayout>
+              </af:panelGroupLayout>
+            </af:showDetailHeader>
+   
+        </af:panelGroupLayout>
+          </af:panelHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

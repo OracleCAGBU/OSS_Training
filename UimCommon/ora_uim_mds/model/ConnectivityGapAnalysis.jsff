@@ -1,0 +1,360 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:panelStretchLayout id="psl1" styleClass="AFStretchWidth" dimensionsFrom="auto">
+        <f:facet name="center">
+            <af:panelGroupLayout id="pgl1" layout="scroll" binding="#{backingBeanScope.CGA_view_panelGroupLayout}">
+                <af:panelHeader text="#{inventoryUIBundle.GAP_ANALYSIS}" id="ph1">
+                    <trh:tableLayout>
+                        <!-- First Row -->
+                        <trh:rowLayout>
+                            <trh:cellFormat halign="left">
+                                <!-- Empty Cell -->
+                            </trh:cellFormat>
+                            <trh:cellFormat halign="left">
+                                <af:spacer width="5" height="10"/>
+                                <af:outputLabel value="#{inventoryUIBundle.SOURCE}" id="selectOneChoiceLabel1"/>
+                                <af:spacer width="25" height="10"/>
+                            </trh:cellFormat>
+                            <trh:cellFormat halign="left">
+                                <af:spacer width="5" height="10"/>
+                                <af:outputLabel value="#{inventoryUIBundle.INTERMEDIATE}" id="selectOneChoiceLabel2"/>
+                                <af:spacer width="25" height="10"/>
+                            </trh:cellFormat>
+                            <trh:cellFormat halign="left">
+                                <af:spacer width="5" height="10"/>
+                                <af:outputLabel value="#{inventoryUIBundle.TARGET}" id="selectOneChoiceLabel3"/>
+                                <af:spacer width="25" height="10"/>
+                            </trh:cellFormat>
+                        </trh:rowLayout>
+                        <af:spacer width="120" height="10" id="sp1"/>
+                        
+                        <!-- Second Row -->
+                        <trh:rowLayout>
+                            <trh:cellFormat halign="left">
+                                <af:outputLabel value="#{inventoryUIBundle.TYPE}" id="scl4"/>
+                                <af:spacer width="25" height="10"/>
+                            </trh:cellFormat>
+                            <trh:cellFormat halign="left">
+                                <af:selectOneChoice id="soc1"
+                                                    value="#{pageFlowScope.ConnectivityGapAnalysisBean.source}"
+                                                    autoSubmit="true"
+                                                    shortDesc="#{inventoryUIBundle.SOURCE}-#{inventoryUIBundle.TYPE}">
+                                    <f:selectItems id="si1"
+                                                   binding="#{pageFlowScope.ConnectivityGapAnalysisBean.sourceList}"/>
+                                </af:selectOneChoice>
+                                <af:spacer width="25" height="10"/>
+                            </trh:cellFormat>
+                            <trh:cellFormat halign="left">
+                                <af:selectOneChoice id="soc2"
+                                                    value="#{pageFlowScope.ConnectivityGapAnalysisBean.intermediate}"
+                                                    autoSubmit="true"
+                                                    shortDesc="#{inventoryUIBundle.INTERMEDIATE}-#{inventoryUIBundle.TYPE}">
+                                    <f:selectItems id="si3"
+                                                   binding="#{pageFlowScope.ConnectivityGapAnalysisBean.intermediateList}"/>
+                                </af:selectOneChoice>
+                                <af:spacer width="25" height="10"/>
+                            </trh:cellFormat>
+                            <trh:cellFormat halign="left">
+                                <af:selectOneChoice id="soc3"
+                                                    value="#{pageFlowScope.ConnectivityGapAnalysisBean.target}"
+                                                    autoSubmit="true"
+                                                    shortDesc="#{inventoryUIBundle.TARGET}-#{inventoryUIBundle.TYPE}">
+                                    <f:selectItems id="si4"
+                                                   binding="#{pageFlowScope.ConnectivityGapAnalysisBean.targetList}"/>
+                                </af:selectOneChoice>
+                                <af:spacer width="25" height="10"/>
+                            </trh:cellFormat>
+                        </trh:rowLayout>
+                        <af:spacer width="120" height="10" id="sp2"/>
+                        <!-- Third Row -->
+                        <trh:rowLayout>
+                            <trh:cellFormat halign="left">
+                                <af:outputLabel value="#{pageFlowScope.ConnectivityGapAnalysisBean.outputLabelText}"
+                                                id="scl5"/>
+                                <af:spacer width="25" height="10"/>
+                            </trh:cellFormat>
+                            <trh:cellFormat halign="left">
+                                <af:panelGroupLayout id="pglc1" layout="horizontal" halign="left">
+                                    <af:inputText id="textInput" maximumLength="50" autoSubmit="true"
+                                                  value="#{pageFlowScope.ConnectivityGapAnalysisBean.sourceLocation}"
+                                                  shortDesc="#{inventoryUIBundle.SOURCE}-#{inventoryUIBundle.NETWORK_ENTITY_LOCATION}"
+                                                  binding="#{backingBeanScope.gapAnalysisSourceLocation}">
+                                        <af:autoSuggestBehavior suggestItems="#{pageFlowScope.ConnectivityGapAnalysisBean.getLocationHandler}"/>
+                                    </af:inputText>
+                                    <af:commandImageLink id="a-conn-sls" icon="/images/search_ena.png"
+                                                         shortDesc="#{inventoryUIBundle.SEARCH}"
+                                                         rendered="#{(pageFlowScope.ConnectivityGapAnalysisBean.serviceConnectivityMode)}">
+                                        <af:showPopupBehavior popupId="propertyLocationSearchPopup"
+                                                              triggerType="click"/>
+                                        <af:setActionListener from="true"
+                                                              to="#{pageFlowScope.showSourceServiceLocation}"/>
+                                        <af:setActionListener from="false"
+                                                              to="#{pageFlowScope.showIntermediateServiceLocation}"/>
+                                        <af:setActionListener from="false"
+                                                              to="#{pageFlowScope.showTargetServiceLocation}"/>
+                                    </af:commandImageLink>
+                                    <af:commandImageLink id="a-conn-clear" icon="/images/clear_ena.png"
+                                                         shortDesc="#{inventoryUIBundle.CLEAR}"
+                                                         rendered="#{pageFlowScope.ConnectivityGapAnalysisBean.serviceConnectivityMode}"
+                                                         actionListener="#{pageFlowScope.ConnectivityGapAnalysisBean.clearSourceServiceLocation}"></af:commandImageLink>
+                                </af:panelGroupLayout>
+                                <af:spacer width="25" height="10"/>
+                            </trh:cellFormat>
+                            <trh:cellFormat halign="left">
+                                <af:panelGroupLayout id="pglc2" layout="horizontal" halign="left">
+                                    <af:inputText id="text1" maximumLength="50" autoSubmit="true"
+                                                  value="#{pageFlowScope.ConnectivityGapAnalysisBean.intermediateLocation}"
+                                                  shortDesc="#{inventoryUIBundle.INTERMEDIATE}-#{inventoryUIBundle.NETWORK_ENTITY_LOCATION}"
+                                                  binding="#{backingBeanScope.gapAnalysisIntermediateLocation}">
+                                        <af:autoSuggestBehavior suggestItems="#{pageFlowScope.ConnectivityGapAnalysisBean.getLocationHandler}"/>
+                                    </af:inputText>
+                                    <af:commandImageLink id="i-conn-sls" icon="/images/search_ena.png"
+                                                         shortDesc="#{inventoryUIBundle.SEARCH}"
+                                                         rendered="#{(pageFlowScope.ConnectivityGapAnalysisBean.serviceConnectivityMode)}">
+                                        <af:showPopupBehavior popupId="propertyLocationSearchPopup"
+                                                              triggerType="click"/>
+                                        <af:setActionListener from="false"
+                                                              to="#{pageFlowScope.showSourceServiceLocation}"/>
+                                        <af:setActionListener from="true"
+                                                              to="#{pageFlowScope.showIntermediateServiceLocation}"/>
+                                        <af:setActionListener from="false"
+                                                              to="#{pageFlowScope.showTargetServiceLocation}"/>
+                                    </af:commandImageLink>
+                                    <af:commandImageLink id="i-conn-clear" icon="/images/clear_ena.png"
+                                                         shortDesc="#{inventoryUIBundle.CLEAR}"
+                                                         rendered="#{pageFlowScope.ConnectivityGapAnalysisBean.serviceConnectivityMode}"
+                                                         actionListener="#{pageFlowScope.ConnectivityGapAnalysisBean.clearIntermedaiteServiceLocation}"></af:commandImageLink>
+                                </af:panelGroupLayout>
+                                <af:spacer width="25" height="10"/>
+                            </trh:cellFormat>
+                            <trh:cellFormat halign="left">
+                                <af:panelGroupLayout id="pglc3" layout="horizontal" halign="left">
+                                    <af:inputText id="text2" maximumLength="50" autoSubmit="true"
+                                                  value="#{pageFlowScope.ConnectivityGapAnalysisBean.targetLocation}"
+                                                  shortDesc="#{inventoryUIBundle.TARGET}-#{inventoryUIBundle.NETWORK_ENTITY_LOCATION}"
+                                                  binding="#{backingBeanScope.gapAnalysisTargetLocation}">
+                                        <af:autoSuggestBehavior suggestItems="#{pageFlowScope.ConnectivityGapAnalysisBean.getLocationHandler}"/>
+                                    </af:inputText>
+                                    <af:commandImageLink id="z-conn-sls" icon="/images/search_ena.png"
+                                                         shortDesc="#{inventoryUIBundle.SEARCH}"
+                                                         rendered="#{(pageFlowScope.ConnectivityGapAnalysisBean.serviceConnectivityMode)}">
+                                        <af:showPopupBehavior popupId="propertyLocationSearchPopup"
+                                                              triggerType="click"/>
+                                        <af:setActionListener from="false"
+                                                              to="#{pageFlowScope.showSourceServiceLocation}"/>
+                                        <af:setActionListener from="false"
+                                                              to="#{pageFlowScope.showIntermediateServiceLocation}"/>
+                                        <af:setActionListener from="true"
+                                                              to="#{pageFlowScope.showTargetServiceLocation}"/>
+                                    </af:commandImageLink>
+                                    <af:commandImageLink id="z-conn-clear" icon="/images/clear_ena.png"
+                                                         shortDesc="#{inventoryUIBundle.CLEAR}"
+                                                         rendered="#{pageFlowScope.ConnectivityGapAnalysisBean.serviceConnectivityMode}"
+                                                         actionListener="#{pageFlowScope.ConnectivityGapAnalysisBean.clearTargetServiceLocation}"></af:commandImageLink>
+                                </af:panelGroupLayout>
+                                <af:spacer width="25" height="10"/>
+                            </trh:cellFormat>
+                        </trh:rowLayout>
+                        <af:spacer width="120" height="10" id="sp3"/>
+                        <!-- Fourth Row -->
+                        <trh:rowLayout>
+                            <trh:cellFormat halign="left">
+                                <af:outputLabel value="#{inventoryUIBundle.DEVICE_IDENTIFIER}" id="scl6"/>
+                            </trh:cellFormat>
+                            <trh:cellFormat halign="left">
+                                <af:inputText id="it7" maximumLength="50"
+                                              value="#{pageFlowScope.ConnectivityGapAnalysisBean.sourceIdentifier}"
+                                              shortDesc="#{inventoryUIBundle.SOURCE}-#{inventoryUIBundle.DEVICE_IDENTIFIER}"/>
+                                <af:spacer width="25" height="10"/>
+                            </trh:cellFormat>
+                            <trh:cellFormat halign="left">
+                                <af:inputText id="it12" maximumLength="50"
+                                              value="#{pageFlowScope.ConnectivityGapAnalysisBean.intermediateIdentifier}"
+                                              shortDesc="#{inventoryUIBundle.INTERMEDIATE}-#{inventoryUIBundle.DEVICE_IDENTIFIER}"/>
+                                <af:spacer width="25" height="10"/>
+                            </trh:cellFormat>
+                            <trh:cellFormat halign="left">
+                                <af:inputText id="it17" maximumLength="50"
+                                              value="#{pageFlowScope.ConnectivityGapAnalysisBean.targetIdentifier}"
+                                              shortDesc="#{inventoryUIBundle.TARGET}-#{inventoryUIBundle.DEVICE_IDENTIFIER}"/>
+                                <af:spacer width="25" height="10"/>
+                            </trh:cellFormat>
+                        </trh:rowLayout>
+                        <!-- Fifth Row -->
+                        <trh:rowLayout>
+                            <trh:cellFormat halign="left"></trh:cellFormat>
+                            <trh:cellFormat halign="left">
+                                <af:selectBooleanCheckbox text="Include Jumpers in Paths" id="sbc1"
+                                                          value="#{pageFlowScope.ConnectivityGapAnalysisBean.showJumpers}"/>
+                                <af:spacer width="25" height="10"/>
+                            </trh:cellFormat>
+                            <trh:cellFormat halign="left"></trh:cellFormat>
+                            <trh:cellFormat halign="left"></trh:cellFormat>
+                        </trh:rowLayout>
+                        <!-- Sixth Row -->
+                        <trh:rowLayout>
+                            <trh:cellFormat halign="left">
+                                <af:outputLabel value="#{inventoryUIBundle.CONNECTIVITIES_SUPPORTED_BY}" id="noOfCL1"
+                                                for="sup2"/>
+                                <af:spacer width="25" height="10"/>
+                            </trh:cellFormat>
+                            <trh:cellFormat halign="left" >
+                                <af:selectOneChoice id="sup2"
+                                                    value="#{pageFlowScope.ConnectivityGapAnalysisBean.selectedSupportedBy}"
+                                                    autoSubmit="true">
+                                    <f:selectItems id="sup3"
+                                                   value="#{pageFlowScope.ConnectivityGapAnalysisBean.supportedByList}"/>
+                                </af:selectOneChoice>
+                                <af:spacer width="25" height="10"/>
+                            </trh:cellFormat>
+                            <trh:cellFormat halign="left" >
+                                <af:selectBooleanCheckbox text="#{inventoryUIBundle.CONTIGUOUS_CHANNELS}" id="conn-ascn"
+                                                          value="#{pageFlowScope.ConnectivityGapAnalysisBean.contiguousChannels}"/>
+                                <af:spacer width="25" height="10"/>
+                            </trh:cellFormat>
+                             <trh:cellFormat halign="left"></trh:cellFormat>
+                        </trh:rowLayout>
+                        <!-- Seventh Row -->
+                        <trh:rowLayout>
+                            <trh:cellFormat halign="left">
+                                <af:outputLabel value="#{inventoryUIBundle.CUSTOM_TUNING}" id="scl7"/>
+                            </trh:cellFormat>
+                            <trh:cellFormat halign="left" columnSpan="3">
+                                <af:inputNumberSlider id="ins1" maximum="100" majorIncrement="10" minimumIncrement="-10"
+                                                      contentStyle="width: 50em" minorIncrement="-10" autoSubmit="true"
+                                                      shortDesc="#{inventoryUIBundle.SHORT_DESCRIPTION}"
+                                                      value="#{pageFlowScope.ConnectivityGapAnalysisBean.sliderValue}"/>
+                            </trh:cellFormat>
+                        </trh:rowLayout>
+                    </trh:tableLayout>
+                    <af:panelFormLayout id="pf1">
+                    </af:panelFormLayout>
+                    <trh:tableLayout width="100%" cellSpacing="0" cellPadding="2">
+                        <trh:rowLayout halign="right">
+                            <trh:cellFormat width="100%">&amp;nbsp;</trh:cellFormat>
+                            <trh:cellFormat halign="center">
+                                <af:commandToolbarButton text="#{inventoryUIBundle.ANALYZE}" id="search"
+                                                         actionListener="#{pageFlowScope.ConnectivityGapAnalysisBean.analyzeGaps}"
+                                                         partialTriggers="ph2"/>
+                            </trh:cellFormat>
+                            <trh:cellFormat halign="center">
+                                <af:commandToolbarButton text="#{inventoryUIBundle.RESET}" id="reset"
+                                                         actionListener="#{pageFlowScope.ConnectivityGapAnalysisBean.resetPage}"
+                                                         accessKey="#{inventoryUIBundle.RESET_ACCESS_KEY}"/>
+                            </trh:cellFormat>
+                        </trh:rowLayout>
+                    </trh:tableLayout>
+                </af:panelHeader>
+                <af:spacer width="10" height="10" id="s5"/>
+                <af:panelHeader text="#{inventoryUIBundle.GAP_ANALYSIS_RESULTS}" id="ph2">
+                    <af:showDetailHeader text="" disclosed="true" id="sdh1">
+                        <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                            <f:facet name="menus"/>
+                            <f:facet name="toolbar"/>
+                            <f:facet name="statusbar"/>
+                            <af:treeTable value="#{pageFlowScope.ConnectivityGapAnalysisBean.model}" var="row"
+                                          autoHeightRows="15" rowBandingInterval="0"
+                                          binding="#{pageFlowScope.ConnectivityGapAnalysisBean.segmentTreeTable}"
+                                          selectionListener="#{pageFlowScope.ConnectivityGapAnalysisBean.selectAction}"
+                                          rowSelection="single" varStatus="vs" styleClass="AFStretchWidth" id="t2"
+                                          summary="#{inventoryUIBundle.PRIMARY_PATHS}">
+                                <af:column id="c8" headerText=" " width="20">
+                                    <af:selectBooleanRadio text=" " id="sbr2" group="group2"
+                                                           value="#{pageFlowScope.ConnectivityGapAnalysisBean.selectRadio}"
+                                                           visible="#{row.hopCount gt 0}"/>
+                                </af:column>
+                                <f:facet name="nodeStamp">
+                                    <af:column id="c9" headerText="#{inventoryUIBundle.HOPS}" width="25"
+                                               rowHeader="unstyled">
+                                        <af:outputText id="sbr3" value="#{row.hopCount}"/>
+                                    </af:column>
+                                </f:facet>
+                                <af:column sortable="true" headerText="#{inventoryUIBundle.A_END}"
+                                           inlineStyle="border-right: 0px;" width="200" id="c3">
+                                    <af:outputText value="#{row.ALocation}" id="ot9"/>
+                                    <af:panelGroupLayout id="pg1" layout="horizontal">
+                                        <af:outputText value="#{row.ALocation}   #{row.AInterface.displayInfo}"
+                                                       id="ot21"/>
+                                        <af:spacer width="10" id="s4"/>
+                                    </af:panelGroupLayout>
+                                </af:column>
+                                <!-- Column to display the Segment Network Information. -->
+                                <af:column sortable="true" headerText="#{inventoryUIBundle.NETWORK}"
+                                           inlineStyle="border-right: 0px;" width="150" align="left" id="c4">
+                                    <af:panelGroupLayout id="pg57" layout="horizontal" halign="left" valign="top">
+                                    <!--    <af:link id="ci87"> -->
+                                            <af:image source="/images/Network_16.png" shortDesc="Network" id="i97"
+                                                      rendered="#{row.networkIcon}" inlineStyle="text-align:left;"/>
+                                   <!--     </af:link> -->
+                                        <af:spacer width="10" id="sp27"/>
+                                        <af:outputText value="#{row.networkName}" id="ot33"/>
+                                    </af:panelGroupLayout>
+                                </af:column>
+                                <!-- Column to display the Segment Details. -->
+                                <af:column sortable="true" headerText=" " filterable="true"
+                                           inlineStyle="border-right: 0px;" width="500" align="center" id="c5">
+                                    <f:facet name="header">
+                                        <af:panelGroupLayout id="pg12" halign="center" layout="horizontal">
+                                            <af:outputText id="ot77" value="#{inventoryUIBundle.SEGMENT}"/>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                    <af:panelGroupLayout id="pgl6" layout="horizontal" halign="center">
+                                        <!-- The Link is displayed only for TDMFacility -->
+                                        <!--af:link id="cl5" actionListener="#{pageFlowScope.ConnectivityGapAnalysisBean.getNavigationAction}"-->
+                                        <af:outputText value="#{row.pipeDisplayInfo}" id="ot6"/>
+                                        <!--/af:link-->
+                                    </af:panelGroupLayout>
+                                </af:column>
+                                <!-- Column to display the Z-Location. -->
+                                <af:column sortable="true" headerText="#{inventoryUIBundle.Z_END} " id="c6"
+                                           inlineStyle="text-align:right;" width="250">
+                                    <af:outputText value="#{row.ZLocation}" id="ot19"/>
+                                    <af:panelGroupLayout id="pg7" layout="horizontal" halign="right">
+                                        <af:outputText value="#{row.ZInterface.displayInfo}   #{row.ZLocation}"
+                                                       id="ot27"/>
+                                    </af:panelGroupLayout>
+                                </af:column>
+                                <af:column id="c1" headerText="#{inventoryUIBundle.JUMPERS_PRESENT}" width="60"
+                                           binding="#{backingBeanScope.jumperPresent}"
+                                           visible="#{pageFlowScope.ConnectivityGapAnalysisBean.showJumpers}"
+                                           minimumWidth="20" align="center">
+                                    <af:commandImageLink icon="/images/checkmark_status_ena.png" id="sbr1"
+                                                         visible="#{row.jumperPresent}"/>
+                                </af:column>
+                            </af:treeTable>
+                        </af:panelCollection>
+                    </af:showDetailHeader>
+                    <af:panelGroupLayout id="pgl2" halign="right" layout="scroll">
+                        <af:panelGroupLayout id="pgl3" layout="horizontal">
+                            <af:toolbar id="t4">
+                                <af:commandToolbarButton text="#{inventoryUIBundle.ASSIGN}" id="ctb14"
+                                                         actionListener="#{pageFlowScope.ConnectivityGapAnalysisBean.associate}"
+                                                         disabled="#{!(pageFlowScope.ConnectivityGapAnalysisBean.selectedModel.hopCount gt 0)}"
+                                                         partialTriggers="pc1:t2"/>
+                                <af:spacer width="10" height="10" id="s3"/>
+                                <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb2"
+                                                         actionListener="#{pageFlowScope.ConnectivityGapAnalysisBean.cancel}"/>
+                            </af:toolbar>
+                        </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                    <af:popup id="propertyLocationSearchPopup" binding="#{backingBeanScope.searchPropertyLocation}"
+                              contentDelivery="lazyUncached">
+                        <af:dialog title="#{inventoryUIBundle.PROPERTY_LOCATION_SEARCH}" id="pl" type="none">
+                            <af:panelStretchLayout id="pl_2" styleClass="invCommonPanelStretchLayout">
+                                <f:facet name="center">
+                                    <af:region value="#{bindings.LocationSearchResultsFlow1.regionModel}" id="r1"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                        <af:serverListener type="refreshEntity"
+                                           method="#{pageFlowScope.ConnectivityGapAnalysisBean.refresh}"/>
+                    </af:popup>
+                </af:panelHeader>
+            </af:panelGroupLayout>
+        </f:facet>
+    </af:panelStretchLayout>
+</jsp:root>

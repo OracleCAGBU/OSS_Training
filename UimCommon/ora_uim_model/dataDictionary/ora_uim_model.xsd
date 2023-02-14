@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:tns="http://xmlns.oracle.com/communications/sce/dictionary/ora_uim_model/ora_uim_model" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/communications/sce/dictionary/ora_uim_model/ora_uim_model">
+                                    <xs:simpleType name="InventoryState">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+                <xs:simpleType name="AttachmentType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+                <xs:minLength value="0"/>
+        </xs:restriction>
+  </xs:simpleType>
+                                                                                <xs:simpleType name="Medium">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+                <xs:minLength value="0"/>
+        </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="TransmissionSignalType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+                <xs:minLength value="0"/>
+        </xs:restriction>
+  </xs:simpleType>
+                                            <xs:simpleType name="NodeType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+                <xs:minLength value="0"/>
+        </xs:restriction>
+  </xs:simpleType>
+            <xs:simpleType name="EdgeAssocType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+                <xs:minLength value="0"/>
+        </xs:restriction>
+  </xs:simpleType>
+                                                <xs:simpleType name="NetworkTopology">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+                <xs:minLength value="0"/>
+        </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="RingType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+                <xs:minLength value="0"/>
+        </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="ProtectionType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+                <xs:minLength value="0"/>
+        </xs:restriction>
+  </xs:simpleType>
+                <xs:simpleType name="EMSServiceState">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+                <xs:minLength value="0"/>
+        </xs:restriction>
+  </xs:simpleType>
+        <xs:simpleType name="ProcessingSignalType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+                <xs:minLength value="0"/>
+        </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="SignalRelType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+                <xs:minLength value="0"/>
+        </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="TerminationPointSignalType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+                <xs:minLength value="0"/>
+        </xs:restriction>
+  </xs:simpleType>
+                        <xs:simpleType name="id">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="name">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="description">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="effDate">
+    <xs:restriction base="xs:dateTime"/>
+  </xs:simpleType>
+  <xs:simpleType name="workflowTemplate">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="unit">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+                                                                                                                            <xs:simpleType name="toEntityRoleKey">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="fromEntityRoleKey">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="direction">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="fromEntityId">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="fromEntityName">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="fromEntitySpecName">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="toEntityId">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="toEntityName">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="toEntitySpecName">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+                            <xs:simpleType name="versioned">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+    <xs:simpleType name="gapPipe">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+    <xs:simpleType name="minTrailPaths">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+    <xs:simpleType name="maxTrailPaths">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+    <xs:simpleType name="nativeEMSName">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="physicalLocation">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+                <xs:minLength value="0"/>
+        </xs:restriction>
+  </xs:simpleType>
+        <xs:simpleType name="connectivityIdentifier">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="serial">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+    <xs:simpleType name="aNetworkLocationEntityCode">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="15"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="zNetworkLocationEntityCode">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="15"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="isConfiguredForUse">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+                                            <xs:simpleType name="serialNumber">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="32"/>
+                <xs:minLength value="0"/>
+        </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="networkLocationCode">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="isRootElement">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+    <xs:simpleType name="portNumber">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+    <xs:simpleType name="vendorPortName">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="customerPortName">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="physicalAddress">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+                <xs:minLength value="0"/>
+        </xs:restriction>
+  </xs:simpleType>
+                <xs:simpleType name="deviceIdentifier">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="32"/>
+                <xs:minLength value="0"/>
+        </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="networkLocationEntityCode">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="15"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="deviceIdentifierSuffixNbr">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+    <xs:simpleType name="interfaceNumber">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="vendorInterfaceNumber">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="customerInterfaceNumber">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="ifType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+                <xs:minLength value="0"/>
+        </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="maxSpeed">
+    <xs:restriction base="xs:decimal"/>
+  </xs:simpleType>
+    <xs:simpleType name="minSpeed">
+    <xs:restriction base="xs:decimal"/>
+  </xs:simpleType>
+    <xs:simpleType name="nominalSpeed">
+    <xs:restriction base="xs:decimal"/>
+  </xs:simpleType>
+    <xs:simpleType name="rateCodeNominalBitRate">
+    <xs:restriction base="xs:decimal"/>
+  </xs:simpleType>
+        <xs:simpleType name="enforceSameChannelAssignment">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+    <xs:simpleType name="isWorkspaceNetwork">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+    <xs:simpleType name="xpos">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+    <xs:simpleType name="ypos">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+    <xs:simpleType name="formattedIdentifier">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="latitude">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="longitude">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="vertical">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="horizontal">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+        <xs:simpleType name="propertyLocationIdentifier">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="isUserNamed">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+    <xs:simpleType name="isNetworkLocationNamed">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+    <xs:simpleType name="areGeocoordinatesLocked">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+    <xs:simpleType name="hasNonValidatedAddress">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+    <xs:simpleType name="hasNonAcceptedAddress">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+                                    <xs:simpleType name="dueDate">
+    <xs:restriction base="xs:dateTime"/>
+  </xs:simpleType>
+    <xs:simpleType name="completedActivityCount">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+                        <xs:simpleType name="signalAddress">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="20"/>
+    </xs:restriction>
+  </xs:simpleType>
+                                                                                                                            <xs:simpleType name="xPos">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+    <xs:simpleType name="yPos">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+                <xs:simpleType name="toEntity">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="fromEntity">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="changedEntity">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+                <xs:minLength value="0"/>
+        </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="geometry">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="AZLocationType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="ConnectivityIdentifierFormat">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="IPAddressVersion">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="MacAddressType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="IPv6AddressType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="identifierFormat">
+    <xs:restriction base="tns:ConnectivityIdentifierFormat"/>
+  </xs:simpleType>
+    <xs:simpleType name="isInternetwork">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+    <xs:simpleType name="isInternetworkExternal">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+    <xs:simpleType name="isAllToOneBundling">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+    <xs:simpleType name="isBundling">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+    <xs:simpleType name="isServiceMultiplexing">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+    <xs:simpleType name="isVLANBased">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+    <xs:simpleType name="maxPacketVirtualNetworkCount">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+    <xs:simpleType name="identifier">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="30"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="flowInterfaceBitRate">
+    <xs:restriction base="xs:decimal"/>
+  </xs:simpleType>
+    <xs:simpleType name="prefix">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="prefixLength">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+    <xs:simpleType name="addressVersion">
+    <xs:restriction base="tns:IPAddressVersion"/>
+  </xs:simpleType>
+    <xs:simpleType name="ipv6AddressType">
+    <xs:restriction base="tns:IPv6AddressType"/>
+  </xs:simpleType>
+    <xs:simpleType name="otherProviderDemarcationPoint">
+    <xs:restriction base="tns:AZLocationType"/>
+  </xs:simpleType>
+    <xs:simpleType name="allowHostAtSubnetBoundaries">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+    <xs:simpleType name="lowerValue">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="upperValue">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="availableHostCount">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+    <xs:simpleType name="isIPNetwork">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+    <xs:simpleType name="numericLowerAddress">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+    <xs:simpleType name="numericUpperAddress">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+    <xs:simpleType name="address">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="45"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="macAddress">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="17"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="macAddressType">
+    <xs:restriction base="tns:MacAddressType"/>
+  </xs:simpleType>
+    <xs:simpleType name="numericAddress">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+    <xs:simpleType name="isServiceLocation">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+    <xs:simpleType name="committedInformationRate">
+    <xs:restriction base="xs:decimal"/>
+  </xs:simpleType>
+    <xs:simpleType name="maxInformationRate">
+    <xs:restriction base="xs:decimal"/>
+  </xs:simpleType>
+    <xs:simpleType name="segment">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="4"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="activityStartDate">
+    <xs:restriction base="xs:dateTime"/>
+  </xs:simpleType>
+    <xs:simpleType name="activityEndDate">
+    <xs:restriction base="xs:dateTime"/>
+  </xs:simpleType>
+    <xs:simpleType name="actualStartDate">
+    <xs:restriction base="xs:dateTime"/>
+  </xs:simpleType>
+    <xs:simpleType name="actualEndDate">
+    <xs:restriction base="xs:dateTime"/>
+  </xs:simpleType>
+    <xs:simpleType name="assignedTo">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="assignedDate">
+    <xs:restriction base="xs:dateTime"/>
+  </xs:simpleType>
+    <xs:simpleType name="percentComplete">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+  <xs:simpleType name="failedReason">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

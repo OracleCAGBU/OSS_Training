@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xsi:type="BusinessEntityType" name="NetworkConnectivity" realizeFromBusinessEntity="true">
+  <com:displayName lang="[default]">NetworkConnectivity</com:displayName>
+  <com:saveVersion>10</com:saveVersion>
+  <com:baseEntityRef>
+    <com:entity>Connectivity</com:entity>
+    <com:entityType>inventoryEntity</com:entityType>
+    <com:relationship>oracle.communications.sce.business.entity.baseEntity</com:relationship>
+  </com:baseEntityRef>
+  <com:id>E:inventoryEntity--NetworkConnectivity</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>inventoryEntity--NetworkConnectivity</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>NetworkConnectivity</data:name>
+    <data:displayName lang="[default]">NetworkConnectivity</data:displayName>
+    <data:dataElement virtual="false">
+      <com:id>unit</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>unit</data:name>
+      <data:displayName lang="[default]">unit</data:displayName>
+      <data:displayName lang="[default]">unit</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>unit</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>unit</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>--+---+J--+x--+D---ofg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>inventoryEntity--NetworkConnectivity</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>7whr--+G--+z1YYcclwe1A</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>unit</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>DFBJ---F--+1KApM---Lzg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>unit</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>---v--+L--+e--+Q---ZYw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>unit</data:dataElementId>
+    <data:information lang="[default]">A unit within the context of a 'hosting' or 'parent' connectivity. For instance, unit identifies a channel (channel address) within a Facility or a Twisted Pair within a Cable.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>Ex1J--+1--+T---VnBwbLg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>unit</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <capability xsi:type="bIEnabledType" enabled="true" id="oracle.communications.sce.poms.capabilities.BusinessInteractionEnabled" history="true" visibilityState="HIDE"/>
+  <implements interface="java.lang.Cloneable"/>
+  <properties abstract="true" hierarchyStrategy="single" interface="oracle.communications.inventory.api.entity.NetworkConnectivity" type="ocim:NetworkConnectivity"/>
+</com:modelEntity>

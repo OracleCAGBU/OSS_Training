@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core">
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+       <af:panelGroupLayout id="pgl1" layout="scroll">
+        <af:panelHeader text="#{inventoryUIBundle.ENTITY_ATTACHMENT_SUMMARY}" id="PAGE_TITLE" styleClass="invSummaryPanelHeader">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:showDetailHeader text="#{inventoryUIBundle.ENTITY_ATTACHMENT_INFORMATION}" disclosed="true" id="sdh1">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelFormLayout id="pfl1">
+                    <af:outputText value="#{pageFlowScope.BusinessInteractionAttachmentSummaryBean.xmlOutput}" id="ot5" escape="false"/>
+                </af:panelFormLayout>
+            </af:showDetailHeader>
+        </af:panelHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+</af:pageTemplate>
+</jsp:root>

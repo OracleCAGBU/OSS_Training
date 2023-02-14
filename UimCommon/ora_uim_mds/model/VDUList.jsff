@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='windows-1250'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <af:panelStretchLayout id="psl1" dimensionsFrom="auto" styleClass="AFStretchWidth">
+        <f:facet name="center">
+            <af:showDetailHeader text="#{inventoryUIBundle.VDU_LIST}" disclosed="true" id="sdh3">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                    <f:facet name="menus"/>
+                    <f:facet name="toolbar"/>
+                    <f:facet name="statusbar">
+                        <af:toolbar id="t4">
+                            <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(pageFlowScope.VDUListBean.vduCollectionModel.rowCount lt 0) ? 0 :  pageFlowScope.VDUListBean.vduCollectionModel.rowCount}"
+                                           id="ot1" styleClass="invSearchOutputLabel" binding="#{backingBeanScope.totalResultsLabel}"
+                                           partialTriggers="resultsTableId"/>
+                        </af:toolbar>
+                    </f:facet>
+                    <af:table id="resultsTableId" value="#{pageFlowScope.VDUListBean.vduCollectionModel}" var="row" rows="1"
+                              emptyText="#{inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET}"
+                              selectionListener="#{pageFlowScope.VDUListBean.vduSelectionListener}" rowBandingInterval="0"
+                              autoHeightRows="#{pageFlowScope.VDUListBean.portletHeight}" contentDelivery="lazy" rowSelection="single"
+                              binding="#{pageFlowScope.VDUListBean.resultsTable}" summary="#{inventoryUIBundle.VDU_LIST_TABLE}">
+                        <af:column headerText="#{inventoryUIBundle.ID}" id="c1" rowHeader="unstyled">
+                            <af:link id="l1" text="#{row.id}" action="vdusummary" actionListener="#{bindings.openSubTaskForEntity.execute}">
+                                <af:setActionListener from="#{pageFlowScope.VDUListBean.logicalDevice.oid}" to="#{objectId}"/>
+                                <af:setActionListener from="#{pageFlowScope.VDUListBean.selectedVDU}" to="#{selectedVDU}"/>
+                            </af:link>
+                        </af:column>
+                        <af:column headerText="#{inventoryUIBundle.NAME}" id="c2">
+                            <af:outputText value="#{row.name}" id="ot2"/>
+                        </af:column>
+                        <af:column headerText="#{inventoryUIBundle.SPECIFICATION}" id="c3">
+                            <af:outputText value="#{row.descriptorName}" id="ot3"/>
+                        </af:column>
+                        <af:column headerText="#{inventoryUIBundle.VDU_FLAVOR}" id="c4">
+                            <af:outputText value="#{row.flavor.name}" id="ot4"/>
+                        </af:column>
+                        <af:column headerText="#{inventoryUIBundle.STATUS}" id="c5">
+                            <af:outputText value="#{row.status}" id="ot5"/>
+                        </af:column>
+                    </af:table>
+                </af:panelCollection>
+            </af:showDetailHeader>
+        </f:facet>
+    </af:panelStretchLayout>
+</jsp:root>

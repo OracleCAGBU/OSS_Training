@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xsi:type="BusinessEntityType" name="InventoryRole" realizeFromBusinessEntity="true">
+  <com:displayName lang="[default]">InventoryRole</com:displayName>
+  <com:saveVersion>8</com:saveVersion>
+  <com:id>E:inventoryEntity--InventoryRole</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>inventoryEntity--InventoryRole</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>InventoryRole</data:name>
+    <data:displayName lang="[default]">InventoryRole</data:displayName>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>n0Nr--+T--+h6Lgwm4AIdw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>inventoryEntity--InventoryRole</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <capability xsi:type="accessControlledType" enabled="true" id="oracle.communications.sce.poms.capabilities.AccessControlled"/>
+  <capability xsi:type="timeboundType" enabled="true" id="oracle.communications.sce.poms.capabilities.Timebound"/>
+  <capability xsi:type="characteristicType" enabled="true" id="oracle.communications.sce.poms.capabilities.Characteristic" spec="CharacteristicSpecification">
+    <characteristicName interface="oracle.communications.inventory.api.entity.InvRoleCharacteristic" name="InvRoleCharacteristic" table="INVENTORYROLE_CHAR"/>
+  </capability>
+  <import type="oracle.communications.inventory.api.entity.Specification"/>
+  <implements interface="java.lang.Cloneable"/>
+  <properties abstract="true" interface="oracle.communications.inventory.api.entity.InventoryRole" type="ocim:InventoryRole"/>
+</com:modelEntity>

@@ -1,0 +1,517 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:pf="/platform/functions">
+		  
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+    <af:panelStretchLayout id="pgl1" binding="#{backingBeanScope.CO_summary_panelGroupLayout}" topHeight="#{pageFlowScope.CustomObjectSummaryBean.topHeight}">
+      <f:facet name="top">
+          <af:panelGroupLayout id="pgsl23" layout="scroll">
+            <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered="#{!pageFlowScope.CustomObjectSummaryBean.previewLayout}">
+                <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                               value="#{pageFlowScope.CustomObjectSummaryBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+                <af:menuBar id="menuBar1">
+                      <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invSummaryMenu"
+                               rendered="#{!(pageFlowScope.CustomObjectSummaryBean.popupMode)}"   />
+                </af:menuBar>
+                <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch2}" contentDelivery="lazyUncached">
+                    <af:dialog id="BISearchPopup_d1" type="none"
+                               title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                        <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                            <f:facet name="center">
+                               <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                            </f:facet>
+                        </af:panelStretchLayout>
+                    </af:dialog>
+                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.CustomObjectSummaryBean.afterBusinessInteractionSelectionChange}"/>
+                </af:popup>
+            </af:panelGroupLayout>
+                    
+            
+        </af:panelGroupLayout>
+      </f:facet>
+        <f:facet name="center">
+        
+        <af:panelHeader text="#{inventoryUIBundle.CUSTOM_OBJECT_SUMMARY} - #{pageFlowScope.CustomObjectSummaryBean.displayInfo}"
+                          id="sdh4" styleClass="invSummaryPanelHeader" helpTopicId="OHW_custObjSummary">
+                <f:facet name="menuBar">
+                  <af:group id="gr55" rendered="#{!pageFlowScope.CustomObjectSummaryBean.previewLayout}">
+                    <af:menuBar id="menuBar2">
+                      <af:menu id="menu5" binding="#{backingBeanScope.InventoryMenuBean.relatedPagesMenu}" styleClass="invSummaryMenu" /> 
+                      <af:menu id="menu6" binding="#{backingBeanScope.InventoryMenuBean.actionsMenu}" styleClass="invSummaryMenu">
+                          <af:clientListener method="goRefreshEntity" type="propertyChange"/>
+                          <af:serverListener type="refreshEntity" method="#{pageFlowScope.CustomObjectSummaryBean.refresh}"/>
+                      </af:menu>
+                     </af:menuBar>
+					<af:popup id="showDeleteWarning" binding="#{backingBeanScope.showDeleteWarning}" contentDelivery="lazyUncached">
+					<af:dialog type="none" title="#{inventoryUIBundle.DELETE_CONFIRMATION_TITLE}">
+					   <f:facet name="buttonBar">
+							<af:toolbar id="del1" binding="#{backingBeanScope.delToolbar}">
+								<af:group id="del2">
+								 <af:outputText id="edel" value="#{pageFlowScope.CustomObjectSummaryBean.deleteConfirmation}"/>
+									<af:spacer width="530"/>
+									<af:commandToolbarButton text="#{inventoryUIBundle.YES}" id="adel" actionListener="#{pageFlowScope.CustomObjectSummaryBean.deleteAfterConfirmation}"/>
+									 <af:spacer width="10"/>
+									<af:commandToolbarButton text="#{inventoryUIBundle.NO}" id="cdel" actionListener="#{pageFlowScope.CustomObjectSummaryBean.cancel}"/>
+								</af:group>
+							</af:toolbar>
+						</f:facet>
+						</af:dialog>
+                </af:popup>
+                  </af:group>
+                </f:facet>  
+        <af:panelGroupLayout layout="scroll" id="pgl23">
+		<af:panelTabbed id="pt7" dimensionsFrom="auto" styleClass="AFStretchWidth" binding="#{backingBeanScope.coTabPanel}">
+			<af:showDetailItem text="#{inventoryUIBundle.GENERAL_INFORMATION}" id="GeneralInfoTab" styleClass="AFStretchWidth" binding="#{backingBeanScope.customobject_generalInfoTab}"
+				rendered="#{pageFlowScope.CustomObjectSummaryBean.renderGeneralInfoTab}" disclosureListener="#{pageFlowScope.CustomObjectSummaryBean.discloseTab}" 
+				disclosed="#{pageFlowScope.CustomObjectSummaryBean.selectedTab == inventoryUIBundle.GENERAL_INFORMATION}">
+					<!-- CUSTOM OBJECT INFORMATION -->
+					<af:showDetailHeader text="#{inventoryUIBundle.CUSTOM_OBJECT_INFORM}"
+                             disclosed="true" id="sdh1" styleClass="invSummaryShowDetailHeader" 
+							 rendered="#{!pageFlowScope.CustomObjectSummaryBean.disableCOInfoPortlet and 
+							 pageFlowScope.CustomObjectSummaryBean.selectedTab == inventoryUIBundle.GENERAL_INFORMATION}">
+					  <f:facet name="info"/>
+					  <f:facet name="legend"/>
+					  <f:facet name="menuBar"/>
+					  <f:facet name="toolbar">
+						<af:commandToolbarButton text="#{inventoryUIBundle.EDIT}" action="edit" id="cb1" actionListener="#{bindings.openSubTaskForEdit.execute}"
+							disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/customobject/flow/CustomObjectEditFlow.xml#CustomObjectEditFlow']}" 
+							rendered="#{!pageFlowScope.CustomObjectSummaryBean.previewLayout &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=CustomObject.EDIT;action=view']}"
+												 accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+							<af:setActionListener from="false" to="#{addMode}"/>  
+						</af:commandToolbarButton>
+					  </f:facet>
+					  <f:facet name="context"/>
+					  <af:panelFormLayout id="custobj" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.CO_summary_panelFormLayout}">
+						<af:panelLabelAndMessage label="#{inventoryUIBundle.ID}" id="custobj-id">
+						  <af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.entityObject.id}" id="ot2"/>
+						</af:panelLabelAndMessage>
+						<af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}"
+												 id="custobj-name">
+						  <af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.entityObject.name}" id="ot3"/>
+						</af:panelLabelAndMessage>
+						<af:panelLabelAndMessage id="custobj-adminState" label="#{inventoryUIBundle.INVENTORY_STATUS}">
+						  <af:outputText id="ot6" value="#{pageFlowScope.CustomObjectSummaryBean.inventoryStatus}"/>
+						<!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.CustomObjectSummaryBean.popupMode}" id="swis618">
+			<f:facet name="false">
+									<af:commandImageLink action="#{pageFlowScope.CustomObjectSummaryBean.getSummaryAction}"
+														 actionListener="#{pageFlowScope.CustomObjectSummaryBean.registerRecentItem}"
+														 disabled="#{pageFlowScope.CustomObjectSummaryBean.installingBIDisabled}"
+														 id="bid3"
+														 shortDesc="#{pageFlowScope.CustomObjectSummaryBean.installingBIShortDesc}"
+														 text="#{pageFlowScope.CustomObjectSummaryBean.installingBILabel}">
+									  <af:setActionListener from="#{pageFlowScope.CustomObjectSummaryBean.inventoryStatusBI.oid}"
+															to="#{objectId}"/>
+									</af:commandImageLink>
+								  </f:facet>
+			<f:facet name="true">
+			<af:outputText id="swftis618" value="#{pageFlowScope.CustomObjectSummaryBean.installingBILabel}"/>
+			</f:facet>
+			</af:switcher>
+			<af:outputText id="installingBIDueDate" value="#{pageFlowScope.CustomObjectSummaryBean.installingBIEffectiveDate}"/>
+			<!--RMI 618 End-->
+						</af:panelLabelAndMessage>
+						<af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}"
+												 id="custobj-ras">
+						  <af:outputText id="ot61" value="#{pageFlowScope.CustomObjectSummaryBean.resourceAssignmentStatus}"/>
+						<!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.CustomObjectSummaryBean.popupMode}" id="swas618">
+			<f:facet name="false">
+									<af:commandImageLink action="#{pageFlowScope.CustomObjectSummaryBean.getSummaryAction}"
+														 actionListener="#{pageFlowScope.CustomObjectSummaryBean.registerRecentItem}"
+														 disabled="#{pageFlowScope.CustomObjectSummaryBean.consumerBIDisabled}"
+														 id="bid4"
+														 shortDesc="#{pageFlowScope.CustomObjectSummaryBean.consumerBIShortDesc}"
+														 text="#{pageFlowScope.CustomObjectSummaryBean.consumerBILabel}">
+									  <af:setActionListener from="#{pageFlowScope.CustomObjectSummaryBean.assignmentBI.oid}"
+															to="#{objectId}"/>
+									</af:commandImageLink>
+								  </f:facet>
+			<f:facet name="true">
+			<af:outputText id="swftas618" value="#{pageFlowScope.CustomObjectSummaryBean.consumerBILabel}"/>
+			</f:facet>
+			</af:switcher>
+			<af:outputText id="consumerBIDueDate" value="#{pageFlowScope.CustomObjectSummaryBean.consumerBIEffectiveDate}"/>
+			<!--RMI 618 End-->
+						</af:panelLabelAndMessage>
+						<af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}" id="custobj-specification">
+						<af:commandImageLink action="SpecificationSummary" id="spc1" actionListener="#{bindings.openSubTaskForSpec.execute}"
+											 shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}"
+											 text="#{pageFlowScope.CustomObjectSummaryBean.specDisplayName}">
+						  
+						  <af:setActionListener from="#{pageFlowScope.CustomObjectSummaryBean.entityObject.specification.oid}" to="#{specObjectId}"/>
+						</af:commandImageLink>
+						</af:panelLabelAndMessage>
+						<af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}"
+												 id="custobj-description">
+						  <af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.entityObject.description}"
+										 id="ot42"/>
+						</af:panelLabelAndMessage>
+						<af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="custobj-lmd" rendered="false">     
+							<af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.entityObject.lastModifiedDate}" id="ot9">
+							   <af:convertDateTime pattern="#{pageFlowScope.CustomObjectSummaryBean.dateTimeFormat}"/>
+							</af:outputText>
+						</af:panelLabelAndMessage>
+						<af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="custobj-lmu" rendered="false">
+							<af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.entityObject.lastModifiedUser}" id="ot10"/>
+						</af:panelLabelAndMessage>
+						<af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="custobj-crd" rendered="false">
+							<af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.entityObject.createdDate}" id="ot11">
+								 <af:convertDateTime pattern="#{pageFlowScope.CustomObjectSummaryBean.dateTimeFormat}"/>
+							</af:outputText>
+						</af:panelLabelAndMessage>
+					<af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="custobj-cru" rendered="false">
+							<af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.entityObject.createdUser}" id="ot12"/>
+						</af:panelLabelAndMessage>
+					  </af:panelFormLayout>
+					  
+					  <!-- show detail collapsible section for external identity -->
+					  <af:showDetail disclosed="#{pageFlowScope.CustomObjectSummaryBean.externalIdentityPopulated}" id="sd1"
+									 disclosedText="#{inventoryUIBundle.EXTERNAL_SYSTEM}" undisclosedText="#{inventoryUIBundle.EXTERNAL_SYSTEM}"
+									 inlineStyle="width:50%;">
+						<af:panelFormLayout id="pfl101" maxColumns="1" rows="2" fieldWidth="69%" labelWidth="31%">
+							<af:panelLabelAndMessage label="#{inventoryUIBundle.EXTERNAL_ARRANGEMENT}" id="plam104">
+								<af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.entityObject.externalArrangement}" id="ot104"/>
+							</af:panelLabelAndMessage>
+							<af:panelLabelAndMessage label="#{inventoryUIBundle.EXTERNAL_MANAGEMENT_DOMAIN}" id="plam101">
+								<af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.entityObject.externalManagementDomain}" id="ot101"/>
+							</af:panelLabelAndMessage>
+							<af:panelLabelAndMessage label="#{inventoryUIBundle.EXTERNAL_NAME}" id="plam102">
+								<af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.entityObject.externalName}" id="ot102"/>
+							</af:panelLabelAndMessage>
+							<af:panelLabelAndMessage label="#{inventoryUIBundle.EXTERNAL_OBJECT_ID}" id="plam103">
+								<af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.entityObject.externalObjectId}" id="ot103"/>
+							</af:panelLabelAndMessage>
+						</af:panelFormLayout>
+					  </af:showDetail>
+					</af:showDetailHeader>
+
+					<!-- CUSTOM OBJECT HIERARCHY -->
+					<af:showDetailHeader text="#{inventoryUIBundle.CUSTOM_OBJECT_HIERARCHY}"
+                                 disclosed="true" id="sdh7" rendered="#{!pageFlowScope.CustomObjectSummaryBean.disableCOHierarchyPortlet and 
+								 pageFlowScope.CustomObjectSummaryBean.selectedTab == inventoryUIBundle.GENERAL_INFORMATION}">
+					  <f:facet name="context"/>
+					  <f:facet name="menuBar"/>
+					  <f:facet name="toolbar"/>
+					  <f:facet name="legend"/>
+					  <f:facet name="info"/>
+					  <af:panelCollection id="co" styleClass="AFStretchWidth">
+						<f:facet name="toolbar"/>
+						<f:facet name="statusbar"/>
+						<af:treeTable value="#{pageFlowScope.CustomObjectTreeBean.treeModel}"
+									  var="node" rowSelection="single" styleClass="AFStretchWidth"
+									  id="customObjectHierarchyTreeTable"
+									  fetchSize="#{pageFlowScope.CustomObjectTreeBean.fetchSize}"
+									  contextMenuSelect="true" contentDelivery="immediate"
+									  selectionListener="#{pageFlowScope.CustomObjectTreeBean.nodeSelectedEvent}"
+									  binding="#{backingBeanScope.CO_treeBinding}"
+									  rowDisclosureListener="#{pageFlowScope.CustomObjectTreeBean.rowDisclosureListener}"
+									  disclosedRowKeys="#{pageFlowScope.CustomObjectTreeBean.treeDisclosedRowKeys}"
+									  rowBandingInterval="0" expandAllEnabled="#{pageFlowScope.CustomObjectTreeBean.expandAllEnabled}"
+									  horizontalGridVisible="false"
+									  summary="#{inventoryUIBundle.CUSTOM_OBJECT_HIERARCHY_TABLE}">
+						  <f:facet name="nodeStamp">
+							<af:column id="column2" width="500" rowHeader="unstyled"
+									   headerText="#{inventoryUIBundle.CUSTOM_OBJECT}">
+							  <af:panelGroupLayout id="pgl5">
+								<af:image source="#{node.data.icon}" id="nodeIcon" styleClass="invSummaryImage" shortDesc="icon"/>
+								<af:switcher id="idSwitcher" defaultFacet="false" facetName="#{pageFlowScope.CustomObjectTreeBean.treeModel.depth le 0}">
+								  <f:facet name="false">
+									<af:commandImageLink action="#{pageFlowScope.CustomObjectTreeBean.view}" id="cl1" actionListener="#{pageFlowScope.CustomObjectTreeBean.registerRecentItem}"
+														 text="#{node.data.label}"
+														 shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+									  <af:setActionListener from="#{pageFlowScope.CustomObjectTreeBean.selectedTreeNode.object.oid}"
+															to="#{pageFlowScope.objectId}"/>
+									  
+									</af:commandImageLink>
+								  </f:facet>
+								  <f:facet name="true">
+									<af:outputText value="#{node.data.label}" id="ot8"/>
+								  </f:facet>
+								</af:switcher>
+							  </af:panelGroupLayout>
+							</af:column>
+						  </f:facet>
+						  <f:facet name="contextMenu">
+							<af:popup contentDelivery="lazyUncached" id="popupContext"
+									  partialTriggers="::customObjectHierarchyTreeTable">
+							  <af:menu id="rootNodeMenu" text="rootNodeMenu">
+							  
+								<af:commandMenuItem text="#{inventoryUIBundle.ADD_CHILD}"
+													id="addChild" selected="true"
+													rendered="#{(pageFlowScope.CustomObjectTreeBean.rootNodePopupMenu || pageFlowScope.CustomObjectTreeBean.childNodePopupMenu) and securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=CustomObject.ASSOCIATE_CO;action=view']}">
+								  <af:setActionListener from="true" to="#{pageFlowScope.invokeCO2}"/>
+								  <af:showPopupBehavior popupId="::popupCustObjectId" triggerType="click"/>
+								</af:commandMenuItem>
+															   
+								<af:commandMenuItem text="#{inventoryUIBundle.REMOVE}"
+													id="remove"
+													actionListener="#{pageFlowScope.CustomObjectTreeBean.removeFromCustomObject}"
+													rendered="#{pageFlowScope.CustomObjectTreeBean.childNodePopupMenu and securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=CustomObject.DISASSOCIATE_CO;action=view']}" >
+													<af:clientListener method="goRefreshEntity"
+														 type="click"/>
+									  <af:serverListener type="refreshEntity"
+														 method="#{pageFlowScope.CustomObjectTreeBean.refreshTree}"/>
+								</af:commandMenuItem>
+							  </af:menu>
+							</af:popup>
+						  </f:facet>
+						</af:treeTable>
+						<af:popup id="popupCustObjectId" binding="#{backingBeanScope.popupCustObjectBinding}"
+								   contentDelivery="lazyUncached">
+						  <af:dialog title="#{inventoryUIBundle.MENU_CUSTOM_OBJECT}"
+									 id="dialog1" type="none">
+							  <af:panelStretchLayout id="psl3" styleClass="invCommonPanelStretchLayout">
+								<f:facet name="center">
+								  <af:region value="#{bindings.CustomObjectSearchResultsFlow2.regionModel}"
+											 id="r2" />
+								</f:facet>
+							  </af:panelStretchLayout>
+						  </af:dialog>
+						  <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+						  <af:serverListener type="refreshEntity"
+											 method="#{pageFlowScope.CustomObjectTreeBean.refreshTree}"/>
+						</af:popup>
+					 
+					  </af:panelCollection>
+					</af:showDetailHeader>
+			
+			</af:showDetailItem>
+			
+			<af:showDetailItem text="#{inventoryUIBundle.ASSOCIATED_RESOURCES}" id="AssocResourcesTab" styleClass="AFStretchWidth" binding="#{backingBeanScope.customobject_resourcesTab}" 
+				rendered="#{pageFlowScope.CustomObjectSummaryBean.renderAssociatedResourcesTab}" disclosureListener="#{pageFlowScope.CustomObjectSummaryBean.discloseTab}" 
+				disclosed="#{pageFlowScope.CustomObjectSummaryBean.selectedTab == inventoryUIBundle.ASSOCIATED_RESOURCES}">
+				<af:panelTabbed id="pt7_child" dimensionsFrom="auto" styleClass="AFStretchWidth" binding="#{backingBeanScope.coResourcesTabPanel}">
+				<!--PARENT CUSTOM OBJECT -->
+				<af:showDetailItem text="#{inventoryUIBundle.PARENT_CUSTOM_OBJECT}" id="pco" styleClass="AFStretchWidth"
+				 rendered="#{!pageFlowScope.CustomObjectSummaryBean.disableParentCOPortlet}" binding="#{backingBeanScope.customobject_parentCOTab}"  
+				 disclosureListener="#{pageFlowScope.CustomObjectSummaryBean.discloseChildTab}"  
+				 disclosed="#{pageFlowScope.CustomObjectSummaryBean.selectedResourceTab == inventoryUIBundle.PARENT_CUSTOM_OBJECT}">
+					<af:showDetailHeader text="#{inventoryUIBundle.PARENT_CUSTOM_OBJECT}"
+                                 disclosed="true" id="sdh3" rendered="#{!pageFlowScope.CustomObjectSummaryBean.disableParentCOPortlet and 
+								 pageFlowScope.CustomObjectSummaryBean.selectedResourceTab == inventoryUIBundle.PARENT_CUSTOM_OBJECT}">
+					  <f:facet name="context"/>
+					  <f:facet name="menuBar"/>
+					  <f:facet name="toolbar"/>
+					  <f:facet name="legend"/>
+					  <f:facet name="info"/>
+					  <af:panelCollection id="CoList" styleClass="AFStretchWidth">
+						<f:facet name="menus"/>
+						<f:facet name="toolbar">
+						  <af:toolbar id="t2">
+							<af:commandToolbarButton text="#{inventoryUIBundle.ASSOCIATE}"
+													 id="cb1Create" 
+													 rendered="#{(pageFlowScope.CustomObjectSummaryBean.parentCustomObjectCollectionModel.rowCount == 0) and (securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=CustomObject.ASSOCIATE_CO;action=view'])}"
+													 icon="#{InventoryHelperBean.associateIcon}" disabledIcon="#{InventoryHelperBean.disAssociateIcon}"
+													 partialTriggers="resultsTableId"
+													 binding="#{backingBeanScope.associateButton}">
+							  <af:setActionListener from="true" to="#{pageFlowScope.invokeCO1}"/>
+							  <af:showPopupBehavior popupId="associateCustomObjectPopup"
+													triggerType="click"/>
+							</af:commandToolbarButton>
+							<af:commandToolbarButton text="#{inventoryUIBundle.DELETE}" 
+													 id="cb3Delete" rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=CustomObject.DISASSOCIATE_CO;action=view']}"
+													 icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+													 actionListener="#{pageFlowScope.CustomObjectSummaryBean.disassociateCustomObject}"
+													 disabled="#{pageFlowScope.CustomObjectSummaryBean.resultsTable.selectedRowKeys == null || pageFlowScope.CustomObjectSummaryBean.resultsTable.selectedRowKeys.size lt 1}"
+													 partialTriggers="resultsTableId"
+													 binding="#{backingBeanScope.deleteButton}">
+							</af:commandToolbarButton>
+						  </af:toolbar>
+						</f:facet>
+						<f:facet name="statusbar">
+						  <af:toolbar id="t4">
+							<af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(pageFlowScope.CustomObjectSummaryBean.parentCustomObjectCollectionModel.rowCount lt 0) ? 0 :  pageFlowScope.CustomObjectSummaryBean.parentCustomObjectCollectionModel.rowCount}"
+										   id="ol2" styleClass="invSearchOutputLabel"
+										   binding="#{backingBeanScope.totalResultsLabel}"
+										   partialTriggers="resultsTableId"/>                         
+						  </af:toolbar>
+						</f:facet>
+						<af:table id="resultsTableId" 
+								  value="#{pageFlowScope.CustomObjectSummaryBean.parentCustomObjectCollectionModel}"
+								  var="row" rows="1" 
+								  emptyText="#{inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET}"
+								  fetchSize="1"
+								  rowBandingInterval="0" autoHeightRows="#{pageFlowScope.CustomObjectSummaryBean.portletHeight}" contentDelivery="immediate"
+								  selectionListener="#{pageFlowScope.CustomObjectSummaryBean.parentCustomObjectSelectionListener}"
+								  rowSelection="single" 
+								  binding="#{pageFlowScope.CustomObjectSummaryBean.resultsTable}"
+								  summary="#{inventoryUIBundle.PARENT_CUSTOM_OBJECT_TABLE}">
+						  <af:column headerText="#{inventoryUIBundle.ID}" id="c42"
+									 rowHeader="unstyled">
+							<af:commandImageLink id="c2" action="init" actionListener="#{bindings.openSubTaskForParentCustomObject.execute}"
+												 text="#{row.id}"
+												 shortDesc="#{inventoryUIBundle.CUSTOM_OBJECT_SUMMARY_LINK}">
+							  
+							  <af:setActionListener from="#{row.oid}" to="#{pageFlowScope.objectId}"/>
+							</af:commandImageLink>
+						  </af:column>
+						  <af:column headerText="#{inventoryUIBundle.NAME}" id="c1">
+							<af:outputText value="#{row.name}" id="ot5"/>
+						  </af:column>
+						  <af:column headerText="#{inventoryUIBundle.SPECIFICATION}" id="c8">
+							<af:commandImageLink action="SpecificationSummary" id="clSpec1" actionListener="#{bindings.openSubTaskForParentCOSpec.execute}"
+												 text="#{pageFlowScope.CustomObjectSummaryBean.parentSpecDisplayName}"
+												 shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+							  
+							  <af:setActionListener from="#{row.specification.oid}" to="#{specObjectId}"/>
+							</af:commandImageLink>
+						  </af:column>
+						  <af:column headerText="#{inventoryUIBundle.INVENTORY_STATUS}" id="c4">
+							<af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.parentInventoryStatus}"
+										   id="ot69"/>
+								<!-- RMI 618 Start -->
+								<af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.inventoryStatusBIDueDate}" id="pendingBIDueDate1"/>
+								<af:switcher id="swispd618" defaultFacet="false"
+											 facetName="#{pageFlowScope.CustomObjectSummaryBean.popupMode}">
+								  <f:facet name="false">
+									<af:commandImageLink text="#{pageFlowScope.CustomObjectSummaryBean.inventoryStatusBILabel}"
+														 disabled="#{pageFlowScope.CustomObjectSummaryBean.invStatusDisabled}"
+														 id="isCI1"
+														 shortDesc="#{pageFlowScope.CustomObjectSummaryBean.invStatusShortDesc}"
+														 action="#{pageFlowScope.CustomObjectSummaryBean.getPendingBiSummaryAction}"
+														 actionListener="#{pageFlowScope.CustomObjectSummaryBean.registerPendingBiRecentItem}">
+									  <af:setActionListener from="#{pageFlowScope.CustomObjectSummaryBean.inventoryStatusBIOid}"
+															to="#{objectId}"/>
+									</af:commandImageLink>
+								  </f:facet>
+								  <f:facet name="true">
+									<af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.inventoryStatusBILabel}"
+												   id="swftispd618"/>
+								  </f:facet>
+								</af:switcher>
+								<!-- RMI 618 End -->
+						  </af:column>
+						  <af:column headerText="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="c5">
+							<af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.parentResourceStatus}"
+										   id="ot70"/>
+								<!-- RMI 618 Start -->
+								<af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.assignmentBIDueDate}" id="pendingBIDueDate2"/>
+								<af:switcher id="swaspd618" defaultFacet="false"
+											 facetName="#{pageFlowScope.CustomObjectSummaryBean.popupMode}">
+								  <f:facet name="false">
+									<af:commandImageLink text="#{pageFlowScope.CustomObjectSummaryBean.assignmentBILabel}"
+													   disabled="#{pageFlowScope.CustomObjectSummaryBean.asnStatusDisabled}"
+													   id="asCI"
+													   shortDesc="#{pageFlowScope.CustomObjectSummaryBean.asnStatusShortDesc}"
+													   action="#{pageFlowScope.CustomObjectSummaryBean.getPendingBiSummaryAction}"
+													   actionListener="#{pageFlowScope.CustomObjectSummaryBean.registerPendingBiRecentItem}">
+									<af:setActionListener from="#{pageFlowScope.CustomObjectSummaryBean.asnStatusBIOid}"
+														  to="#{objectId}"/>
+								  </af:commandImageLink>
+								  </f:facet>
+								  <f:facet name="true">
+									<af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.assignmentBILabel}"
+												   id="swftaspd618"/>
+								  </f:facet>
+								</af:switcher>
+								<!-- RMI 618 End -->  
+						  </af:column>
+						  <af:column headerText="#{inventoryUIBundle.CONDITION_TYPE}" id="c6">
+							<af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.parentConditionType}" escape="false"
+										   id="ot71"/>
+						  </af:column>
+						  <af:column headerText="#{inventoryUIBundle.RESERVATION_TYPE}" id="c7">
+							<af:outputText value="#{pageFlowScope.CustomObjectSummaryBean.parentReservationType}" escape="false"
+										   id="ot72"/>
+						  </af:column>
+						</af:table>
+						<af:popup id="associateCustomObjectPopup"
+								  binding="#{backingBeanScope.associateCustomObject}"
+								  contentDelivery="lazyUncached">
+						  <af:dialog title="#{inventoryUIBundle.MENU_CUSTOM_OBJECT}" id="d1" type="none">
+							<af:panelStretchLayout id="psl1" styleClass="invCommonPanelStretchLayout">
+							  <f:facet name="center" >
+								<af:region value="#{bindings.CustomObjectSearchResultsFlow1.regionModel}" id="r7" />
+							  </f:facet>
+							</af:panelStretchLayout>
+						  </af:dialog>
+						  <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+						  <af:serverListener type="refreshEntity"
+											 method="#{pageFlowScope.CustomObjectSummaryBean.refresh}"/>
+						</af:popup>
+					  </af:panelCollection>
+					</af:showDetailHeader>
+				</af:showDetailItem>
+				<!--NETWORK NODES -->
+				<af:showDetailItem text="#{inventoryUIBundle.NETWORK_NODES}" id="networkNode" styleClass="AFStretchWidth"
+				 rendered="#{!pageFlowScope.CustomObjectSummaryBean.disableNetworkNodesPortlet}" binding="#{backingBeanScope.customobject_networkNodesTab}" 
+				 disclosureListener="#{pageFlowScope.CustomObjectSummaryBean.discloseChildTab}" 
+				 disclosed="#{pageFlowScope.CustomObjectSummaryBean.selectedResourceTab == inventoryUIBundle.NETWORK_NODES}">
+					<af:region value="#{bindings.NetworkListFlow1.regionModel}" id="r4"/>
+				</af:showDetailItem>
+				<!--NETWORK EDGES -->
+				<af:showDetailItem text="#{inventoryUIBundle.NETWORK_EDGES}" id="networkEdge" styleClass="AFStretchWidth"
+				 rendered="#{!pageFlowScope.CustomObjectSummaryBean.disableNetworkEdgePortlet}" binding="#{backingBeanScope.customobject_networkEdgesTab}" 
+				 disclosureListener="#{pageFlowScope.CustomObjectSummaryBean.discloseChildTab}" 
+				 disclosed="#{pageFlowScope.CustomObjectSummaryBean.selectedResourceTab == inventoryUIBundle.NETWORK_EDGES}">
+					<af:region value="#{bindings.NetworkEdgeListFlow1.regionModel}" id="r10"/>
+				</af:showDetailItem>
+				<!--CUSTOM INVOLVEMENTS-->
+				<af:showDetailItem text="#{inventoryUIBundle.CUSTOM_INVOLVEMENTS}" id="ci" styleClass="AFStretchWidth"
+				 rendered="#{!pageFlowScope.CustomObjectSummaryBean.disableCustomInvolvementsPortlet}" binding="#{backingBeanScope.customobject_customInvolvementsTab}"
+				 disclosureListener="#{pageFlowScope.CustomObjectSummaryBean.discloseChildTab}" 
+				 disclosed="#{pageFlowScope.CustomObjectSummaryBean.selectedResourceTab == inventoryUIBundle.CUSTOM_INVOLVEMENTS}">
+					<af:region value="#{bindings.CustomInvolvementListFlow1.regionModel}" id="r5"/>
+				</af:showDetailItem>			
+				</af:panelTabbed>
+			</af:showDetailItem>
+			
+			<af:showDetailItem text="#{inventoryUIBundle.CONSUMERS}" id="AssignmentsTab" styleClass="AFStretchWidth"  binding="#{backingBeanScope.customobject_consumersTab}"
+				rendered="#{pageFlowScope.CustomObjectSummaryBean.renderConsumersTab}" disclosureListener="#{pageFlowScope.CustomObjectSummaryBean.discloseTab}" 
+				disclosed="#{pageFlowScope.CustomObjectSummaryBean.selectedTab == inventoryUIBundle.CONSUMERS}">
+				  <!--ASSIGNMENTS-->
+                                <af:region value="#{bindings.ConsumerListFlow1.regionModel}" id="r17"/>
+                                <af:spacer width="10" height="10"/>
+                                <!--REFERENCES-->
+                                <af:region value="#{bindings.ReferenceListFlow1.regionModel}" id="r8"/>
+                                <af:spacer width="10" height="10"/>
+                                <!--BUSINESS INTERACTIONS-->
+				<af:region value="#{bindings.BusinessInteractionListFlow1.regionModel}" id="r21"/>
+			</af:showDetailItem>
+			
+			<af:showDetailItem text="#{inventoryUIBundle.GROUPS_AND_INFRASTRUCTURE}" id="GroupsAndInfraTab" styleClass="AFStretchWidth"  binding="#{backingBeanScope.customobject_groupInfraTab}"
+				rendered="#{pageFlowScope.CustomObjectSummaryBean.renderGroupsTab}" disclosureListener="#{pageFlowScope.CustomObjectSummaryBean.discloseTab}" 
+				disclosed="#{pageFlowScope.CustomObjectSummaryBean.selectedTab == inventoryUIBundle.GROUPS_AND_INFRASTRUCTURE}">
+				<af:panelTabbed id="pt7_groupsTab" dimensionsFrom="auto" styleClass="AFStretchWidth" binding="#{backingBeanScope.coGroupsAndInfraTabPanel}">
+				<af:showDetailItem text="#{inventoryUIBundle.INVENTORY_GROUPS}" id="IGTab" styleClass="AFStretchWidth"  binding="#{backingBeanScope.customobject_IGTab}"
+					rendered="#{!pageFlowScope.CustomObjectSummaryBean.disableIGPortlet}" disclosureListener="#{pageFlowScope.CustomObjectSummaryBean.discloseGroupsAndInfraChildTab}" 
+					disclosed="#{pageFlowScope.CustomObjectSummaryBean.selectedGroupsAndInfraTab == inventoryUIBundle.INVENTORY_GROUPS}">
+					<!--INVENTORY GROUPS -->
+					<af:region value="#{bindings.InventoryGroupListFlow1.regionModel}" id="r3"/>
+				</af:showDetailItem>
+				<af:showDetailItem text="#{inventoryUIBundle.PLACES}" id="placesTab" styleClass="AFStretchWidth"  binding="#{backingBeanScope.customobject_placesTab}"
+					rendered="#{!pageFlowScope.CustomObjectSummaryBean.disablePlacesPortlet}" disclosureListener="#{pageFlowScope.CustomObjectSummaryBean.discloseGroupsAndInfraChildTab}" 
+					disclosed="#{pageFlowScope.CustomObjectSummaryBean.selectedGroupsAndInfraTab == inventoryUIBundle.PLACES}">
+					<!-- PLACES -->
+					<af:region value="#{bindings.PlaceListFlow1.regionModel}" id="r1"/>
+				</af:showDetailItem>
+				<af:showDetailItem text="#{inventoryUIBundle.ROLES}" id="rolesTab" styleClass="AFStretchWidth"  binding="#{backingBeanScope.customobject_rolesTab}"
+					rendered="#{!pageFlowScope.CustomObjectSummaryBean.disableRolesPortlet}" disclosureListener="#{pageFlowScope.CustomObjectSummaryBean.discloseGroupsAndInfraChildTab}" 
+					disclosed="#{pageFlowScope.CustomObjectSummaryBean.selectedGroupsAndInfraTab == inventoryUIBundle.ROLES}">
+					<!--INVENTORY ROLES -->
+					<af:region value="#{bindings.InventoryRoleListFlow1.regionModel}" id="r6"/>
+				</af:showDetailItem>
+				<af:showDetailItem text="#{inventoryUIBundle.PARTIES}" id="partiesTab" styleClass="AFStretchWidth"  binding="#{backingBeanScope.customobject_partiesTab}"
+					rendered="#{!pageFlowScope.CustomObjectSummaryBean.disablePartyPortlet}" disclosureListener="#{pageFlowScope.CustomObjectSummaryBean.discloseGroupsAndInfraChildTab}" 
+					disclosed="#{pageFlowScope.CustomObjectSummaryBean.selectedGroupsAndInfraTab == inventoryUIBundle.PARTIES}">
+					<!--PARTY -->
+					<af:region value="#{bindings.PartyListFlow1.regionModel}" id="r9"/>
+				</af:showDetailItem>				
+				</af:panelTabbed>
+			</af:showDetailItem>
+			
+		</af:panelTabbed>
+        </af:panelGroupLayout>
+        </af:panelHeader>       
+       </f:facet>
+       </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

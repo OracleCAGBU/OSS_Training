@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:panelStretchLayout id="psl2" styleClass="AFStretchWidth" dimensionsFrom="auto">
+        <f:facet name="center">
+            <af:showDetailHeader id="sdh1" text="#{inventoryUIBundle.REMOVE_NODE_LABEL} - #{pageFlowScope.RemoveNodeActivityBean.activity.name}" styleClass="AFStretchWidth" 
+                            binding="#{backingBeanScope.removeNodeShowDetailHeader}" immediate="true">
+                <f:facet name="toolbar">
+                    <af:toolbar id="t6">
+                        <af:commandToolbarButton text="#{inventoryUIBundle.REMOVE_NODE_LABEL}" id="ctbg6" disabled="#{pageFlowScope.RemoveNodeActivityBean.disableRemoveNode}" 
+                                                 binding="#{pageFlowScope.RemoveNodeActivityBean.activityButton}"
+                                                 actionListener="#{pageFlowScope.RemoveNodeActivityBean.removenodeListener}"
+                                                 partialTriggers="r1 r2"/>
+                             <af:popup id="removenodePopup" contentDelivery="lazyUncached"
+                                      binding="#{backingBeanScope.removenodePopup}">
+                            <!-- @pskalaga_bug_19052830v1 removed from dialog [resize="on" ] to see if sized better -->
+                                <af:dialog id="d1" type="none">
+                                    <af:panelStretchLayout id="psl3" styleClass="invGroomPopupLayout">
+                                        <f:facet name="center">
+                                            <af:region value="#{bindings.RemoveNodeTrainFlow1.regionModel}" id="r2"/>
+                                        </f:facet>
+                                    </af:panelStretchLayout>
+                                </af:dialog>
+                                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                <af:serverListener type="refreshEntity"
+                                                   method="#{pageFlowScope.RemoveNodeActivityBean.refresh}"/>
+                            </af:popup>
+                    </af:toolbar>
+                </f:facet>
+                <af:panelStretchLayout id="psl1" styleClass="AFStretchWidth" dimensionsFrom="auto">
+                    <f:facet name="center">
+                        <af:panelAccordion id="pA1" discloseMany="true" styleClass="AFStretchWidth">
+                            <af:showDetailItem text="Source" id="sdi1" disclosed="true" flex="1" stretchChildren="first"
+                                               disclosureListener="#{pageFlowScope.RemoveNodeActivityBean.sourceDiscloserListener}">
+                                <af:panelGroupLayout layout="scroll">
+                                    <af:spacer height="10" width="10"/>
+                                    <!-- Source Workspace Region -->
+                                    <af:region value="#{bindings.SourceWorkspaceFlow.regionModel}" id="r1"
+                                               binding="#{pageFlowScope.RemoveNodeActivityBean.sourceRegionBinding}"/>
+                                </af:panelGroupLayout>
+                            </af:showDetailItem>
+                        </af:panelAccordion>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:showDetailHeader>
+        </f:facet>
+    </af:panelStretchLayout>
+</jsp:root>

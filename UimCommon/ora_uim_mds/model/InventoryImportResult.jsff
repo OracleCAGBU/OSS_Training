@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved. */
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    3/12/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   id="pt1">
+    <f:facet name="localArea">
+    <af:panelGroupLayout id="pgl1">
+      <af:panelHeader text="#{inventoryUIBundle.EXECUTE_RULE}" id="ph1">
+          <af:panelHeader text="#{inventoryUIBundle.EXECUTE_RULE_INFORMATION}"
+                          id="ph2" inlineStyle="width:100%;">
+            
+             <br/><af:activeOutputText value="#{'Processed'} #{pageFlowScope.InventoryImportResultBean.importExportResult.importedCount} Records Successfully." id="aot1"/>
+             <br/><af:activeOutputText value="Exported Inventory to the location : #{pageFlowScope.InventoryImportResultBean.importExportResult.outputFilePath}" id="aot2"
+                                       visible="#{pageFlowScope.InventoryImportResultBean.importExportResult.downloadAvailable}"/>
+             <br/><br/><af:commandButton text="Download File!" id="cb1"
+                                         visible="#{pageFlowScope.InventoryImportResultBean.importExportResult.downloadAvailable}"
+                                         accessKey="#{inventoryUIBundle.DOWNLOAD_FILE_ACCESS_KEY}">
+                          <af:fileDownloadActionListener contentType="application/x-zip-compressed"
+											 filename="#{pageFlowScope.InventoryImportResultBean.importExportResult.outputFileName}"
+                                             method="#{pageFlowScope.InventoryImportResultBean.downloadFile}"/>
+             </af:commandButton>
+            </af:panelHeader>
+        </af:panelHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

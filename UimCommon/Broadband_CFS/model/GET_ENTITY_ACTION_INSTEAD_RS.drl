@@ -1,0 +1,33 @@
+package com.broadband.ci;
+
+import java.lang.*;
+import java.util.*;
+import oracle.communications.inventory.api.entity.BusinessInteraction;
+import oracle.communications.inventory.api.entity.common.RootEntity;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.framework.logging.LogFactory;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+import oracle.communications.inventory.extensibility.rules.impl.RuleDebug;
+import com.broadband.ci.GetEntityAction;
+
+global Log log;
+
+rule "GET_ENTITY_ACTION_INSTEAD_RS : Broadband_CFS"
+    salience 0
+    when
+        entity : RootEntity()
+        action : String()
+        context: ExtensionPointRuleContext()
+    then
+        //log = LogFactory.getLog("com.broadband.ci");
+        log.debug("", "GET_ENTITY_ACTION : Broadband_CFS Started");
+        
+        log.debug("", "Action: " + action);
+        System.out.println("Root Entity : " + entity);
+        GetEntityAction getEntAct = new GetEntityAction();
+        String entityAction = getEntAct.getEntityAction(action, entity);
+        log.debug("", "Resultant Entity Action: " + entityAction);
+        context.setReturnValue(entityAction);        
+
+        log.debug("", "GET_ENTITY_ACTION : Broadband_CFS rule end");
+    end

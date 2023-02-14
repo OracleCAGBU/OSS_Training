@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xsi:type="BusinessEntityType" name="PacketConnectivity" realizeFromBusinessEntity="false">
+  <com:displayName lang="[default]">PacketConnectivity</com:displayName>
+  <com:saveVersion>8</com:saveVersion>
+  <com:baseEntityRef>
+    <com:entity>NetworkConnectivity</com:entity>
+    <com:entityType>inventoryEntity</com:entityType>
+    <com:relationship>oracle.communications.studio.model.baseEntity</com:relationship>
+  </com:baseEntityRef>
+  <com:id>E:inventoryEntity--PacketConnectivity</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>inventoryEntity--PacketConnectivity</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>PacketConnectivity</data:name>
+    <data:displayName lang="[default]">PacketConnectivity</data:displayName>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>6Ll35icZ--+h--+NQo91Kg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>inventoryEntity--PacketConnectivity</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <properties interface="oracle.communications.inventory.api.entity.PacketConnectivity"/>
+</com:modelEntity>

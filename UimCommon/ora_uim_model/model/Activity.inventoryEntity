@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xsi:type="BusinessEntityType" name="Activity" realizeFromBusinessEntity="true">
+  <com:displayName lang="[default]">Activity</com:displayName>
+  <com:saveVersion>8</com:saveVersion>
+  <com:id>E:inventoryEntity--Activity</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>inventoryEntity--Activity</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>Activity</data:name>
+    <data:displayName lang="[default]">Activity</data:displayName>
+    <data:dataElement virtual="false">
+      <com:id>name</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>name</data:name>
+      <data:displayName lang="[default]">name</data:displayName>
+      <data:displayName lang="[default]">name</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>name</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>name</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>description</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>description</data:name>
+      <data:displayName lang="[default]">description</data:displayName>
+      <data:displayName lang="[default]">description</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>description</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>description</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>percentComplete</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>percentComplete</data:name>
+      <data:displayName lang="[default]">percentComplete</data:displayName>
+      <data:displayName lang="[default]">percentComplete</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>percentComplete</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>percentComplete</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>int</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>failedReason</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>failedReason</data:name>
+      <data:displayName lang="[default]">failedReason</data:displayName>
+      <data:displayName lang="[default]">failedReason</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>failedReason</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>failedReason</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>activityStartDate</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>activityStartDate</data:name>
+      <data:displayName lang="[default]">activityStartDate</data:displayName>
+      <data:displayName lang="[default]">activityStartDate</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>activityStartDate</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>activityStartDate</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>dateTime</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>activityEndDate</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>activityEndDate</data:name>
+      <data:displayName lang="[default]">activityEndDate</data:displayName>
+      <data:displayName lang="[default]">activityEndDate</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>activityEndDate</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>activityEndDate</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>dateTime</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>actualStartDate</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>actualStartDate</data:name>
+      <data:displayName lang="[default]">actualStartDate</data:displayName>
+      <data:displayName lang="[default]">actualStartDate</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>actualStartDate</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>actualStartDate</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>dateTime</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>actualEndDate</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>actualEndDate</data:name>
+      <data:displayName lang="[default]">actualEndDate</data:displayName>
+      <data:displayName lang="[default]">actualEndDate</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>actualEndDate</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>actualEndDate</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>dateTime</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>assignedTo</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>assignedTo</data:name>
+      <data:displayName lang="[default]">assignedTo</data:displayName>
+      <data:displayName lang="[default]">assignedTo</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>assignedTo</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>assignedTo</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>assignedDate</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>assignedDate</data:name>
+      <data:displayName lang="[default]">assignedDate</data:displayName>
+      <data:displayName lang="[default]">assignedDate</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>assignedDate</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>assignedDate</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>dateTime</data:primitiveType>
+    </data:dataElement>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>C9uO0K8dR-GoR956orQ0Sg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>inventoryEntity--Activity</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>6J0MbPsoQkK8buAX-IBRDg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>E-cH8FK2Q1yWYaPGrbGXuw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>ru3PrfQrQQq5ZJWzubSG8w</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+    <data:information lang="[default]">A short, descriptive name of the activity. Activities with the same name can exist across different Projects but not in the same project.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>c-Y+ByU6TlqG91i4V4rnqg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>name</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>HwDCgHrgRI2rCUQa3uIqZQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>XIX8phzNR-uzjVBe-PtSFw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>6L2IodOQQkqys2s0PLXPzg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+    <data:information lang="[default]">Descriptive text about the activity.  A longer description than name for the activity. Can be up to 255 characters long.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>4lI4lppiR1WwgLhT2iQ72Q</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>description</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType" columnDefinition="NUMBER(3)" name="percentComplete">
+    <com:id>BBcXvVfGSeaIFQFFtLMQ7w</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>percentComplete</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>gBJCYIaNTwWa69jP+nIOMQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>percentComplete</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>+fLLkOtwSruq8tQhbJSY5g</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>percentComplete</data:dataElementId>
+    <data:information lang="[default]">Indicates how much work has been completed for the activity. This value is Defaulted to 0.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>4O8sQ-2+SEq-e46hcPmfpQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>percentComplete</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>GuOqGe0eQ72zjX4STALgGw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>failedReason</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>i1NsjYJyQKqeX7Ld15xhvg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>failedReason</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>waF4k5a-SYapbteBtftkhQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>failedReason</data:dataElementId>
+    <data:information lang="[default]">A description of why the activity failed or is in error. Populated if state is FAILED.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>MgbFmuseSJaozQJsxGVl0g</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>failedReason</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>fW76eB7nRmmyMNC+IccfCA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>activityStartDate</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>vCeql+bjRM+SHEeyXAYHYQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>activityStartDate</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>PAQKj+S+RGqGMRmoEer2Mw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>activityStartDate</data:dataElementId>
+    <data:information lang="[default]">The activity start date. The current date is populated to this field when the activity is submitted or resubmitted.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>mHAEODObTpmXqOIw8BZo7g</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>activityStartDate</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>yzVeoD5STO25ixZx1l4rxg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>activityEndDate</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>QJgJq169SA6UlaY0RieEUw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>activityEndDate</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>XKLXIXwfQjC1RL2WR3uDFQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>activityEndDate</data:dataElementId>
+    <data:information lang="[default]">The activity end date. The current date is populated to this field when the acitivity is in completed, failed, error or aborted states.  When the activity is submitted the field is reset to null.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>nfB3FsnBSk+e+Z-997HBOA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>activityEndDate</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>NKxR+n2hTYWLuN3+r+k-yg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>actualStartDate</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>h9TLjMHjSRGsMZLIkFAlMA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>actualStartDate</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>WXbCFd3xRYeb2cMdUGWp4A</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>actualStartDate</data:dataElementId>
+    <data:information lang="[default]">The activity actual start date. The current date is populated to this field when the activity is started.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>KsfNjDxWTlSb5Md2ZyW2rA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>actualStartDate</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>k1YlweZiT2OdaFcbFeCheA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>actualEndDate</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>qW5qcj9CQz+s9qUtHmr-rw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>actualEndDate</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>qVhlsh5yQ7iclrLMloEo8w</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>actualEndDate</data:dataElementId>
+    <data:information lang="[default]">The activity actual end date. The current date is populated to this field when the acitivity is in completed, failed, error or aborted states.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>JUhCmt5XRNyrr1JOS1d+4Q</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>actualEndDate</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>eUK3gmeYTuK-f1hZlVpGOA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>assignedTo</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>BSguaU4nRsK3Ge-HmzgtWg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>assignedTo</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>dm0UWPHjTmyZ0obRA3VjtA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>assignedTo</data:dataElementId>
+    <data:information lang="[default]">Indicates the user to which the activity is assigned</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>Sa3EuzjhS5el22cH2AiN0g</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>assignedTo</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>jpKelbscSMyGx44Ny9ta0Q</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>assignedDate</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>mmHeazpoR+GR3HPOM-CFnw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>assignedDate</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>ONZOLELYRFuhWETgtWVyhA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>assignedDate</data:dataElementId>
+    <data:information lang="[default]">The activity assigned date. Populates the current date when activity is assigned</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>pL+c0QT0SfCZw5mmX3imGQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>assignedDate</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <implements interface="oracle.communications.inventory.api.entity.common.ProjectElement"/>
+  <compositeIndex name="IDX_ACTIVITY_NAME_PROJ" unique="true">
+    <attributeName>name</attributeName>
+    <attributeName>project</attributeName>
+  </compositeIndex>
+  <method name="getDuration">
+    <signature>long getDuration()</signature>
+    <body>long duration = 0;
+        oracle.communications.inventory.api.entity.ActivityState activityState = getAdminState();
+        if(activityState != null) {
+	    if(oracle.communications.inventory.api.entity.ActivityState.READY.getValue().equals(activityState.getValue())) {
+	        duration = 0;
+	    } else if(oracle.communications.inventory.api.entity.ActivityState.IN_PROGRESS.getValue().equals(activityState.getValue())) {
+	    	if(getActivityStartDate()!=null) {
+	            duration = System.currentTimeMillis() - getActivityStartDate().getTime();
+	        }
+	    } else {
+	    	if(getActivityEndDate()!=null &amp;&amp; getActivityStartDate()!=null) {
+	            duration = getActivityEndDate().getTime() - getActivityStartDate().getTime();
+	        }
+	    }        
+        }
+        return duration;</body>
+    <javadoc>
+	Returns the duration of the activity. 
+	If activity is in READY state, returns duration as 0.
+	If activity is in IN PROGRESS state, returns duration by subtracting the activity start date from current date.
+	Else return duration by subtracting activity start date from activity end date.
+	</javadoc>
+  </method>
+  <properties hierarchyStrategy="single" interface="oracle.communications.inventory.api.entity.Activity" table="ACTIVITY" type="ocim:Activity"/>
+  <identifier>
+    <attribute>name</attribute>
+    <attribute>project</attribute>
+  </identifier>
+</com:modelEntity>

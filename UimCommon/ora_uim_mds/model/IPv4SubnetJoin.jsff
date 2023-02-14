@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:cui="/CommsUI">
+		  
+    <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <c:set var="bundle"
+           value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+<af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"  value="#{bindings.pageTemplateBinding}" id="pt1">
+    <f:facet name="localArea">
+    <af:panelGroupLayout id="pgl1">
+        <af:panelHeader id="ph1" styleClass="invSummaryPanelHeader" text="#{inventoryUIBundle.JOIN_DETAILS}"
+                        helpTopicId="OHW_ipv4SubnetJoin">
+            <f:facet name="toolbar">
+                <af:panelGroupLayout layout="horizontal" rendered="#{!pageFlowScope.IPv4SubnetJoinBean.previewLayout}">
+                    <af:commandToolbarButton text="#{inventoryUIBundle.SUBNET_JOIN}" id="ctb1"
+                                             actionListener="#{pageFlowScope.IPv4SubnetJoinBean.save}"
+                                             rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=IPv4SubnetJoin.JOIN;action=view']}"
+                                             accessKey="#{inventoryUIBundle.JOIN_ACCESS_KEY}"
+                                             binding="#{backingBeanScope.saveButtonBinding}">
+                        <af:setActionListener from="editing" to="#{pageFlowScope.saveActionOutcome}"/>
+                    </af:commandToolbarButton>
+                    <af:spacer width="10" height="10" id="s11"/>
+                    <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb3" action="cancel"
+                                             immediate="true"
+                                             actionListener="#{pageFlowScope.IPv4SubnetJoinBean.cancel}"
+                                             accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                </af:panelGroupLayout>
+            </f:facet>
+         <af:spacer width="10" height="10" id="s1"/>
+        <af:panelGroupLayout layout="scroll" id="pgl2">
+                        <af:panelGroupLayout>
+                            <af:panelFormLayout id="pfl1" maxColumns="2" rows="2" labelWidth="43%" fieldWidth="57%"
+                                                binding="#{backingBeanScope.uiHintsPanel}">
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.IPv4_NETWORK}"
+                                                         id="plm-net">
+                                    <af:outputText value="#{pageFlowScope.IPv4SubnetJoinBean.entityObject.parentBlock.addressRange.lowerValue}"
+                                                   id="otp1"/>
+                                </af:panelLabelAndMessage>
+                               
+                                   <af:panelLabelAndMessage label=" #{inventoryUIBundle.IPV4_SUBNET_START}"
+                                                         id="plm-start">
+                                    <af:outputText value="#{pageFlowScope.IPv4SubnetJoinBean.entityObject.addressRange.lowerValue}"
+                                                   id="otp"/>
+                                </af:panelLabelAndMessage>
+                                <af:selectOneChoice id="ctb4" autoSubmit="true"
+                                                    label="#{inventoryUIBundle.JOIN_CIDR_NUMBER}" showRequired="true"
+                                                    valueChangeListener="#{pageFlowScope.IPv4SubnetJoinBean.prefixLengthJoinListener}"
+                                                    value="#{pageFlowScope.IPv4SubnetJoinBean.itsCidrNumber}"
+                                                    binding="#{backingBeanScope.plb}">
+                                    <f:selectItems id="ctb5" value="#{pageFlowScope.IPv4SubnetJoinBean.prefixLengthJoinList}"/>
+                                </af:selectOneChoice>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.IPv4_SUBNET_MASK}" id="plm-mask">
+                                    <af:outputText value="#{pageFlowScope.IPv4SubnetJoinBean.itsMask}"
+                                                   binding="#{backingBeanScope.subnetMaskBinding}" id="ot-newmask"
+                                                   partialTriggers="ctb4"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.IPV4_SUBNET_END}"
+                                                         id="plm-join">
+                                    <af:outputText value="#{pageFlowScope.IPv4SubnetJoinBean.entityObject.addressRange.upperValue}"
+                                                   id="ot2"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.NEW_IPv4_SUBNET_START}"
+                                                         id="plm-new">
+                                    <af:outputText value="#{pageFlowScope.IPv4SubnetJoinBean.itsAddress}"
+                                                   binding="#{backingBeanScope.addressBinding}" id="ot3"
+                                                   partialTriggers="ctb4"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.MAX_HOSTS_PER_SUBNET}" id="plm-maxHost">
+                                    <af:outputText value="#{pageFlowScope.IPv4SubnetJoinBean.itsMaxHosts}"
+                                                   binding="#{backingBeanScope.maxHostsBinding}" id="ot4"
+                                                   partialTriggers="ctb4"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}"
+                                                         id="plm-lmd" rendered="false">
+                                    <af:outputText value="#{pageFlowScope.IPv4SubnetJoinBean.lastModifiedDate}"
+                                                   id="ot5">
+                                        <af:convertDateTime pattern="#{pageFlowScope.IPv4SubnetJoinBean.dateTimeFormat}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}"
+                                                         id="plm-lmu" rendered="false">
+                                    <af:outputText value="#{pageFlowScope.IPv4SubnetJoinBean.entityObject.lastModifiedUser}"
+                                                   id="ot6"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="plm-crd"
+                                                         rendered="false">
+                                    <af:outputText value="#{pageFlowScope.IPv4SubnetJoinBean.createdDate}" id="ot11">
+                                        <af:convertDateTime pattern="#{pageFlowScope.IPv4SubnetJoinBean.dateTimeFormat}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="plm-cru"
+                                                         rendered="false">
+                                    <af:outputText value="#{pageFlowScope.IPv4SubnetJoinBean.entityObject.createdUser}"
+                                                   id="ot7"/>
+                                </af:panelLabelAndMessage>
+                            </af:panelFormLayout>
+                        </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+            </af:panelHeader>
+     </af:panelGroupLayout>
+    </f:facet>
+   </af:pageTemplate>
+</jsp:root>

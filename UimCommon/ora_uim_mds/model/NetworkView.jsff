@@ -1,0 +1,1545 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" 
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:jvf="http://www.ilog.com/jviews/tlds/jviews-framework-faces.tld"
+          xmlns:jvtf="http://www.ilog.com/jviews/tlds/jviews-tgo-faces.tld"
+          xmlns:jv="http://www.ilog.com/jviews/tlds/jviews-faces.tld"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   id="pt1" value="#{bindings.ptb1}">  
+    <f:facet name="localArea">
+      <af:panelGroupLayout layout="scroll" id="pgl2"
+                           binding="#{backingBeanScope.NWK_view_panelGroupLayout}">
+        <af:resource source="css/style.css" type="css"/>
+        <af:resource source="script/view.js" type="javascript"/>
+        <!--af:panelGroupLayout id="pgl23" layout="scroll">
+          <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left">
+            <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                           rendered="#{!(NetworkViewBean.popupMode)}"
+                           value="#{NetworkViewBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+            <af:menuBar id="menuBar1">
+              <af:menu id="BIContextMenu"
+                       binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}"
+                       styleClass="invSearchMenu"
+                       disabled="#{backingBeanScope.InventoryMenuBean.disableBiMenu}"
+                       rendered="#{!(NetworkViewBean.popupMode)}"/>
+            </af:menuBar>
+            <af:popup id="BISearchPopup"
+                      binding="#{backingBeanScope.businessInteractionView1}"
+                      contentDelivery="lazyUncached">
+              <af:dialog id="BISearchPopup_d1" type="none">
+                <af:panelStretchLayout id="psl_1"
+                                       styleClass="invCommonPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}"
+                               id="BISP_r2"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.afterBusinessInteractionSelectionChange}"/>
+            </af:popup>
+          </af:panelGroupLayout>
+        </af:panelGroupLayout-->
+        
+        <af:link action="configSummary" id="verSummary" visible="true" binding="#{NetworkViewBean.versionBinding}" actionListener="#{bindings.openSubTaskForConfigSummary.execute}">
+            <af:outputText value="#{NetworkViewBean.version}" id="ot13" inlineStyle="font-weight:bolder;" partialTriggers="cmi5"/>
+        </af:link>
+        
+        <af:panelGroupLayout id="pgl3">
+
+            <!-- START - Network Node Edit Popup -->
+            <af:popup id="editNetworkNodePopup" contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.editNetworkNodeBinding}">
+              <af:dialog id="editNetworkNodeDialog" closeIconVisible="true"
+                         type="none">
+                <af:panelStretchLayout id="pt_psl100"
+                                       styleClass="invEditPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.NetworkNodeEditFlow1.regionModel}"
+                               id="ENNR"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - Network Node Edit Popup -->
+            <!-- START - Network Edge Edit Popup -->
+            <af:popup id="editNetworkEdgePopup" contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.editNetworkEdgeBinding}">
+              <af:dialog id="editNetworkEdgeDialog" closeIconVisible="true"
+                         type="none">
+                <af:panelStretchLayout id="pt_psl20"
+                                       styleClass="invEditPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.NetworkEdgeEditFlow1.regionModel}"
+                               id="ENER"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - Network Edge Edit Popup -->
+          <!-- START - Location Search and Associate Popup -->         
+          <af:popup id="associateLocationPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.associateLocationBinding}">
+                <af:dialog id="associateLocationDialog" closeIconVisible="true" type="none"
+                            title="#{inventoryUIBundle.ASSOCIATE_LOCATION}">
+                   <af:panelStretchLayout id="pt_psl310" styleClass="invSummaryPanelStretchLayout">
+                      <f:facet name="center">
+                  <af:region value="#{bindings.LocationSearchResultsFlow1.regionModel}" id="ALR"/>                 
+                      </f:facet>
+                    </af:panelStretchLayout>              
+                 </af:dialog>
+             <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity"
+                               method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+          </af:popup>
+          <!-- END - Location Search and Associate Popup -->
+
+            <!-- START - Place Search and Associate Popup -->
+            <af:popup id="associatePlacePopup" contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.associatePlaceBinding}">
+              <af:dialog id="associatePlaceDialog" closeIconVisible="true"
+                         type="none">
+                <af:panelStretchLayout id="pt_psl30"
+                                       styleClass="invSummaryPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.PlaceSearchResultsFlow1.regionModel}"
+                               id="APR"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - Place Search and Associate Popup -->
+            <!-- START - Custom Object Search and Associate Popup -->
+            <af:popup id="associateCustomObjectPopup"
+                      contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.associateCustomObjectBinding}">
+              <af:dialog id="associateCustomObjectDialog"
+                         closeIconVisible="true" type="none">
+                <af:panelStretchLayout id="pt_psl40"
+                                       styleClass="invSummaryPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.CustomObjectSearchResultsFlow1.regionModel}"
+                               id="ACOR"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - Custom Object  Search and Associate Popup -->
+            <!-- START - Custom Network Address Search and Associate Popup -->
+            <af:popup id="associateCustomNetworkAddressPopup"
+                      contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.associateCustomNetworkAddressBinding}">
+              <af:dialog id="associateCustomNetworkAddressDialog"
+                         closeIconVisible="true" type="none">
+                <af:panelStretchLayout id="pt_psl50"
+                                       styleClass="invSummaryPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.CustomNetworkAddressSearchResultsFlow1.regionModel}"
+                               id="ACNAR"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - Custom Onject  Search and Associate Popup -->
+            <!-- START - Device Interface Search and Associate Popup -->
+            <af:popup id="associateDeviceInterfacePopup"
+                      contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.associateDeviceInterfaceBinding}">
+              <af:dialog id="associateDeviceInterfaceDialog"
+                         closeIconVisible="true" type="none">
+                <af:panelStretchLayout id="pt_psl60"
+                                       styleClass="invSummaryPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.DeviceInterfaceSearchResultsFlow1.regionModel}"
+                               id="ADIR"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - Device Interface Search and Associate Popup -->
+            <!-- START - Equipment Search and Associate Popup -->
+            <af:popup id="associateEquipmentPopup"
+                      contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.associateEquipmentBinding}">
+              <af:dialog id="associateEquipmentDialog" closeIconVisible="true"
+                         type="none">
+                <af:panelStretchLayout id="pt_psl70"
+                                       styleClass="invSummaryPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.EquipmentSearchResultsFlow1.regionModel}"
+                               id="AER"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - Equipment Search and Associate Popup -->
+            <!-- START - LogicalDevice Search and Associate Popup -->
+            <af:popup id="associateLogicalDevicePopup"
+                      contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.associateLogicalDeviceBinding}">
+              <af:dialog id="associateLogicalDeviceDialog"
+                         closeIconVisible="true" type="none">
+                <af:panelStretchLayout id="pt_psl80"
+                                       styleClass="invSummaryPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.LogicalDeviceSearchResultsFlow1.regionModel}"
+                               id="ALDR"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - LogicalDevice Search and Associate Popup -->
+            <!-- START - Network Search and Associate Popup -->
+            <af:popup id="associateNetworkPopup" contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.associateNetworkBinding}">
+              <af:dialog id="associateNetworkDialog" closeIconVisible="true"
+                         type="none">
+                <af:panelStretchLayout id="pt_psl90"
+                                       styleClass="invSummaryPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.NetworkSearchResults1.regionModel}"
+                               id="ANR"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - Network Search and Associate Popup -->
+            <!-- START - Physical Device Search and Associate Popup -->
+            <af:popup id="associatePhysicalDevicePopup"
+                      contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.associatePhysicalDeviceBinding}">
+              <af:dialog id="associatePhysicalDeviceDialog"
+                         closeIconVisible="true" type="none">
+                <af:panelStretchLayout id="pt_ps200"
+                                       styleClass="invSummaryPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.PhysicalDeviceSearchResultsFlow1.regionModel}"
+                               id="APDR"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - Physical Device Search and Associate Popup -->
+            <!-- START - Physical Port Search and Associate Popup -->
+            <af:popup id="associatePhysicalPortPopup"
+                      contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.associatePhysicalPortBinding}">
+              <af:dialog id="associatePhysicalPortDialog"
+                         closeIconVisible="true" type="none">
+                <af:panelStretchLayout id="pt_ps210"
+                                       styleClass="invSummaryPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.PhysicalPortSearchResultsFlow1.regionModel}"
+                               id="APPR"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - Physical Port Search and Associate Popup -->
+            <!-- START - Party Search and Associate Popup -->
+            <af:popup id="associatePartyPopup" contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.associatePartyBinding}">
+              <af:dialog id="associatePartyDialog" closeIconVisible="true"
+                         type="none">
+                <af:panelStretchLayout id="pt_ps220"
+                                       styleClass="invSummaryPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.PartySearchResultsFlow1.regionModel}"
+                               id="APTYR"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - Party Search and Associate Popup -->
+            <!-- START - Pipe Search and Associate Popup -->
+            <af:popup id="associatePipePopup" contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.associatePipeBinding}">
+              <af:dialog id="associatePipeDialog" closeIconVisible="true"
+                         type="none">
+                <af:panelStretchLayout id="pt_ps230"
+                                       styleClass="invSummaryPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.PipeSearchResultsFlow1.regionModel}"
+                               id="r1"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - Pipe Search and Associate Popup -->
+            <!-- START - Connectivity Search and Associate Popup -->
+            <af:popup id="associateConnectivityPopup"
+                      contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.associateConnectivityBinding}">
+              <!-- @pskalaga_bug_19052830v1 removed from dialog [resize="on" ] to see if sized better -->
+              <af:dialog id="associateConnectivityDialog"
+                         closeIconVisible="true"
+                         stretchChildren="first"
+                         contentHeight="750"
+                         contentWidth="1200"
+                         type="none">
+
+                    <af:region value="#{bindings.TDMConnectivitySearchResultsFlow1.regionModel}"
+                               id="r5"/>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - Connectivity Search and Associate Popup -->
+            <!-- START - TDM Connectivity Search and Associate Popup -->
+            <af:popup id="associateMultiConnectivityPopup"
+                      contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.associateMultiConnectivityBinding}">
+              <!-- @pskalaga_bug_19052830v1 removed from dialog [resize="on" ] to see if sized better -->
+              <af:dialog id="associateMultiConnectivityDialog"
+                         closeIconVisible="true"
+                         stretchChildren="first"
+                         contentHeight="700"
+                         contentWidth="1000"
+                         type="none">
+
+                    <af:region value="#{bindings.TDMConnectivitySearchResultsFlow2.regionModel}"
+                               id="r6"/>
+
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - TDM Connectivity Search and Associate Popup -->
+            <!-- START - Pipe Search and Associate Popup -->
+            <af:popup id="associateMultiPipePopup"
+                      contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.associateMultiPipeBinding}">
+              <af:dialog id="associateMultiPipeDialog" closeIconVisible="true"
+                         type="none">
+                <af:panelStretchLayout id="pt_ps233"
+                                       styleClass="invSummaryPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.PipeSearchResultsFlow2.regionModel}"
+                               id="r7"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - Pipe Search and Associate Popup -->
+            <!-- START - Custom Object Search and Associate Popup -->
+            <af:popup id="associateEdgeCustomObjectPopup"
+                      contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.associateEdgeCustomObjectBinding}">
+              <af:dialog id="associateEdgeCustomObjectDialog"
+                         closeIconVisible="true" type="none">
+                <af:panelStretchLayout id="pt_ps240"
+                                       styleClass="invSummaryPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.CustomObjectSearchResultsFlow2.regionModel}"
+                               id="r4"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - Custom Object  Search and Associate Popup -->
+            <!-- START - Disassociate associated entity list Popup -->
+            <af:popup id="inventoryAssociationListPopup"
+                      contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.inventoryAssociationListBinding}">
+              <af:dialog id="inventoryAssociationListDialog"
+                         closeIconVisible="true" type="none"
+                         styleClass="invVisualDialog">
+                <af:panelStretchLayout id="pt_ps250"
+                                       styleClass="invSummaryPanelStretchLayout" dimensionsFrom="auto">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.InventoryAssociationListFlow1.regionModel}"
+                               id="r2"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - Disassociate associated entity list Popup -->
+            <!-- START - Disassociate associated entity list Popup -->
+            <af:popup id="inventoryAssociationEntityRoleListPopup"
+                      contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.inventoryAssociationEntityRoleListBinding}">
+              <af:dialog id="inventoryAssociationEntityRoleListDialog"
+                         closeIconVisible="true" type="none"
+                         styleClass="invVisualDialog">
+                <af:panelStretchLayout id="pt_ps260"
+                                       styleClass="invSummaryPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.InventoryAssociationListFlow2.regionModel}"
+                               id="r3"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <!-- END - Disassociate associated entity list Popup -->
+            <af:popup id="inventoryAssignmentFlowIdentifierListPopup" contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.inventoryAssignmentFlowIdentifierListBinding}">
+              
+                <af:dialog id="inventoryAssignmanetFlowIdentifierListDialog" closeIconVisible="true" type="none"
+                            contentWidth="#{NetworkViewBean.popupWidth}"
+                         contentHeight="#{NetworkViewBean.popupHeight}">
+                  <af:panelStretchLayout id="pt_ps261" 
+                                         styleClass="invSummaryPanelStretchLayout">
+						<f:facet name="center">
+							<af:region value="#{bindings.InventoryAssignmentListFlow1.regionModel}" id="r31"/>
+						</f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+              
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity" method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <af:popup id="unassignFlowIdentifierFromFlowInterfaceListPopup"
+                      contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.unassignFlowIdentifierFromFlowInterfaceListBinding}">
+              <af:dialog id="unassignFlowIdentifierFromFlowInterfaceListDialog"
+                         closeIconVisible="true" type="none"
+                         styleClass="invVisualDialog">
+                <af:panelGroupLayout id="pt_ps262"
+                                       inlineStyle="height:300px; width:500px;">
+                    <af:region value="#{bindings.UnassignFlowIdentifierListFlow2.regionModel}"
+                               id="r32"/>
+                </af:panelGroupLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            
+            <af:popup id="addFlowInterfacePopup"
+                      contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.addFlowInterfacePopup}">
+              <!-- @pskalaga_bug_19052830v1 removed from dialog [resize="on" ] to see if sized better -->
+              <af:dialog id="addFlowInterfaceDialog" 
+                         stretchChildren="first"
+                         closeIconVisible="true"
+                         contentWidth="#{NetworkViewBean.popupWidth}"
+                         contentHeight="#{NetworkViewBean.popupHeight}"
+                         type="none" 
+                         title="#{inventoryUIBundle.FLOW_INTERFACE_ASSOCIATE}">
+                <af:panelStretchLayout id="psl1"
+                                       styleClass="invSummaryPanelStretchLayout">
+                <f:facet name="center">
+
+                    <af:region value="#{bindings.FlowInterfaceCreateFlow1.regionModel}"
+                               id="r8"/>
+                               
+                </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            
+            
+            <af:popup id="associateFlowIdentifierPopup"
+                      contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.associateFlowIdentifierPopup}">
+              <!-- @pskalaga_bug_19052830v1 removed from dialog [resize="on" ] to see if sized better -->
+              <af:dialog id="assignFlowIdentifierDialog" 
+                         closeIconVisible="true"
+                         type="none"
+                         stretchChildren="first"
+                         contentWidth="#{NetworkViewBean.popupWidth}"
+                         contentHeight="#{NetworkViewBean.popupHeight}"
+                         title="#{inventoryUIBundle.FLOW_IDENTIFIER_ASSOCIATE}">
+                <af:panelStretchLayout id="psl2"
+                                       styleClass="invSummaryPanelStretchLayout">
+                    <f:facet name="center">
+                        <af:region value="#{bindings.FlowIdentifierSearchResultsFlow1.regionModel}"
+                               id="r9"/>
+                    </f:facet>
+                               
+                 </af:panelStretchLayout>
+
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            
+            <af:popup id="pp8" binding="#{backingBeanScope.preferencePopup}" contentDelivery="lazyUncached">
+                <af:dialog id="pref_d1" type="okCancel" title="#{inventoryUIBundle.PREFERENCES}" binding="#{backingBeanScope.preferenceDialog}"
+                           dialogListener="#{NetworkViewBean.savePreferences}" cancelTextAndAccessKey="&amp;#{inventoryUIBundle.CANCEL}" affirmativeTextAndAccessKey="O&amp;K"
+                           contentHeight="100" contentWidth="300" stretchChildren="first">
+                    <af:panelStretchLayout id="psl_7" styleClass="AFStretchWidth" dimensionsFrom="parent">
+                        <f:facet name="center">
+                            <af:panelGroupLayout id="pgl234" layout="scroll" styleClass="AFStretchWidth">
+                                <af:selectOneChoice id="soc3" value="#{NetworkViewBean.canvasSize}" label="#{inventoryUIBundle.CANVAS_SIZE}">
+                                    <af:selectItem label="#{inventoryUIBundle.CANVAS_SIZE_LARGE}" value="large" id="si1"/>
+                                    <af:selectItem label="#{inventoryUIBundle.CANVAS_SIZE_MEDLRG}" value="med-large" id="si5"/>
+                                    <af:selectItem label="#{inventoryUIBundle.CANVAS_SIZE_MEDIUM}" value="medium" id="si3"/>
+                                    <af:selectItem label="#{inventoryUIBundle.CANVAS_SIZE_SMALL}" value="small" id="si4"/>
+                                </af:selectOneChoice>
+                                <af:spacer width="10" height="10" id="sp1"/>
+                                <af:selectBooleanCheckbox value="#{NetworkViewBean.hideEdgeLabels}" label="#{inventoryUIBundle.HIDE_EDGE_LABELS}" id="dl2"/>
+                                <af:spacer width="10" height="10" id="sp2"/>
+                                <af:selectBooleanCheckbox value="#{NetworkViewBean.hideNodeLabels}" label="#{inventoryUIBundle.HIDE_NODE_LABELS}" id="dl3"/>
+
+                            </af:panelGroupLayout>
+                        </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>            
+            
+             <af:popup id="addFlowIdentifierPopup"
+                      contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.addFlowIdentifierPopup}">
+            
+              <af:dialog id="addFlowIdentifierDialog" 
+                         closeIconVisible="true"
+                         type="none">
+                <af:panelStretchLayout id="psl3"
+                                       styleClass="invSummaryPanelStretchLayout">
+                    <f:facet name="center">
+                    <af:region value="#{bindings.FlowIdentifierSearchResultsFlow2.regionModel}" id="r10"/>
+                  </f:facet>
+                 </af:panelStretchLayout>
+                </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            
+          <af:popup id="filterTechnologyPopup" contentDelivery="lazyUncached" 
+                    binding="#{backingBeanScope.filterTechnologyPopup}">
+            <af:dialog id="filterTechnologyDialog" closeIconVisible="true" type="none"
+                    stretchChildren="first" contentWidth="#{NetworkViewBean.popupWidth}"
+                    contentHeight="#{NetworkViewBean.popupHeight}" title="#{inventoryUIBundle.FILTER_CRITERIA}" resize="on">
+              <af:panelStretchLayout id="psl4" styleClass="invSummaryPanelStretchLayout">
+                <f:facet name="center">
+                  <af:panelGroupLayout id="pgl7" layout="horizontal" halign="left" valign="top">
+                    <af:panelFormLayout id="pfl2" labelWidth="33%" fieldWidth="67%" maxColumns="2" rows="6">
+                       <trh:tableLayout id="tl2">
+                        <trh:rowLayout id="rl5">
+    			  <trh:cellFormat halign="left" id="cf14">
+                             <af:outputLabel value="    " id="blankLine"
+                                             inlineStyle="white-space:nowrap;" for="it3"/>
+                          </trh:cellFormat>
+   	                </trh:rowLayout>                       
+                        <trh:rowLayout id="rl4">
+                          <trh:cellFormat id="cf1">
+                            <af:inputText label="#{inventoryUIBundle.ROLE_NAME}" id="it3" value="#{NetworkViewBean.roleName}" autoSubmit="true" required="false" 
+                              valueChangeListener="#{NetworkViewBean.roleNameChanged}" binding="#{backingBeanScope.roleName}"
+                                          contentStyle="width:260px">
+                              <af:autoSuggestBehavior suggestItems="#{NetworkViewBean.getRoleNameHandler}" maxSuggestedItems="25"/>
+                            </af:inputText>
+                          </trh:cellFormat>
+                        </trh:rowLayout>                       
+                        <trh:rowLayout id="rl3a">
+    			  <trh:cellFormat halign="left" id="cf7">
+                             <af:outputLabel value="    " id="blankLine3"
+                                             inlineStyle="white-space:nowrap;" for="it1"/>
+                          </trh:cellFormat>
+   	                </trh:rowLayout>
+                        <trh:rowLayout id="rl1">
+                          <trh:cellFormat id="cf3">
+                            <af:inputText label="#{inventoryUIBundle.TECHNOLOGY}" id="it1" value="#{NetworkViewBean.technology}" autoSubmit="true" required="false" 
+                                    rendered="true" valueChangeListener="#{NetworkViewBean.technologyChanged}" binding="#{backingBeanScope.technology}" contentStyle="width:260px">
+                                <af:autoSuggestBehavior suggestItems="#{NetworkViewBean.getTechnologyHandler}" maxSuggestedItems="25"/>
+                            </af:inputText>
+                          </trh:cellFormat>
+                        </trh:rowLayout>
+                        <trh:rowLayout id="rl2a">
+    			  <trh:cellFormat halign="left" id="cf4">
+                             <af:outputLabel value="    " id="blankLine2"
+                                             inlineStyle="white-space:nowrap;" for="it2"/>
+                          </trh:cellFormat>
+   	                </trh:rowLayout>
+                        <trh:rowLayout id="rl2">
+                          <trh:cellFormat id="cf5">
+                            <af:inputText label="#{inventoryUIBundle.RATE_CODE}" id="it2" value="#{NetworkViewBean.rateCode}" autoSubmit="true" required="false" 
+                                    rendered="true" valueChangeListener="#{NetworkViewBean.rateCodeChanged}" binding="#{backingBeanScope.rateCode}" contentStyle="width:260px">
+                                <af:autoSuggestBehavior suggestItems="#{NetworkViewBean.getRateCodeHandler}" maxSuggestedItems="25"/>
+                            </af:inputText>
+                          </trh:cellFormat>
+                        </trh:rowLayout>
+                        
+                        <trh:rowLayout id="rl3">
+                            <trh:cellFormat halign="left" id="cf6">
+				<af:outputLabel value="#{inventoryUIBundle.NETWORK_FILTER_MESSAGE}" id="inst"
+                                             inlineStyle="font-size:xx-small;"/>
+                            </trh:cellFormat>
+                        </trh:rowLayout>                       
+                        
+                      </trh:tableLayout>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                </f:facet>
+              </af:panelStretchLayout>
+              <f:facet name="buttonBar">
+                <af:toolbar id="tb1">
+                    <af:commandToolbarButton text="#{inventoryUIBundle.DONE}" id="ctb3"
+                                             actionListener="#{NetworkViewBean.filterNetwork}"
+                                             accessKey="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>
+                    <af:spacer width="5" height="10" id="spc1"/>
+                    <af:commandToolbarButton text="#{inventoryUIBundle.RESET}" id="ctb5"
+                                             actionListener="#{NetworkViewBean.resetNetworkFilter}"
+                                             accessKey="#{inventoryUIBundle.RESET_ACCESS_KEY}"/>
+                    <af:spacer width="30" height="10" id="spc2"/>
+
+                    <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb4"
+                                             actionListener="#{NetworkViewBean.cancel}" immediate="true"
+                                             accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                </af:toolbar>
+              </f:facet>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+          </af:popup>     
+          
+          <af:popup id="findNodeAndEdgePopup" contentDelivery="lazyUncached" 
+                    binding="#{backingBeanScope.findNodeAndEdgePopup}">
+            <af:dialog id="findNodeAndEdgeDialog" closeIconVisible="true" type="none"
+                    stretchChildren="first" contentWidth="#{NetworkViewBean.popupWidth}"
+                    contentHeight="#{NetworkViewBean.popupHeight}" title="#{inventoryUIBundle.SEARCH_ENTITY}" resize="on">
+              <af:panelStretchLayout id="psl5" styleClass="invSummaryPanelStretchLayout">
+                <f:facet name="center">
+                  <af:panelGroupLayout id="pgl8" layout="horizontal" halign="left" valign="top">
+                    <af:panelFormLayout id="pfl3" fieldWidth="67%" labelWidth="33%">
+                       <trh:tableLayout id="tl3">
+                        <trh:rowLayout id="rl6">
+                            <trh:cellFormat halign="left" id="cf8">
+                                <af:outputLabel value="    " id="blankLine4" inlineStyle="white-space:nowrap;"/>
+                            </trh:cellFormat>
+			</trh:rowLayout>
+                        <trh:rowLayout id="rl7">
+                          <trh:cellFormat id="cf9">
+                            <af:selectOneChoice id="soc6" autoSubmit="true" label="#{inventoryUIBundle.ENTITY_TYPE}"
+                                                  value="#{NetworkViewBean.selectedEntityType}" required="false"
+                                                  shortDesc="#{inventoryUIBundle.ENTITY_TYPE}" binding="#{backingBeanScope.entityType}"
+                                                contentStyle="width:281px"
+                                                valueChangeListener="#{NetworkViewBean.entityTypeChanged}">
+                                <f:selectItems binding="#{NetworkViewBean.entityList}" id="si6"/>
+                            </af:selectOneChoice>
+                          </trh:cellFormat>
+                        </trh:rowLayout>
+                        <trh:rowLayout id="rl8">
+                            <trh:cellFormat halign="left" id="cf11">
+                                <af:outputLabel value="    " id="blankLine5" inlineStyle="white-space:nowrap;"/>
+                            </trh:cellFormat>
+                        </trh:rowLayout>
+                        <trh:rowLayout id="rl9">
+                          <trh:cellFormat id="cf10">
+                            <af:inputText label="#{inventoryUIBundle.NAME}" id="it9" value="#{NetworkViewBean.entityName}" autoSubmit="true" required="false" 
+                                    rendered="true" valueChangeListener="#{NetworkViewBean.entityNameChanged}" binding="#{backingBeanScope.entityName}"
+                                          contentStyle="width:281px">
+                                <af:autoSuggestBehavior suggestItems="#{NetworkViewBean.getNameHandler}"  maxSuggestedItems="25"/>
+                            </af:inputText>
+                          </trh:cellFormat>
+                        </trh:rowLayout>
+                      </trh:tableLayout>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                </f:facet>
+              </af:panelStretchLayout>
+              <f:facet name="buttonBar">
+                <af:toolbar id="tb2">
+                    <af:commandToolbarButton text="#{inventoryUIBundle.DONE}" id="ctb6"
+                                             actionListener="#{NetworkViewBean.findNodesAndEdges}"
+                                             accessKey="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>
+                    <af:spacer width="5" height="10" id="spc4"/>
+                    <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb8"
+                                             actionListener="#{NetworkViewBean.cancel}" immediate="true"
+                                             accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                </af:toolbar>
+              </f:facet>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+          </af:popup>  
+          
+            <af:popup id="assignBitRatePopup" contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.assignFIBitRatePopup}"
+                      popupFetchListener="#{NetworkViewBean.assignBitRatePopupFetchListener}">              
+              <af:dialog id="assignFlowInterfaceBitRateDialog" closeIconVisible="true" type="none"
+                         stretchChildren="first" contentWidth="#{NetworkViewBean.popupWidth}"
+                         contentHeight="#{NetworkViewBean.popupHeight}" title="#{inventoryUIBundle.ASSIGN_BIT_RATE}"
+                         resize="on">
+                <af:panelStretchLayout id="psl21" styleClass="invSummaryPanelStretchLayout">
+                  <f:facet name="center">
+                    <af:panelGroupLayout id="pgl14" layout="horizontal" halign="left" valign="top">
+                      <af:panelFormLayout id="pfl11" binding="#{backingBeanScope.flowInterfaceDetailsPanel}">
+                        <trh:tableLayout id="tl11">
+                          <trh:rowLayout id="rl11">
+                            <trh:cellFormat halign="right" id="cf12">
+                              <af:outputLabel value="#{inventoryUIBundle.FLOW_INTERFACE_BIT_RATE}" id="textLabe"
+                                              inlineStyle="white-space:nowrap;" for="it13"/>
+                            </trh:cellFormat>
+                            <trh:cellFormat id="cf13">
+                              <af:inputText autoSubmit="true" id="it13" columns="15"
+                                            value="#{NetworkViewBean.bitRateAmount}"/>
+                            </trh:cellFormat>
+                            <af:spacer width="6" height="22" id="s53"/>  
+                            <trh:cellFormat id="cf31">
+                              <af:selectOneChoice id="s1tt" autoSubmit="true" label="#{inventoryUIBundle.UNIT_OF_MEASURE}"
+                                                  value="#{NetworkViewBean.selectedUnitOfMeasure}" required="true"
+                                                  shortDesc="#{inventoryUIBundle.UNIT_OF_MEASURE}">
+                                <f:selectItems binding="#{NetworkViewBean.unitOfMeasureList}" id="si11"/>
+                              </af:selectOneChoice>
+                            </trh:cellFormat>
+                          </trh:rowLayout>
+                        </trh:tableLayout>
+                        </af:panelFormLayout>
+                    </af:panelGroupLayout>
+                  </f:facet>
+                   </af:panelStretchLayout>
+                <f:facet name="buttonBar">
+                  <af:toolbar id="t421">
+                    <af:commandToolbarButton text="#{inventoryUIBundle.DONE}" id="ctb322"
+                                             actionListener="#{NetworkViewBean.assignBitRate}"
+                                             accessKey="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>
+                    <af:spacer width="10" height="10" id="s222"/>
+                    <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb233"
+                                             actionListener="#{NetworkViewBean.cancel}" immediate="true"
+                                             accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                  </af:toolbar>
+                </f:facet>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity" method="#{NetworkViewBean.refreshNetworkCanvasArea}"/>
+            </af:popup>
+            <af:panelGroupLayout id="pg20">
+              <af:inputText id="heightComp" label="Invisible Height"
+                            binding="#{backingBeanScope.inputTextHeightBinding}"
+                            value="" clientComponent="true" immediate="true"
+                            visible="false" autoSubmit="true">
+                <af:clientAttribute name="defaultFocusField" value="Y"/>
+              </af:inputText>
+              <af:inputText id="widthComp" label="Invisible Width"
+                            binding="#{backingBeanScope.inputTextWidthBinding}"
+                            clientComponent="true" immediate="true"
+                            visible="false" autoSubmit="true"/>
+              <trh:script id="vars3"
+                          text='var inputHeightId = "#{NetworkViewBean.heightClientId}"; '></trh:script>
+              <trh:script id="vars4"
+                          text='var inputWidthId = "#{NetworkViewBean.widthClientId}"; '></trh:script>
+              <trh:script id="vars5"
+                          text='var widthInputComponent = "#{NetworkViewBean.heightInput}"; '></trh:script>
+              <trh:script id="vars6"
+                          text='var heightInputComponent = "#{NetworkViewBean.widthInput}"; '></trh:script>
+              <trh:script id="vars7"
+                          text='var detailsTable = "#{NetworkViewBean.detailsTable}"; '></trh:script>        
+              <trh:script id="script">                // Used to set the width and height based ondefine screen size.
+                var vpHeight = window.innerHeight;
+                if (vpHeight == null || vpHeight == "") {
+                    vpHeight = document.documentElement.clientHeight;
+                }
+                var vpWidth = window.innerWidth;
+                if (vpWidth == null || vpWidth == "") {
+                    vpWidth = document.documentElement.clientWidth;
+                }
+
+                var hiddenHeightComp2 = AdfPage.PAGE.findComponentByAbsoluteId(inputHeightId);
+                var hiddenWidthComp2 = AdfPage.PAGE.findComponentByAbsoluteId(inputWidthId);
+              </trh:script>
+            </af:panelGroupLayout>
+            <af:commandButton id="updateADFComponents"
+                              binding="#{backingBeanScope.updateADFComponentBinding}"
+                              partialSubmit="true" visible="false"
+                              styleClass="invisibleComponent"/>
+                              
+           <af:link action="#{NetworkViewBean.getPageAction}"
+                            id="goToPage" visible="false"
+                            binding="#{backingBeanScope.summaryPageLink}">
+              <af:outputText value="#{NetworkViewBean.fromParameter}" id="ot4"/>
+              <af:setActionListener from="#{NetworkViewBean.fromParameter}"
+                                    to="#{requestScope.oid}"/>
+            </af:link>
+			        
+            <af:commandButton id="saveAsImageButtonId" text="Save as Image" visible="false" 
+                    binding="#{backingBeanScope.saveAsImageBinding}" partialSubmit="true" styleClass="invisibleComponent">
+                <af:fileDownloadActionListener filename="ilogImage.jpg" contentType="image/jpeg;" method="#{NetworkViewBean.saveAsImage}"/>
+            </af:commandButton>        
+            <af:commandButton id="saveFullImageButtonId" text="Save Full Image" visible="false" 
+                    binding="#{backingBeanScope.saveFullImageBinding}" partialSubmit="true" styleClass="invisibleComponent">
+                 <af:fileDownloadActionListener filename="ilogFullImage.jpg" contentType="image/jpeg" method="#{NetworkViewBean.saveFullImage}"/>
+            </af:commandButton>
+        
+            <jvf:zoomInteractor id="zoom"/>
+            <jvf:panInteractor id="pan"/>
+            <jvtf:clientSelectInteractor id="select" menuModelId="selectItr"/>
+            <h:panelGrid styleClass="visualToolbar">
+              <af:panelGroupLayout id="pgl1" layout="horizontal">
+                <!-- Declare a grid with six columns to accomodate the buttons -->
+                <!-- Group Tag needed for showing / hiding buttons, they also add the seperators -->
+                <af:toolbar id="panelGroupLayout1" binding="#{NetworkViewBean.toolbarBinding}">
+                  <af:menuBar id="mb1" rendered="#{NetworkViewBean.virtualNetwork}">
+                    <af:menu text="#{inventoryUIBundle.DESIGN_STEPS}" id="m1">
+                      <af:commandMenuItem text="#{inventoryUIBundle.ASSIGN_FLOW_IDENTIFIER}" id="cmi2"
+                                          disabled="#{NetworkViewBean.nwVisualReadOnly || NetworkViewBean.disableCanvasActions}"
+                                          rendered="#{NetworkViewBean.packetVirtualNetwork}">
+                        <af:clientListener type="action" method="showFlowIdentifierSearchPopup"/>
+                      </af:commandMenuItem>
+                      <af:commandMenuItem text="#{inventoryUIBundle.ASSIGN_BIT_RATE}" id="cmi7"                                          
+                                          disabled="#{NetworkViewBean.nwVisualReadOnly || NetworkViewBean.disableCanvasActions}">
+                        <af:clientListener type="action" method="showAssignFlowInterfaceBitRatePopup"/>
+                      </af:commandMenuItem>
+                       <af:commandMenuItem text="#{inventoryUIBundle.FLOW_IDENTIFIER_DISASSOCIATE}" id="cmi71"                                          
+                                          disabled="#{NetworkViewBean.nwVisualReadOnly || NetworkViewBean.disableCanvasActions}">
+                        <af:clientListener type="action" method="showUnassignFlowIdentifierPopup"/>
+                      </af:commandMenuItem>
+                      <af:commandMenuItem text="#{inventoryUIBundle.VALIDATE_DESIGN}" id="cmi3"
+                                          disabled="#{NetworkViewBean.nwVisualReadOnly || NetworkViewBean.disableDesignSteps}"
+                                          actionListener="#{NetworkViewBean.validateDesignVersion}"/>
+                      <af:commandMenuItem text="#{inventoryUIBundle.CREATE_NEW_VERSION}" id="cmi4"
+                                          disabled="#{NetworkViewBean.disableCreateNewVersion}" action="createConfig"/>
+                      <af:commandMenuItem text="#{inventoryUIBundle.COMPLETE_DESIGN}" id="cmi5"
+                                          actionListener="#{NetworkViewBean.completeDesignVersion}"
+                                          disabled="#{NetworkViewBean.nwVisualReadOnly || NetworkViewBean.disableDesignSteps}"/>
+                      <af:commandMenuItem text="#{inventoryUIBundle.CANCEL_DESIGN}" id="cmi6"
+                                          actionListener="#{NetworkViewBean.cancelDesignVersion}"
+                                          disabled="#{NetworkViewBean.nwVisualReadOnly || NetworkViewBean.disableDesignSteps}"/>
+                    </af:menu>
+                  </af:menuBar>
+                  <af:group id="grp0" rendered="true">
+                    <!-- Declare the image buttons -->
+                    <!-- Notice how 'onclick' tag attribute is used -->
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    selected="true"
+                                    onclick="networkCanvas.setInteractor(select)"
+                                    image="/images/selectobject_ena.png"
+                                    buttonGroupId="interactors"
+                                    rolloverImage="/images/selectobject_ovr.png"
+                                    selectedImage="/images/selectobject_dwn.png"
+                                    title="#{inventoryUIBundle.SELECT}"
+                                    message="#{inventoryUIBundle.SELECT}"
+                                    binding="#{backingBeanScope.SELECTBUTTON}" />
+                                    
+                    <af:spacer width="2" height="10" id="s01"/>
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="networkCanvas.setInteractor(zoom)"
+                                    image="/images/zoomtoselection_ena.png"
+                                    buttonGroupId="interactors"
+                                    rolloverImage="/images/zoomtoselection_ovr.png"
+                                    selectedImage="/images/zoomtoselection_dwn.png"
+                                    title="#{inventoryUIBundle.ZOOM}"
+                                    message="#{inventoryUIBundle.ZOOM}" />
+                                    
+                    <af:spacer width="2" height="10" id="s02"/>
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="networkCanvas.setInteractor(pan)"
+                                    image="/images/pan_ena.png"
+                                    buttonGroupId="interactors"
+                                    rolloverImage="/images/pan_ovr.png"
+                                    selectedImage="/images/pan_dwn.png"
+                                    title="#{inventoryUIBundle.PAN}"
+                                    message="#{inventoryUIBundle.PAN}" />
+                                    
+                    <af:spacer width="2" height="10" id="s03"/>
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="networkCanvas.showAll(true)"
+                                    image="/images/zoombestfit_ena.png"
+                                    rolloverImage="/images/zoombestfit_ovr.png"
+                                    selectedImage="/images/zoombestfit_dwn.png"
+                                    title="#{inventoryUIBundle.SHOW_ALL}"
+                                    message="#{inventoryUIBundle.SHOW_ALL}" />
+                                    
+                    <af:spacer width="2" height="10" id="s04"/>
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="networkCanvas.zoomIn(true)"
+                                    image="/images/zoomin_ena.png"
+                                    rolloverImage="/images/zoomin_ovr.png"
+                                    selectedImage="/images/zoomin_dwn.png"
+                                    title="#{inventoryUIBundle.ZOOM_IN}"
+                                    message="#{inventoryUIBundle.ZOOM_IN}" />
+                                    
+                    <af:spacer width="2" height="10" id="s05"/>
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="networkCanvas.zoomOut(true)"
+                                    image="/images/zoomout_ena.png"
+                                    rolloverImage="/images/zoomout_ovr.png"
+                                    selectedImage="/images/zoomout_dwn.png"
+                                    title="#{inventoryUIBundle.ZOOM_OUT}"
+                                    message="#{inventoryUIBundle.ZOOM_OUT}" />
+                                    
+                  </af:group>
+                  <af:group id="gp1"
+                            rendered="#{!NetworkViewBean.packetVirtualNetwork}">
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    id="ib1AddNode" onclick="addNode()"
+                                    image="/images/add-node_ena.png"
+                                    rolloverImage="/images/add-node_ovr.png"
+                                    selectedImage="/images/add-node_dwn.png"
+                                    title="#{inventoryUIBundle.NEW_NODE}"
+                                    message="#{inventoryUIBundle.NEW_NODE}"
+                                    enabled="#{!(NetworkViewBean.disableCanvasActions) and !(NetworkViewBean.nwVisualReadOnly)}"/>
+                  </af:group>
+                  <af:group id="grp2"
+                            rendered="#{NetworkViewBean.packetVirtualNetwork}">
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    id="addFlowInterface" 
+                                    image="/images/FlowInterface_16.png"
+                                    rolloverImage="/images/FlowInterface_16_ena.png"
+                                    selectedImage="/images/FlowInterface_16_ena.png"
+                                    title="#{inventoryUIBundle.ADD_FLOW_INTERFACE}"
+                                    message="#{inventoryUIBundle.ADD_FLOW_INTERFACE}"
+                                    enabled="#{!(NetworkViewBean.disableCanvasActions)}"
+                                    onclick="showAddFlowInterfacePopup()"/>
+                    <af:spacer width="2" height="10" id="s1"/>
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    id="addFICrossConnect" 
+                                    image="/images/CrossConnectFrom_16.png"
+                                    rolloverImage="/images/CrossConnectFrom_16_ena.png"
+                                    selectedImage="/images/CrossConnectFrom_16_ena.png"
+                                    title="#{inventoryUIBundle.ADD_FLOW_INTERFACE_CROSS_CONNECT}"
+                                    message="#{inventoryUIBundle.ADD_FLOW_INTERFACE_CROSS_CONNECT}"
+                                    enabled="#{!(NetworkViewBean.disableCanvasActions)}"
+                                    onclick="addFlowInterfaceCrossConnect()"/>
+                    
+                  </af:group>
+                  <af:spacer width="2" height="10" id="s12"/>
+                  <jv:imageButton style="width: 16px;height: 16px;"
+                                  id="ib2AddLink" onclick="addLink()"
+                                  image="/images/linkobject_ena.png"
+                                  rolloverImage="/images/linkobject_ovr.png"
+                                  selectedImage="/images/linkobject_dwn.png"
+                                  title="#{inventoryUIBundle.CREATE_EDGE}"
+                                  message="#{inventoryUIBundle.CREATE_EDGE}"
+                                  enabled="#{!(NetworkViewBean.disableCanvasActions) and !(NetworkViewBean.nwVisualReadOnly)}"/>
+                  <af:spacer width="2" height="10" id="s13"/>
+                  <jv:imageButton style="width: 16px;height: 16px;"
+                                  image="/images/connectivity_ena.png"
+                                  rolloverImage="/images/connectivity_ovr.png"
+                                  selectedImage="/images/connectivity_ovr.png"
+                                  title="#{inventoryUIBundle.ASSOCIATE_CONNECTIVITY}"
+                                  message="#{inventoryUIBundle.ADD_CONNECTIVITY}"
+                                  enabled="#{!(NetworkViewBean.disableCanvasActions) and !(NetworkViewBean.nwVisualReadOnly)}"
+                                  onclick="handleSearchPopup()"/>
+                  <af:spacer width="2" height="10" id="s14"/>
+                  <af:group id="grp3"
+                            rendered="#{!NetworkViewBean.virtualNetwork}">
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    image="/images/pipe_ena.png"
+                                    rolloverImage="/images/pipe_ovr.png"
+                                    selectedImage="/images/pipe_ovr.png"
+                                    title="#{inventoryUIBundle.ASSOCIATE_PIPE}"
+                                    message="#{inventoryUIBundle.ADD_PIPE}"
+                                    enabled="#{!NetworkViewBean.nwVisualReadOnly}"
+                                    onclick="handlePipeSearchPopup()"/>
+                  </af:group>
+                  <af:checkUncommittedDataBehavior/>
+                  <af:group id="grp4">
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="networkCanvas.performAction('editAction',['NetworkVisualizationAdapter.performLabelLayout'], true);"
+                                    image="/images/aligngoals_ena.png"
+                                    rolloverImage="/images/aligngoals_ovr.png"
+                                    selectedImage="/images/aligngoals_dwn.png"
+                                    title="#{inventoryUIBundle.PERFORM_LABEL_LAYOUT}"
+                                    message="#{inventoryUIBundle.PERFORM_LABEL_LAYOUT}" />
+                                    
+                    <af:spacer width="2" height="10" id="s21"/>
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="deleteObject()"
+                                    image="/images/delete_ena.png"
+                                    title="#{inventoryUIBundle.DELETE}"
+                                    message="#{inventoryUIBundle.DELETE}"
+                                    enabled="#{!(NetworkViewBean.disableCanvasActions) and !(NetworkViewBean.nwVisualReadOnly)}"/>
+                    <af:spacer width="2" height="10" id="s22"/>
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="saveNodePositions()"
+                                    image="/images/save_ena.png"
+                                    rolloverImage="/images/save_ovr.png"
+                                    selectedImage="/images/save_ena.png"
+									title="#{inventoryUIBundle.SAVE_NODE_POSITIONS}"
+                                    message="#{inventoryUIBundle.SAVE_NODE_POSITIONS}" />
+                                    
+                    <af:spacer width="2" height="10" id="s2022"/>
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    image="/images/expand-all.png"
+                                    rolloverImage="/images/expandall_ovr.png"
+                                    selectedImage="/images/expandall_ovr.png"
+                                    title="#{inventoryUIBundle.RESIZE_CANVAS}"
+                                    message="#{inventoryUIBundle.RESIZE_CANVAS}"                                    
+                                    onclick="resize()"/>
+                  </af:group>
+                  
+		  <af:group id="grp6">
+                    <af:spacer width="2" height="10" id="s40"/>
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="handleFilterPopup()"
+                                    image="/images/func_filterplus_16_act.png"
+                                    rolloverImage="/images/func_filterplus_16_hov.png"
+                                    selectedImage="/images/func_filterplus_16_act.png"
+                                    title="#{inventoryUIBundle.CANVAS_FILTER}"
+                                    message="#{inventoryUIBundle.CANVAS_FILTER}" />                                    
+                    <af:spacer width="2" height="10" id="s41"/>                                    
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="handleSearchNodesPopup()"
+                                    image="/images/func_magnifyingglass_16_act.png"
+                                    rolloverImage="/images/func_magnifyingglass_16_hov.png"
+                                    selectedImage="/images/func_magnifyingglass_16_act.png"
+                                    title="#{inventoryUIBundle.SEARCH}"
+                                    message="#{inventoryUIBundle.SEARCH}" />                                    
+                    <af:spacer width="2" height="10" id="s42"/>                                    
+
+                  </af:group>
+                  <af:group id="grp5">
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="networkCanvas.performAction('editAction',['NetworkVisualizationAdapter.doSpringEmbedderLayout'], true);"
+                                    image="/images/SpringEmbedderLayout.gif"
+                                    rolloverImage="/images/SpringEmbedderLayouth.gif"
+                                    selectedImage="/images/SpringEmbedderLayoutd.gif"
+                                    title="#{inventoryUIBundle.SPRING_EMBEDDER_LAYOUT}"
+                                    message="#{inventoryUIBundle.SPRING_EMBEDDER_LAYOUT}" />
+                                    
+                    <af:spacer width="2" height="10" id="s31"/>
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="networkCanvas.performAction('editAction',['NetworkVisualizationAdapter.doRandomLayout'], true);"
+                                    image="/images/community_ena.png"
+                                    rolloverImage="/images/community_ovr.png"
+                                    selectedImage="/images/community_dwn.png"
+                                    title="#{inventoryUIBundle.RANDOM_LAYOUT}"
+                                    message="#{inventoryUIBundle.RANDOM_LAYOUT}" />
+                                    
+                    <!-- deleted button for mesh layout bug 8317674 -->
+                    <af:spacer width="2" height="10" id="s32"/>
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="networkCanvas.performAction('editAction',['NetworkVisualizationAdapter.doUniformLengthEdgesLayout'], true);"
+                                    image="/images/UniformLengthEdgesLayout.gif"
+                                    rolloverImage="/images/UniformLengthEdgesLayouth.gif"
+                                    selectedImage="/images/UniformLengthEdgesLayoutd.gif"
+                                    title="#{inventoryUIBundle.UNIFORM_LENGTH_EDGES_LAYOUT}"
+                                    message="#{inventoryUIBundle.UNIFORM_LENGTH_EDGES_LAYOUT}" />
+                                    
+                    <af:spacer width="2" height="10" id="s33"/>
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="networkCanvas.performAction('editAction',['NetworkVisualizationAdapter.doTreeLayout'], true);"
+                                    image="/images/TreeLayout.gif"
+                                    rolloverImage="/images/TreeLayouth.gif"
+                                    selectedImage="/images/TreeLayoutd.gif"
+                                    title="#{inventoryUIBundle.TREE_LAYOUT}"
+                                    message="#{inventoryUIBundle.TREE_LAYOUT}" />
+                                    
+                    <af:spacer width="2" height="10" id="s34"/>
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="networkCanvas.performAction('editAction',['NetworkVisualizationAdapter.doHierarchicalLayout'], true);"
+                                    image="/images/HierarchicalLayout.gif"
+                                    rolloverImage="/images/HierarchicalLayouth.gif"
+                                    selectedImage="/images/HierarchicalLayoutd.gif"
+                                    title="#{inventoryUIBundle.HIERARCHICAL_LAYOUT}"
+                                    message="#{inventoryUIBundle.HIERARCHICAL_LAYOUT}" />
+                                    
+                    <af:spacer width="2" height="10" id="s35"/>
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="performTopologicalMeshLayout()"
+                                    image="/images/TopologicalMeshLayout.gif"
+                                    rolloverImage="/images/TopologicalMeshLayouth.gif"
+                                    selectedImage="/images/TopologicalMeshLayoutd.gif"
+                                    title="#{inventoryUIBundle.TOPOLOGICALMESH_LAYOUT}"
+                                    message="#{inventoryUIBundle.TOPOLOGICALMESH_LAYOUT}" />
+                                    
+                    <af:spacer width="2" height="10" id="s36"/>
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="networkCanvas.performAction('editAction',['NetworkVisualizationAdapter.doCircularLayout'], true);"
+                                    image="/images/CircularLayout.gif"
+                                    rolloverImage="/images/CircularLayouth.gif"
+                                    selectedImage="/images/CircularLayoutd.gif"
+                                    title="#{inventoryUIBundle.CIRCULAR_LAYOUT}"
+                                    message="#{inventoryUIBundle.CIRCULAR_LAYOUT}" />
+                                    
+                    <af:spacer width="2" height="10" id="s37"/>
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="networkCanvas.performAction('editAction',['NetworkVisualizationAdapter.doGridLayout'], true);"
+                                    image="/images/GridLayout.gif"
+                                    rolloverImage="/images/GridLayouth.gif"
+                                    selectedImage="/images/GridLayoutd.gif"
+                                    title="#{inventoryUIBundle.GRID_LAYOUT}"
+                                    message="#{inventoryUIBundle.GRID_LAYOUT}" />
+                  </af:group>				
+		  <af:group id="grp7">
+                    <af:spacer width="2" height="10" id="s38"/>
+                    <jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="handlePreferencePopup()"
+                                    image="/images/preferences.png"
+                                    rolloverImage="/images/preferencesh.png"
+                                    selectedImage="/images/preferencesd.png"
+                                    title="#{inventoryUIBundle.PREFERENCES}"
+                                    message="#{inventoryUIBundle.PREFERENCES}" />                                    
+                    <af:spacer width="2" height="10" id="s39"/>  
+					<jv:imageButton style="width: 16px;height: 16px;"
+                                    onclick="printPage()"
+                                    image="/images/print_ena.png" 
+                                    title="#{inventoryUIBundle.PRINT}"
+                                    message="#{inventoryUIBundle.PRINT}" />                                    
+                    <af:spacer width="2" height="10" id="s399"/> 					
+                  </af:group>
+                </af:toolbar>
+              </af:panelGroupLayout>
+            </h:panelGrid>
+            <af:panelGroupLayout id="pgl4" layout="horizontal" valign="top"
+                                 halign="left">
+              <af:panelGroupLayout layout="horizontal" id="canvasArea"
+                                   binding="#{backingBeanScope.networkCanvasArea}">
+                <af:serverListener type="jsSetPageSize"
+                                   method="#{NetworkViewBean.setPageSize}"/>
+                <af:serverListener type="jsCreateDetails"
+                                   method="#{NetworkViewBean.createDetails}"/>
+                <af:serverListener type="jsHandlePopup"
+                                   method="#{NetworkViewBean.handlePopup}"/>
+			    <af:serverListener type="jsPrintPage" 
+								   method="#{NetworkViewBean.printPage}"/>
+				<af:serverListener type="jsResize" 
+								   method="#{NetworkViewBean.resize}"/>
+                <af:serverListener type="jsDisassociateEntity" 
+                                   method="#{NetworkViewBean.disassociateEntity}"/>
+                <af:serverListener type="jsNavigatePage"
+                                   method="#{NetworkViewBean.navigatePage}"/>
+                <af:serverListener type="jsSwitchContext"
+                                   method="#{NetworkViewBean.switchContext}"/>
+                <h:panelGrid border="0" columns="1" styleClass="psheet">
+                  <jvtf:networkView id="networkCanvas" context="#{defContext}"
+                                    width="#{NetworkViewBean.width}"
+                                    height="#{NetworkViewBean.height}"
+                                    interactorId="select"
+                                    binding="#{NetworkViewBean.networkView}"
+                                    imageFormat="PNG" resizable="false"
+                                    servlet="oracle.communications.inventory.ui.framework.visualization.servlet.NetworkSyncImageServlet"
+                                    waitingImage="images/waiting.gif"
+                                    scrollBar="need">
+                    <jvtf:selectionManager id="selectionManager"
+                                           imageMode="false" lineColor="black"
+                                           lineWidth="2"
+                                           propertyAccessor="#{NetworkInteractorBean.propertyAccessor}"
+                                           onSelectionChanged="displaySelection(selection)"
+                                           forceUpdateProperties="false"/>
+                    <!-- Declare the contextual menu with given popup menu factory  -->
+                    <jvf:contextualMenu factory="#{NetworkPopupMenuFactoryBean}"
+                                        itemStyleClass="menuItem"
+                                        itemHighlightedStyleClass="menuItemHighlighted"
+                                        itemDisabledStyleClass="menuItemDisabled"
+                                        id="cm1"/>
+                  </jvtf:networkView>
+                  <trh:script id="vars" text='
+                      var ntwkCanvasId = "#{NetworkViewBean.clientId}"; 
+                      var virtualNetwork = "#{NetworkViewBean.virtualNetwork}";   
+					  '>
+                  </trh:script>
+                  <trh:script id="sc1">
+                    var p = "";
+                    // called by the onSelectionChanged attribute on NetworkView.jsff file. It returns a map of attributes
+                    //to a javascript variable. These attributes will be used to dynamically build the Details section
+                    //in NonMapTopologyViewBean.
+                    function displaySelection(selection) {
+                        try {
+                            if (selection.length == 1) {
+                                p = selection[0].getObjectProperties();
+                            }
+                            else if (selection.length == 0) {
+                                p = "NOTHING_IS_SELECTED";
+                            }
+                            else if (selection.length &gt; 1) {
+                                p = "MULTIPLE_OBJECTS_ARE_SELECTED";
+                            }
+                            var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                            AdfCustomEvent.queue(ntwkCanvas, "jsCreateDetails", 
+                            {
+                                props : p
+                            }, true);
+                            p = "";
+                        }
+                        catch (e) {
+                            alert("An error occurred when building property sheet." + e);
+                        }
+                    }
+
+                    function handlePreferencePopup() {
+                        p = "handlePreferencePopup";
+                        var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                        AdfCustomEvent.queue(ntwkCanvas, "jsHandlePopup", 
+                        {
+                            props : p
+                        }, true);
+                    }
+					
+					function printPage() {
+                        p = "printPage";
+                        var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                        AdfCustomEvent.queue(ntwkCanvas, "jsPrintPage", 
+                        {
+                            props : p
+                        }, true);
+                    }
+					function resize() {
+                        p = getWidth();
+                        var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                        AdfCustomEvent.queue(ntwkCanvas, "jsResize", 
+                        {
+                            props : p
+                        }, true);
+                    }
+                    
+                    function handleFilterPopup() {
+                        p = "handleFilterPopup";
+                        var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                        AdfCustomEvent.queue(ntwkCanvas, "jsHandlePopup", 
+                        {
+                            props : p
+                        }, true);
+                    }
+
+                    function handleSearchNodesPopup() {
+                        p = "handleSearchNodesPopup";
+                        var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                        AdfCustomEvent.queue(ntwkCanvas, "jsHandlePopup", 
+                        {
+                            props : p
+                        }, true);
+                    }
+
+                    function handlePipeSearchPopup() {
+                        p = "associateMultiPipePopup";
+                        var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                        AdfCustomEvent.queue(ntwkCanvas, "jsHandlePopup", 
+                        {
+                            props : p
+                        }, true);
+                    }
+
+                    function handleSearchPopup() {
+                        p = "associateMultiConnectivityPopup";
+                        var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                        AdfCustomEvent.queue(ntwkCanvas, "jsHandlePopup", 
+                        {
+                            props : p
+                        }, true);
+                    }
+                    
+                    function showAddFlowInterfacePopup() {
+                        p = "addFlowInterfacePopup";
+                        
+                        //Popup is approx 75% size of screen 
+                        var popupHeight = screen.availHeight * 0.68;
+                        var popupWidth  = screen.availWidth  * 0.75;
+                        
+                        var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                        AdfCustomEvent.queue(ntwkCanvas, "jsHandlePopup", {props : p, height : popupHeight, width: popupWidth}, true);
+                    }
+                    
+                    function showFlowIdentifierSearchPopup() {
+                        p = "flowIdentifierSearchPopup";
+                        
+                        //Popup is approx 75% size of screen 
+                        var popupHeight = screen.availHeight * 0.60;
+                        var popupWidth  = screen.availWidth  * 0.75;
+                        
+                        var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                        AdfCustomEvent.queue(ntwkCanvas, "jsHandlePopup", {props : p, height : popupHeight, width: popupWidth}, true);
+                    }
+                    function showUnassignFlowIdentifierPopup() {
+                        p = "inventoryAssignmentFlowIdentifierListPopup";
+                        
+                        //Popup is approx 75% size of screen 
+                        var popupHeight = screen.availHeight * 0.20;
+                        var popupWidth  = screen.availWidth  * 0.35;
+                        
+                        var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                        AdfCustomEvent.queue(ntwkCanvas, "jsHandlePopup", {props : p, height : popupHeight, width: popupWidth}, true);
+                    }
+                    
+                    function showAssignFlowInterfaceBitRatePopup() {
+                        p = "assignFIBitRatePopup";
+                        
+                        var popupHeight = 50;
+                        var popupWidth  = 275;
+                        
+                        var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                        AdfCustomEvent.queue(ntwkCanvas, "jsHandlePopup", {props : p, height : popupHeight, width: popupWidth}, true);
+                    }
+                    
+
+                    function handlePopup(popupId) {
+                        p = popupId;
+                        var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                        AdfCustomEvent.queue(ntwkCanvas, "jsHandlePopup", 
+                        {
+                            props : p
+                        }, true);
+                    }
+
+                    function handlePopupWithLocation(popupId,location){
+                          p = popupId;
+                          l = location;
+                          var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);                                      
+                          AdfCustomEvent.queue(ntwkCanvas, "jsHandlePopup",{props : p, nlc : l},true);                                                                            
+                    }
+                    
+                    function disassociateEntity(eOID, nOID){                            
+                          var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);                                      
+                          AdfCustomEvent.queue(ntwkCanvas, "jsDisassociateEntity",  {entityOID : eOID, netNodeOID : nOID},true);
+                    }
+                   
+                    function showNetworkViewPage(networkViewFullPageId) {
+                        showPage(networkViewFullPageId);
+                        p = popupId;
+                        var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                        AdfCustomEvent.queue(ntwkCanvas, "jsCreateDetails", 
+                        {
+                            props : p
+                        }, true);
+                    }
+
+                    function navigatePage(pageId, pageAction) {
+                        var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                        AdfCustomEvent.queue(ntwkCanvas, "jsNavigatePage", 
+                        {
+                            pageId : pageId, pageAction : pageAction
+                        }, true);
+                        
+                    }
+                  </trh:script>
+                  <trh:script id="vars2"
+                      text='var updateADFComponentsId = "#{NetworkViewBean.updateADFComponentId}"; '>
+                  </trh:script>
+                  <trh:script id="saveAsImage" text='var saveAsImageButtonId = "#{NetworkViewBean.saveAsImageButtonId}"; '/>
+                  <trh:script id="saveFullImage" text='var saveFullImageButtonId = "#{NetworkViewBean.saveFullImageButtonId}"; '/>
+                  <trh:script id="collapsedPanel" text='var isPanelCollapsed = "#{NetworkViewBean.panelCollapsed}"; '/>
+                  <trh:script id="script2">                    
+                    function addNode() {
+                        networkCanvas.performAction('editAction', ['NetworkVisualizationAdapter.addNode'], true);
+                        clickInvisibleButton(updateADFComponentsId);
+                    }
+
+                    function addLink() {
+                        networkCanvas.performAction('editAction', ['NetworkVisualizationAdapter.addLink'], true);
+                        clickInvisibleButton(updateADFComponentsId);
+                    }
+                    
+                    function addFlowInterfaceCrossConnect() {
+                        networkCanvas.performAction('editAction', ['NetworkVisualizationAdapter.addFlowInterfaceCrossConnect'], true);
+                        clickInvisibleButton(updateADFComponentsId);
+                    }
+                    
+                    function deleteObject() {
+                        displaySelection(""); // Bug 18516524 - P-18457682 QA:LAT:Entity NetworkEdge with OIDoracle.communications_NetworkEdgeDAO-3075062
+                        networkCanvas.performAction('editAction', ['NetworkVisualizationAdapter.deleteObject'], true);
+                        clickInvisibleButton(updateADFComponentsId);
+                    }
+
+                    function saveNodePositions() {
+                        networkCanvas.performAction('editAction', ['NetworkVisualizationAdapter.saveNodePositions'], true);
+                        clickInvisibleButton(updateADFComponentsId);
+                    }
+
+                    function performLabelLayout() {
+                        networkCanvas.performAction('editAction', ['NetworkVisualizationAdapter.performLabelLayout'], true);
+                        clickInvisibleButton(updateADFComponentsId);
+                    }
+
+                    function performTopologicalMeshLayout() {
+                        networkCanvas.performAction('editAction', ['NetworkVisualizationAdapter.doTopologicalMeshLayout'], true);
+                        clickInvisibleButton(updateADFComponentsId);
+                    }
+                    function saveAsImage(){
+                        clickInvisibleButton(saveAsImageButtonId);  
+                    }   
+                    function saveFullImage(){
+                        clickInvisibleButton(saveFullImageButtonId);  
+                    }
+                    function getHeight() {
+                        var vHeight = window.innerHeight;
+                        if (vHeight == null || vHeight == "") {
+                            vHeight = document.documentElement.clientHeight;
+                        }
+                        return vHeight;
+                    }
+
+                    function getWidth() {
+                        vWidth = window.innerWidth;
+                        if (vWidth == null || vWidth == "") {
+                            vWidth = document.documentElement.clientWidth;
+                        }
+                        return vWidth;
+                    }
+
+                    function setCanvasSize() {
+                        if (isPanelCollapsed === 'true') {
+                            vpWidth = getWidth() - 120;
+                        } else {
+                            vpWidth = getWidth() - 385;
+                        }    
+                        var hiddenWidthComp2 = AdfPage.PAGE.findComponentByAbsoluteId(inputWidthId);
+                        var netCnvs = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                        
+                        hiddenWidthComp2.setValue(vpWidth);
+                        AdfPage.PAGE.addPartialTargets(netCnvs);
+                    }
+                    
+                  </trh:script>                     
+
+                </h:panelGrid>
+              </af:panelGroupLayout>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout layout="vertical" id="pgl21" rendered="true">
+              <af:separator id="s3"/>
+            </af:panelGroupLayout>
+            
+            <af:table var="row" rowBandingInterval="0" id="dtlTbl"
+                    inlineStyle="height:auto;" emptyText="#{inventoryUIBundle.NOTHING_IS_SELECTED}"
+                    columnStretching="column:c6"
+                    binding="#{NetworkViewBean.detailsTable}"
+                    value="#{NetworkViewBean.detailsCollectionModel}" width="#{NetworkViewBean.width}"
+                    partialTriggers="::widthComp" 
+                    rendered="true"
+                    contentDelivery="immediate" disableColumnReordering="true">
+            <af:column sortable="false" headerText="#{NetworkViewBean.columnOneHeader}" id="c6"
+                       width="#{NetworkViewBean.columnOneWidth}" 
+                       rendered="#{NetworkViewBean.columnOneRendered}">
+              <af:outputText value="#{NetworkViewBean.columnOneValue}" id="ot7"/>
+            </af:column>
+            <af:column sortable="false" headerText="#{NetworkViewBean.columnTwoHeader}"
+                       id="c7" headerNoWrap="false"
+                       width="#{NetworkViewBean.columnTwoWidth}" 
+                       rendered="#{NetworkViewBean.columnTwoRendered}">
+              <af:outputText value="#{NetworkViewBean.columnTwoValue}" id="ot8"/>
+            </af:column>
+            <af:column sortable="false" headerText="#{NetworkViewBean.columnThreeHeader}"
+                       id="c1" headerNoWrap="false" 
+                       width="#{NetworkViewBean.columnThreeWidth}" 
+                       rendered="#{NetworkViewBean.columnThreeRendered}">
+              <af:outputText value="#{NetworkViewBean.columnThreeValue}" id="ot1"/>
+            </af:column>
+            <af:column sortable="false" headerText="#{NetworkViewBean.columnFourHeader}" id="c2"
+                       width="#{NetworkViewBean.columnFourWidth}" 
+                       rendered="#{NetworkViewBean.columnFourRendered}">
+              <af:outputText value="#{NetworkViewBean.columnFourValue}" id="ot6"/>
+            </af:column>
+            <af:column sortable="false" headerText="#{NetworkViewBean.columnFiveHeader}" id="c3" 
+                       width="#{NetworkViewBean.columnFiveWidth}" 
+                       rendered="#{NetworkViewBean.columnFiveRendered}">
+              <af:outputText value="#{NetworkViewBean.columnFiveValue}" id="ot3"/>
+            </af:column>
+            <af:column sortable="false" headerText="#{NetworkViewBean.columnSixHeader}"
+                       id="c5" headerNoWrap="false" 
+                       width="#{NetworkViewBean.columnSixWidth}" 
+                       rendered="#{NetworkViewBean.columnSixRendered}">
+              <af:outputText value="#{NetworkViewBean.columnSixValue}" id="ot2"/>
+            </af:column>
+            <af:column sortable="false" headerText="#{NetworkViewBean.columnSevenHeader}"
+                       id="c9" headerNoWrap="false"
+                       width="#{NetworkViewBean.columnSevenWidth}" 
+                       rendered="#{NetworkViewBean.columnSevenRendered}">
+              <af:outputText value="#{NetworkViewBean.columnSevenValue}" id="ot9"/>
+            </af:column>
+
+          </af:table>
+                                
+          <af:popup id="nofi" contentDelivery="lazyUncached" binding="#{backingBeanScope.nofi}">
+            <af:dialog title="#{inventoryUIBundle.NO_FI_COMPLETE_DESIGN}" type="yesNo"
+                        dialogListener="#{NetworkViewBean.confirmCompleteDesign}" id="dd4"/>
+          </af:popup>
+          
+          <af:popup id="canc" contentDelivery="lazyUncached" binding="#{backingBeanScope.canc}">
+            <af:dialog title="#{inventoryUIBundle.CANCEL_CONFIRMATION}" type="yesNo"
+                        dialogListener="#{NetworkViewBean.confirmCancel}" id="dd5"/>
+          </af:popup>         
+          
+          <!-- Poppop will be displayed when two PVN are selected and click on associate connectivity on canvas-->
+            <af:popup id="ctp" contentDelivery="lazyUncached" binding="#{backingBeanScope.associatepvnConnections}">
+              <af:dialog title="Associate Connectivity" id="d2" stretchChildren="first" contentWidth="500"
+                         contentHeight="200" type="none">
+                <f:facet name="buttonBar">
+                  <af:panelGroupLayout id="pgl6" halign="right" layout="scroll">
+                    <af:panelGroupLayout id="pg1l3" layout="horizontal">
+                      <af:toolbar>
+                        <af:commandToolbarButton text="#{inventoryUIBundle.DONE}" id="ctb1"
+                                                 disabled="#{NetworkViewBean.pvnConnectionsTable.selectedRowKeys == null ||
+                                                 NetworkViewBean.pvnConnectionsTable.selectedRowKeys.size lt 1}"
+                                                 partialTriggers="pvnConnections"
+                                                 actionListener="#{NetworkViewBean.addPvnConnections}"
+                                                 accessKey="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>
+                        <af:spacer width="10" height="10" id="s4"/>
+                        <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb2"
+                                                 actionListener="#{NetworkViewBean.cancelPvnConnectivtiesPopup}"
+                                                 accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                      </af:toolbar>
+                    </af:panelGroupLayout>
+                  </af:panelGroupLayout>
+                </f:facet>
+                <af:panelStretchLayout id="pt_psl4" styleClass="AFStretchWidth">
+                  <f:facet name="center">
+                    <af:table value="#{NetworkViewBean.pvnConnectionsCollectionModel}" var="model"
+                              emptyText="#{inventoryUIBundle.NOTHING_IS_SELECTED}" 
+                              rowBandingInterval="0"
+                              selectionListener="#{NetworkViewBean.conModelSelectionListener}" 
+                              styleClass="AFStretchWidth" contentDelivery="immediate"
+                              rowSelection="multiple"  id="pvnConnections"
+                              binding="#{NetworkViewBean.pvnConnectionsTable}">
+                      <af:column sortable="false" rowHeader="unstyled" headerText="#{inventoryUIBundle.CONNECTIVITY}" id="c66" width="250">
+                        <af:outputText value="#{model.conDesc}" id="ot77"/>
+                      </af:column>
+                      <af:column sortable="false" headerText="#{inventoryUIBundle.FROM_FLOW_INTERFACE}" id="c81" width="125">
+                        <af:outputText value="#{model.asidefidesc}" id="ot11"/>
+                      </af:column>
+                      <af:column sortable="false" headerText="#{inventoryUIBundle.TO_FLOW_INTERFACE}" id="c4" width="125">
+                        <af:outputText value="#{model.zsidefidesc}" id="ot5"/>
+                      </af:column>
+                    </af:table>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+            </af:popup>
+
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

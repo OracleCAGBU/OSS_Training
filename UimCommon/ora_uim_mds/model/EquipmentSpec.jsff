@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:jvf="http://www.ilog.com/jviews/tlds/jviews-framework-faces.tld"
+          xmlns:jvtf="http://www.ilog.com/jviews/tlds/jviews-tgo-faces.tld"
+          xmlns:jv="http://www.ilog.com/jviews/tlds/jviews-faces.tld"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                     id="pt1">
+        <f:facet name="localArea">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+              <af:resource source="script/view.js" type="javascript"/>
+            <af:panelHeader text="#{inventoryUIBundle.EQUIPMENT_SPECIFICAION_VISUALIZATION} - #{EquipmentSpecVisualBean.spec.name}" id="ph1">
+
+                <h:panelGrid border="0" columns="1" >
+                    <h:panelGrid border="0" columns="1" >                          
+                          <af:outputText value="#{EquipmentSpecVisualBean.displayInfo}" id="visualName1" styleClass="psheet-cell-bold"/>
+                    </h:panelGrid>                     
+                    <af:resource source="css/style.css" type="css"/>                
+                    <!-- Declare the predefined interactors -->
+                    <jvf:zoomInteractor id="zoom"/>
+                    <jvf:panInteractor id="pan"/>
+                    <jvtf:clientSelectInteractor id="select"/>
+                    <h:panelGrid styleClass="visualToolbar">      
+                        <!-- Declare a grid with six columns to accomodate the buttons -->
+                        <af:toolbar id="tb1">
+                            <jv:imageButton style="width: 16px;height: 16px;" selected="true"
+                                            onclick="equipSpecView.setInteractor(select)" image="/images/selectobject_ena.png"
+                                            buttonGroupId="interactors" rolloverImage="/images/selectobject_ovr.png"
+                                            selectedImage="/images/selectobject_dwn.png"
+                                            title="#{inventoryUIBundle.SELECT_INTERACTOR}" message="#{inventoryUIBundle.SELECT_INTERACTOR}"
+                                            id="ib2"/>
+                            <jv:imageButton style="width: 16px;height: 16px;" onclick="equipSpecView.setInteractor(zoom)"
+                                            image="/images/zoomtoselection_ena.png" buttonGroupId="interactors"
+                                            rolloverImage="/images/zoomtoselection_ovr.png" selectedImage="/images/zoomtoselection_dwn.png"
+                                            title="#{inventoryUIBundle.ZOOM_INTERACTOR}"
+                                            message="#{inventoryUIBundle.ZOOM_INTERACTOR}" id="ib1"/>
+                            <jv:imageButton style="width: 16px;height: 16px;" onclick="equipSpecView.setInteractor(pan)"
+                                            image="/images/pan_ena.png" buttonGroupId="interactors"
+                                            rolloverImage="/images/pan_ovr.png" selectedImage="/images/pan_dwn.png"
+                                            title="#{inventoryUIBundle.PAN_INTERACTOR}"
+                                            message="#{inventoryUIBundle.PAN_INTERACTOR}" id="ib3"/>
+                            <jv:imageButton style="width: 16px;height: 16px;" onclick="equipSpecView.showAll(true)"
+                                            image="/images/zoombestfit_ena.png" rolloverImage="/images/zoombestfit_ovr.png"
+                                            selectedImage="/images/zoombestfit_dwn.png" 
+                                            title="#{inventoryUIBundle.SHOW_ALL}" message="#{inventoryUIBundle.SHOW_ALL}" id="ib4"/>
+                            <jv:imageButton style="width: 16px;height: 16px;" onclick="equipSpecView.zoomIn(true)"
+                                            image="/images/zoomin_ena.png" rolloverImage="/images/zoomin_ovr.png"
+                                            selectedImage="/images/zoomin_dwn.png" title="#{inventoryUIBundle.ZOOM_IN}"
+                                            message="#{inventoryUIBundle.ZOOM_IN}" id="ib5"/>
+                            <jv:imageButton style="width: 16px;height: 16px;" onclick="equipSpecView.zoomOut(true)"
+                                            image="/images/zoomout_ena.png" rolloverImage="/images/zoomout_ovr.png"
+                                            selectedImage="/images/zoomout_dwn.png" 
+                                            title="#{inventoryUIBundle.ZOOM_OUT}" message="#{inventoryUIBundle.ZOOM_OUT}" id="ib6"/>
+                        </af:toolbar> 
+                    </h:panelGrid>
+                      <af:panelGroupLayout id="pgl3" layout="horizontal" valign="top" halign="left">
+                         <af:panelGroupLayout layout="horizontal"
+                                         inlineStyle="background-color:InactiveBorder;"
+                                         id="canvasArea" binding="#{backingBeanScope.equipSpecCanvasArea}">                        
+                            <af:serverListener type="jsCreateDetails" method="#{EquipmentSpecVisualBean.createDetails}"/>                        
+                            <h:panelGrid border="0" columns="1" styleClass="psheet">
+                                <!-- Declare the equipment faces component -->                            
+                                <jvtf:equipmentView id="equipSpecView" context="#{defContext}"
+                                                    binding="#{EquipmentSpecVisualBean.equipmentView}" interactorId="select"
+                                                    imageFormat="PNG" height="450" width="400"
+                                                    waitingImage="images/waiting.gif">
+                                        <jvtf:selectionManager id="selectionManager" imageMode="false" lineColor="red" lineWidth="2"
+                                                               propertyAccessor="#{EquipmentSpecVisualBean.propertyAccessor}"                                                           
+                                                               onSelectionChanged="displaySelection(selection)"/>                                    
+                                </jvtf:equipmentView>
+                            </h:panelGrid>
+                          </af:panelGroupLayout>
+                        <af:spacer width="10" height="10" id="s2"/>
+                        <!-- Declare the attributes table -->
+                        <h:panelGrid border="1" columns="1" styleClass="psheet">  
+                                <!-- <h:panelGrid border="0" columns="1">
+                                     <h:outputText value="#{inventoryUIBundle.OVERVIEW}" styleClass="text" style="font-weight:bold"/>
+                                     <jvf:overview id="equipViewO" viewId="equipSpecView" autoRefresh="true" height="100" width="135"/>
+                                </h:panelGrid> -->
+                                <h:panelGrid border="0" columns="2">
+                                    <h:graphicImage url="/images/attributegroup_ena.png"/>
+                                    <h:outputText value="#{inventoryUIBundle.DETAILS}" styleClass="text" style="font-weight:bold" />
+                                </h:panelGrid>
+                                <h:panelGrid columns="2" id="pg14" binding="#{EquipmentSpecVisualBean.equipmentSpecDetailsGrid}" border="0"
+                                             frame="border" cellpadding="4" cellspacing="1" width="100%"
+                                             columnClasses="psheet-cell"></h:panelGrid>                        
+                        <trh:script id="vars" text='var equipmentCanvasId = "#{EquipmentSpecVisualBean.clientId}"; '/> 
+                        <trh:script id="sc1">
+                            var p = "";
+                            //called by the onSelectionChanged attribute on EquipSpecView. It returns a map of attributes
+                            //to a javascript variable. These attributes will be used to dynamically build the Details section
+                            //in EquipmentSpecVisualBean.
+                            function displaySelection(selection) {
+                              try {
+                                  if (selection.length == 1) {
+                                      p = selection[0].getObjectProperties();
+                                  }else if(selection.length == 0){
+                                      p = "NOTHING_IS_SELECTED";
+                                  }
+                                  
+                                  var ref = AdfPage.PAGE.findComponentByAbsoluteId(equipmentCanvasId);
+                                  AdfCustomEvent.queue(ref, "jsCreateDetails",{props : p},true);
+                                  p = "";
+                              } catch (e) {
+                                  alert("An error occurred when building property sheet." + e);
+                              }
+                            }                          
+                        </trh:script>
+                        </h:panelGrid>
+              </af:panelGroupLayout>                  
+            </h:panelGrid>
+            </af:panelHeader>
+            </af:panelGroupLayout>
+          </f:facet>        
+        <f:facet name="contextualArea"/>
+    </af:pageTemplate>
+</jsp:root>

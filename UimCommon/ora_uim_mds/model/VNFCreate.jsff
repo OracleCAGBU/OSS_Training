@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='windows-1250'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:panelStretchLayout id="psl1" dimensionsFrom="auto" styleClass="AFStretchWidth">
+        <f:facet name="center">
+            <af:panelGroupLayout id="vnfpgl" layout="scroll" styleClass="AFStretchWidth">
+                <af:panelGroupLayout layout="horizontal" halign="left" valign="top" id="pgl23" rendered="#{pageFlowScope.VNFCreateBean.addMode || pageFlowScope.VNFCreateBean.editMode}">
+                    <af:panelFormLayout id="vnfpfl" styleClass="AFStretchWidth" binding="#{backingBeanScope.vnfpfBinding}"> 
+                        <af:selectOneChoice id="vnf-spec" label="#{inventoryUIBundle.DESCRIPTOR}" autoSubmit="true" disabled="#{pageFlowScope.VNFCreateBean.editMode}"
+                                          value="#{pageFlowScope.VNFCreateBean.selectedSpec}" contentStyle="width:170px"
+                                          valueChangeListener="#{pageFlowScope.VNFCreateBean.specChanged}" showRequired="true">
+                            <f:selectItems binding="#{pageFlowScope.VNFCreateBean.specifications}" id="si1"/>
+                      </af:selectOneChoice>
+                      <af:inputText value="#{pageFlowScope.VNFCreateBean.id}"
+                                    label="#{inventoryUIBundle.ID}" required="true" id="vnf-id" binding="#{backingBeanScope.idBinding}"
+                                    disabled="#{(pageFlowScope.VNFCreateBean.specificationCount > 0) &amp;&amp; (!(pageFlowScope.VNFCreateBean.addMode &amp;&amp; pageFlowScope.VNFCreateBean.enterIdManually))}"
+                                    maximumLength="25"/>
+                      <af:inputText value="#{pageFlowScope.VNFCreateBean.name}" id="vnf-name" label="#{inventoryUIBundle.NAME}" showRequired="true" maximumLength="255" autoSubmit="true"
+                                    disabled="true"/>
+                    </af:panelFormLayout>
+                    <af:spacer width="300" id="s32"/>
+                    <af:panelFormLayout id="eppf" binding="#{backingBeanScope.vnfViewPanel}"/>
+                </af:panelGroupLayout>
+                
+                <af:panelGroupLayout layout="scroll" id="pgl24" rendered="#{pageFlowScope.VNFCreateBean.viewMode}">
+                    <af:panelFormLayout id="epv" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+                        <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}" id="plm1">
+                            <af:link text="#{pageFlowScope.VNFCreateBean.vnfResponseInfo.id}" id="l1" action="VnfSummary"
+                                     actionListener="#{bindings.openSubTaskForEntity.execute}" shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                <af:setActionListener from="#{pageFlowScope.VNFCreateBean.entityObject.oid}" to="#{objectId}"/>
+                            </af:link>
+                        </af:panelLabelAndMessage>
+                        <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="plm2">
+                                <af:outputText value="#{pageFlowScope.VNFCreateBean.vnfResponseInfo.name}" id="ot2"/>
+                        </af:panelLabelAndMessage>
+                        <af:panelLabelAndMessage label="#{inventoryUIBundle.STATUS}" id="plm3">
+                                <af:outputText value="#{pageFlowScope.VNFCreateBean.vnfResponseInfo.status}" id="ot3"/>
+                        </af:panelLabelAndMessage>
+                        <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTOR}" id="plm4">
+                            <af:link text="#{pageFlowScope.VNFCreateBean.vnfResponseInfo.descriptorName}" id="l3"
+                                     actionListener="#{bindings.openSubTaskForSpec.execute}" action="VnfdDetails"
+                                     shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+                                <af:setActionListener from="#{pageFlowScope.VNFCreateBean.selectedSpec.oid}" to="#{objectId}"/>
+                            </af:link>
+                        </af:panelLabelAndMessage>
+                        <af:iterator id="it1" value="#{pageFlowScope.VNFCreateBean.characteristics}" var="characteristicDetails">
+                            <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="plam1" 
+                                rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'ALPHANUMERIC' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'CALENDAR' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'DROPDOWN_LIST' || characteristicDetails.characteristic.characteristicSpecification.valueType == 'NUMERIC'}">
+                                <af:outputText id="ot6" value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="plam2" rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'URL'}">
+                                <af:link id="l2" targetFrame="_blank" destination="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}" inlineStyle="padding-left:6px;">
+                                    <af:outputText id="ot7" truncateAt="50" value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                                </af:link>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="" id="plam3" rendered="#{characteristicDetails.characteristic.characteristicSpecification.controlType == 'CHECKBOX'}">
+                                <af:selectBooleanCheckbox id="sbc1" disabled="true" value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}" text="#{characteristicDetails.label}" simple="true"/>
+                            </af:panelLabelAndMessage>
+                        </af:iterator>
+                    </af:panelFormLayout>
+                </af:panelGroupLayout>
+                
+            </af:panelGroupLayout>
+        </f:facet>
+    </af:panelStretchLayout>
+</jsp:root>

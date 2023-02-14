@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved. */
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    3/26/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout id="pgl1" binding="#{backingBeanScope.networkMapProfileBinding}">
+      
+         
+     <af:panelHeader text="#{inventoryUIBundle.MAP_PROFILE}" helpTopicId="OHW_networkMapProfile"
+                      id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar">
+          <af:panelGroupLayout layout="horizontal" id="pg3" rendered="#{!pageFlowScope.NetworkMapProfileBean.previewLayout}">    
+            <!-- <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}"
+                              id="cb1" action="#{pageFlowScope.NetworkMapProfileBean.saveOutcome}"
+                              actionListener="#{pageFlowScope.NetworkMapProfileBean.saveAction}"
+                              accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+                <af:setActionListener from="networkSummary" to="#{pageFlowScope.saveActionOutcome}"/>
+                <af:setActionListener from="#{pageFlowScope.objectId}" to="#{objectId}"/>
+            </af:commandButton>
+            <af:spacer width="10" height="10" id="s1"/>
+            <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb3"
+                              action="back" immediate="true" accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"></af:commandButton>
+							  -->
+			
+				<af:commandToolbarButton text="#{inventoryUIBundle.EDIT}" 
+								id="nb1" 
+								rendered="#{pageFlowScope.NetworkMapProfileBean.editingMode == 'mapProfile-viewing' &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=NetworkMap.EDIT;action=view']}"
+								actionListener="#{pageFlowScope.NetworkMapProfileBean.editMapProfile}"
+								accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+				</af:commandToolbarButton>
+			   <af:commandToolbarButton text="#{inventoryUIBundle.SAVE}" 
+								   id="ncb1" 
+								   rendered="#{pageFlowScope.NetworkMapProfileBean.editingMode == 'mapProfile-editing'}"
+								   actionListener="#{pageFlowScope.NetworkMapProfileBean.saveAction}" 
+								   accessKey="#{inventoryUIBundle.SAVE_ACCESS_KEY}">
+			   </af:commandToolbarButton> 
+			   <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}"  immediate="true"
+								   id="ncb2" 
+								   actionListener="#{pageFlowScope.NetworkMapProfileBean.cancelMapProfileSave}"
+								   rendered="#{pageFlowScope.NetworkMapProfileBean.editingMode == 'mapProfile-editing'}"  
+								   accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}">
+			   </af:commandToolbarButton>			
+           </af:panelGroupLayout>
+        </f:facet>
+        <!--af:showDetailHeader text="#{inventoryUIBundle.NETWORK_INFORMATION}"
+                             disclosed="true" id="sdh1"-->
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"></f:facet>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+           <af:group id="g1">
+           <af:spacer height="10" id="s2"/>
+		   <af:switcher id="n21" defaultFacet="mapProfile-viewing" facetName="#{pageFlowScope.NetworkMapProfileBean.editingMode}" 
+		   binding="#{backingBeanScope.mapProfileSwitcherBinding}">
+		  <f:facet name="mapProfile-editing">
+          <af:panelGroupLayout id="pgl0" layout="scroll">
+            <af:panelFormLayout id="pfl1">
+              <af:inputText label="#{inventoryUIBundle.BASE_MAP}" id="it1"   
+							binding="#{backingBeanScope.baseMap}" 
+                            value="#{pageFlowScope.NetworkMapProfileBean.baseMap}"
+                            maximumLength="35" required="true" autoSubmit="true"
+                            columns="70"/>
+              <af:inputText label="#{inventoryUIBundle.MAP_SOURCE}" id="it2" 
+							binding="#{backingBeanScope.mapSource}" 
+                            value="#{pageFlowScope.NetworkMapProfileBean.applicationDatasource}"
+                            rendered="true" maximumLength="35" required="true"
+                            autoSubmit="true"/>
+              <af:inputText label="#{inventoryUIBundle.MAP_TILE_SERVER}" 
+							binding="#{backingBeanScope.mapTileServer}" 
+                            id="it3"
+                            value="#{pageFlowScope.NetworkMapProfileBean.mapTileServerUrl}"
+                            maximumLength="70" required="false" columns="70"
+                            autoSubmit="true"/>
+              <af:inputText label="#{inventoryUIBundle.MAP_COPYRIGHT}" id="it6" 
+							binding="#{backingBeanScope.mapCopyright}"  
+                            value="#{pageFlowScope.NetworkMapProfileBean.copyright}"
+                            maximumLength="70" columns="70" autoSubmit="true"/>
+              <af:inputNumberSpinbox label="#{inventoryUIBundle.MAP_ZOOM}"
+                                     id="ins1"
+                                     value='#{pageFlowScope.NetworkMapProfileBean.zoomLevel}'
+                                     minimum="0" maximum="20"/>
+              <af:panelLabelAndMessage id="plam1"
+                                       label="#{inventoryUIBundle.MAP_CENTER_LATITUDE}"
+                                       for="it4">
+                <af:inputText id="it4"
+                              value="#{pageFlowScope.NetworkMapProfileBean.centerMapLatitude}" 
+							  binding="#{backingBeanScope.centerMapLatitude}"  
+                              maximumLength="35" autoSubmit="true"
+                              inlineStyle="text-align:left;">
+                  <af:validateDoubleRange minimum="-90" maximum="90"/>
+                </af:inputText>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.MAP_CENTER_LONGITUDE}"
+                                       id="plam2" for="it5"
+                                       inlineStyle="text-align:left;">
+                <af:panelGroupLayout id="pgl41" layout="horizontal"
+                                     halign="left">
+                  <af:inputText id="it5"
+                                value="#{pageFlowScope.NetworkMapProfileBean.centerMapLongitude}" 
+								binding="#{backingBeanScope.centerMapLongitude}"  
+                                maximumLength="35" autoSubmit="true">
+                    <af:validateDoubleRange minimum="-180" maximum="180"/>
+                  </af:inputText>
+                  <af:commandImageLink id="cil1" rendered="true"
+                                       icon="/images/calculator_ena.png"
+                                       iconPosition="leading"
+                                       actionListener="#{pageFlowScope.NetworkMapProfileBean.computeMapCenterCoordinates}"
+                                       shortDesc="#{inventoryUIBundle.COMPUTE_CENTER}"/>
+                </af:panelGroupLayout>
+              </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+          </af:panelGroupLayout>
+		  </f:facet>
+		  
+		  <f:facet name="mapProfile-viewing">
+          <af:panelGroupLayout id="pgl0_view" layout="scroll">
+            <af:panelFormLayout id="pfl1_view">
+			  <af:panelLabelAndMessage label="#{inventoryUIBundle.BASE_MAP}"
+                                         id="it1_view">
+				  <af:outputText value="#{pageFlowScope.NetworkMapProfileBean.baseMap}"
+								 id="baseMap"/>
+			  </af:panelLabelAndMessage>
+			  <af:panelLabelAndMessage label="#{inventoryUIBundle.MAP_SOURCE}"
+                                         id="it2_view">
+				  <af:outputText value="#{pageFlowScope.NetworkMapProfileBean.applicationDatasource}"
+								 id="mapSource"/>
+			  </af:panelLabelAndMessage>
+			  <af:panelLabelAndMessage label="#{inventoryUIBundle.MAP_TILE_SERVER}"
+                                         id="it3_view">
+				  <af:outputText value="#{pageFlowScope.NetworkMapProfileBean.mapTileServerUrl}"
+								 id="mapTileServer"/>
+			  </af:panelLabelAndMessage>
+			  <af:panelLabelAndMessage label="#{inventoryUIBundle.MAP_COPYRIGHT}"
+                                         id="it4_view">
+				  <af:outputText value="#{pageFlowScope.NetworkMapProfileBean.copyright}"
+								 id="mapCopyright"/>
+			  </af:panelLabelAndMessage>
+			  <af:panelLabelAndMessage label="#{inventoryUIBundle.MAP_ZOOM}"
+                                         id="it5_view">
+				  <af:outputText value="#{pageFlowScope.NetworkMapProfileBean.zoomLevel}"
+								 id="mapZoom"/>
+			  </af:panelLabelAndMessage>
+			  <af:panelLabelAndMessage label="#{inventoryUIBundle.MAP_CENTER_LATITUDE}"
+                                         id="plam1_view">
+				  <af:outputText value="#{pageFlowScope.NetworkMapProfileBean.centerMapLatitude}"
+								 id="mapLatitude"/>
+			  </af:panelLabelAndMessage>
+			  <af:panelLabelAndMessage label="#{inventoryUIBundle.MAP_CENTER_LONGITUDE}"
+                                         id="plam2_view">
+				  <af:outputText value="#{pageFlowScope.NetworkMapProfileBean.centerMapLongitude}"
+								 id="mapLongitude"/>
+			  </af:panelLabelAndMessage>             
+            </af:panelFormLayout>
+          </af:panelGroupLayout>
+		  </f:facet>
+		  </af:switcher>
+            </af:group>
+        <!--/af:showDetailHeader-->
+      </af:panelHeader>
+       </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

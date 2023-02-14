@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:pf="/platform/functions">
+		  
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   id="pt1">
+    <f:facet name="localArea">
+        <af:panelStretchLayout id="pgl11" binding="#{backingBeanScope.MS_summary_panelGroupLayout}" topHeight="#{pageFlowScope.MediaStreamSummaryBean.topHeight}">
+          <f:facet name="top">
+              <af:panelGroupLayout id="pgsl23" layout="scroll">
+                <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered="#{!pageFlowScope.MediaStreamSummaryBean.previewLayout}">
+                    <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                                   value="#{pageFlowScope.MediaStreamSummaryBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+                    <af:menuBar id="menuBar1">
+                          <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invSummaryMenu"
+                                   rendered="#{!(pageFlowScope.MediaStreamSummaryBean.popupMode)}"   />
+                    </af:menuBar>
+                    <af:popup id="BISearchPopup" binding="#{backingBeanScope.msSummary_businessInteractionSearch}" contentDelivery="lazyUncached">
+                        <af:dialog id="BISearchPopup_d1" type="none"
+                                   title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                            <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                                <f:facet name="center">
+                                   <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                        <af:serverListener type="refreshEntity" method="#{pageFlowScope.MediaStreamSummaryBean.afterBusinessInteractionSelectionChange}"/>
+                    </af:popup>
+                </af:panelGroupLayout>
+                       
+          
+            </af:panelGroupLayout>
+            </f:facet>
+            <f:facet name="center">
+           
+            <!--TITLE & MENUS-->
+          <af:panelHeader text="#{inventoryUIBundle.MEDIA_STREAM_SUMMARY} - #{pageFlowScope.MediaStreamSummaryBean.displayInfo}" helpTopicId="OHW_mediaStreamSummary"
+                          id="sdh1" styleClass="invSummaryPanelHeader">
+            <f:facet name="menuBar">
+              <af:group id="g2" rendered="#{!pageFlowScope.MediaStreamSummaryBean.previewLayout}">
+                <af:menuBar id="menuBar2">
+                  <af:menu id="menu5"
+                           binding="#{backingBeanScope.InventoryMenuBean.relatedPagesMenu}" styleClass="invSummaryMenu"/>
+                  <af:menu id="menu6"
+                           binding="#{backingBeanScope.InventoryMenuBean.actionsMenu}" styleClass="invSummaryMenu"/>
+                </af:menuBar>
+              </af:group>
+            </f:facet>       
+            <!--MEDIA STREAM INFORMATION-->
+             <af:panelGroupLayout layout="scroll" id="pgl23">
+            <af:showDetailHeader text="#{inventoryUIBundle.MEDIA_STREAM_INFORM}"
+                                 disclosed="true" id="sdh2" rendered="#{!pageFlowScope.MediaStreamSummaryBean.disableMediaStreamInfoPortlet}">
+              <f:facet name="context"/>
+              <f:facet name="menuBar"/>
+              <f:facet name="toolbar">
+                  <af:commandButton text="#{inventoryUIBundle.EDIT}" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/mediaresource/flow/MediaStreamEditFlow.xml#MediaStreamEditFlow']}"
+                                    action="edit" id="cb1" actionListener="#{bindings.openSubTaskForEdit.execute}"
+                                    rendered="#{!pageFlowScope.MediaStreamSummaryBean.previewLayout &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=MediaStream.EDIT;action=view']}"
+                                    accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                    <af:setActionListener from="false" to="#{addMode}"/>
+                  </af:commandButton>
+              </f:facet>
+              <f:facet name="legend"/>
+              <f:facet name="info"/>
+              <af:panelFormLayout id="medstm" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}"
+                                         id="medstm-id">
+                  <af:outputText value="#{pageFlowScope.MediaStreamSummaryBean.entityObject.id}" id="ot1"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}"
+                                         id="medstm-name">
+                  <af:outputText value="#{pageFlowScope.MediaStreamSummaryBean.entityObject.name}" id="ot2"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}"
+                                         id="medstm-description">
+                  <af:outputText value="#{pageFlowScope.MediaStreamSummaryBean.entityObject.description}"
+                                 id="ot3"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}"
+                                         id="medstm-inventoryStatus">
+                  <af:outputText id="ot6" value="#{pageFlowScope.MediaStreamSummaryBean.inventoryStatus}"/>
+		<!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.MediaStreamSummaryBean.popupMode}" id="swis618">
+		<f:facet name="false">
+                        <af:commandImageLink action="#{pageFlowScope.MediaStreamSummaryBean.getSummaryAction}"
+                                             actionListener="#{pageFlowScope.MediaStreamSummaryBean.registerRecentItem}"
+                                             disabled="#{pageFlowScope.MediaStreamSummaryBean.installingBIDisabled}"
+                                             id="bid3"
+                                             shortDesc="#{pageFlowScope.MediaStreamSummaryBean.installingBIShortDesc}"
+                                             text="#{pageFlowScope.MediaStreamSummaryBean.installingBILabel}">
+                          <af:setActionListener from="#{pageFlowScope.MediaStreamSummaryBean.inventoryStatusBI.oid}"
+                                                to="#{objectId}"/>
+                        </af:commandImageLink>
+                      </f:facet>
+		<f:facet name="true">
+		<af:outputText id="swftis618" value="#{pageFlowScope.MediaStreamSummaryBean.installingBILabel}"/>
+		</f:facet>
+		</af:switcher>
+		<af:outputText id="installingBIDueDate" value="#{pageFlowScope.MediaStreamSummaryBean.installingBIEffectiveDate}"/>
+		<!--RMI 618 End-->
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}"
+                                         id="medstm-resourceAssignmentStatus">
+                  <af:outputText id="ot12" value="#{pageFlowScope.MediaStreamSummaryBean.resourceAssignmentStatus}"/>
+                <!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.MediaStreamSummaryBean.popupMode}" id="swas618">
+		<f:facet name="false">
+                        <af:commandImageLink action="#{pageFlowScope.MediaStreamSummaryBean.getSummaryAction}"
+                                             actionListener="#{pageFlowScope.MediaStreamSummaryBean.registerRecentItem}"
+                                             disabled="#{pageFlowScope.MediaStreamSummaryBean.consumerBIDisabled}"
+                                             id="bid4"
+                                             shortDesc="#{pageFlowScope.MediaStreamSummaryBean.consumerBIShortDesc}"
+                                             text="#{pageFlowScope.MediaStreamSummaryBean.consumerBILabel}">
+                          <af:setActionListener from="#{pageFlowScope.MediaStreamSummaryBean.assignmentBI.oid}"
+                                                to="#{objectId}"/>
+                        </af:commandImageLink>
+                      </f:facet>
+		<f:facet name="true">
+		<af:outputText id="swftas618" value="#{pageFlowScope.MediaStreamSummaryBean.consumerBILabel}"/>
+		</f:facet>
+		</af:switcher>
+		<af:outputText id="consumerBIDueDate" value="#{pageFlowScope.MediaStreamSummaryBean.consumerBIEffectiveDate}"/>
+		<!--RMI 618 End-->
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}"
+                                         id="medstm-specification">
+                  <af:commandImageLink action="SpecificationSummary" id="clSpec" actionListener="#{bindings.openSubTaskForSpec.execute}"
+                                       shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}"
+                                       text="#{pageFlowScope.MediaStreamSummaryBean.entityObject.specification.name}">
+                        
+                        <af:setActionListener from="#{pageFlowScope.MediaStreamSummaryBean.entityObject.specification.oid}" to="#{specObjectId}"/>
+                  </af:commandImageLink>
+                </af:panelLabelAndMessage> 
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="medstm-lmd" rendered="false">
+                    <af:outputText value="#{pageFlowScope.MediaStreamSummaryBean.entityObject.lastModifiedDate}" id="ot9">
+                       <af:convertDateTime pattern="#{pageFlowScope.MediaStreamSummaryBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="medstm-lmu" rendered="false">
+                    <af:outputText value="#{pageFlowScope.MediaStreamSummaryBean.entityObject.lastModifiedUser}"
+                                   id="ot4"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="medstm-crd" rendered="false">
+                     <af:outputText value="#{pageFlowScope.MediaStreamSummaryBean.entityObject.createdDate}" id="ot11">
+                        <af:convertDateTime pattern="#{pageFlowScope.MediaStreamSummaryBean.dateTimeFormat}"/>
+                     </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="medstm-cru" rendered="false">
+                     <af:outputText value="#{pageFlowScope.MediaStreamSummaryBean.entityObject.createdUser}" id="ot13"/>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+            </af:showDetailHeader>
+            <af:group rendered="#{!pageFlowScope.MediaStreamSummaryBean.previewLayout}" id ="group2">
+                <af:spacer width="10" height="10" id="spacer1"/>
+                <!--LOGICAL DEVICE RELATIONSHIP -->
+                <af:region value="#{bindings.MediaResourceLogicalDeviceListFlow1.regionModel}"
+                           id="r1"/>
+                <af:spacer width="10" height="10" id="spacer2"/>
+                <!--BUSINESS INTERACTIONS-->
+            <af:region value="#{bindings.BusinessInteractionListFlow1.regionModel}" id="r13"/>
+            </af:group>
+            </af:panelGroupLayout>
+          </af:panelHeader>
+        
+        </f:facet>
+        </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

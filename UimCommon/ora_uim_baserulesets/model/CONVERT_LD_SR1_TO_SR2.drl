@@ -1,0 +1,166 @@
+package oracle.communications.inventory.rules
+
+//-------------------------------------------------------------------------------------------------
+// IMPORTS
+//-------------------------------------------------------------------------------------------------
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.Iterator;
+
+import javax.transaction.UserTransaction;
+
+import au.com.bytecode.opencsv.CSVReader;
+
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.rules.impl.RuleDebug;
+
+import oracle.communications.inventory.api.entity.DeviceInterface;
+import oracle.communications.inventory.api.entity.LogicalDevice;
+import oracle.communications.inventory.api.util.Utils;
+import oracle.communications.platform.persistence.PersistenceHelper;
+import oracle.communications.platform.persistence.Persistent;
+import oracle.communications.inventory.api.common.container.ImportInventoryContainer;
+import oracle.communications.inventory.api.common.container.ImportInventoryResult;
+import oracle.communications.inventory.extensibility.rules.ExtensionPointManager;
+import oracle.communications.inventory.extensibility.rules.ExtensionPointSearchCriteria;
+import oracle.communications.inventory.api.entity.LogicalDeviceSpecification;
+import oracle.communications.platform.persistence.Finder;
+import oracle.communications.inventory.api.logicaldevice.LogicalDeviceManager;
+import oracle.communications.inventory.api.logicaldevice.LogicalDeviceSearchCriteria;
+import oracle.communications.inventory.api.logicaldevice.impl.LogicalDeviceCreator;
+import oracle.communications.inventory.api.entity.DeviceInterface;
+import oracle.communications.inventory.api.logicaldevice.impl.LogicalDeviceUpdater;
+
+//-------------------------------------------------------------------------------------------------
+// GLOBALS
+//-------------------------------------------------------------------------------------------------
+
+global Log log;
+
+//-------------------------------------------------------------------------------------------------
+// FUNCTIONS
+//-------------------------------------------------------------------------------------------------
+
+function ImportInventoryResult convertLogicalDevices(Object attachment, Log log, boolean displayOnly) {
+    int specCount = 0;
+    int failedCount = 0;
+    UserTransaction ut = null;
+    try {
+        List records = null;
+        CSVReader cvs = new CSVReader(new StringReader(attachment.toString()),'#');
+        records = cvs.readAll();
+
+        List ldList = new ArrayList();
+        for (int r=0; r<records.size(); r++) {
+            String[] record = (String[]) records.get(r);
+            ldList.add(record[0]);
+        }
+
+        if (Utils.isEmpty(ldList)) {
+            log.info("", new String [] {"No Logical Device Specification found"});
+        }
+        
+        Iterator ldSpecListItr = ldList.iterator();
+        while (ldSpecListItr.hasNext()) {
+            try {
+                ut = PersistenceHelper.makePersistenceManager().getTransaction();
+                ut.begin();
+                
+                String specName = (String) ldSpecListItr.next();
+                
+                log.debug("", new String [] {"Processing the spec " + specName});
+                
+                Finder f = null;
+                f = PersistenceHelper.makeFinder();
+                LogicalDeviceManager ldMgr = PersistenceHelper.makeLogicalDeviceManager();
+                Collection<LogicalDeviceSpecification> specList = f.findByName(LogicalDeviceSpecification.class, specName);
+                if (specList.size() > 0) {
+                    LogicalDeviceSearchCriteria criteria = ldMgr.makeLogicalDeviceSearchCriteria();
+                    criteria.setLogicalDeviceSpecs(specList.toArray(new LogicalDeviceSpecification[specList.size()]));
+                    Collection<LogicalDevice> ldListResult = ldMgr.findLogicalDevice(criteria);
+                    log.debug("", new String [] {"  Found " + ldListResult.size() + " logical devices"});
+                    LogicalDeviceCreator ldc = new LogicalDeviceCreator();
+                    LogicalDeviceUpdater ldu = new LogicalDeviceUpdater();
+                    int i = 1;
+                    for (LogicalDevice ld : ldListResult) {
+                        log.debug("", new String [] {"    " + i + ") Converting Logical device " + ld.getId()});
+                        Set <DeviceInterface> deviceInterfaceList = ld.getAllDeviceInterfaces();
+                        int j = 1;
+                        for ( DeviceInterface deviceInterface : deviceInterfaceList ) {
+                            log.debug("", new String [] {"      " + j + ") Converting Device Interface " + deviceInterface.getId()});
+                            /*if (deviceInterface.getRateCode() != null ) {
+                                log.debug("", new String [] {"             Device Interface Rate Code BEFORE = " + deviceInterface.getRateCode().getName()});
+                            }
+                            else {
+                                log.debug("", new String [] {"             Device Interface Rate Code BEFORE = -"});
+                            }
+                            */
+                            ldc.setRateCodeOnDeviceInterface(deviceInterface);
+                            //log.debug("", new String [] {"             Device Interface Rate Code AFTER = " + deviceInterface.getRateCode().getName()});
+                            j++;
+                        }
+                        i++;
+                    }
+                }
+                f.reset();
+                specCount++;
+                ut.commit();
+            }
+            catch (Throwable t) {
+                failedCount++;
+                if (ut != null) {
+                    try {
+                        ut.rollback();
+                    } catch (Exception e){}
+                }
+                log.exception("", new Exception(), new String[] {"convert LD from SR1 to SR2 error", t.getLocalizedMessage()});
+            }
+            finally {
+            log.debug("", new String [] {"In Finally"});
+            }
+        }
+    } catch(Exception e) {
+        log.exception("", e, new String[] {"Error", e.getLocalizedMessage()});
+    }
+    log.debug("", new String [] {"Before return"});
+    ImportInventoryResult result = new ImportInventoryResult();
+    result.setImportedCount(specCount);
+    return result;
+}
+
+function boolean checkFileType(ImportInventoryContainer container,Log log)
+{
+        String fileName =container.getUploadedFilename();
+        if(fileName==null){
+            log.error("import.noUpload",new String[] {".txt"} );
+            return false;
+        }else if(!fileName.contains(".txt")){
+        	log.error("import.fileUploadTextType");
+        	return false;
+        }
+        return true;
+}
+
+rule "CONVERT LD SR1 TO SR2"
+        salience 0
+    when
+        container: ImportInventoryContainer()
+    then
+        // set the following boolean variable to false if delete is to be truly executed
+        if(checkFileType(container,log)){
+        	boolean displayOnly = true;
+        	ImportInventoryResult result = convertLogicalDevices(container.getAttachment(), log, displayOnly);
+        	log.debug("", new String [] {"Returned"});
+        	//log.info("", new String [] {"Executed and converted " + result.getImportedCount() + " Logical Device Specifications"});
+        	drools.insert(result);
+         }
+end

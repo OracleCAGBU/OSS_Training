@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  
+      <af:panelHeader text="#{pageFlowScope.ConditionEditBean.displayInfo}" 
+                      helpTopicId="#{pageFlowScope.ConditionEditBean.helpTopic}" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar">
+            <af:panelGroupLayout id="pgl3" layout="horizontal">
+             <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb1"
+                               actionListener="#{pageFlowScope.ConditionEditBean.createCondition}"
+                               action="#{pageFlowScope.ConditionEditBean.saveOutcome}"
+                               accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+                <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>               
+             </af:commandButton>   
+             <af:spacer width="10" height="10" id="s11"/>
+             
+             <af:commandButton text="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER}"
+                               actionListener="#{pageFlowScope.ConditionEditBean.createCondition}"
+                              action="#{pageFlowScope.ConditionEditBean.saveOutcome}"
+                              id="cb3"
+                              rendered="#{pageFlowScope.ConditionEditBean.addMode and !pageFlowScope.ConditionEditBean.popupMode}"
+                               accessKey="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER_ACCESS_KEY}">
+               <af:setActionListener from="init" to="#{pageFlowScope.saveActionOutcome}"/>                    
+            </af:commandButton>                  
+            <af:spacer width="10" height="10" id="s5" rendered="#{pageFlowScope.ConditionEditBean.addMode and !pageFlowScope.ConditionEditBean.popupMode}"/>
+             
+             <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2" action="cancel" immediate="true" actionListener="#{pageFlowScope.ConditionEditBean.cancel}"
+                               accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+            </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:showDetailHeader text="#{inventoryUIBundle.CONDITION_INFORMATION}" disclosed="true" id="sdh1">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:group id="g2">
+            <af:panelGroupLayout id="pgl1">
+              <af:panelFormLayout id="pfl1" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+                <af:selectOneChoice id="conditionTypeDropDown" label="#{inventoryUIBundle.CONDITION_TYPE}"
+                            autoSubmit="true" required="true"
+                            value="#{pageFlowScope.ConditionEditBean.conditionTypeValue}">
+               <f:selectItems binding="#{pageFlowScope.ConditionEditBean.conditionTypes}"/>
+               </af:selectOneChoice>
+               <af:spacer height="10" id="spacer11"/>
+               <af:inputText value="#{pageFlowScope.ConditionEditBean.description}"
+                             label="#{inventoryUIBundle.DESCRIPTION}" maximumLength="255" rows="5" columns="50" id="it2"/>
+               <af:inputText value="#{pageFlowScope.ConditionEditBean.reason}" label="#{inventoryUIBundle.REASON}" required="true"
+                             disabled="#{!(pageFlowScope.ConditionEditBean.addMode)}" id="it1"/>
+               <af:inputDate value="#{pageFlowScope.ConditionEditBean.startDate}" label="#{inventoryUIBundle.START_DATE}"
+                             disabled="#{!(pageFlowScope.ConditionEditBean.addMode)}" required="true" id="inputDate1">
+                  <af:convertDateTime pattern="#{pageFlowScope.ConditionEditBean.dateTimeFormat}"/>
+               </af:inputDate>
+               <af:inputDate value="#{pageFlowScope.ConditionEditBean.endDate}" label="#{inventoryUIBundle.END_DATE}" id="inputDate2">
+                  <af:convertDateTime pattern="#{pageFlowScope.ConditionEditBean.dateTimeFormat}"/>
+               </af:inputDate>
+              </af:panelFormLayout>
+            </af:panelGroupLayout>
+          </af:group>
+        </af:showDetailHeader>
+       </af:panelHeader>
+      
+</jsp:root>

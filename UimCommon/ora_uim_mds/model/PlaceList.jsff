@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2016, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    4/08/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:showDetailHeader text="#{inventoryUIBundle.PLACES}" disclosed="true" id="sdh1">
+    <f:facet name="context"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:panelCollection id="plList" styleClass="AFStretchWidth">
+      <f:facet name="menus"/>    
+      <f:facet name="toolbar">
+                <af:toolbar id="t1">
+                   <af:commandToolbarButton text="#{inventoryUIBundle.ASSOCIATE}" id="cb1Crt" binding="#{backingBeanScope.associateButton}"
+                                            disabled="#{pageFlowScope.PlaceListBean.disableAssociateButton}" disabledIcon="#{InventoryHelperBean.disAssociateIcon}"
+                                            rendered="#{!(pageFlowScope.PlaceListBean.disableAssociateButton) and securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Place.ASSOCIATE;action=view']}"
+                                            icon="#{InventoryHelperBean.associateIcon}">
+                          <af:setActionListener from="true" to="#{pageFlowScope.invokePlace}"/>
+                          <af:showPopupBehavior popupId="::ascplp" triggerType="click"/>
+                          <af:setActionListener from="true" to="#{pageFlowScope.associatePlace}"/> 
+                   </af:commandToolbarButton>
+                   <af:spacer width="10" height="10" id="s11"/>
+                   <af:commandToolbarButton text="#{inventoryUIBundle.UPDATE}" id="cb3Up" icon="#{InventoryHelperBean.editIcon}"
+                                            actionListener="#{pageFlowScope.PlaceListBean.updatePlace}"
+                                            partialTriggers="rtId"
+                                            binding="#{backingBeanScope.editButton}" disabledIcon="#{InventoryHelperBean.disEditIcon}"
+                                            rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Place.EDIT;action=view']}"
+                                            disabled="#{pageFlowScope.PlaceListBean.resultsTable.selectedRowKeys.size lt 1 or pageFlowScope.PlaceListBean.resultsTable.selectedRowKeys.size eq null || pageFlowScope.PlaceListBean.disableAssociateButton}">
+                   </af:commandToolbarButton>
+                   <af:spacer width="10" height="10" id="s12"/>
+                   <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}" id="cb3Del" icon="#{InventoryHelperBean.deleteIcon}"
+                                            binding="#{backingBeanScope.deleteButton}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                            rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Place.DELETE;action=view']}"
+                                            actionListener="#{pageFlowScope.PlaceListBean.disassociatePlace}" partialTriggers="rtId"
+                                            disabled="#{pageFlowScope.PlaceListBean.resultsTable.selectedRowKeys.size lt 1 or pageFlowScope.PlaceListBean.resultsTable.selectedRowKeys.size eq null || pageFlowScope.PlaceListBean.disableAssociateButton}">
+                   </af:commandToolbarButton>
+                </af:toolbar>
+      </f:facet>
+      <f:facet name="statusbar">
+        <af:toolbar id="t2">
+          <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount lt 0) ? 0 : bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount}"
+                         id="ol2" styleClass="invSearchOutputLabel" binding="#{backingBeanScope.totalResultsLabel}"
+                         partialTriggers="rtId"/>                         
+        </af:toolbar>
+      </f:facet>
+      <af:table id="rtId"
+            value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}"
+            var="row" autoHeightRows="#{pageFlowScope.PlaceListBean.portletHeight}" contentDelivery="immediate" 
+            emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+            fetchSize="#{pageFlowScope.PlaceListBean.fetchSize}"
+            filterModel="#{pageFlowScope.PlaceQueryBean.filterModel}"
+            queryListener="#{InventoryHelperBean.processQuery}"
+            selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+            filterVisible="false" varStatus="vs"
+            selectionListener="#{pageFlowScope.PlaceListBean.selectAction}"
+            sortListener="#{bindings.searchResultsIterator.dataControl.dataProvider.processSort}"
+            rowSelection="#{pageFlowScope.PlaceListBean.rowSelection}" styleClass="AFStretchWidth"
+            binding="#{pageFlowScope.PlaceListBean.resultsTable}"
+                summary="#{inventoryUIBundle.PLACE_LIST}">
+        <af:column sortProperty="geographicPlace.id" sortable="true" filterable="true" headerText="#{inventoryUIBundle.ID}" id="c1"
+                   rowHeader="unstyled">
+          <af:commandImageLink action="#{pageFlowScope.PlaceListBean.getSummaryAction}" id="cl1"
+                               text="#{pageFlowScope.PlaceListBean.placeId}"
+                               shortDesc="#{inventoryUIBundle.PLACE_SUMMARY_LINK}">
+           
+              <af:setActionListener from="#{row.geographicPlace.oid}" to="#{requestScope.oid}"/>
+          </af:commandImageLink>
+        </af:column>
+        <af:column sortProperty="geographicPlace.name" sortable="true" filterable="true" headerText="#{inventoryUIBundle.NAME}" id="c2">
+          <af:outputText value="#{pageFlowScope.PlaceListBean.placeName}" id="ot1"/>
+        </af:column>
+        <af:column id="c15" headerText="#{inventoryUIBundle.PLACE_ROLE}">
+            <af:selectOneChoice id="c13" value="#{pageFlowScope.PlaceListBean.selectedPlaceRole}"
+                                autoSubmit="true" valueChangeListener="#{pageFlowScope.PlaceListBean.onChangeFromEntityRole}"
+                                shortDesc="#{inventoryUIBundle.SELECT} #{inventoryUIBundle.PLACE_ROLE}">
+                <f:selectItems value="#{pageFlowScope.PlaceListBean.placeRoles}" id="sc13"/>
+            </af:selectOneChoice>
+        </af:column>
+        <af:column id="c16" headerText="#{inventoryUIBundle.ENTITY_ROLE}"
+                   rendered="#{pageFlowScope.PlaceListBean.roleEnabled}">
+            <af:selectOneChoice id="c14" value="#{pageFlowScope.PlaceListBean.selectedEntityRole}"
+                                autoSubmit="true" valueChangeListener="#{pageFlowScope.PlaceListBean.onChangeToEntityRole}"
+                                shortDesc="#{inventoryUIBundle.SELECT} #{inventoryUIBundle.ENTITY_ROLE}">
+                <f:selectItems value="#{pageFlowScope.PlaceListBean.entityRoles}" id="sc14"/>
+            </af:selectOneChoice>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+    <af:popup id="ascplp" binding="#{backingBeanScope.associatePlace}"
+              contentDelivery="lazyUncached">
+      <af:dialog id="d3" type="none" title="#{inventoryUIBundle.ASSOCIATE_PLACE}">
+        <af:panelStretchLayout id="pt_ps35"
+                               styleClass="invCommonPanelStretchLayout">
+          <f:facet name="center">
+            <af:region value="#{bindings.PlaceSearchResultsFlow2.regionModel}"
+                       id="r1"/>
+          </f:facet>
+        </af:panelStretchLayout>
+      </af:dialog>
+      <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+      <af:serverListener type="refreshEntity"
+                         method="#{pageFlowScope.PlaceListBean.refresh}"/>
+    </af:popup>
+  </af:showDetailHeader>
+</jsp:root>

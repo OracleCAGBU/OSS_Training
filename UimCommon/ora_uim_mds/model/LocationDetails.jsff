@@ -1,0 +1,813 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2015, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    hbanoth     04/16/15 - VALIDATE ADDRESS MATCH DIALOG'S BUTTONS NOT WORKING
+                           FROM DETACHED SCREEN
+    sagadeka    03/02/15 - CLEAr and RESET button added bug 19616070 
+    raattulu    3/29/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:cui="/CommsUI">
+		   
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle"
+         value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   value="#{bindings.pageTemplateBinding}" id="pt1">
+    <f:facet name="localArea">
+      <af:group id="g1">
+        
+        <af:panelHeader text="#{inventoryUIBundle.PROPERTY_LOCATION} - #{pageFlowScope.LocationDetailsBean.displayInfo}"
+                        id="ph2"
+                        binding="#{backingBeanScope.pageTitleBinding}">
+          <f:facet name="toolbar">
+            <af:toolbar id="t1">
+             <af:group id="gr1">
+                 <af:menuBar id="mb1" rendered="#{pageFlowScope.detailsMode == 'viewing'}">
+                     <af:menu id="menu6" binding="#{pageFlowScope.LocationDetailsBean.actionsMenu}" styleClass="invSummaryMenu">
+                     </af:menu>
+                 </af:menuBar>
+                    </af:group>
+              <af:group id="g2">
+              <!-- CLEAR and RESET button are added as part of bugfix 19616070  -->
+                <af:commandToolbarButton text="#{inventoryUIBundle.CLEAR}" id="rb1" accessKey="l"
+                                                         binding="#{backingBeanScope.clearButtonBinding}"
+                                                         actionListener="#{pageFlowScope.LocationDetailsBean.onClear}"
+                                                         rendered="#{pageFlowScope.LocationDetailsBean.renderClearButton}"></af:commandToolbarButton>
+                                <af:commandToolbarButton text="#{inventoryUIBundle.RESET}" id="rb2" accessKey="2" immediate="true"
+                                                         binding="#{backingBeanScope.resetButtonBinding}"
+                                                         disabled="#{pageFlowScope.LocationDetailsBean.disableResetButton}"
+                                                         actionListener="#{pageFlowScope.LocationDetailsBean.onReset}"
+                                                         rendered="#{pageFlowScope.LocationDetailsBean.renderResetButton}">
+                                                         <af:resetActionListener/></af:commandToolbarButton>
+                                <!--<af:resetButton text="#{inventoryUIBundle.CLEAR}" id="rb1"
+                                accessKey="l"
+                                binding="#{backingBeanScope.clearButtonBinding}"
+                                disabled="#{pageFlowScope.LocationDetailsBean.disableClearButton}"/>-->
+                            </af:group>
+              <af:group id="g3">
+                <af:commandToolbarButton text="#{inventoryUIBundle.SAVE}"
+                                         id="ctb1"
+                                         disabled="#{pageFlowScope.LocationDetailsBean.disableSaveButtons}"
+                                         accessKey="#{inventoryUIBundle.SAVE_ACCESS_KEY}"
+                                         actionListener="#{pageFlowScope.LocationDetailsBean.save}"
+                                         binding="#{backingBeanScope.saveButtonBinding}">
+                  <af:setActionListener from="editing"
+                                        to="#{pageFlowScope.saveActionOutcome}"/>
+                </af:commandToolbarButton>
+                <af:commandToolbarButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}"
+                                         id="ctb2"
+                                         disabled="#{pageFlowScope.LocationDetailsBean.disableSaveButtons}"
+                                         actionListener="#{pageFlowScope.LocationDetailsBean.save}"
+                                         accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}"
+                                         binding="#{backingBeanScope.saveAndCloseButtonBinding}">
+                  <af:setActionListener from="viewing"
+                                        to="#{pageFlowScope.saveActionOutcome}"/>
+                </af:commandToolbarButton>
+                <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}"
+                                         id="ctb3" action="cancel" accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"
+                                         actionListener="#{bindings.closeSubTask.execute}"
+                                         immediate="true" disabled="#{pageFlowScope.LocationDetailsBean.disableCancel}"/>
+              </af:group>
+            </af:toolbar>
+          </f:facet>
+        </af:panelHeader>
+        <af:panelTabbed id="pt2" dimensionsFrom="auto"
+                        binding="#{backingBeanScope.panelTabbed}">
+          <af:showDetailItem id="sdi1" 
+                             text="#{inventoryUIBundle.GENERAL_INFORMATION}"
+                             styleClass="AFStretchWidth" stretchChildren="first"
+                             binding="#{backingBeanScope.generalTab}" 
+							 disclosed="#{pageFlowScope.LocationDetailsBean.selectedTab == inventoryUIBundle.GENERAL_INFORMATION}" 
+                             disclosureListener="#{pageFlowScope.LocationDetailsBean.tabSelected}">
+            <af:panelStretchLayout id="psl1" styleClass="AFStretchWidth"
+                                   dimensionsFrom="auto">
+              <f:facet name="center">
+                <af:switcher id="s1" defaultFacet="editing"
+                             facetName="#{pageFlowScope.detailsMode}"
+                             binding="#{backingBeanScope.detailsSwitcherBinding}">
+                  <f:facet name="editing">
+                    <af:panelBox id="pb1" background="default" text=""
+                                 showDisclosure="false"
+                                 styleClass="AFStretchWidth" >
+                      <af:panelGroupLayout id="pgl4" layout="horizontal"
+                                           styleClass="AFStretchWidth"
+                                           halign="left" valign="top">
+                        <af:panelGroupLayout id="pg59" layout="vertical"
+                                             halign="left" valign="top">
+                          
+                          <af:outputText value="#{inventoryUIBundle.LOCATION_TYPE}"
+                                         inlineStyle="font-weight:bold;"/>
+
+                           <af:panelFormLayout id="ltfl1"> 
+                            <af:panelGroupLayout id="ltl12" layout="horizontal"> 
+                             <af:spacer id="sp1" width="84"/>
+                                
+                             <af:selectBooleanCheckbox text="#{inventoryUIBundle.NETWORK_LOCATION}" 
+                                                              contentStyle="width:100px"
+                                                              value="#{pageFlowScope.LocationDetailsBean.networkLocation}"
+                                                              id="lt-isnl"
+                                                              partialTriggers="pl-nlc"
+                                                              autoSubmit="true"
+                                                              binding="#{backingBeanScope.isNetworkLocationBinding}"
+                                                              valueChangeListener="#{pageFlowScope.LocationDetailsBean.networkLocationCheckBoxListener}"/>
+                                                              
+                            </af:panelGroupLayout> 
+                           <af:panelGroupLayout id="lg12" layout="horizontal">                                    
+                             <af:spacer id="sp2" width="84"/>
+    
+                              <af:selectBooleanCheckbox text="#{inventoryUIBundle.SERVICE_LOCATION}" 
+                                                                value="#{pageFlowScope.LocationDetailsBean.entityObject.isServiceLocation}"
+                                                                id="pl-issl"
+                                                                autoSubmit="true"
+                                                                binding="#{backingBeanScope.isServiceLocationBinding}"
+                                                        valueChangeListener="#{pageFlowScope.LocationDetailsBean.serviceLocationCheckBoxListener}"/>
+
+           
+                          </af:panelGroupLayout>
+						  <af:panelGroupLayout id="pop1" layout="horizontal">                                    
+                             <af:spacer id="pop2" width="84"/>
+    
+                              <af:selectBooleanCheckbox text="#{inventoryUIBundle.POINT_OF_PRESENCE}" 
+                                                                value="#{pageFlowScope.LocationDetailsBean.entityObject.isPointOfPresence}"
+                                                                id="pl-ispop"
+                                                                autoSubmit="true"
+                                                                binding="#{backingBeanScope.isPointOfPresenceBinding}"/>
+
+           
+                          </af:panelGroupLayout>
+                           </af:panelFormLayout>
+                          <af:spacer width="10" height="10" id="sl51"/>
+                          
+                          <af:outputText value="#{inventoryUIBundle.PROPERTY_ADDRESS}"
+                                         inlineStyle="font-weight:bold;"/>
+                          <!--<af:spacer width="10" height="10" id="s5"/>-->
+                          <af:panelFormLayout id="pfl1">
+                            <h:panelGrid id="pg8" columns="3"
+                                         style="vertical-align:middle; text-align:center;">
+
+                              <af:selectBooleanCheckbox text="#{inventoryUIBundle.ACCEPT_PA_AS_IS}"
+                                                        value="#{pageFlowScope.LocationDetailsBean.acceptPropertyAddressAsIs}"
+                                                        id="pl-apaa"
+                                                        autoSubmit="true"
+                                                        disabled="#{pageFlowScope.LocationDetailsBean.disableAcceptAsis}"
+                                                        valueChangeListener="#{pageFlowScope.LocationDetailsBean.acceptPAAsIs}"
+                                                        binding="#{backingBeanScope.acceptPAAsIsBinding}"/>
+                              <af:spacer width="10" height="10" id="s30"/>
+                              <af:commandButton text="#{inventoryUIBundle.VALIDATE_ADDRESS}"
+                                                id="cb1"
+                                                actionListener="#{pageFlowScope.LocationDetailsBean.validateAddress}"
+                                                binding="#{backingBeanScope.validateAddressBinding}"
+                                                accessKey="#{inventoryUIBundle.VALIDATE_ADDRESS_ACCESS_KEY}"
+                                                rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=LocationDetails.VALIDATE_ADDRESS;action=view']}"
+                                                disabled="#{pageFlowScope.LocationDetailsBean.disableValidateAddress}"/>
+                            </h:panelGrid>
+                            <h:panelGrid id="pg9" columns="1"
+                                         style="text-align:right;"
+                                         cellpadding="0">
+                              <h:panelGrid id="pg10" columns="2">
+                                <af:image id="i1"
+                                          source="#{pageFlowScope.LocationDetailsBean.validatedAddressImage}"
+                                          binding="#{backingBeanScope.validatedAddressImageBinding}"
+                                          shortDesc="#{inventoryUIBundle.VALIDATED_ADDRESS}"/>
+                                <af:outputText id="ot1"
+                                               value="#{inventoryUIBundle.VALIDATED_ADDRESS}"
+                                               binding="#{backingBeanScope.validatedAddressTextBinding}"
+                                               styleClass="#{pageFlowScope.LocationDetailsBean.validatedAddressStyle}"/>
+                              </h:panelGrid>
+                            </h:panelGrid>
+                            <af:inputText label="#{inventoryUIBundle.STREET_ADDRESS}"
+                                          id="pl-sa" showRequired="true"
+                                          maximumLength="100" columns="53"
+                                          binding="#{backingBeanScope.streetAddressBinding}"
+                                          autoSubmit="true"
+                                          valueChangeListener="#{pageFlowScope.LocationDetailsBean.streetAddressListener}"
+                                          value="#{pageFlowScope.LocationDetailsBean.entityObject.primaryPropertyAddress.streetAddress}">
+                              <af:clientListener method="toUpperCase"
+                                                 type="valueChange"/>
+                            </af:inputText>
+                            
+                            <af:inputText label="#{inventoryUIBundle.SUB_UNIT}"
+                                          id="pl-su" 
+                                          showRequired="false"
+                                          maximumLength="30" columns="26"
+                                          binding="#{backingBeanScope.subUnitBinding}"
+                                          autoSubmit="true"
+                                          valueChangeListener="#{pageFlowScope.LocationDetailsBean.subUnitListener}"
+                                          value="#{pageFlowScope.LocationDetailsBean.entityObject.primaryPropertyAddress.subUnit}"
+                                          shortDesc="The sub-unit field is not used in the validation of the address."> 
+                              <af:clientListener method="toUpperCase"
+                                                 type="valueChange"/>
+                            </af:inputText> 
+                            <af:inputText label="#{inventoryUIBundle.SUB_AREA}"
+                                          id="pl-sarea" 
+                                          showRequired="false"
+                                          maximumLength="48" columns="26"
+                                          binding="#{backingBeanScope.subAreaBinding}"
+                                          autoSubmit="true"
+                                          disabled="#{pageFlowScope.LocationDetailsBean.disableSubArea}"
+                                          valueChangeListener="#{pageFlowScope.LocationDetailsBean.subAreaListener}"
+                                          value="#{pageFlowScope.LocationDetailsBean.entityObject.primaryPropertyAddress.subArea}">
+                              <af:clientListener method="toUpperCase"
+                                                 type="valueChange"/>
+                            </af:inputText> 
+                            
+                            <af:inputText label="#{inventoryUIBundle.CITY}"
+                                          id="pl-c" showRequired="true"
+                                          maximumLength="70" columns="26"
+                                          binding="#{backingBeanScope.cityBinding}"
+                                          rendered="#{pageFlowScope.LocationDetailsBean.renderCity}"
+                                          autoSubmit="true"
+                                          valueChangeListener="#{pageFlowScope.LocationDetailsBean.cityListener}"
+                                          value="#{pageFlowScope.LocationDetailsBean.entityObject.primaryPropertyAddress.city}">
+                              <af:clientListener method="toUpperCase"
+                                                 type="valueChange"/>
+                            </af:inputText>
+                            <af:inputText label="#{inventoryUIBundle.STATE}"
+                                          id="pl-s" maximumLength="3"
+                                          columns="5"
+                                          value="#{pageFlowScope.LocationDetailsBean.entityObject.primaryPropertyAddress.state}"
+                                          binding="#{backingBeanScope.stateBinding}"
+                                          valueChangeListener="#{pageFlowScope.LocationDetailsBean.stateListener}"
+                                          autoSubmit="true">
+                              <af:clientListener method="toUpperCase"
+                                                 type="valueChange"/>
+                            </af:inputText>
+                            <af:inputText label="#{inventoryUIBundle.POSTAL_CODE}"
+                                          id="pl-pc" maximumLength="15"
+                                          columns="26"
+                                          value="#{pageFlowScope.LocationDetailsBean.entityObject.primaryPropertyAddress.postalCode}"
+                                          binding="#{backingBeanScope.postalBinding}"
+                                          valueChangeListener="#{pageFlowScope.LocationDetailsBean.postalCodeListener}"
+                                          autoSubmit="true" 
+                                          shortDesc="The entered postal code field should match exactly if validated, but can be left out and the validation will retrieve it.">
+                              <af:clientListener method="toUpperCase"
+                                                 type="valueChange"/>
+                            </af:inputText>
+                            <af:selectOneChoice id="pl-co" autoSubmit="true" 
+                                                label="#{inventoryUIBundle.COUNTRY}"
+                                                showRequired="true"
+                                                valueChangeListener="#{pageFlowScope.LocationDetailsBean.countryListener}"
+                                                value="#{pageFlowScope.LocationDetailsBean.countryValue}"
+                                                binding="#{backingBeanScope.countryBinding}">
+                              <f:selectItems  binding="#{pageFlowScope.LocationDetailsBean.countries}"/>
+                            </af:selectOneChoice>
+                            <af:spacer width="10" height="10" id="s6"/>
+                          </af:panelFormLayout>
+                          <trh:script id="js1">
+                            function toUpperCase(event) {
+                                var inputField = event.getSource();
+                                inputField.setValue(event.getNewValue().toUpperCase());
+                            }
+                          </trh:script>
+                          <af:outputText value="#{inventoryUIBundle.PROPERTY_LOCATION}"
+                                         inlineStyle="font-weight:bold;"/>
+                          <af:spacer height="10"/>
+                          <af:panelGroupLayout id="pgl8" layout="horizontal"
+                                               styleClass="AFStretchWidth"
+                                               halign="left" valign="top">
+                            <af:panelFormLayout id="pf78">
+                              <af:inputText label="#{inventoryUIBundle.PROPERTY_NAME}"
+                                            id="pl-pn" showRequired="true"
+                                            maximumLength="#{pageFlowScope.LocationDetailsBean.locationNameMaximumLength}"
+                                            columns="53"
+                                            valueChangeListener="#{pageFlowScope.LocationDetailsBean.propertyNameListener}"
+                                            autoSubmit="true"
+                                            binding="#{backingBeanScope.propertyNameBinding}"
+                                            value="#{pageFlowScope.LocationDetailsBean.entityObject.name}"/>
+                              <af:inputText label="#{inventoryUIBundle.DESCRIPTION}"
+                                            id="pl-d" maximumLength="255"
+                                            rows="5" columns="50"
+                                            autoSubmit="true"
+                                            value="#{pageFlowScope.LocationDetailsBean.entityObject.description}"/>
+                            </af:panelFormLayout>
+                          </af:panelGroupLayout>
+                          <af:spacer width="10" height="10" id="s8"/>
+                          <h:panelGrid id="pg19" columns="2">
+                            <af:panelBox id="pb3"
+                                         text="#{inventoryUIBundle.GEOGRAPHIC_COORDINATES}"
+                                         background="medium"
+                                         showDisclosure="false">
+                              <f:facet name="toolbar">
+                                <af:toolbar id="tb1">
+                                  <af:commandToolbarButton id="ctb4"
+                                                           icon="#{pageFlowScope.LocationDetailsBean.lockCoordinatesButtonImage}"
+                                                           binding="#{backingBeanScope.lockCoordinatesBinding}"
+                                                           actionListener="#{pageFlowScope.LocationDetailsBean.lockGeographicCoordinates}"
+                                                           shortDesc="#{inventoryUIBundle.LOCK_COORDINATES}"
+                                                           disabled="#{pageFlowScope.LocationDetailsBean.disableLockCoordinates}"/>
+                                </af:toolbar>
+                              </f:facet>
+                              <af:panelFormLayout id="pfl3" maxColumns="2"
+                                                  rows="2">
+                                <af:inputText label="#{inventoryUIBundle.LATITUDE}"
+                                              id="pl-lat" maximumLength="12"
+                                              columns="13"
+                                              binding="#{backingBeanScope.latBinding}"
+                                              shortDesc="#{inventoryUIBundle.LATITUDE_DESC}"
+                                              autoSubmit="true"
+                                              value="#{pageFlowScope.LocationDetailsBean.entityObject.latitude}"
+                                              partialTriggers="ctb4"
+                                              valueChangeListener="#{pageFlowScope.LocationDetailsBean.populateHorVerFields}"
+                                              validator="#{pageFlowScope.LocationDetailsBean.validate}"/>
+                                <af:inputText label="#{inventoryUIBundle.LONGITUDE}"
+                                              id="pl-lon" maximumLength="12"
+                                              columns="13"
+                                              binding="#{backingBeanScope.lonBinding}"
+                                              autoSubmit="true"
+                                              shortDesc="#{inventoryUIBundle.LONGITUDE_DESC}"
+                                              value="#{pageFlowScope.LocationDetailsBean.entityObject.longitude}"
+                                              partialTriggers="ctb4"
+                                              valueChangeListener="#{pageFlowScope.LocationDetailsBean.populateHorVerFields}"
+                                              validator="#{pageFlowScope.LocationDetailsBean.validate}"/>
+                                <af:inputText label="#{inventoryUIBundle.HORIZONTAL}"
+                                              id="pl-hor" maximumLength="12"
+                                              columns="13"
+                                              binding="#{backingBeanScope.horBinding}"
+                                              autoSubmit="true"
+                                              value="#{pageFlowScope.LocationDetailsBean.entityObject.horizontal}"
+                                              partialTriggers="ctb4"
+                                              valueChangeListener="#{pageFlowScope.LocationDetailsBean.populateLatLonFields}"
+                                              disabled="#{!pageFlowScope.LocationDetailsBean.na}"
+                                              validator="#{pageFlowScope.LocationDetailsBean.validate}"/>
+                                <af:inputText label="#{inventoryUIBundle.VERTICAL}"
+                                              id="pl-ver" maximumLength="12"
+                                              columns="13"
+                                              binding="#{backingBeanScope.verBinding}"
+                                              autoSubmit="true"
+                                              value="#{pageFlowScope.LocationDetailsBean.entityObject.vertical}"
+                                              partialTriggers="ctb4"
+                                              valueChangeListener="#{pageFlowScope.LocationDetailsBean.populateLatLonFields}"
+                                              disabled="#{!pageFlowScope.LocationDetailsBean.na}"
+                                              validator="#{pageFlowScope.LocationDetailsBean.validate}"/>
+                              </af:panelFormLayout>
+                            </af:panelBox>
+                          </h:panelGrid>
+                          <af:spacer width="10" height="10" id="s7"/>
+                          <h:panelGrid id="pg4" columns="1">
+                            <h:panelGrid id="pg5" columns="2">
+                              <af:inputText label="#{inventoryUIBundle.NETWORK_LOCATION_CODE}"
+                                            id="pl-nlc"
+                                            disabled="#{!pageFlowScope.LocationDetailsBean.networkLocation}"
+                                            partialTriggers="lt-isnl"
+                                            value="#{pageFlowScope.LocationDetailsBean.networkLocationCode}"
+                                            maximumLength="#{pageFlowScope.LocationDetailsBean.locationCodeMaximumLength}"
+                                            columns="20" autoSubmit="true"
+                                            binding="#{backingBeanScope.networkLocationCodeBinding}"
+                                            valueChangeListener="#{pageFlowScope.LocationDetailsBean.checkUniqueNLC}"
+                                            validator="#{pageFlowScope.LocationDetailsBean.validate}" 
+                                            shortDesc="#{pageFlowScope.LocationDetailsBean.networkLocationCodeMessage}">
+                                <af:clientListener method="toUpperCase"
+                                                   type="valueChange"/>
+                              </af:inputText>
+                              <af:group id="g4">
+                                <af:spacer width="5" height="10" id="s10"/>
+                                <af:image id="i3"
+                                          source="#{pageFlowScope.LocationDetailsBean.uniqueCodeImage}"
+                                          binding="#{backingBeanScope.uniqueCodeImageBinding}"
+                                          shortDesc="#{inventoryUIBundle.UNIQUE_CODE}"
+                                          partialTriggers="pl-nlc"/>
+                                <af:outputText id="ot2"
+                                               value="#{inventoryUIBundle.UNIQUE_CODE}"
+                                               binding="#{backingBeanScope.uniqueCodeTextBinding}"
+                                               styleClass="#{pageFlowScope.LocationDetailsBean.uniqueCodeStyle}"
+                                               partialTriggers="pl-nlc"/>
+                              </af:group>
+                            </h:panelGrid>
+                            <h:panelGrid id="pg41" columns="2">
+                              <af:spacer width="110" height="10" id="s9"/>
+                              <af:selectBooleanCheckbox text="#{inventoryUIBundle.USE_NLC_AS_PA}"
+                                                        value="#{pageFlowScope.LocationDetailsBean.useNetworkLocationAsPropertyName}"
+                                                        id="sbc1"
+                                                        autoSubmit="true"
+                                                        valueChangeListener="#{pageFlowScope.LocationDetailsBean.useNetworkLocationCodeAsPropertyName}"
+                                                        binding="#{backingBeanScope.useNLCAsPABinding}"
+                                                        disabled="#{pageFlowScope.LocationDetailsBean.disableUseNLCAsPA}"></af:selectBooleanCheckbox>
+                            </h:panelGrid>
+                            <af:spacer width="10" height="10" id="s11"/>
+                          </h:panelGrid>
+                        </af:panelGroupLayout>
+                        <af:panelGroupLayout id="pg56" layout="vertical"
+                                             halign="left" valign="top">
+                          <h:panelGrid id="pg45" columns="3">
+                            <!--<af:spacer width="10" id="s32"/>-->
+                            <af:panelFormLayout id="ple"
+                                                binding="#{backingBeanScope.uiHintsEditPanel}"/>
+                          </h:panelGrid>
+                        </af:panelGroupLayout>
+                      </af:panelGroupLayout>
+                    </af:panelBox>
+                  </f:facet>
+                  <f:facet name="viewing">
+                    <!--<h:panelGrid id="pg18" columns="2" cellspacing="0">-->
+                    <af:panelBox id="pb6" background="default"
+                                 showDisclosure="false"
+                                 styleClass="AFStretchWidth" text="">
+                      <f:facet name="toolbar">
+                        <af:toolbar id="tb2">
+                          <af:commandToolbarButton id="ctb5"
+                                                   text="#{inventoryUIBundle.EDIT}"
+                                                   actionListener="#{pageFlowScope.LocationDetailsBean.edit}"
+                                                   rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=LocationDetails.EDIT;action=view']}"
+                                                   accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}"/>
+                        </af:toolbar>
+                      </f:facet>
+                      <af:panelGroupLayout id="pgl19" layout="horizontal"
+                                           styleClass="AFStretchWidth"
+                                           halign="left" valign="top">
+                        <af:panelGroupLayout id="pgl21" layout="vertical"
+                                             halign="left" valign="top"
+                                             inlineStyle="width:50.0%;">
+                          <af:outputText value="#{inventoryUIBundle.PROPERTY_ADDRESS}"
+                                         inlineStyle="font-weight:bold;"/>
+                          <af:panelGroupLayout id="pgl21a" layout="vertical"
+                                               halign="right" valign="top"
+                                               inlineStyle="width:70.0%;">
+                            <af:switcher id="addressv" defaultFacet=""
+                                         facetName="#{pageFlowScope.LocationDetailsBean.addressStatus}">
+                              <f:facet name="isValidated">
+                                <h:panelGrid id="pg10v" columns="3"
+                                             style="text-align:left;"
+                                             cellpadding="0">
+                                  <af:image id="imgv1"
+                                            source="/images/checkmark_ena.png"
+                                            shortDesc="Validated"/>
+                                  <af:spacer width="5"/>
+                                  <af:outputText id="ot1vv"
+                                                 value="#{inventoryUIBundle.VALIDATED_ADDRESS}"
+                                                 styleClass="invEnabledText"/>
+                                </h:panelGrid>
+                              </f:facet>
+                              <f:facet name="isAccepted">
+                                <h:panelGrid id="pg10va" columns="3"
+                                             style="text-align:right;"
+                                             cellpadding="0">
+                                  <af:image id="imga2"
+                                            source="/images/confirmtitleicon_ena.png"
+                                            shortDesc="Accepted"/>
+                                  <af:spacer width="5"/>
+                                  <af:outputText id="ot1va"
+                                                 value="#{inventoryUIBundle.ACCEPTED_ADDRESS}"
+                                                 styleClass="invEnabledText"/>
+                                </h:panelGrid>
+                              </f:facet>
+                              <f:facet name="">
+                                <h:panelGrid id="pg10vn" columns="3"
+                                             style="text-align:right;"
+                                             cellpadding="0">
+                                  <af:image id="imgnv3"
+                                            source="/images/alert_ena.png"
+                                            shortDesc="Neither Validated nor Accepted"/>
+                                  <af:spacer width="5"/>
+                                  <af:outputText id="ot1vn"
+                                                 value="#{inventoryUIBundle.CANCELLED_ADDRESS}"
+                                                 styleClass="invEnabledText"/>
+                                </h:panelGrid>
+                              </f:facet>
+                            </af:switcher>
+                          </af:panelGroupLayout>
+                          <af:spacer height="10"/>
+                          <af:panelFormLayout id="pfl5" maxColumns="1">
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.STREET_ADDRESS}"
+                                                     id="vpl-sa">
+                              <af:outputText id="ot5"
+                                             value="#{pageFlowScope.LocationDetailsBean.entityObject.primaryPropertyAddress.streetAddress}"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.SUB_UNIT}"
+                                                     id="vpl-su">
+                              <af:outputText id="suot"
+                                             value="#{pageFlowScope.LocationDetailsBean.entityObject.primaryPropertyAddress.subUnit}"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.SUB_AREA}"
+                                                     id="vpl-sarea">
+                              <af:outputText id="sareaot"
+                                             value="#{pageFlowScope.LocationDetailsBean.entityObject.primaryPropertyAddress.subArea}"/>
+                            </af:panelLabelAndMessage> 
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.CITY}" rendered="#{pageFlowScope.LocationDetailsBean.renderCity}"
+                                                     id="vpl-c">
+                              <af:outputText id="ot6" rendered="#{pageFlowScope.LocationDetailsBean.renderCity}"
+                                             value="#{pageFlowScope.LocationDetailsBean.entityObject.primaryPropertyAddress.city}"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.STATE}"
+                                                     id="vpl-s">
+                              <af:outputText id="ot16"
+                                             value="#{pageFlowScope.LocationDetailsBean.entityObject.primaryPropertyAddress.state}"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.POSTAL_CODE}"
+                                                     id="vpl-pc">
+                              <af:outputText id="ot7"
+                                             value="#{pageFlowScope.LocationDetailsBean.entityObject.primaryPropertyAddress.postalCode}"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.COUNTRY}"
+                                                     id="vpl-co">
+                              <af:outputText id="ot8"
+                                             value="#{pageFlowScope.LocationDetailsBean.entityObject.primaryPropertyAddress.country}"/>
+                            </af:panelLabelAndMessage>
+                          </af:panelFormLayout>
+                          <af:spacer height="10"/>
+                          <af:outputText value="#{inventoryUIBundle.PROPERTY_LOCATION}"
+                                         inlineStyle="font-weight:bold;"/>
+                          <af:panelFormLayout id="pfl0" maxColumns="1">
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.PROPERTY_NAME}"
+                                                     id="vpl-pa">
+                              <af:outputText id="ot9"
+                                             value="#{pageFlowScope.LocationDetailsBean.entityObject.name}"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}"
+                                                     id="vpl-d">
+                              <af:outputText id="ot10"
+                                             value="#{pageFlowScope.LocationDetailsBean.entityObject.description}"/>
+                            </af:panelLabelAndMessage>
+                            <af:spacer id="s2" height="20"/>
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.LATITUDE}"
+                                                     id="vpl-lat">
+                              <af:outputText id="ot11"
+                                             value="#{pageFlowScope.LocationDetailsBean.entityObject.latitude}"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.LONGITUDE}"
+                                                     id="vpl-lon">
+                              <af:outputText id="ot12"
+                                             value="#{pageFlowScope.LocationDetailsBean.entityObject.longitude}"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.HORIZONTAL}"
+                                                     id="vpl-hor">
+                              <af:outputText id="ot13"
+                                             value="#{pageFlowScope.LocationDetailsBean.entityObject.horizontal}"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.VERTICAL}"
+                                                     id="vpl-ver">
+                              <af:outputText id="ot14"
+                                             value="#{pageFlowScope.LocationDetailsBean.entityObject.vertical}"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.NETWORK_LOCATION_CODE}"
+                                                     id="vpl-nlc">
+                              <af:outputText id="ot15"
+                                             value="#{pageFlowScope.LocationDetailsBean.entityObject.networkLocationCode}"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{inventoryUIBundle.SERVICE_LOCATION}"
+                                                     id="vpl-sl">
+                              <af:outputText id="slot"
+                                             value="#{pageFlowScope.LocationDetailsBean.serviceLocationSummaryDisplay}"/>
+                            </af:panelLabelAndMessage>
+							<af:panelLabelAndMessage label="#{inventoryUIBundle.POINT_OF_PRESENCE}"
+                                                     id="vpl-pop">
+                              <af:outputText id="popot"
+                                             value="#{pageFlowScope.LocationDetailsBean.pointOfPresenceSummaryDisplay}"/>
+                            </af:panelLabelAndMessage>
+                            <af:switcher id="idSwitcher2" defaultFacet="true" facetName="#{pageFlowScope.LocationDetailsBean.showParentSpec}">
+                                <f:facet name="true">
+                                    <af:panelLabelAndMessage label="#{inventoryUIBundle.PARENTPLACE}" id="place2-parentplace">
+                                    <af:commandImageLink action="PlaceSummary" id="cil2" actionListener="#{bindings.openSubTaskForParentPlaceFromPL.execute}"
+                                                         text="#{pageFlowScope.LocationDetailsBean.parentPlaceName}">
+                                    <af:setActionListener from="#{pageFlowScope.LocationDetailsBean.parentOid}"
+                                                      to="#{pageFlowScope.objectId}"/>
+                                        
+                                    </af:commandImageLink>
+                                    </af:panelLabelAndMessage>
+                                </f:facet> 
+                             </af:switcher>
+                          </af:panelFormLayout>
+                        </af:panelGroupLayout>
+                        <af:panelGroupLayout id="pgl21ch" layout="vertical"
+                                             halign="left" valign="top">
+                          <h:panelGrid id="pg99" columns="3">
+                            <af:panelFormLayout id="plvx"
+                                                binding="#{backingBeanScope.uiHintsViewPanel}"/>
+                          </h:panelGrid>
+                        </af:panelGroupLayout>
+                      </af:panelGroupLayout>
+                    </af:panelBox>
+                    <!--</h:panelGrid>-->
+                  </f:facet>
+                </af:switcher>
+              </f:facet>
+            </af:panelStretchLayout>
+          </af:showDetailItem>
+          <af:showDetailItem id="sdin3" 
+                             text="#{inventoryUIBundle.NETWORK_ENTITY_CODES}"
+                             styleClass="AFStretchWidth"
+                             disabled="#{pageFlowScope.LocationDetailsBean.disableNecTab}"
+                             disclosureListener="#{pageFlowScope.LocationDetailsBean.tabSelected}"
+                             partialTriggers="pl-nlc" 
+							 disclosed="#{pageFlowScope.LocationDetailsBean.selectedTab == inventoryUIBundle.NETWORK_ENTITY_CODES}" 
+                             binding="#{backingBeanScope.necTab}">
+            <af:panelGroupLayout layout="vertical">
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.NETWORK_LOCATION_CODE}">
+                <af:outputText value="#{pageFlowScope.LocationDetailsBean.entityObject.networkLocationCode}"
+                               styleClass="invEnabledText"/>
+              </af:panelLabelAndMessage>
+              <af:spacer height="10"/>
+              <af:panelCollection id="pc2" styleClass="invSearchPanelCollection"
+                                  featuresOff="statusBar detachMenuItem detachToolbarItem detach viewMenu">
+                <f:facet name="toolbar">
+                  <af:toolbar id="t4">
+                    <af:commandToolbarButton id="ctb42"
+                                             icon="#{InventoryHelperBean.addNewIcon}"
+                                             partialTriggers="t6"
+                                            rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=LocationDetails.CREATE_NEC;action=view']}"
+                                             actionListener="#{pageFlowScope.LocationDetailsBean.createNetworkEntityCodes}"
+                                             shortDesc="#{inventoryUIBundle.ADD_NEW_ICON}"></af:commandToolbarButton>
+                    <af:spacer width="10" height="10" id="s25"/>
+                    <af:commandToolbarButton id="ctb6" partialTriggers="t6"
+                                             icon="#{InventoryHelperBean.deleteIcon}"
+                                             disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                             rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=LocationDetails.DELETE_NEC;action=view']}"
+                                             actionListener="#{pageFlowScope.LocationDetailsBean.deleteNetworkEntityCodes}"
+                                             disabled="#{pageFlowScope.LocationDetailsBean.networkEntityCodesTable.selectedRowKeys.size lt 1 or pageFlowScope.LocationDetailsBean.networkEntityCodesTable.selectedRowKeys.size eq null}"
+                                             shortDesc="#{inventoryUIBundle.DELETE} #{inventoryUIBundle.ICON}"/>
+                  </af:toolbar>
+                </f:facet>
+                <af:table value="#{pageFlowScope.LocationDetailsBean.networkEntityCodesCollectionModel}"
+                          var="necRow" editingMode="clickToEdit"
+                          rowSelection="multiple" varStatus="vs"
+                          emptyText="#{inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET}"
+                          binding="#{pageFlowScope.LocationDetailsBean.networkEntityCodesTable}"
+                          autoHeightRows="#{pageFlowScope.LocationDetailsBean.networkEntityCodeTableHeight}"
+                          contentDelivery="immediate" rowBandingInterval="0"
+                          id="t6"
+                          selectionListener="#{pageFlowScope.LocationDetailsBean.necSelectionListener}"
+                          fetchSize="30" summary="#{inventoryUIBundle.NETWORK_ENTITY_CODES_TABLE}">
+                  <af:column id="c1" headerText="#{inventoryUIBundle.ROW}"
+                             rowHeader="unstyled">
+                    <af:outputText value="#{vs.index+1}" id="vst1"/>
+                  </af:column>
+                  <af:column headerText="#{inventoryUIBundle.NETWORK_ENTITY_CODE}"
+                             id="c18">
+                    <af:switcher id="nelSw1" defaultFacet="false"
+                                 facetName="#{pageFlowScope.LocationDetailsBean.associatedToResource}">
+                      <!-- If this NetworkEntityCode is associated with the LogicalDevice or TDMConnectivity object then display as only text. -->
+                      <f:facet name="true">
+                        <af:outputText value="#{necRow.name}" id="ot20"/>
+                      </f:facet>
+                      <!-- Else if this NetworkEntityCode is not associated with the LogicalDevice or TDMConnectivity object then display the content as inputText for editing. -->
+                      <f:facet name="false">
+                        <af:inputText value="#{necRow.name}"
+                                      maximumLength="#{pageFlowScope.LocationDetailsBean.entityCodeMaximumLength}"
+                                      simple="true" autoSubmit="true" id="ot30"
+                                      disabled="#{maxRowIndexReached}" 
+                                      valueChangeListener="#{pageFlowScope.LocationDetailsBean.necValueChangeListener}"
+                                      validator="#{pageFlowScope.LocationDetailsBean.validate}"
+                                      shortDesc="#{inventoryUIBundle.NETWORK_ENTITY_CODE}">
+                          <af:clientListener method="toNecUpperCase"
+                                             type="valueChange"/>
+                        </af:inputText>
+                      </f:facet>
+                    </af:switcher>
+                  </af:column>
+                  <af:column headerText="#{inventoryUIBundle.DEVICE_IDENTIFIER}"
+                             id="c19">
+                    <af:commandImageLink action="LogicalDeviceSummary" id="cl2"
+                                    actionListener="#{bindings.openSubTaskForLogicalDeviceSummary.execute}"
+                                         text="#{pageFlowScope.LocationDetailsBean.associatedLogicalDeviceName}"
+                                         shortDesc="#{pageFlowScope.LocationDetailsBean.associatedLogicalDeviceName eq '' ? '&#160;' : inventoryUIBundle.LOGICAL_DEVICE_SUMMARY_LINK}"
+                                         disabled="#{pageFlowScope.LocationDetailsBean.associatedLogicalDeviceName eq '' ? true : false}">
+                      <af:setActionListener from="#{necRow.logicalDevice.oid}"
+                                            to="#{logicalDeviceOid}"/>
+                      <af:setActionListener from="#{necRow.logicalDevice.displayInfo}"
+                                            to="#{ldDisplayInfo}"/>
+                    </af:commandImageLink>
+                  </af:column>                  
+                  <af:column headerText="#{inventoryUIBundle.CONNECTIVITY}"   id="c20">
+                    <af:switcher id="nelSw2" defaultFacet="false"
+                                 facetName="#{pageFlowScope.LocationDetailsBean.associatedToConnectivity}">
+                      <f:facet name="true">
+                        <af:commandImageLink icon="/images/connectivity_ena.png"
+                                             id="cil1"                                            
+                                             action="TDMConnectivitySearch"
+                                              actionListener="#{bindings.openSubTaskForConnectivitySearch.execute}">
+                          <af:setActionListener from="#{necRow.networkLocationEntityCode}"
+                                                to="#{NetworkEntityLocation}"/>                                          
+                        </af:commandImageLink>
+                      </f:facet>
+                      <f:facet name="false">
+                        <af:outputText value="" id="ot22"/>
+                      </f:facet>
+                    </af:switcher>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </af:panelGroupLayout>
+            <trh:script id="js2">
+                  function toNecUpperCase(event) {
+                      var inputField = event.getSource();
+                      inputField.setValue(event.getNewValue().toUpperCase());
+                  }
+            </trh:script>
+          </af:showDetailItem>
+          <af:showDetailItem id="sdi2" 
+                             text="#{inventoryUIBundle.GROUPS_AND_INFRASTRUCTURE}"
+                             disabled="#{pageFlowScope.LocationDetailsBean.disableIGTab}"
+                             styleClass="AFStretchWidth"
+                             binding="#{backingBeanScope.inventoryGroupTab}" 
+							 disclosed="#{pageFlowScope.LocationDetailsBean.selectedTab == inventoryUIBundle.GROUPS_AND_INFRASTRUCTURE}" 
+                             disclosureListener="#{pageFlowScope.LocationDetailsBean.tabSelected}" 
+							 rendered="#{!pageFlowScope.LocationDetailsBean.disableIGPortlet}">
+            <af:panelGroupLayout layout="scroll" id="pg22">
+              <af:region value="#{bindings.InventoryGroupListFlow1.regionModel}"
+                         id="r1"/>
+            </af:panelGroupLayout>
+          </af:showDetailItem>
+          
+          <af:showDetailItem id="sdi4" 
+                             text="#{inventoryUIBundle.ASSOCIATED_RESOURCES}"
+                             disabled="#{pageFlowScope.LocationDetailsBean.disableCITab}"
+                             styleClass="AFStretchWidth"
+                             binding="#{backingBeanScope.involvementTab}" 
+							 disclosed="#{pageFlowScope.LocationDetailsBean.selectedTab == inventoryUIBundle.ASSOCIATED_RESOURCES}" 
+                             disclosureListener="#{pageFlowScope.LocationDetailsBean.tabSelected}" 
+							 rendered="#{!pageFlowScope.LocationDetailsBean.disableCustomInvolvementsPortlet}">
+            <af:panelGroupLayout layout="scroll" id="pg23">
+              <af:region value="#{bindings.CustomInvolvementListFlow1.regionModel}" id="r2"/>
+            </af:panelGroupLayout>
+          </af:showDetailItem>
+          
+        </af:panelTabbed>
+        <!--address validation popup begin-->
+        <af:panelGroupLayout id="POPUPl3">
+          <af:popup id="pi" binding="#{backingBeanScope.addressValidationPopup}"
+                    contentDelivery="lazyUncached">
+            <af:dialog id="d1" type="none"
+                       title="#{inventoryUIBundle.VALIDATED_ADDRESS_MATCH}">
+              <af:panelStretchLayout id="psll1"  styleClass="invEditPanelStretchLayout">
+                <f:facet name="center">
+                  <af:panelCollection id="pc1" defaultToolbarItemDisplay="icon" featuresOff="freeze wrap detach">  
+                    <f:facet name="statusbar">
+                      <af:toolbar id="t3">
+                        <af:group id="group1">
+                        <af:commandToolbarButton text="#{inventoryUIBundle.ACCEPT_PA_AS_IS}"
+                                                 id="ctb9"
+                                                 actionListener="#{pageFlowScope.LocationDetailsBean.clickAcceptAsIsPopup}"/>
+                        </af:group>
+                        <af:group id="group2">
+                        <af:commandToolbarButton text="#{inventoryUIBundle.DONE}"
+                                                 id="ctb7"
+                                                 actionListener="#{pageFlowScope.LocationDetailsBean.clickOkPopup}"
+                                                 disabled="#{pageFlowScope.LocationDetailsBean.disableOkPopup}"
+                                                 binding="#{backingBeanScope.oKPopup}"
+                                                 shortDesc="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>
+                        <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL_VALIDATION}"
+                                                 id="ctb8"
+                                                 actionListener="#{pageFlowScope.LocationDetailsBean.clickCancelPopup}"/>
+                        <af:outputText value="#{pageFlowScope.LocationDetailsBean.matchCount}"
+                                       id="ot4"/>
+                        </af:group>               
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table var="row" id="t2"
+                              value="#{pageFlowScope.LocationDetailsBean.match}"
+                              partialTriggers=":::cb1" width="100%"
+                              columnStretching="multiple"
+                              emptyText="#{inventoryUIBundle.NO_MATCHES_FOUND}"
+                              summary="#{inventoryUIBundle.MATCHING_ADDRESS_TABLE}">
+                      <af:column sortable="false" id="c3" width="10%" 
+                                 headerText="#{inventoryUIBundle.SELECT}">
+                        <af:outputText value="#{row}" visible="false"/>
+                        <af:selectBooleanRadio id="sbr1" group="radioButtons"
+                                               autoSubmit="true"
+                                               selected="#{pageFlowScope.LocationDetailsBean.defaultRadioButtonSelected}"
+                                               valueChangeListener="#{pageFlowScope.LocationDetailsBean.radioButtonSelected}"
+                                               shortDesc="#{inventoryUIBundle.SELECT}"/>
+                      </af:column>
+                      <af:column sortable="false" id="c8" width="90%"
+                                 rowHeader="unstyled"
+                                 headerText="#{inventoryUIBundle.LOCATION_DETAILS}">
+                        <af:outputText value="#{row.outputAddress.houseNumber} #{row.outputAddress.street} #{row.outputAddress.builtupArea} #{row.outputAddress.order1Area} #{row.outputAddress.postalCode} - #{row.latitude} / #{row.longitude}"
+                                       id="ot17"/>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+          </af:popup>
+        </af:panelGroupLayout>
+        <!--address validation popup end-->
+        <af:panelGroupLayout id="ERRORNAVIGl3">
+          <af:popup id="nipopup"
+                    binding="#{backingBeanScope.navigationAlertPopup}"
+                    contentDelivery="lazyUncached">
+            <af:dialog dialogListener="#{pageFlowScope.LocationDetailsBean.navigationDialogAction}"
+                       type="yesNo" title="Confirm Navigation" id="d2"/>
+          </af:popup>
+        </af:panelGroupLayout>
+        <cui:WarningDialog id="wd"
+                           binding="#{backingBeanScope.navigationWarningDialog}"/>
+      </af:group>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+    <f:facet name="localAreaScroll"/>
+  </af:pageTemplate>
+</jsp:root>

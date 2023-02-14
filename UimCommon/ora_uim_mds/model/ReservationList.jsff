@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:cui="/CommsUI"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  
+    <af:showDetailHeader text="#{pageFlowScope.InventoryResultsBean.displayInfo}" disclosed="true" id="sdh1">
+        <cui:WarningDialog id="wd" binding="#{backingBeanScope.navigationWarningDialog}"/>
+          <af:panelCollection id="pc1" styleClass="AFStretchWidth" featuresOff="#{pageFlowScope.InventoryResultsBean.turnOffFeatures}">
+            <f:facet name="toolbar">
+              <af:toolbar id="t3">
+                      <af:button text="#{inventoryUIBundle.CREATE}" id="cb1Create" icon="#{InventoryHelperBean.createIcon}" 
+                                               action="create" actionListener="#{pageFlowScope.InventoryResultsBean.registerRecentItemForCreate}"
+                                               rendered="#{(!pageFlowScope.InventoryResultsBean.popupMode) and securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/consumer/flow/ReservationEditFlow.xml#ReservationEditFlow'] &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Reservation.CREATE;action=view']}">
+                            <af:setActionListener from="true" to="#{addMode}"/> 
+                      </af:button>
+                      <af:button text="#{inventoryUIBundle.CREATE}" id="cb1" icon="#{InventoryHelperBean.createIcon}" 
+                                               actionListener="#{pageFlowScope.InventoryResultsBean.launchCreate}"
+                                               rendered="#{(pageFlowScope.InventoryResultsBean.popupMode) and securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/consumer/flow/ReservationEditFlow.xml#ReservationEditFlow'] &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Reservation.CREATE;action=view']}">
+                            <af:setActionListener from="true" to="#{addMode}"/> 
+                      </af:button>
+                      <af:spacer width="10" height="10" id="rl12"/>
+                      <af:button text="#{inventoryUIBundle.EDIT}" id="cb2Edit" icon="#{InventoryHelperBean.editIcon}" 
+                                               disabledIcon="#{InventoryHelperBean.disEditIcon}"
+                                               disabled="#{pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size != 1}"
+                                               action="edit" actionListener="#{pageFlowScope.InventoryResultsBean.registerRecentItemForEdit}"
+                                               partialTriggers="resultsTableId" 
+                                               rendered="#{(!pageFlowScope.InventoryResultsBean.popupMode) and securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/consumer/flow/ReservationEditFlow.xml#ReservationEditFlow'] &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Reservation.EDIT;action=view']}"
+                                               binding="#{backingBeanScope.editrlButton}"
+                                               accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                            <af:setActionListener from= "#{bindings.searchResultsIterator.currentRow.dataProvider.oid}" to="#{objectId}"/>
+                            <af:setActionListener from="false" to="#{addMode}"/>
+                      </af:button>
+                      <af:button text="#{inventoryUIBundle.EDIT}" id="cb2" icon="#{InventoryHelperBean.editIcon}" 
+                                               disabledIcon="#{InventoryHelperBean.disEditIcon}"
+                                               disabled="#{pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size != 1}"
+                                               partialTriggers="resultsTableId" binding="#{backingBeanScope.cb2Button}"
+                                               actionListener="#{pageFlowScope.InventoryResultsBean.launchEdit}"
+                                               rendered="#{(pageFlowScope.InventoryResultsBean.popupMode) and securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/consumer/flow/ReservationEditFlow.xml#ReservationEditFlow'] &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Reservation.EDIT;action=view']}"
+                                               accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                            <af:setActionListener from= "#{bindings.searchResultsIterator.currentRow.dataProvider.oid}" to="#{objectId}"/>
+                            <af:setActionListener from="false" to="#{addMode}"/>
+                      </af:button>
+                      <af:spacer width="10" height="10" id="rl13"/>
+                      <af:button text="#{inventoryUIBundle.DELETE}" icon="#{InventoryHelperBean.deleteIcon}" id="cb3Delete"
+                                               disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                               partialTriggers="resultsTableId" disabled="#{pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size lt 1 or pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size eq null}"
+                                               rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Reservation.DELETE;action=view']}"
+                                               actionListener="#{InventoryHelperBean.deleteAction}" binding="#{backingBeanScope.deleterlButton}"/>
+                      
+                      <af:popup id="rep" contentDelivery="lazyUncached" binding="#{backingBeanScope.repBinding}">
+                            <af:dialog id="d2" type="none" title="">
+                              <af:panelStretchLayout id="pt_psl2" styleClass="invDirectionalityLayout">
+                                <f:facet name="center">
+                                    <af:region value="#{bindings.ReservationEditFlow1.regionModel}" id="r1" binding="#{backingBeanScope.rerBinding}"/>
+                                </f:facet>
+                              </af:panelStretchLayout>
+                            </af:dialog>
+                            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                            <af:serverListener type="refreshEntity" method="#{pageFlowScope.InventoryResultsBean.refresh}"/>
+                      </af:popup>
+                      
+                </af:toolbar>
+            </f:facet>
+            <f:facet name="statusbar">
+                <af:toolbar id="rst2">
+                    <af:outputText  value="#{inventoryUIBundle.ROW_COUNT} #{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount lt 0) ? 0 : bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount}"
+                                id="rlol1" styleClass="invSearchOutputLabel" binding="#{backingBeanScope.totalResultsLabel}" partialTriggers="resultsTableId"/>
+                </af:toolbar>
+            </f:facet>
+            <af:table id="resultsTableId"
+                      value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}" contentDelivery="immediate"
+                      var="row" 
+                      emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                      fetchSize="#{pageFlowScope.InventoryResultsBean.fetchSize}"
+                      varStatus="vs"
+                      autoHeightRows="#{pageFlowScope.InventoryResultsBean.portletHeight}"
+                      selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                      selectionListener="#{pageFlowScope.InventoryResultsBean.selectAction}"
+                      queryListener="#{InventoryHelperBean.processQuery}"
+                      rowSelection="#{pageFlowScope.InventoryResultsBean.rowSelection}"
+                      styleClass="AFStretchWidth"
+                      binding="#{pageFlowScope.InventoryResultsBean.resultsTable}"
+                      columnStretching="last"
+                      summary="#{inventoryUIBundle.RESERVATION_LIST}">
+                      <af:column headerText="#{inventoryUIBundle.RESERVATION_NUMBER}" id="c1"
+                                 rowHeader="unstyled">
+                        <af:commandImageLink id="cl1" action="#{InventoryHelperBean.refreshAndEdit}" actionListener="#{pageFlowScope.InventoryResultsBean.registerRecentItemForEdit}"
+                                             text="#{row.reservationNumber}"
+                                             shortDesc="#{inventoryUIBundle.RESERVATION_INFORMATION_LINK}">
+                           
+                            <af:setActionListener from= "#{bindings.searchResultsIterator.currentRow.dataProvider.oid}" to="#{objectId}"/>
+                        </af:commandImageLink>
+                      </af:column>
+                        <af:column headerText="#{inventoryUIBundle.RESERVATION_TYPE}" id="c2">
+                        <af:outputText value="#{pageFlowScope.InventoryResultsBean.reservationType}" escape="false" id="ot2"/>
+                      </af:column>
+                      <af:column headerText="#{inventoryUIBundle.REASON}" id="c3">
+                        <af:outputText value="#{row.reason}" id="ot3"/>
+                      </af:column>
+                      <af:column headerText="#{inventoryUIBundle.EXPIRY_DATE}" id="c4">
+                        <af:outputText value="#{row.expiry}" id="ot4">
+                         <af:convertDateTime pattern="#{pageFlowScope.InventoryResultsBean.dateTimeFormat}"/>
+                       </af:outputText>
+                      </af:column>
+                      <af:column headerText="#{inventoryUIBundle.RESERVED_FOR}" id="c5">
+                        <af:outputText value="#{row.reservedFor}" id="ot5"/>
+                      </af:column>
+                      <af:column headerText="#{inventoryUIBundle.RESERVED_FOR_TYPE}" id="c6">
+                        <af:outputText value="#{pageFlowScope.InventoryResultsBean.reservedForType}" id="ot6"/>
+                      </af:column>
+                      <af:column headerText="#{inventoryUIBundle.RESERVATION_CREATED_USER}" id="c11">
+                      <af:outputText value="#{pageFlowScope.InventoryResultsBean.createdUser}" id="ot11"/>
+                      </af:column>
+                       <af:column headerText="#{inventoryUIBundle.RESERVATION_CREATED_DATE}" id="c9">
+                      <af:outputText value="#{pageFlowScope.InventoryResultsBean.createdDate}" id="ot1">
+                       <af:convertDateTime pattern="#{pageFlowScope.InventoryResultsBean.dateTimeFormat}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column headerText="#{inventoryUIBundle.START_DATE}" id="c7">
+                        <af:outputText value="#{row.validFor.startDate}" id="ot7">
+                           <af:convertDateTime pattern="#{pageFlowScope.InventoryResultsBean.dateTimeFormat}"/>
+                        </af:outputText>
+                       </af:column>
+                       <af:column headerText="#{inventoryUIBundle.END_DATE}" id="c8">
+                        <af:outputText value="#{row.validFor.endDate}" id="ot8">
+                           <af:convertDateTime pattern="#{pageFlowScope.InventoryResultsBean.dateTimeFormat}"/>
+                        </af:outputText>
+                      </af:column>
+            </af:table>
+          </af:panelCollection>
+    </af:showDetailHeader>
+    
+</jsp:root>

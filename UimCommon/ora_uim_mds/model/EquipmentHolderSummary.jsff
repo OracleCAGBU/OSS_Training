@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:pf="/platform/functions">
+		   
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+   <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelStretchLayout id="pgl2" binding="#{backingBeanScope.EQH_summary_panelGroupLayout}" topHeight="#{pageFlowScope.EquipmentHolderSummaryBean.topHeight}">   
+        <f:facet name="top">
+            <af:panelGroupLayout id="pgsl23" layout="scroll">
+                <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered="#{!pageFlowScope.EquipmentHolderSummaryBean.previewLayout}">
+                    <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                                   value="#{pageFlowScope.EquipmentHolderSummaryBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+                    <af:menuBar id="menuBar1">
+                          <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invSummaryMenu"
+                                   rendered="#{!(pageFlowScope.EquipmentHolderSummaryBean.popupMode)}"   />
+                    </af:menuBar>
+                    <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch12}" contentDelivery="lazyUncached">
+                        <af:dialog id="BISearchPopup_d1" type="none"
+                                   title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                            <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                                <f:facet name="center">
+                                   <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                        <af:serverListener type="refreshEntity" method="#{pageFlowScope.EquipmentHolderSummaryBean.afterBusinessInteractionSelectionChange}"/>
+                    </af:popup>
+                </af:panelGroupLayout>
+        
+               
+                  
+            </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+        
+          <af:panelHeader text="#{inventoryUIBundle.EQUIPMENT_HOLDER_SUMMARY} - #{pageFlowScope.EquipmentHolderSummaryBean.displayInfo}"
+                      id="PAGE_TITLE" styleClass="invSummaryPanelHeader">
+                      <f:facet name="context"/>
+                        <f:facet name="menuBar">
+                            <af:group rendered="#{!pageFlowScope.EquipmentHolderSummaryBean.previewLayout}">
+                               <af:menuBar id="menuBar2">
+                                 <af:menu id="menu5" binding="#{backingBeanScope.InventoryMenuBean.relatedPagesMenu}" styleClass="invSummaryMenu"/>
+                              </af:menuBar>
+                            </af:group>
+                        </f:facet>
+                        <af:panelGroupLayout layout="scroll" id="pgl23">
+                <af:showDetailHeader text="#{inventoryUIBundle.EQUIPMENT_HOLDER_INFORMATION}" disclosed="true" id="sdh1" styleClass="invSummaryShowDetailHeader">
+                    <f:facet name="info"/>
+                    <f:facet name="legend"/>
+                    <f:facet name="menuBar"/>
+                    <f:facet name="toolbar">
+                        <af:commandButton text="#{inventoryUIBundle.EDIT}" action="edit" id="cb1" actionListener="#{bindings.openSubTaskForEdit.execute}"
+                                          disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/equipmentholder/flow/EquipmentHolderEditFlow.xml#EquipmentHolderEditFlow']}"
+                                          rendered="#{!pageFlowScope.EquipmentHolderSummaryBean.previewLayout &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=EquipmentHolder.EDIT;action=view']}"
+                                          accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                         <af:setActionListener from="#{pageFlowScope.EquipmentHolderSummaryBean.entityObject.oid}" to="#{objectId}"/>
+                         <af:setActionListener from="false" to="#{addMode}"/>
+                       </af:commandButton>
+                    </f:facet>
+                    <f:facet name="context"/>
+                    <af:panelFormLayout id="eqphldr" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+                       <af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}" id="eqphldr-specification">
+                           <af:commandImageLink action="SpecificationSummary" id="cl1" actionListener="#{bindings.openSubTaskForSpecSummary.execute}"
+                                                shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}"
+                                                text="#{pageFlowScope.EquipmentHolderSummaryBean.entityObject.specification.name}">
+                               
+                               <af:setActionListener from="#{pageFlowScope.EquipmentHolderSummaryBean.entityObject.specification.oid}" to="#{specObjectId}"/>
+                           </af:commandImageLink>
+                       </af:panelLabelAndMessage>
+                       <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}" id="eqphldr-id">
+                        <af:outputText value="#{pageFlowScope.EquipmentHolderSummaryBean.entityObject.id}" id="ot2"/>
+                       </af:panelLabelAndMessage>
+                       <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="eqphldr-name">
+                        <af:outputText value="#{pageFlowScope.EquipmentHolderSummaryBean.entityObject.name}" id="ot1"/>
+                       </af:panelLabelAndMessage>
+                       <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}" id="eqphldr-description">
+                        <af:outputText value="#{pageFlowScope.EquipmentHolderSummaryBean.entityObject.description}" id="ot3"/>
+                       </af:panelLabelAndMessage>
+                       <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="eqphldr-inventoryStatus">
+                         <af:outputText value="#{pageFlowScope.EquipmentHolderSummaryBean.inventoryStatus}" id="ot6"/>
+			<!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.EquipmentHolderSummaryBean.popupMode}" id="swis618">
+			<f:facet name="false">
+                                                <af:commandImageLink action="#{pageFlowScope.EquipmentHolderSummaryBean.getSummaryAction}"
+                                                                     actionListener="#{pageFlowScope.EquipmentHolderSummaryBean.registerRecentItem}"
+                                                                     disabled="#{pageFlowScope.EquipmentHolderSummaryBean.installingBIDisabled}"
+                                                                     id="bid3"
+                                                                     shortDesc="#{pageFlowScope.EquipmentHolderSummaryBean.installingBIShortDesc}"
+                                                                     text="#{pageFlowScope.EquipmentHolderSummaryBean.installingBILabel}">
+                                                    <af:setActionListener from="#{pageFlowScope.EquipmentHolderSummaryBean.inventoryStatusBI.oid}"
+                                                                          to="#{objectId}"/>
+                                                </af:commandImageLink>
+                                            </f:facet>
+			<f:facet name="true">
+			<af:outputText id="swftis618" value="#{pageFlowScope.EquipmentHolderSummaryBean.installingBILabel}"/>
+			</f:facet>
+			</af:switcher>
+			<af:outputText id="installingBIDueDate" value="#{pageFlowScope.EquipmentHolderSummaryBean.installingBIEffectiveDate}"/>
+			<!--RMI 618 End-->
+                       </af:panelLabelAndMessage>
+                       <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="eqphldr-resourceAssignmentStatus">
+                        <af:outputText value="#{pageFlowScope.EquipmentHolderSummaryBean.resourceAssignmentStatus}" id="outputText5"/>
+			<!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.EquipmentHolderSummaryBean.popupMode}" id="swas618">
+			<f:facet name="false">
+                                                <af:commandImageLink action="#{pageFlowScope.EquipmentHolderSummaryBean.getSummaryAction}"
+                                                                     actionListener="#{pageFlowScope.EquipmentHolderSummaryBean.registerRecentItem}"
+                                                                     disabled="#{pageFlowScope.EquipmentHolderSummaryBean.consumerBIDisabled}"
+                                                                     id="bid4"
+                                                                     shortDesc="#{pageFlowScope.EquipmentHolderSummaryBean.consumerBIShortDesc}"
+                                                                     text="#{pageFlowScope.EquipmentHolderSummaryBean.consumerBILabel}">
+                                                    <af:setActionListener from="#{pageFlowScope.EquipmentHolderSummaryBean.assignmentBI.oid}"
+                                                                          to="#{objectId}"/>
+                                                </af:commandImageLink>
+                                            </f:facet>
+			<f:facet name="true">
+			<af:outputText id="swftas618" value="#{pageFlowScope.EquipmentHolderSummaryBean.consumerBILabel}"/>
+			</f:facet>
+			</af:switcher>
+			<af:outputText id="consumerBIDueDate" value="#{pageFlowScope.EquipmentHolderSummaryBean.consumerBIEffectiveDate}"/>
+			<!--RMI 618 End-->
+                       </af:panelLabelAndMessage>
+                       <af:panelLabelAndMessage label="#{inventoryUIBundle.NATIVE_EMS_NAME}" id="eqphldr-nativeEMSName">
+                        <af:outputText value="#{pageFlowScope.EquipmentHolderSummaryBean.entityObject.nativeEMSName}" id="outputText6"/>
+                       </af:panelLabelAndMessage>
+                       <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="eqphldr-lmd" rendered="false">
+                        <af:outputText value="#{pageFlowScope.EquipmentHolderSummaryBean.entityObject.lastModifiedDate}" id="ot4">
+                            <af:convertDateTime pattern="#{pageFlowScope.EquipmentHolderSummaryBean.dateTimeFormat}"/>
+                        </af:outputText>                       
+                       </af:panelLabelAndMessage>
+                       <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="eqphldr-lmu" rendered="false">
+                        <af:outputText value="#{pageFlowScope.EquipmentHolderSummaryBean.entityObject.lastModifiedUser}" id="ot12"/>
+                       </af:panelLabelAndMessage>                        
+                       <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="eqphldr-crd" rendered="false">
+                        <af:outputText value="#{pageFlowScope.EquipmentHolderSummaryBean.entityObject.createdDate}" id="ot13">
+                          <af:convertDateTime pattern="#{pageFlowScope.EquipmentHolderSummaryBean.dateTimeFormat}"/>
+                        </af:outputText>
+                       </af:panelLabelAndMessage>
+		       <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="eqphldr-cru" rendered="false">
+                         <af:outputText value="#{pageFlowScope.EquipmentHolderSummaryBean.entityObject.createdUser}" id="ot14"/>
+                       </af:panelLabelAndMessage>
+                      </af:panelFormLayout>
+         </af:showDetailHeader>
+         <af:group rendered="#{!pageFlowScope.EquipmentHolderSummaryBean.previewLayout}" id ="group2">
+            <af:spacer width="10" height="10" id="s1"/>
+            <af:region value="#{bindings.CustomInvolvementListFlow1.regionModel}" id="r1"/>
+            <af:spacer width="10" height="10" id="s2"/>
+            <af:region value="#{bindings.BusinessInteractionListFlow1.regionModel}" id="r3"/>
+         </af:group>
+         </af:panelGroupLayout>
+        </af:panelHeader>
+        
+        </f:facet>
+    </af:panelStretchLayout>
+  </f:facet>
+</af:pageTemplate>
+</jsp:root>

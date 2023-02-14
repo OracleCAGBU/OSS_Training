@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:showDetailHeader text="#{inventoryUIBundle.ROLES}" disclosed="true"
+                       id="sdh1">
+    <f:facet name="context"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:panelCollection id="IRList" styleClass="AFStretchWidth">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar">
+        <af:toolbar id="t1">
+          <af:commandToolbarButton text="#{inventoryUIBundle.ASSOCIATE}"
+                                   id="cb1Create"
+                                   rendered="#{securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/role/flow/InventoryRoleEditFlow.xml#InventoryRoleEditFlow']}"
+                                   icon="#{InventoryHelperBean.associateIcon}">            
+            <af:setActionListener from="true" to="#{pageFlowScope.associateRole}"/>
+            <af:setActionListener from="true" to="#{pageFlowScope.addMode}"/>
+            <af:showPopupBehavior popupId="associateInventoryRole"
+                                  triggerType="click"/>
+          </af:commandToolbarButton>
+          <af:spacer width="10" height="10" id="s4"/>
+        <af:commandToolbarButton text="#{inventoryUIBundle.EDIT}" id="cb2Edit" disabledIcon="#{InventoryHelperBean.disEditIcon}"
+                                   disabled="#{pageFlowScope.InventoryRoleListBean.resultsTable.selectedRowKeys.size != 1}"
+                                   partialTriggers="resultsTableId" binding="#{backingBeanScope.editButton}"
+                                   rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Role.EDIT;action=view']}"
+                                   icon="#{InventoryHelperBean.editIcon}"
+                                   actionListener="#{pageFlowScope.InventoryRoleListBean.onEditRoles}"
+                                 accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+          </af:commandToolbarButton>
+          <af:spacer width="10" height="10" id="s1"/>
+          <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}"
+                                   id="cb3Delete" binding="#{backingBeanScope.deleteButton}"
+                                   disabled="#{pageFlowScope.InventoryRoleListBean.resultsTable.selectedRowKeys.size lt 1 or pageFlowScope.InventoryRoleListBean.resultsTable.selectedRowKeys.size eq null}"
+                                   partialTriggers="resultsTableId"
+                                   icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                   rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Role.DELETE;action=view']}"
+                                   actionListener="#{pageFlowScope.InventoryRoleListBean.disassociateRoles}">
+                      
+          </af:commandToolbarButton>
+        </af:toolbar>
+      </f:facet>
+       <f:facet name="statusbar">
+        <af:toolbar id="t2">
+          <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount lt 0) ? 0 : bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount}"
+                         id="ol2" styleClass="invSearchOutputLabel"
+                         binding="#{backingBeanScope.totalResultsLabel}"
+                         partialTriggers="resultsTableId"/>
+        </af:toolbar>
+      </f:facet>
+      <af:table id="resultsTableId"
+                value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}"
+                var="row"
+                autoHeightRows="#{pageFlowScope.InventoryRoleListBean.portletHeight}"
+                contentDelivery="immediate"
+                emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                fetchSize="#{pageFlowScope.InventoryRoleListBean.fetchSize}"
+                filterModel="#{pageFlowScope.InventoryRoleQueryBean.filterModel}"
+                selectionListener="#{pageFlowScope.InventoryRoleListBean.selectAction}"
+                queryListener="#{InventoryHelperBean.processQuery}"
+                filterVisible="false" varStatus="vs"
+                sortListener="#{bindings.searchResultsIterator.dataControl.dataProvider.processSort}"
+                selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                rowSelection="#{pageFlowScope.InventoryRoleListBean.rowSelection}"
+                styleClass="AFStretchWidth"
+                binding="#{pageFlowScope.InventoryRoleListBean.resultsTable}"
+                summary="#{inventoryUIBundle.INVENTORY_ROLES_LIST}">
+        <af:column sortProperty="specification.name" sortable="true" filterable="true" headerText="#{inventoryUIBundle.NAME}" id="c2" width="145"
+                   rowHeader="unstyled">
+          <af:outputText value="#{pageFlowScope.InventoryRoleListBean.invRoleSpecificationName}" id="ot2"/>
+        </af:column>
+        <af:column headerText="#{inventoryUIBundle.TYPE}" id="c3">
+          <af:outputText value="#{pageFlowScope.InventoryRoleListBean.roleType}" id="ot3"/>
+        </af:column>
+      </af:table>
+      <af:popup id="associateInventoryRole" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.inventoryRoleEditBinding_associate}">
+        <af:dialog id="d1" type="none" title="#{inventoryUIBundle.INVENTORY_ROLE_EDIT}">
+          <af:panelStretchLayout id="psl1" styleClass="invEditPanelStretchLayout" >
+            <f:facet name="center">
+              <af:region value="#{bindings.InventoryRoleEditFlow1.regionModel}"
+                         id="r1"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.InventoryRoleListBean.refresh}"/>
+      </af:popup>
+   </af:panelCollection>
+  </af:showDetailHeader>
+</jsp:root>

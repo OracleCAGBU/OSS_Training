@@ -1,0 +1,396 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"          
+          xmlns:pf="/platform/functions"
+          xmlns:cf="http://java.sun.com/jsf/core" xmlns:cui="/CommsUI">
+
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>		  
+<c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>          
+<af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" value="#{bindings.pageTemplateBinding}" id="pt1">
+    <f:facet name="localArea">
+    <af:panelGroupLayout id="pgl1a" layout="scroll" styleClass="AFStretchWidth" binding="#{backingBeanScope.act_edit_panelGroupLayout}">
+    <cui:WarningDialog id="wd1" binding="#{backingBeanScope.warningDialog}"/>
+      <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left">
+                    <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                                   rendered="#{!pageFlowScope.TDMConnectivityCreateBean.popupMode  and (pageFlowScope.createConnectivityInPopUpMode==null or pageFlowScope.createConnectivityInPopUpMode == false)}"
+                                   value="#{pageFlowScope.TDMConnectivityCreateBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+            <af:menuBar id="menuBar1">
+                          <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invSearchMenu"
+                                   rendered="#{!pageFlowScope.TDMConnectivityCreateBean.popupMode  and (pageFlowScope.createConnectivityInPopUpMode==null or pageFlowScope.createConnectivityInPopUpMode == false)}"   />
+            </af:menuBar>                    
+            <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch1_tdmCreate}" contentDelivery="lazyUncached">
+                        <af:dialog id="BISearchPopup_d1" type="none"
+                                   title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                            <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                                <f:facet name="center">
+                                   <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                        <af:serverListener type="refreshEntity" method="#{pageFlowScope.TDMConnectivityCreateBean.afterBusinessInteractionSelectionChange}"/>
+                    </af:popup>
+        </af:panelGroupLayout>
+        
+        <!-- Bug 19233693 - QA:Packet Connectivity creation page of char fields allignment is not proper  -->
+        <af:panelStretchLayout id="psl1" dimensionsFrom="auto" styleClass="AFStretchWidth">
+         <f:facet name="center">
+          <af:panelGroupLayout id="pgl1" layout="scroll" styleClass="AFStretchWidth">
+            <af:panelBox id="pb11" text="#{inventoryUIBundle.CREATE_CONNECTIVITY}" styleClass="AFStretchWidth" 
+                         binding="#{pageFlowScope.TDMConnectivityCreateBean.panelBoxBinding}"
+                         disclosed="#{pageFlowScope.TDMConnectivityCreateBean.discloseCreatePanel}" background="default">
+                
+                <af:panelHeader id="ph1" styleClass="AFStretchWidth" helpTopicId="OHW_tdmCreate" 
+                        text="#{inventoryUIBundle.CONNECTIVITY} - #{pageFlowScope.TDMConnectivityCreateBean.displayInfo}">
+                    <f:facet name="toolbar">
+                        <af:panelGroupLayout id="pgl3" layout="horizontal" binding="#{backingBeanScope.buttonBinding}">
+                          <af:commandButton text="#{inventoryUIBundle.SAVE}" id="cb1" actionListener="#{pageFlowScope.TDMConnectivityCreateBean.save}" partialSubmit="true"
+                                            rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=TDMConnectivityCreate.SAVE;action=view'] and 
+                                            !pageFlowScope.TDMConnectivityCreateBean.popupMode and (pageFlowScope.createConnectivityInPopUpMode==null or pageFlowScope.createConnectivityInPopUpMode == false)}"
+                                            disabled="#{pageFlowScope.TDMConnectivityCreateBean.disableButtons}"
+                                            accessKey="#{inventoryUIBundle.SAVE_ACCESS_KEY}">
+                                <af:clientListener method="queueEvent" type="click"/>
+                          </af:commandButton>
+                          <af:spacer width="10" height="10" id="s11"/>                                
+                          <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb4"  actionListener="#{pageFlowScope.TDMConnectivityCreateBean.saveAndClose}"
+                                            action="#{pageFlowScope.TDMConnectivityCreateBean.saveOutcome}" partialSubmit="true"
+                                            rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=TDMConnectivityCreate.SAVE_AND_CLOSE;action=view'] and !pageFlowScope.TDMConnectivityCreateBean.diagramMode}"
+                                            disabled="#{pageFlowScope.TDMConnectivityCreateBean.disableButtons}"
+                                            accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+                                <af:clientListener method="queueEvent" type="click"/>
+                                <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+                          </af:commandButton>
+						  <af:commandToolbarButton text="#{inventoryUIBundle.DONE}" id="ctb1" actionListener="#{pageFlowScope.TDMConnectivityCreateBean.populateAttributes}"
+                                             rendered="#{(pageFlowScope.TDMConnectivityCreateBean.diagramMode)}"
+                                             accessKey="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>
+                          <af:spacer width="10" height="10" id="s12"/>
+                          <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2" action="cancel" immediate="true" actionListener="#{pageFlowScope.TDMConnectivityCreateBean.cancel}"
+                                            accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                      </af:panelGroupLayout>
+                    </f:facet>
+                </af:panelHeader>
+                <af:panelGroupLayout layout="scroll" id="pgl2" styleClass="AFStretchWidth">
+                    <af:showDetail disclosed="true" disclosedText="#{inventoryUIBundle.CONNECTIVITY}" id="sd1" immediate="true" styleClass="AFStretchWidth">                        
+						<af:spacer width="150" height="20" id="s21" rendered="#{!pageFlowScope.TDMConnectivityCreateBean.diagramMode}"/>
+                        <af:outputText id="ot1" value="#{pageFlowScope.TDMConnectivityCreateBean.displayIdentificationLabel}" binding="#{backingBeanScope.labelBinding}"
+                                       inlineStyle="text-align:center; font-weight:bold; border-style:groove; padding:5px;"
+                                       visible="#{pageFlowScope.TDMConnectivityCreateBean.labelRendered}"/>
+                        
+                        <!--You may need to update the ids to include conn -->
+                        <af:spacer height="10" id="s22" rendered="#{!pageFlowScope.TDMConnectivityCreateBean.diagramMode}"/>  
+                       <af:panelGroupLayout id="pgl4" layout="horizontal" halign="left" valign="top"> 
+                           <af:panelFormLayout id="conn-form" binding="#{backingBeanScope.mainPanel}">                        
+                                <af:inputText label="#{inventoryUIBundle.TECHNOLOGY}" value="#{pageFlowScope.TDMConnectivityCreateBean.technology}" autoSubmit="true" required="true" id="it3" rendered="#{!pageFlowScope.TDMConnectivityCreateBean.serviceConfigServiceConnCreateMode}"
+                                              valueChangeListener="#{pageFlowScope.TDMConnectivityCreateBean.technologyChanged}">
+                                              <af:autoSuggestBehavior suggestItems="#{pageFlowScope.TDMConnectivityCreateBean.getTechnologyHandler}"/>
+                                </af:inputText>
+								<af:spacer height="5" id="s23"/>  
+                                <af:selectOneChoice id="conn-specification" label="#{inventoryUIBundle.SPECIFICATION}" required="true" showRequired="true"
+                                                  autoSubmit="true"  partialTriggers="it3" disabled= "#{pageFlowScope.TDMConnectivityCreateBean.specDisabled}" valueChangeListener="#{pageFlowScope.TDMConnectivityCreateBean.specChanged}"                                             
+                                                  value="#{pageFlowScope.TDMConnectivityCreateBean.selectedSpec}">
+                                 <f:selectItems binding="#{pageFlowScope.TDMConnectivityCreateBean.specifications}" id="si1"/>
+                                 </af:selectOneChoice>
+                                <af:selectOneChoice id="conn-idfm" label="#{inventoryUIBundle.IDENTIFICATION_FORMAT}" rendered="#{!pageFlowScope.TDMConnectivityCreateBean.diagramMode}"
+                                                    valueChangeListener="#{pageFlowScope.TDMConnectivityCreateBean.identificationFormatChanged}"
+                                                    autoSubmit="true"
+                                                    value="#{pageFlowScope.TDMConnectivityCreateBean.identificationFormat}" binding="#{backingBeanScope.identificationFormats}" disabled="#{pageFlowScope.TDMConnectivityCreateBean.selectedSpec == null}">
+                                   <f:selectItems  binding="#{pageFlowScope.TDMConnectivityCreateBean.identificationFormatList}" id="conn-idfmItems"/>
+                                </af:selectOneChoice>                                
+                                <af:panelLabelAndMessage id="conn-sl" label="#{pageFlowScope.TDMConnectivityCreateBean.ALocationLabel}" rendered="#{!pageFlowScope.TDMConnectivityCreateBean.diagramMode}"
+                                                          showRequired="true" for="conn-slit">
+                                  <af:inputText  value="#{pageFlowScope.TDMConnectivityCreateBean.ALocation}" simple="true" required="true" autoSubmit="true"
+                                                 id="conn-slit"
+                                                 valueChangeListener="#{pageFlowScope.TDMConnectivityCreateBean.aLocationChanged}"
+                                                 disabled="#{pageFlowScope.TDMConnectivityCreateBean.packetNetworkAccessConnectivityBeingCreated || pageFlowScope.TDMConnectivityCreateBean.serviceConfigServiceConnCreateMode}" 
+                                                 shortDesc="#{pageFlowScope.TDMConnectivityCreateBean.ALocationLabel}">
+                                   <af:autoSuggestBehavior suggestItems="#{pageFlowScope.TDMConnectivityCreateBean.getLocationHandler}"/>
+                                   <af:clientListener method="toUpperCase" type="valueChange"/>
+                                  </af:inputText>
+                                  <af:commandImageLink id="conn-sls" immediate="true" icon="/images/search_ena.png" shortDesc="#{inventoryUIBundle.SEARCH}"
+                                                       rendered="#{(pageFlowScope.TDMConnectivityCreateBean.packetNetworkAccessConnectivityBeingCreated || pageFlowScope.TDMConnectivityCreateBean.serviceConnectivityCreateMode) &amp;&amp; !pageFlowScope.TDMConnectivityCreateBean.serviceConfigServiceConnCreateMode}">
+                                      <af:showPopupBehavior popupId="propertyLocationSearchPopup" triggerType="click"/>
+                                      <af:setActionListener from="true" to="#{pageFlowScope.showAServiceLocation}"/>
+                                      <af:setActionListener from="false" to="#{pageFlowScope.showZServiceLocation}"/>
+                                  </af:commandImageLink>
+                                   <af:commandImageLink id="conn-clear" immediate="true" icon="/images/clear_ena.png" shortDesc="#{inventoryUIBundle.CLEAR}"
+                                                       rendered="#{pageFlowScope.TDMConnectivityCreateBean.packetNetworkAccessConnectivityBeingCreated}" actionListener="#{pageFlowScope.TDMConnectivityCreateBean.clearServiceLocation}">
+                                  </af:commandImageLink>
+                              </af:panelLabelAndMessage>
+                              <af:outputText value="#{pageFlowScope.TDMConnectivityCreateBean.ALocationAddress}" id="ot2" binding="#{backingBeanScope.aAddress}" rendered="#{!pageFlowScope.TDMConnectivityCreateBean.diagramMode}"/>
+                                <af:panelLabelAndMessage id="conn-zl" label="#{pageFlowScope.TDMConnectivityCreateBean.ZLocationLabel}" rendered="#{!pageFlowScope.TDMConnectivityCreateBean.diagramMode}"
+                                                          showRequired="true" for="conn-zlit">
+                                  <af:inputText  value="#{pageFlowScope.TDMConnectivityCreateBean.ZLocation}" simple="true" required="true" autoSubmit="true"
+                                                 id="conn-zlit"
+                                                 valueChangeListener="#{pageFlowScope.TDMConnectivityCreateBean.zLocationChanged}"
+                                                 disabled="#{pageFlowScope.TDMConnectivityCreateBean.ZLocationServiceLocation}" 
+                                                 shortDesc="#{pageFlowScope.TDMConnectivityCreateBean.ZLocationLabel}">
+                                   <af:autoSuggestBehavior suggestItems="#{pageFlowScope.TDMConnectivityCreateBean.getLocationHandler}"/>
+                                   <af:clientListener method="toUpperCase" type="valueChange"/>
+                                  </af:inputText>
+                                  <af:commandImageLink id="conn-zsls" immediate="true" icon="/images/search_ena.png" shortDesc="#{inventoryUIBundle.SEARCH}"
+                                                       rendered="#{pageFlowScope.TDMConnectivityCreateBean.serviceConnectivityCreateMode &amp;&amp; !pageFlowScope.TDMConnectivityCreateBean.serviceConfigServiceConnCreateMode}">
+                                      <af:showPopupBehavior popupId="propertyLocationSearchPopup" triggerType="click"/>
+                                      <af:setActionListener from="true" to="#{pageFlowScope.showZServiceLocation}"/>
+                                      <af:setActionListener from="false" to="#{pageFlowScope.showAServiceLocation}"/>
+                                  </af:commandImageLink>
+                              </af:panelLabelAndMessage> 
+                                
+                                
+                                <af:outputText value="#{pageFlowScope.TDMConnectivityCreateBean.ZLocationAddress}" id="ot3" binding="#{backingBeanScope.zAddress}" rendered="#{!pageFlowScope.TDMConnectivityCreateBean.diagramMode}"/>
+                                
+                                <af:inputText label="#{inventoryUIBundle.RATE_CODE}" id="it4" autoSubmit="true" required="#{!pageFlowScope.TDMConnectivityCreateBean.serviceConnectivityCreateMode}"  value="#{pageFlowScope.TDMConnectivityCreateBean.rateCode}"
+                                              valueChangeListener="#{pageFlowScope.TDMConnectivityCreateBean.rateCodeChanged}" disabled="#{pageFlowScope.TDMConnectivityCreateBean.technologyObj eq null}">
+                                              <af:autoSuggestBehavior suggestItems="#{pageFlowScope.TDMConnectivityCreateBean.getRateCodeHandler}"/>
+                                </af:inputText>
+                                
+                                <af:inputText label="#{inventoryUIBundle.OVERSUBSCRIPTION}" id="conn-oversubscription" autoSubmit="true"
+                                              value="#{pageFlowScope.TDMConnectivityCreateBean.consumablePercent}"
+                                                maximumLength="4" showRequired="true"
+                                              rendered="#{pageFlowScope.TDMConnectivityCreateBean.oversubscriptionFieldRendered}"
+                                              validator="#{pageFlowScope.TDMConnectivityCreateBean.validateOversubscription}">
+                                </af:inputText>
+                                
+                               <af:panelLabelAndMessage id="plam1" label="#{inventoryUIBundle.COMMITTED_INFORMATION_RATE}" rendered="#{pageFlowScope.TDMConnectivityCreateBean.serviceConnectivityCreateMode}"  for="it7" showRequired="true">
+                                       <af:inputText simple="true" required="true" autoSubmit="true" id="it7" columns = "8" value="#{pageFlowScope.TDMConnectivityCreateBean.serviceConnectivityAttributesBean.committedInformationRateAmount}" disabled="#{pageFlowScope.TDMConnectivityCreateBean.serviceConnectivityAttributesBean.committedInformationRateDisabled}"/>
+                                        <af:selectOneChoice id="s1tt" simple="true" autoSubmit="true" value="#{pageFlowScope.TDMConnectivityCreateBean.serviceConnectivityAttributesBean.committedInformationRateUOM}" disabled="#{pageFlowScope.TDMConnectivityCreateBean.serviceConnectivityAttributesBean.committedInformationRateDisabled}">
+                                          <f:selectItems binding="#{pageFlowScope.TDMConnectivityCreateBean.serviceConnectivityAttributesBean.committedInformationRateUOMList}"
+                                                         id="si2"/>
+                                        </af:selectOneChoice>
+                                </af:panelLabelAndMessage>
+
+                                <af:panelLabelAndMessage id="plam2" label="#{inventoryUIBundle.MAX_INFORMATION_RATE}" rendered="#{pageFlowScope.TDMConnectivityCreateBean.serviceConnectivityCreateMode}"  for="it9" showRequired="true">
+                                       <af:inputText simple="true" required="true" autoSubmit="true" id="it9" columns = "8" value="#{pageFlowScope.TDMConnectivityCreateBean.serviceConnectivityAttributesBean.maxInformationRateAmount}"/>
+                                        <af:selectOneChoice id="soc2" simple="true" autoSubmit="true" value="#{pageFlowScope.TDMConnectivityCreateBean.serviceConnectivityAttributesBean.maxInformationRateUOM}">
+                                          <f:selectItems binding="#{pageFlowScope.TDMConnectivityCreateBean.serviceConnectivityAttributesBean.maxInformationRateUOMList}"
+                                                         id="si4"/>
+                                        </af:selectOneChoice>
+                                </af:panelLabelAndMessage> 
+                                                            
+                                <af:inputText label="#{inventoryUIBundle.FUNCTION}" id="it5" autoSubmit="true" required="true" value="#{pageFlowScope.TDMConnectivityCreateBean.function}"
+                                              valueChangeListener="#{pageFlowScope.TDMConnectivityCreateBean.functionChanged}" disabled="#{pageFlowScope.TDMConnectivityCreateBean.technologyObj eq null}">
+                                              <af:autoSuggestBehavior suggestItems="#{pageFlowScope.TDMConnectivityCreateBean.getFunctionHandler}"/>
+                                </af:inputText>
+                                <af:inputText label="#{inventoryUIBundle.SERIAL_NUMBER}" id="it6" autoSubmit="true" value="#{pageFlowScope.TDMConnectivityCreateBean.serialNumber}"
+                                              maximumLength="#{pageFlowScope.TDMConnectivityCreateBean.serialNumberLength}" rendered="#{!pageFlowScope.TDMConnectivityCreateBean.diagramMode}"
+                                              valueChangeListener="#{pageFlowScope.TDMConnectivityCreateBean.serialNumberChanged}">
+                                </af:inputText>
+                                
+                                                                
+                                <af:inputNumberSpinbox label="#{inventoryUIBundle.QUANTITY}" id="ins1" showRequired="true" autoSubmit="true" 
+                                                       rendered="#{(!pageFlowScope.TDMConnectivityCreateBean.diagramMode || !pageFlowScope.TDMConnectivityCreateBean.serviceConfigServiceConnCreateMode)}"
+                                                       value="#{pageFlowScope.TDMConnectivityCreateBean.quantity}" disabled="#{pageFlowScope.TDMConnectivityCreateBean.diagramMode}"
+                                                       maximum="#{pageFlowScope.TDMConnectivityCreateBean.maxQuantity}" minimum="1" 
+                                                       binding="#{backingBeanScope.quantityBinding}"/>
+                                <af:selectBooleanCheckbox text="#{inventoryUIBundle.ASSIGN_CONTIGUOUS_SERIAL_NUMBER}" id="sbc1" rendered="#{!pageFlowScope.TDMConnectivityCreateBean.diagramMode}"
+                                                          value="#{pageFlowScope.TDMConnectivityCreateBean.assignContiguousSerialNumber}"/>
+                            </af:panelFormLayout>
+                              <af:panelFormLayout id="packetconn" binding="#{backingBeanScope.packetPanel}">
+                                  
+                                  <!--Internetwork Attributes -->
+                                  <af:selectBooleanCheckbox text="#{inventoryUIBundle.INTERNETWORK}" id="conn-internetwork" 
+                                    value="#{pageFlowScope.TDMConnectivityCreateBean.nniConnectivityAttributesBean.internetwork}" autoSubmit="true"
+                                                            rendered="#{pageFlowScope.TDMConnectivityCreateBean.nniConnectivityCreateMode}"
+                                                            disabled="#{pageFlowScope.TDMConnectivityCreateBean.nniConnectivityAttributesBean.disableInternetwork}"/> 
+                                 
+                                 <af:selectBooleanCheckbox text="#{inventoryUIBundle.INTERNETWORK_EXTERNAL}" id="conn-internetworkExternal"
+                                                           value="#{pageFlowScope.TDMConnectivityCreateBean.nniConnectivityAttributesBean.internetworkExternal}" autoSubmit="true"
+                                                           rendered="#{pageFlowScope.TDMConnectivityCreateBean.nniConnectivityCreateMode}"
+                                                           valueChangeListener="#{pageFlowScope.TDMConnectivityCreateBean.internetworkExternalChanged}"
+                                                           disabled="#{pageFlowScope.TDMConnectivityCreateBean.nniConnectivityAttributesBean.disableInternetworkExternal}"/> 
+                                  
+                                <af:panelLabelAndMessage id="conn-otherServiceProvider" label="#{inventoryUIBundle.OTHER_SERVICE_PROVIDER}"
+                                                          rendered="#{pageFlowScope.TDMConnectivityCreateBean.nniConnectivityCreateMode}" for="nni-ospit" partialTriggers="conn-internetworkExternal">
+                                    <af:inputText value="#{pageFlowScope.TDMConnectivityCreateBean.nniConnectivityAttributesBean.otherServiceProviderName}" simple="true"
+                                                   id="nni-ospit" disabled="true" binding="#{backingBeanScope.otherServiceProviderBinding}"
+                                                  rendered="#{pageFlowScope.TDMConnectivityCreateBean.nniConnectivityCreateMode}" />                 
+                                    <af:commandImageLink id="nni-osps" immediate="true" blocking="true" icon="/images/search_ena.png" shortDesc="#{inventoryUIBundle.SEARCH}"
+                                                         partialTriggers="conn-internetworkExternal"
+                                                         rendered="#{pageFlowScope.TDMConnectivityCreateBean.nniConnectivityCreateMode and pageFlowScope.TDMConnectivityCreateBean.nniConnectivityAttributesBean.internetworkExternal}"  >
+                                        <af:showPopupBehavior popupId="partySearchPopup" triggerType="click" />
+                                    </af:commandImageLink>
+                                    <af:commandImageLink id="provider-clear" immediate="true" icon="/images/clear_ena.png"  shortDesc="#{inventoryUIBundle.CLEAR}"
+                                                         partialTriggers="conn-internetworkExternal"
+                                                         rendered="#{pageFlowScope.TDMConnectivityCreateBean.nniConnectivityCreateMode and pageFlowScope.TDMConnectivityCreateBean.nniConnectivityAttributesBean.internetworkExternal}" 
+                                    actionListener="#{pageFlowScope.TDMConnectivityCreateBean.clearServiceProvider}"/>
+                                 </af:panelLabelAndMessage>  
+                                   
+                                 <af:selectOneChoice id="conn-demarcationPoint" label="#{inventoryUIBundle.OTHER_PROVIDER_DEMARCATION_POINT}" 
+                                                  autoSubmit="true"
+                                                     rendered ="#{pageFlowScope.TDMConnectivityCreateBean.nniConnectivityCreateMode}"                                             
+                                                  value="#{pageFlowScope.TDMConnectivityCreateBean.nniConnectivityAttributesBean.otherProviderDemarcationPoint}"
+                                                  partialTriggers="conn-internetworkExternal"
+                                                  valueChangeListener="#{pageFlowScope.TDMConnectivityCreateBean.demarcationPointChanged}"
+                                                     disabled="#{!pageFlowScope.TDMConnectivityCreateBean.nniConnectivityAttributesBean.internetworkExternal}">
+                                 <f:selectItems binding="#{pageFlowScope.TDMConnectivityCreateBean.nniConnectivityAttributesBean.otherProviderDemarcationPointList}" id="nni-opdmItems"/>
+                                </af:selectOneChoice>                                
+                              
+                                <af:selectBooleanCheckbox text="#{inventoryUIBundle.SERVICE_MULTIPLEXING}" id="conn-serviceMultiplexing" 
+                                  value="#{pageFlowScope.TDMConnectivityCreateBean.uniConnectivityAttributesBean.serviceMultiplexing}" autoSubmit="true"
+                                                          rendered="#{pageFlowScope.TDMConnectivityCreateBean.uniConnectivityCreateMode}"/>
+                              
+                                <af:selectBooleanCheckbox text="#{inventoryUIBundle.BUNDLING}" id="conn-bundling"
+                                                          value="#{pageFlowScope.TDMConnectivityCreateBean.uniConnectivityAttributesBean.bundling}" autoSubmit="true"
+                                                          rendered="#{pageFlowScope.TDMConnectivityCreateBean.uniConnectivityCreateMode}"/>                                
+                            
+                                <af:selectBooleanCheckbox text="#{inventoryUIBundle.ALL_TO_ONE_BUNDLING}" id="conn-allToOneBundling"
+                                                          value="#{pageFlowScope.TDMConnectivityCreateBean.uniConnectivityAttributesBean.allToOneBundling}" autoSubmit="true"
+                                                          rendered="#{pageFlowScope.TDMConnectivityCreateBean.uniConnectivityCreateMode}"/>     
+                              
+                                 <af:selectBooleanCheckbox text="#{inventoryUIBundle.VLAN_BASED}" id="conn-vlanBased"
+                                                           value="#{pageFlowScope.TDMConnectivityCreateBean.uniConnectivityAttributesBean.vlanBased}" autoSubmit="true"
+                                                           rendered="#{pageFlowScope.TDMConnectivityCreateBean.uniConnectivityCreateMode}"/>
+                                                            
+                                <af:inputText label="#{inventoryUIBundle.MAX_PACKET_VIRTUAL_NETWORK_COUNT}" id="conn-mpvn" autoSubmit="true"
+                                              value="#{pageFlowScope.TDMConnectivityCreateBean.uniConnectivityAttributesBean.maxPacketVirtualNetworkCount}"
+                                                maximumLength="9"
+                                              rendered="#{pageFlowScope.TDMConnectivityCreateBean.uniConnectivityCreateMode}">
+                                </af:inputText>
+                                
+                              </af:panelFormLayout> 
+                              <af:panelFormLayout id="conn" binding="#{backingBeanScope.uiHintsPanel}"/>
+                        </af:panelGroupLayout>
+                    </af:showDetail>
+                </af:panelGroupLayout>
+                <af:spacer height="10" id="s39"/>
+                <af:panelGroupLayout layout="scroll" id="pgl9" styleClass="AFStretchWidth" rendered="#{!pageFlowScope.TDMConnectivityCreateBean.popupMode || !pageFlowScope.TDMConnectivityCreateBean.diagramMode}">
+                    <af:showDetail disclosed="true" disclosedText="#{inventoryUIBundle.NEW_CONNECTIVITIES}" id="sd2">
+                        <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                            <f:facet name="menus"/>
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t2" rendered="#{!pageFlowScope.TDMConnectivityCreateBean.serviceConfigServiceConnCreateMode}">
+                                    <af:commandToolbarButton shortDesc="#{inventoryUIBundle.EDIT}" id="cbe" partialTriggers="t1"
+                                                             disabled="#{pageFlowScope.TDMConnectivityCreateBean.newFacilitiesTable.selectedRowKeys.size != 1}"
+                                                             rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=TDMConnectivityCreate.EDIT;action=view']}"
+                                                             icon="#{InventoryHelperBean.editIcon}" disabledIcon="#{InventoryHelperBean.disEditIcon}"
+                                                             actionListener="#{pageFlowScope.TDMConnectivityCreateBean.editFacility}"
+                                                             accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                                                             <af:setActionListener from="true" to="#{pageFlowScope.invokeDetails}"/>
+                                    </af:commandToolbarButton>                                                         
+                                    <af:spacer width="10" height="10" id="s15"/>
+                                    <af:commandToolbarButton shortDesc="#{inventoryUIBundle.DISCONNECT}" id="cbd" partialTriggers="t1"
+                                                             actionListener="#{pageFlowScope.TDMConnectivityCreateBean.deleteFacilities}"
+                                                             rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=TDMConnectivityCreate.DELETE;action=view']}"
+                                                             disabled="#{pageFlowScope.TDMConnectivityCreateBean.newFacilitiesTable.selectedRowKeys.size lt 1 or pageFlowScope.TDMConnectivityCreateBean.newFacilitiesTable.selectedRowKeys.size eq null}"
+                                                             icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}">
+                                    </af:commandToolbarButton>
+                                </af:toolbar>
+                            </f:facet>
+                            <f:facet name="statusbar"/>
+                            <af:table var="row"
+                                      value="#{pageFlowScope.TDMConnectivityCreateBean.newFacilitiesCollectionModel}" 
+                                      rowSelection="multiple" contentDelivery="immediate"
+                                      styleClass="AFStretchWidth" fetchSize="25"
+                                      autoHeightRows="#{pageFlowScope.TDMConnectivityCreateBean.portletHeight}"
+                                      binding="#{pageFlowScope.TDMConnectivityCreateBean.newFacilitiesTable}"
+                                      rowBandingInterval="0" id="t1"
+                                      selectionListener="#{pageFlowScope.TDMConnectivityCreateBean.facilitiesSelectionListener}"
+                                      summary="#{inventoryUIBundle.NEW_CONNECTIVITIES_TABLE}">
+                            <af:column sortable="false" headerText="#{inventoryUIBundle.IDENTIFICATION}" id="c6" width="450"
+                                       rowHeader="unstyled">
+                                <af:outputText value="#{row.connectivityIdentifier}" id="ot5"/>
+                            </af:column>
+                            <af:column sortable="false" headerText="#{inventoryUIBundle.A_LOCATION}" id="c4" >
+                                <af:outputText value="#{row.ANetworkLocationEntityCode eq null ? row.pipeTerminationPoints[0].pipeTerminationPoint.propertyLocation.name : row.ANetworkLocationEntityCode}" id="ot4"/>
+                            </af:column>
+                            <af:column sortable="false" headerText="#{inventoryUIBundle.Z_LOCATION}" id="c3">
+                                <af:outputText value="#{row.ZNetworkLocationEntityCode eq null ? row.pipeTerminationPoints[1].pipeTerminationPoint.propertyLocation.name : row.ZNetworkLocationEntityCode}" id="ot6"/>
+                            </af:column>
+                            <af:column sortable="false" headerText="#{inventoryUIBundle.TECHNOLOGY}" id="c16">
+                                <af:outputText value="#{row.technology.name}" id="ot13"/>
+                            </af:column>
+                            <af:column sortable="false" headerText="#{inventoryUIBundle.RATE_CODE}" id="c5">
+                                <af:outputText value="#{row.rateCode.name}" id="ot9"/>
+                            </af:column>
+                            <af:column sortable="false" headerText="#{inventoryUIBundle.FUNCTION}" id="c1">
+                                <af:outputText value="#{row.connectivityFunction.name}" id="ot8"/>
+                            </af:column>
+                            <af:column sortable="false" headerText="#{inventoryUIBundle.SERIAL_NUMBER}" id="c2">
+                                <af:outputText value="#{row.serial}" id="ot7"/>
+                            </af:column>
+                            
+                            <af:clientListener method="handleTableDoubleClick" type="dblClick"/>
+                            <af:serverListener type="TableDoubleClickEvent" method="#{pageFlowScope.TDMConnectivityCreateBean.handleTableDoubleClick}"/>
+                            
+                        </af:table>
+                        </af:panelCollection>
+                    </af:showDetail>
+                </af:panelGroupLayout>
+                
+            </af:panelBox>
+            <af:spacer width="10" height="10" id="s5"/>
+           
+            <af:panelStretchLayout id="psc" styleClass="AFStretchWidth" visible="#{pageFlowScope.TDMConnectivityCreateBean.detailsRendered and (!pageFlowScope.TDMConnectivityCreateBean.popupMode or !pageFlowScope.TDMConnectivityCreateBean.diagramMode)}" dimensionsFrom="auto" partialTriggers="pc1:cbe">
+                <f:facet name="center">
+                    <af:panelBox text=" " showDisclosure="false" id="pb2">
+                        <af:region value="#{bindings.TDMConnectivityDetailsFlow1.regionModel}" id="r1" binding="#{pageFlowScope.TDMConnectivityCreateBean.detailsBinding}"/>
+                    </af:panelBox>
+                </f:facet>
+            </af:panelStretchLayout>
+            
+            <af:popup id="partySearchPopup" binding="#{backingBeanScope.searchParty}" contentDelivery="lazyUncached">
+                  <af:dialog title="#{inventoryUIBundle.PARTY_SEARCH}" id="d1" type="none">
+                    <af:panelStretchLayout id="psl_2" styleClass="invCommonPanelStretchLayout">
+                        <f:facet name="center">                 
+                            <af:region value="#{bindings.PartySearchResultsFlow1.regionModel}" id="prty1"/>
+                         </f:facet>
+                     </af:panelStretchLayout>          
+                  </af:dialog>
+                  <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                  <af:serverListener type="refreshEntity" method="#{pageFlowScope.TDMConnectivityCreateBean.refresh}"/>
+            </af:popup> 
+            
+            <af:popup id="propertyLocationSearchPopup" binding="#{backingBeanScope.searchPropertyLocation}" contentDelivery="lazyUncached">
+                  <af:dialog title="#{inventoryUIBundle.PROPERTY_LOCATION_SEARCH}" id="pl" type="none">
+                    <af:panelStretchLayout id="pl_2" styleClass="invCommonPanelStretchLayout">
+                        <f:facet name="center">                 
+                            <af:region value="#{bindings.PropertyLocationSearchResultsFlow1.regionModel}" id="prpl1"/>
+                         </f:facet>
+                     </af:panelStretchLayout>          
+                  </af:dialog>
+                  <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                  <af:serverListener type="refreshEntity" method="#{pageFlowScope.TDMConnectivityCreateBean.refresh}"/>
+            </af:popup> 
+
+            <af:resource type="javascript">
+              <!-- The below javascript code is defined to handle the Double click event on 'New Facilities' table to display the Connectivity details. -->
+              function handleTableDoubleClick(evt){   
+                 var table = evt.getSource();
+                 AdfCustomEvent.queue(table, "TableDoubleClickEvent",{}, true);         
+                 evt.cancel();
+              }
+              
+              <!-- The below javascript code is defined to Convert the Network/Location Entity Codes into Uppercase. -->
+              function toUpperCase(event) {
+                 var inputField = event.getSource();
+                 inputField.setValue(event.getNewValue().toUpperCase());
+              }
+              
+              <!-- The below javascript code is defined to Block the user operations while Save operation is in progress. -->
+              function queueEvent(event) {
+                   event.cancel(); // cancel action event
+                   var source = event.getSource();
+                   var params = {};
+                   var type = "customListener";
+                   var immediate = true;
+                   var isPartial = true;
+                   var customEvent =  new AdfCustomEvent(source, type, params, immediate);
+                   customEvent.preventUserInput();
+                   customEvent.queue(isPartial);
+              }
+              
+              function getALocationName(connectivity) {
+                return connectivity.getANetworkLocationEntityCode();
+              }
+              
+              
+           </af:resource>
+            
+          </af:panelGroupLayout>
+         </f:facet>
+        </af:panelStretchLayout>
+    </af:panelGroupLayout>
+    </f:facet>
+</af:pageTemplate>
+</jsp:root>

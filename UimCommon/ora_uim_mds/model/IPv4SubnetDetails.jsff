@@ -1,0 +1,396 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+            xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:cui="/CommsUI">
+		  
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle"
+         value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+<af:group id="g3">
+    <af:panelGroupLayout id="pgl1" binding="#{backingBeanScope.subNetPanelGroupBinding}" layout="scroll">
+      <af:panelHeader id="ph1" styleClass="invSummaryPanelHeader" helpTopicId="OHW_ipv4SubnetSummary"
+                      text="#{inventoryUIBundle.IPv4_SUBNET} - #{pageFlowScope.IPv4SubnetDetailsBean.entityObject.addressRange.lowerValue}/#{pageFlowScope.IPv4SubnetDetailsBean.entityObject.prefixLength}">
+        
+        <f:facet name="toolbar">
+                <af:toolbar id="t1">
+                    <af:group id="gr1">
+                        <af:menuBar id="mb1">
+                            <af:menu id="menu6" binding="#{backingBeanScope.InventoryMenuBean.actionsMenu}" 
+							         disabled="#{pageFlowScope.IPv4SubnetDetailsBean.renderEditPanel}" styleClass="invSummaryMenu">
+                                <af:clientListener method="goRefreshEntity" type="propertyChange"/>
+                                <af:serverListener type="refreshEntity" method="#{pageFlowScope.IPv4SubnetDetailsBean.refresh}"/>
+                            </af:menu>
+                        </af:menuBar>
+                    </af:group>
+                    <af:group id="gr2">
+                        <af:button text="#{inventoryUIBundle.SAVE}" id="ctb1" disabled="#{pageFlowScope.IPv4SubnetDetailsBean.disableSaveButtons}"
+                                                 accessKey="#{inventoryUIBundle.SAVE_ACCESS_KEY}" actionListener="#{pageFlowScope.IPv4SubnetDetailsBean.save}" 
+                                                 binding="#{backingBeanScope.saveButtonBinding}"
+                                                 rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=IPv4SubnetDetails.SAVE;action=view']}">
+                            <af:setActionListener from="viewing"
+                                                  to="#{pageFlowScope.saveActionOutcome}"/>
+                        </af:button>
+                        <af:spacer width="10" height="10" id="s11"/>
+                        <af:button text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="ctb2" disabled="#{pageFlowScope.IPv4SubnetDetailsBean.disableSaveButtons}"
+                                                 actionListener="#{pageFlowScope.IPv4SubnetDetailsBean.save}" accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}" 
+                                                 binding="#{backingBeanScope.saveAndCloseButtonBinding}"
+                                                 action="#{pageFlowScope.IPv4SubnetDetailsBean.saveOutcome}"
+                                                 rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=IPv4SubnetDetails.SAVE_AND_CLOSE;action=view']}">
+                            <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+                        </af:button>
+                        <af:spacer width="10" height="10" id="s12"/>
+                        <af:button text="#{inventoryUIBundle.CANCEL}" id="ctb3"
+                                                 action="#{pageFlowScope.IPv4SubnetDetailsBean.view}"
+                                                accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}" immediate="true" 
+                                                actionListener="#{pageFlowScope.IPv4SubnetDetailsBean.cancel}"/>
+                    </af:group>
+                </af:toolbar>
+            </f:facet>
+        
+      </af:panelHeader>
+      <af:panelHeader text="" id="ph2" binding="#{backingBeanScope.generalInfoTab}"
+                             styleClass="AFStretchWidth"
+                      partialTriggers="ctb6 ctb1 ctb2">
+        <af:panelGroupLayout id="pgl3" binding="#{pageFlowScope.IPv4SubnetDetailsBean.detailsEditViewPanel}">
+          <af:panelGroupLayout id="pgl4" layout="scroll" rendered="#{pageFlowScope.IPv4SubnetDetailsBean.renderEditPanel}">
+            <af:showDetailHeader text="#{inventoryUIBundle.IPv4_SUBNET_INFORMATION}"
+                                 disclosed="true" id="sdh1">
+              <f:facet name="toolbar">
+              <af:toolbar id="t2">
+             
+                    <af:commandToolbarButton id="ctb5" text="#{inventoryUIBundle.EDIT}" actionListener="#{pageFlowScope.IPv4SubnetDetailsBean.edit}"
+                                             disabled="#{!pageFlowScope.IPv4SubnetDetailsBean.disableSaveButtons}"
+											 accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}"
+                                             rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=IPv4SubnetDetails.EDIT;action=view']}"/>
+                                            </af:toolbar>
+               
+              </f:facet>
+              <af:panelFormLayout id="ipv4sub" maxColumns="2" rows="2"
+                                  labelWidth="33%" fieldWidth="67%"
+                                  partialTriggers="ctb5">
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}"
+                                         id="ipv4sub-name">
+                  <af:inputText value="#{pageFlowScope.IPv4SubnetDetailsBean.entityObject.name}" maximumLength="50"
+                                 id="ot5" label="Name" simple="true"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.IPV4_ADDRESS}"
+                                         id="ipv4sub-startaddress">
+                  <af:outputText value="#{pageFlowScope.IPv4SubnetDetailsBean.entityObject.addressRange.lowerValue}"
+                                 id="ot3"/>
+                </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.PREFIX_LENGTH}" id="ipv4sub-prefixlength">
+                <af:outputText value="#{pageFlowScope.IPv4SubnetDetailsBean.entityObject.prefixLength}" id="ot5_1"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage id="panelLabelAndMessage3"
+                                         label="#{inventoryUIBundle.OWNED_BY}">
+                  <af:outputText value="#{pageFlowScope.IPv4SubnetDetailsBean.ownedByName}"
+                                 id="ot4" />
+                </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="ipv4sub-adminstate">
+                <af:outputText value="#{pageFlowScope.IPv4SubnetDetailsBean.inventoryStatus}" id="ot9"/>		
+              </af:panelLabelAndMessage>
+              <af:inputText value="#{pageFlowScope.IPv4SubnetDetailsBean.entityObject.description}"
+                            label="#{inventoryUIBundle.DESCRIPTION}" id="it1" maximumLength="255" rows="3"
+                            columns="35"/>
+              <af:panelLabelAndMessage id="panelLabelAndMessage9" label="#{inventoryUIBundle.IP_ADDRESS_DOMAIN}">
+                <af:inputText value="#{pageFlowScope.IPv4SubnetDetailsBean.entityObject.ipAddressDomain.name}"
+                              id="inputText1" simple="true" disabled="true"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.IPV4_SUBNET_END}" id="plam1">
+                <af:outputText value="#{pageFlowScope.IPv4SubnetDetailsBean.entityObject.addressRange.upperValue}"
+                               id="ot1"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.IPv4_NETWORK}" id="plam2">
+                <af:outputText value="#{pageFlowScope.IPv4SubnetDetailsBean.entityObject.parentBlock.addressRange.lowerValue}"
+                               id="ot2"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.MANAGED_BY}" id="panelLabelAndMessage11">
+                  <af:inputText value="#{pageFlowScope.IPv4SubnetDetailsBean.managedByName}" simple="true" id="sub-it4" 
+                        binding="#{backingBeanScope.managedByBinding}" columns="35" label="#{inventoryUIBundle.MANAGED_BY}"
+                                valueChangeListener="#{pageFlowScope.IPv4SubnetDetailsBean.partyChanged}">
+                    <af:autoSuggestBehavior suggestItems="#{pageFlowScope.IPv4SubnetDetailsBean.getPartyHandler}"/>
+                </af:inputText>
+                  <af:link id="ldacc-ldcreate_2" icon="/images/search_ena.png" shortDesc="#{inventoryUIBundle.BROWSE}"
+                           actionListener="#{pageFlowScope.IPv4SubnetDetailsBean.launchPartyPopup}">
+                  </af:link>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}"
+                                       id="ipv4sub-ras">
+                <af:outputText id="ot12" value="#{pageFlowScope.IPv4SubnetDetailsBean.resourceAssignmentStatus}"/>		
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}"
+                                         id="ipv4sub-lmd" rendered="false">
+                  <af:outputText value="#{pageFlowScope.IPv6SubnetSummaryBean.entityObject.lastModifiedDate}"
+                                 id="ot10"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}"
+                                         id="ipv4sub-lmu" rendered="false">
+                  <af:outputText value="#{pageFlowScope.IPv6SubnetSummaryBean.entityObject.lastModifiedUser}"
+                                 id="ot13"/>
+                </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+                <!-- The Below PanelFormLayout will be used to render the Entity-Level Characteristics for IPv4Network. -->
+            <af:panelFormLayout id="ipv4subedit" maxColumns="2" rows="2"
+                                  labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsEditPanel}"/>
+              <!-- show detail collapsible section for external identity -->
+            </af:showDetailHeader>
+            
+            <af:popup id="pp1" binding="#{backingBeanScope.sppopup}" contentDelivery="lazyUncached">
+              <af:dialog id="d1" type="none" title="#{inventoryUIBundle.PARTY_SEARCH}">
+                <af:panelStretchLayout id="psl_2" styleClass="invCommonPanelStretchLayout">
+                  <f:facet name="center">
+                  <af:region value="#{bindings.PartySearchResultsFlow1.regionModel}" id="r6"/>
+                </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity" method="#{pageFlowScope.IPv4SubnetDetailsBean.refresh}"/>
+            </af:popup>
+           
+          </af:panelGroupLayout>
+          <af:panelGroupLayout id="pgl5" layout="scroll" rendered="#{pageFlowScope.IPv4SubnetDetailsBean.renderViewPanel}">
+          <af:showDetailHeader text="#{inventoryUIBundle.IPv4_SUBNET_INFORMATION}" disclosed="true"
+                               id="showDetailHeader1">
+            <f:facet name="toolbar">
+              <af:toolbar id="t3">
+                <af:button text="#{inventoryUIBundle.SUBNET_PARTITION}" id="ctbp" binding="#{backingBeanScope.sub_pbBinding}"
+                                         disabled="#{pageFlowScope.IPv4SubnetDetailsBean.disablePartition}"
+                                         actionListener="#{pageFlowScope.IPv4SubnetDetailsBean.invokePartitionPopup}"
+										 accessKey="#{inventoryUIBundle.PARTITION_ACCESS_KEY}"
+                                         rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=IPv4SubnetDetails.PARTITION;action=view']}"/>
+               <af:spacer width="10" height="10" id="sp"/>
+                <af:button text="#{inventoryUIBundle.SUBNET_JOIN}" id="ctbj" binding="#{backingBeanScope.sub_jbBinding}"
+                                         disabled="#{pageFlowScope.IPv4SubnetDetailsBean.disableJoin}"
+										 accessKey="#{inventoryUIBundle.JOIN_ACCESS_KEY}"
+                                         actionListener="#{pageFlowScope.IPv4SubnetDetailsBean.invokeJoinPopup}"
+                                         rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=IPv4SubnetDetails.JOIN;action=view']}"/>
+               <af:spacer width="10" height="10" id="sj"/>
+                <af:button id="ctb6" text="#{inventoryUIBundle.EDIT}"
+                                         actionListener="#{pageFlowScope.IPv4SubnetDetailsBean.edit}"
+										 accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}"
+                                         rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=IPv4SubnetDetails.EDIT;action=view']}"/>
+              </af:toolbar>
+             
+            </f:facet>
+            <af:panelFormLayout id="panelLabelAndMessage1" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="panelLabelAndMessage2">
+                <af:outputText value="#{pageFlowScope.IPv4SubnetDetailsBean.entityObject.name}" id="sub-name"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.IPV4_SUBNET_START}" id="panelLabelAndMessage5">
+                <af:outputText value="#{pageFlowScope.IPv4SubnetDetailsBean.entityObject.addressRange.lowerValue}"
+                               id="sub-start"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.PREFIX_LENGTH}" id="panelLabelAndMessage13">
+                <af:outputText value="#{pageFlowScope.IPv4SubnetDetailsBean.entityObject.prefixLength}"
+                               id="sub-prefix"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage id="ldacc-ldaldid" label="#{inventoryUIBundle.OWNED_BY}">
+                <af:outputText value="#{pageFlowScope.IPv4SubnetDetailsBean.ownedByName}" id="sub-owdby"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="panelLabelAndMessage8">
+                <af:outputText value="#{pageFlowScope.IPv4SubnetDetailsBean.inventoryStatus}" id="sub-status"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}" id="panelLabelAndMessage7">
+                <af:outputText value="#{pageFlowScope.IPv4SubnetDetailsBean.entityObject.description}" id="sub-dec"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage id="panelLabelAndMessage5_1" label="#{inventoryUIBundle.IP_ADDRESS_DOMAIN}">
+                <af:outputText value="#{pageFlowScope.IPv4SubnetDetailsBean.entityObject.ipAddressDomain.name}"
+                               id="sub-domain"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.IPV4_SUBNET_END}" id="panelLabelAndMessage4">
+                <af:outputText value="#{pageFlowScope.IPv4SubnetDetailsBean.entityObject.addressRange.upperValue}"
+                               id="sub-end"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.IPv4_NETWORK}" id="panelLabelAndMessage6">
+                <af:commandImageLink action="toParent" id="networkDetails"
+                                       text="#{pageFlowScope.IPv4SubnetDetailsBean.entityObject.parentBlock.addressRange.lowerValue}"
+                                       shortDesc="#{inventoryUIBundle.IPv4_NETWORK}"
+                                       actionListener="#{pageFlowScope.IPv4SubnetDetailsBean.toNetworkDetails}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage id="ldacc-subnet" label="#{inventoryUIBundle.MANAGED_BY}">
+                <af:outputText value="#{pageFlowScope.IPv4SubnetDetailsBean.entityObject.ipSubnetManagedBy.name}"
+                               id="sub-mgdby"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}"
+                                       id="panelLabelAndMessage12">
+                <af:outputText value="#{pageFlowScope.IPv4SubnetDetailsBean.resourceAssignmentStatus}"
+                               id="sub-resource"/>
+                               <!--RMI 618 Start-->
+                <af:switcher defaultFacet="false" facetName="#{pageFlowScope.IPv4SubnetDetailsBean.popupMode}"
+                             id="swas618">
+                  <f:facet name="false">
+                    <af:commandImageLink action="#{pageFlowScope.IPv4SubnetDetailsBean.getSummaryAction}"
+                                         actionListener="#{pageFlowScope.IPv4SubnetDetailsBean.registerRecentItem}"
+                                         disabled="#{pageFlowScope.IPv4SubnetDetailsBean.consumerBIDisabled}"
+                                         id="bid4"
+                                         shortDesc="#{pageFlowScope.IPv4SubnetDetailsBean.consumerBIShortDesc}"
+                                         text="#{pageFlowScope.IPv4SubnetDetailsBean.consumerBILabel}">
+                      <af:setActionListener from="#{pageFlowScope.IPv4SubnetDetailsBean.assignmentBI.oid}"
+                                            to="#{objectId}"/>
+                    </af:commandImageLink>
+                  </f:facet>
+                  <f:facet name="true">
+                    <af:outputText id="swftas618" value="#{pageFlowScope.IPv4SubnetDetailsBean.consumerBILabel}"/>
+                  </f:facet>
+                </af:switcher>
+                <af:outputText id="consumerBIDueDate" value="#{pageFlowScope.IPv4SubnetDetailsBean.consumerBIEffectiveDate}"/>
+		<!--RMI 618 End-->
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="lmd" rendered="false">
+                <af:outputText value="#{pageFlowScope.IPv4SubnetDetailsBean.entityObject.lastModifiedDate}"
+                               id="sub-lmd"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="sub-lmu" rendered="false">
+                <af:outputText value="#{pageFlowScope.IPv4SubnetDetailsBean.entityObject.lastModifiedUser}" id="ot19"/>
+              </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+            <!-- The Below PanelFormLayout will be used to render the Entity-Level Characteristics for IPv4Subnet. -->
+            <af:panelFormLayout id="elcpf"  maxColumns="2" rows="1"
+                                  labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsViewPanel}">
+              <af:iterator id="it123" value="#{pageFlowScope.IPv4SubnetDetailsBean.characteristics}"
+                           var="characteristicDetails">
+                <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="onn312"
+                                         rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'ALPHANUMERIC' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'CALENDAR' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'DROPDOWN_LIST' || characteristicDetails.characteristic.characteristicSpecification.valueType == 'NUMERIC'}">
+                  <af:outputText id="ote3"
+                                 value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="onn317"
+                                         rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'URL'}">
+                  <af:link id="oth3" targetFrame="_blank"
+                             destination="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                             inlineStyle="padding-left:6px;">
+                    <af:outputText id="ot18" truncateAt="50"
+                                   value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                  </af:link>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="" id="onn318"
+                                         rendered="#{characteristicDetails.characteristic.characteristicSpecification.controlType == 'CHECKBOX'}">
+                  <af:selectBooleanCheckbox id="sbc1" readOnly="true"
+                                            value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                            text="#{characteristicDetails.label}" simple="true"/>
+                </af:panelLabelAndMessage>
+              </af:iterator>
+            </af:panelFormLayout>
+          </af:showDetailHeader>
+          <af:popup id="createPartitionPopup"
+                      binding="#{backingBeanScope.createPartitionBinding}"
+                      contentDelivery="lazyUncached" >
+              <af:dialog id="p1" type="none" title="#{inventoryUIBundle.IPv4SUBNET_PARTITION}">
+               <af:panelStretchLayout id="psl_32"
+                                       styleClass="invIpamPopupLayout">
+                  <f:facet name="center">
+                  <af:region value="#{bindings.IPv4SubnetPartitionFlow1.regionModel}"
+                             id="r2"/>
+                </f:facet>
+                </af:panelStretchLayout>
+              
+              </af:dialog>
+             <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                  <af:serverListener type="refreshEntity"
+                                 method="#{pageFlowScope.IPv4SubnetDetailsBean.refresh}"/>
+            </af:popup>
+            
+            <af:popup id="joinSubnetPopup"
+                      binding="#{backingBeanScope.joinSubnetBinding}"
+                      contentDelivery="lazyUncached" >
+              <af:dialog id="p12" type="none" title="#{inventoryUIBundle.IPv4SUBNET_JOIN}">
+               <af:panelStretchLayout id="ps2_32"
+                                       styleClass="invIpamPopupLayout">
+                  <f:facet name="center">
+                  <af:region value="#{bindings.IPv4SubnetJoinFlow1.regionModel}"
+                             id="r1"/>
+                </f:facet>
+                </af:panelStretchLayout>
+              
+              </af:dialog>
+             <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                  <af:serverListener type="refreshEntity"
+                                 method="#{pageFlowScope.IPv4SubnetDetailsBean.refresh}"/>
+            </af:popup>
+            
+            
+          </af:panelGroupLayout>
+        </af:panelGroupLayout>
+          <af:spacer width="10" height="10" id="s1"/>
+         <af:panelTabbed id="pt2" dimensionsFrom="disclosedChild" styleClass="AFStretchWidth"
+                         rendered="#{pageFlowScope.IPv4SubnetDetailsBean.renderViewPanel}">
+              <af:showDetailItem text="#{inventoryUIBundle.SUBNET_DETAILS}" id="sdi1" binding="#{backingBeanScope.ipv4SDBinding}"
+				disclosureListener="#{pageFlowScope.IPv4SubnetDetailsBean.discloseSubnetChildTab}" disclosed="true"
+			  rendered="#{pageFlowScope.IPv4SubnetDetailsBean.renderIPSubnetDetailsTab}">
+                <af:showDetailHeader text="#{inventoryUIBundle.IPv4_SUBNET_HIERARCHY}" disclosed="true" id="sdh5" 
+				rendered="#{!pageFlowScope.IPv4SubnetDetailsBean.disableIPSubnetHierarchyPortlet}">
+          
+                  <af:panelCollection id="pc2" styleClass="AFStretchWidth"
+                                      featuresOff="freeze wrap detach">
+                    <f:facet name="menus"/>
+                    <f:facet name="toolbar"/>
+                    <f:facet name="statusbar"/>
+                    <af:treeTable id="ipv4SubnetTreeTable"
+                                  value="#{pageFlowScope.IPv4SubnetTreeBean.treeModel}"
+                                  binding="#{backingBeanScope.SubnetDetailsBinding}" initiallyExpanded="#{pageFlowScope.IPv4SubnetDetailsBean.expandTree}"
+                                  rowDisclosureListener="#{pageFlowScope.IPv4SubnetTreeBean.rowDisclosureListener}"
+                                  disclosedRowKeys="#{pageFlowScope.IPv4SubnetTreeBean.treeDisclosedRowKeys}"
+                                  var="node" rowSelection="single" columnStretching="last"
+                                  expandAllEnabled="#{pageFlowScope.IPv4SubnetTreeBean.expandAllEnabled}"
+                                  columnSelection="multiple" styleClass="AFStretchWidth"
+                                  fetchSize="#{pageFlowScope.IPv4SubnetDetailsBean.fetchSize}"
+                                  contextMenuSelect="true" contentDelivery="immediate"
+                                  selectionListener="#{pageFlowScope.IPv4SubnetTreeBean.nodeSelectedEvent}"
+                                  horizontalGridVisible="false">
+                      <f:facet name="nodeStamp">
+                        <af:column id="c9" rowHeader="unstyled" headerText="#{inventoryUIBundle.IPV4_ADDRESS}" width="200">
+                          <af:panelGroupLayout id="pgl2">
+                            <af:image source="#{node.data.icon}"
+                                      styleClass="invSummaryImage" shortDesc="icon"
+                                      id="i1"/>
+                            <af:switcher id="idSwitcher" defaultFacet="false"
+                                         facetName="#{pageFlowScope.IPv4SubnetTreeBean.treeModel.depth le 0}">
+                              <f:facet name="false">
+                                <af:link action="#{pageFlowScope.IPv4SubnetTreeBean.view}"
+                                                id="cl1"
+                                                actionListener="#{pageFlowScope.IPv4SubnetTreeBean.registerRecentItem}">
+                                  <af:outputText value="#{node.data.label}"
+                                                 id="outputText22"/>
+                                </af:link>
+                              </f:facet>
+                              <f:facet name="true">
+                                <af:outputText value="#{node.data.label}" id="ot8"/>
+                              </f:facet> 
+                             </af:switcher>
+                          </af:panelGroupLayout>
+                        </af:column>
+                      </f:facet>
+                      <af:column headerText="#{inventoryUIBundle.INVENTORY_STATUS}" id="column6" >
+                           <af:outputText value="#{node.data.invStatus}" id="ot313"/>
+                      </af:column>
+                      <af:column headerText="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="column7">
+                           <af:outputText value="#{node.data.raStatus}" id="ot324"/>
+                      </af:column> 
+                      <f:facet name="contextMenu">
+                      </f:facet> 
+                    </af:treeTable>
+                  </af:panelCollection>
+                </af:showDetailHeader>
+                <af:spacer width="10" height="10" id="s2"/>
+                <af:region value="#{bindings.InventoryGroupListFlow1.regionModel}" id="r11"/>
+                <af:spacer width="10" height="10" id="spacer1"/>
+                <af:region value="#{bindings.CustomInvolvementListFlow1.regionModel}" id="r12"/>
+              </af:showDetailItem>
+              <af:showDetailItem text="#{inventoryUIBundle.CONSUMERS}" id="sdi2" binding="#{backingBeanScope.ipv4SCBinding}"
+			  disclosureListener="#{pageFlowScope.IPv4SubnetDetailsBean.discloseSubnetChildTab}"
+			  rendered="#{pageFlowScope.IPv4SubnetDetailsBean.renderConsumersTab}">
+                <af:spacer width="10" height="10" id="s4"/>
+                <af:region value="#{bindings.ConsumerListFlow1.regionModel}" id="r3"/>
+                <af:spacer width="10" height="10" id="s3"/>
+                <af:region value="#{bindings.ReservationListFlow1.regionModel}" id="r4"/>
+                <af:spacer width="10" height="10" id="spacer2"/>
+                <af:region value="#{bindings.ConditionListFlow1.regionModel}" id="r5"/>
+            </af:showDetailItem>
+        </af:panelTabbed>
+     
+      </af:panelHeader>
+    </af:panelGroupLayout> 
+  </af:group>
+</jsp:root>

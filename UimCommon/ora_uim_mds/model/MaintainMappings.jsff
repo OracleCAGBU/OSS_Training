@@ -1,0 +1,352 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2014, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    4/05/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+		  
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+          <af:panelStretchLayout id="psl1" styleClass="AFStretchWidth">
+            <f:facet name="center">
+              <af:panelGroupLayout id="pgl01" layout="scroll">
+				<af:panelHeader text="#{inventoryUIBundle.DEVICE_MAPPINGS}" id="ph1">
+				<af:spacer width="5" height="10" id="s1"/>
+                <af:panelGroupLayout id="pgl9" layout="horizontal">
+                  <af:panelHeader text="#{inventoryUIBundle.LOGICAL_PHYSICAL_MAPPINGS}"
+                                  id="sdh5">
+                    <f:facet name="context"/>
+                    <f:facet name="menuBar"/>
+                    <f:facet name="toolbar">
+                      <af:commandButton text="#{inventoryUIBundle.AUTO_MAP}"
+                                        id="cbAutomap"
+                                        actionListener="#{pageFlowScope.MaintainMappingsBean.onAutoMap}"
+                                        inlineStyle="font-size:x-small;"
+                                        accessKey="#{inventoryUIBundle.AUTO_MAP_ACCESS_KEY}"/>
+                    </f:facet>
+                    <f:facet name="legend"/>
+                    <f:facet name="info"/>
+                    <af:panelGroupLayout id="pgl2" layout="horizontal">
+                      <af:panelGroupLayout id="pgl3">
+                        <af:panelHeader text="#{inventoryUIBundle.LOGICAL_DEVICE_HIERARCHY}"
+                                        id="sdh1">
+                          <f:facet name="context"/>
+                          <f:facet name="menuBar"/>
+                          <f:facet name="toolbar"/>
+                          <f:facet name="legend"/>
+                          <f:facet name="info"/>
+                          <af:spacer width="10" height="3" id="s14"/>
+                          <af:panelCollection id="pc1">
+                            <f:facet name="menus"/>
+                            <f:facet name="toolbar"/>
+                            <f:facet name="statusbar"/>
+                            <af:treeTable value="#{pageFlowScope.LogicalDeviceMappingTreeBean.treeModel}"
+                                          rowSelection="single" id="ldTree"
+                                          fetchSize="#{pageFlowScope.LogicalDeviceMappingTreeBean.fetchSize}"
+                                          contextMenuSelect="false"
+                                          rowBandingInterval="0" expandAllEnabled="#{pageFlowScope.LogicalDeviceMappingTreeBean.expandAllEnabled}"
+                                          horizontalGridVisible="false"
+                                          width="500" initiallyExpanded="false"
+                                          partialTriggers=":::cbAutomap :::cbSave"
+                                          binding="#{backingBeanScope.ldTreeBinding}"
+                                          disclosedRowKeys="#{pageFlowScope.LogicalDeviceMappingTreeBean.treeDisclosedRowKeys}"
+                                          columnSelection="none"
+                                          verticalGridVisible="false"
+                                          var="node"
+                                          summary="#{inventoryUIBundle.LOGICAL_DEVICE_HIERARCHY_TREETABLE}" selectionListener="#{pageFlowScope.LogicalDeviceMappingTreeBean.nodeSelectedEvent}">
+                              <f:facet name="nodeStamp">
+                                <af:column sortable="false" id="col1"
+                                           width="295"
+                                           headerText="#{inventoryUIBundle.LOGICAL_DEVICE}">
+                                  <af:panelGroupLayout id="pgl">
+                                    <af:selectBooleanCheckbox id="sbc1" 
+                                                              autoSubmit="true" value="#{node.data.checkboxValue}"
+                                                              valueChangeListener="#{pageFlowScope.LogicalDeviceMappingTreeBean.selectionChanged}"
+                                                              label="#{inventoryUIBundle.LOGICAL_DEVICE}"/>
+                                    <af:spacer width="3" height="10" id="s8"/>
+                                    <af:image source="#{node.data.icon}"
+                                              id="ldIcon" styleClass="invSummaryImage" shortDesc="icon"/>
+                                    <af:outputText value="#{node.data.label}" id="ot1" truncateAt="80"/>
+                                  </af:panelGroupLayout>
+                                </af:column>
+                              </f:facet>                              
+                              
+                            <af:column sortable="false" headerText="#{inventoryUIBundle.MAPPED_TO}" id="colun24" filterable="false">
+                                <br></br>
+                                <af:link actionListener="#{pageFlowScope.LogicalDeviceMappingTreeBean.invokeActionPopupFromMappedToColumn}" id="cn127"
+                                     shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                    <af:outputText value="#{pageFlowScope.LogicalDeviceMappingTreeBean.mappedToPortConnectorSize} #{inventoryUIBundle.PHYSICAL_PORT_CONNECTOR}" id="onn3123" 
+                                    rendered="#{pageFlowScope.LogicalDeviceMappingTreeBean.displayList}"/>
+                                    <af:setActionListener from="popupRemoveMappingsBinding" to="#{pageFlowScope.invokedPopupId}" />
+                                </af:link>
+                                
+                                <af:link action="#{pageFlowScope.LogicalDeviceMappingTreeBean.getMappedResourceAction}" shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}"
+                                                   actionListener="#{pageFlowScope.LogicalDeviceMappingTreeBean.viewMappedResource}" text="#{pageFlowScope.LogicalDeviceMappingTreeBean.portConnectorMappable.displayInfo}" id="onn3137" 
+                                rendered="#{!pageFlowScope.LogicalDeviceTreeBean.displayList}">
+                                <f:param name="mappedresourceOid" value="#{pageFlowScope.LogicalDeviceMappingTreeBean.portConnectorMappable.oid}" id="par223"/>
+                                </af:link>
+                                
+                            </af:column>
+                              
+                            <af:column sortable="false" headerText="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="column7" filterable="false"
+                                       rowHeader="unstyled">
+                              <af:outputText value="#{node.data.raStatus}" id="ot324"/>
+                            </af:column>
+                                          
+                            <af:column sortable="false" headerText="#{inventoryUIBundle.RESERVATION}" id="column4" filterable="false">
+                              <af:outputText value="#{node.data.reservation}" id="ot314"/>
+                            </af:column>
+                            
+                            <af:column sortable="false" headerText="#{inventoryUIBundle.CONDITION}" id="column5" filterable="false">
+                              <af:outputText value="#{node.data.condition}" id="ot315"/>
+                            </af:column>
+                            
+                            <af:column sortable="false" headerText="#{inventoryUIBundle.CONSUMERS}" id="colun3" filterable="false">
+                               <af:iterator id="it123" value="#{node.data.consumers}" var="consumer">
+                                 <af:link actionListener="#{pageFlowScope.LogicalDeviceMappingTreeBean.viewConsumer}" action="#{pageFlowScope.LogicalDeviceMappingTreeBean.getConsumerAction}" id="cn16"
+                                                 shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                    <af:outputText value="#{consumer.label}" id="onn312"/>
+                                    <f:param name="consumerOid" value="#{consumer.object.oid}" id="par222"/>
+                                 </af:link>
+                                 <br></br>
+                               </af:iterator>  
+                            </af:column>
+                              
+                              <f:facet name="contextMenu"/>
+                            </af:treeTable>
+                            <af:popup id="removeMappingsPopupId1"  contentDelivery="lazyUncached"
+                                binding="#{backingBeanScope.popupRemoveMappingsBinding}" clientComponent="true">
+                                <af:dialog id="d12" type="none" title="#{inventoryUIBundle.DEVICE_MAPPINGS_LIST}">
+                                    <af:panelStretchLayout id="ps28" styleClass="invEditPanelStretchLayout">
+                                    <f:facet name="center">
+                                    <af:region value="#{bindings.DeviceMappingListFlow1.regionModel}"
+                                     id="r124"/></f:facet></af:panelStretchLayout>
+                                </af:dialog> 
+                            </af:popup>
+                            
+                          </af:panelCollection>
+                        </af:panelHeader>
+                      </af:panelGroupLayout>
+                      <af:spacer width="5" height="10" id="s3"/>
+                      <af:panelGroupLayout id="pgl4">
+                        <af:panelHeader text="#{inventoryUIBundle.PHYSICAL_DEVICE_HIERARCHY}"
+                                        id="sdh2">
+                          <f:facet name="context"/>
+                          <f:facet name="menuBar">
+                            <af:selectOneChoice id="portsOrConnectors"
+                                                valueChangeListener="#{pageFlowScope.PhysicalDeviceMappingTreeBean.valueChangePortDropDown}"
+                                                autoSubmit="true"
+                                                unselectedLabel="#{inventoryUIBundle.PHYSICAL_MAPPING_PORTS}"
+                                                label="#{inventoryUIBundle.PHYSICAL_MAPPING_PORTSANDCONNECTORS}">
+                              <af:selectItem label="#{inventoryUIBundle.PHYSICAL_MAPPING_CONNECTORS}"
+                                             value="1" id="si1"/>
+                            </af:selectOneChoice>
+                          </f:facet>
+                          <f:facet name="toolbar"/>
+                          <f:facet name="legend"/>
+                          <f:facet name="info"/>
+                          <af:spacer width="10" height="3" id="s15"/>
+                          <af:panelCollection id="pc2">
+                            <f:facet name="menus"/>
+                            <f:facet name="toolbar"/>
+                            <f:facet name="statusbar"/>
+                            <af:treeTable value="#{pageFlowScope.PhysicalDeviceMappingTreeBean.treeModel}"
+                                          rowSelection="single" id="pdTree"
+                                          horizontalGridVisible="false" 
+                                          width="500" columnSelection="none"
+                                          partialTriggers=":::cbAutomap :::cbSave"
+                                          binding="#{backingBeanScope.pdTreeBinding}"
+                                          disclosedRowKeys="#{pageFlowScope.PhysicalDeviceMappingTreeBean.treeDisclosedRowKeys}"
+                                          rowBandingInterval="0" expandAllEnabled="#{pageFlowScope.PhysicalDeviceMappingTreeBean.expandAllEnabled}"
+                                          verticalGridVisible="false"
+                                          initiallyExpanded="false" var="node"
+                                          fetchSize="#{pageFlowScope.PhysicalDeviceMappingTreeBean.fetchSize}"
+                                          rendered="true"
+                                          summary="#{inventoryUIBundle.PHYSICAL_DEVICE_HIERARCHY_TREETABLE}">
+                              <f:facet name="nodeStamp">
+                                <af:column sortable="false" id="col2"
+                                           width="295"
+                                           headerText="#{inventoryUIBundle.PHYSICAL_DEVICE}">
+                                  <af:panelGroupLayout id="pg2">
+                                    <af:selectBooleanCheckbox id="sbc2" value="#{node.data.checkboxValue}"
+                                                              valueChangeListener="#{pageFlowScope.PhysicalDeviceMappingTreeBean.selectionChanged}"
+                                                              autoSubmit="true"
+                                                              label="#{inventoryUIBundle.PHYSICAL_DEVICE}"/>
+                                    <af:spacer width="3" height="10" id="s7"/>
+                                    <af:image source="#{node.data.icon}"
+                                              id="pdIcon" styleClass="invSummaryImage"
+                                              shortDesc="icon"/>
+                                            <af:outputText value="#{node.data.label}" id="ot44" truncateAt="80"/>
+                                  </af:panelGroupLayout>
+                                </af:column>
+                              </f:facet>                              
+                              
+                                <af:column sortable="false" headerText="#{inventoryUIBundle.MAPPED_TO}" id="colun14" filterable="false">
+                                   <af:iterator id="it1124" value="#{node.data.mappedResources}" var="mappedresource">
+                                     <af:link actionListener="#{pageFlowScope.PhysicalDeviceMappingTreeBean.viewMappedResource}" action="#{pageFlowScope.PhysicalDeviceMappingTreeBean.getMappedResourceAction}" id="cn117"
+                                                     shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                        <af:outputText value="#{mappedresource.displayInfo}" id="onn3113" />
+                                        <f:param name="mappedresourceOid" value="#{mappedresource.oid}" id="par1223"/>
+                                     </af:link>
+                                     <br></br>
+                                   </af:iterator>  
+                                </af:column>
+                              
+                                <af:column sortable="false" headerText="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="column17" filterable="false"
+                                           rowHeader="unstyled">
+                                  <af:outputText value="#{node.data.raStatus}" id="ot3124"/>
+                                </af:column>          
+                
+                                <af:column sortable="false" headerText="#{inventoryUIBundle.RESERVATION}" id="column14" filterable="false">
+                                  <af:outputText value="#{node.data.reservation}" id="ot1314"/>
+                                </af:column>
+                                
+                                <af:column sortable="false" headerText="#{inventoryUIBundle.CONDITION}" id="column15" filterable="false">
+                                  <af:outputText value="#{node.data.condition}"
+                                                       id="ot3115"/>
+                                </af:column>                    
+                              
+                                <af:column sortable="false" headerText="#{inventoryUIBundle.CONSUMERS}" id="colun13" filterable="false">
+                                   <af:iterator id="it1123" value="#{node.data.consumers}" var="consumer">
+                                     <af:link actionListener="#{pageFlowScope.PhysicalDeviceMappingTreeBean.viewConsumer}" action="#{pageFlowScope.PhysicalDeviceMappingTreeBean.getConsumerAction}" id="cn116"
+                                                     shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                        <af:outputText value="#{consumer.label}" id="onn1312"/>
+                                        <f:param name="consumerOid" value="#{consumer.object.oid}" id="par2122"/>
+                                     </af:link>
+                                     <br></br>
+                                   </af:iterator>  
+                                </af:column>
+                                
+                              <f:facet name="contextMenu"/>
+                            </af:treeTable>
+                          </af:panelCollection>
+                        </af:panelHeader>
+                      </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                  </af:panelHeader>
+                  <af:spacer width="10" height="10" id="s2"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl8" layout="vertical">
+                  <af:spacer width="10" height="3" id="s5"/>
+                  <af:panelGroupLayout id="pgl10" layout="horizontal">
+                    <af:spacer width="250" height="10" id="s6"/>
+                    <af:commandButton id="popcb1"
+                                      inlineStyle="font-size:x-small;"
+                                      actionListener="#{pageFlowScope.LogicalDeviceMappingTreeBean.populateDeviceMapping}"
+                                      icon="/images/shuttledown_ena.png"
+                                      shortDesc="#{inventoryUIBundle.POPULATE}"/>
+                    <af:spacer width="490" height="10" id="s11"/>
+                    <af:commandButton id="popcb2"
+                                      inlineStyle="font-size:x-small;"
+                                      actionListener="#{pageFlowScope.PhysicalDeviceMappingTreeBean.populatePhysicalMapping}"
+                                      icon="/images/shuttledown_ena.png"
+                                      shortDesc="#{inventoryUIBundle.POPULATE}"/>
+                  </af:panelGroupLayout>
+                  <af:spacer width="10" height="3" id="s9"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pg29" layout="horizontal">
+					<af:panelHeader text="#{inventoryUIBundle.SELECTED_MAPPING_CANDIDATES}"
+									id="ph0">
+					  <f:facet name="context"/>
+					  <f:facet name="menuBar"/>
+					  <f:facet name="toolbar">
+						<af:commandButton text="#{inventoryUIBundle.PHYSICAL_MAPPING_SAVE}"
+										  id="cbSave"
+										  actionListener="#{pageFlowScope.MaintainMappingsBean.onSaveMappings}"
+										  inlineStyle="font-size:x-small;"
+										  binding="#{backingBeanScope.save}"
+										  accessKey="#{inventoryUIBundle.PHYSICAL_MAPPING_SAVE_ACCESS_KEY}"/>
+					  </f:facet>
+					  <f:facet name="legend"/>
+					  <f:facet name="info"/>
+					  <af:panelGroupLayout id="pgl5" layout="horizontal">
+						<af:panelGroupLayout id="pgl6">
+						  <af:panelHeader text="#{inventoryUIBundle.LOGICAL_MAPPING_CANDIDATES}" id="sdh3">
+								<af:table var="row" rowBandingInterval="0" id="t1"
+										  width="522" inlineStyle="height:auto"
+										  value="#{pageFlowScope.LogicalDeviceMappingTreeBean.selectedDeviceInterfaces}"
+										  partialTriggers="#{pageFlowScope.LogicalDeviceMappingTreeBean.selectedDeviceInterfaces}"
+										  varStatus="status"
+										  summary="#{inventoryUIBundle.LOGICAL_MAPPING_CANDIDATES_TABLE}">
+								  <af:column sortable="false" id="c1" width="20"
+											 align="center" rowHeader="unstyled">
+									<af:outputText value="#{status.index+1}"
+												   id="ot3"
+												   inlineStyle="color:Black; font-family:Arial, Helvetica, sans-serif; font-size:x-small; font-weight:bold;"/>
+									<f:facet name="header">
+									  <af:outputText value="#" id="ot5"
+													 inlineStyle="color:Black; font-family:Arial, Helvetica, sans-serif; font-size:x-small; font-weight:bold;"/>
+									</f:facet>
+								  </af:column>
+								  <af:column sortable="false" id="c2" width="466">
+									<af:outputText value="#{row.id}" id="ot4"
+												   inlineStyle="color:Black; font-family:Arial, Helvetica, sans-serif; font-size:x-small; font-weight:bold;"/>
+									<f:facet name="header">
+									  <af:outputText value="#{inventoryUIBundle.DEVICE_INTERFACE}"
+													 id="ot6"
+													 inlineStyle="color:Black; font-family:Arial, Helvetica, sans-serif; font-size:x-small; font-weight:bold;"/>
+									</f:facet>
+								  </af:column>
+								</af:table>
+						  </af:panelHeader>
+						</af:panelGroupLayout>
+						<af:spacer width="50" height="10" id="s4"/>
+						<af:panelGroupLayout id="pgl7">
+						  <af:panelHeader text="#{inventoryUIBundle.PHYSICAL_MAPPING_CANDIDATES}" id="sdh4">
+								<af:table var="prow" rowBandingInterval="0" id="t2"
+										  width="522" varStatus="pstatus" inlineStyle="height:auto"
+										  value="#{pageFlowScope.PhysicalDeviceMappingTreeBean.mappingCandidates}"
+                                          editingMode="clickToEdit" columnSelection="none" rowSelection="single" 
+                                          sortListener="#{pageFlowScope.PhysicalDeviceMappingTreeBean.onSort}"
+										  partialTriggers="#{pageFlowScope.PhysicalDeviceMappingTreeBean.mappingCandidates}"
+										  summary="#{inventoryUIBundle.PHYSICAL_MAPPING_CANDIDATES_LIST}">
+								  <af:column sortable="false" id="c3" width="20" sortProperty="recordNumber"
+											 align="center">
+									<af:inputText id="it2"
+												  value="#{prow.recordNumber}"
+												  inlineStyle="color:Black; font-family:Arial, Helvetica, sans-serif; font-size:x-small;"
+												shortDesc="#{inventoryUIBundle.RECORD_NUMBER}"/>
+									<f:facet name="header">
+									  <af:outputText value="#" id="ot9"
+													 inlineStyle="color:Black; font-family:Arial, Helvetica, sans-serif; font-size:x-small; font-weight:bold;"/>
+									</f:facet>
+								  </af:column>
+								  <af:column sortable="false" id="c4" width="466"
+											 inlineStyle="color:Black; font-family:Arial, Helvetica, sans-serif; font-size:x-small; font-weight:normal;"
+											 rowHeader="unstyled">
+									<af:outputText value="#{prow.mappingObject.id}"
+												   id="ot8"
+												   inlineStyle="color:Black; font-family:Arial, Helvetica, sans-serif; font-size:x-small; font-weight:bold;"/>
+									<f:facet name="header">
+									  <af:outputText value="#{inventoryUIBundle.PHYSICAL_MAPPING_PORTSANDCONNECTORS}"
+													 id="ot10"
+													 inlineStyle="color:Black; font-family:Arial, Helvetica, sans-serif; font-size:x-small; font-weight:bold;"/>
+									</f:facet>
+								  </af:column>
+								</af:table>
+						  </af:panelHeader>
+						</af:panelGroupLayout>
+					  </af:panelGroupLayout>
+					</af:panelHeader>
+				</af:panelGroupLayout>
+				</af:panelHeader>
+			  </af:panelGroupLayout>
+			</f:facet>
+          </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

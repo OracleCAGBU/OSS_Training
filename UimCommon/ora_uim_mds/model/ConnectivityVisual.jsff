@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2015, Oracle and/or its affiliates. 
+All rights reserved.*/
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+     
+    MODIFIED    (MM/DD/YY)
+    pvusuvan    06/04/14 - Bug 18496471 - P-18444052 ENABLE SAVE AS IMAGE FEATURE IN CONNECTIVITY SCHEMATIC VIEW
+    pvusuvan    06/03/14 - Bug 18635920 - P-18628585 UI customization for improving user experience in ILOG Visual screens
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:h="http://java.sun.com/jsf/html" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:jvf="http://www.ilog.com/jviews/tlds/jviews-framework-faces.tld"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html" xmlns:jvdf="http://www.ilog.com/jviews/tlds/jviews-diagrammer-faces.tld" xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:panelSplitter orientation="vertical" splitterPosition="125" id="ps5" dimensionsFrom="auto">
+        <f:facet name="first">
+            
+        </f:facet>
+        <f:facet name="second">
+            <af:panelStretchLayout id="psl3" dimensionsFrom="auto" topHeight="55" styleClass="AFStretchWidth">
+                <f:facet name="top">
+                    <af:panelGroupLayout layout="scroll" id="pgl923">
+                        <af:toolbox id="tb12">
+                            <af:group id="g11">
+                                <af:toolbar id="td1" inlineStyle="padding-top: 5px;">
+                                    <af:spacer width="5"/>
+                                    <af:button id="b11" actionListener="#{ConnectivityVisualBean.expandOrCollapseNodes}" shortDesc="#{inventoryUIBundle.EXPAND_ALL_CTX}" icon="/images/diagram/func_arrowdownlines_24.svg"/>
+                                    <af:spacer width="5"/>
+                                    <af:button id="b13" actionListener="#{ConnectivityVisualBean.expandOrCollapseNodes}" shortDesc="#{inventoryUIBundle.COLLAPSE_ALL_CTX}" icon="/images/diagram/func_arrowuplines_24.svg"/>
+                                </af:toolbar>
+                                <af:toolbar id="td6" inlineStyle="padding-top: 5px;">
+                                    <af:spacer width="5"/>
+                                    <af:button id="b14" shortDesc="#{inventoryUIBundle.PREFERENCES}" icon="/images/diagram/navi_gear_24_ena.png" actionListener="#{ConnectivityVisualBean.launchPreferencesDialog}"/>
+                                    <af:spacer width="5"/>
+                                </af:toolbar>
+                                <af:toolbar id="td2" inlineStyle="padding-top: 10px;">
+                                    <af:spacer width="5"/>
+                                    <af:selectOneChoice id="pathType" label="#{inventoryUIBundle.PATHS}" valueChangeListener="#{ConnectivityVisualBean.pathChanged}" autoSubmit="true" value="#{ConnectivityVisualBean.path}">
+                                        <f:selectItems binding="#{ConnectivityVisualBean.paths}"/>
+                                    </af:selectOneChoice>
+                                </af:toolbar>
+                            </af:group>
+                        </af:toolbox>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="center">
+                    <af:panelGroupLayout id="pgl6">
+                        <dvt:diagram id="d2" summary="Database Schema Diagram Demo" styleClass="AFStretchWidth" minZoom="1" maxZoom="3" inlineStyle="height: 750px;" 
+                                        controlPanelBehavior="initExpanded" layout="tierLayout" selection="single" binding="#{backingBeanScope.schematicBinding}">
+                            <dvt:clientLayout name="tierLayout" method="DemoTierLayout.tierLayout" featureName="DemoTierLayout">
+                                <f:attribute name="curvedLinks" value="false"/>
+                                <dvt:nodeAttributes node="n2">
+                                    <f:attribute name="tier" value="tier"/>
+                                    <f:attribute name="xPos" value="xPos"/>
+                                    <f:attribute name="transformX" value="transformX"/>
+                                </dvt:nodeAttributes>
+                                <dvt:nodeAttributes node="n1">
+                                    <f:attribute name="xPos" value="xPos"/>
+                                </dvt:nodeAttributes>
+                            </dvt:clientLayout>
+                            <dvt:diagramNodes value="#{ConnectivityVisualBean.nodes}" var="node" id="dn1" disclosedRowKeys="#{ConnectivityVisualBean.disclosedNodes}"
+                                              selectionListener="#{ConnectivityVisualBean.nodeSelectionListener}" binding="#{backingBeanScope.nodesComponent}">
+                                <dvt:diagramNode id="n1" nodeId="#{node.id}" containerId="#{node.container}" shortDesc="#{node.desc}" label="#{node.label}" rendered="#{node.type=='PTP'}" layout="tierLayout">
+                                    <f:facet name="zoom100">
+                                        <af:panelGroupLayout inlineStyle="padding:5px;border-color:#abb3b9;border-width:1px;border-radius:8px;" id="pgl12" layout="horizontal">
+                                            <dvt:marker id="marker1" source="#{node.image}" borderWidth="2" width="#{node.size}" height="#{node.size}"/>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </dvt:diagramNode>
+                                <dvt:diagramNode id="n2" nodeId="#{node.id}" containerId="#{node.container}" shortDesc="#{node.desc}" rendered="#{!(node.type=='PTP')}" label="#{node.label}" containerStyle="border-color:black;"
+                                                 layout="tierLayout" showDrill="false">
+                                    <f:facet name="zoom100">
+                                        <af:panelGroupLayout inlineStyle="padding:5px;border-color:#abb3b9;border-width:1px;border-radius:8px;" id="pgl13" layout="horizontal">
+                                            <dvt:marker id="marker2" source="#{node.image}" borderWidth="2" width="#{node.size}" height="#{node.size}"/>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </dvt:diagramNode>
+                            </dvt:diagramNodes>
+                            <dvt:diagramLinks value="#{ConnectivityVisualBean.links}" var="link" id="dl1" selectionListener="#{ConnectivityVisualBean.linkSelectionListener}"
+								 binding="#{backingBeanScope.linksComponent}">
+                                <dvt:diagramLink startNode="#{link.start}" endNode="#{link.end}" linkColor="#{link.color}" rendered="#{link.type=='Trail'}" shortDesc="#{link.desc}" label="#{link.id}" id="l1"/>
+                                <dvt:diagramLink startNode="#{link.start}" endNode="#{link.end}" linkColor="#{link.color}" rendered="#{!(link.type=='Trail')}" shortDesc="#{link.desc}" linkStyle="#{link.style}" id="l2"
+                                                 label="#{link.label}"/>
+                            </dvt:diagramLinks>
+                            <dvt:overviewWindow id="ow1"/>
+                            <f:facet name="contextMenu">
+                                <af:popup contentDelivery="lazyUncached" id="nodeMenu">
+                                    <af:menu id="m1i">
+                                        <af:commandMenuItem text="#{inventoryUIBundle.VIEW_SUMMARY}" id="cmi1" actionListener="#{ConnectivityVisualBean.navigateToNodeSummary}"
+                                                    action="#{ConnectivityVisualBean.nodeSummaryAction}"/>
+                                    </af:menu>
+                                </af:popup>
+                            </f:facet>
+                            <f:facet name="linkContextMenu">
+                                <af:popup contentDelivery="lazyUncached" id="linkMenu">
+                                    <af:menu id="m2i">
+                                        <af:commandMenuItem text="#{inventoryUIBundle.VIEW_SUMMARY}" id="cmi4" rendered=
+										"#{ConnectivityVisualBean.dispLinkViewSumm}" 
+										actionListener="#{ConnectivityVisualBean.navigateToLinkSummary}"
+                                                    action="#{ConnectivityVisualBean.linkSummaryAction}"/>
+                                    </af:menu>
+                                </af:popup>
+                            </f:facet>
+                        </dvt:diagram>
+                        <af:popup id="pp8" binding="#{backingBeanScope.cvPrefPopup}" contentDelivery="lazyUncached">
+                            <af:dialog id="cv_pref_d1" type="okCancel" title="#{inventoryUIBundle.PREFERENCES}" binding="#{backingBeanScope.cvPrefDialog}" dialogListener="#{ConnectivityVisualBean.savePreferences}"
+                                       cancelTextAndAccessKey="&amp;#{inventoryUIBundle.CANCEL}" affirmativeTextAndAccessKey="O&amp;K" contentHeight="70" contentWidth="300" stretchChildren="first">
+                                <af:panelStretchLayout id="psl_7" styleClass="AFStretchWidth" dimensionsFrom="parent">
+                                    <f:facet name="center">
+                                        <af:panelGroupLayout id="pgl234" layout="scroll" styleClass="AFStretchWidth">
+                                            <af:panelFormLayout id="pfl1" maxColumns="1" labelWidth="65%" fieldWidth="35%">
+                                                <af:selectBooleanCheckbox value="#{ConnectivityVisualBean.displayNodeLabel}" label="#{inventoryUIBundle.DISPLAY_NODE_LABEL}" id="dl2" inlineStyle="padding-top: 0px;"/>
+                                                <af:selectBooleanCheckbox value="#{ConnectivityVisualBean.displayConnectivityLabel}" label="#{inventoryUIBundle.DISPLAY_CONNECTIVITY_LABEL}" id="dl3"
+                                                                          inlineStyle="padding-top: 0px;"/>
+                                            </af:panelFormLayout>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </af:panelStretchLayout>
+                            </af:dialog>
+                            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                            <af:serverListener type="refreshEntity" method="#{ConnectivityVisualBean.refresh}"/>
+                        </af:popup>
+                    </af:panelGroupLayout>
+                </f:facet>
+            </af:panelStretchLayout>
+        </f:facet>
+    </af:panelSplitter>
+    <!--End - Diagram Visualization  -->
+</jsp:root>

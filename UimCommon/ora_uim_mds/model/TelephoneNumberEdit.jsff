@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:pf="/platform/functions">
+		   
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>           
+<af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+<f:facet name="localArea">
+ <af:panelGroupLayout id="pgl1" binding="#{backingBeanScope.edit_panelGroupLayout}"
+                      layout="scroll">
+    <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered ="#{!pageFlowScope.TelephoneNumberEditBean.previewLayout}">
+        <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                       rendered="#{!(pageFlowScope.TelephoneNumberEditBean.popupMode)}"
+                       value="#{pageFlowScope.TelephoneNumberEditBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+        <af:menuBar id="menuBar1">
+              <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invEditMenu"
+                       rendered="#{!(pageFlowScope.TelephoneNumberEditBean.popupMode)}"/>
+        </af:menuBar>
+        <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch3}" contentDelivery="lazyUncached">
+            <af:dialog id="BISearchPopup_d1" type="none"
+                       title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                    <f:facet name="center">
+                       <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.TelephoneNumberEditBean.afterBusinessInteractionSelectionChange}"/>
+        </af:popup>
+    </af:panelGroupLayout>
+    
+        
+        
+        <af:panelHeader text="#{inventoryUIBundle.TELEPHONE_NUMBER} - #{pageFlowScope.TelephoneNumberEditBean.displayInfo}" helpTopicId="#{pageFlowScope.TelephoneNumberEditBean.helpTopic}" id="ph1">
+        <f:facet name="toolbar">
+           <af:panelGroupLayout id="pgl3" layout="horizontal" rendered ="#{!pageFlowScope.TelephoneNumberEditBean.previewLayout}">
+            <!--CRUD Buttons Starts -->
+            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb1"
+                              actionListener="#{pageFlowScope.TelephoneNumberEditBean.save}" action="#{pageFlowScope.TelephoneNumberEditBean.saveOutcome}"
+                              rendered="#{!pageFlowScope.TelephoneNumberEditBean.addMode || pageFlowScope.TelephoneNumberEditBean.popupMode}"
+                              disabled="#{pageFlowScope.TelephoneNumberEditBean.popupMode}" binding="#{backingBeanScope.saveAndCloseButton}"
+                              accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}"> 
+               <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>               
+            </af:commandButton>                  
+            <af:spacer width="10" height="10" id="s4"/>
+            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CONTINUE}" id="cb31" binding="#{backingBeanScope.saveAndContinueButton}" disabled="true"
+                              actionListener="#{pageFlowScope.TelephoneNumberEditBean.save}" action="#{pageFlowScope.TelephoneNumberEditBean.getAction}"
+                              rendered="#{pageFlowScope.TelephoneNumberEditBean.addMode and !pageFlowScope.TelephoneNumberEditBean.popupMode}"
+                              accessKey="#{inventoryUIBundle.SAVE_AND_CONTINUE_ACCESS_KEY}">
+				<af:setActionListener from="saveAndContinue" to="#{pageFlowScope.saveActionOutcome}"/>
+             </af:commandButton>                 
+            <af:spacer width="10" height="10" id="s51" rendered="#{pageFlowScope.TelephoneNumberEditBean.addMode and !pageFlowScope.TelephoneNumberEditBean.popupMode}"/>
+            <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2" action="cancel" immediate="true" actionListener="#{bindings.closeSubTask.execute}"
+                              accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+            <!--CRUD Buttons Ends -->
+          </af:panelGroupLayout>
+        </f:facet>
+        <af:panelGroupLayout layout="scroll" id="pgl23">
+        <af:showDetailHeader text="#{inventoryUIBundle.TELEPHONE_NUMBER_INFORMATION}" disclosed="true" id="PAGE_TITLE">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:group id="g1">
+            <af:panelGroupLayout id="pgl2">
+              <af:panelFormLayout id="number" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsPanel}">
+                  <af:selectOneChoice id="number-specification"
+                                    label="#{inventoryUIBundle.SPECIFICATION}"
+                                    autoSubmit="true" required="true"
+                                    disabled="#{!(pageFlowScope.TelephoneNumberEditBean.addMode)}"
+                                    valueChangeListener="#{pageFlowScope.TelephoneNumberEditBean.specChangeListener}"
+                                    value="#{pageFlowScope.TelephoneNumberEditBean.selectedSpec}">
+                  <f:selectItems binding="#{pageFlowScope.TelephoneNumberEditBean.specifications}" id="si1"/>
+                  </af:selectOneChoice>
+                  <af:inputText value="#{pageFlowScope.TelephoneNumberEditBean.entityObject.name}"
+                                label="#{inventoryUIBundle.PHONE_NUMBER}"
+                                maximumLength="20"
+                                rendered="#{!(pageFlowScope.TelephoneNumberEditBean.addMode)}"
+                                disabled="#{!(pageFlowScope.TelephoneNumberEditBean.addMode)}"
+                                id="number-phonenumber">
+                   </af:inputText>
+                   <af:inputText value="#{pageFlowScope.TelephoneNumberEditBean.entityObject.description}" 
+                                    id="number-description" autoSubmit="true" 
+                                    label="#{inventoryUIBundle.DESCRIPTION}" maximumLength="255" rows="5" columns="50"/>
+                  <af:inputText label="#{inventoryUIBundle.RANGE_FROM}" autoSubmit="true"
+                              value="#{pageFlowScope.TelephoneNumberEditBean.maskedRangeFrom}" columns="20"
+                              maximumLength="#{pageFlowScope.TelephoneNumberEditBean.maxLength}"
+                              rendered="#{pageFlowScope.TelephoneNumberEditBean.addMode}"
+                              binding="#{backingBeanScope.rangeFromComponent}"
+                              id="number-ranegfrom" required="true" validator="#{pageFlowScope.TelephoneNumberEditBean.validate}">
+                  </af:inputText>
+                  <af:inputText label="#{inventoryUIBundle.RANGE_TO}" autoSubmit="true"
+                                rendered="#{pageFlowScope.TelephoneNumberEditBean.addMode}" columns="20"
+                                maximumLength="#{pageFlowScope.TelephoneNumberEditBean.maxLength}"            
+                                value="#{pageFlowScope.TelephoneNumberEditBean.maskedRangeTo}"
+                                binding="#{backingBeanScope.rangeToComponent}" 
+                                id="number-rangeto"
+                                validator="#{pageFlowScope.TelephoneNumberEditBean.validate}">                    
+                  </af:inputText>
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="number-adminstate">
+                      <af:outputText value="#{pageFlowScope.TelephoneNumberEditBean.inventoryStatus}" id="ot7"/>
+		<!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.TelephoneNumberEditBean.popupMode}" id="swis618">
+		<f:facet name="false">
+		<af:commandImageLink action="#{pageFlowScope.TelephoneNumberEditBean.getSummaryAction}" actionListener="#{pageFlowScope.TelephoneNumberEditBean.registerRecentItem}" disabled="#{(pageFlowScope.TelephoneNumberEditBean.installingBI_OID eq null) ? true : false}" id="bid3" shortDesc="#{(pageFlowScope.TelephoneNumberEditBean.installingBI_OID eq null) ? '&amp;#160;' : inventoryUIBundle.BUSINESS_INTERACTION}" text="#{pageFlowScope.TelephoneNumberEditBean.installingBILabel}">
+		<af:setActionListener from="#{pageFlowScope.TelephoneNumberEditBean.inventoryStatusBI.oid}" to="#{objectId}"/>
+		</af:commandImageLink>
+		</f:facet>
+		<f:facet name="true">
+		<af:outputText id="swftis618" value="#{pageFlowScope.TelephoneNumberEditBean.installingBILabel}"/>
+		</f:facet>
+		</af:switcher>
+		<af:outputText id="installingBIDueDate" value="#{pageFlowScope.TelephoneNumberEditBean.installingBIEffectiveDate}"/>
+		<!--RMI 618 End-->
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="number-ras">
+                      <af:outputText value="#{pageFlowScope.TelephoneNumberEditBean.resourceAssignmentStatus}" id="ot8"/>
+		<!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.TelephoneNumberEditBean.popupMode}" id="swas618">
+		<f:facet name="false">
+		<af:commandImageLink action="#{pageFlowScope.TelephoneNumberEditBean.getSummaryAction}" actionListener="#{pageFlowScope.TelephoneNumberEditBean.registerRecentItem}" disabled="#{(pageFlowScope.TelephoneNumberEditBean.consumerBI_OID eq null) ? true : false}" id="bid4" shortDesc="#{(pageFlowScope.TelephoneNumberEditBean.consumerBI_OID eq null) ? '&amp;#160;' : inventoryUIBundle.BUSINESS_INTERACTION}" text="#{pageFlowScope.TelephoneNumberEditBean.consumerBILabel}">
+		<af:setActionListener from="#{pageFlowScope.TelephoneNumberEditBean.assignmentBI.oid}" to="#{objectId}"/>
+		</af:commandImageLink>
+		</f:facet>
+		<f:facet name="true">
+		<af:outputText id="swftas618" value="#{pageFlowScope.TelephoneNumberEditBean.consumerBILabel}"/>
+		</f:facet>
+		</af:switcher>
+		<af:outputText id="consumerBIDueDate" value="#{pageFlowScope.TelephoneNumberEditBean.consumerBIEffectiveDate}"/>
+		<!--RMI 618 End-->
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="number-lmd" rendered="false" visible="#{pageFlowScope.TelephoneNumberEditBean.lastModifiedDate != null}">
+                    <af:outputText value="#{pageFlowScope.TelephoneNumberEditBean.lastModifiedDate}" id="ot9">
+                        <af:convertDateTime pattern="#{pageFlowScope.TelephoneNumberEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="number-lmu" rendered="false" visible="#{pageFlowScope.TelephoneNumberEditBean.entityObject.lastModifiedUser != null}">
+                    <af:outputText value="#{pageFlowScope.TelephoneNumberEditBean.entityObject.lastModifiedUser}" id="ot10"/>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="number-crd" rendered="false" visible="#{pageFlowScope.TelephoneNumberEditBean.createdDate != null}">
+                    <af:outputText value="#{pageFlowScope.TelephoneNumberEditBean.createdDate}" id="ot11">
+                        <af:convertDateTime pattern="#{pageFlowScope.TelephoneNumberEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="number-cru" rendered="false" visible="#{pageFlowScope.TelephoneNumberEditBean.entityObject.createdUser != null}">
+                    <af:outputText value="#{pageFlowScope.TelephoneNumberEditBean.entityObject.createdUser}" id="ot12"/>
+                  </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+            </af:panelGroupLayout>
+          </af:group>
+         </af:showDetailHeader>
+         </af:panelGroupLayout>
+        </af:panelHeader>
+      
+      </af:panelGroupLayout>
+    </f:facet>
+  <f:facet name="contextualArea"/>
+</af:pageTemplate>
+</jsp:root>

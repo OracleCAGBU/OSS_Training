@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xsi:type="BusinessEntityType" name="PropertyLocation" realizeFromBusinessEntity="true">
+  <com:displayName lang="[default]">PropertyLocation</com:displayName>
+  <com:saveVersion>10</com:saveVersion>
+  <com:baseEntityRef>
+    <com:entity>GeographicLocation</com:entity>
+    <com:entityType>inventoryEntity</com:entityType>
+    <com:relationship>oracle.communications.sce.business.entity.baseEntity</com:relationship>
+  </com:baseEntityRef>
+  <com:id>E:inventoryEntity--PropertyLocation</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>inventoryEntity--PropertyLocation</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>PropertyLocation</data:name>
+    <data:displayName lang="[default]">PropertyLocation</data:displayName>
+    <data:dataElement virtual="false">
+      <com:id>propertyLocationIdentifier</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>propertyLocationIdentifier</data:name>
+      <data:displayName lang="[default]">propertyLocationIdentifier</data:displayName>
+      <data:displayName lang="[default]">propertyLocationIdentifier</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>propertyLocationIdentifier</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>propertyLocationIdentifier</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>networkLocationCode</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>networkLocationCode</data:name>
+      <data:displayName lang="[default]">networkLocationCode</data:displayName>
+      <data:displayName lang="[default]">networkLocationCode</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>networkLocationCode</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>networkLocationCode</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>isUserNamed</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>isUserNamed</data:name>
+      <data:displayName lang="[default]">isUserNamed</data:displayName>
+      <data:displayName lang="[default]">isUserNamed</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>isUserNamed</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>isUserNamed</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>boolean</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>isNetworkLocationNamed</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>isNetworkLocationNamed</data:name>
+      <data:displayName lang="[default]">isNetworkLocationNamed</data:displayName>
+      <data:displayName lang="[default]">isNetworkLocationNamed</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>isNetworkLocationNamed</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>isNetworkLocationNamed</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>boolean</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>areGeocoordinatesLocked</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>areGeocoordinatesLocked</data:name>
+      <data:displayName lang="[default]">areGeocoordinatesLocked</data:displayName>
+      <data:displayName lang="[default]">areGeocoordinatesLocked</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>areGeocoordinatesLocked</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>areGeocoordinatesLocked</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>boolean</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>hasNonValidatedAddress</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>hasNonValidatedAddress</data:name>
+      <data:displayName lang="[default]">hasNonValidatedAddress</data:displayName>
+      <data:displayName lang="[default]">hasNonValidatedAddress</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>hasNonValidatedAddress</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>hasNonValidatedAddress</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>boolean</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>hasNonAcceptedAddress</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>hasNonAcceptedAddress</data:name>
+      <data:displayName lang="[default]">hasNonAcceptedAddress</data:displayName>
+      <data:displayName lang="[default]">hasNonAcceptedAddress</data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>hasNonAcceptedAddress</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>hasNonAcceptedAddress</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>boolean</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <com:id>isServiceLocation</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>isServiceLocation</data:name>
+      <data:displayName lang="[default]">Is Service Location</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <com:entity>ora_uim_model</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>isServiceLocation</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>isServiceLocation</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>boolean</data:primitiveType>
+    </data:dataElement>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>z-sN--+9--+T---yDwRylA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>inventoryEntity--PropertyLocation</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>--+61qwc--+WrW9NeiQASQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>propertyLocationIdentifier</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>NX5DNoFS--+l--+O---Pjw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>propertyLocationIdentifier</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>6qUB--+v--+N--+g---YOQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>propertyLocationIdentifier</data:dataElementId>
+    <data:information lang="[default]">The Property Identifier is the unique internal identifier for a Property Location. This property is derived from the Primary Property Address of the Property Location. It is formatted as a concatenated property address components delimited by a space.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>---S---V--+1G65o---zUQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>propertyLocationIdentifier</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>3cVRGXMQ--+t---xUfNRiw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>propertyLocationIdentifier</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>bt0e98Y0--+7cTFZ---o-A</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>networkLocationCode</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>IS02169m--+9f286---Srg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>networkLocationCode</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>--+KYwFP--+q--+i--+CIg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>networkLocationCode</data:dataElementId>
+    <data:information lang="[default]">An alphanumeric code that identifies the property and declares that Property Location also serves as a 'Network Location' for the service provider's business and network infrastructure. It can be alphanumeric and all in UPPER case.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>3b8---+b--+o--+0kzgbMg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>networkLocationCode</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>PLgZ7Rg1--+U---nSQUCLQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>isUserNamed</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>--+fS4IB--+ZBvJ1SBdSPg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>isUserNamed</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>Qh50---n--+p--+YcaZ0OQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>isUserNamed</data:dataElementId>
+    <data:information lang="[default]">Indicates that the name of the Property Location has been set by a UX or SOA user and should be respected until it is removed or empties by the UX or SOA user.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>RbF0rgxT--+5--+p8AsjBg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>isUserNamed</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>---6--+t--+w-------u4A</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>isUserNamed</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>--+Z+DI0--+j--+bx580QQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>isNetworkLocationNamed</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>--+D---F--+p---Jnrcilw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>isNetworkLocationNamed</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>BllGWLov--+cuEE1dlBNOA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>isNetworkLocationNamed</data:dataElementId>
+    <data:information lang="[default]">Indicates that the name of the Property Location has been set to the Network Location identity and should be respected as long as the Property Location is serving as a Network Location.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>3cgM--+L--+3--+l--+LOw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>isNetworkLocationNamed</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>---AJ3h+--+qODlqSD5bWg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>isNetworkLocationNamed</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>---z---V--+k--+m--+H9Q</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>areGeocoordinatesLocked</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>S2hJ---p--+z--+QwrQCvw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>areGeocoordinatesLocked</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>---W---F--+Q--+K--+wgQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>areGeocoordinatesLocked</data:dataElementId>
+    <data:information lang="[default]">Indicates that the geographic coordinate information for the Property Location is locked and should be respected regardless of Geocoding results.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>---e--+x--+m--+IAVt4FA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>areGeocoordinatesLocked</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>t6kuImBD--+D--+co8Fg+g</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>areGeocoordinatesLocked</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>--+B0fo3--+GUCMkTwlxgA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>hasNonValidatedAddress</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>KHVZ---w--+y--+QYM9+Hw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>hasNonValidatedAddress</data:dataElementId>
+    <data:defaultValue>true</data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>--+K--++--+RB-dr8AsL8Q</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>hasNonValidatedAddress</data:dataElementId>
+    <data:information lang="[default]">Indicates that at least one of the Property addresses is not 'Validated' by a address validation subsystem (such as GIS/eLocation)</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>FbQoRfFC--+U--+k2Yk-Hg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>hasNonValidatedAddress</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>b7kF9i0G--+r---V4PB6XQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>hasNonValidatedAddress</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="attributeComplexType">
+    <com:id>uA5z---Y--+GASkRXe9Skw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>hasNonAcceptedAddress</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>DXJZuthF--+LfNIaufEC9w</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>hasNonAcceptedAddress</data:dataElementId>
+    <data:defaultValue>true</data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>true</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>G6Ej---L--+nNEpcoWhveA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>hasNonAcceptedAddress</data:dataElementId>
+    <data:information lang="[default]">Indicates that at least one non-validated property address has not been 'accepted' by the business.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>gWpO--+S--+s---IEDM1rg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>hasNonAcceptedAddress</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="relationshipComplexType">
+    <com:id>---s---D--+wnjUqAvdc1Q</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>hasNonAcceptedAddress</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>uAA---+6--+wIMtC---J1Q</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>isServiceLocation</data:dataElementId>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <capability xsi:type="accessControlledType" enabled="true" id="oracle.communications.sce.poms.capabilities.AccessControlled"/>
+  <capability xsi:type="timeboundType" enabled="true" id="oracle.communications.sce.poms.capabilities.Timebound"/>
+  <capability xsi:type="GroupEnabledType" enabled="true" id="oracle.communications.sce.poms.capabilities.GroupEnabled"/>
+  <implements interface="java.lang.Cloneable"/>
+  <implements interface="oracle.communications.inventory.api.entity.common.TopologyObject"/>
+  <implements interface="oracle.communications.inventory.api.entity.common.NetworkEntityLocation"/>
+  <compositeIndex name="IDX_PL_EID_HNVA" unique="true">
+    <attributeName>entityId</attributeName>
+    <attributeName>hasNonValidatedAddress</attributeName>
+  </compositeIndex>
+  <compositeIndex name="IDX_PL_EID_HNAA" unique="true">
+    <attributeName>entityId</attributeName>
+    <attributeName>hasNonAcceptedAddress</attributeName>
+  </compositeIndex>
+  <compositeIndex name="IDX_PL_EID_HNVA_HNAA" unique="true">
+    <attributeName>entityId</attributeName>
+    <attributeName>hasNonValidatedAddress</attributeName>
+    <attributeName>hasNonAcceptedAddress</attributeName>
+  </compositeIndex>
+  <compositeIndex name="IDX_PL_EID_NLC_CLS" unique="true">
+    <attributeName>entityId</attributeName>
+    <attributeName>networkLocationCode</attributeName>
+    <attributeName>entityClass</attributeName>
+  </compositeIndex>
+  <method name="isNetworkLocation">
+    <signature>boolean isNetworkLocation()</signature>
+    <body>if(this.getNetworkLocationCode()==null ||  this.getNetworkLocationCode().length()==0)
+	return false;
+      else 
+          return true;
+						</body>
+    <javadoc>This method checks whether or not the given Property Location serves as a network location. A Property Location is considered a network location if it is populated with a network location code. A network location can have Network Entity Codes that are used to identify Logical Devices, located at the network location. The end points (Pipe Termination Points) of Network Connectivity can also be located at a network location or one of the Network Entity Codes owed by a network location.</javadoc>
+  </method>
+  <method name="getPrimaryPropertyAddress">
+    <signature>oracle.communications.inventory.api.entity.PropertyAddress getPrimaryPropertyAddress()</signature>
+    <body>if (!oracle.communications.platform.util.Utils.isEmpty(this.getPropertyAddresses())) {
+	for (oracle.communications.inventory.api.entity.PropertyAddress propertyAddress : this.getPropertyAddresses()) {
+		if (propertyAddress.getIsPrimaryAddress())
+			return propertyAddress;
+			}
+          }
+			 return null;
+						</body>
+    <javadoc>Checks the given set of Property Addresses for a PropertyLocation and returns a PropertyAddress which is designated as Primary Address.</javadoc>
+  </method>
+  <properties hierarchyStrategy="single" interface="oracle.communications.inventory.api.entity.PropertyLocation" type="ocim:PropertyLocation"/>
+</com:modelEntity>

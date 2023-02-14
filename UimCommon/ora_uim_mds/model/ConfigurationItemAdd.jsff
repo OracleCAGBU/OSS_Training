@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    4/15/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   id="pt1">
+    <f:facet name="localArea">       
+    <af:panelGroupLayout id="pgl2" layout="scroll">
+      <af:panelHeader text="#{inventoryUIBundle.ITEMSTOBEADDED}" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar"> 
+         <af:toolbar id="tb1">
+            <af:commandToolbarButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cbCIA1"
+                              actionListener="#{pageFlowScope.ConfigurationItemAddBean.addConfigurationItem}"
+                              action="summary" accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}"/>
+            <af:spacer width="10" height="10" id="s11"/>
+            <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="cbCIA2"
+                              action="cancel" immediate="true"
+                              actionListener="#{pageFlowScope.ConfigurationItemAddBean.cancel}"
+                                     accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+         </af:toolbar>
+        </f:facet>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:showDetailHeader text="#{inventoryUIBundle.ADDITEMS}"
+                             disclosed="true" id="showDetailHeader1"
+                             styleClass="invListShowDetailHeader">
+          <f:facet name="info"/>
+          <f:facet name="legend"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="context"/>
+          <af:panelCollection id="panelCollection2" styleClass="AFStretchWidth">
+            <f:facet name="menus"></f:facet>
+            <f:facet name="toolbar">            
+            </f:facet>
+            <f:facet name="statusbar">    
+            
+            </f:facet>
+            <af:table value="#{pageFlowScope.ConfigurationItemAddBean.specificationRelClientCollectionModel}"
+                      var="row"
+                      rows="#{bindings.SpecificationRelClient.rangeSize}"
+                      emptyText="#{inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET}"
+                      fetchSize="#{bindings.SpecificationRelClient.rangeSize}"                      
+                      rowBandingInterval="0"
+                      styleClass="invSearchTable"
+                      rowSelection="#{pageFlowScope.ConfigurationItemAddBean.rowSelection}" id="t1"
+                      binding="#{pageFlowScope.ConfigurationItemAddBean.resultsTable}"
+                      summary="#{inventoryUIBundle.CONFIGURATION_ITEMS_LIST}">
+              <af:column headerText="#{inventoryUIBundle.NAME}" id="c13"
+                         rowHeader="unstyled">
+                <af:outputText value="#{pageFlowScope.ConfigurationItemAddBean.configItemDisplayName}" id="ot24"/>
+              </af:column>
+              <af:column headerText="#{inventoryUIBundle.QUANTITY}" id="c133" width="150">
+              <af:inputNumberSpinbox value="#{row.requiredCount}" id="spinboxInTable" 
+                                               label="#{inventoryUIBundle.QUANTITY} test spinbox" valueChangeListener="#{pageFlowScope.ConfigurationItemAddBean.requiredCountChangeListener}"
+                                               simple="true"
+                                     maximum="#{row.remainingCount}"
+                                     minimum="0"
+                                     disabled="#{row.remainingCount&lt;=0}"/>
+                        
+              </af:column>
+              <af:column headerText="#{inventoryUIBundle.CURRENTCOUNT}"
+                         id="c153">
+                <af:outputText value="#{row.currentCount}" id="ot254"/>
+              </af:column>
+              <af:column headerText="#{inventoryUIBundle.REMAININGCOUNT}"
+                         id="c1353">
+                <af:outputText value="#{row.remainingCount}" id="ot28"/>
+              </af:column>
+            </af:table>
+          </af:panelCollection>
+        </af:showDetailHeader>    
+      </af:panelHeader>      
+    </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

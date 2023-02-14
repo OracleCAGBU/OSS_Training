@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:inv="http://www.mslv.com/studio/inventory/model/specification" xmlns="http://www.mslv.com/studio/inventory/model/specification" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xsi:type="inv:PartySpecificationType" name="Individual">
+  <com:saveVersion>3</com:saveVersion>
+  <com:baseEntityRef>
+    <com:entity>Party</com:entity>
+    <com:entityType>inventoryEntity</com:entityType>
+    <com:relationship>unknown</com:relationship>
+  </com:baseEntityRef>
+  <com:id>--+pRMhd--+3--+g---MCQ</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>--+pRMhd--+3--+g---MCQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>Individual</data:name>
+    <data:displayName lang="[default]">Individual</data:displayName>
+    <data:dataElement virtual="false">
+      <com:id>MLJl---5--+E---N9o0NTA</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>accountNumber</data:name>
+      <data:displayName lang="[default]">accountNumber</data:displayName>
+      <data:baseElement>
+        <com:entity>OracleComms_Model_Common</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>accountNumber</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>accountNumber</com:elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>8mMIzh0A--+G---6zfcLzw</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>--+pRMhd--+3--+g---MCQ</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:abstract>false</data:abstract>
+    <data:internal>false</data:internal>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>-1</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>Ju0gLz44--+U22ta---8TQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>MLJl---5--+E---N9o0NTA</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementTagDetails">
+    <com:id>--+4cbV5--+NsMol---22A</com:id>
+    <com:elementType>oracle.communications.studio.model.tag.StudioModelTagDetails</com:elementType>
+    <data:dataElementId>MLJl---5--+E---N9o0NTA</data:dataElementId>
+    <data:tags>
+      <data:id>oracle.communications.studio.inventory.dataelement.characteristic</data:id>
+      <data:name>Characteristic</data:name>
+    </data:tags>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="inv:CharElementDetailType">
+    <com:id>--+K---5--+CpjhFV15Elw</com:id>
+    <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+    <data:dataElementId>MLJl---5--+E---N9o0NTA</data:dataElementId>
+    <inv:startTimestamp>0</inv:startTimestamp>
+    <inv:endTimestamp>0</inv:endTimestamp>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>V1YUCndQ--+TsmByRukiXg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>MLJl---5--+E---N9o0NTA</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>--+8--+l--+sNT8s---LFA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>MLJl---5--+E---N9o0NTA</data:dataElementId>
+    <layout:hints>
+      <layout:panel page="Default" panel="Default">
+        <layout:controlType>Text</layout:controlType>
+        <layout:label lang="[default]">Account Number</layout:label>
+        <layout:case>Mixed</layout:case>
+      </layout:panel>
+    </layout:hints>
+  </data:dataElementDetails>
+  <inv:formLayout>
+    <inv:column>specification</inv:column>
+    <inv:column>id</inv:column>
+    <inv:column>name</inv:column>
+    <inv:column></inv:column>
+    <inv:column>description</inv:column>
+    <inv:column>accountNumber</inv:column>
+    <inv:lcolumn>lastdate</inv:lcolumn>
+    <inv:lcolumn>lastuser</inv:lcolumn>
+    <inv:lcolumn>owner</inv:lcolumn>
+    <inv:lcolumn>partition</inv:lcolumn>
+    <inv:lcolumn>permissions</inv:lcolumn>
+  </inv:formLayout>
+  <inv:summaryFormLayout>
+    <inv:column>id</inv:column>
+    <inv:column>name</inv:column>
+    <inv:column>specification</inv:column>
+    <inv:column>description</inv:column>
+    <inv:column>accountNumber</inv:column>
+    <inv:lcolumn>lastdate</inv:lcolumn>
+    <inv:lcolumn>lastuser</inv:lcolumn>
+    <inv:lcolumn>owner</inv:lcolumn>
+    <inv:lcolumn>partition</inv:lcolumn>
+    <inv:lcolumn>permissions</inv:lcolumn>
+  </inv:summaryFormLayout>
+</com:modelEntity>

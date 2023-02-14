@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved. */
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    3/27/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:pf="/platform/functions">
+		   
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/> 
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   id="pt1">
+    <f:facet name="localArea">
+    <af:panelGroupLayout id="pgl1" layout="scroll">
+      <af:panelHeader text="#{inventoryUIBundle.NETWORK_EDGE} - #{pageFlowScope.NetworkEdgeEditBean.displayInfo}"
+                      id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar">
+          <af:panelGroupLayout layout="horizontal" id="pg3" rendered="#{!pageFlowScope.NetworkEdgeEditBean.previewLayout}">                                 
+            <af:commandToolbarButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb4"
+                                actionListener="#{pageFlowScope.NetworkEdgeEditBean.save}"                              
+                                rendered="#{pageFlowScope.NetworkEdgeEditBean.popupMode}"
+                                     accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}"/>            
+              <!-- Display the below SAVE_AND_CONTINUE button in the page mode. -->
+              <af:commandToolbarButton text="#{inventoryUIBundle.SAVE_AND_CONTINUE}"
+                                id="cb1"
+                                actionListener="#{pageFlowScope.NetworkEdgeEditBean.save}"
+                                action="#{pageFlowScope.NetworkEdgeEditBean.saveOutcome}"
+                                rendered="#{!pageFlowScope.NetworkEdgeEditBean.popupMode}"
+                                       accessKey="#{inventoryUIBundle.SAVE_AND_CONTINUE_ACCESS_KEY}">
+                        <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandToolbarButton>              
+              <af:spacer width="10" height="10" id="s2"/>
+              <!-- Display the below CANCEL button in the page mode. -->
+              <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="cb2"
+                                action="cancel" immediate="true"
+                                rendered="#{!pageFlowScope.NetworkEdgeEditBean.popupMode}"
+                                       accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+              
+              <!-- Display the below CANCEL button in the popup mode. -->
+              <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="cb3"
+                                immediate="true" actionListener="#{pageFlowScope.NetworkEdgeEditBean.cancel}"
+                                rendered="#{pageFlowScope.NetworkEdgeEditBean.popupMode}"
+                                       accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:showDetailHeader text="#{inventoryUIBundle.NETWORK_EDGE_INFORMATION}"
+                             disclosed="true" id="sdh1">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <!-- Entity Details -->
+          <af:group id="g1">
+              <af:panelGroupLayout id="pgl2" binding="#{backingBeanScope.edit_panelGroupLayout}">              
+                <af:panelFormLayout id="ntwkedg" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsPanel}">
+                  <af:selectOneChoice id="ntwkedg-specification"
+                                          label="#{inventoryUIBundle.SPECIFICATION}"
+                                          autoSubmit="true"
+                                          value="#{pageFlowScope.NetworkEdgeEditBean.selectedSpec}"
+                                          disabled="false">
+                        <f:selectItems binding="#{pageFlowScope.NetworkEdgeEditBean.specifications}" id="si1"/>
+                  </af:selectOneChoice>
+                  <af:inputText value="#{pageFlowScope.NetworkEdgeEditBean.entityObject.id}"
+                                label="#{inventoryUIBundle.NETWORK_EDGE_ID}"
+                                disabled="true"
+                                maximumLength="50" columns="53"
+                                id="ntwkedg-id">
+                  </af:inputText>
+                  <af:inputText value="#{pageFlowScope.NetworkEdgeEditBean.entityObject.name}"
+                                label="#{inventoryUIBundle.NAME}"
+                                maximumLength="50" columns="53"
+                                id="ntwkedg-name">
+                  </af:inputText>
+                  <af:inputText value="#{pageFlowScope.NetworkEdgeEditBean.entityObject.description}"
+                                label="#{inventoryUIBundle.DESCRIPTION}"
+                                maximumLength="255" rows="5" columns="50"
+                                id="ntwkedg-description">
+                  </af:inputText>
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="ntwkedg-inventoryStatus">
+                          <af:outputText value="#{pageFlowScope.NetworkEdgeEditBean.inventoryStatus}" id="ot7"/>
+		<!--RMI 618 Start-->
+                    <af:switcher defaultFacet="false" facetName="#{pageFlowScope.NetworkEdgeEditBean.popupMode}"
+                                 id="swis618">
+                      <f:facet name="false">
+                        <af:commandImageLink action="#{pageFlowScope.NetworkEdgeEditBean.getSummaryAction}"
+                                             actionListener="#{pageFlowScope.NetworkEdgeEditBean.registerRecentItem}"
+                                             disabled="#{(pageFlowScope.NetworkEdgeEditBean.installingBI_OID eq null) ? true : false}"
+                                             id="bid3"
+                                             shortDesc="#{(pageFlowScope.NetworkEdgeEditBean.installingBI_OID eq null) ? '&amp;#160;' : inventoryUIBundle.BUSINESS_INTERACTION}"
+                                             text="#{pageFlowScope.NetworkEdgeEditBean.installingBILabel}">
+                          <af:setActionListener from="#{pageFlowScope.NetworkEdgeEditBean.inventoryStatusBI.oid}"
+                                                to="#{objectId}"/>
+                        </af:commandImageLink>
+                      </f:facet>
+                      <f:facet name="true">
+                        <af:outputText id="swftis618" value="#{pageFlowScope.NetworkEdgeEditBean.installingBILabel}"/>
+                      </f:facet>
+                    </af:switcher>
+                    <af:outputText id="installingBIDueDate" value="#{pageFlowScope.NetworkEdgeEditBean.installingBIEffectiveDate}"/>
+		<!--RMI 618 End-->
+                  </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="ntwkedg-lmd" rendered="false">
+                    <af:outputText value="#{pageFlowScope.NetworkEdgeEditBean.lastModifiedDate}" id="ot9">
+                        <af:convertDateTime pattern="#{pageFlowScope.NetworkEdgeEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="ntwkedg-lmu" rendered="false">
+                    <af:outputText value="#{pageFlowScope.NetworkEdgeEditBean.entityObject.lastModifiedUser}" id="ot10"/>
+                </af:panelLabelAndMessage>                  
+                </af:panelFormLayout>
+              </af:panelGroupLayout>
+            </af:group>
+        </af:showDetailHeader>
+      </af:panelHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

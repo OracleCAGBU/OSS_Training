@@ -1,0 +1,602 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+    <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" value="#{bindings.ptb1}" id="pt1">
+        <f:facet name="localArea">
+            <af:panelSplitter orientation="vertical" id="ps7" dimensionsFrom="auto" splitterPosition="290">
+                <f:facet name="first"></f:facet>
+                <f:facet name="second">
+                    <af:decorativeBox id="pb4" dimensionsFrom="auto" topHeight="35" theme="light">
+                        <f:facet name="top">
+                            <af:panelHeader id="ph1" styleClass="AFStretchWidth" helpTopicId="OHW_busIntCanvas" text="#{inventoryUIBundle.CANVAS_DIAGRAM} - #{pageFlowScope.NetworkDiagramBean.network.name}">
+                                <f:facet name="menuBar">
+                                    <af:menuBar id="menuBar2" rendered="#{adfFacesContext.outputMode!= 'printable'}">
+                                        <af:menu id="menu6" binding="#{pageFlowScope.NetworkDiagramBean.actionsMenu}" disabled="#{pageFlowScope.NetworkDiagramBean.disableActionsMenu}" text="#{inventoryUIBundle.ACTIONS}">
+                                            <af:commandMenuItem id="cmi3" text="#{inventoryUIBundle.COMPLETE}" actionListener="#{pageFlowScope.NetworkDiagramBean.processMenuItem}"/>
+                                            <af:commandMenuItem id="cmi2" text="#{inventoryUIBundle.CANCEL}" actionListener="#{pageFlowScope.NetworkDiagramBean.processMenuItem}"/>
+                                        </af:menu>
+                                    </af:menuBar>
+                                </f:facet>
+                            </af:panelHeader>
+                        </f:facet>
+                        <f:facet name="center">
+                            <af:panelSplitter orientation="vertical" splitterPosition="125" id="ps5" dimensionsFrom="auto" binding="#{pageFlowScope.NetworkDiagramBean.psBinding}">
+                                <f:facet name="first">
+                                    <af:panelStretchLayout id="psl2" dimensionsFrom="auto">
+                                        <f:facet name="center">
+                                            <af:panelGroupLayout layout="scroll" id="pgl5">
+                                                <af:panelBox text="#{inventoryUIBundle.SEARCH_ENTITY}" id="pb2" rendered="#{adfFacesContext.outputMode!= 'printable'}" disclosed="true">
+                                                    <af:panelGroupLayout layout="horizontal" id="pgl8">
+                                                        <af:panelFormLayout id="ntwk" labelWidth="35%" fieldWidth="65%" binding="#{backingBeanScope.entityPanel}">
+                                                            <af:selectOneChoice label="#{inventoryUIBundle.ENTITY_TYPE}" contentStyle="width:281px" id="soc2" value="#{pageFlowScope.NetworkDiagramBean.selectedEntityType}"
+                                                                                autoSubmit="true" valueChangeListener="#{pageFlowScope.NetworkDiagramBean.entityTypeChanged}">
+                                                                <f:selectItems value="#{pageFlowScope.NetworkDiagramBean.entityList}" id="si2"/>
+                                                            </af:selectOneChoice>
+                                                            <af:panelLabelAndMessage id="plm1" label="#{inventoryUIBundle.NAME}">
+                                                                <af:panelGroupLayout layout="horizontal" id="pgl9">
+                                                                    <af:inputText value="#{pageFlowScope.NetworkDiagramBean.entityInfo}" simple="true" contentStyle="width:281px" disabled="true" maximumLength="50" id="en"
+                                                                                  autoSubmit="true" valueChangeListener="#{pageFlowScope.NetworkDiagramBean.nameChanged}" binding="#{backingBeanScope.entityNameBinding}">
+                                                                        <af:autoSuggestBehavior suggestItems="#{pageFlowScope.NetworkDiagramBean.getNameHandler}" maxSuggestedItems="25"/>
+                                                                    </af:inputText>
+                                                                    <af:spacer width="10"/>
+                                                                    <af:commandImageLink id="sil" icon="/images/func_magnifyingglass_16_act.png" disabledIcon="/images/func_magnifyingglass_16_dis.png"
+                                                                                         disabled="#{pageFlowScope.NetworkDiagramBean.disableSearchIcon}" binding="#{backingBeanScope.searchIcon}"
+                                                                                         shortDesc="#{inventoryUIBundle.BROWSE}" actionListener="#{pageFlowScope.NetworkDiagramBean.invokeSearchPopup}"/>
+                                                                </af:panelGroupLayout>
+                                                            </af:panelLabelAndMessage>
+                                                        </af:panelFormLayout>
+                                                        <af:spacer width="5" height="5"/>
+                                                        <af:image source="#{pageFlowScope.NetworkDiagramBean.selectedEntityIcon}" shortDesc="#{pageFlowScope.NetworkDiagramBean.entityShortDesc}"
+                                                                  binding="#{backingBeanScope.iconBinding}">
+                                                            <af:componentDragSource/>
+                                                        </af:image>
+                                                    </af:panelGroupLayout>
+                                                </af:panelBox>
+                                                <af:popup id="lds" binding="#{backingBeanScope.searchLD}" contentDelivery="lazyUncached">
+                                                    <af:dialog id="ldd" type="none" title="#{inventoryUIBundle.LOGICAL_DEVICE_SEARCH}">
+                                                        <af:panelStretchLayout id="pslds" styleClass="invEntitySearchPopup" dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.LogicalDeviceSearchResultsFlow1.regionModel}" id="r6"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.NetworkDiagramBean.refreshSearchPopup}"/>
+                                                </af:popup>
+                                                <af:popup id="pds" binding="#{backingBeanScope.searchPD}" contentDelivery="lazyUncached">
+                                                    <af:dialog id="pdd" type="none" title="#{inventoryUIBundle.PHYSICAL_DEVICE_SEARCH}">
+                                                        <af:panelStretchLayout id="pspds" styleClass="invEntitySearchPopup" dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.PhysicalDeviceSearchResultsFlow1.regionModel}" id="r7"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.NetworkDiagramBean.refreshSearchPopup}"/>
+                                                </af:popup>
+                                                <af:popup id="eqs" binding="#{backingBeanScope.searchEQ}" contentDelivery="lazyUncached">
+                                                    <af:dialog id="eqd" type="none" title="#{inventoryUIBundle.EQUIPMENT_SEARCH}">
+                                                        <af:panelStretchLayout id="pseqs" styleClass="invEntitySearchPopup" dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.EquipmentSearchResultsFlow1.regionModel}" id="r8"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.NetworkDiagramBean.refreshSearchPopup}"/>
+                                                </af:popup>
+                                                <af:popup id="pps" binding="#{backingBeanScope.searchPipe}" contentDelivery="lazyUncached">
+                                                    <af:dialog id="piped" type="none" title="#{inventoryUIBundle.PIPE_SEARCH}">
+                                                        <af:panelStretchLayout id="pipes" styleClass="invEntitySearchPopup" dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.PipeSearchResultsFlow1.regionModel}" id="r9"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.NetworkDiagramBean.refreshSearchPopup}"/>
+                                                </af:popup>
+                                                <af:popup id="ns" binding="#{backingBeanScope.searchNetwork}" contentDelivery="lazyUncached">
+                                                    <af:dialog id="nwd" type="none" title="#{inventoryUIBundle.NETWORK_SEARCH_RESULTS_DIALOG}">
+                                                        <af:panelStretchLayout id="nws" styleClass="invEntitySearchPopup" dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.NetworkSearchResults1.regionModel}" id="r12"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.NetworkDiagramBean.refreshSearchPopup}"/>
+                                                </af:popup>
+                                                <af:popup id="pls" binding="#{backingBeanScope.searchPlace}" contentDelivery="lazyUncached">
+                                                    <af:dialog id="placed" type="none" title="#{inventoryUIBundle.PLACE_SEARCH_DIALOG}">
+                                                        <af:panelStretchLayout id="places" styleClass="invEntitySearchPopup" dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.PlaceSearchResultsFlow1.regionModel}" id="r10"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.NetworkDiagramBean.refreshSearchPopup}"/>
+                                                </af:popup>
+                                                <af:popup id="ls" binding="#{backingBeanScope.searchLocation}" contentDelivery="lazyUncached">
+                                                    <af:dialog id="ld" type="none" title="#{inventoryUIBundle.LOCATION_SEARCH}">
+                                                        <af:panelStretchLayout id="pll" styleClass="invEntitySearchPopup" dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.LocationSearchResultsFlow1.regionModel}" id="r11"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.NetworkDiagramBean.refreshSearchPopup}"/>
+                                                </af:popup>
+                                            </af:panelGroupLayout>
+                                        </f:facet>
+                                    </af:panelStretchLayout>
+                                </f:facet>
+                                <f:facet name="second">
+                                    <af:panelStretchLayout id="psl3" dimensionsFrom="auto" topHeight="55">
+                                        <f:facet name="top">
+                                            <af:panelGroupLayout layout="scroll" id="pgl923">
+                                                <af:toolbox id="tb1">
+                                                    <af:group id="g11">
+                                                        <af:toolbar id="td3" inlineStyle="border-width: 1 px;">
+                                                            <af:inputNumberSlider shortDesc="#{inventoryUIBundle.QUANTITY}" id="ins1" minimum="1" maximum="10" rendered="#{pageFlowScope.NetworkDiagramBean.renderQuantity}"
+                                                                                  value="#{pageFlowScope.NetworkDiagramBean.quantity}" binding="#{backingBeanScope.quantityBinding}" autoSubmit="true" majorIncrement="1"
+                                                                                  minorIncrement="1" valueChangeListener="#{pageFlowScope.NetworkDiagramBean.quanityChanged}" inlineStyle="width: 28em" contentStyle="width: 25em"/>
+                                                        </af:toolbar>
+                                                        <af:toolbar id="td2" inlineStyle="border-width: 1 px;" rendered="#{pageFlowScope.NetworkDiagramBean.renderQuantity}">
+                                                            <af:spacer width="5"/>
+                                                            <af:button id="bN5" shortDesc="#{inventoryUIBundle.CREATE_NETWORK}" actionListener="#{pageFlowScope.NetworkDiagramBean.createNewEntity}" icon="/images/qual_cloud_24.svg">
+                                                                <af:componentDragSource/>
+                                                            </af:button>
+                                                            <af:spacer width="5"/>
+                                                            <af:button id="b5" shortDesc="#{inventoryUIBundle.CREATE_LOGICAL_DEVICE}" actionListener="#{pageFlowScope.NetworkDiagramBean.createNewEntity}"
+                                                                       icon="/images/qual_computer02_24_full.png">
+                                                                <af:componentDragSource/>
+                                                            </af:button>
+                                                            <af:spacer width="5"/>
+                                                            <af:button id="b6" shortDesc="#{inventoryUIBundle.CREATE_PHYSICAL_DEVICE}" actionListener="#{pageFlowScope.NetworkDiagramBean.createNewEntity}"
+                                                                       icon="/images/qual_computer_24_full.png">
+                                                                <af:componentDragSource/>
+                                                            </af:button>
+                                                            <af:spacer width="5"/>
+                                                            <af:button id="b7" shortDesc="#{inventoryUIBundle.CREATE_EQUIPMENT}" actionListener="#{pageFlowScope.NetworkDiagramBean.createNewEntity}"
+                                                                       icon="/images/qual_server_24_full.png">
+                                                                <af:componentDragSource/>
+                                                            </af:button>
+                                                            <af:spacer width="5"/>
+                                                            <af:button id="b8" shortDesc="#{inventoryUIBundle.CREATE_CONNECTIVITY}" icon="/images/qual_nodes_24_full.png">
+                                                                <f:facet name="popup">
+                                                                    <af:menu text="Items">
+                                                                        <af:commandMenuItem id="mi1" text="#{inventoryUIBundle.MENU_CONNECTIVITY}" shortDesc="#{inventoryUIBundle.CREATE_CONNECTIVITY}"
+                                                                                            actionListener="#{pageFlowScope.NetworkDiagramBean.createNewEntity}"/>
+                                                                        <af:commandMenuItem id="mi2" text="#{inventoryUIBundle.PIPE}" shortDesc="#{inventoryUIBundle.CREATE_PIPE}"
+                                                                                            actionListener="#{pageFlowScope.NetworkDiagramBean.createNewEntity}"/>
+                                                                    </af:menu>
+                                                                </f:facet>
+                                                            </af:button>
+                                                            <af:spacer width="5"/>
+                                                        </af:toolbar>
+                                                        <af:toolbar id="td1" inlineStyle="border-width: 1 px;">
+                                                            <af:spacer width="5"/>
+                                                            <af:button id="b1" actionListener="#{pageFlowScope.NetworkDiagramBean.layoutListener}" shortDesc="#{inventoryUIBundle.FORCE_DIRECTED_LAYOUT}"
+                                                                       icon="/images/diagram/viewtreeradial_ena.png" disabledIcon="/images/diagram/viewtreeradial_dis.png" hoverIcon="/images/diagram/viewtreeradial_dwn.png"/>
+                                                            <af:spacer width="5"/>
+                                                            <af:button id="b2" actionListener="#{pageFlowScope.NetworkDiagramBean.layoutListener}" shortDesc="#{inventoryUIBundle.CIRCULAR_LAYOUT}"
+                                                                       icon="/images/diagram/viewtreecircle_ena.png" disabledIcon="/images/diagram/viewtreecircle_dis.png" hoverIcon="/images/diagram/viewtreecircle_dwn.png"/>
+                                                            <af:spacer width="5"/>
+                                                            <af:button id="b4" actionListener="#{pageFlowScope.NetworkDiagramBean.layoutListener}" shortDesc="#{inventoryUIBundle.GRID_LAYOUT}"
+                                                                       icon="/images/diagram/viewtree_horizontal_ena.png" disabledIcon="/images/diagram/viewtree_horizontal_dis.png"
+                                                                       hoverIcon="/images/diagram/viewtree_horizontal_dwn.png"/>
+                                                        </af:toolbar>
+                                                        <af:toolbar id="td5" inlineStyle="border-width: 1 px;" binding="#{backingBeanScope.toggleToolbar}">
+                                                            <af:spacer width="5"/>
+                                                            <af:button id="b10" shortDesc="#{inventoryUIBundle.NETWORK_VIEW}" type="radio" actionListener="#{pageFlowScope.NetworkDiagramBean.toggleNetworkMode}"
+                                                                       selected="#{pageFlowScope.NetworkDiagramBean.networkView}" icon="/images/diagram/navi_clouds_24_ena.png"></af:button>
+                                                            <af:spacer width="5"/>
+                                                            <af:button id="b11" shortDesc="#{inventoryUIBundle.EXPANDED_NETWORK_VIEW}" type="radio" actionListener="#{pageFlowScope.NetworkDiagramBean.toggleNetworkMode}"
+                                                                       selected="#{(pageFlowScope.NetworkDiagramBean.expandedNetworkView)}" icon="/images/diagram/qual_cloudthreenodes_24_full.png"></af:button>
+                                                            <!--af:spacer width="5"/>
+                                                            <af:button id="b12" shortDesc="#{inventoryUIBundle.STACKING_VIEW}" type="radio" actionListener="#{pageFlowScope.NetworkDiagramBean.toggleNetworkMode}"
+                                                                       selected="#{(pageFlowScope.NetworkDiagramBean.stackingView)}" icon="/images/diagram/qual_applications_24_full.png"></af:button>
+                                                            <af:spacer width="5"/-->
+                                                        </af:toolbar>
+                                                        <af:toolbar id="td6" inlineStyle="border-width: 1 px;" rendered="#{pageFlowScope.NetworkDiagramBean.renderQuantity}">
+                                                            <af:spacer width="5"/>
+                                                            <af:button id="b13" shortDesc="#{inventoryUIBundle.PREFERENCES}" actionListener="#{pageFlowScope.NetworkDiagramBean.launchPreferencesDialog}"
+                                                                       icon="/images/diagram/navi_gear_24_ena.png"></af:button>
+                                                            <af:spacer width="5"/>
+                                                        </af:toolbar>
+                                                    </af:group>
+                                                </af:toolbox>
+                                            </af:panelGroupLayout>
+                                        </f:facet>
+                                        <f:facet name="center">
+                                            <af:panelGroupLayout layout="scroll" id="pgl6">
+                                                <af:panelSplitter orientation="horizontal" splitterPosition="250" dimensionsFrom="auto" positionedFromEnd="true" collapsed="true">
+                                                    <f:facet name="first">
+                                                        <af:panelStretchLayout dimensionsFrom="auto" styleClass="AFStretchWidth">
+                                                            <f:facet name="center">
+                                                                <dvt:diagram id="dg1" binding="#{pageFlowScope.NetworkDiagramBean.diagrammer}" layout="#{pageFlowScope.NetworkDiagramBean.diagramLayout}" selection="multiple"
+                                                                             controlPanelBehavior="initExpanded" readOnly="#{pageFlowScope.NetworkDiagramBean.editable}" minZoom="0" maxZoom="3" rolloverBehavior="dim"
+                                                                             summary="Diagram Editor Demo" styleClass="AFStretchWidth" inlineStyle="height: 700px;">
+                                                                    <af:transition transition="auto" triggerType="dataChange"/>
+                                                                    <!--af:clientListener method="DemoGridLayout.makeDraggable" type="click"/-->
+                                                                    <dvt:clientLayout name="forceDirectedLayout" method="DemoEditorLayout.forceDirectedLayout" featureName="DemoEditorLayout">
+                                                                        <f:attribute name="optimalLinkLength" value="200"/>
+                                                                        <f:attribute name="setViewport" value="false"/>
+                                                                    </dvt:clientLayout>
+                                                                    <dvt:clientLayout name="gridLayout" method="DemoGridLayout.gridLayout" featureName="DemoGridLayout">
+                                                                        <f:attribute name="setViewport" value="true"/>
+                                                                        <f:attribute name="padding" value="50"/>
+                                                                        <f:attribute name="curvedLinks" value="true"/>
+                                                                    </dvt:clientLayout>
+                                                                    <dvt:clientLayout name="circleLayout" method="DemoCircleLayout.circleLayout" featureName="DemoCircleLayout">
+                                                                        <f:attribute name="center" value="true"/>
+                                                                    </dvt:clientLayout>
+                                                                    <dvt:clientLayout name="treeLayout" method="DemoTreeLayout.treeLayout" featureName="DemoTreeLayout"/>
+                                                                    <dvt:clientLayout name="layout" method="DemoCrossContainerLinksLayout.layout" featureName="TutorialLayouts"/>
+                                                                    <dvt:overviewWindow id="ow1" disclosed="true"/>
+                                                                    <dvt:palette maxWidth="250px" disclosed="false" binding="#{backingBeanScope.paletteBinding}" id="pal">
+                                                                        <dvt:paletteSection label="Shapes" id="ps1" disclosed="true" rendered="#{pageFlowScope.NetworkDiagramBean.nodeType eq 'Shape'}">
+                                                                            <dvt:paletteItem label="#{inventoryUIBundle.EQUIPMENT}">
+                                                                                <dvt:marker id="mr1" shape="circle" labelDisplay="off" fillColor="#ff8533" width="24" height="24"/>
+                                                                            </dvt:paletteItem>
+                                                                            <dvt:paletteItem label="#{inventoryUIBundle.LOGICAL_DEVICE}">
+                                                                                <dvt:marker id="mr2" shape="circle" labelDisplay="off" fillColor="#33cc33" width="24" height="24"/>
+                                                                            </dvt:paletteItem>
+                                                                            <dvt:paletteItem label="#{inventoryUIBundle.NETWORK}">
+                                                                                <dvt:marker id="mr3" shape="circle" labelDisplay="off" fillColor="#99d6ff" width="24" height="24"/>
+                                                                            </dvt:paletteItem>
+                                                                            <dvt:paletteItem label="#{inventoryUIBundle.PHYSICAL_DEVICE}">
+                                                                                <dvt:marker id="mr4" shape="circle" labelDisplay="off" fillColor="#0073e6" width="24" height="24"/>
+                                                                            </dvt:paletteItem>
+                                                                            <dvt:paletteItem label="#{inventoryUIBundle.GEOGRAPHIC_PLACE}">
+                                                                                <dvt:marker id="mr12" shape="circle" labelDisplay="off" fillColor="#b35900" width="24" height="24"/>
+                                                                            </dvt:paletteItem>
+                                                                            <dvt:paletteItem label="#{inventoryUIBundle.NETWORK_ENTITY_CODE}">
+                                                                                <dvt:marker id="mr13" shape="circle" labelDisplay="off" fillColor="#008B8B" width="24" height="24"/>
+                                                                            </dvt:paletteItem>
+                                                                            <dvt:paletteItem label="#{inventoryUIBundle.PROPERTY_LOCATION}">
+                                                                                <dvt:marker id="mr14" shape="circle" labelDisplay="off" fillColor="#b35900" width="24" height="24"/>
+                                                                            </dvt:paletteItem>
+                                                                        </dvt:paletteSection>
+                                                                        <dvt:paletteSection label="Icons" id="ps2" disclosed="true" rendered="#{pageFlowScope.NetworkDiagramBean.nodeType eq 'Icon'}">
+                                                                            <dvt:paletteItem label="#{inventoryUIBundle.EQUIPMENT}">
+                                                                                <dvt:marker id="mr5" width="24" height="24" source="/images/qual_server_16_full_2x.svg"/>
+                                                                            </dvt:paletteItem>
+                                                                            <dvt:paletteItem label="#{inventoryUIBundle.LOGICAL_DEVICE}">
+                                                                                <dvt:marker id="mr6" width="24" height="24" source="/images/qual_computer02_16_full_2x.svg"/>
+                                                                            </dvt:paletteItem>
+                                                                            <dvt:paletteItem label="#{inventoryUIBundle.NETWORK}">
+                                                                                <dvt:marker id="mr7" width="24" height="24" source="/images/cloud_32.svg"/>
+                                                                            </dvt:paletteItem>
+                                                                            <dvt:paletteItem label="#{inventoryUIBundle.PHYSICAL_DEVICE}">
+                                                                                <dvt:marker id="mr8" width="24" height="24" source="/images/qual_computer_32_full.svg"/>
+                                                                            </dvt:paletteItem>
+                                                                            <dvt:paletteItem label="#{inventoryUIBundle.GEOGRAPHIC_PLACE}">
+                                                                                <dvt:marker id="mr9" width="24" height="24" source="/images/qual_globe_16_mono_2x.svg"/>
+                                                                            </dvt:paletteItem>
+                                                                            <dvt:paletteItem label="#{inventoryUIBundle.NETWORK_ENTITY_CODE}">
+                                                                                <dvt:marker id="mr10" width="24" height="24" source="/images/qual_globenodes_16_full@2x.png"/>
+                                                                            </dvt:paletteItem>
+                                                                            <dvt:paletteItem label="#{inventoryUIBundle.PROPERTY_LOCATION}">
+                                                                                <dvt:marker id="mr11" width="24" height="24" source="/images/qual_globe_16_mono_2x.svg"/>
+                                                                            </dvt:paletteItem>
+                                                                        </dvt:paletteSection>
+                                                                    </dvt:palette>
+                                                                    <dvt:search id="searchId" initialBehavior="initExpanded"/>
+                                                                    <af:dropTarget dropListener="#{pageFlowScope.NetworkDiagramBean.diagramDropListener}" actions="COPY LINK MOVE">
+                                                                        <af:dataFlavor flavorClass="org.apache.myfaces.trinidad.model.RowKeySet" discriminant="fromDiagram"/>
+                                                                        <af:dataFlavor flavorClass="javax.faces.component.UIComponent"/>
+                                                                    </af:dropTarget>
+                                                                    <!--dvt:legend>
+                                                                        <dvt:showLegendGroup label="Networks">
+                                                                            <dvt:legendSection source="#{pageFlowScope.NetworkDiagramBean.legendString}"/>
+                                                                        </dvt:showLegendGroup>
+                                                                    </dvt:legend-->
+                                                                    <dvt:diagramNodes id="dn1" value="#{pageFlowScope.NetworkDiagramBean.nodesModel}" var="node" 
+                                                                                      drillListener="#{pageFlowScope.NetworkDiagramBean.nodeDrillListener}" rowDisclosureListener="#{pageFlowScope.NetworkDiagramBean.disclosedNode}"
+                                                                                      nodeDeleteListener="#{pageFlowScope.NetworkDiagramBean.nodeDeleteListener}"
+                                                                                      selectionListener="#{pageFlowScope.NetworkDiagramBean.nodesSelectedEdit}" selectedRowKeys="#{pageFlowScope.NetworkDiagramBean.selectedNodes}"
+                                                                                      binding="#{backingBeanScope.nodesComp}" nodeCreateListener="#{pageFlowScope.NetworkDiagramBean.nodeCreateListener}"
+                                                                                      highlightBehavior="nodeAndLinks">
+                                                                        <af:dragSource actions="COPY LINK MOVE" defaultAction="MOVE" discriminant="fromDiagram"/>
+                                                                        <dvt:diagramNode id="nstep" nodeId="#{node.Nodeid}" layout="forceDirectedLayout" showNodeActions="true" showDrill="true"
+                                                                                         shortDesc="#{node.Label}" rendered="#{pageFlowScope.NetworkDiagramBean.nodeType eq 'Shape'}">
+                                                                            <f:facet name="zoom100">
+                                                                                <af:panelGroupLayout id="pglm1">
+                                                                                    <dvt:marker id="marker1" shape="circle" labelDisplay="#{pageFlowScope.NetworkDiagramBean.displayLabel ? 'on' : 'off'}"
+                                                                                                labelPosition="#{pageFlowScope.NetworkDiagramBean.labelPosition}" fillColor="#{node.Color}" borderWidth="2" value="#{node.Label}"
+                                                                                                width="48" height="48">
+                                                                                        <!--dvt:attributeGroups id="ag0" type="color" label="#{node.group}"/-->
+                                                                                    </dvt:marker>
+                                                                                </af:panelGroupLayout>
+                                                                            </f:facet>
+                                                                        </dvt:diagramNode>
+                                                                        <dvt:diagramNode id="nstep1" nodeId="#{node.Nodeid}" layout="forceDirectedLayout" showNodeActions="true" showDrill="true"
+                                                                                         shortDesc="#{node.Label}" rendered="#{pageFlowScope.NetworkDiagramBean.nodeType eq 'Icon'}">
+                                                                            <f:facet name="zoom100">
+                                                                                <af:panelGroupLayout id="pglm11" inlineStyle="padding:5px;border-width:2px;border-radius:8px;">
+                                                                                    <dvt:marker id="marker2" source="#{node.Icon}" labelDisplay="#{pageFlowScope.NetworkDiagramBean.displayLabel ? 'on' : 'off'}"
+                                                                                                labelPosition="#{pageFlowScope.NetworkDiagramBean.labelPosition}" borderWidth="2" value="#{node.Label}"
+                                                                                                width="48" height="48">
+                                                                                        <!--dvt:attributeGroups id="ag1" type="shape" label="#{node.group}"/-->
+                                                                                    </dvt:marker>
+                                                                                </af:panelGroupLayout>
+                                                                            </f:facet>
+                                                                        </dvt:diagramNode>
+                                                                    </dvt:diagramNodes>
+                                                                    <dvt:diagramLinks id="dl1" value="#{pageFlowScope.NetworkDiagramBean.linksModel}" var="link"
+                                                                                      linkCreateListener="#{pageFlowScope.NetworkDiagramBean.linkCreateListener}"
+                                                                                      linkChangeListener="#{pageFlowScope.NetworkDiagramBean.linkUpdateListener}"
+                                                                                      linkDeleteListener="#{pageFlowScope.NetworkDiagramBean.linkDeleteListener}"
+                                                                                      selectionListener="#{pageFlowScope.NetworkDiagramBean.linksSelected}" selectedRowKeys="#{pageFlowScope.NetworkDiagramBean.selectedLinks}"
+                                                                                      binding="#{pageFlowScope.NetworkDiagramBean.linksComp}">
+                                                                        <dvt:diagramLink id="l6" startNode="#{link.Startnode}" rendered="#{link.EntityType =='Connectivity'}" endNode="#{link.Endnode}" readOnly="false"
+                                                                                         startConnectorType="none" shortDesc="#{link.Label}" endConnectorType="none" linkStyle="solid" linkWidth="1" linkColor="black"/>
+                                                                        <dvt:diagramLink id="l7" startNode="#{link.Startnode}" rendered="#{link.EntityType =='Pipe'}" endNode="#{link.Endnode}" readOnly="false"
+                                                                                         startConnectorType="none" shortDesc="#{link.Label}" endConnectorType="none" linkStyle="solid" linkWidth="2" linkColor="gray"/>
+                                                                    </dvt:diagramLinks>
+                                                                    <f:facet name="contextMenu">
+                                                                        <af:popup contentDelivery="lazyUncached" id="nodeMenu">
+                                                                            <af:menu id="m1">
+                                                                                <af:commandMenuItem text="#{inventoryUIBundle.VIEW_SUMMARY}" id="cmi1" action="#{pageFlowScope.NetworkDiagramBean.nodeSummaryAction}"
+                                                                                                    actionListener="#{pageFlowScope.NetworkDiagramBean.navigateToSummary}"/>
+                                                                                <af:commandMenuItem text="#{inventoryUIBundle.EDIT_NODE}" id="cmi5" action="#{pageFlowScope.NetworkDiagramBean.nodeEditAction}"
+                                                                                                    actionListener="#{pageFlowScope.NetworkDiagramBean.navigateToEdit}"/>
+                                                                            </af:menu>
+                                                                        </af:popup>
+                                                                    </f:facet>
+                                                                    <f:facet name="linkContextMenu">
+                                                                        <af:popup contentDelivery="lazyUncached" id="linkMenu">
+                                                                            <af:menu id="m2">
+                                                                                <af:commandMenuItem text="#{inventoryUIBundle.VIEW_SUMMARY}" id="cmi4" action="#{pageFlowScope.NetworkDiagramBean.linkSummaryAction}"
+                                                                                                    actionListener="#{pageFlowScope.NetworkDiagramBean.navigateToSummary}"/>
+                                                                                <af:commandMenuItem text="#{inventoryUIBundle.EDIT_LINK}" id="cmi6" action="#{pageFlowScope.NetworkDiagramBean.linkEditAction}"
+                                                                                                    actionListener="#{pageFlowScope.NetworkDiagramBean.navigateToEdit}"/>
+                                                                                <af:commandMenuItem text="#{inventoryUIBundle.REMOVE_LINK}" id="cmi7" action="#{pageFlowScope.NetworkDiagramBean.linkRemoveAction}"
+                                                                                                    actionListener="#{pageFlowScope.NetworkDiagramBean.removeLink}"/>
+                                                                            </af:menu>
+                                                                        </af:popup>
+                                                                    </f:facet>
+                                                                    <af:clientListener method="handleClick" type="click"/>
+                                                                    <af:clientListener method="mouseMove" type="mouseMove"/>
+                                                                    <af:clientListener method="mouseUp" type="mouseUp"/>
+                                                                    <af:clientListener method="mouseDown" type="mouseDown"/>
+                                                                </dvt:diagram>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </f:facet>
+                                                    <f:facet name="second">
+                                                        <af:panelGroupLayout id="pgl2" layout="scroll" rendered="#{adfFacesContext.outputMode!= 'printable'}">
+                                                            <af:panelAccordion id="paEditor" discloseMany="true" dimensionsFrom="auto">
+                                                                <af:showDetailItem disclosed="true" id="sdiEditor" text="Editor" flex="1" stretchChildren="first">
+                                                                    <af:panelGroupLayout id="pgl3" layout="scroll">
+                                                                        <af:panelFormLayout id="pfl1" maxColumns="1" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.editorPanel}">
+                                                                            <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}" id="ntwk-id">
+                                                                                <af:link id="ln2" action="#{pageFlowScope.NetworkDiagramBean.nodeSummaryAction}"
+                                                                                         actionListener="#{pageFlowScope.NetworkDiagramBean.navigateToSummary}">
+                                                                                    <af:outputText value="#{pageFlowScope.NetworkDiagramBean.id}" id="ot3"/>
+                                                                                </af:link>
+                                                                            </af:panelLabelAndMessage>
+                                                                            <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="ntwk-name">
+                                                                                <af:outputText value="#{pageFlowScope.NetworkDiagramBean.name}" id="ot2"/>
+                                                                            </af:panelLabelAndMessage>
+                                                                            <af:panelLabelAndMessage label="#{inventoryUIBundle.NETWORK_ENTITY_LOCATION}" id="logdev-nel"
+                                                                                                     rendered="#{pageFlowScope.NetworkDiagramBean.renderLocation}">
+                                                                                <af:link id="ln1" action="LocationDetails" actionListener="#{pageFlowScope.NetworkDiagramBean.navigateToSummary}">
+                                                                                    <af:outputText value="#{pageFlowScope.NetworkDiagramBean.location}" id="ot5"/>
+                                                                                </af:link>
+                                                                            </af:panelLabelAndMessage>
+                                                                            <af:spacer height="10"/>
+                                                                            <af:iterator id="it123" binding="#{backingBeanScope.charPanelBinding}" value="#{pageFlowScope.NetworkDiagramBean.characteristics}"
+                                                                                         var="characteristicDetails">
+                                                                                <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="onn312"
+                                                                                                         rendered="#{(characteristicDetails.characteristic.characteristicSpecification.valueType == 'ALPHANUMERIC' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'CALENDAR' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'DROPDOWN_LIST' || characteristicDetails.characteristic.characteristicSpecification.valueType == 'NUMERIC') and !(characteristicDetails.characteristic.characteristicSpecification.isEntityReference == 'true')}">
+                                                                                    <af:outputText id="ote3" value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                                                                                </af:panelLabelAndMessage>
+                                                                                <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="onn317"
+                                                                                                         rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'URL'}">
+                                                                                    <af:link id="oth3" targetFrame="_blank" destination="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                                                                             inlineStyle="padding-left:6px;">
+                                                                                        <af:outputText id="ot18" truncateAt="50" value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                                                                                    </af:link>
+                                                                                </af:panelLabelAndMessage>
+                                                                                <af:panelLabelAndMessage label="" id="onn318"
+                                                                                                         rendered="#{characteristicDetails.characteristic.characteristicSpecification.controlType == 'CHECKBOX'}">
+                                                                                    <af:selectBooleanCheckbox id="sbc1" readOnly="true"
+                                                                                                              value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                                                                                              text="#{characteristicDetails.label}" simple="true"/>
+                                                                                </af:panelLabelAndMessage>
+                                                                                <af:panelLabelAndMessage id="onn319" label="#{characteristicDetails.label}"
+                                                                                                         rendered="#{characteristicDetails.characteristic.characteristicSpecification.controlType == 'DROPDOWN_LIST' and characteristicDetails.characteristic.characteristicSpecification.isEntityReference == 'true'}">
+                                                                                    <af:commandLink action="#{pageFlowScope.NetworkDiagramBean.charSummaryAction}"
+                                                                                                    actionListener="#{pageFlowScope.NetworkDiagramBean.navigateToCharSummary}"
+                                                                                                    text="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}">
+                                                                                        <af:setActionListener from="#{characteristicDetails.characteristic.referencedEntity}" to="#{requestScope.entityLink}"/>
+                                                                                    </af:commandLink>
+                                                                                </af:panelLabelAndMessage>
+                                                                                <af:spacer height="10"/>
+                                                                            </af:iterator>
+                                                                        </af:panelFormLayout>
+                                                                    </af:panelGroupLayout>
+                                                                </af:showDetailItem>
+                                                            </af:panelAccordion>
+                                                            <af:resource type="javascript">
+                                                              function handleClick(event) {
+                                                                  event.cancel();
+                                                              }
+
+                                                              var bMouseDragging = false;
+                                                              var nMouseOffsetX = 0;
+                                                              var nMouseOffsetY = 0;
+
+                                                              function mouseDown(evt) {
+                                                                  bMouseDragging = true;
+                                                                  console.log("mouseDown" + bMouseDragging);
+                                                                  var ball = document.getElementById("N1");
+                                                                  console.log("mouseDown-Node" + ball);
+                                                                  var p = document.documentElement.createSVGPoint();
+                                                                  console.log("mouseDown-SVG Point" + p);
+                                                                  p.x = evt.clientX;
+                                                                  p.y = evt.clientY;
+                                                                  console.log("mouseDown- (x,y)" + p.x + "--" + p.y);
+                                                                  var m = ball.getScreenCTM();
+                                                                  console.log("mouseDown-ScreenCTM" + m);
+                                                                  p = p.matrixTransform(m.inverse());
+                                                                  console.log("mouseDown-matrixTransform" + p);
+                                                                  nMouseOffsetX = p.x - parseInt(ball.getAttribute("cx"));
+                                                                  nMouseOffsetY = p.y - parseInt(ball.getAttribute("cy"));
+                                                                  console.log("mouseDown- Mouse Offset" + nMouseOffsetX + "--" + nMouseOffsetY);
+                                                              }
+
+                                                              function mouseUp(evt) {
+                                                                  bMouseDragging = false;
+                                                                  console.log("mouseUp" + bMouseDragging);
+                                                              }
+
+                                                              function mouseMove(evt) {
+                                                                  bMouseDragging = true;
+                                                                  console.log("mouseMove is executing--" + bMouseDragging);
+                                                                  var p = document.documentElement.createSVGPoint();
+                                                                  console.log("mouseMove-SVG Point" + p);
+                                                                  p.x = evt.clientX;
+                                                                  p.y = evt.clientY;
+                                                                  console.log("mouseMove- (x,y)" + p.x + "--" + p.y);
+                                                                  var bClient = true;
+                                                                  console.log("mouseMove" + bMouseDragging);
+                                                                  var ball = document.getElementById("N1");
+                                                                  console.log("mouseMove-------Node found----------" + ball);
+                                                                  if (ball) {
+                                                                      console.log("mouseMove--------------ball" + bMouseDragging);
+                                                                      var m = ball.getScreenCTM();
+                                                                      console.log("mouseMove-ScreenCTM" + m);
+                                                                      p = p.matrixTransform(m.inverse());
+                                                                      console.log("mouseMove-matrixTransform" + p);
+                                                                      ball.setAttribute("cx", p.x - nMouseOffsetX);
+                                                                      ball.setAttribute("cy", p.y - nMouseOffsetY);
+                                                                      console.log("mouseMove- Mouse Offset" + ball.getAttribute("cx") + "--" + ball.getAttribute("cy"));
+                                                                      bClient = false;
+                                                                  }
+                                                              }
+
+                                                              function init() {
+                                                                  var ball = document.getElementById("N1");
+                                                                  console.log("init-------------" + ball);
+                                                                  if (ball) {
+                                                                      ball.addEventListener("mousedown", mouseDown, false);
+                                                                      ball.addEventListener("mouseup", mouseUp, false);
+                                                                      ball.addEventListener("mousemove", mouseMove, false);
+                                                                  }
+                                                              }
+                                                            </af:resource>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                </af:panelSplitter>
+                                                <af:popup id="pp1" binding="#{backingBeanScope.editorPopup}" contentDelivery="lazyUncached">
+                                                    <af:dialog id="editor_d1" type="none" title="#{inventoryUIBundle.CONNECTIVITY}">
+                                                        <af:panelStretchLayout id="psl_1" styleClass="invConnectivityEditorPopup" dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.TDMConnectivityCreateFlow1.regionModel}" id="r1"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.NetworkDiagramBean.refresh}"/>
+                                                </af:popup>
+                                                <af:popup id="pp2" binding="#{backingBeanScope.pipePopup}" contentDelivery="lazyUncached">
+                                                    <af:dialog id="p_d1" type="none" title="#{inventoryUIBundle.PIPE}">
+                                                        <af:panelStretchLayout id="psl_2" styleClass="invConnectivityEditorPopup" dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.PipeEditFlow1.regionModel}" id="r2"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.NetworkDiagramBean.refresh}"/>
+                                                </af:popup>
+                                                <af:popup id="pp3" binding="#{backingBeanScope.eqPopup}" contentDelivery="lazyUncached">
+                                                    <af:dialog id="eq_d1" type="none" title="#{inventoryUIBundle.EQUIPMENT}">
+                                                        <af:panelStretchLayout id="psl_3" styleClass="invEntityEditorPopup" dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.EquipmentEditFlow1.regionModel}" id="r3"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.NetworkDiagramBean.refresh}"/>
+                                                </af:popup>
+                                                <af:popup id="pp4" binding="#{backingBeanScope.pdPopup}" contentDelivery="lazyUncached">
+                                                    <af:dialog id="pd_d1" type="none" title="#{inventoryUIBundle.PHYSICAL_DEVICE}">
+                                                        <af:panelStretchLayout id="psl_4" styleClass="invEntityEditorPopup" dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.PhysicalDeviceEditFlow1.regionModel}" id="r4"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.NetworkDiagramBean.refresh}"/>
+                                                </af:popup>
+                                                <af:popup id="pp5" binding="#{backingBeanScope.ldPopup}" contentDelivery="lazyUncached">
+                                                    <af:dialog id="ld_d1" type="none" title="#{inventoryUIBundle.LOGICAL_DEVICE}">
+                                                        <af:panelStretchLayout id="psl_5" styleClass="invEntityEditorPopup" dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.LogicalDeviceEditFlow1.regionModel}" id="r5"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.NetworkDiagramBean.refresh}"/>
+                                                </af:popup>
+                                                <af:popup id="pp6" binding="#{backingBeanScope.ddPopup}" contentDelivery="lazyUncached">
+                                                    <af:dialog id="dd_d1" type="none" title="Detached Diagram" binding="#{backingBeanScope.ddDialog}" contentHeight="750" contentWidth="1600"/>
+                                                </af:popup>
+                                                <af:popup id="pp7" binding="#{backingBeanScope.nwPopup}" contentDelivery="lazyUncached">
+                                                    <af:dialog id="nw_d1" type="none" title="#{inventoryUIBundle.NETWORK}">
+                                                        <af:panelStretchLayout id="psl_6" styleClass="invEntityEditorPopup" dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.NetworkEditFlow1.regionModel}" id="r13"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.NetworkDiagramBean.refresh}"/>
+                                                </af:popup>
+                                                <af:popup id="pp8" binding="#{backingBeanScope.prefPopup}" contentDelivery="lazyUncached">
+                                                    <af:dialog id="pref_d1" type="yesNo" title="#{inventoryUIBundle.PREFERENCES}" binding="#{backingBeanScope.prefDialog}"
+                                                               dialogListener="#{pageFlowScope.NetworkDiagramBean.savePreferences}" cancelTextAndAccessKey="&amp;#{inventoryUIBundle.CANCEL}" affirmativeTextAndAccessKey="O&amp;K"
+                                                               contentHeight="100" contentWidth="300" stretchChildren="first">
+                                                        <af:panelStretchLayout id="psl_7" styleClass="AFStretchWidth" dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:panelGroupLayout id="pgl234" layout="scroll" styleClass="AFStretchWidth">
+                                                                    <af:selectOneRadio value="#{pageFlowScope.NetworkDiagramBean.nodeType}" autoSubmit="true" label="#{inventoryUIBundle.NODE_TYPE}" id="sor1">
+                                                                        <af:selectItem label="#{inventoryUIBundle.ICON}" value="#{inventoryUIBundle.ICON}" id="si5"/>
+                                                                        <af:selectItem label="#{inventoryUIBundle.SHAPE}" value="#{inventoryUIBundle.SHAPE}" id="si6"/>
+                                                                    </af:selectOneRadio>
+                                                                    <af:spacer height="5"/>
+                                                                    <af:selectBooleanCheckbox value="#{pageFlowScope.NetworkDiagramBean.displayLabel}" label="#{inventoryUIBundle.DISPLAY_LABEL}" id="dl2"/>
+                                                                    <af:spacer height="5"/>
+                                                                    <af:selectOneChoice id="soc3" value="#{pageFlowScope.NetworkDiagramBean.labelPosition}" label="#{inventoryUIBundle.LABEL_POSITION}">
+                                                                        <af:selectItem label="#{inventoryUIBundle.BOTTOM}" value="bottom" id="si1"/>
+                                                                        <af:selectItem label="#{inventoryUIBundle.CENTER}" value="center" id="si3"/>
+                                                                        <af:selectItem label="#{inventoryUIBundle.TOP}" value="top" id="si4"/>
+                                                                    </af:selectOneChoice>
+                                                                </af:panelGroupLayout>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.NetworkDiagramBean.refresh}"/>
+                                                </af:popup>
+                                            </af:panelGroupLayout>
+                                        </f:facet>
+                                    </af:panelStretchLayout>
+                                </f:facet>
+                            </af:panelSplitter>
+                        </f:facet>
+                    </af:decorativeBox>
+                </f:facet>
+            </af:panelSplitter>
+        </f:facet>
+    </af:pageTemplate>
+</jsp:root>

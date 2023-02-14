@@ -1,0 +1,405 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:showDetailHeader text="#{inventoryUIBundle.CUSTOM_INVOLVEMENTS}" disclosed="true" id="sdh1">
+	 <f:facet name="menuBar">
+        <af:menuBar id="menuBar1">
+            <af:menu id="CIMenu" binding="#{pageFlowScope.CustomInvolvementListBean.specsMenu}" styleClass="invListMenu"/>
+            <af:menu id="ETMenu" binding="#{pageFlowScope.CustomInvolvementListBean.entityTypeMenu}" styleClass="invListMenu"/>
+            <af:menu id="ESMenu" binding="#{pageFlowScope.CustomInvolvementListBean.entitySpecsMenu}" styleClass="invListMenu"/>
+        </af:menuBar>
+    </f:facet>
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+      <f:facet name="menus">
+        <af:menu binding="#{pageFlowScope.CustomInvolvementListBean.involvementsMenu}" styleClass="invListMenu" id="involvemenu"/>
+      </f:facet>
+      <f:facet name="toolbar">
+        <af:toolbar id="t2">
+          <af:commandToolbarButton text="#{inventoryUIBundle.EDIT}"
+                                   id="cb2Edit" binding="#{backingBeanScope.editButton}"
+                                   icon="#{InventoryHelperBean.editIcon}"
+                                   rendered="#{securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/custominvolvement/flow/CustomInvolvementEditFlow.xml#CustomInvolvementEditFlow'] &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Involvement.EDIT;action=view']}"
+                                   disabled="#{pageFlowScope.CustomInvolvementListBean.resultsTable.selectedRowKeys.size != 1}"
+                                   partialTriggers="resultsTableId" disabledIcon="#{InventoryHelperBean.disEditIcon}"
+                                   actionListener="#{pageFlowScope.CustomInvolvementListBean.editAction}"
+                                   accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+            <af:setActionListener from="true"
+                                  to="#{pageFlowScope.updateCustomInvolvement}"/>
+          </af:commandToolbarButton>
+          <af:spacer width="10" height="10" id="s1"/>
+          <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}"
+                                   id="disassociateButton" binding="#{backingBeanScope.deleteButton}"
+                                   icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                   disabled="#{pageFlowScope.CustomInvolvementListBean.resultsTable.selectedRowKeys.size lt 1 or pageFlowScope.CustomInvolvementListBean.resultsTable.selectedRowKeys.size eq null}"
+                                   partialTriggers="resultsTableId"
+                                   rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Involvement.DELETE;action=view']}"
+                                   actionListener="#{pageFlowScope.CustomInvolvementListBean.disassociateCustomInvolvements}"/>
+        </af:toolbar>
+      </f:facet>
+      <f:facet name="statusbar">
+        <af:toolbar>
+          <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount lt 0) ? 0 : bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount}"
+                          id="ol1" styleClass="invSearchOutputLabel"
+                          binding="#{backingBeanScope.totalResultsLabel}" partialTriggers="resultsTableId"/>
+        </af:toolbar>
+      </f:facet>
+      <af:table id="resultsTableId"
+                value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}"
+                var="row"
+                autoHeightRows="#{pageFlowScope.CustomInvolvementListBean.portletHeight}"
+                contentDelivery="immediate"
+                emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                fetchSize="#{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount &lt; 25) ? bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount : 25}"                
+                selectionListener="#{pageFlowScope.CustomInvolvementListBean.selectAction}"
+                queryListener="#{InventoryHelperBean.processQuery}"
+                varStatus="vs"
+                sortListener="#{bindings.searchResultsIterator.dataControl.dataProvider.processSort}"
+                rowSelection="#{pageFlowScope.CustomInvolvementListBean.rowSelection}" styleClass="AFStretchWidth"
+                binding="#{pageFlowScope.CustomInvolvementListBean.resultsTable}"
+                selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                columnStretching="last"
+                summary="#{inventoryUIBundle.CUSTOM_INVOLVEMENT_LIST}">
+        
+        <af:column headerText="#{inventoryUIBundle.INVOLVEMENT_SPECIFICATION}" id="c1" rowHeader="unstyled" sortable="true" sortProperty="customInvolvementSpecification.name">
+        <af:commandImageLink action="SpecificationSummary" actionListener="#{bindings.openSubTaskForSpecSummary.execute}"
+                             text="#{pageFlowScope.CustomInvolvementListBean.involvementSpecifiction.name}" id="cil1"
+                             shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+         
+            <af:setActionListener from="#{pageFlowScope.CustomInvolvementListBean.involvementSpecifiction.oid}" to="#{specObjectId}"/>
+          </af:commandImageLink>
+        </af:column>
+        
+        <af:column headerText="#{inventoryUIBundle.ENTITY_ROLE}" id="c2" sortable="true" sortProperty="fromEntityRoleKey">
+          <af:outputText value="#{pageFlowScope.CustomInvolvementListBean.currentRole}" id="ot1"/>
+        </af:column>
+        
+        <af:column headerText="#{inventoryUIBundle.INVOLVED_ENTITY}" align="center" id="c3">
+            <af:column headerText="#{inventoryUIBundle.ENTITY_TYPE}" id="c4" sortable="true" sortProperty="toEntityClass">
+              <af:outputText value="#{pageFlowScope.CustomInvolvementListBean.resourceType}" id="ot2"/>
+            </af:column>
+            
+            <af:column headerText="#{inventoryUIBundle.SPECIFICATION}" id="c5" sortable="true" sortProperty="toEntitySpecName">
+              <af:commandImageLink action="SpecificationSummary" actionListener="#{bindings.openSubTaskForSpecSummary.execute}"
+                                   text="#{pageFlowScope.CustomInvolvementListBean.entitySpecificationName}" id="cil2"
+                                   shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+                
+                <af:setActionListener from="#{pageFlowScope.CustomInvolvementListBean.entitySpecificationOid}" to="#{specObjectId}"/>
+              </af:commandImageLink>
+            </af:column>
+            
+            <af:column headerText="#{inventoryUIBundle.ID}" id="c6" sortable="true" sortProperty="toEntityId">
+              <af:commandImageLink action="#{pageFlowScope.CustomInvolvementListBean.getSummaryPage}" actionListener="#{pageFlowScope.CustomInvolvementListBean.registerRecentItem}"
+                                   text="#{pageFlowScope.CustomInvolvementListBean.entityId}" id="cil3"
+                                   shortDesc="#{inventoryUIBundle.LINK} #{inventoryUIBundle.FOR} #{pageFlowScope.CustomInvolvementListBean.resourceType} #{inventoryUIBundle.SUMMARY}">
+                
+                <af:setActionListener from="#{pageFlowScope.CustomInvolvementListBean.oidForNavigation}" to="#{oid}"/>
+                <af:setActionListener from="#{pageFlowScope.CustomInvolvementListBean.objectIdForNavigation}" to="#{objectId}"/>
+              </af:commandImageLink>
+            </af:column>
+            
+            <af:column headerText="#{inventoryUIBundle.NAME}" id="c7" sortable="true" sortProperty="toEntityName">
+              <af:outputText value="#{pageFlowScope.CustomInvolvementListBean.entityName}" id="ot3"/>
+            </af:column>
+            
+            <af:column headerText="#{inventoryUIBundle.ROLE}" id="c8" sortable="true" sortProperty="toEntityRoleKey">
+              <af:outputText value="#{pageFlowScope.CustomInvolvementListBean.otherRole}" id="ot4"/>
+            </af:column>
+      </af:column>
+      </af:table>
+       <af:popup id="invEditPopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupInvEditBinding}">
+        <af:dialog id="CIEditdia1og" type="none"
+                   title="#{inventoryUIBundle.CUSTOM_INVOLVEMENT_EDIT}">
+          <af:panelStretchLayout  styleClass="invCommonPanelStretchLayout" id="iep">
+            <f:facet name="center">
+              <af:region value="#{bindings.CustomInvolvementEditFlow1.regionModel}" styleClass="invCommonPanelStretchLayout" id="iepr"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invCustomObjectPopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupCOBinding}">
+        <af:dialog type="none" id="cod"
+                   title="#{inventoryUIBundle.CUSTOM_OBJECT_SEARCH}">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="icop">
+            <f:facet name="center">
+              <af:region value="#{bindings.CustomObjectSearchResultsFlow1.regionModel}" id="icopr"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invCustomNetworkAddressPopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupCNABinding}">
+        <af:dialog type="none" id="cnad"
+                   title="#{inventoryUIBundle.CUSTOM_NETWORK_ADDRESS_SEARCH}">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="icna">
+            <f:facet name="center">
+              <af:region value="#{bindings.CustomNetworkAddressSearchResultsFlow1.regionModel}" id="icnar"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invDeviceInterfacePopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupDIBinding}">
+        <af:dialog type="none" id="did"
+                   title="#{inventoryUIBundle.DEVICE_INTERFACE_SEARCH}">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="idip">
+            <f:facet name="center">
+              <af:region value="#{bindings.DeviceInterfaceSearchResultsFlow1.regionModel}"  id="idipr"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invEquipmentPopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupEQBinding}">
+        <af:dialog type="none" id="eqd"
+                   title="#{inventoryUIBundle.EQUIPMENT_SEARCH}">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="ieqp">
+            <f:facet name="center">
+              <af:region value="#{bindings.EquipmentSearchResultsFlow1.regionModel}"  id="ieqpr"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invEquipmentHolderPopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupEHBinding}">
+        <af:dialog type="none" id="eqhd"
+                   title="#{inventoryUIBundle.EQUIPMENT_HOLDER_SEARCH}">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="ieqhp">
+            <f:facet name="center">
+              <af:region value="#{bindings.EquipmentHolderSearchResultsFlow1.regionModel}" id="ieqhr"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invLogicalDevicePopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupLDBinding}">
+        <af:dialog type="none" id="ldd"
+                   title="#{inventoryUIBundle.LOGICAL_DEVICE_SEARCH}">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="ildp">
+            <f:facet name="center">
+              <af:region value="#{bindings.LogicalDeviceSearchResultsFlow1.regionModel}" id="ildpr"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invLogicalDeviceAccountPopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupLDABinding}">
+        <af:dialog type="none" id="ldad"
+                   title="#{inventoryUIBundle.LOGICAL_DEVICE_ACCOUNT_SEARCH}">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="ildap">
+            <f:facet name="center">
+              <af:region value="#{bindings.LogicalDeviceAccountSearchResultsFlow1.regionModel}" id="ildapr"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invPhysicalConnectorPopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupPCBinding}">
+        <af:dialog type="none" id="pcd"
+                   title="#{inventoryUIBundle.PHYSICAL_CONNECTOR_SEARCH}">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="ipcp">
+            <f:facet name="center">
+              <af:region value="#{bindings.PhysicalConnectorSearchResultsFlow1.regionModel}" id="ipcpr"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invPhysicalDevicePopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupPDBinding}">
+        <af:dialog type="none" id="pdd"
+                   title="#{inventoryUIBundle.PHYSICAL_DEVICE_SEARCH}">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="ipdp">
+            <f:facet name="center">
+              <af:region value="#{bindings.PhysicalDeviceSearchResultsFlow1.regionModel}" id="ipdpr"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invPhysicalPortPopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupPPBinding}">
+        <af:dialog type="none" id="ppd"
+                   title="#{inventoryUIBundle.PHYSICAL_PORT_SEARCH}">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="ippp">
+            <f:facet name="center">
+              <af:region value="#{bindings.PhysicalPortSearchResultsFlow1.regionModel}" id="ipppr"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invPipePopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupPIPEBinding}">
+        <af:dialog type="none" id="pid"
+                   title="#{inventoryUIBundle.PIPE_SEARCH}">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout"  id="ipip">
+            <f:facet name="center">
+              <af:region value="#{bindings.PipeSearchResultsFlow1.regionModel}" id="ipipr"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invTelephoneNumberPopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupTNBinding}">
+        <af:dialog type="none" id="tnd"
+                   title="#{inventoryUIBundle.TELEPHONE_NUMBER_SEARCH}">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="itnp">
+            <f:facet name="center">
+              <af:region value="#{bindings.TelephoneNumberSearchResultsFlow1.regionModel}" id="itnpr"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invIPv4AddressPopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupIPv4AddressBinding}">
+        <af:dialog type="none" id="ipa">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="ipap">
+            <f:facet name="center">
+              <af:region value="#{bindings.IPv4AddressSearchResultsFlow1.regionModel}"
+                         id="r1"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invIPv4SubnetPopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupIPv4SubnetBinding}">
+        <af:dialog type="none" id="ips">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="ipsp">
+            <f:facet name="center">
+              <af:region value="#{bindings.IPv4SubnetSearchResultsFlow1.regionModel}" id="r2"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invIPv6AddressPopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupIPv6AddressBinding}">
+        <af:dialog type="none" id="ipa1">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="ipap1">
+            <f:facet name="center">
+              <af:region value="#{bindings.IPv6AddressSearchResultsFlow1.regionModel}" id="r4"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invIPv6SubnetPopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupIPv6SubnetBinding}">
+        <af:dialog type="none" id="ips2">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="ipsp1">
+            <f:facet name="center">
+              <af:region value="#{bindings.IPv6SubnetSearchResultsFlow1.regionModel}" id="r3"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invPlaceSearchPopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupPlaceBinding}">
+        <af:dialog type="none" id="psp1"
+       title="#{inventoryUIBundle.PLACE_SEARCH_DIALOG}">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="pslp">
+            <f:facet name="center">
+              <af:region value="#{bindings.PlaceSearchResultsFlow1.regionModel}" id="r5"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invLocationSearchPopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupPLBinding}">
+        <af:dialog type="none" id="lsd"
+       title="#{inventoryUIBundle.LOCATION_SEARCH}">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="lsp">
+            <f:facet name="center">
+              <af:region value="#{bindings.LocationSearchResultsFlow1.regionModel}" id="r6"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+      <af:popup id="invConnectivityPopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupConnectivityBinding}">
+        <af:dialog type="none" id="csd"
+       title="#{inventoryUIBundle.CONNECTIVITY_SEARCH}">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="csp">
+            <f:facet name="center">
+              <af:region value="#{bindings.ConnectivitySearchResultsFlow1.regionModel}" id="r7"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+	  <af:popup id="invNetworkAddressDomainPopup" contentDelivery="lazyUncached"
+                binding="#{backingBeanScope.popupNetworkAddressDomainBinding}">
+        <af:dialog type="none" id="nsd"
+       title="#{inventoryUIBundle.NETWORK_ADDRESS_DOMAIN_SEARCH}">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="nsp">
+            <f:facet name="center">
+              <af:region value="#{bindings.NetworkAddressDomainSearchResultsFlow.regionModel}" id="r8"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.CustomInvolvementListBean.refresh}"/>
+      </af:popup>
+    </af:panelCollection>
+  </af:showDetailHeader>
+</jsp:root>

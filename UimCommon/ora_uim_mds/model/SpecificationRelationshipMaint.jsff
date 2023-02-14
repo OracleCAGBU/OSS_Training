@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved. */
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    2/20/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>      
+    <af:panelHeader text="#{inventoryUIBundle.SPECIFICATION_RELATIONSHIP_MAINTENANCE}" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="toolbar">
+            <af:panelGroupLayout id="pgl3" layout="horizontal">
+              <af:commandButton text="#{inventoryUIBundle.DONE}" id="cb2" actionListener="#{pageFlowScope.SpecificationRelationshipMaintBean.cancel}"
+                                accessKey="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        </af:panelHeader>
+    <af:panelFormLayout maxColumns="2" rows="4" labelWidth="33%" fieldWidth="67%">
+        <af:inputText label="#{inventoryUIBundle.PARENT_SPECIFICATION}" id="it_parentSpec" value="#{pageFlowScope.SpecRelation.parent.name}" maximumLength="50" columns="53" disabled="true"/>
+
+        <af:inputText label="#{inventoryUIBundle.CHILD_SPECIFICATION}" id="it_childSpec" value="#{pageFlowScope.SpecRelation.child.name}" maximumLength="50" columns="53" disabled="true"/>
+
+        <af:inputText label="#{inventoryUIBundle.NAME}" id="it_specName" value="#{pageFlowScope.SpecRelation.name}" maximumLength="50" columns="53" disabled="true"/>
+
+        <af:selectOneChoice id="statusDropdown"
+                            label="#{inventoryUIBundle.SPEC_STATUS}"
+                            value="#{pageFlowScope.SpecRelation.status}"
+                            disabled="true">
+            <f:selectItems binding="#{pageFlowScope.SpecificationRelationshipMaintBean.statusItems}"
+                           id="status_si"/>
+        </af:selectOneChoice>
+        <af:selectOneChoice id="relTypeDropdown"
+                            label="#{inventoryUIBundle.RELATIONSHIP_TYPE}"
+                            value="#{pageFlowScope.SpecRelation.relationshipType}"
+                            disabled="true">
+            <f:selectItems binding="#{pageFlowScope.SpecificationRelationshipMaintBean.specRelationTypeItems}"
+                           id="relType_si"/>
+        </af:selectOneChoice>
+        
+        <af:inputText label="#{inventoryUIBundle.MIN_QUANTITY}" id="it_minQuantity" value="#{pageFlowScope.SpecRelation.parentsToChildMin}" disabled="true"/>
+
+        <af:inputText label="#{inventoryUIBundle.MAX_QUANTITY}" id="it_maxQuantity" value="#{pageFlowScope.SpecRelation.parentsToChildMax}" disabled="true"/>
+
+        <af:inputText label="#{inventoryUIBundle.DESCRIPTION}" id="it_description" value="#{pageFlowScope.SpecRelation.description}" maximumLength="255" rows="5" columns="50" disabled="true"/>
+
+    </af:panelFormLayout>
+</jsp:root>

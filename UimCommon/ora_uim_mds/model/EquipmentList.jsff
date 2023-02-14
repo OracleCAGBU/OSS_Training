@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:showDetailHeader text="#{inventoryUIBundle.EQUIPMENT}" disclosed="true"
+                       id="sdh1">
+    <af:panelCollection id="EqList" styleClass="AFStretchWidth">
+      <f:facet name="toolbar">
+        <af:toolbar id="t1">
+          <af:commandToolbarButton text="#{inventoryUIBundle.ASSOCIATE}"
+                                   rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Equipment.ASSOCIATE;action=view']}"
+                                   id="cb1Create"
+                                   icon="#{InventoryHelperBean.associateIcon}">
+            <af:showPopupBehavior popupId="::associateEquipmentPopup" triggerType="click"/>
+			<af:setActionListener from="true" to="#{pageFlowScope.associateEQSearch}"/>
+          </af:commandToolbarButton>
+          <af:spacer width="10" height="10" id="s1"/>
+          <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}"
+                                   id="cb3Delete"
+                                   icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                   action="checkError"
+                                   rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Equipment.DELETE;action=view']}"
+                                   disabled="#{pageFlowScope.EquipmentListBean.resultsTable.selectedRowKeys == null || pageFlowScope.EquipmentListBean.resultsTable.selectedRowKeys.size lt 1}"
+                                   partialTriggers="resultsTableId" binding="#{backingBeanScope.deleteButton}"
+                                   actionListener="#{pageFlowScope.EquipmentListBean.disassociateEquipment}">
+         </af:commandToolbarButton>
+        </af:toolbar>
+      </f:facet>
+      <f:facet name="statusbar">
+        <af:toolbar id="t2">
+          <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount lt 0) ? 0 : bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount}"
+                         id="ol2" styleClass="invSearchOutputLabel"
+                         binding="#{backingBeanScope.totalResultsLabel}"
+                         partialTriggers="resultsTableId"/>
+        </af:toolbar>
+      </f:facet>
+      <af:table id="resultsTableId"
+                value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}"
+                var="row"
+                emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                fetchSize="#{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount &lt; 25) ? bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount : 25}"
+                filterModel="#{pageFlowScope.EquipmentQueryBean.filterModel}"
+                selectionListener="#{pageFlowScope.EquipmentListBean.selectAction}"
+                queryListener="#{InventoryHelperBean.processQuery}"
+                filterVisible="false" varStatus="vs" styleClass="AFStretchWidth"
+                sortListener="#{bindings.searchResultsIterator.dataControl.dataProvider.processSort}"
+                selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                rowSelection="multiple"
+                autoHeightRows="#{pageFlowScope.EquipmentListBean.portletHeight}"
+                contentDelivery="immediate"
+                binding="#{pageFlowScope.EquipmentListBean.resultsTable}"
+                summary="#{inventoryUIBundle.EQUIPMENT_LIST}">
+        <af:column sortProperty="id" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.ID}" id="c42"
+                   rowHeader="unstyled">
+          <af:commandImageLink action="equipmentsummary" id="c2" actionListener="#{bindings.openSubTaskForSummary.execute}"
+                               shortDesc="#{inventoryUIBundle.LINK} #{inventoryUIBundle.FOR} #{inventoryUIBundle.EQUIPMENT_SUMMARY}"
+                               text="#{row.id}">
+            
+            <af:setActionListener from="#{row.oid}" to="#{requestScope.oid}"/>
+          </af:commandImageLink>
+        </af:column>
+        <af:column sortProperty="name" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.NAME}" id="c4">
+          <af:outputText value="#{row.name}" id="ot3"/>
+        </af:column>
+        <af:column sortProperty="specification.name" sortable="true"
+                   filterable="true" headerText="#{inventoryUIBundle.TYPE}"
+                   id="c1">
+          <af:commandImageLink action="SpecificationSummary" actionListener="#{bindings.openSubTaskForEQSpecSummary.execute}"
+                               shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}"
+                               text="#{row.specification.name}">
+            
+            <af:setActionListener from="#{row.specification.oid}"
+                                  to="#{specObjectId}"/>
+          </af:commandImageLink>
+        </af:column>
+        <af:column headerText="#{inventoryUIBundle.VENDOR_NAME}" id="c8">
+          <af:outputText value="#{pageFlowScope.EquipmentListBean.vendorName}"
+                         id="ot9"/>
+        </af:column>
+        <af:column sortProperty="adminState" sortable="true"
+                   filterable="true"
+                   headerText="#{inventoryUIBundle.INVENTORY_STATUS}" id="c41">
+          <af:outputText value="#{pageFlowScope.EquipmentListBean.inventoryStatus}"
+                         id="ot5"/>
+                         <!-- RMI 618 Start -->
+		  <af:outputText value="#{pageFlowScope.EquipmentListBean.inventoryStatusBIDueDate}" id="pendingBIDueDate1"/>
+                   <af:switcher id="swispd618" defaultFacet="false" facetName="#{pageFlowScope.EquipmentListBean.popupMode}">
+                   <f:facet name="false">
+              <af:commandImageLink text="#{pageFlowScope.EquipmentListBean.inventoryStatusBILabel}"
+                                   disabled="#{pageFlowScope.EquipmentListBean.invStatusDisabled}" id="isCI1"
+                                   shortDesc="#{pageFlowScope.EquipmentListBean.invStatusShortDesc}"
+                                   action="#{pageFlowScope.EquipmentListBean.getPendingBiSummaryAction}"
+                                   actionListener="#{pageFlowScope.EquipmentListBean.registerPendingBiRecentItem}">
+                <af:setActionListener from="#{pageFlowScope.EquipmentListBean.inventoryStatusBIOid}"
+                                      to="#{objectId}"/>
+              </af:commandImageLink>
+            </f:facet>
+                  <f:facet name="true">
+                      <af:outputText value="#{pageFlowScope.EquipmentListBean.inventoryStatusBILabel}" id="swftispd618"/>
+                    </f:facet>
+                    </af:switcher>
+                     <!-- RMI 618 End -->
+        </af:column>
+        <af:column headerText="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}"
+                   id="c5">
+          <af:outputText value="#{pageFlowScope.EquipmentListBean.resourceAssignmentStatus}"
+                         id="ot6"/>
+                         <!-- RMI 618 Start -->
+                  <af:outputText value="#{pageFlowScope.EquipmentListBean.assignmentBIDueDate}" id="pendingBIDueDate2"/>
+                   <af:switcher id="swaspd618" defaultFacet="false" facetName="#{pageFlowScope.EquipmentListBean.popupMode}">
+                   <f:facet name="false">
+                  <af:commandImageLink text="#{pageFlowScope.EquipmentListBean.assignmentBILabel}"
+                                               disabled="#{pageFlowScope.EquipmentListBean.asnStatusDisabled}"
+                                               id="asCI"
+                                               shortDesc="#{pageFlowScope.EquipmentListBean.asnStatusShortDesc}"
+                                               action="#{pageFlowScope.EquipmentListBean.getPendingBiSummaryAction}"
+                                               actionListener="#{pageFlowScope.EquipmentListBean.registerPendingBiRecentItem}">
+                            <af:setActionListener from="#{pageFlowScope.EquipmentListBean.asnStatusBIOid}"
+                                                  to="#{objectId}"/>
+                          </af:commandImageLink>
+                  </f:facet>
+                  <f:facet name="true">
+                      <af:outputText value="#{pageFlowScope.EquipmentListBean.assignmentBILabel}" id="swftaspd618"/>
+                    </f:facet>
+                    </af:switcher>
+		         <!-- RMI 618 End --> 
+        </af:column>
+        <af:column headerText="#{inventoryUIBundle.CONDITION_TYPE}" id="c6">
+          <af:outputText value="#{pageFlowScope.EquipmentListBean.conditionType}"
+                         escape="false" id="ot7"/>
+        </af:column>
+        <af:column headerText="#{inventoryUIBundle.RESERVATION_TYPE}" id="c7">
+          <af:outputText value="#{pageFlowScope.EquipmentListBean.reservationType}"
+                         escape="false" id="ot8"/>
+        </af:column>
+      </af:table>
+      
+    </af:panelCollection>
+    <af:popup id="associateEquipmentPopup"
+                binding="#{backingBeanScope.associateEquipment}"
+                contentDelivery="lazyUncached">
+        <af:dialog id="d1" type="none"
+                   title="#{inventoryUIBundle.EQUIPMENT_SEARCH}">
+          <af:panelStretchLayout id="psl3"
+                                 styleClass="invCommonPanelStretchLayout">
+            <f:facet name="center">
+              <af:region value="#{bindings.EquipmentSearchResultsFlow2.regionModel}"
+                         id="r1"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.EquipmentListBean.refresh}"/>
+      </af:popup>
+  </af:showDetailHeader>
+</jsp:root>

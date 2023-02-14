@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:panelStretchLayout id="psl2" styleClass="AFStretchWidth" dimensionsFrom="auto">
+        <f:facet name="center">
+            <af:showDetailHeader id="sdh1" text="#{inventoryUIBundle.GROOM} - #{pageFlowScope.GroomActivityBean.activity.name}" styleClass="AFStretchWidth"
+                                 binding="#{backingBeanScope.groomShowDetailHeader}" immediate="true">
+                <f:facet name="toolbar">
+                    <af:toolbar id="t6">
+                        <af:commandToolbarButton text="#{inventoryUIBundle.GROOM_CONNECTIVITIES}" id="ctbg6" disabled="#{pageFlowScope.GroomActivityBean.disableGroomButton}" 
+                                                 binding="#{pageFlowScope.GroomActivityBean.activityButton}" actionListener="#{pageFlowScope.GroomActivityBean.groomListener}"/>
+                        <af:popup id="groomPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.groomPopup}">
+                            <af:dialog title="#{inventoryUIBundle.GROOM_CONNECTIVITIES}" type="none" id="igd">
+                               <af:panelStretchLayout styleClass="invGroomPopupLayout" id="igps">
+                                    <f:facet name="center">
+                                        <af:region value="#{bindings.GroomConnectivitiesFlow1.regionModel}" id="r3"/>
+                                    </f:facet>
+                                 </af:panelStretchLayout>
+                            </af:dialog>
+                            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                            <af:serverListener type="refreshEntity" method="#{pageFlowScope.GroomActivityBean.refresh}"/>
+                        </af:popup>
+                    </af:toolbar>
+                </f:facet>
+                
+                <af:panelStretchLayout id="psl3" styleClass="AFStretchWidth" dimensionsFrom="auto">
+                    <f:facet name="center">
+                    
+                         <af:panelAccordion  id="pA1" discloseMany="true" styleClass="AFStretchWidth" dimensionsFrom="auto">
+                            <af:showDetailItem text="#{inventoryUIBundle.SOURCE}" id="sdi1" disclosed="true" flex="1" stretchChildren="first">
+                                <af:panelGroupLayout id="pgl1" layout="scroll">
+                                    <af:spacer id="sp2" height="10" width="10"/>
+                                    <af:region value="#{bindings.SourceWorkspaceFlow.regionModel}" id="r1" binding="#{pageFlowScope.GroomActivityBean.sourceRegionBinding}"/>
+                                </af:panelGroupLayout>
+                            </af:showDetailItem>
+                            
+                            <af:showDetailItem text="#{inventoryUIBundle.TARGET}" id="sdi2" disclosed="true" flex="1" stretchChildren="first">
+                                <af:panelGroupLayout id="pgl2" layout="scroll">
+                                    <af:spacer id="sp3" height="10" width="10"/>
+                                    <af:region value="#{bindings.TargetWorkspaceFlow.regionModel}" id="r2" binding="#{pageFlowScope.GroomActivityBean.targetRegionBinding}"/>
+                                </af:panelGroupLayout>
+                            </af:showDetailItem>
+                        </af:panelAccordion>
+                        
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:showDetailHeader>
+        </f:facet>
+    </af:panelStretchLayout>
+</jsp:root>

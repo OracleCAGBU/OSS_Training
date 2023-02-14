@@ -1,0 +1,25 @@
+package  oracle.communications.inventory.rules
+
+import java.util.*;
+import java.lang.*;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+import oracle.communications.inventory.api.entity.common.EntityConsumer;
+import oracle.communications.inventory.api.entity.common.ConsumableResource;
+
+global Log log;
+function boolean checkRedeemer(EntityConsumer ec, ConsumableResource cr){
+	return true;
+}
+
+rule "Check For Redeemer"
+        salience 0
+	when
+	    entityconsumer : EntityConsumer ()
+	    consumableresource : ConsumableResource ()
+	    context : ExtensionPointRuleContext()
+	then
+		log.debug( "", new Object[] { "Test in debug" } );
+		boolean returnvalue = checkRedeemer(entityconsumer, consumableresource);
+		context.setReturnValue(returnvalue);
+end

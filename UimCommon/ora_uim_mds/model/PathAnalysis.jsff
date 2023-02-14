@@ -1,0 +1,529 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2014, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    3/7/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html">
+		   
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="inventoryuiBundle" value="#{adfBundle['oracle.communications.inventory.ui.InventoryUIBundle']}"/>
+  <c:set var="queryModel" value="#{pageFlowScope.PathAnalysisQueryBean.queryModel}"/>
+  <c:set var="criterion" value="#{queryModel.currentDescriptor.conjunctionCriterion.criterionList}"/>
+  
+<af:panelStretchLayout id="psll7" styleClass="AFStretchWidth" dimensionsFrom="auto">          
+    <f:facet name="center">
+      <af:panelGroupLayout layout="scroll" id="pgl11" binding="#{pageFlowScope.PathAnalysisQueryBean.panelGrpLayout}">
+          <af:panelGroupLayout id="pgl23" layout="scroll">
+                <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left">
+                    <af:outputText id="otbi" styleClass="invCommonText" noWrap="true" rendered="#{!(pageFlowScope.PathAnalysisQueryBean.renderRateCode)}"
+                                   value="#{pageFlowScope.PathAnalysisQueryBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+                    <af:menuBar id="menuBar1" rendered="#{!(pageFlowScope.PathAnalysisQueryBean.renderRateCode)}">
+                              <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invSearchMenu" 
+                                       rendered="#{!(pageFlowScope.PathAnalysisQueryBean.renderRateCode)}"/>
+                    </af:menuBar>
+                    <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch5}" contentDelivery="lazyUncached">
+                        <af:dialog id="BISearchPopup_d1" type="none"
+                                   title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                            <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                                <f:facet name="center">
+                                   <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                        <af:serverListener type="refreshEntity" method="#{pageFlowScope.PathAnalysisQueryBean.invBean.afterBusinessInteractionSelectionChange}"/>
+                    </af:popup>
+                </af:panelGroupLayout>
+            </af:panelGroupLayout>    
+        <af:panelHeader text="#{inventoryUIBundle.PATH_ANALYSIS}- #{pageFlowScope.PathAnalysisQueryBean.displayInfo}" id="ph1" helpTopicId="OHW_pipePathAnalysis">
+          <!-- CUSTOM QUERY start -->
+          <af:showDetailHeader text="#{inventoryUIBundle.PATH_ANALYSIS_SEARCH}" disclosed="true"
+                               id="queryShowDetailHeader" rendered="#{pageFlowScope.PathAnalysisQueryBean.showCriteria}" 
+                               binding="#{backingBeanScope.queryShowDetailHeader}">
+         <af:panelGroupLayout id="pg779" layout="scroll">
+              <af:panelFormLayout id="pfl1" maxColumns="4" rows="4">
+                <af:panelGroupLayout layout="horizontal" halign="left">
+                  <af:panelGroupLayout layout="vertical" valign="top">
+                    <af:outputLabel value=" " id="sol1"/>
+                    <af:spacer height="10"/>
+                    <af:outputLabel value="#{inventoryUIBundle.TYPE}"
+                                    id="scl4"/>
+                    <af:spacer height="18"/>
+                    <af:outputLabel value="#{inventoryUIBundle.ID}" id="scl5"/>
+                    <af:spacer height="18"/>
+                    <af:outputLabel value="#{inventoryUIBundle.NAME}"
+                                    id="scl6"/>
+                  </af:panelGroupLayout>
+                  <af:spacer width="30"/>
+                  <af:panelGroupLayout layout="vertical" halign="left">
+                    <af:outputLabel value="#{inventoryUIBundle.SOURCE}"
+                                    id="selectOneChoiceLabel1"
+                                    inlineStyle="margin:7.0px;"/>
+                    <af:spacer height="10"/>
+                    <af:selectOneChoice id="selectOneChoiceInputWithoutDepCriteria"
+                                        value="#{criterion[0].values[0]}"
+                                        shortDesc="#{inventoryUIBundle.SOURCE}-#{inventoryUIBundle.TYPE}"
+                                        valueChangeListener="#{pageFlowScope.PathAnalysisQueryBean.valueChangeSourceType}"
+                                        autoSubmit="true">
+                      <f:selectItems id="si1"
+                                     value="#{criterion[0].attribute.model}"/>
+                    </af:selectOneChoice>
+                    <af:spacer height="10"/>
+                    <af:panelGroupLayout layout="horizontal" halign="left">
+                      <af:inputText id="textInput" maximumLength="50"
+                                    valueChangeListener="#{pageFlowScope.PathAnalysisQueryBean.valueChangeForSourceID}"
+                                    value="#{criterion[1].values[0]}"
+                                    shortDesc="#{inventoryUIBundle.SOURCE}-#{inventoryUIBundle.ID}"
+                                    autoSubmit="true"/>
+                      <af:commandImageLink id="ldar-searchLD"
+                                           icon="/images/search_ena.png"
+                                           shortDesc="#{inventoryUIBundle.BROWSE}"
+                                           actionListener="#{pageFlowScope.PathAnalysisQueryBean.launchSourceTypePopup}"/>
+                    </af:panelGroupLayout>
+                    <af:spacer height="10"/>
+                    <af:inputText id="it7" disabled="true"
+                                  value="#{criterion[2].values[0]}"
+                                  shortDesc="#{inventoryUIBundle.SOURCE}-#{inventoryUIBundle.NAME}"
+                                  maximumLength="50"
+                                  binding="#{backingBeanScope.sourceName}"/>
+                  </af:panelGroupLayout>
+                  <af:spacer width="30"/>
+                  <af:panelGroupLayout layout="vertical" halign="left">
+                    <af:outputLabel value="#{inventoryUIBundle.INTERMEDIATE}"
+                                    id="selectOneChoiceLabel2"
+                                    inlineStyle="margin:7.0px;"/>
+                    <af:spacer height="10"/>
+                    <af:selectOneChoice id="soc2"
+                                        value="#{criterion[3].values[0]}"
+                                        shortDesc="#{inventoryUIBundle.INTERMEDIATE}-#{inventoryUIBundle.TYPE}"
+                                        valueChangeListener="#{pageFlowScope.PathAnalysisQueryBean.valueChangeIntermediateType}"
+                                        autoSubmit="true" immediate="true">
+                      <f:selectItems id="si3"
+                                     value="#{criterion[3].attribute.model}"/>
+                    </af:selectOneChoice>
+                    <af:spacer height="10"/>
+                    <af:panelGroupLayout layout="horizontal" halign="left">
+                      <af:inputText id="text1" maximumLength="50"
+                                    valueChangeListener="#{pageFlowScope.PathAnalysisQueryBean.valueChangeIntermediateID}"
+                                    value="#{criterion[4].values[0]}"
+                                    shortDesc="#{inventoryUIBundle.INTERMEDIATE}-#{inventoryUIBundle.ID}"
+                                    autoSubmit="true"/>
+                      <af:commandImageLink id="ldar-1"
+                                           icon="/images/search_ena.png"
+                                           shortDesc="#{inventoryUIBundle.BROWSE}"
+                                           actionListener="#{pageFlowScope.PathAnalysisQueryBean.launchIntermediateTypePopup}"/>
+                    </af:panelGroupLayout>
+                    <af:spacer height="10"/>
+                    <af:inputText id="it12" disabled="true"
+                                  value="#{criterion[5].values[0]}"
+                                  shortDesc="#{inventoryUIBundle.INTERMEDIATE}-#{inventoryUIBundle.NAME}"
+                                  maximumLength="50"
+                                  binding="#{backingBeanScope.intermediateName}"/>
+                  </af:panelGroupLayout>
+                  <af:spacer width="30"/>
+                  <af:panelGroupLayout layout="vertical">
+                    <af:outputLabel value="#{inventoryUIBundle.TARGET}"
+                                    id="selectOneChoiceLabel3"
+                                    inlineStyle="margin:7.0px;"/>
+                    <af:spacer height="10"/>
+                    <af:selectOneChoice id="soc3"
+                                        value="#{criterion[6].values[0]}"
+                                        shortDesc="#{inventoryUIBundle.TARGET}-#{inventoryUIBundle.TYPE}"
+                                        valueChangeListener="#{pageFlowScope.PathAnalysisQueryBean.valueChangeTargetType}"
+                                        autoSubmit="true">
+                      <f:selectItems id="si4"
+                                     value="#{criterion[6].attribute.model}"/>
+                    </af:selectOneChoice>
+                    <af:spacer height="10"/>
+                    <af:panelGroupLayout layout="horizontal" halign="left">
+                      <af:inputText id="text2" maximumLength="50"
+                                    valueChangeListener="#{pageFlowScope.PathAnalysisQueryBean.valueChangeTargetID}"
+                                    value="#{criterion[7].values[0]}"
+                                    shortDesc="#{inventoryUIBundle.TARGET}-#{inventoryUIBundle.ID}"
+                                    autoSubmit="true"/>
+                      <af:commandImageLink id="ldar-2"
+                                           icon="/images/search_ena.png"
+                                           shortDesc="#{inventoryUIBundle.BROWSE}"
+                                           actionListener="#{pageFlowScope.PathAnalysisQueryBean.launchTargetTypePopup}"/>
+                    </af:panelGroupLayout>
+                    <af:spacer height="10"/>
+                    <af:inputText id="it17" disabled="true"
+                                  value="#{criterion[8].values[0]}"
+                                  shortDesc="#{inventoryUIBundle.TARGET}-#{inventoryUIBundle.NAME}"
+                                  maximumLength="50"
+                                  binding="#{backingBeanScope.targetName}"/>
+                  </af:panelGroupLayout>
+                  <af:spacer width="30"/>
+                </af:panelGroupLayout>
+              </af:panelFormLayout>
+              <af:spacer height="10"/>
+              <af:panelFormLayout id="pf46" maxColumns="1" rows="1"
+                                  rendered="#{pageFlowScope.PathAnalysisQueryBean.renderRateCode}">
+                <af:panelGroupLayout id="pg78" layout="horizontal"
+                                     halign="left">
+                  <af:outputLabel id="sbc1"
+                                  value="#{inventoryUIBundle.RATE_CODE}"/>
+                  <af:spacer width="15" id="sp198"/>
+                  <af:outputText id="s14"
+                                 value="#{pageFlowScope.PathAnalysisQueryBean.rateCode}"/>
+                </af:panelGroupLayout>
+              </af:panelFormLayout>
+              <af:spacer height="10"/>
+              <af:panelFormLayout id="pfl5" maxColumns="4" rows="1">
+                <af:panelGroupLayout id="pg775" layout="horizontal"
+                                     halign="left">
+                  <af:outputLabel value="#{criterion[9].attribute.label}"
+                                  id="ol1"/>
+                  <af:spacer width="20" id="sp44"/>
+                  <af:inputText id="it2" value="#{criterion[9].values[0]}"
+                                maximumLength="50"
+                                converter="javax.faces.BigDecimal"
+                                columns="15"
+                                shortDesc="#{criterion[9].attribute.label}"/>
+                  <af:spacer width="40" id="sp24"/>
+                  <af:outputLabel value="#{criterion[10].attribute.label}"
+                                  id="ol2"/>
+                  <af:selectOneChoice id="soc1"
+                                      value="#{criterion[10].values[0]}"
+                                      shortDesc="#{criterion[10].attribute.label}">
+                    <f:selectItems id="si2"
+                                   value="#{criterion[10].attribute.model}"/>
+                  </af:selectOneChoice>
+                  <af:spacer width="36" id="sp25"/>
+                  <af:outputLabel value="#{criterion[11].attribute.label}"
+                                  id="numberLabel"/>
+                  <af:inputNumberSpinbox id="numberInput"
+                                         value="#{criterion[11].values[0]}" minimum="1"
+                                         shortDesc="#{criterion[11].attribute.label}"/>
+                </af:panelGroupLayout>
+              </af:panelFormLayout>
+              <af:panelFormLayout id="pfl6" maxColumns="1" rows="1">
+                <af:panelLabelAndMessage id="plm16">
+                  <af:panelGroupLayout id="pg778" layout="horizontal"
+                                       halign="left">
+                    <af:spacer width="55" id="sp43"/>
+                    <af:selectBooleanCheckbox id="sbc"
+                                              value="#{criterion[12].values[0]}"
+                                              text="#{criterion[12].attribute.label}"
+                                              autoSubmit="true"/>
+                  </af:panelGroupLayout>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+              <af:panelFormLayout id="pf27" maxColumns="1" rows="1">
+                <af:panelLabelAndMessage id="plm17">
+                  <af:panelGroupLayout id="pg758" layout="horizontal"
+                                       halign="left">
+                    <af:spacer width="55" id="sp54"/>
+                    <af:selectBooleanCheckbox id="sbc11"
+                                              value="#{criterion[13].values[0]}"
+                                              text="#{criterion[13].attribute.label}"
+                                              autoSubmit="true"/>
+                  </af:panelGroupLayout>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+              <af:panelFormLayout id="pf28" maxColumns="1" rows="1">
+                <af:panelLabelAndMessage id="plm18">
+                  <af:panelGroupLayout id="pg759" layout="horizontal"
+                                       halign="left">
+                    <af:spacer width="55" id="sp45"/>
+                    <af:selectBooleanCheckbox id="sbc2"
+                                              value="#{criterion[14].values[0]}"
+                                              valueChangeListener="#{pageFlowScope.PathAnalysisQueryBean.onChangeIncludeNetworkNodesEdges}"
+                                              autoSubmit="true"
+                                              text="#{criterion[14].attribute.label}"/>
+                  </af:panelGroupLayout>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+              <af:panelFormLayout id="pf29" maxColumns="1" rows="1"
+                                  rendered="#{(!pageFlowScope.PathAnalysisQueryBean.renderRateCode)}">
+                <af:panelLabelAndMessage id="plm29">
+                  <af:panelGroupLayout id="pg769" layout="horizontal"
+                                       halign="left">
+                    <af:spacer width="55" id="sp46"/>
+                    <af:selectBooleanCheckbox id="isc"
+                                              value="#{criterion[15].values[0]}"
+                                              binding="#{backingBeanScope.includeSecondaryPathsBinding}"
+                                              rendered="#{pageFlowScope.PathAnalysisQueryBean.pipe.maxTrailPaths gt 1}"
+                                              text="#{criterion[15].attribute.label}"/>
+                  </af:panelGroupLayout>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+              
+               <af:panelFormLayout id="pf30" maxColumns="1" rows="1">
+                <af:panelLabelAndMessage id="plm30">
+                  <af:panelGroupLayout id="pg770" layout="horizontal"
+                                       halign="left">
+                    <af:spacer width="55" id="sp50"/>
+                    <af:selectBooleanCheckbox id="sc"
+                                              value="#{criterion[16].values[0]}"
+                                              binding="#{backingBeanScope.sameWavelengthOrFrequencyChannel}"
+                                              rendered="true"
+                                              text="#{criterion[16].attribute.label}"/>
+                  </af:panelGroupLayout>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+               <af:panelFormLayout id="pfl2" maxColumns="1" rows="1">
+                <af:panelLabelAndMessage id="plam1">
+                    <af:panelGroupLayout id="pgl4" layout="horizontal" halign="left">
+                        <af:spacer width="55" id="ot19"/>
+                        <af:selectBooleanCheckbox id="sbc3" 
+                                                      value="#{pageFlowScope.PathAnalysisQueryBean.showJumpers}"
+                                                      text="Include Jumpers in Paths"/>
+                    </af:panelGroupLayout>
+                </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+              <af:spacer height="10"/>
+              <af:inputNumberSlider label="#{inventoryUIBundle.CUSTOM_TUNING}" id="ins1" maximum="100" majorIncrement="10"
+                                    minimumIncrement="-10" contentStyle="width: 50em" minorIncrement="-10" autoSubmit="true"
+                                    shortDesc="#{inventoryUIBundle.SHORT_DESCRIPTION}" value="#{pageFlowScope.PathAnalysisQueryBean.sliderValue}"/>
+            </af:panelGroupLayout>
+            <trh:tableLayout width="100%" cellSpacing="0" cellPadding="2">
+              <trh:rowLayout halign="right">
+                <trh:cellFormat width="100%">&amp;nbsp;</trh:cellFormat>
+                <trh:cellFormat halign="center">
+                  <af:commandToolbarButton text="#{inventoryUIBundle.ANALYZE}" id="searchButton"
+                                           actionListener="#{pageFlowScope.PathAnalysisQueryBean.queryActionListener}"/>
+                </trh:cellFormat>
+               <trh:cellFormat halign="center">
+                  <af:commandToolbarButton text="#{inventoryUIBundle.RESET}" id="resetButton"
+                                           actionListener="#{pageFlowScope.PathAnalysisQueryBean.resetPage}"
+                                           accessKey="#{inventoryUIBundle.RESET_ACCESS_KEY}"/>
+              </trh:cellFormat>
+              </trh:rowLayout>
+            </trh:tableLayout>
+ 
+            <!-- popup -->
+            <af:popup id="popupLDId" binding="#{backingBeanScope.popupBindingLogicalDevice}" contentDelivery="lazyUncached">
+              <af:dialog id="d1" type="none" title="#{inventoryUIBundle.LOGICAL_DEVICE_SEARCH}">
+                <af:panelStretchLayout id="psl3" styleClass="invCommonPanelStretchLayout">
+                    <f:facet name="center">
+                       <af:region value="#{bindings.LogicalDeviceSearchResultsFlow1.regionModel}" id="r1"/>
+                    </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity" method="#{pageFlowScope.PathAnalysisQueryBean.refresh}"/>
+            </af:popup>
+            <af:popup id="popupEQId" binding="#{backingBeanScope.popupBindingEquipment}" contentDelivery="lazyUncached">
+                <af:dialog id="d2" type="none" title="#{inventoryUIBundle.EQUIPMENT_SEARCH}">
+                   <af:panelStretchLayout id="psl4" styleClass="invCommonPanelStretchLayout">
+                    <f:facet name="center">
+                       <af:region value="#{bindings.EquipmentSearchResultsFlow1.regionModel}" id="r2"/>
+                    </f:facet>
+                </af:panelStretchLayout>
+                </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity" method="#{pageFlowScope.PathAnalysisQueryBean.refresh}"/>   
+            </af:popup>
+            <af:popup id="popupLocationId" binding="#{backingBeanScope.popupBindingLocation}" contentDelivery="lazyUncached">
+                 <af:dialog id="d7" type="none" 
+                    title="#{inventoryUIBundle.LOCATION_SEARCH}">
+                    <af:panelStretchLayout id="ps20" styleClass="invCommonPanelStretchLayout">
+                       <f:facet name="center">
+                          <af:region value="#{bindings.LocationSearchResultsFlow1.regionModel}" id="r7"/>
+                      </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.PathAnalysisQueryBean.refresh}"/> 
+            </af:popup>
+            <af:popup id="popupPlaceId" binding="#{backingBeanScope.popupBindingPlace}" contentDelivery="lazyUncached">
+                 <af:dialog id="d3" type="none"
+                            title="#{inventoryUIBundle.PLACE_SEARCH_DIALOG}">
+                    <af:panelStretchLayout id="psl5" styleClass="invCommonPanelStretchLayout">
+                       <f:facet name="center">
+                          <af:region value="#{bindings.PlaceSearchResultsFlow1.regionModel}" id="r3"/>
+                      </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.PathAnalysisQueryBean.refresh}"/> 
+            </af:popup>
+            <af:popup id="popupNetworkId" binding="#{backingBeanScope.popupBindingNetwork}" contentDelivery="lazyUncached">
+                 <af:dialog id="d4" type="none"
+                            title="#{inventoryUIBundle.NETWORK_SEARCH_RESULTS_DIALOG}">
+                    <af:panelStretchLayout id="psl6" styleClass="invCommonPanelStretchLayout">
+                       <f:facet name="center">
+                          <af:region value="#{bindings.NetworkSearchResults1.regionModel}" id="r4"/>
+                       </f:facet>
+                    </af:panelStretchLayout>
+                 </af:dialog>
+                 <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                 <af:serverListener type="refreshEntity" method="#{pageFlowScope.PathAnalysisQueryBean.refresh}"/>
+            </af:popup>
+             <af:popup id="popupPDId" binding="#{backingBeanScope.popupBindingPD}" contentDelivery="lazyUncached">
+                 <af:dialog id="d5" type="none"
+                            title="#{inventoryUIBundle.PHYSICAL_DEVICE_SEARCH}">
+                    <af:panelStretchLayout id="psl7" styleClass="invCommonPanelStretchLayout">
+                       <f:facet name="center">
+                          <af:region value="#{bindings.PhysicalDeviceSearchResultsFlow1.regionModel}" id="r5"/>
+                       </f:facet>
+                    </af:panelStretchLayout>
+                 </af:dialog>
+                 <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                 <af:serverListener type="refreshEntity" method="#{pageFlowScope.PathAnalysisQueryBean.refresh}"/>
+            </af:popup>
+             <af:popup id="popupNNodeId" binding="#{backingBeanScope.popupBindingNNode}" contentDelivery="lazyUncached">
+                 <af:dialog id="d6" type="none"
+                            title="#{inventoryUIBundle.NETWORK_NODE_SEARCH_DIALOG}">
+                    <af:panelStretchLayout id="psl1" styleClass="invCommonPanelStretchLayout">
+                       <f:facet name="center">
+                          <af:region value="#{bindings.NetworkNodeSearchResultsFlow1.regionModel}"
+                               id="r6"/>
+                  </f:facet>
+                    </af:panelStretchLayout>
+                 </af:dialog>
+                 <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                 <af:serverListener type="refreshEntity" method="#{pageFlowScope.PathAnalysisQueryBean.refresh}"/>
+            </af:popup>
+          </af:showDetailHeader>
+          <!-- CUSTOM QUERY end -->
+        </af:panelHeader>
+        <af:spacer width="10" height="10" id="s5"/>
+        <af:panelHeader text="#{inventoryUIBundle.PATH_ANALYSIS}- #{pageFlowScope.PathAnalysisQueryBean.displayInfo}" id="ph2" binding="#{backingBeanScope.tableShowDetailHeader}">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:showDetailHeader text="#{inventoryUIBundle.PRIMARY_PATHS}" disclosed="true" id="sdh1"> 
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:panelCollection id="pc1" styleClass="invEditPanelCollection">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t3" rendered="#{!(pageFlowScope.PathAnalysisQueryBean.renderRateCode)}">
+                  <af:commandToolbarButton text="#{inventoryUIBundle.UPDATE}"
+                                           id="ctb1"
+                                           icon="#{InventoryHelperBean.editIcon}"
+                                           action="#{pageFlowScope.PathAnalysisQueryBean.update}"/>
+                  <af:spacer width="10" height="10" id="s17"/>
+                  <af:commandToolbarButton text="#{inventoryUIBundle.VIEW_TOPOLOGY}" id="ctb23" action="viewTopology" />
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{pageFlowScope.PathAnalysisQueryBean.collectionModel}"
+                        var="row" rowBandingInterval="0" id="resultsTableId" 
+                        varStatus="vs" autoHeightRows="10" contentDelivery="immediate"
+                        horizontalGridVisible="true" 
+                        verticalGridVisible="true" summary="#{inventoryUIBundle.PATH_ANALYSIS_LIST}">
+                <af:column id="c3" styleClass="#{pageFlowScope.PathAnalysisQueryBean.toggleColor ? '' : 'invListPathTable'}" headerText=" " width="20"
+                           shortDesc="inventory">
+                     <af:selectBooleanRadio text="" label="Label 1" id="sbr1" group="group1" visible="#{row.samePath}"
+                     value="#{pageFlowScope.PathAnalysisQueryBean.radioButtonList[vs.index]}" 
+                     autoSubmit="true" valueChangeListener="#{pageFlowScope.PathAnalysisQueryBean.onSelectPrimaryPath}" >
+                    <af:setPropertyListener type="valueChange" from="#{vs.index}" to="#{pageFlowScope.selectedModel}"/>
+                  </af:selectBooleanRadio>
+                </af:column>   
+                <af:column id="c1" headerText="#{inventoryUIBundle.FROM_ID}" styleClass="#{pageFlowScope.PathAnalysisQueryBean.toggledColor ? '' : 'invListPathTable'}">
+                   <af:outputText value="#{row.fromNodeId}" id="ot3"/>
+                </af:column>
+                <af:column id="c2" headerText="#{inventoryUIBundle.FROM_NAME}" styleClass="#{pageFlowScope.PathAnalysisQueryBean.toggledColor ? '' : 'invListPathTable'}">
+                   <af:outputText value="#{row.fromNodeName}" id="ot4"/>
+                </af:column>
+                <af:column id="c7" headerText="#{inventoryUIBundle.SEGMENT_ID}" styleClass="#{pageFlowScope.PathAnalysisQueryBean.toggledColor ? '' : 'invListPathTable'}">
+                   <af:outputText value="#{row.segmentId}" id="ot9"/>
+                </af:column>
+                <af:column id="c4" headerText="#{inventoryUIBundle.SEGMENT_NAME}" styleClass="#{pageFlowScope.PathAnalysisQueryBean.toggledColor ? '' : 'invListPathTable'}">
+                   <af:outputText value="#{row.segmentName}" id="ot6"/>
+                </af:column>
+                <af:column id="c5" headerText="#{inventoryUIBundle.TO_ID}" styleClass="#{pageFlowScope.PathAnalysisQueryBean.toggledColor ? '' : 'invListPathTable'}">
+                   <af:outputText value="#{row.toNodeId}" id="ot7"/>
+                </af:column>
+                <af:column id="c6" headerText="#{inventoryUIBundle.TO_NAME}" styleClass="#{pageFlowScope.PathAnalysisQueryBean.toggledColor ? '' : 'invListPathTable'}">
+                   <af:outputText value="#{row.toNodeName}" id="ot8"/>
+                </af:column>
+                <af:column id="c20" headerText="#{inventoryUIBundle.NETWORK_ID}" styleClass="#{pageFlowScope.PathAnalysisQueryBean.toggledColor ? '' : 'invListPathTable'}"
+                           rowHeader="unstyled">
+                   <af:outputText value="#{row.networkId}" id="ot21"/>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:showDetailHeader>
+          
+          <af:spacer height="10" id="s4"/>
+          <af:showDetailHeader text="#{inventoryUIBundle.SECONDARY_PATHS}" disclosed="true" 
+                               rendered="#{pageFlowScope.PathAnalysisQueryBean.includeSecondaryPaths}"                               
+                               binding="#{backingBeanScope.secondaryShowDetailHeader}"
+                               id="sdh2"> 
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:panelCollection id="pc2" styleClass="invEditPanelCollection">
+              <f:facet name="statusbar"/>
+              <af:table value="#{pageFlowScope.PathAnalysisQueryBean.collectionModelSecondary}"
+                        var="row" rowBandingInterval="0" id="resultsTableIdSecondary" 
+                        varStatus="vs" autoHeightRows="10" contentDelivery="immediate"
+                        horizontalGridVisible="true" 
+                        verticalGridVisible="true"
+                        summary="#{inventoryUIBundle.SECONDARY_PATHS}">
+                <af:column id="c8" styleClass="#{pageFlowScope.PathAnalysisQueryBean.toggleColor ? '' : 'invListPathTable'}" headerText=" " width="20"
+                           shortDesc="select one">
+                     <af:selectBooleanRadio text="" label="Label 1" id="sbr2" group="group2" visible="#{row.samePath}"
+                     value="#{pageFlowScope.PathAnalysisQueryBean.radioButtonListSecondary[vs.index]}" autoSubmit="true"/>
+                </af:column>   
+                <af:column id="c9" headerText="#{inventoryUIBundle.FROM_ID}" styleClass="#{pageFlowScope.PathAnalysisQueryBean.toggledColor ? '' : 'invListPathTable'}">
+                   <af:outputText value="#{row.fromNodeId}" id="ot1"/>
+                </af:column>
+                <af:column id="c10" headerText="#{inventoryUIBundle.FROM_NAME}" styleClass="#{pageFlowScope.PathAnalysisQueryBean.toggledColor ? '' : 'invListPathTable'}">
+                   <af:outputText value="#{row.fromNodeName}" id="ot2"/>
+                </af:column>
+                <af:column id="c11" headerText="#{inventoryUIBundle.SEGMENT_ID}" styleClass="#{pageFlowScope.PathAnalysisQueryBean.toggledColor ? '' : 'invListPathTable'}">
+                   <af:outputText value="#{row.segmentId}" id="ot5"/>
+                </af:column>
+                <af:column id="c12" headerText="#{inventoryUIBundle.SEGMENT_NAME}" styleClass="#{pageFlowScope.PathAnalysisQueryBean.toggledColor ? '' : 'invListPathTable'}">
+                   <af:outputText value="#{row.segmentName}" id="ot10"/>
+                </af:column>
+                <af:column id="c13" headerText="#{inventoryUIBundle.TO_ID}" styleClass="#{pageFlowScope.PathAnalysisQueryBean.toggledColor ? '' : 'invListPathTable'}">
+                   <af:outputText value="#{row.toNodeId}" id="ot11"/>
+                </af:column>
+                <af:column id="c14" headerText="#{inventoryUIBundle.TO_NAME}" styleClass="#{pageFlowScope.PathAnalysisQueryBean.toggledColor ? '' : 'invListPathTable'}">
+                   <af:outputText value="#{row.toNodeName}" id="ot12"/>
+                </af:column>
+                <af:column id="c22" headerText="#{inventoryUIBundle.NETWORK_ID}" styleClass="#{pageFlowScope.PathAnalysisQueryBean.toggledColor ? '' : 'invListPathTable'}"
+                           rowHeader="unstyled">
+                   <af:outputText value="#{row.networkId}" id="ot23"/>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:showDetailHeader>
+          
+          <af:panelGroupLayout id="pgl2" halign="right" layout="scroll">
+              <af:panelGroupLayout id="pgl3" layout="horizontal">
+                <af:toolbar id="t4">
+                    <af:commandToolbarButton text="#{inventoryUIBundle.ASSIGN}" id="ctb14"
+                                             rendered="#{pageFlowScope.PathAnalysisQueryBean.renderRateCode}"
+                                             actionListener="#{pageFlowScope.PathAnalysisQueryBean.associate}"/>
+                    <af:spacer width="10" height="10" id="s3"/>                                             
+                    <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb2" rendered="#{(pageFlowScope.PathAnalysisQueryBean.renderRateCode)}"
+                                             actionListener="#{pageFlowScope.PathAnalysisQueryBean.cancel}"
+                                             accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                </af:toolbar>
+              </af:panelGroupLayout>
+          </af:panelGroupLayout>
+          
+        </af:panelHeader>
+      </af:panelGroupLayout>
+      
+      </f:facet>
+</af:panelStretchLayout>      
+    
+</jsp:root>

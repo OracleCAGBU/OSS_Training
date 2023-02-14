@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved. */
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    3/11/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+    <af:panelGroupLayout layout="scroll" id="pgl1" binding="#{backingBeanScope.edit_panelGroupLayout}">
+        <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered ="#{!pageFlowScope.PipeTerminationPointEditBean.previewLayout}">
+            <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                           rendered="#{!(pageFlowScope.PipeTerminationPointEditBean.popupMode)}"
+                           value="#{pageFlowScope.PipeTerminationPointEditBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+            <af:menuBar id="menuBar1">
+                  <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invEditMenu"
+                           rendered="#{!(pageFlowScope.PipeTerminationPointEditBean.popupMode)}"   />
+            </af:menuBar>
+            <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch3}" contentDelivery="lazyUncached">
+                <af:dialog id="BISearchPopup_d1" type="none"
+                           title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                    <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                        <f:facet name="center">
+                           <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                        </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.PipeTerminationPointEditBean.afterBusinessInteractionSelectionChange}"/>
+            </af:popup>
+        </af:panelGroupLayout>
+      <af:panelHeader text="#{inventoryUIBundle.TERMINATION_POINT}" id="ph1">
+        <f:facet name="toolbar">
+            <af:panelGroupLayout id="pgl3" layout="horizontal">
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb4"  actionListener="#{pageFlowScope.PipeTerminationPointEditBean.save}"
+                                action="#{pageFlowScope.PipeTerminationPointEditBean.saveOutcome}" 
+                                rendered="#{(!pageFlowScope.PipeTerminationPointEditBean.addMode) || (pageFlowScope.PipeTerminationPointEditBean.popupMode)}"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+                   <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>                  
+              </af:commandButton>
+              <af:spacer width="10" height="10" id="s12"/>
+              <!-- Display the below CANCEL button in the page mode. -->
+              <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2" action="cancel" immediate="true" rendered="#{!pageFlowScope.PipeTerminationPointEditBean.popupMode}"
+                                accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+              <!-- Display the below CANCEL button in the popup mode. -->
+              <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb3" actionListener="#{pageFlowScope.PipeTerminationPointEditBean.cancel}" immediate="true" rendered="#{pageFlowScope.PipeTerminationPointEditBean.popupMode}"
+                                accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+          <af:showDetailHeader text="#{inventoryUIBundle.TERMINATION_POINT_INFO}" disclosed="true" id="sdh1">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:group id="g2">
+              <af:panelGroupLayout id="pgl2">
+                <af:panelFormLayout id="pfl1" maxColumns="2" rows="2">
+                  <af:selectOneChoice id="specDropDown" label="#{inventoryUIBundle.SPECIFICATION}" value="#{pageFlowScope.PipeTerminationPointEditBean.selectedSpec}">
+                      <f:selectItems binding="#{pageFlowScope.PipeTerminationPointEditBean.specifications}"/>
+                  </af:selectOneChoice>
+                  <af:inputText value="#{pageFlowScope.PipeTerminationPointEditBean.entityObject.id}" label="#{inventoryUIBundle.ID}" required="true" disabled="true" 
+                                maximumLength="50" columns="53" id="it1">
+                  </af:inputText>
+                  <af:inputText value="#{pageFlowScope.PipeTerminationPointEditBean.entityObject.name}" label="#{inventoryUIBundle.NAME}"  maximumLength="50" columns="53" id="it3"/>
+                  <af:inputText value="#{pageFlowScope.PipeTerminationPointEditBean.entityObject.description}" label="#{inventoryUIBundle.DESCRIPTION}" 
+                                maximumLength="255" rows="5" columns="50" id="it2"/>
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="plam7">
+                      <af:outputText value="#{pageFlowScope.PipeTerminationPointEditBean.inventoryStatus}" id="ot7"/>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="plam8">
+                      <af:outputText value="#{pageFlowScope.PipeTerminationPointEditBean.resourceAssignmentStatus}" id="ot8"/>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="ptp-lmd" rendered="false">
+                    <af:outputText value="#{pageFlowScope.PipeTerminationPointEditBean.entityObject.lastModifiedDate}" id="ot9">
+                        <af:convertDateTime pattern="#{pageFlowScope.PipeTerminationPointEditBean.dateTimeFormat}"/>
+                    </af:outputText>    
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="ptp-lmu" rendered="false">
+                    <af:outputText value="#{pageFlowScope.PipeTerminationPointEditBean.entityObject.lastModifiedUser}" id="ot10"/>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="ptp-crd" rendered="false">
+                    <af:outputText value="#{pageFlowScope.PipeTerminationPointEditBean.createdDate}" id="ot11">
+                        <af:convertDateTime pattern="#{pageFlowScope.PipeTerminationPointEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="ptp-cru" rendered="false">
+                    <af:outputText value="#{pageFlowScope.PipeTerminationPointEditBean.entityObject.createdUser}" id="ot12"/>
+                  </af:panelLabelAndMessage>
+                </af:panelFormLayout>
+              </af:panelGroupLayout>
+            </af:group>
+          </af:showDetailHeader>
+      </af:panelHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

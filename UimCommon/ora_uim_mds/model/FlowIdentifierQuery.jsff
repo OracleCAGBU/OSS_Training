@@ -1,0 +1,313 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html" 
+           xmlns:tr="http://myfaces.apache.org/trinidad/html">
+		   
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="queryModel"
+         value="#{pageFlowScope.InventoryQueryBean.queryModel}"/>
+  <c:set var="attributeMap"
+          value="#{pageFlowScope.InventoryQueryBean.hardAttributeMap}"/>
+  <af:showDetailHeader text="#{inventoryUIBundle.SEARCH}" disclosed="true"
+                       id="queryShowDetailHeader"
+                       binding="#{pageFlowScope.InventoryQueryBean.queryShowDetailHeader}" > 
+
+    <f:facet name="context"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="toolbar"></f:facet>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:panelGroupLayout id ="queryPGL" layout = "scroll">
+    <jsp:include page="/oracle/communications/inventory/ui/framework/page/InventoryQuerySavedSearch.jsff"/>
+    <af:panelFormLayout id="queryPFL" binding="#{pageFlowScope.InventoryQueryBean.queryPanelFormLayout}" maxColumns="1" fieldWidth="100%">
+      
+       <trh:tableLayout>
+           <trh:rowLayout>
+           <af:group> 
+              <trh:cellFormat halign="right">
+                 <af:outputLabel value="#{inventoryUIBundle.ID}" id="idLab" inlineStyle="white-space:nowrap;" />
+              </trh:cellFormat>
+              <trh:cellFormat>
+                 <af:selectOneChoice id="idoper" value="#{attributeMap.ID.operator}"
+                                     shortDesc="#{inventoryUIBundle.ID}">
+                    <f:selectItems value="#{attributeMap.ID.operators}" id="idopers"/>
+                 </af:selectOneChoice>
+              </trh:cellFormat>
+
+              <trh:cellFormat>
+                 <af:inputText id="idText"  value="#{attributeMap.ID.values[0]}"
+                               shortDesc="#{inventoryUIBundle.ID}"/>
+              </trh:cellFormat>
+              <trh:cellFormat>
+                <af:spacer width="100"  id="s22"/>
+             </trh:cellFormat>  
+              <trh:cellFormat halign="right">
+                 <af:outputLabel value="#{inventoryUIBundle.DESCRIPTION}" id="descLab" inlineStyle="white-space:nowrap;" />
+              </trh:cellFormat>
+              <trh:cellFormat>
+                 <af:selectOneChoice id="descoper" value="#{attributeMap.DESCRIPTION.operator}"
+                                     shortDesc="#{inventoryUIBundle.DESCRIPTION}">
+                    <f:selectItems value="#{attributeMap.DESCRIPTION.operators}" id="descopers"/>
+                 </af:selectOneChoice>
+              </trh:cellFormat>
+              <trh:cellFormat>
+                 <af:inputText id="descText"  value="#{attributeMap.DESCRIPTION.values[0]}"
+                               shortDesc="#{inventoryUIBundle.DESCRIPTION}"/>
+              </trh:cellFormat>
+
+              </af:group>
+              </trh:rowLayout> 
+           <trh:rowLayout>
+              <af:group> 
+              <trh:cellFormat halign="right">
+                 <af:outputLabel value="#{inventoryUIBundle.NAME}" id="nameLab" inlineStyle="white-space:nowrap;" />
+              </trh:cellFormat>
+              <trh:cellFormat>
+                 <af:selectOneChoice id="nameoper" value="#{attributeMap.NAME.operator}"
+                                     shortDesc="#{inventoryUIBundle.NAME}">
+                    <f:selectItems value="#{attributeMap.NAME.operators}" id="nameopers"/>
+                 </af:selectOneChoice>
+              </trh:cellFormat>
+              <trh:cellFormat>
+                 <af:inputText id="namenext"  value="#{attributeMap.NAME.values[0]}"
+                               shortDesc="#{inventoryUIBundle.NAME}"/>
+              </trh:cellFormat>
+             <trh:cellFormat>
+                <af:spacer width="100"  id="s2"/>
+             </trh:cellFormat>   
+              <trh:cellFormat halign="right">
+                 <af:outputLabel value="#{inventoryUIBundle.IDENTIFIER}" id="idenLab" inlineStyle="white-space:nowrap;" />
+              </trh:cellFormat>
+              <trh:cellFormat>
+                 <af:selectOneChoice id="idenoper" value="#{attributeMap.IDENTIFIER.operator}"
+                                     shortDesc="#{inventoryUIBundle.IDENTIFIER}">
+                    <f:selectItems value="#{attributeMap.IDENTIFIER.operators}" id="idenopers"/>
+                 </af:selectOneChoice>
+              </trh:cellFormat>
+              <trh:cellFormat >
+                 <af:inputText id="idenext"  value="#{attributeMap.IDENTIFIER.values[0]}"
+                               shortDesc="#{inventoryUIBundle.IDENTIFIER}"/>
+              </trh:cellFormat>
+              </af:group>                                           
+                
+           </trh:rowLayout> 
+           <trh:rowLayout>
+           <af:group> 
+              <trh:cellFormat halign="right">
+                  <af:outputLabel value="#{inventoryUIBundle.DOMAIN}" id="techLabel" inlineStyle="white-space:nowrap;" />
+              </trh:cellFormat>
+              <trh:cellFormat columnSpan="2">
+                 <af:inputText id="domText" autoSubmit="true" value="#{attributeMap.DOMAIN.values[0]}"
+                               shortDesc="#{inventoryUIBundle.DOMAIN}">
+                    <af:clientAttribute name="componentName" value="#{attributeMap.DOMAIN.attribute.name}"/>
+                    <af:clientListener method="setComponentName" type="focus"/>
+                    <af:serverListener type="jsSetComponentName" method="#{pageFlowScope.InventoryQueryBean.setComponentName}"/>
+                    <af:autoSuggestBehavior suggestItems="#{pageFlowScope.InventoryQueryBean.getSuggestItems}"/>
+                 </af:inputText>
+              </trh:cellFormat>
+              <trh:cellFormat>
+                <af:spacer width="100" id="fids1"/>
+             </trh:cellFormat>
+
+              <trh:cellFormat halign="right">
+                 <af:outputLabel value="#{inventoryUIBundle.RESOURCE_POOL}"  id="rsText" inlineStyle="white-space:nowrap;"/>
+              </trh:cellFormat>
+              <trh:cellFormat columnSpan="2">
+                 <af:selectManyChoice id="resourcePool" value="#{attributeMap.RESOURCE_POOL.values[0]}" autoSubmit ="true"
+                shortDesc="#{inventoryUIBundle.RESOURCE_POOL}" >
+                 <f:selectItems id="res-items" value="#{attributeMap.RESOURCE_POOL.attribute.model}"/>
+                </af:selectManyChoice>
+    
+              </trh:cellFormat>
+              </af:group> 
+             
+             
+           </trh:rowLayout> 
+           <trh:rowLayout>
+           <af:group> 
+              <trh:cellFormat halign="right">
+                 <af:outputLabel value="#{inventoryUIBundle.SPECIFICATION}"  id="specText" inlineStyle="white-space:nowrap;" />
+              </trh:cellFormat>
+              <trh:cellFormat columnSpan="2">
+                 <af:selectOneChoice id="specs" value="#{attributeMap.SPECIFICATION.values[0]}" autoSubmit="true" shortDesc="#{inventoryUIBundle.SPECIFICATION}">
+                    <f:selectItems id="spec-items" value="#{attributeMap.SPECIFICATION.attribute.model}"/>
+                 </af:selectOneChoice>
+              </trh:cellFormat>
+              <trh:cellFormat>
+                <af:spacer width="100" id="fids3"/>
+             </trh:cellFormat>
+              
+              <trh:cellFormat halign="right">
+                 <af:outputLabel value="#{inventoryUIBundle.STATUS}"  id="sLab" inlineStyle="white-space:nowrap;"/>
+              </trh:cellFormat>
+              <trh:cellFormat columnSpan="2">
+                 <af:selectOneChoice id="staSel" value="#{attributeMap.INVENTORY_STATUS.values[0]}" autoSubmit="true"
+                                     shortDesc="#{inventoryUIBundle.STATUS}">
+                    <f:selectItems id="si" value="#{attributeMap.INVENTORY_STATUS.attribute.model}"/>
+                 </af:selectOneChoice>
+              </trh:cellFormat>
+            </af:group> 
+           </trh:rowLayout>
+          <trh:rowLayout>
+              <af:group>     
+              <trh:cellFormat halign="right">
+                 <af:outputLabel value="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}"  id="rsLab" inlineStyle="white-space:nowrap;"/>
+              </trh:cellFormat>
+              <trh:cellFormat columnSpan="2">
+                 <af:selectOneChoice id="rstaSel" value="#{attributeMap.RESOURCE_ASSIGNMENT_STATUS.values[0]}" autoSubmit="true"
+                                     shortDesc="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}">
+                    <f:selectItems id="rsi" value="#{attributeMap.RESOURCE_ASSIGNMENT_STATUS.attribute.model}"/>
+                 </af:selectOneChoice>
+              </trh:cellFormat>
+              <trh:cellFormat>
+                <af:spacer width="100" height="10" id="fids4"/>
+             </trh:cellFormat>
+              </af:group> 
+           </trh:rowLayout>
+
+        </trh:tableLayout>
+       
+       <af:spacer  height="4" />
+    
+        <af:forEach 
+                     items="#{pageFlowScope.InventoryQueryBean.sections}"
+                     var="section" varStatus="vs2">
+          <af:showDetailHeader text="#{section.conjunction.additionalInfo.name}"  inlineStyle="padding-top:0px; padding-bottom:0px;"
+                       rendered='#{section.conjunction.additionalInfo.onForm == "true" }'
+                       disclosed="#{section.conjunction.additionalInfo.disclosed}" 
+                       disclosureListener = "#{pageFlowScope.InventoryQueryBean.disclosureListener}" >
+            <trh:tableLayout cellPadding="0" cellSpacing="0" borderWidth="0">
+            <af:forEach  items="#{section.pairOfAttributes}"
+                         var="pair" varStatus="vs2">
+                 <trh:rowLayout>
+                 <af:iterator  value="#{pair.attributes}"
+                         var="criterionInner" varStatus="vs8">         
+              <af:switcher facetName="#{criterionInner.attribute.componentType}">
+                <f:facet name="inputText">
+                    <af:group>
+                    <trh:cellFormat halign="right">
+                     <af:outputLabel value="#{criterionInner.attribute.label}"
+                                    id="textLabelInner"/>
+                    </trh:cellFormat>
+                    <trh:cellFormat>
+                    <af:selectOneChoice value="#{criterionInner.operator}"  rendered="#{!(empty criterionInner.operators)}"  autoSubmit ="true"
+                                        shortDesc="#{section.conjunction.additionalInfo.name}-#{criterionInner.attribute.label}">
+                      <f:selectItems value="#{criterionInner.operators}"
+                                      />
+                    </af:selectOneChoice>
+                    </trh:cellFormat>
+                    <trh:cellFormat>
+                    <af:inputText value="#{criterionInner.values[0]}" autoSubmit ="true"
+                                  shortDesc="#{criterionInner.attribute.label}-#{section.conjunction.additionalInfo.name}"/>
+                    
+                    </trh:cellFormat>
+                    </af:group>
+                </f:facet>
+                <f:facet name="inputDate">
+                  <af:group>
+                    <trh:cellFormat halign="right">
+                    <af:outputLabel value="#{criterionInner.attribute.label}"
+                                   />
+                    </trh:cellFormat>
+                    <trh:cellFormat>
+                    <af:selectOneChoice 
+                                        value="#{criterionInner.operator}" rendered="#{!(empty criterionInner.operators)}" autoSubmit="true"
+                                        shortDesc="#{section.conjunction.additionalInfo.name}-#{criterionInner.attribute.label}">
+                      <f:selectItems value="#{criterionInner.operators}"
+                                     />
+                    </af:selectOneChoice>
+                    </trh:cellFormat>
+                    <trh:cellFormat>
+                    <af:inputDate 
+                                  value="#{criterionInner.values[0]}" autoSubmit="true"
+                                  shortDesc="#{criterionInner.attribute.label}-#{section.conjunction.additionalInfo.name}"/>
+                    </trh:cellFormat>
+                    </af:group>
+                </f:facet>
+                <f:facet name="selectOneChoice">
+                  <af:group>
+                    <trh:cellFormat halign="right">
+                      <af:outputLabel value="#{criterionInner.attribute.label}"
+                                   />
+                    </trh:cellFormat>
+                                      
+                    <trh:cellFormat columnSpan="2">
+                    
+                    <af:selectOneChoice 
+                                        value="#{criterionInner.values[0]}" autoSubmit ="true"
+                                        shortDesc="#{section.conjunction.additionalInfo.name}-#{criterionInner.attribute.label}">
+                      <f:selectItems 
+                                     value="#{criterionInner.attribute.model}"/>
+                    </af:selectOneChoice>
+                   </trh:cellFormat>
+                   </af:group>
+                </f:facet>
+                <f:facet name="selectBooleanCheckbox">
+                  <af:group>
+                    
+                    <trh:cellFormat halign="right">
+                    <af:selectBooleanCheckbox 
+                                              value="#{criterionInner.values[0]}" autoSubmit ="true" shortDesc="#{criterionInner.attribute.label}"/>
+                    </trh:cellFormat>
+                   
+                    <trh:cellFormat halign="left" columnSpan="2">
+                      <af:spacer width="5" height="10" />
+                    <af:inputText label="#{criterionInner.attribute.name}"
+                                           rendered="false" autoSubmit="true"
+                                  shortDesc="#{criterionInner.attribute.label}-#{section.conjunction.additionalInfo.name}"/>
+                    <af:outputLabel value="#{criterionInner.attribute.label}"
+                                    shortDesc="#{criterionInner.attribute.label}-#{section.conjunction.additionalInfo.name}"/>
+                    </trh:cellFormat>
+                    
+                   
+                    </af:group>
+                </f:facet>
+                <f:facet name="inputNumberSpinbox">
+                  <af:group>
+                    <trh:cellFormat halign="right">
+                     <af:outputLabel value="#{criterionInner.attribute.label}"
+                                   />
+                    </trh:cellFormat>
+                    <trh:cellFormat>
+                    <af:selectOneChoice value="#{criterionInner.operator}" rendered="#{!(empty criterionInner.operators)}"  autoSubmit="true"
+                                        shortDesc="#{section.conjunction.additionalInfo.name}-#{criterionInner.attribute.label}">
+                      <f:selectItems value="#{criterionInner.operators}"
+                                     />
+                    </af:selectOneChoice>
+                    </trh:cellFormat>
+                    <trh:cellFormat>
+                    <af:inputNumberSpinbox value="#{criterionInner.values [0]}"  autoSubmit="true"
+                                           shortDesc="#{criterionInner.attribute.label}-#{section.conjunction.additionalInfo.name}">
+                    </af:inputNumberSpinbox>
+                    </trh:cellFormat>
+                    </af:group>
+                </f:facet>
+              </af:switcher>
+              <trh:cellFormat>
+                 <af:spacer width="100" height="10" />
+               </trh:cellFormat>
+            </af:iterator>
+                 </trh:rowLayout>
+            </af:forEach>
+            </trh:tableLayout>
+           </af:showDetailHeader>
+
+        </af:forEach>
+     </af:panelFormLayout>
+     </af:panelGroupLayout>
+   
+    <jsp:include page="/oracle/communications/inventory/ui/framework/page/InventoryQueryButtons.jsff"/>
+    <trh:script>
+        function setComponentName(event){
+             var txtField = event.getSource();
+             var componentName = txtField.getProperty('componentName');
+             AdfCustomEvent.queue(txtField, "jsSetComponentName", {componentName: componentName}, true);                 
+          }
+        
+        </trh:script>
+      
+  </af:showDetailHeader>
+</jsp:root>

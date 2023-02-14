@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelHeader text="#{inventoryUIBundle.REDEEM_RESERVATION}" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar">
+            <af:group id="g1">
+              <af:commandButton text="#{inventoryUIBundle.REDEEM}" id="cb4" actionListener="#{pageFlowScope.RedeemReservation.redeem}"/>
+              <af:spacer width="10" height="10" id="s12"/>
+              <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2" actionListener="#{pageFlowScope.RedeemReservation.cancel}" immediate="true"/>
+            </af:group>
+        </f:facet>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:showDetailHeader text="" disclosed="true" id="sdh1">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:group id="g2">
+            <af:panelGroupLayout id="pgl1">
+              <af:panelFormLayout id="pfl1">
+                <af:selectOneChoice id="reservedForType" label="#{inventoryUIBundle.RESERVED_FOR_TYPE}"
+                            autoSubmit="true" required="true" value="#{pageFlowScope.RedeemReservation.reservedForType}">
+                      <f:selectItems binding="#{pageFlowScope.RedeemReservation.reservedForTypes}" id="si2"/>
+                </af:selectOneChoice>
+                <af:spacer width="10" height="10" id="s11"/>
+                <af:inputText label="#{inventoryUIBundle.RESERVED_FOR}" id="it1" required="true" maximumLength="35" 
+                              value="#{pageFlowScope.RedeemReservation.reservedFor}"/>
+              </af:panelFormLayout>
+            </af:panelGroupLayout>
+          </af:group>
+        </af:showDetailHeader>
+      </af:panelHeader>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

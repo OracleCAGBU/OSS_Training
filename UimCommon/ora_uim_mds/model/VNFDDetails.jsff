@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="inventoryuiBundle"
+           value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                     value="#{bindings.ptb1}" id="pt1">
+        <f:facet name="localArea">
+            <af:panelStretchLayout id="psl1">
+                <f:facet name="center">
+                    <af:panelHeader text="#{pageFlowScope.VNFDDetailsBean.displayInfo}"
+                                    helpTopicId="OHW_vnfdescriptDetailsPage" styleClass="invSummaryPanelHeader" id="ph1">
+                        <f:facet name="menuBar">
+                            <af:group id="g1">
+                                <af:menuBar id="menuBar2"
+                                            rendered="#{pageFlowScope.VNFDDetailsBean.renderRelatedPagesMenu}">
+                                    <!-- Menus Start-->
+                                    <af:menu id="menu5" binding="#{backingBeanScope.InventoryMenuBean.relatedPagesMenu}"
+                                             styleClass="invSummaryMenu"/>
+                                </af:menuBar>
+                                <!-- Menus Ends-->
+                            </af:group>
+                        </f:facet>
+                        <!-- Descriptor Information starts here -->
+                        <af:panelGroupLayout layout="scroll" id="pgl23">
+                            <af:showDetailHeader text="#{inventoryuiBundle.DESCRIPTOR_INFORMATION}"
+                                                 styleClass="invSummaryShowDetailHeader" disclosed="true" id="sdh1">
+                                <af:panelFormLayout maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" id="pfl1">
+                                    <af:panelLabelAndMessage label="#{inventoryuiBundle.NAME}" id="plam1">
+                                        <af:outputText value="#{pageFlowScope.VNFDDetailsBean.specDisplayName}"
+                                                       id="ot1"/>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{inventoryuiBundle.ENTITY_TYPE}" id="plam2">
+                                        <af:outputText value="#{pageFlowScope.VNFDDetailsBean.entityType}"
+                                                       id="ot2"/>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{inventoryuiBundle.START_DATE}" id="plam3">
+                                        <af:outputText value="#{pageFlowScope.VNFDDetailsBean.entityObject.validFor.startDate}"
+                                                       id="ot3">
+                                            <af:convertDateTime pattern="#{pageFlowScope.VNFDDetailsBean.dateTimeFormat}"/>
+                                        </af:outputText>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{inventoryuiBundle.END_DATE}" id="plam4">
+                                        <af:outputText value="#{pageFlowScope.VNFDDetailsBean.entityObject.validFor.endDate}"
+                                                       id="ot4">
+                                            <af:convertDateTime pattern="#{pageFlowScope.VNFDDetailsBean.dateTimeFormat}"/>
+                                        </af:outputText>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{inventoryuiBundle.DESCRIPTION}" id="plam5">
+                                        <af:outputText value="#{pageFlowScope.VNFDDetailsBean.entityObject.description}"
+                                                       id="ot5"/>
+                                    </af:panelLabelAndMessage>
+                                </af:panelFormLayout>
+                            </af:showDetailHeader>
+                            <af:spacer width="10" height="10" id="s9"/>
+                            <af:showDetailHeader text="#{inventoryuiBundle.DESCRIPTOR_FILE}" disclosed="true" id="sdh2">
+                                <af:panelStretchLayout id="psl2" styleClass="AFStretchWidth" dimensionsFrom="auto">
+                                    <f:facet name="center">
+                                        <af:codeEditor id="ce1" value="#{pageFlowScope.VNFDDetailsBean.XMLDescriptor}" styleClass="AFStretchWidth" simple="true"
+                                                language="xml" rows="15" readOnly="true" dimensionsFrom="auto" inlineStyle="background-color:White;"/>
+                                    </f:facet>
+                                </af:panelStretchLayout>
+                            </af:showDetailHeader>
+                            <af:spacer width="10" height="10" id="s91"/> 
+                            <af:showDetailHeader text="#{inventoryuiBundle.TOSCA_FILE}" disclosed="true" id="sdh3">
+                                <af:panelStretchLayout id="psl3" styleClass="AFStretchWidth" dimensionsFrom="auto">
+                                    <f:facet name="center">
+                                        <af:codeEditor id="ce2" value="#{pageFlowScope.VNFDDetailsBean.TOSCATemplate}" styleClass="AFStretchWidth" simple="true"
+                                                language="text" rows="15" readOnly="true" dimensionsFrom="auto" inlineStyle="background-color:White;"/>
+                                    </f:facet>
+                                </af:panelStretchLayout>
+                            </af:showDetailHeader>    
+                            <af:spacer width="10" height="10" id="s12"/>
+                            <af:showDetailHeader text="#{inventoryuiBundle.COMPOSITION}"
+                                                 rendered="#{!(pageFlowScope.VNFDDetailsBean.configSpec)}"
+                                                 disclosed="true" styleClass="invSummaryShowDetailHeader" id="sdh9">
+                                <af:panelCollection styleClass="invSummaryPanelCollection; AFStretchWidth" id="pc7">
+                                    <af:treeTable value="#{pageFlowScope.VNFDTreeBean.treeModel}" var="node"
+                                                  rowSelection="multiple"
+                                                  styleClass="invSummaryTreeTable; AFStretchWidth"
+                                                  id="vnfdTreeTable" contextMenuSelect="true"
+                                                  contentDelivery="immediate"
+                                                  binding="#{backingBeanScope.SPEC_treeBinding}"
+                                                  disclosedRowKeys="#{pageFlowScope.VNFDTreeBean.treeDisclosedRowKeys}"
+                                                  expandAllEnabled="#{pageFlowScope.VNFDTreeBean.expandAllEnabled}"
+                                                  selectionListener="#{pageFlowScope.VNFDTreeBean.nodeSelectedEvent}"
+                                                  fetchSize="#{pageFlowScope.VNFDDetailsBean.fetchSize}"
+                                                  summary="#{inventoryuiBundle.COMPOSITION}">
+                                        <f:facet name="nodeStamp">
+                                            <af:column sortable="false" id="c21" width="500" rowHeader="unstyled"
+                                                       headerText="#{inventoryuiBundle.COMPOSITION}">
+                                                <af:panelGroupLayout id="pgl5">
+                                                    <af:image source="#{node.data.icon}" id="nodeIcon"
+                                                              styleClass="invSummaryImage" shortDesc="icon"/>
+                                                    <af:outputText value="#{node.data.label}" id="ot40"/>
+                                                </af:panelGroupLayout>
+                                            </af:column>
+                                        </f:facet>
+                                        <af:column sortable="false" headerText="#{inventoryuiBundle.RATE_CODE}"
+                                                   id="ratecodeId" filterable="false"
+                                                   rendered="#{pageFlowScope.VNFDDetailsBean.rateCodeColumnVisible}">
+                                            <!-- Start For displaying the RateCode -->
+                                            <af:outputText value="#{node.data.rateCode}" id="rateCodeID"/>
+                                            <!-- End For displaying the RateCode -->
+                                        </af:column>
+                                        <f:facet name="contextMenu">
+                                            <af:popup contentDelivery="lazyUncached" id="popupContext"
+                                                      partialTriggers="::vnfdTreeTable">
+                                                <af:menu text="childNodeMenu" id="childNodeMenu"
+                                                         rendered="#{pageFlowScope.VNFDTreeBean.childNodePopupMenu}">
+                                                    <af:commandMenuItem text="#{inventoryuiBundle.RELATIONSHIP_PROPERTIES}"
+                                                                        id="relPropertiesMenuItem" selected="true">
+                                                        <af:setActionListener from="true"
+                                                                              to="#{pageFlowScope.invokeSR}"/>
+                                                        <af:showPopupBehavior triggerType="click"
+                                                                              popupId="::popupSpecRelationId"/>
+                                                    </af:commandMenuItem>
+                                                </af:menu>
+                                            </af:popup>
+                                        </f:facet>
+                                    </af:treeTable>
+                                    <af:popup id="popupSpecRelationId" binding="#{backingBeanScope.popupSpecRelation}"
+                                              contentDelivery="lazyUncached">
+                                        <af:dialog id="specRelDialog" type="none"
+                                                   title="#{inventoryuiBundle.MAINTAIN} #{inventoryuiBundle.DESCRIPTOR_RELATIONSHIP}">
+                                            <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                                                <f:facet name="center">
+                                                    <af:region value="#{bindings.SpecificationRelationshipMaintFlow1.regionModel}"
+                                                               id="r2"/>
+                                                </f:facet>
+                                            </af:panelStretchLayout>
+                                        </af:dialog>
+                                    </af:popup>
+                                </af:panelCollection>
+                            </af:showDetailHeader>
+                            <af:spacer width="10" height="10" id="s10"/>
+                            <af:region value="#{bindings.CharacteristicSpecificationListFlow1.regionModel}" id="r1"
+                                       styleClass="AFStretchWidth"/>
+                            <af:spacer width="10" height="10" id="s11"/>
+                            <af:showDetailHeader text="#{inventoryuiBundle.EXTENSION_POINT_RULE_SETS}"
+                                                 rendered="#{!pageFlowScope.VNFDDetailsBean.entityIdSpec}"
+                                                 disclosed="true" styleClass="invSummaryShowDetailHeader" id="sdh7">
+                                <af:panelCollection styleClass="invSummaryPanelCollection; AFStretchWidth" id="pc5">
+                                    <af:table var="row" rowBandingInterval="0" contentDelivery="immediate"
+                                              autoHeightRows="#{pageFlowScope.VNFDDetailsBean.portletHeight}"
+                                              value="#{pageFlowScope.VNFDDetailsBean.relatedExtensionPointRuleSets}"
+                                              summary="#{inventoryuiBundle.EXTENSION_POINT_RULE_SETS}" id="t5"
+                                              styleClass="AFStretchWidth" width="100%" columnStretching="multiple">
+                                        <af:column sortable="false" headerText="#{inventoryuiBundle.MENU_RULE_SET}"
+                                                   id="c17" width="200">
+                                            <af:commandImageLink action="ruleSummary"
+                                                                 actionListener="#{bindings.openSubTaskForRuleSummary.execute}"
+                                                                 shortDesc="#{inventoryuiBundle.RULE_SETS_SUMMARY_LINK}"
+                                                                 text="#{row.ruleSetEntity.name}" id="cil6">
+                                                <af:setActionListener from="#{row.ruleSetEntity.oid}" to="#{ruleOid}"/>
+                                                <af:setActionListener from="#{row.ruleSetEntity.name}"
+                                                                      to="#{DisplayInfo}"/>
+                                            </af:commandImageLink>
+                                        </af:column>
+                                        <af:column sortable="false" headerText="#{inventoryuiBundle.EXTENSION_POINT}"
+                                                   rowHeader="unstyled" id="c18" width="300">
+                                            <af:outputText value="#{row.extensionPoint.name}" id="ot37"/>
+                                        </af:column>
+                                        <af:column sortable="false" headerText="#{inventoryuiBundle.TYPE}" id="c19"
+                                                   width="150">
+                                            <af:outputText value="#{row.type}" id="ot38"/>
+                                        </af:column>
+                                    </af:table>
+                                </af:panelCollection>
+                            </af:showDetailHeader>
+                        </af:panelGroupLayout>
+                    </af:panelHeader>
+                </f:facet>
+            </af:panelStretchLayout>
+        </f:facet>
+        <f:facet name="contextualArea"/>
+        <f:facet name="localAreaScroll"/>
+    </af:pageTemplate>
+</ui:composition>

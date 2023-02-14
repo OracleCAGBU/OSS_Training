@@ -1,0 +1,209 @@
+package oracle.communications.inventory.rules
+
+import javax.transaction.UserTransaction;
+
+import oracle.communications.platform.persistence.PersistenceHelper;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.rules.impl.RuleDebug;
+import java.lang.*;
+import java.util.*;
+import oracle.communications.inventory.api.entity.AssignmentState;
+import oracle.communications.inventory.api.ObjectState;
+import oracle.communications.inventory.api.entity.TNAssignment;
+import oracle.communications.platform.persistence.Finder;
+import oracle.communications.platform.persistence.PersistenceHelper;
+import oracle.communications.platform.persistence.PersistenceManager;
+
+import oracle.communications.inventory.api.util.*;
+import oracle.communications.inventory.extensibility.extension.util.*;
+import oracle.communications.inventory.api.framework.config.SystemConfig;
+import oracle.communications.inventory.api.entity.*;
+import oracle.communications.inventory.api.entity.TNCharacteristic;
+import oracle.communications.inventory.api.entity.common.AssignmentAction;
+import oracle.communications.inventory.api.entity.common.ConsumableResource;
+import oracle.communications.inventory.api.common.TransitionManager;
+
+
+global Log log;
+
+rule "Recall Disconnected Telephone Number"
+    salience 0
+    when
+        context: ExtensionPointRuleContext()
+    then
+        log.debug("", new Object[]{"timerExpired extension point has been invoked"});
+        
+        Finder finder = null;
+        TNAssignment tnAssignment = null;
+        PersistenceManager pm = null;
+        UserTransaction ut = null;
+        try {
+        
+            pm = PersistenceHelper.makePersistenceManager();
+            
+            // Define the expiry for changing TRANSITIONAL to UNASSIGNED state
+	        GregorianCalendar stateExpiry = new GregorianCalendar();
+	        int durationInDays = 30;
+	        stateExpiry.add(GregorianCalendar.DAY_OF_MONTH, durationInDays);
+	         
+	         int queryLimit = SystemConfig.getInstance().getIntProperty("tn.recallTNSearchResultsLimit", 500);
+	            
+	        // For testing only; to set the TRANSITIONAL duration to 1 minute
+	        //int durationInMins = 1;
+	        //stateExpiry.add(GregorianCalendar.MINUTE,durationInMins);
+	          
+	        boolean finished = false;   
+	        do
+            { 
+                ut = pm.getTransaction();
+	            ut.begin();
+	            
+	            finder = PersistenceHelper.makeFinder();
+	            String filter = "o.stateExpiry < :pCurrentDate AND " + 
+	                             "(o.adminState = :pDisconnectedState OR o.adminState = :pTransitionalState)  AND o.objectState = :pObjectState";
+	            finder.setResultClass(TNAssignment.class);
+	            finder.setJPQLFilter(filter);
+	            finder.setParameters(new String[]{"pCurrentDate", "pDisconnectedState", "pTransitionalState", "pObjectState"}, 
+	                                 new Object[]{new Date(), AssignmentState.DISCONNECTED, AssignmentState.TRANSITIONAL, ObjectState.ACTIVE});
+	            finder.setRange( 0, queryLimit );
+            
+                Collection candidates = finder.findMatches();
+                if ( candidates.isEmpty() ) finished = true;
+		            
+	            Iterator itr = candidates.iterator();
+	            while (itr.hasNext()) {
+	                
+	                tnAssignment = (TNAssignment) itr.next();
+						if (tnAssignment == null) {
+							continue;
+						}
+						AssignmentState currentState = tnAssignment.getAdminState();
+						TelephoneNumber telephoneNumber = null;
+						telephoneNumber = tnAssignment.getTelephoneNumber();
+						if (telephoneNumber == null){
+							continue;
+						}
+						
+						Set<TNCharacteristic> tnCharacteristic = telephoneNumber.getCharacteristics();
+						Object[] tnCharArray = tnCharacteristic.toArray();
+						String poolValue = null;
+						String tnTypeCharValue = null;
+						String tnCharacteristicName = SystemConfig.getInstance().getProperty("tn.portabilityCharacteristicName","tnType");
+						String tnCharacteristicPool = "Pool";
+						// loop thru all characteristics and fetch tnType and pool values
+						for( int j = 0; j < tnCharArray.length; j++ ){
+							TNCharacteristic tnChar = (TNCharacteristic)tnCharArray[j];
+							if ( tnCharacteristicPool.equals(tnChar.getName())){
+								poolValue = tnChar.getValue();
+							}
+							if ( tnCharacteristicName.equals(tnChar.getName())){
+								tnTypeCharValue = tnChar.getValue();
+							}
+						}
+						log.debug("", new Object[]{"tnType : " + tnTypeCharValue + "pool : " + poolValue});
+						
+						//Assignment state DISCONNECTED
+						if ((AssignmentState.DISCONNECTED.getValueAsString()).equals(currentState.getValueAsString())) {
+							TransitionManager tmDiscon = PersistenceHelper.makeTransitionManager(tnAssignment);
+							
+							
+							
+							
+							//Change state of owned number and set stateExpiry 
+							if ((("OWNED").equals(tnTypeCharValue)) ||(("").equals(tnTypeCharValue))){
+								log.debug("", new Object[]{"timerExpired extension point change DISCONNECT state for "  + tnTypeCharValue});
+								tmDiscon.transition(tnAssignment, AssignmentAction.EXPIRE);
+								tnAssignment.setStateExpiry(stateExpiry.getTime());
+							}
+							
+							//Change state of PortedIn and TollFree numbers
+							//2 Step process: 1st EXPIRE changes DISCONNECTED TO TRANSITIONAL and 2nd TRANSITIONAL to UNASSIGNED
+							else if ((("PORTEDIN").equals(tnTypeCharValue)) ||
+									(("TOLLFREE").equals(tnTypeCharValue))){									
+								log.debug("", new Object[]{"timerExpired extension point change DISCONNECT state for "  + tnTypeCharValue});
+								tmDiscon.transition(tnAssignment, AssignmentAction.EXPIRE);
+								ConsumableResource consumableResource = tnAssignment.getResource();
+								if(consumableResource==null) {
+									return;
+								}
+								consumableResource.setCurrentAssignment(null);
+								tmDiscon.transition(tnAssignment, AssignmentAction.EXPIRE);									
+								
+								tnAssignment.setStateExpiry(null);
+								tmDiscon.transition(telephoneNumber, ResourceAction.DEACTIVATE);
+							}
+							
+							//Change state of PORTEDOUT numbers
+							else if (("PORTEDOUT").equals(tnTypeCharValue)){
+								log.debug("", new Object[]{"timerExpired extension point change DISCONNECT state for "  + tnTypeCharValue});
+								tmDiscon.transition(tnAssignment, AssignmentAction.EXPIRE_PORTED_TN);
+								tnAssignment.setStateExpiry(null);
+								tmDiscon.transition(telephoneNumber, ResourceAction.DEACTIVATE);
+							}
+							
+							//Fail safe in case no tnType found
+							else {
+								log.debug("", new Object[]{"timerExpired extension point change DISCONNECT state for unknown tnType"});
+								tmDiscon.transition(tnAssignment, AssignmentAction.EXPIRE);
+								tnAssignment.setStateExpiry(stateExpiry.getTime());
+							}
+						}
+						
+						//Assignment State TRANSITIONAL
+						else if ((AssignmentState.TRANSITIONAL.getValueAsString()).equals(currentState.getValueAsString())) {
+							TransitionManager tmTrans = PersistenceHelper.makeTransitionManager(tnAssignment);
+							
+							//In case of OWNED and blank tnTYpes transition the state of TN
+							if ((("OWNED").equals(tnTypeCharValue))|| (("").equals(tnTypeCharValue))) {
+								ConsumableResource consumableResource = tnAssignment.getResource();
+								if(consumableResource==null) {
+									return;
+								}
+								consumableResource.setCurrentAssignment(null);
+								log.debug("", new Object[]{"timerExpired extension point change TRANSITIONAL state for "  + tnTypeCharValue});
+								tmTrans.transition(tnAssignment, AssignmentAction.EXPIRE);
+								tnAssignment.setStateExpiry(null);
+							}
+							//Fail safe in case no tnType found
+							else{
+								ConsumableResource consumableResource = tnAssignment.getResource();
+								if(consumableResource==null) {
+									return;
+								}
+								consumableResource.setCurrentAssignment(null);
+								log.debug("", new Object[]{"timerExpired extension point change TRANSITIONAL state for unknown tnType"});
+								tmTrans.transition(tnAssignment, AssignmentAction.EXPIRE);
+								tnAssignment.setStateExpiry(null);
+							}
+						}
+						
+	            }
+	            
+		        ut.commit();
+            }
+            while ( ! finished );
+        }
+        catch (Throwable t) {
+            if ( ut != null )
+            {
+                try
+                {
+                    ut.rollback();
+                }
+                catch ( Exception notUsed ) {}
+            }
+            
+            if (tnAssignment != null)
+                log.error("consumer.failedToExpiredDisconnectedTN", new Object[]{tnAssignment.getTelephoneNumber().getName(), t.getLocalizedMessage()});
+            else
+                log.error("consumer.failedToFindTNAssignment", new Object[]{t.getLocalizedMessage()});
+        }
+        finally {
+            if (pm != null)
+                pm.close();
+                
+            if (finder != null)
+                finder.close();
+        }
+
+end

@@ -1,0 +1,51 @@
+package oracle.communications.inventory.rules
+
+import java.util.ArrayList;
+import java.util.*;
+import java.lang.*;
+import oracle.communications.inventory.extensibility.rules.*;
+import oracle.communications.platform.persistence.PersistenceHelper;
+import oracle.communications.inventory.api.place.AddressRangeManager;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
+import oracle.communications.inventory.api.entity.GeographicAddress;
+import oracle.communications.inventory.api.entity.GeographicAddressRange;
+import oracle.communications.inventory.api.entity.Specification;
+import oracle.communications.inventory.api.entity.PlaceCharacteristic;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.framework.logging.LogFactory;
+import oracle.communications.platform.persistence.Finder;
+import oracle.communications.platform.persistence.impl.EntityField;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+import oracle.communications.inventory.api.framework.resource.MessageResource;
+
+global Log log;
+ 
+function GeographicAddressRange validate(GeographicAddressRange range, GeographicAddress address) {
+	GeographicAddressRange returnAddress = null;
+	AddressRangeManager rangeManager = PersistenceHelper.makeAddressRangeManager();      
+	  //create a characteristic map with just the populated characteristics
+	  Map<String, String> addrMap = new HashMap<String, String>();
+	  List resultList = new ArrayList();
+	  RulesExecutor rulesExecutor = PersistenceHelper.makeRulesExecutor();	  
+	  resultList = rulesExecutor.execute("CREATE ADDRESS CHARACTERISTIC MAP", Map.class, address);
+	  addrMap = (HashMap) resultList.get(0);       
+      Collection<GeographicAddressRange> ranges = new ArrayList<GeographicAddressRange>();
+      ranges.add(range);
+      //verify whether this range is valid for this address
+      returnAddress = rangeManager.processRanges(ranges, addrMap);
+    return returnAddress;
+} 
+  
+rule "Validate Address For Range"
+		salience 0
+	when
+		range : GeographicAddressRange()	
+		address : GeographicAddress()
+		context : ExtensionPointRuleContext()
+	then		
+		log.debug( "", new Object[] { "Starting Validate Address Range. Range= "+range.getName()+" Address = " + address.getName() } );
+	    // execute for address
+	    GeographicAddressRange rangeResult = validate(range, address);      
+	    context.setReturnValue(rangeResult);
+end

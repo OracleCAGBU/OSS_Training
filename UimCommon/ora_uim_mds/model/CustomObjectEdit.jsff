@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:pf="/platform/functions">
+  
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>		  
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>         
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+     <af:panelGroupLayout id="pgl1" binding="#{backingBeanScope.edit_panelGroupLayout}"
+                          layout="scroll">
+         <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered ="#{!pageFlowScope.CustomObjectEditBean.previewLayout}">
+            <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                           rendered="#{!(pageFlowScope.CustomObjectEditBean.popupMode)}"
+                           value="#{pageFlowScope.CustomObjectEditBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+            <af:menuBar id="menuBar1">
+                  <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invEditMenu"
+                           rendered="#{!(pageFlowScope.CustomObjectEditBean.popupMode)}"   />
+            </af:menuBar>
+            <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch3}" contentDelivery="lazyUncached">
+                <af:dialog id="BISearchPopup_d1" type="none"
+                           title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                    <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                        <f:facet name="center">
+                           <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                        </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.CustomObjectEditBean.afterBusinessInteractionSelectionChange}"/>
+            </af:popup>
+        </af:panelGroupLayout>
+      
+        
+        <af:panelHeader text="#{pageFlowScope.CustomObjectEditBean.message}" id="ph45" messageType="confirmation" rendered="#{pageFlowScope.CustomObjectEditBean.addAnotherMode}"/>
+        
+        <af:panelHeader text="#{inventoryUIBundle.CUSTOM_OBJECT} - #{pageFlowScope.CustomObjectEditBean.displayInfo}"
+                      id="ph1" helpTopicId="#{pageFlowScope.CustomObjectEditBean.helpTopic}">
+        <f:facet name="toolbar">
+          <af:panelGroupLayout layout="horizontal" id="pg3" rendered ="#{!pageFlowScope.CustomObjectEditBean.previewLayout}">
+              <!--CRUD Buttons Starts -->
+            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}"
+                              id="cb1"
+                              actionListener="#{pageFlowScope.CustomObjectEditBean.save}"
+                              action="#{pageFlowScope.CustomObjectEditBean.saveOutcome}"
+                              rendered="#{!pageFlowScope.CustomObjectEditBean.addMode || pageFlowScope.CustomObjectEditBean.popupMode}"
+                              accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}"> 
+               <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>               
+            </af:commandButton>                  
+            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CONTINUE}"
+                              actionListener="#{pageFlowScope.CustomObjectEditBean.save}"
+                              id="cb31"
+                              rendered="#{pageFlowScope.CustomObjectEditBean.addMode and !pageFlowScope.CustomObjectEditBean.popupMode}"
+                              action="#{pageFlowScope.CustomObjectEditBean.saveOutcome}"
+                              accessKey="#{inventoryUIBundle.SAVE_AND_CONTINUE_ACCESS_KEY}">
+                <af:setActionListener from="summary" to="#{pageFlowScope.saveActionOutcome}"/>               
+             </af:commandButton>                 
+            <af:spacer width="10" height="10" id="s51"/>
+            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER}"
+                              actionListener="#{pageFlowScope.CustomObjectEditBean.save}"
+                              action="#{pageFlowScope.CustomObjectEditBean.saveOutcome}"
+                              id="cb3"
+                              rendered="#{pageFlowScope.CustomObjectEditBean.addMode and !pageFlowScope.CustomObjectEditBean.popupMode}"
+                              accessKey="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER_ACCESS_KEY}">
+               <af:setActionListener from="init" to="#{pageFlowScope.saveActionOutcome}"/>                    
+            </af:commandButton>                  
+            <af:spacer width="10" height="10" id="s5" rendered="#{pageFlowScope.CustomObjectEditBean.addMode and !pageFlowScope.CustomObjectEditBean.popupMode}"/>
+            <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2" actionListener="#{bindings.closeSubTask.execute}"
+                              action="cancel"
+                              immediate="true" accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+            <!--CRUD Buttons Ends -->
+          </af:panelGroupLayout>
+        </f:facet>
+        <af:panelGroupLayout layout="scroll" id="pgl23">
+        <af:showDetailHeader text="#{inventoryUIBundle.CUSTOM_OBJECT_INFORM}" disclosed="true" id="PAGE_TITLE">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"></f:facet>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:group id="g1">
+            <af:spacer height="10" id="spacer1"/>
+            <af:panelGroupLayout id="pgl2">
+              <af:panelFormLayout id="custobj" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsPanel}">
+                <af:selectOneChoice id="custobj-specification"
+                                    label="#{inventoryUIBundle.SPECIFICATION}"
+                                    autoSubmit="true"
+                                    value="#{pageFlowScope.CustomObjectEditBean.selectedSpec}"
+                                    disabled="#{!(pageFlowScope.CustomObjectEditBean.addMode)}"
+                                    valueChangeListener="#{pageFlowScope.CustomObjectEditBean.specChanged}">
+                  <f:selectItems binding="#{pageFlowScope.CustomObjectEditBean.specifications}"
+                                 id="si1"/>
+                </af:selectOneChoice>
+             
+                <af:inputText   value="#{(pageFlowScope.CustomObjectEditBean.addMode ) ? ( (pageFlowScope.CustomObjectEditBean.enterIdManually) ? pageFlowScope.CustomObjectEditBean.entityObject.id : inventoryUIBundle.AUTO_GENERATE) : (pageFlowScope.CustomObjectEditBean.entityObject.id)}"
+                                label="#{inventoryUIBundle.ID}"
+                                required="true"
+                                disabled="#{ !(pageFlowScope.CustomObjectEditBean.addMode &amp;&amp; pageFlowScope.CustomObjectEditBean.enterIdManually)}"
+                                maximumLength="50" columns="53"
+                                id="custobj-id"
+                                binding="#{backingBeanScope.idBinding}">
+                  </af:inputText>
+                  
+                <af:inputText value="#{pageFlowScope.CustomObjectEditBean.entityObject.name}"
+                              label="#{inventoryUIBundle.NAME}"
+                              maximumLength="50" columns="53"
+                              id="custobj-name">
+                </af:inputText>
+                <af:inputText value="#{pageFlowScope.CustomObjectEditBean.entityObject.description}"
+                              label="#{inventoryUIBundle.DESCRIPTION}"
+                              maximumLength="255" rows="5" columns="50"
+                              id="custobj-description">
+                </af:inputText>
+               <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="custobj-adminState">
+                    <af:outputText value="#{pageFlowScope.CustomObjectEditBean.inventoryStatus}" id="ot7"/>
+                <!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.CustomObjectEditBean.popupMode}" id="swis618">
+<f:facet name="false">
+<af:commandImageLink action="#{pageFlowScope.CustomObjectEditBean.getSummaryAction}" actionListener="#{pageFlowScope.CustomObjectEditBean.registerRecentItem}" disabled="#{(pageFlowScope.CustomObjectEditBean.installingBI_OID eq null) ? true : false}" id="bid3" shortDesc="#{(pageFlowScope.CustomObjectEditBean.installingBI_OID eq null) ? '&amp;#160;' : inventoryUIBundle.BUSINESS_INTERACTION}" text="#{pageFlowScope.CustomObjectEditBean.installingBILabel}">
+<af:setActionListener from="#{pageFlowScope.CustomObjectEditBean.inventoryStatusBI.oid}" to="#{objectId}"/>
+</af:commandImageLink>
+</f:facet>
+<f:facet name="true">
+<af:outputText id="swftis618" value="#{pageFlowScope.CustomObjectEditBean.installingBILabel}"/>
+</f:facet>
+</af:switcher>
+<af:outputText id="installingBIDueDate" value="#{pageFlowScope.CustomObjectEditBean.installingBIEffectiveDate}"/>
+<!--RMI 618 End-->
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="custobj-ras">
+                    <af:outputText value="#{pageFlowScope.CustomObjectEditBean.resourceAssignmentStatus}" id="ot8"/>
+                <!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.CustomObjectEditBean.popupMode}" id="swas618">
+<f:facet name="false">
+<af:commandImageLink action="#{pageFlowScope.CustomObjectEditBean.getSummaryAction}" actionListener="#{pageFlowScope.CustomObjectEditBean.registerRecentItem}" disabled="#{(pageFlowScope.CustomObjectEditBean.consumerBI_OID eq null) ? true : false}" id="bid4" shortDesc="#{(pageFlowScope.CustomObjectEditBean.consumerBI_OID eq null) ? '&amp;#160;' : inventoryUIBundle.BUSINESS_INTERACTION}" text="#{pageFlowScope.CustomObjectEditBean.consumerBILabel}">
+<af:setActionListener from="#{pageFlowScope.CustomObjectEditBean.assignmentBI.oid}" to="#{objectId}"/>
+</af:commandImageLink>
+</f:facet>
+<f:facet name="true">
+<af:outputText id="swftas618" value="#{pageFlowScope.CustomObjectEditBean.consumerBILabel}"/>
+</f:facet>
+</af:switcher>
+<af:outputText id="consumerBIDueDate" value="#{pageFlowScope.CustomObjectEditBean.consumerBIEffectiveDate}"/>
+<!--RMI 618 End-->
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="custobj-lmd" rendered="false" visible="#{pageFlowScope.CustomObjectEditBean.lastModifiedDate != null}">
+                    <af:outputText value="#{pageFlowScope.CustomObjectEditBean.lastModifiedDate}" id="ot9">
+                        <af:convertDateTime pattern="#{pageFlowScope.CustomObjectEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="custobj-lmu" rendered="false" visible="#{pageFlowScope.CustomObjectEditBean.entityObject.lastModifiedUser != null}">
+                    <af:outputText value="#{pageFlowScope.CustomObjectEditBean.entityObject.lastModifiedUser}" id="ot10"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="custobj-crd" rendered="false" visible="#{pageFlowScope.CustomObjectEditBean.createdDate != null}">
+                    <af:outputText value="#{pageFlowScope.CustomObjectEditBean.createdDate}" id="ot11">
+                        <af:convertDateTime pattern="#{pageFlowScope.CustomObjectEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+		 <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="custobj-cru" rendered="false" visible="#{pageFlowScope.CustomObjectEditBean.entityObject.createdUser != null}">
+                    <af:outputText value="#{pageFlowScope.CustomObjectEditBean.entityObject.createdUser}" id="ot12"/>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+              </af:panelGroupLayout>
+          </af:group>
+        </af:showDetailHeader>
+        </af:panelGroupLayout>
+        </af:panelHeader>
+      
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

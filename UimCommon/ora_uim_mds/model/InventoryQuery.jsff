@@ -1,0 +1,488 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html" 
+           xmlns:tr="http://myfaces.apache.org/trinidad/html"
+		   xmlns:pf="/platform/functions">
+		   
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="queryModel"
+         value="#{pageFlowScope.InventoryQueryBean.queryModel}"/>
+  <af:showDetailHeader text="#{inventoryUIBundle.SEARCH}" disclosed="true"
+                       id="queryShowDetailHeader"
+                       binding="#{pageFlowScope.InventoryQueryBean.queryShowDetailHeader}" > 
+
+    <f:facet name="context"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="toolbar">
+        <af:toolbar id="t9">
+			<jsp:include page="/oracle/communications/inventory/ui/framework/page/InventoryQuerySavedSearch.jsff"/>
+		</af:toolbar>
+    </f:facet>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:panelGroupLayout id ="queryPGL" layout = "scroll">
+    
+    <af:panelFormLayout id="queryPFL" binding="#{pageFlowScope.InventoryQueryBean.queryPanelFormLayout}" maxColumns="1" fieldWidth="100%">
+      
+      <trh:tableLayout>
+      
+       <af:forEach  items="#{pageFlowScope.InventoryQueryBean.pairOfAttributes}"
+                         var="pair" varStatus="vs">            
+          <trh:rowLayout>
+
+
+          <af:iterator id="i3" value="#{pair.attributes}"
+                         var="criterion" varStatus="vs2">
+        
+        <af:switcher id="criteriaSwitcher2"
+                     facetName="#{criterion.attribute.componentType}"
+                     rendered='#{criterion.additionalInfo.type == "attribute"}'>
+          <f:facet name="inputText">
+                <af:group id="g3">
+                 
+                    <trh:cellFormat  halign="right">
+                    <af:outputLabel value="#{criterion.attribute.label}"
+                                    id="textLabe" inlineStyle="white-space:nowrap;"/>
+                    </trh:cellFormat>
+                    <trh:cellFormat  rendered="#{!(empty criterion.operators)}" > 
+                    <af:selectOneChoice id="textCriterionOperator"
+                                       rendered="#{!(empty criterion.operators)}" 
+                                        value="#{criterion.operator}"  autoSubmit="true"
+                                        shortDesc="#{criterion.attribute.label}" contentStyle="#{pageFlowScope.InventoryQueryBean.selectOneChoiceWidth}">
+                      <f:selectItems value="#{criterion.operators}"
+                                     id="nameCriterionOperators"/>
+                    </af:selectOneChoice>
+                    </trh:cellFormat>
+                    <trh:cellFormat valign="top">
+                        <af:switcher id="switchForAutoSuggest" facetName="#{criterion.attribute.additionalInfo.behaviour}" defaultFacet="text">
+                            <f:facet name="autoSuggest">
+                                <af:inputText id="textInput" value="#{criterion.values[0]}" autoSubmit="#{criterion.attribute.additionalInfo.autoSubmit}"  disabled ="#{criterion.attribute.additionalInfo.disableValue}"
+                                          shortDesc="#{pageFlowScope.InventoryResultsBean.displayInfo} #{criterion.attribute.label}" columns="#{pageFlowScope.InventoryQueryBean.inputTextWidth}">                                            
+                                    <af:clientAttribute name="componentName" value="#{criterion.attribute.name}" />                        
+                                    <af:clientListener method="setComponentName" type="focus"/>
+                                    <af:serverListener type="jsSetComponentName" method="#{pageFlowScope.InventoryQueryBean.setComponentName}" />
+                                    <af:autoSuggestBehavior  suggestItems="#{pageFlowScope.InventoryQueryBean.getSuggestItems}" />
+                                </af:inputText>    
+                            </f:facet>
+                            <f:facet name="autoSuggestWithPopup">
+                                <af:group id="g5">
+                                    <af:inputText id="it99" value="#{criterion.values[0]}" autoSubmit="#{criterion.attribute.additionalInfo.autoSubmit}"  
+                                              shortDesc="#{pageFlowScope.InventoryResultsBean.displayInfo} #{criterion.attribute.label}" columns="#{pageFlowScope.InventoryQueryBean.inputTextWidth}">                                            
+                                        <af:clientAttribute name="componentName" value="#{criterion.attribute.name}" />                        
+                                        <af:clientListener method="setComponentName" type="focus"/>
+                                        <af:serverListener type="jsSetComponentName" method="#{pageFlowScope.InventoryQueryBean.setComponentName}" />
+                                        <af:autoSuggestBehavior  suggestItems="#{pageFlowScope.InventoryQueryBean.getSuggestItems}" />
+                                    </af:inputText>
+                                    <trh:cellFormat id="cf1">
+                                        <af:commandImageLink id="ldacc-ldcreate" icon="/images/search_ena.png" shortDesc="#{inventoryUIBundle.BROWSE}"
+                                                         actionListener="#{pageFlowScope.InventoryQueryBean.processPopupBehaviour}">
+                                            <af:setPropertyListener type="action" from="#{criterion.attribute}" to="#{pageFlowScope.currentPopupDescriptor}"/>
+                                        </af:commandImageLink>
+                                    </trh:cellFormat>
+                                </af:group>
+                            </f:facet>
+                            <f:facet name="text">
+                                <af:inputText id="text" value="#{criterion.values[0]}" disabled ="#{criterion.attribute.additionalInfo.disableValue}" autoSubmit="true"
+                                          shortDesc="#{pageFlowScope.InventoryResultsBean.displayInfo} #{criterion.attribute.label}" columns="#{pageFlowScope.InventoryQueryBean.inputTextWidth}"/>
+                            </f:facet>
+                            <f:facet name="popup">
+                              <af:group id="g4">
+                                <af:spacer width="6" height="10" />
+                                <af:inputText value="#{criterion.values[0]}" id="popup" simple="true"
+                                              columns="#{pageFlowScope.InventoryQueryBean.inputTextWidth}" autoSubmit="true"  disabled="true"/>
+                                <trh:cellFormat id="cf17">
+                                    <af:commandImageLink id="cil9" icon="/images/search_ena.png" shortDesc="#{inventoryUIBundle.BROWSE}"
+                                                     actionListener="#{pageFlowScope.InventoryQueryBean.processPopupBehaviour}">
+                                        <af:setPropertyListener type="action" from="#{criterion.attribute}" to="#{pageFlowScope.currentPopupDescriptor}"/>
+                                    </af:commandImageLink>
+                                </trh:cellFormat>
+                                </af:group>
+                            </f:facet>
+                        </af:switcher>
+                    </trh:cellFormat>
+                    <trh:cellFormat rendered="#{(empty criterion.operators)}" />
+                 </af:group>
+              </f:facet>
+          <f:facet name="inputDate">
+                <af:group id="g2">
+                  <trh:cellFormat  halign="right">
+                   <af:outputLabel value="#{criterion.attribute.label}"
+                                    id="dateLabel"/>
+                  </trh:cellFormat>
+                  <trh:cellFormat>                  
+                    <af:selectOneChoice id="dateCriterionOperator"  rendered="#{!(empty criterion.operators)}" 
+                                        value="#{criterion.operator}" autoSubmit="true"
+                                        shortDesc="#{criterion.attribute.label}" contentStyle="#{pageFlowScope.InventoryQueryBean.selectOneChoiceWidth}">
+                      <f:selectItems value="#{criterion.operators}"
+                                     id="dateCriterionOperators"/>
+                    </af:selectOneChoice>
+                    </trh:cellFormat>
+                    <trh:cellFormat>
+                    <af:inputDate id="dateInput"
+                                  value="#{criterion.values[0]}" autoSubmit="true"
+                                  shortDesc="#{pageFlowScope.InventoryResultsBean.displayInfo} #{criterion.attribute.label}">
+						<af:convertDateTime pattern="#{platformPrefs.dateFormatPattern}"/>
+                    </af:inputDate>
+                    </trh:cellFormat>
+                                </af:group>
+              </f:facet>
+          <f:facet name="selectOneChoice">
+                <af:group id="g1">
+                    <trh:cellFormat halign = "right" >
+                    <af:outputLabel value="#{criterion.attribute.label}"
+                                    id="selectOneChoiceLabel" inlineStyle="white-space:nowrap;"/>
+                    </trh:cellFormat>
+                    <trh:cellFormat columnSpan = "2">
+                    <af:switcher id="switchForPPR" facetName="#{criterion.attribute.additionalInfo.pprBehaviour}" defaultFacet="pprBehaviour">
+                      <f:facet name="pprBehaviour">
+                        <af:selectOneChoice id="selectOneChoiceInputWithoutDepCriteria"
+                                        value="#{criterion.values[0]}" autoSubmit ="true" disabled ="#{criterion.attribute.additionalInfo.disableValue}"
+                                        shortDesc="#{criterion.attribute.label}" contentStyle="#{pageFlowScope.InventoryQueryBean.selectOneChoiceWidth}">
+                             <af:clientAttribute name="componentName" value="#{criterion.attribute.name}" />     
+                             <af:clientListener method="selectOneChange" type="valueChange"/>             
+                             <af:serverListener type="jsSelectOneChange" method="#{pageFlowScope.InventoryQueryBean.handlePPRevent}" />
+                             <f:selectItem id="si1" itemLabel="" itemValue=""/>
+                             <f:selectItems id="si" value="#{criterion.attribute.model}"/>
+                        </af:selectOneChoice>
+                      </f:facet>
+                      <f:facet name="NOPPR">
+                        <af:selectOneChoice id="selectOneChoiceInputWithoutDepCriteria1" 
+                                        value="#{criterion.values[0]}" autoSubmit ="true" disabled ="#{criterion.attribute.additionalInfo.disableValue}"
+                                            shortDesc="#{criterion.attribute.label}" contentStyle="#{pageFlowScope.InventoryQueryBean.selectOneChoiceWidth}">
+                            <f:selectItem id="si2" itemLabel="" itemValue=""/>
+                            <f:selectItems id="si3" value="#{criterion.attribute.model}"/>
+                        </af:selectOneChoice>
+                      </f:facet>
+                    <f:facet name="pprForChar">
+                        <af:selectOneChoice id="selectOneChoiceInputWithoutDepCriteria2"                                                
+                                        valueChangeListener="#{criterion.attribute.additionalInfo.charDetails.lovValueChanged}"  value="#{criterion.values[0]}" autoSubmit ="true" disabled ="#{criterion.attribute.additionalInfo.disableValue}"
+                                            shortDesc="#{criterion.attribute.label}" contentStyle="#{pageFlowScope.InventoryQueryBean.selectOneChoiceWidth}">
+                            <f:selectItem id="si4" itemLabel="" itemValue=""/>
+                            <f:selectItems id="si5" value="#{criterion.attribute.additionalInfo.charDetails.listModel}"/>
+                        </af:selectOneChoice>
+                      </f:facet>
+                    </af:switcher>
+                   </trh:cellFormat>
+                   
+                </af:group>
+          </f:facet>
+          <f:facet name="selectManyChoice">
+              <af:switcher id="switchForSelectManyChoice" facetName="#{criterion.attribute.additionalInfo.allSelectDefaultManyChoice}" defaultFacet="selectManyChoice">
+                <f:facet name="selectManyChoice">
+                    <af:group id="gm1">
+                        <trh:cellFormat halign = "right" >
+                            <af:outputLabel value="#{criterion.attribute.label}" id="selectMChoiceLabel1" inlineStyle="white-space:nowrap;"/>
+                        </trh:cellFormat>
+                        <trh:cellFormat columnSpan = "2">
+                            <af:selectManyChoice id="selectMChoiceInputWithoutDepCriteria1" value="#{criterion.values[0]}" autoSubmit ="true"
+                                                 shortDesc="#{criterion.attribute.label}" contentStyle="#{pageFlowScope.InventoryQueryBean.selectOneChoiceWidth}">
+								<af:clientAttribute name="componentName" value="#{criterion.attribute.name}" />     
+								<af:clientListener method="selectOneChange" type="focus"/>             
+								<af:serverListener type="jsSelectOneChange" method="#{pageFlowScope.InventoryQueryBean.handlePPRevent}" />
+                                <f:selectItems id="sm1" value="#{criterion.attribute.model}"/>
+                            </af:selectManyChoice>
+                        </trh:cellFormat>
+                    </af:group>
+                </f:facet>
+                <f:facet name="allSelectDefaultManyChoice">
+                    <af:group id="gm2">
+                        <trh:cellFormat halign = "right" >
+                            <af:outputLabel value="#{criterion.attribute.label}" id="selectMChoiceLabel2" inlineStyle="white-space:nowrap;"/>
+                        </trh:cellFormat>
+                        <trh:cellFormat columnSpan = "2">
+                        <af:selectManyChoice id="selectMChoiceInputWithoutDepCriteria2" value="#{criterion.values[0]}" autoSubmit ="true" contentStyle="#{pageFlowScope.InventoryQueryBean.selectOneChoiceWidth}"
+                                             shortDesc="#{criterion.attribute.label}" contentDelivery="lazy" lazySelectedLabels="_ALL_">
+							
+                            <f:selectItem itemLabel="None" itemValue=""/>
+                            <f:selectItems id="sm2" value="#{criterion.attribute.model}"/>
+                        </af:selectManyChoice>
+                       </trh:cellFormat>
+                    </af:group>
+              </f:facet>
+            </af:switcher>
+        </f:facet>
+		
+        <f:facet name="inputComboboxListOfValues">
+            <af:group id="g11">
+                <trh:cellFormat halign="right">
+                    <af:outputLabel value="#{criterion.attribute.label}" id="iclvC" inlineStyle="white-space:nowrap;"/>
+                </trh:cellFormat>
+                <trh:cellFormat columnSpan="2">
+                    <af:inputComboboxListOfValues xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="iclv1" autoSubmit="true" searchDesc=" "
+                            valueChangeListener="#{criterion.attribute.additionalInfo.charDetails.lovValueChanged}" columns="#{pageFlowScope.InventoryQueryBean.lovWidth}"
+                            model="#{criterion.attribute.additionalInfo.charDetails.listOfValuesModel}" value="#{criterion.values[0]}" >
+                         <af:autoSuggestBehavior xmlns:af="http://xmlns.oracle.com/adf/faces/rich" suggestItems="#{criterion.attribute.additionalInfo.charDetails.getSuggestItems}"/>
+                    </af:inputComboboxListOfValues>
+                </trh:cellFormat>
+            </af:group>
+        </f:facet>
+		
+          <f:facet name="selectBooleanCheckbox" >
+                  <af:group>
+                    <trh:cellFormat halign="right">
+						<af:selectBooleanCheckbox id="selectBooleanCheckboxInput"
+                                                value="#{criterion.values[0]}" autoSubmit="true"
+                                                shortDesc="#{criterion.attribute.label}">
+							<af:clientAttribute name="componentName" value="#{criterion.attribute.name}" />
+							<af:clientListener method="selectOneChange" type="click"/>             
+							<af:serverListener type="jsSelectOneChange" method="#{pageFlowScope.InventoryQueryBean.handlePPRevent}" />
+						</af:selectBooleanCheckbox>
+                    </trh:cellFormat>
+                   
+                    <trh:cellFormat halign="left" columnSpan = "2">
+                       <af:spacer width="5" height="10" id="s25"/>
+                      <af:outputLabel value="#{criterion.attribute.label}"
+                                      id="selectBooleanCheckboxLabel"  />
+                    </trh:cellFormat>
+                  </af:group>
+                </f:facet>
+          <f:facet name="inputNumberSpinbox">
+               <af:group>
+                   <trh:cellFormat halign = "right" >
+                   <af:outputLabel value="#{criterion.attribute.label}" visible="#{criterion.attribute.additionalInfo.visible}" showRequired="#{criterion.attribute.additionalInfo.required}"
+                                  id="numberLabel" />
+                  </trh:cellFormat>
+                  <trh:cellFormat rendered="#{!(empty criterion.operators)}">
+                  <af:selectOneChoice id="numberCriterionOperator"  rendered="#{!(empty criterion.operators)}" visible="#{criterion.attribute.additionalInfo.visible}"
+                                      value="#{criterion.operator}" autoSubmit="true" contentStyle="#{pageFlowScope.InventoryQueryBean.selectOneChoiceWidth}"
+                                      shortDesc="#{criterion.attribute.label}">
+                    <f:selectItems value="#{criterion.operators}"
+                                   id="numberCriterionOperators"/>
+                  </af:selectOneChoice>
+                    </trh:cellFormat>
+                   <trh:cellFormat>
+                  <af:inputText id="numberInput" value="#{criterion.values [0]}" columns="#{pageFlowScope.InventoryQueryBean.inputTextWidth}" maximumLength="15" autoSubmit="true"
+                                shortDesc="#{pageFlowScope.InventoryResultsBean.displayInfo} #{criterion.attribute.label}" visible="#{criterion.attribute.additionalInfo.visible}" >
+                        <af:validateRegExp pattern="#{criterion.attribute.additionalInfo.validRegex}" messageDetailNoMatch="#{inventoryUIBundle.RANGE_NUMERIC_VALIDATION}" />
+                  </af:inputText>
+                  </trh:cellFormat>
+                </af:group>
+          </f:facet>
+        </af:switcher>
+           <trh:cellFormat>
+              <af:spacer width="100" height="10" id="s22"/>
+           </trh:cellFormat>
+        </af:iterator>
+       </trh:rowLayout>
+        </af:forEach>
+        </trh:tableLayout>
+       
+       <af:spacer  height="4" />
+    
+       <af:forEach items="#{pageFlowScope.InventoryQueryBean.sections}"
+                     var="section" varStatus="vs2">
+          <af:showDetailHeader text="#{section.conjunction.additionalInfo.name}"  inlineStyle="padding-top:0px; padding-bottom:0px;"
+                       rendered='#{section.conjunction.additionalInfo.onForm == "true" }'
+                       disclosed="#{section.conjunction.additionalInfo.disclosed}" 
+                       disclosureListener = "#{pageFlowScope.InventoryQueryBean.disclosureListener}" >
+            <trh:tableLayout cellPadding="0" cellSpacing="0" borderWidth="0">
+            <af:iterator  value="#{section.pairOfAttributes}"
+                         var="pair" varStatus="vs2">
+                 <trh:rowLayout>
+                 <af:iterator  value="#{pair.attributes}"
+                         var="criterionInner" varStatus="vs8">         
+              <af:switcher facetName="#{criterionInner.attribute.componentType}">
+                <f:facet name="inputText">
+                    <af:group>
+                    <trh:cellFormat halign="right">
+                     <af:outputLabel value="#{criterionInner.attribute.label}"
+                                    id="textLabelInner"/>
+                    </trh:cellFormat>
+                    <trh:cellFormat rendered="#{!(empty criterionInner.operators)}">
+                    <af:selectOneChoice value="#{criterionInner.operator}"  rendered="#{!(empty criterionInner.operators)}"  autoSubmit ="true"
+                                        shortDesc="#{section.conjunction.additionalInfo.name}-#{criterionInner.attribute.label}" contentStyle="#{pageFlowScope.InventoryQueryBean.selectOneChoiceWidth}">
+                      <f:selectItems value="#{criterionInner.operators}"
+                                      />
+                    </af:selectOneChoice>
+                    </trh:cellFormat>
+                    <!--trh:cellFormat>      
+                    <af:inputText value="#{criterionInner.values[0]}" autoSubmit ="true" columns="#{pageFlowScope.InventoryQueryBean.inputTextWidth}"
+                     shortDesc="#{section.conjunction.additionalInfo.name} #{criterionInner.attribute.label}"/>
+                    </trh:cellFormat-->
+                    <trh:cellFormat>
+                        <af:switcher id="sw12" facetName="#{criterionInner.attribute.additionalInfo.behaviour}" defaultFacet="text">
+                            <f:facet name="autoSuggest">
+                                <af:inputText id="ti1" value="#{criterionInner.values[0]}" autoSubmit="#{criterionInner.attribute.additionalInfo.autoSubmit}"  disabled ="#{criterionInner.attribute.additionalInfo.disableValue}"
+                                          shortDesc="#{section.conjunction.additionalInfo.name} #{criterionInner.attribute.label}" columns="#{pageFlowScope.InventoryQueryBean.inputTextWidth}">                                            
+                                    <af:clientAttribute name="componentName" value="#{criterionInner.attribute.name}" />                        
+                                    <af:clientListener method="setComponentName" type="focus"/>
+                                    <af:serverListener type="jsSetComponentName" method="#{pageFlowScope.InventoryQueryBean.setComponentName}" />
+                                    <af:autoSuggestBehavior  suggestItems="#{pageFlowScope.InventoryQueryBean.getSuggestItems}" />
+                                </af:inputText>    
+                            </f:facet>
+                            <f:facet name="autoSuggestWithPopup">
+                                <af:group id="g15">
+                                    <af:inputText id="it199" value="#{criterionInner.values[0]}" autoSubmit="#{criterionInner.attribute.additionalInfo.autoSubmit}"  
+                                              shortDesc="#{section.conjunction.additionalInfo.name} #{criterionInner.attribute.label}" columns="#{pageFlowScope.InventoryQueryBean.inputTextWidth}">                                            
+                                        <af:clientAttribute name="componentName" value="#{criterionInner.attribute.name}" />                        
+                                        <af:clientListener method="setComponentName" type="focus"/>
+                                        <af:serverListener type="jsSetComponentName" method="#{pageFlowScope.InventoryQueryBean.setComponentName}" />
+                                        <af:autoSuggestBehavior  suggestItems="#{pageFlowScope.InventoryQueryBean.getSuggestItems}" />
+                                    </af:inputText>
+                                    <trh:cellFormat id="cf12">
+                                        <af:commandImageLink id="cil1" icon="/images/search_ena.png" shortDesc="#{inventoryUIBundle.BROWSE}"
+                                                         actionListener="#{pageFlowScope.InventoryQueryBean.processPopupBehaviour}">
+                                            <af:setPropertyListener type="action" from="#{criterionInner.attribute}" to="#{pageFlowScope.currentPopupDescriptor}"/>
+                                        </af:commandImageLink>
+                                    </trh:cellFormat>
+                                </af:group>
+                            </f:facet>
+                            <f:facet name="text">
+                                <af:inputText id="t4" value="#{criterionInner.values[0]}" disabled ="#{criterionInner.attribute.additionalInfo.disableValue}" autoSubmit="true"
+                                          shortDesc="#{section.conjunction.additionalInfo.name} #{criterionInner.attribute.label}" columns="#{pageFlowScope.InventoryQueryBean.inputTextWidth}"/>
+                            </f:facet>
+                            <f:facet name="popup">
+                              <af:group id="g9">
+                                <af:spacer width="6" height="10" />
+                                <af:inputText value="#{criterionInner.values[0]}" id="p7" simple="true"
+                                              columns="#{pageFlowScope.InventoryQueryBean.inputTextWidth}" autoSubmit="true"  disabled="true"/>
+                                <trh:cellFormat id="cf13">
+                                    <af:commandImageLink id="cil2" icon="/images/search_ena.png" shortDesc="#{inventoryUIBundle.BROWSE}"
+                                                     actionListener="#{pageFlowScope.InventoryQueryBean.processPopupBehaviour}">
+                                        <af:setPropertyListener type="action" from="#{criterionInner.attribute}" to="#{pageFlowScope.currentPopupDescriptor}"/>
+                                    </af:commandImageLink>
+                                </trh:cellFormat>
+                                </af:group>
+                            </f:facet>
+                        </af:switcher>
+                    </trh:cellFormat>
+                    </af:group>
+                </f:facet>
+                <f:facet name="inputDate">
+                  <af:group>
+                    <trh:cellFormat halign="right">
+                    <af:outputLabel value="#{criterionInner.attribute.label}"
+                                   />
+                    </trh:cellFormat>
+                    <trh:cellFormat>
+                    <af:selectOneChoice 
+                                        value="#{criterionInner.operator}" rendered="#{!(empty criterionInner.operators)}" autoSubmit="true" contentStyle="#{pageFlowScope.InventoryQueryBean.selectOneChoiceWidth}"
+                                        shortDesc="#{section.conjunction.additionalInfo.name}-#{criterionInner.attribute.label}">
+                      <f:selectItems value="#{criterionInner.operators}"
+                                     />
+                    </af:selectOneChoice>
+                    </trh:cellFormat>
+                    <trh:cellFormat>
+                    <af:inputDate 
+                                  value="#{criterionInner.values[0]}" autoSubmit="true"
+                                  shortDesc="#{section.conjunction.additionalInfo.name} #{criterionInner.attribute.label}">
+						<af:convertDateTime pattern="#{platformPrefs.dateFormatPattern}"/>
+                    </af:inputDate>
+                    </trh:cellFormat>
+                    </af:group>
+                </f:facet>
+                <f:facet name="selectOneChoice">
+                  <af:group>
+                    <trh:cellFormat halign="right">
+                      <af:outputLabel value="#{criterionInner.attribute.label}"
+                                   />
+                    </trh:cellFormat>
+                                      
+                    <trh:cellFormat columnSpan="2">
+                    
+                    <af:selectOneChoice 
+                                        value="#{criterionInner.values[0]}" autoSubmit ="true" contentStyle="#{pageFlowScope.InventoryQueryBean.selectOneChoiceWidth}"
+                                        shortDesc="#{section.conjunction.additionalInfo.name}-#{criterionInner.attribute.label}">
+                      <f:selectItem id="soc1" itemLabel="" itemValue=""/>
+                      <f:selectItems value="#{criterionInner.attribute.model}"/>
+                    </af:selectOneChoice>
+                   </trh:cellFormat>
+                   </af:group>
+                </f:facet>
+                <f:facet name="selectBooleanCheckbox">
+                  <af:group>
+                    
+                    <trh:cellFormat halign="right">
+                    <af:selectBooleanCheckbox 
+                                              value="#{criterionInner.values[0]}" autoSubmit ="true"
+                                             shortDesc="#{criterionInner.attribute.label}"/>
+                    </trh:cellFormat>
+                   
+                    <trh:cellFormat halign="left" columnSpan="2">
+                      <af:spacer width="5" height="10" />
+                    <af:inputText label="#{criterionInner.attribute.name}"
+                                           rendered="false" autoSubmit="true" columns="#{pageFlowScope.InventoryQueryBean.inputTextWidth}"
+                                  shortDesc="#{section.conjunction.additionalInfo.name} #{criterionInner.attribute.label}"/>
+                    <af:outputLabel value="#{criterionInner.attribute.label}"
+                                    />
+                    </trh:cellFormat>
+                    
+                   
+                    </af:group>
+                </f:facet>
+                <f:facet name="inputNumberSpinbox">
+                  <af:group>
+                    <trh:cellFormat halign="right">
+                     <af:outputLabel value="#{criterionInner.attribute.label}"
+                                   />
+                    </trh:cellFormat>
+                    <trh:cellFormat>
+                    <af:selectOneChoice value="#{criterionInner.operator}" rendered="#{!(empty criterionInner.operators)}"  autoSubmit="true"
+                                        shortDesc="#{section.conjunction.additionalInfo.name}-#{criterionInner.attribute.label}" contentStyle="#{pageFlowScope.InventoryQueryBean.selectOneChoiceWidth}">
+                      <f:selectItems value="#{criterionInner.operators}"
+                                     />
+                    </af:selectOneChoice>
+                    </trh:cellFormat>
+                    <trh:cellFormat>
+                     <af:inputText  value="#{criterionInner.values [0]}" columns="#{pageFlowScope.InventoryQueryBean.inputTextWidth}" maximumLength="15" autoSubmit="true"
+                                shortDesc="#{section.conjunction.additionalInfo.name} #{criterionInner.attribute.label}" >
+                        <af:validateRegExp pattern="#{criterionInner.attribute.additionalInfo.validRegex}" messageDetailNoMatch="#{inventoryUIBundle.RANGE_NUMERIC_VALIDATION}" />
+                  </af:inputText>
+                    </trh:cellFormat>
+                    </af:group>
+                </f:facet>
+                
+                <f:facet name="inputComboboxListOfValues">
+                    <af:group id="sg11">
+                        <trh:cellFormat halign="right">
+                            <af:outputLabel value="#{criterionInner.attribute.label}" id="siclv" inlineStyle="white-space:nowrap;"/>
+                        </trh:cellFormat>
+                        <trh:cellFormat columnSpan="2">
+                            <af:inputComboboxListOfValues xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="sicl" autoSubmit="true" searchDesc=" "
+                                    valueChangeListener="#{criterionInner.attribute.additionalInfo.charDetails.lovValueChanged}" columns="#{pageFlowScope.InventoryQueryBean.lovWidth}"
+                                    model="#{criterionInner.attribute.additionalInfo.charDetails.listOfValuesModel}" value="#{criterionInner.values[0]}" >
+                                 <af:autoSuggestBehavior xmlns:af="http://xmlns.oracle.com/adf/faces/rich" suggestItems="#{criterionInner.attribute.additionalInfo.charDetails.getSuggestItems}"/>
+                            </af:inputComboboxListOfValues>
+                        </trh:cellFormat>
+                    </af:group>
+                </f:facet>
+                
+              </af:switcher>
+              <trh:cellFormat>
+                 <af:spacer width="100" height="10" />
+               </trh:cellFormat>
+            </af:iterator>
+                 </trh:rowLayout>
+           </af:iterator>
+            </trh:tableLayout>
+           </af:showDetailHeader>
+
+        </af:forEach>
+     </af:panelFormLayout>
+     </af:panelGroupLayout>
+   
+    <f:subview id="sv8">
+        <jsp:include page="/oracle/communications/inventory/ui/framework/page/InventoryQueryButtons.jsff"/>
+        <af:separator id="sp1"/>
+    </f:subview>
+        
+    <trh:script>
+        function setComponentName(event){
+             var txtField = event.getSource();
+             var componentName = txtField.getProperty('componentName');
+             AdfCustomEvent.queue(txtField, "jsSetComponentName", {componentName: componentName}, true);                 
+          }
+          
+        function selectOneChange(event){
+                var selectOne = event.getSource();
+                  var componentName = selectOne.getProperty('componentName');
+                 AdfCustomEvent.queue(selectOne, "jsSelectOneChange", {selectOne: selectOne,componentName:componentName}, true);      
+          }
+        
+    </trh:script>
+      
+  </af:showDetailHeader>
+</jsp:root>

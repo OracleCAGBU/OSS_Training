@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces"
+          xmlns:h="http://java.sun.com/jsf/html" xmlns:trh="http://myfaces.apache.org/trinidad/html" xmlns:cui="/CommsUI">
+    <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                     value="#{bindings.ptb1}" id="pt1">
+        <f:facet name="localArea">
+            <af:panelGroupLayout id="pgl1">
+                <cui:WarningDialog id="wd" binding="#{backingBeanScope.navigationWarningDialog}"/>
+                <af:panelHeader text="#{inventoryUIBundle.MENU_OUTAGE_IMPACTS}" id="ph1"
+                                helpTopicId="OHW_UIMOH1401">
+                    <f:facet name="toolbar">
+                        <af:panelGroupLayout layout="horizontal">
+                            <af:commandButton text="#{inventoryUIBundle.RELOAD}" id="outageRld1"
+                                              accessKey="#{inventoryUIBundle.RELOAD_KEY}"
+                                              rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=OutageImpacts.RELOAD;action=view']}"
+                                              actionListener="#{pageFlowScope.OutageImpactsBean.reloadConfirm}"/>
+                            <af:spacer width="10" height="10" id="s1"/>
+                            <af:commandButton text="#{inventoryUIBundle.RETRIEVE_OUTAGE_REPORT}" id="cb1"
+                                              accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}"
+                                              actionListener="#{pageFlowScope.OutageImpactsBean.onProcess}"
+                                              clientComponent="true" partialSubmit="true"
+                                              action="#{pageFlowScope.OutageImpactsBean.processOutcome}">
+                                <af:setActionListener from="processAndClose"
+                                                to="#{pageFlowScope.processActionOutcome}"/>
+                            </af:commandButton>
+                            <af:commandButton text="HIDDEN" id="hidden" visible="false" 
+                                                              clientComponent="true" partialTriggers="cb1"
+                                                              partialSubmit="false"
+                                                              binding="#{backingBeanScope.hiddenButton}">
+                                <af:fileDownloadActionListener filename="#{pageFlowScope.OutageImpactsBean.downloadFileName}"
+                                                               contentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=utf-8"
+                                                               method="#{pageFlowScope.OutageImpactsBean.downloadFile}"/>
+                            </af:commandButton>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <af:panelGroupLayout layout="scroll" id="pgl23">
+                        <af:showDetailHeader text="#{inventoryUIBundle.OUTAGE_IMPACTS_INFO}" disclosed="true">
+                            <af:panelGroupLayout>
+                                <af:panelFormLayout id="pfl1"  maxColumns="1"   fieldWidth="100%">
+								 <trh:tableLayout id="tl1">
+                                        <trh:rowLayout id="rl1">
+                                            <af:group id="g0">
+                                                <trh:cellFormat halign="right" id="cf1">
+                                                    <af:selectOneChoice id="soc2" required="true"
+                                                                        label="#{inventoryUIBundle.ENTITY}"
+                                                                        value="#{pageFlowScope.OutageImpactsBean.selectedEntityType}"
+                                                                        autoSubmit="true"
+                                                                        valueChangeListener="#{pageFlowScope.OutageImpactsBean.entityTypeChanged}">
+                                                        <f:selectItems value="#{pageFlowScope.OutageImpactsBean.entityTypeList}"
+                                                                       id="si2"/>
+                                                    </af:selectOneChoice>
+													</trh:cellFormat>
+                                                <trh:cellFormat id="cf11">
+                                                        <af:inputText value="#{pageFlowScope.OutageImpactsBean.entityInfo}"
+                                                                      maximumLength="50" id="oi-entityInfo"
+                                                                      autoSubmit="true" immediate="true" 
+                                                                      valueChangeListener="#{pageFlowScope.OutageImpactsBean.nameChanged}"
+                                                                      binding="#{backingBeanScope.entityNameBinding}"
+																	  disabled="#{pageFlowScope.OutageImpactsBean.selectedEntityType eq null}">
+                                                            <af:autoSuggestBehavior suggestItems="#{pageFlowScope.OutageImpactsBean.getNameHandler}"/>
+                                                        </af:inputText>
+														</trh:cellFormat>
+                                                <trh:cellFormat id="cf12">
+                                                        <af:commandImageLink id="oi-sls" immediate="true"
+                                                                             blocking="true"
+                                                                             icon="/images/search_ena.png"
+                                                                             shortDesc="#{inventoryUIBundle.SEARCH}"
+                                                                             partialTriggers="oi-entityInfo">
+                                                            <af:showPopupBehavior popupId="entityInfoPopup"
+                                                                                  triggerType="click"/>
+                                                        </af:commandImageLink>
+														</trh:cellFormat>
+                                                <trh:cellFormat id="cf13">
+                                                        <af:commandImageLink id="oi-clear" immediate="true"
+                                                                             icon="/images/clear_ena.png"
+                                                                             shortDesc="#{inventoryUIBundle.CLEAR}"
+                                                                             partialTriggers="oi-entityInfo"
+                                                                             actionListener="#{pageFlowScope.OutageImpactsBean.clearEntityInfo}"></af:commandImageLink>
+													</trh:cellFormat>
+                                            </af:group>
+                                        </trh:rowLayout>
+                                    </trh:tableLayout>
+                                </af:panelFormLayout>
+                            </af:panelGroupLayout>
+                        </af:showDetailHeader>
+                        <af:popup id="entityInfoPopup" binding="#{backingBeanScope.entityInfoPopup}"
+                                  contentDelivery="lazyUncached">
+                            <af:dialog title="#{pageFlowScope.OutageImpactsBean.selectedEntityType}" id="pl" type="none">
+                                <af:panelStretchLayout id="pl_2" styleClass="invCommonPanelStretchLayout">
+                                    <f:facet name="center">
+                                        <af:region value="#{pageFlowScope.OutageImpactsBean.regionModel}" 
+                                                   id="prpl1"/>
+                                    </f:facet>
+                                </af:panelStretchLayout>
+                            </af:dialog>
+                            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                            <af:serverListener type="refreshEntity" method="#{pageFlowScope.OutageImpactsBean.refresh}"/>
+                        </af:popup>
+                    </af:panelGroupLayout>
+                </af:panelHeader>
+            </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="contextualArea"/>
+        <f:facet name="localAreaScroll"/>
+    </af:pageTemplate>
+</jsp:root>

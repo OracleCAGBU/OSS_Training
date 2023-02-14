@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   id="pt1">
+    <f:facet name="localArea"> 
+      <af:panelHeader text="#{pageFlowScope.MappedPhysicalDeviceListBean.displayInfo}" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:showDetailHeader text=""
+                             disclosed="true" id="sdh1" 
+                             binding="#{backingBeanScope.infoShowDetailHeader}" >
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+            <f:facet name="menus"/>
+            <f:facet name="toolbar">
+              <af:toolbar id="t2">
+                <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}"
+                                         icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                         id="ctb1"
+                                         rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=PhysicalDevice.DELETE;action=view']}"
+                                         disabled="#{pageFlowScope.MappedPhysicalDeviceListBean.resultsTable.selectedRowKeys == null || pageFlowScope.MappedPhysicalDeviceListBean.resultsTable.selectedRowKeys.size lt 1}"
+                                         partialTriggers="t1" binding="#{backingBeanScope.deleteButton}"
+                                         actionListener="#{pageFlowScope.MappedPhysicalDeviceListBean.unAssociate}"/>
+              </af:toolbar>
+            </f:facet>
+            <f:facet name="statusbar">
+             <af:toolbar id="tb2">
+                  <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(pageFlowScope.MappedPhysicalDeviceListBean.mappedPhysicalDeviceCollectionModel.rowCount lt 0) ? 0 :  pageFlowScope.MappedPhysicalDeviceListBean.mappedPhysicalDeviceCollectionModel.rowCount}"
+                                 id="ol1" styleClass="invSearchOutputLabel"
+                                 binding="#{backingBeanScope.totalResultsLabel}"
+                                 partialTriggers="t1 ctb1"/>
+                </af:toolbar>
+            </f:facet>
+            <af:table value="#{pageFlowScope.MappedPhysicalDeviceListBean.mappedPhysicalDeviceCollectionModel}"
+                      var="row" rowBandingInterval="0" id="t1"
+                      emptyText="#{inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET}"
+                      selectionListener="#{pageFlowScope.MappedPhysicalDeviceListBean.selectPhysicalDevices}"
+                      rowSelection="multiple"
+                      binding="#{pageFlowScope.MappedPhysicalDeviceListBean.resultsTable}"
+                      filterVisible="true" summary="#{inventoryUIBundle.ASSOCIATED_PHYSICAL_DEVICES_TABLE}">
+              <af:column sortProperty="id" sortable="false"
+                         headerText="#{inventoryUIBundle.ID}" id="c5"
+                         rowHeader="unstyled">
+                <af:commandImageLink action="summary" id="cl1" text="#{row.id}"
+                                     shortDesc="#{inventoryUIBundle.PHYSICAL_DEVICE_SUMMARY_LINK}">
+                  <af:setActionListener from="#{row.oid}" to="#{objectId}"/>
+                  
+                </af:commandImageLink>
+              </af:column>
+              <af:column sortProperty="name" sortable="false"
+                         headerText="#{inventoryUIBundle.NAME}" id="c1">
+                <af:outputText value="#{row.name}" id="ot5"/>
+              </af:column>
+              <af:column sortProperty="name" sortable="false"
+                         headerText="#{inventoryUIBundle.SPECIFICATION}"
+                         id="c3">
+                <af:commandImageLink action="SpecificationSummary" id="cl2"
+                                     text="#{row.specification.name}"
+                                     shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+                  <af:setActionListener from="#{row.specification.oid}"
+                                        to="#{specObjectId}"/>
+                  
+                </af:commandImageLink>
+              </af:column>
+              <af:column sortProperty="valueAsString" sortable="false"
+                         headerText="#{inventoryUIBundle.INVENTORY_STATUS}"
+                         id="c6">
+                <af:outputText value="#{pageFlowScope.MappedPhysicalDeviceListBean.inventoryStatus}"
+                               id="ot6"/>
+              </af:column>
+              <af:column sortable="false"
+                         headerText="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}"
+                         id="c7">
+                <af:outputText value="#{pageFlowScope.MappedPhysicalDeviceListBean.resourceAssignmentStatus}"
+                               id="ot15"/>
+              </af:column>
+              <af:column sortable="false"
+                         headerText="#{inventoryUIBundle.CONDITION_TYPE}"
+                         id="column1">
+                <af:outputText value="#{pageFlowScope.MappedPhysicalDeviceListBean.conditionType}"
+                               escape="false" id="outputText1"/>
+              </af:column>
+              <af:column sortProperty="reservationtype" sortable="false"
+                         headerText="#{inventoryUIBundle.RESERVATION_TYPE}"
+                         id="c2">
+                <af:outputText value="#{pageFlowScope.MappedPhysicalDeviceListBean.reservationType}"
+                               escape="false" id="ot2"/>
+              </af:column>
+            </af:table>
+          </af:panelCollection>
+        </af:showDetailHeader>
+      </af:panelHeader>
+    </f:facet> 
+    <f:facet name="contextualArea"/>
+    <f:facet name="localAreaScroll"/>
+  </af:pageTemplate>
+</jsp:root>

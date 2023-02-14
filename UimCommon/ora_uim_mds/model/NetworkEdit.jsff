@@ -1,0 +1,231 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2015, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    3/25/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:pf="/platform/functions">
+		  
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/> 
+    <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1"
+                     value="#{bindings.ptb1}">
+        <f:facet name="localArea">
+        <af:panelGroupLayout id="pgl1" binding="#{backingBeanScope.edit_panelGroupLayout}"
+                             layout="scroll">
+            <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered ="#{!pageFlowScope.NetworkEditBean.previewLayout}">
+                <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                               rendered="#{!(pageFlowScope.NetworkEditBean.popupMode)}"
+                               value="#{pageFlowScope.NetworkEditBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+                <af:menuBar id="menuBar1">
+                      <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invEditMenu"
+                               rendered="#{!(pageFlowScope.NetworkEditBean.popupMode)}"   />
+                </af:menuBar>
+                <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch3}" contentDelivery="lazyUncached">
+                    <af:dialog id="BISearchPopup_d1" type="none"
+                               title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                        <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                            <f:facet name="center">
+                               <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                            </f:facet>
+                        </af:panelStretchLayout>
+                    </af:dialog>
+                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.NetworkEditBean.afterBusinessInteractionSelectionChange}"/>
+                </af:popup>
+            </af:panelGroupLayout>
+            
+               
+                <af:panelHeader text="#{pageFlowScope.NetworkEditBean.message}" id="ph45" messageType="confirmation" rendered="#{pageFlowScope.NetworkEditBean.addAnotherMode}"/>
+                
+                <af:panelHeader text="#{inventoryUIBundle.NETWORK} - #{pageFlowScope.NetworkEditBean.displayInfo}" helpTopicId="#{pageFlowScope.NetworkEditBean.helpTopic}" id="ph1">
+                <f:facet name="toolbar">
+                    <!-- Buttons on edit page Save And Continue/Save And Add Another/Cancel -->
+                    <af:panelGroupLayout layout="horizontal" id="pg3" rendered="#{!pageFlowScope.NetworkEditBean.previewLayout}">       
+                    <af:commandToolbarButton text="#{inventoryUIBundle.SAVE_AND_CONTINUE}"
+                                          id="sAndCCmdButton"
+                                          actionListener="#{pageFlowScope.NetworkEditBean.save}"
+                                          action="#{pageFlowScope.NetworkEditBean.saveOutcome}"
+                                          rendered="#{pageFlowScope.NetworkEditBean.addMode and !pageFlowScope.NetworkEditBean.popupMode}"
+                                             accessKey="#{inventoryUIBundle.SAVE_AND_CONTINUE_ACCESS_KEY}">
+                         <af:setActionListener from="summary" to="#{pageFlowScope.saveActionOutcome}"/>               
+                    </af:commandToolbarButton>                 
+                     <af:spacer width="10" height="10" id="s11"/>
+                     <af:commandToolbarButton text="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER}"
+                                          actionListener="#{pageFlowScope.NetworkEditBean.save}"
+                                          id="cb3"
+                                          action="#{pageFlowScope.NetworkEditBean.saveOutcome}"
+                                          rendered="#{pageFlowScope.NetworkEditBean.addMode and !pageFlowScope.NetworkEditBean.popupMode}"
+                                              accessKey="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER_ACCESS_KEY}">
+                        <af:setActionListener from="init" to="#{pageFlowScope.saveActionOutcome}"/>                    
+                     </af:commandToolbarButton>        
+                      <af:commandToolbarButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}"
+                                id="cb1"
+                                actionListener="#{pageFlowScope.NetworkEditBean.save}"
+                                action="#{pageFlowScope.NetworkEditBean.saveOutcome}"
+                                rendered="#{(!pageFlowScope.NetworkEditBean.addMode || pageFlowScope.NetworkEditBean.popupMode) and (!pageFlowScope.NetworkEditBean.diagramMode)}"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+                          <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+                      </af:commandToolbarButton>           
+                      
+                      <af:commandToolbarButton text="#{inventoryUIBundle.DONE}" id="ctb1" actionListener="#{pageFlowScope.NetworkEditBean.populateAttributes}"
+                                       rendered="#{(pageFlowScope.NetworkEditBean.diagramMode)}" accessKey="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>
+                      
+                     <af:spacer width="10" height="10" id="spacer2"/>
+                     <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}"
+                                          id="cb2" action="cancel" actionListener="#{bindings.closeSubTask.execute}"
+                                          immediate="true" accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <!-- Entity Details -->
+                <af:panelGroupLayout layout="scroll" id="pgl23">
+                <af:showDetailHeader text="#{inventoryUIBundle.NETWORK_INFORMATION}" disclosed="true" id="sdh1">
+                    <f:facet name="context"/>
+                    <f:facet name="menuBar"/>
+                    <f:facet name="toolbar"/>
+                    <f:facet name="info"/>
+                    <af:group id="g1">
+                        <af:spacer height="10" id="s2"/>
+                        <af:panelGroupLayout id="pgl2">
+                            <af:panelFormLayout id="ntwk" maxColumns="2"
+                                                rows="2" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsPanel}">
+                                <af:selectOneChoice id="ntwk-specification"
+                                                    label="#{inventoryUIBundle.SPECIFICATION}"
+                                                    autoSubmit="true"
+                                                    value="#{pageFlowScope.NetworkEditBean.selectedSpec}"
+                                                    valueChangeListener="#{pageFlowScope.NetworkEditBean.specChanged}"
+                                                    disabled="#{!(pageFlowScope.NetworkEditBean.addMode)}">
+                                    <f:selectItems binding="#{pageFlowScope.NetworkEditBean.specifications}"
+                                                   id="si1"/>
+                                </af:selectOneChoice>
+                                <af:inputText value="#{(pageFlowScope.NetworkEditBean.addMode &amp;&amp; pageFlowScope.NetworkEditBean.specificationCount > 0) ? 
+                                                      (pageFlowScope.NetworkEditBean.enterIdManually ? pageFlowScope.NetworkEditBean.entityObject.id : inventoryUIBundle.AUTO_GENERATE) : (pageFlowScope.NetworkEditBean.entityObject.id)}"
+                                              label="#{inventoryUIBundle.NETWORK_ID}"
+                                              required="true"
+                                              disabled="#{(pageFlowScope.NetworkEditBean.specificationCount > 0) &amp;&amp; (!(pageFlowScope.NetworkEditBean.addMode &amp;&amp; pageFlowScope.NetworkEditBean.enterIdManually))}"
+                                              maximumLength="50" columns="53"
+                                              id="ntwk-id"
+                                              binding="#{backingBeanScope.idBinding}">
+                                </af:inputText>
+                                <af:inputText value="#{pageFlowScope.NetworkEditBean.entityObject.name}"
+                                              label="#{inventoryUIBundle.NAME}"
+                                              maximumLength="50" columns="53"
+                                              id="ntwk-name">
+                                </af:inputText>
+                                <af:inputText value="#{pageFlowScope.NetworkEditBean.entityObject.description}"
+                                              label="#{inventoryUIBundle.DESCRIPTION}"
+                                              maximumLength="255" rows="5" columns="50"
+                                              id="ntwk-description">
+                                </af:inputText>
+
+                                <af:selectOneChoice label="#{inventoryUIBundle.NETWORK_TOPOLOGY}"
+                                                        id="ntwk-networkTopology" 
+                                                        autoSubmit="true" value="#{pageFlowScope.NetworkEditBean.networkTopology}" unselectedLabel="">
+                                        <f:selectItems binding="#{pageFlowScope.NetworkEditBean.networkTopologyList}"/>
+                                </af:selectOneChoice>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.TECHNOLOGY}" id="ntwk-technology">
+                                        <af:outputText value="#{pageFlowScope.NetworkEditBean.technology}" id="ot1"/>
+                                </af:panelLabelAndMessage>
+                                <!-- The Serial Number and Function fields only appear if added by user -->
+                                <af:inputText label="#{inventoryUIBundle.SERIAL_NUMBER}" id="ntwk-serialnumber"
+                                              maximumLength="6"
+                                              rendered="false"
+                                              value="#{pageFlowScope.NetworkEditBean.serialNumber}"
+                                              valueChangeListener="#{pageFlowScope.NetworkEditBean.serialNumberChanged}"
+                                              autoSubmit="true">
+                                        <af:validateRegExp pattern="[0-9]{1,1000}" messageDetailNoMatch="#{inventoryUIBundle.SORT_ORDER_VALIDATION}"/>
+                                </af:inputText>
+                                <af:selectOneChoice label="#{inventoryUIBundle.FUNCTION}"
+                                                    id="ntwk-function" 
+                                                    autoSubmit="true" value="#{pageFlowScope.NetworkEditBean.function}"
+                                                    rendered="false"
+                                                    required="#{pageFlowScope.NetworkEditBean.serviceNetwork}">
+                                    <f:selectItems binding="#{pageFlowScope.NetworkEditBean.functionList}"/>
+                                </af:selectOneChoice>
+                                <!-- The fields enforce same channel, ring type and protection type will not appear unless added by user in Studio-->
+                                <af:selectBooleanCheckbox value="#{pageFlowScope.NetworkEditBean.entityObject.enforceSameChannelAssignment}" 
+                                                          text="#{inventoryUIBundle.ENFORCE_SAME_CHANNEL_ASSIGNMENT}" 
+                                                          id="ntwk-enforceSameChannelAssignment" 
+                                                          rendered="false">
+                                </af:selectBooleanCheckbox>
+                                        <af:selectOneChoice label="#{inventoryUIBundle.RING_TYPE}"
+                                                        id="ntwk-ringType" 
+                                                        autoSubmit="true" value="#{pageFlowScope.NetworkEditBean.ringType}"
+                                                        rendered="false">
+                                        <f:selectItems binding="#{pageFlowScope.NetworkEditBean.ringTypeList}"/>
+                                </af:selectOneChoice>
+                                <af:selectOneChoice label="#{inventoryUIBundle.PROTECTION_TYPE}"
+                                                        id="ntwk-protectionType" 
+                                                        autoSubmit="true" value="#{pageFlowScope.NetworkEditBean.protectionType}"
+                                                    rendered="false">
+                                        <f:selectItems binding="#{pageFlowScope.NetworkEditBean.protectionTypeList}"/>
+                                </af:selectOneChoice>                                
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="ntwk-inventoryStatus">
+                                    <af:outputText value="#{pageFlowScope.NetworkEditBean.inventoryStatus}" id="ot7"/>
+				<!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.NetworkEditBean.popupMode}" id="swis618">
+				<f:facet name="false">
+				<af:commandImageLink action="#{pageFlowScope.NetworkEditBean.getSummaryAction}" actionListener="#{pageFlowScope.NetworkEditBean.registerRecentItem}" disabled="#{(pageFlowScope.NetworkEditBean.installingBI_OID eq null) ? true : false}" id="bid3" shortDesc="#{(pageFlowScope.NetworkEditBean.installingBI_OID eq null) ? '&amp;#160;' : inventoryUIBundle.BUSINESS_INTERACTION}" text="#{pageFlowScope.NetworkEditBean.installingBILabel}">
+				<af:setActionListener from="#{pageFlowScope.NetworkEditBean.inventoryStatusBI.oid}" to="#{objectId}"/>
+				</af:commandImageLink>
+				</f:facet>
+				<f:facet name="true">
+				<af:outputText id="swftis618" value="#{pageFlowScope.NetworkEditBean.installingBILabel}"/>
+				</f:facet>
+				</af:switcher>
+				<af:outputText id="installingBIDueDate" value="#{pageFlowScope.NetworkEditBean.installingBIEffectiveDate}"/>
+				<!--RMI 618 End-->
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="ntwk-resourceAssignmentStatus">
+                                    <af:outputText value="#{pageFlowScope.NetworkEditBean.resourceAssignmentStatus}" id="ot8"/>
+				<!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.NetworkEditBean.popupMode}" id="swas618">
+				<f:facet name="false">
+				<af:commandImageLink action="#{pageFlowScope.NetworkEditBean.getSummaryAction}" actionListener="#{pageFlowScope.NetworkEditBean.registerRecentItem}" disabled="#{(pageFlowScope.NetworkEditBean.consumerBI_OID eq null) ? true : false}" id="bid4" shortDesc="#{(pageFlowScope.NetworkEditBean.consumerBI_OID eq null) ? '&amp;#160;' : inventoryUIBundle.BUSINESS_INTERACTION}" text="#{pageFlowScope.NetworkEditBean.consumerBILabel}">
+				<af:setActionListener from="#{pageFlowScope.NetworkEditBean.assignmentBI.oid}" to="#{objectId}"/>
+				</af:commandImageLink>
+				</f:facet>
+				<f:facet name="true">
+				<af:outputText id="swftas618" value="#{pageFlowScope.NetworkEditBean.consumerBILabel}"/>
+				</f:facet>
+				</af:switcher>
+				<af:outputText id="consumerBIDueDate" value="#{pageFlowScope.NetworkEditBean.consumerBIEffectiveDate}"/>
+				<!--RMI 618 End-->
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="ntwk-lmd" rendered="false" visible="#{pageFlowScope.NetworkEditBean.lastModifiedDate != null}">
+                                    <af:outputText value="#{pageFlowScope.NetworkEditBean.lastModifiedDate}" id="ot9">
+                                        <af:convertDateTime pattern="#{pageFlowScope.NetworkEditBean.dateTimeFormat}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="ntwk-lmu" rendered="false" visible="#{pageFlowScope.NetworkEditBean.entityObject.lastModifiedUser != null}">
+                                    <af:outputText value="#{pageFlowScope.NetworkEditBean.entityObject.lastModifiedUser}" id="ot10"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="ntwk-crd" rendered="false" visible="#{pageFlowScope.NetworkEditBean.createdDate != null}">
+                                    <af:outputText value="#{pageFlowScope.NetworkEditBean.createdDate}" id="ot11">
+                                        <af:convertDateTime pattern="#{pageFlowScope.NetworkEditBean.dateTimeFormat}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="ntwk-cru" rendered="false" visible="#{pageFlowScope.NetworkEditBean.entityObject.createdUser != null}">
+                                    <af:outputText value="#{pageFlowScope.NetworkEditBean.entityObject.createdUser}" id="ot12"/>
+                                </af:panelLabelAndMessage>
+                            </af:panelFormLayout>                            
+                        </af:panelGroupLayout>
+                    </af:group>
+                </af:showDetailHeader>
+            
+            </af:panelGroupLayout>
+            </af:panelHeader>
+            </af:panelGroupLayout>
+        </f:facet>
+    </af:pageTemplate>
+</jsp:root>

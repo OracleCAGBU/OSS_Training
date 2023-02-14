@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xsi:type="BusinessEntityType" name="GeographicLocation" realizeFromBusinessEntity="true">
+  <com:displayName lang="[default]">GeographicLocation</com:displayName>
+  <com:saveVersion>8</com:saveVersion>
+  <com:baseEntityRef>
+    <com:entity>GeographicPlace</com:entity>
+    <com:entityType>inventoryEntity</com:entityType>
+    <com:relationship>oracle.communications.sce.business.entity.baseEntity</com:relationship>
+  </com:baseEntityRef>
+  <com:id>E:inventoryEntity--GeographicLocation</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>inventoryEntity--GeographicLocation</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>GeographicLocation</data:name>
+    <data:displayName lang="[default]">GeographicLocation</data:displayName>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>---w--+g--+A---OBZgF3w</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>inventoryEntity--GeographicLocation</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <capability xsi:type="consumableType" enabled="true" id="oracle.communications.sce.poms.capabilities.Consumable" assignmentStateType="AssignmentState" attribute="geographicLocation" prefix="GeographicLocation">
+    <consumer ConfigurationItemEnabled="true" name="Service"/>
+    <consumer ConfigurationItemEnabled="true" name="GeographicSite"/>
+  </capability>
+  <capability xsi:type="referenceEnabledType" enabled="true" id="oracle.communications.sce.poms.capabilities.ReferenceEnabled" attribute="geographicLocation" prefix="GeographicLocation"/>
+  <implements interface="java.lang.Cloneable"/>
+  <properties extension="true" hierarchyStrategy="single" interface="oracle.communications.inventory.api.entity.GeographicLocation" type="ocim:GeographicLocation"/>
+</com:modelEntity>

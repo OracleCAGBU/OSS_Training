@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad/html">
+		  
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<c:set var="queryModel"
+         value="#{pageFlowScope.InventoryQueryBean.queryModel}"/>
+  <trh:tableLayout cellSpacing="0" cellPadding="2" borderWidth="0"
+                   halign="right" width="100%">
+    <trh:rowLayout halign="right">
+      <!--<trh:cellFormat width="100%">&amp;nbsp;</trh:cellFormat>-->
+      <trh:cellFormat halign="right" wrappingDisabled="true">
+        <af:selectOneChoice label="#{inventoryUIBundle.SAVED_SEARCH}" id="savedSearchDropdown"
+                            valueChangeListener="#{pageFlowScope.InventoryQueryBean.savedSearchChanged}"
+                            binding="#{backingBeanScope.savedSearchesBinding}"
+                            autoSubmit="true" rendered="#{!pageFlowScope.InventoryQueryBean.popupMode or pageFlowScope.InventoryQueryBean.associatedToActivity}" value="#{pageFlowScope.InventoryQueryBean.savedSearchDropDownValue}">
+           <f:selectItems value="#{pageFlowScope.InventoryQueryBean.savedSearches}" id="si1"/>
+        </af:selectOneChoice>
+      </trh:cellFormat>
+    </trh:rowLayout>
+  </trh:tableLayout>
+  <af:popup id="saveSearchEditPopup"
+            binding="#{backingBeanScope.savedSearchEditPopupBinding}">
+    <af:dialog type="okCancel" title="#{inventoryUIBundle.PERSONALIZE_SAVED_SEARCH}" affirmativeTextAndAccessKey="#{inventoryUIBundle.OK_BUTTON}" cancelTextAndAccessKey="#{inventoryUIBundle.CANCEL_BUTTON}" closeIconVisible="false"
+               dialogListener="#{pageFlowScope.InventorySavedSearchBean.personalizeSavedSearchDialogAction}">
+      <af:panelGroupLayout>
+        <af:panelFormLayout binding="#{backingBeanScope.savedSearchEditFormLayOut}">
+          <trh:tableLayout 
+                 width="100%">
+            <trh:rowLayout >
+              <trh:cellFormat halign="center">
+                <af:outputLabel value="#{inventoryUIBundle.SAVED_SEARCHES}" id="savedSearchesText"/>
+              </trh:cellFormat>
+            </trh:rowLayout>
+             <trh:rowLayout halign="center">
+              <trh:cellFormat>
+                <af:spacer width="10" height="10"/>
+              </trh:cellFormat>
+            </trh:rowLayout>
+             <trh:rowLayout>
+              <trh:cellFormat halign="center">
+                <af:selectOneChoice 
+                                    id="savedSearchDropdownEdit"
+                                    valueChangeListener="#{pageFlowScope.InventorySavedSearchBean.personalizeSavedSearchChanged}"
+                                    binding="#{pageFlowScope.InventorySavedSearchBean.savedSearchesBinding}"
+                                    autoSubmit="true"
+                                    value="#{pageFlowScope.InventorySavedSearchBean.currentSelectedQueryDescriptor}"
+                                    shortDesc="#{inventoryUIBundle.SAVED_SEARCHES}">
+                  <f:selectItems value="#{pageFlowScope.InventorySavedSearchBean.savedSearches}" id="ssi2"/>
+                </af:selectOneChoice>
+              </trh:cellFormat>
+            </trh:rowLayout>
+             <trh:rowLayout halign="center">
+              <trh:cellFormat>
+                <af:spacer width="10" height="10"/>
+              </trh:cellFormat>
+            </trh:rowLayout>
+            <trh:rowLayout>
+              <trh:cellFormat halign="center">
+                <af:toolbar id="tb2">
+                  <af:commandToolbarButton id="iqsct"
+                                           text="#{inventoryUIBundle.DELETE}"
+                                           actionListener="#{pageFlowScope.InventorySavedSearchBean.deleteSavedSearch}"
+                                           binding="#{backingBeanScope.savedSearchDeleteBinding}"/>
+                </af:toolbar>
+             </trh:cellFormat>
+             </trh:rowLayout>
+            <trh:rowLayout halign="center">
+              <trh:cellFormat>
+                <af:spacer width="10" height="20"/>
+              </trh:cellFormat>
+            </trh:rowLayout>
+             
+            <trh:rowLayout>
+              <trh:cellFormat halign="center">
+                <af:inputText label="#{inventoryUIBundle.SEARCH_NAME}" showRequired="true" id="it11" 
+                              valueChangeListener="#{pageFlowScope.InventorySavedSearchBean.nameChanged}"
+                              value="#{pageFlowScope.InventorySavedSearchBean.savedSearchName}"
+                              binding="#{pageFlowScope.InventorySavedSearchBean.savedSearchNameBinding}"/>
+              </trh:cellFormat>
+             </trh:rowLayout>
+              <trh:rowLayout halign="center">
+              <trh:cellFormat>
+                <af:spacer width="10" height="10"/>
+              </trh:cellFormat>
+            </trh:rowLayout>
+            <trh:rowLayout >
+              <trh:cellFormat halign="left">
+                <af:selectBooleanCheckbox text="#{inventoryUIBundle.SET_AS_DEFAULT}"
+                                          value="#{pageFlowScope.InventorySavedSearchBean.isDefault}"
+                                          binding="#{pageFlowScope.InventorySavedSearchBean.isDefaultBinding}"/>
+             </trh:cellFormat>
+             </trh:rowLayout>
+              <trh:rowLayout halign="center">
+              <trh:cellFormat>
+                <af:spacer width="10" height="10"/>
+              </trh:cellFormat>
+            </trh:rowLayout>
+            <trh:rowLayout>
+              <trh:cellFormat halign="left">
+                <af:selectBooleanCheckbox text="#{inventoryUIBundle.RUN_AUTOMATICALLY}"
+                                          value="#{pageFlowScope.InventorySavedSearchBean.isRunAutomatically}"
+                                          binding="#{pageFlowScope.InventorySavedSearchBean.isAutoExecuteBinding}"/>
+              </trh:cellFormat>
+           </trh:rowLayout>
+         </trh:tableLayout>
+        </af:panelFormLayout>
+      </af:panelGroupLayout>
+	   <af:clientListener method="onDialogCancel" type="dialog"/>
+       <af:serverListener type="DialogCancelHandlerEvent" method="#{pageFlowScope.InventorySavedSearchBean.onDialogCancel}"/>
+    </af:dialog>
+   <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+   <af:serverListener type="refreshEntity" method="#{pageFlowScope.InventorySavedSearchBean.refresh}"/>
+  </af:popup>
+	<af:resource type="javascript">
+        function onDialogCancel(evt){
+          var outcome = evt.getOutcome();          
+          if(outcome == AdfDialogEvent.OUTCOME_CANCEL){
+            //call server
+            var eventSource = evt.getSource();
+            var immediate = true;
+            AdfCustomEvent.queue(eventSource,"DialogCancelHandlerEvent",{},immediate); 
+            evt.cancel();
+          }
+        }
+    </af:resource>
+</jsp:root>

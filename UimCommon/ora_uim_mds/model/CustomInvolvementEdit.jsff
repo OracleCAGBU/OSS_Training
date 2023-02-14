@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:pf="/platform/functions"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+		  
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout layout="scroll">
+        <af:panelHeader text="#{pageFlowScope.CustomInvolvementEditBean.displayInfo}">
+          <f:facet name="toolbar">
+            <af:panelGroupLayout layout="horizontal" rendered ="#{!pageFlowScope.CustomInvolvementEditBean.previewLayout}">
+              <af:switcher id="idSwitcher" defaultFacet="false"
+                           facetName="#{pageFlowScope.CustomInvolvementEditBean.isLastEntityToCreate}">
+                <f:facet name="false">
+                  <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CONTINUE}"
+                                    action="#{pageFlowScope.CustomInvolvementEditBean.createInvolvement}"
+                                    rendered="#{pageFlowScope.addMode eq 'ADD'}"
+                                    id="cb2" accessKey="#{inventoryUIBundle.SAVE_AND_CONTINUE_ACCESS_KEY}"/>
+                </f:facet>
+                <f:facet name="true">
+                  <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}"
+                                    action="#{pageFlowScope.CustomInvolvementEditBean.createInvolvement}"
+                                    rendered="#{pageFlowScope.addMode eq 'ADD'}"
+                                    id="cb5" accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}"/>
+                </f:facet>
+              </af:switcher>
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}"
+                                actionListener="#{pageFlowScope.CustomInvolvementEditBean.updateInvolvement}"
+                                rendered="#{pageFlowScope.addMode eq 'EDIT'}"
+                                id="cb4" accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}"/>
+              <af:spacer width="10" height="10" id="s4"/>
+              <af:commandButton text="#{inventoryUIBundle.SKIP}"
+                                disabled="#{pageFlowScope.CustomInvolvementEditBean.isLastEntityToCreate}"
+                                action="#{pageFlowScope.CustomInvolvementEditBean.skipInvolvement}"
+                                rendered="#{pageFlowScope.addMode eq 'ADD'}"
+                                id="cb3" accessKey="#{inventoryUIBundle.SKIP_ACCESS_KEY}"/>
+              <af:spacer width="10" height="10"
+                         rendered="#{pageFlowScope.addMode eq 'ADD'}" id="s1"/>
+              <af:commandButton text="#{inventoryUIBundle.CANCEL}"
+                                action="cancel" immediate="true"
+                                actionListener="#{pageFlowScope.CustomInvolvementEditBean.cancel}"
+                                id="cb1" accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+            </af:panelGroupLayout>
+          </f:facet>
+          <af:showDetailHeader text="#{inventoryUIBundle.CUSTOM_INVOLVEMENT_INFORMATION}"
+                               disclosed="true" id="sdh1">
+            <af:group id="g1">
+              <af:spacer width="10" height="10" id="s2"/>
+              <af:panelGroupLayout id="pgl1">
+                <af:panelFormLayout id="atmt" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsPanel}" >
+                  <af:selectOneChoice id="atmt-specification"
+                                      label="#{inventoryUIBundle.INVOLVEMENT_SPECIFICATION}"
+                                      autoSubmit="true"
+                                      value="#{pageFlowScope.CustomInvolvementEditBean.selectedSpec}"
+									  valueChangeListener="#{pageFlowScope.CustomInvolvementEditBean.specChanged}"
+                                      disabled="#{pageFlowScope.addMode eq 'EDIT'}">
+                    <f:selectItems binding="#{pageFlowScope.CustomInvolvementEditBean.specifications}"
+                                   id="si4"/>
+                  </af:selectOneChoice>
+                  <af:inputText value="#{pageFlowScope.CustomInvolvementEditBean.entityObject.fromEntity.id}"
+                                label="#{inventoryUIBundle.FROM_ENTITY_ID}"
+                                disabled="true" id="atmt-id"/>
+                  <af:inputText value="#{pageFlowScope.CustomInvolvementEditBean.entityObject.fromEntity.name}"
+                                label="#{inventoryUIBundle.FROM_ENTITY_NAME}"
+                                disabled="true" id="atmt-name"/>
+                  <af:selectOneChoice id="atmt-selectedFromEntityRole"
+                                      label="#{inventoryUIBundle.FROM_ENTITY_ROLE}"
+                                      autoSubmit="true"
+                                      value="#{pageFlowScope.CustomInvolvementEditBean.selectedFromEntityRole}"
+                                      disabled="false">
+                    <f:selectItems value="#{pageFlowScope.CustomInvolvementEditBean.fromEntityRoles}"
+                                   id="si2"/>
+                  </af:selectOneChoice>
+                  <af:inputText value="#{pageFlowScope.CustomInvolvementEditBean.entityObject.toEntity.id}"
+                                label="#{inventoryUIBundle.TO_ENTITY_ID}"
+                                disabled="true" id="atmt-id2"/>
+                  <af:inputText value="#{pageFlowScope.CustomInvolvementEditBean.entityObject.toEntity.name}"
+                                label="#{inventoryUIBundle.TO_ENTITY_NAME}"
+                                disabled="true" id="atmt-name2"/>
+                  <af:selectOneChoice id="atmt-selectedToEntityRole"
+                                      label="#{inventoryUIBundle.TO_ENTITY_ROLE}"
+                                      autoSubmit="true"
+                                      value="#{pageFlowScope.CustomInvolvementEditBean.selectedToEntityRole}"
+                                      disabled="false">
+                    <f:selectItems value="#{pageFlowScope.CustomInvolvementEditBean.toEntityRoles}" id="si3"/>
+                  </af:selectOneChoice>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="ci-lmd" rendered="false">
+                    <af:outputText value="#{pageFlowScope.CustomInvolvementEditBean.lastModifiedDate}" id="ot9">
+                        <af:convertDateTime pattern="#{pageFlowScope.CustomInvolvementEditBean.dateTimeFormat}"/>
+                    </af:outputText>    
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="ci-lmu" rendered="false">
+                    <af:outputText value="#{pageFlowScope.CustomInvolvementEditBean.entityObject.lastModifiedUser}" id="ot10"/>
+                </af:panelLabelAndMessage>                  
+                </af:panelFormLayout>                
+              </af:panelGroupLayout>
+            </af:group>
+          </af:showDetailHeader>
+        </af:panelHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

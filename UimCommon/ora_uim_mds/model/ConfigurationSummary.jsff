@@ -1,0 +1,1092 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2015, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+       avsubram  05/04/15 - Show BI link only when associated to BI - 20610921
+       avsubram  04/07/15 - Increase Resource Spec default size - 20799142
+       rnaguban  12/12/13 - Bug 17358558
+    raattulu    4/15/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" 
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1111"
+                   value="#{bindings.ptb1}">
+    <f:facet name="localArea">
+      <af:panelStretchLayout id="pgl2" binding="#{backingBeanScope.CONFIG_summary_panelGroupLayout}" topHeight="#{pageFlowScope.ConfigurationSummaryBean.topHeight}">
+        <f:facet name="top">
+          <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered="#{pageFlowScope.ConfigurationSummaryBean.biSupported}">
+                    <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                                   rendered="#{!(pageFlowScope.ConfigurationSummaryBean.popupMode)}"
+                                   value="#{pageFlowScope.ConfigurationSummaryBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+            <af:menuBar id="menuBar1">
+                          <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invSearchMenu"
+                                   rendered="#{!(pageFlowScope.ConfigurationSummaryBean.popupMode)}"  
+                                   disabled="#{pageFlowScope.ConfigurationSummaryBean.disableBiMenu}"/>
+            </af:menuBar>                    <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch3}" contentDelivery="lazyUncached">
+                        <af:dialog id="BISearchPopup_d1" type="none"
+                                   title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                            <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                                <f:facet name="center">
+                                   <af:region value="#{bindings.BusinessInteractionSearchResultsFlow3.regionModel}" id="BISP_r2"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                        <af:serverListener type="refreshEntity" method="#{pageFlowScope.ConfigurationSummaryBean.afterBusinessInteractionSelectionChange}"/>
+                    </af:popup>
+                </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+        
+          <af:panelHeader text="#{pageFlowScope.ConfigurationSummaryBean.entityInfo} #{inventoryUIBundle.CONFIGURATION}-#{pageFlowScope.ConfigurationSummaryBean.displayInfo}"
+                        id="PAGE_TITLE" styleClass="invSummaryPanelHeader" helpTopicId="#{pageFlowScope.ConfigurationSummaryBean.helpTopic}"> 
+          <f:facet name="context"/>
+          <f:facet name="menuBar">
+            <af:group>
+              <af:menuBar id="menuBar2" binding="#{backingBeanScope.ConfigPanelHeader}">
+                <af:menu styleClass="invSummaryMenu" id="m12" text="#{inventoryUIBundle.RELATED_PAGES}" rendered="#{pageFlowScope.ConfigurationSummaryBean.renderRelatedPagesMenu}">
+                    <af:commandMenuItem id="vt" text="#{inventoryUIBundle.VIEW_TOPOLOGY}" rendered="#{pageFlowScope.ConfigurationSummaryBean.renderViewTopology}" 
+                                        action="serviceTopology" actionListener="#{bindings.openSubTaskForTopology.execute}" /> 
+                    <af:commandMenuItem id="xp" text="#{inventoryUIBundle.XML_PAYLOAD}" action="xmlPayload"/>
+                     <af:commandMenuItem id="mv" text="#{inventoryUIBundle.MAP_VIEW}" rendered="#{pageFlowScope.ConfigurationSummaryBean.renderViewTopology}" 
+                                        action="toServiceMapView" actionListener="#{bindings.openSubTaskForServiceMapView.execute}"/>
+                    
+                </af:menu>
+                <af:menu id="menu6" binding="#{backingBeanScope.ActionsMenuBean.configActionsMenu}" styleClass="invSummaryMenu">
+                </af:menu>
+              </af:menuBar>
+            </af:group>
+          </f:facet>
+          <af:panelGroupLayout layout="scroll" id="pgl23">
+          <af:showDetailHeader text="#{pageFlowScope.ConfigurationSummaryBean.entityInfo} #{inventoryUIBundle.CONFIGURATION_INFORMATION}"
+                               disclosed="true" id="sdh1" styleClass="invSummaryShowDetailHeader" binding="#{backingBeanScope.infoShowDetailHeader}" >
+            <f:facet name="info"/>
+            <f:facet name="legend"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar">
+              <af:commandButton text="#{inventoryUIBundle.EDIT}" action="edit" id="confEdit1"
+                                disabled="#{pageFlowScope.ConfigurationSummaryBean.disableEditButton or !securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/configuration/flow/ConfigurationEditFlow.xml#ConfigurationEditFlow']}"
+								rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Configuration.EDIT;action=view']}"
+                                partialTriggers="menu6" actionListener="#{bindings.openSubTaskForEdit.execute}"
+                                accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                <af:setActionListener from="#{pageFlowScope.ConfigurationSummaryBean.entityObject.oid}"
+                                      to="#{pageFlowScope.objectId}"/>
+                <af:setActionListener from="false" to="#{addMode}"/>
+              </af:commandButton>
+            </f:facet>
+            <f:facet name="context"/>
+            <af:panelFormLayout id="info" maxColumns="2" rows="2"
+                                labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.CONFIG_summary_panelFormLayout}">
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.VERSION}"
+                                       id="plam22">
+                <af:outputText value="#{pageFlowScope.ConfigurationSummaryBean.version}"
+                               id="ot17"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}"
+                                       id="plam4">
+                <af:outputText value="#{pageFlowScope.ConfigurationSummaryBean.id}"
+                               id="ot3"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}"
+                                       id="plam1">
+                <af:outputText value="#{pageFlowScope.ConfigurationSummaryBean.name}"
+                               id="ot4"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.STATUS}"
+                                       id="plmsg4">
+                <af:outputText value="#{pageFlowScope.ConfigurationSummaryBean.status}"
+                               id="ot29"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}"
+                                       id="plmsg14">
+                <af:commandImageLink id="c221" action="specificationSummary" actionListener="#{bindings.openSubTaskForSpec.execute}"
+                                     text="#{pageFlowScope.ConfigurationSummaryBean.specDisplayName}"
+                                     shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+                 
+                  <af:setActionListener from="#{pageFlowScope.ConfigurationSummaryBean.configurationSpecification.oid}"
+                                        to="#{objectId}"/>
+                </af:commandImageLink>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.PREVIOUS_CONFIGURATION}"
+                                       id="panelLabelAndMessage132">
+                <af:commandImageLink id="c222" action="init" actionListener="#{bindings.openSubTaskForPrevConfigSummary.execute}"
+                                     text="#{pageFlowScope.ConfigurationSummaryBean.previousConfiguration.versionNumber}"
+                                     shortDesc="#{pageFlowScope.ConfigurationSummaryBean.previousConfiguration.versionNumber eq null ? '&#160;' : inventoryUIBundle.PREVIOUS_CONFIGURATION_LINK}"
+                                     disabled="#{pageFlowScope.ConfigurationSummaryBean.previousConfiguration.versionNumber eq null ? true : false}">
+                
+                  <af:setActionListener from="#{pageFlowScope.ConfigurationSummaryBean.previousConfiguration.oid}"
+                                        to="#{pageFlowScope.objectId}"/>
+                </af:commandImageLink>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.NEXT_CONFIGURATION}"
+                                       id="panelLabelAndMessage1321">
+                <af:commandImageLink id="c2221" action="init" actionListener="#{bindings.openSubTaskForNextConfigSummary.execute}"
+                                     text="#{pageFlowScope.ConfigurationSummaryBean.nextConfiguration.versionNumber}"
+                                     shortDesc="#{pageFlowScope.ConfigurationSummaryBean.nextConfiguration.versionNumber eq null ? '&#160;' : inventoryUIBundle.NEXT_CONFIGURATION_LINK}"
+                                     disabled="#{pageFlowScope.ConfigurationSummaryBean.nextConfiguration.versionNumber eq null ? true : false}">
+                
+                  <af:setActionListener from="#{pageFlowScope.ConfigurationSummaryBean.nextConfiguration.oid}"
+                                        to="#{pageFlowScope.objectId}"/>
+                </af:commandImageLink>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.START_DATE}"
+                                       id="pla22">
+                <af:outputText value="#{pageFlowScope.ConfigurationSummaryBean.startDate}"
+                               id="ot12">
+                  <af:convertDateTime pattern="#{pageFlowScope.ConfigurationSummaryBean.dateTimeFormat}"/>
+                </af:outputText>             
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.END_DATE}"
+                                       id="plam25">
+                <af:outputText value="#{pageFlowScope.ConfigurationSummaryBean.endDate}"
+                               id="ot42">
+                 <af:convertDateTime pattern="#{pageFlowScope.ConfigurationSummaryBean.dateTimeFormat}"/>
+                </af:outputText>               
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{pageFlowScope.ConfigurationSummaryBean.entityName}" id="plm134">
+                <af:commandImageLink id="c22134" action="#{pageFlowScope.ConfigurationSummaryBean.getSummaryPage}"
+                                     text="#{pageFlowScope.ConfigurationSummaryBean.configurableEntity.displayInfo}"
+                                     shortDesc="#{inventoryUIBundle.LINK} #{inventoryUIBundle.FOR} #{pageFlowScope.ConfigurationSummaryBean.entityName} #{inventoryUIBundle.SUMMARY}">
+                  
+                  <af:setActionListener from="#{pageFlowScope.ConfigurationSummaryBean.inventoryConfigurationVersion.oid}" to="#{inventoryConfigurationVersion}"/>
+                  <af:setActionListener from="#{pageFlowScope.ConfigurationSummaryBean.configurableEntity.oid}" to="#{objectId}"/>
+                  <af:setActionListener from="#{pageFlowScope.ConfigurationSummaryBean.recentItemLabel}" to="#{entityInfo}"/>
+                  <af:setActionListener from="#{pageFlowScope.ConfigurationSummaryBean.configurableEntity.displayInfo}" to="#{displayInfo}"/>
+                </af:commandImageLink>
+              </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.ASSOCIATED_TO_BI}" id="plam26"
+                                             inlineStyle="text-align:center;" rendered="#{pageFlowScope.ConfigurationSummaryBean.biSupported}">
+                          <af:commandImageLink id="c223" action="businessInteractionSummary" actionListener="#{pageFlowScope.ConfigurationSummaryBean.registerBiRecentItem}"
+                                               text="#{pageFlowScope.ConfigurationSummaryBean.associatedBiDisplayInfo}"
+                                               shortDesc="#{pageFlowScope.ConfigurationSummaryBean.associatedBi eq null ? '&#160;' : inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                                    
+                            <af:setActionListener from="#{pageFlowScope.ConfigurationSummaryBean.associatedBi.oid}"
+                                                  to="#{objectId}"/>
+                            <af:setActionListener from="#{pageFlowScope.ConfigurationSummaryBean.associatedBi.displayInfo}"
+                              to="#{displayInfo}"/>
+                          </af:commandImageLink>
+                    </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+          </af:showDetailHeader>
+          <af:spacer width="10" height="10" id="s11"/>
+          <af:showDetailHeader text="#{inventoryUIBundle.CONFIGURATION_ITEMS}"
+                               styleClass="invSummaryShowDetailHeader"
+                               disclosed="true" id="sdh22">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:panelCollection id="pc_11" featuresOff="freeze wrap"
+                                styleClass="AFStretchWidth">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar"></f:facet>
+              <f:facet name="statusbar"/>
+              <!-- displaying Configuration Hierarchy-->
+              <af:treeTable value="#{pageFlowScope.ConfigurationTreeBean.treeModel}"
+                            var="node" rowSelection="single"
+                            styleClass="AFStretchWidth" id="confTr"
+                            columnSelection="single"
+                            fetchSize="#{pageFlowScope.ConfigurationSummaryBean.fetchSize}"
+                            contextMenuSelect="true"
+                            contentDelivery="immediate" expandAllEnabled="true"
+                            selectionListener="#{pageFlowScope.ConfigurationTreeBean.nodeSelectedEvent}"
+                            binding="#{backingBeanScope.CONFIG_treeBinding}"
+                            disclosedRowKeys="#{pageFlowScope.ConfigurationTreeBean.treeDisclosedRowKeys}"
+                            horizontalGridVisible="true"
+                            rowBandingInterval="0"
+                            summary="#{inventoryUIBundle.CONFIGURATION_HIERARCHY_TREETABLE}">
+                <f:facet name="nodeStamp">
+                  <!-- Column to Display Label -->
+                  <af:column sortable="false" headerText="#{inventoryUIBundle.CONFIGURATION}" id="column2"
+                             width="300" rowHeader="unstyled">
+                    <af:panelGroupLayout id="pgl5">
+                      <af:image source="#{node.data.icon}" id="nodeIcon" styleClass="invSummaryImage" shortDesc="icon"/>
+                      <af:switcher id="idSwitcher" defaultFacet="false" facetName="#{node.data.disableNodeLink}">
+                            <f:facet name="true">           
+                                <af:commandImageLink action="#{pageFlowScope.ConfigurationTreeBean.view}" id="ot48"
+                                                     shortDesc="#{inventoryUIBundle.TAG_SUMMARY_LINK}"
+                                                     text="#{node.data.label}">
+                                </af:commandImageLink>
+                            </f:facet> 
+                            <f:facet name="false">           
+                                <af:outputText value="#{node.data.label}" id="ot47"/>
+                            </f:facet> 
+                        </af:switcher>
+                    </af:panelGroupLayout>
+                  </af:column>
+                </f:facet>
+                <!-- Column to display Specifications -->
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.RESOURCE_SPECIFICATION}"
+                           id="column9" filterable="false" width="170">
+                  <!-- Start For displaying the specifcations -->
+                 
+                        <af:outputText value="#{node.data.specification1}"
+                                       id="ot312"
+                                       rendered="#{node.data.resource1 != null}"/>
+                     
+                        <af:outputText value="#{node.data.specification2}"
+                                       id="ot221"
+                                       rendered="#{node.data.resource2 != null}"/>
+                                     
+                       <af:selectOneChoice id="spdd1" disabled="#{node.data.nativeConfiguration or pageFlowScope.ConfigurationSummaryBean.incorrectContext}"
+                                            value="#{node.data.specification}"
+                                            rendered="#{!node.data.specOptionsDropDownRequired}"
+                                           label="#{inventoryUIBundle.SPECIFICATION}">
+                          <f:selectItems value="#{node.data.specOptions}"/>
+                        </af:selectOneChoice>
+                
+                  <!-- End For displaying the specifcations -->
+                </af:column>
+                <!-- Column to display Assignment Status -->
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.ASSIGNMENT_REFERENCE_STATUS}"
+                           id="c2" width="145">
+                  <trh:tableLayout>
+                    <trh:rowLayout>
+                      <trh:cellFormat>
+                        <af:outputText value="#{node.data.assignmentReferenceStatus1}"
+                                       id="ot1"
+                                       rendered="#{node.data.assignmentReferenceStatus1 != null}"/>
+                      </trh:cellFormat>  
+                      </trh:rowLayout>
+                   <trh:rowLayout>
+                      <trh:cellFormat>
+                        <af:outputText value="#{node.data.assignmentReferenceStatus2}"
+                                       id="ot21"
+                                       rendered="#{node.data.assignmentReferenceStatus2 != null}"/>
+                      </trh:cellFormat>
+                      </trh:rowLayout>
+                  </trh:tableLayout>
+                </af:column>
+                <!-- Column to display Resources -->
+                <af:column sortable="false"
+                           headerText="#{inventoryUIBundle.RESOURCE}" id="c32" width="250">
+            <trh:tableLayout>
+                    <trh:rowLayout>
+                      <trh:cellFormat>
+                        <af:commandImageLink action="#{pageFlowScope.ConfigurationSummaryBean.getSummaryPage}" id="cl1"
+                                        shortDesc="#{node.data.resource1.displayInfo eq null ? '&#160;' : inventoryUIBundle.LINK_FOR_SUMMARY}"
+                                        disabled="#{node.data.resource1.displayInfo eq null ? true : false}"
+                                             text="#{node.data.resource1.displayInfo}"
+                                             rendered="#{node.data.resource1 != null}">
+                         
+                          <af:setActionListener from="#{node.data.resource1.oid}"
+                                                to="#{objectId}"/>
+                          <af:setActionListener from="#{pageFlowScope.ConfigurationSummaryBean.entityTypeName}" to="#{entityInfo}"/>
+                          <af:setActionListener from="#{node.data.resource1.displayInfo}" to="#{displayInfo}"/>
+                        </af:commandImageLink>
+                        <af:outputText value=" (#{node.data.resource1InventoryStatus})" id="rs1Is" rendered="#{node.data.resource1InstalledBI != null}"/>
+                        <af:outputText value=" (#{node.data.resource1InstalledBIDueDate} " id="pendingBIDueDate1" rendered="#{node.data.resource1InstalledBI != null}"/>
+                        <af:commandImageLink action="businessInteractionSummary" actionListener="#{bindings.openSubTaskForAssociatedBiSummary.execute}" 
+                                       text="#{node.data.resource1InstalledBI.displayInfo})" id="bid3" 
+                                       rendered="#{(node.data.resource1 != null) and (node.data.resource1InstalledBI!=null)}"
+                                       shortDesc="#{(node.data.resource1InstalledBI.oid eq null) ? '&#160;' : inventoryUIBundle.BUSINESS_INTERACTION}"
+                                       disabled="#{(node.data.resource1InstalledBI.oid eq null) or (pageFlowScope.ConfigurationSummaryBean.popupMode) ? true : false}">                        
+                    <af:setActionListener from="#{node.data.resource1InstalledBI.oid}" to="#{objectId}"/>
+                  </af:commandImageLink>          
+                     </trh:cellFormat>
+                     </trh:rowLayout>                    
+                     <trh:rowLayout>
+                     <trh:cellFormat>
+                        <af:commandImageLink action="#{pageFlowScope.ConfigurationSummaryBean.getSummaryPage}" id="cl2"
+                                         shortDesc="#{node.data.resource2.displayInfo eq null ? '&#160;' : inventoryUIBundle.LINK_FOR_SUMMARY}"
+                                        disabled="#{node.data.resource2.displayInfo eq null ? true : false}"
+                                             text="#{node.data.resource2.displayInfo}"
+                                             rendered="#{node.data.resource2 != null}">
+                          
+                          <af:setActionListener from="#{node.data.resource2.oid}"
+                                                to="#{objectId}"/>
+                          <af:setActionListener from="#{pageFlowScope.ConfigurationSummaryBean.entityTypeName}" to="#{entityInfo}"/>
+                          <af:setActionListener from="#{node.data.resource2.displayInfo}" to="#{displayInfo}"/>
+                        </af:commandImageLink>
+                        <af:outputText value=" (#{node.data.resource2InventoryStatus})" id="rs2Is" rendered="#{node.data.resource2InstalledBI != null}"/>
+                        <af:outputText value=" (#{node.data.resource2InstalledBIDueDate}" id="pendingBIDueDate2" rendered="#{node.data.resource2InstalledBI != null}"/>
+                        <af:commandImageLink action="businessInteractionSummary" actionListener="#{bindings.openSubTaskForAssociatedBiSummary.execute}" 
+                                       text="#{node.data.resource2InstalledBI.displayInfo})" id="bid4" 
+                                       rendered="#{(node.data.resource2 != null) and (node.data.resource2InstalledBI!=null)}"
+                                       shortDesc="#{(node.data.resource2InstalledBI.oid eq null) ? '&#160;' : inventoryUIBundle.BUSINESS_INTERACTION}"
+                                       disabled="#{(node.data.resource2InstalledBI.oid eq null) or (pageFlowScope.ConfigurationSummaryBean.popupMode) ? true : false}">                        
+                        <af:setActionListener from="#{node.data.resource2InstalledBI.oid}" to="#{objectId}"/>
+                        </af:commandImageLink>
+                      </trh:cellFormat>
+                      </trh:rowLayout>
+                  </trh:tableLayout>
+                </af:column>
+                <!-- Column to display Actions -->
+                <af:column sortable="true"
+                           headerText="#{inventoryUIBundle.ACTIONS}"
+                           id="column39" filterable="true">
+                  <!-- To display Allocate /Reference Actions -->                  
+                  <af:commandImageLink id="c2331" partialSubmit="true" disabled="#{node.data.nativeConfiguration or !securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Configuration.MAINTAIN_CONFIG_ITEMS;action=view'] or node.data.configItemAction1 eq null ? true : false or pageFlowScope.ConfigurationSummaryBean.incorrectContext or pageFlowScope.ConfigurationSummaryBean.undoDisabled}"
+                                  actionListener="#{pageFlowScope.ConfigurationTreeBean.processAction1}"
+                                  shortDesc="#{node.data.configItemAction1 eq null ? '&#160;' : inventoryUIBundle.ASSIGN_LINK}"
+                                       text="#{node.data.configItemAction1}"
+                                       styleClass="invSummaryPanelLabelAndMessage">
+                   
+                  </af:commandImageLink>
+                  <af:commandImageLink id="c2332" partialSubmit="true" disabled="#{node.data.nativeConfiguration or !securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Configuration.MAINTAIN_CONFIG_ITEMS;action=view'] or node.data.configItemAction2 eq null ? true : false or pageFlowScope.ConfigurationSummaryBean.incorrectContext}"
+                                  actionListener="#{pageFlowScope.ConfigurationTreeBean.processAction2}"
+                                  shortDesc="#{node.data.configItemAction2 eq null ? '&#160;' : inventoryUIBundle.ASSIGN_LINK}"
+                                       text="#{node.data.configItemAction2}"
+                                       styleClass="invSummaryPanelLabelAndMessage">
+                    
+                  </af:commandImageLink>
+                </af:column>	
+<!-- new column - changed FDD to show only one instead of iterator of list -->
+                <af:column sortable="false" headerText="#{inventoryUIBundle.NETWORK_TARGET}" id="c520" 
+                                                       filterable="false" width="140">
+                  <table border="0">
+                    <tr>
+                      <td>
+                      <af:commandImageLink action="#{pageFlowScope.ConfigurationSummaryBean.getSummaryPage}" id="nt121h"
+                                        shortDesc="#{node.data.networkTargetSingle.displayInfo eq null ? '&#160;' : inventoryUIBundle.LINK_FOR_SUMMARY}"
+                                        disabled="#{node.data.networkTargetSingle.displayInfo eq null ? true : false}"
+                                             text="#{node.data.networkTargetSingle.displayInfo}"
+                                             rendered="#{node.data.networkTargetSingle != null}">
+                         
+                          <af:setActionListener from="#{node.data.networkTargetSingle.oid}"
+                                                to="#{objectId}"/>
+                          <af:setActionListener from="#{pageFlowScope.ConfigurationSummaryBean.entityTypeName}" to="#{entityInfo}"/>
+                          <af:setActionListener from="#{node.data.networkTargetSingle.displayInfo}" to="#{displayInfo}"/>
+                        </af:commandImageLink>
+                      </td>
+                    </tr>                     
+                    <tr>
+                      <td>
+                         <af:commandImageLink action="#{pageFlowScope.ConfigurationSummaryBean.getSummaryPage}" id="nt122h"
+                                        shortDesc="#{node.data.networkTarget2Single.displayInfo eq null ? '&#160;' : inventoryUIBundle.LINK_FOR_SUMMARY}"
+                                        disabled="#{node.data.networkTarget2Single.displayInfo eq null ? true : false}"
+                                             text="#{node.data.networkTarget2Single.displayInfo}"
+                                             rendered="#{node.data.networkTarget2Single != null}">
+                         
+                          <af:setActionListener from="#{node.data.networkTarget2Single.oid}"
+                                                to="#{objectId}"/>
+                          <af:setActionListener from="#{pageFlowScope.ConfigurationSummaryBean.entityTypeName}" to="#{entityInfo}"/>
+                          <af:setActionListener from="#{node.data.networkTarget2Single.displayInfo}" to="#{displayInfo}"/>
+                        </af:commandImageLink>
+                      </td>
+                    </tr>
+                  </table>                
+                 </af:column>  			   
+
+                <f:facet name="contextMenu">
+                  <af:popup contentDelivery="lazyUncached" id="popupContext">
+                    <!-- this menu is is used for displaying the menu items  for root node -->
+                    <af:menu id="ConfigTreeContextMenus" text="ContextMenus">
+                      <af:commandMenuItem text="#{inventoryUIBundle.ADDCONFIGITEM}"
+                                          selected="true"
+                                          actionListener="#{pageFlowScope.ConfigurationTreeBean.processAction}"
+                                          rendered="#{pageFlowScope.ConfigurationTreeBean.rootNodePopupMenu and securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Configuration.MAINTAIN_CONFIG_ITEMS;action=view']}"
+                                          disabled="#{pageFlowScope.ConfigurationTreeBean.configurationReadOnly}"
+                                          id="addRootConfigItem">
+                      </af:commandMenuItem>
+                      <af:commandMenuItem text="#{inventoryUIBundle.ADDCONFIGITEM}"
+                                          selected="true"
+                                          actionListener="#{pageFlowScope.ConfigurationTreeBean.processAction}"
+                                          visible="#{pageFlowScope.ConfigurationTreeBean.disableAddConfigItem}"
+                                          rendered="#{pageFlowScope.ConfigurationTreeBean.childNodePopupMenu and securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Configuration.MAINTAIN_CONFIG_ITEMS;action=view']}"
+                                          disabled="#{pageFlowScope.ConfigurationTreeBean.configurationReadOnly}"
+                                          id="addChildConfigItem">
+                      </af:commandMenuItem>
+                      <!-- this menu is is used for displaying the menu items  for child node-->
+                      <af:commandMenuItem text="#{inventoryUIBundle.RENAMEITEM}"
+                                          selected="true"
+                                          actionListener="#{pageFlowScope.ConfigurationTreeBean.processAction}"
+                                          rendered="#{pageFlowScope.ConfigurationTreeBean.childNodePopupMenu and securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Configuration.MAINTAIN_CONFIG_ITEMS;action=view']}"
+                                          disabled="#{pageFlowScope.ConfigurationTreeBean.configurationReadOnly}"
+                                          id="renameConfigItems">
+                      </af:commandMenuItem>
+                      <af:commandMenuItem text="#{inventoryUIBundle.REMOVEITEM}"
+                                          actionListener="#{pageFlowScope.ConfigurationTreeBean.deleteConfigurationItem}"
+                                          rendered="#{pageFlowScope.ConfigurationTreeBean.childNodePopupMenu and securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Configuration.MAINTAIN_CONFIG_ITEMS;action=view']}"
+                                          disabled="#{pageFlowScope.ConfigurationTreeBean.configurationReadOnly}">
+                      </af:commandMenuItem>
+                      <!-- this menu is is used for displaying the menu items  for root Characteristic node-->
+                      <af:commandMenuItem text="#{inventoryUIBundle.MAINTAINCHAR}"
+                                          selected="true"
+                                          actionListener="#{pageFlowScope.ConfigurationTreeBean.processAction}"
+                                          rendered="#{pageFlowScope.ConfigurationTreeBean.charRootNodePopupMenu and securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Configuration.MAINTAIN_CONFIG_ITEMS;action=view']}"
+                                          disabled="#{pageFlowScope.ConfigurationTreeBean.configurationReadOnly}"
+                                          id="maintainRootChar">
+                      </af:commandMenuItem>
+                      <!-- this menu is is used for displaying the menu items  for child Characteristic node-->
+                      <af:commandMenuItem text="#{inventoryUIBundle.EDITCHAR}"
+                                          selected="true"
+                                          actionListener="#{pageFlowScope.ConfigurationTreeBean.processAction}"
+                                          rendered="#{pageFlowScope.ConfigurationTreeBean.charChildNodePopupMenu and securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Configuration.MAINTAIN_CONFIG_ITEMS;action=view']}"
+                                          disabled="#{pageFlowScope.ConfigurationTreeBean.configurationReadOnly}"
+                                          id="maintainChildChar">
+                      </af:commandMenuItem>
+                    </af:menu>
+                  </af:popup>
+                </f:facet>
+              </af:treeTable>
+              <!--Popup for renaming the config items -->
+              <af:popup id="renameConfigItem"
+                        binding="#{backingBeanScope.renameConfigItemBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="d3" type="none"
+                           title="#{inventoryUIBundle.ITEM_RENAME}">
+                  <af:panelStretchLayout id="pt_psl1"
+                                         styleClass="invConfigPanelStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.ConfigurationItemRenameFlow1.regionModel}"
+                                 id="r3"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!--Popup for adding config items -->
+              <af:popup id="addConfigItemPopup"
+                        binding="#{backingBeanScope.addConfigItemPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="d23" type="none"
+                           title="#{inventoryUIBundle.ADD_CONFIG_ITEM}">
+                  <af:panelStretchLayout id="pt_psl2"
+                                         styleClass="invConfigPanelStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.ConfigurationItemAddFlow1.regionModel}"
+                                 id="r21"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!--Popup for maintaining Characteristics -->
+              <af:popup id="maintainCharacteristicPopup"
+                        binding="#{backingBeanScope.maintainCharacteristicBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="maintainChar" type="none"
+                           title="#{inventoryUIBundle.MAINTAINCHAR}">
+                  <af:panelStretchLayout id="pt_psl3"
+                                         styleClass="invConfigPanelStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.ConfigurationMaintainCharacteristicsFlow1.regionModel}"
+                                 id="r2"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!--Popup for assigning resources to config items -->
+              <!-- Media stream popup -->
+              <af:popup id="assignmediaStreamPopup" binding="#{backingBeanScope.MediaStreamConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="immediate">
+                <af:dialog id="id001" type="none"
+                           title="#{inventoryUIBundle.MEDIA_STREAM_SEARCH}">
+                  <af:panelStretchLayout id="pt_psl" styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                        <af:region value="#{bindings.MediaStreamSearchResultsFlow1.regionModel}" id="r24"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- Media stream popup -->
+              <!-- CustomObject popup -->
+              <af:popup id="assignCustObjPopup"
+                        binding="#{backingBeanScope.CustomObjectConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="d1233" type="none"
+                           title="#{inventoryUIBundle.CUSTOM_OBJECT_SEARCH}">
+                  <af:panelStretchLayout id="pt_psl4"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.CustomObjectSearchResultsFlow1.regionModel}"
+                                 id="r1"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!--end  CustomObject popup -->
+              <!-- LogicalDevice popup -->
+              <af:popup id="assignLogicalDevicePopup"
+                        binding="#{backingBeanScope.LogicalDeviceConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="ldConfig" type="none"
+                           title="#{inventoryUIBundle.LOGICAL_DEVICE_SEARCH}">
+                  <af:panelStretchLayout id="pt_psl5"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.LogicalDeviceSearchResultsFlow1.regionModel}"
+                                 id="r4"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End LogicalDevice popup -->
+              <!--Start  PhysicalDevice popup -->
+              <af:popup id="assignPhysicalDevicePopup"
+                        binding="#{backingBeanScope.PhysicalDeviceConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="pdConfig" type="none"
+                           title="#{inventoryUIBundle.PHYSICAL_DEVICE_SEARCH}">
+                  <af:panelStretchLayout id="pt_psl6"
+                                         inlineStyle="width:950px; height:600px;">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.PhysicalDeviceSearchResultsFlow1.regionModel}"
+                                 id="r5"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- end PhysicalDevice popup -->
+              <!--Start  Service popup -->
+              <af:popup id="assignServicePopup"
+                        binding="#{backingBeanScope.ServiceConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="serviceConfig" type="none"
+                           title="#{inventoryUIBundle.SERVICE_SEARCH}">
+                  <af:panelStretchLayout id="pt_psl7"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.ServiceSearchResultsFlow1.regionModel}"
+                                 id="r6"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End Service popup -->
+              <!--Start  Place popup -->
+              <af:popup id="assignPlacePopup"
+                        binding="#{backingBeanScope.PlaceConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="placeConfig" type="none"
+                           title="#{inventoryUIBundle.PLACE_SEARCH_DIALOG}">
+                  <af:panelStretchLayout id="pt_psl8"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.PlaceSearchResultsFlow1.regionModel}"
+                                 id="r7"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End Place popup -->
+              <!--Start  Network popup -->
+              <af:popup id="assignNetworkPopup"
+                        binding="#{backingBeanScope.NetworkConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="networkConfig" type="none"
+                           title="#{inventoryUIBundle.NETWORK_SEARCH_RESULTS_DIALOG}">
+                  <af:panelStretchLayout id="pt_psl9"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.NetworkSearchResults1.regionModel}"
+                                 id="r8"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End Network popup -->
+              <!--Start  Equipment popup -->
+              <af:popup id="assignEquipmentPopup"
+                        binding="#{backingBeanScope.EquipmentConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="equipmentConfig" type="none"
+                           title="#{inventoryUIBundle.EQUIPMENT_SEARCH}">
+                  <af:panelStretchLayout id="pt_ps20"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.EquipmentSearchResultsFlow1.regionModel}"
+                                 id="r9"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End Equipment popup -->
+              <!--Start  TelephoneNumber popup -->
+              <af:popup id="assignTelephoneNumberPopup"
+                        binding="#{backingBeanScope.TelephoneNumberConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="telephoneNumberConfig" type="none"
+                           title="#{inventoryUIBundle.TELEPHONE_NUMBER_SEARCH}">
+                  <af:panelStretchLayout id="pt_ps21"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.TelephoneNumberSearchResultsFlow1.regionModel}"
+                                 id="r10"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End TelephoneNumber popup -->
+              <!--Start  PhysicalPort popup -->
+              <af:popup id="assignPhysicalPortPopup"
+                        binding="#{backingBeanScope.PhysicalPortConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="physicalPortConfig" type="none"
+                           title="#{inventoryUIBundle.PHYSICAL_PORT_SEARCH}">
+                  <af:panelStretchLayout id="pt_ps22"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.PhysicalPortSearchResultsFlow1.regionModel}"
+                                 id="r11"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End PhysicalPort popup -->
+              <!--Start  PhysicalConnector popup -->
+              <af:popup id="assignPhysicalConnectorPopup"
+                        binding="#{backingBeanScope.PhysicalConnectorConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="physicalConnectorConfig" type="none"
+                           title="#{inventoryUIBundle.PHYSICAL_CONNECTOR_SEARCH}">
+                  <af:panelStretchLayout id="pt_ps23"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.PhysicalConnectorSearchResultsFlow1.regionModel}"
+                                 id="r12"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End PhysicalConnector popup -->
+              <!--Start  DeviceInterface popup -->
+              <af:popup id="assignDeviceInterfacePopup"
+                        binding="#{backingBeanScope.DeviceInterfaceConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="deviceInterfaceConfig" type="none"
+                           title="#{inventoryUIBundle.DEVICE_INTERFACE_SEARCH}">
+                  <af:panelStretchLayout id="pt_ps24"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.DeviceInterfaceSearchResultsFlow1.regionModel}"
+                                 id="r13"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End DeviceInterface popup -->
+              <!--Start  EquipmentHolder popup -->
+              <af:popup id="assignEquipmentHolderfacePopup"
+                        binding="#{backingBeanScope.EquipmentHolderConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="equipmentHolderConfig" type="none"
+                           title="#{inventoryUIBundle.EQUIPMENT_HOLDER_SEARCH}">
+                  <af:panelStretchLayout id="pt_ps25"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.EquipmentHolderSearchResultsFlow1.regionModel}"
+                                 id="r14"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End EquipmentHolder popup -->
+              <!--Start  BusinessInteraction popup -->
+              <af:popup id="assignBusinessInteractionPopup"
+                        binding="#{backingBeanScope.BusinessInteractionSpecDAOConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="businessInteractionConfig" type="none"
+                           title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                  <af:panelStretchLayout id="pt_ps26"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}"
+                                 id="r15"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End BusinessInteraction popup -->
+              <!--Start  CustomNetworkAddress popup -->
+              <af:popup id="assignCustNetAddrPopup"
+                        binding="#{backingBeanScope.CustNetAddrConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="custNetAddrConfig" type="none"
+                           title="#{inventoryUIBundle.CUSTOM_NETWORK_ADDRESS_SEARCH}">
+                  <af:panelStretchLayout id="pt_ps27"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.CustomNetworkAddressSearchResultsFlow1.regionModel}"
+                                 id="r16"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End CustomNetworkAddress popup -->
+              <!--Start  InventoryGroup popup -->
+              <af:popup id="assignInventoryGroupPopup"
+                        binding="#{backingBeanScope.InventoryGroupConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="inventoryGroupConfig" type="none"
+                           title="#{inventoryUIBundle.INVENTORY_GROUP_SEARCH}">
+                  <af:panelStretchLayout id="pt_ps28"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.InventoryGroupSearchResultsFlow1.regionModel}"
+                                 id="r17"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End InventoryGroup popup -->
+              <!--Start  Product popup -->
+              <af:popup id="assignProductPopup"
+                        binding="#{backingBeanScope.ProductConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="productConfig" type="none"
+                           title="#{inventoryUIBundle.PRODUCT_SEARCH}">
+                  <af:panelStretchLayout id="pt_ps29"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.ProductSearchResultsFlow1.regionModel}"
+                                 id="r18"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End Product popup -->
+              <!--Start  LogicalDeviceAccount popup -->
+              <af:popup id="assignLogicalDeviceAccountPopup"
+                        binding="#{backingBeanScope.LogicalDeviceAccountConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="logicalDeviceAccountConfig" type="none"
+                           title="#{inventoryUIBundle.LOGICAL_DEVICE_ACCOUNT_SEARCH}">
+                  <af:panelStretchLayout id="pt_ps30"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.LogicalDeviceAccountSearchResultsFlow1.regionModel}"
+                                 id="r19"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End LogicalDeviceAccount popup -->
+              <!--Start  Pipe popup -->
+              <af:popup id="assignPipePopup"
+                        binding="#{backingBeanScope.PipeConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="pipeConfig" type="none"
+                           title="#{inventoryUIBundle.PIPE_SEARCH}">
+                  <af:panelStretchLayout id="pt_ps31"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.PipeSearchResultsFlow1.regionModel}"
+                                 id="r20"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End Pipe popup -->
+              <!--Start assign connectivity popup -->
+              <af:popup id="assignConnectivityPopup"
+                        binding="#{backingBeanScope.ConnectivityPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="assignConnectivity" type="none">
+                  <af:panelStretchLayout id="psl1"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.ConnectivitySearchFlow1.regionModel}"
+                                 id="r25"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+             <af:popup id="createServiceConnectivityPopup"
+                        binding="#{backingBeanScope.ServiceConnectivityPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="serviceConnCreate" type="none">
+                  <af:panelStretchLayout id="psl2"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.ConnectivityCreateFlow1.regionModel}"
+                                 id="r26"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End assign Connectivity popup -->       
+              <!--Start Flow Interface popup -->
+              <af:popup id="assignFlowInterfacePopup"
+                        binding="#{backingBeanScope.addFlowInterfaceBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <!-- @pskalaga_bug_19052830v1 removed from dialog [resize="on" ] to see if sized better -->
+                <af:dialog id="addFlowInterfaceDialog"                          
+                         stretchChildren="first"
+                         closeIconVisible="true"
+                         contentWidth="1000"
+                         contentHeight="550"
+                         type="none" 
+                         title="#{inventoryUIBundle.FLOW_INTERFACE_ASSOCIATE}">
+                  <af:panelStretchLayout id="pl_ps33"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.FlowInterfaceCreateFlow1.regionModel}"
+                                 id="rpl24"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              
+             <af:popup id="associateFlowIdentifierPopup"
+                      contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.associateFlowIdentifier}">
+              <!-- @pskalaga_bug_19052830v1 removed from dialog [resize="on" ] to see if sized better -->
+              <af:dialog id="assignFlowIdentifierDialog"                        
+                         closeIconVisible="true"
+                         type="none"
+                         stretchChildren="first"
+                         contentWidth="1000"
+                         contentHeight="600"
+                         title="#{inventoryUIBundle.FLOW_IDENTIFIER_ASSOCIATE}">
+                <af:panelStretchLayout id="psl3"
+                                       styleClass="invSummaryPanelStretchLayout">
+                    <f:facet name="center">
+                        <af:region value="#{bindings.FlowIdentifierSearchResultsFlow1.regionModel}"
+                               id="r30"/>
+                    </f:facet>
+                               
+                 </af:panelStretchLayout>
+
+              </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End Flow Interface popup -->   
+              <!--Start  Party popup -->
+              <af:popup id="assignPartyPopup"
+                        binding="#{backingBeanScope.PartyConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="partyConfig" type="none"
+                           title="#{inventoryUIBundle.PARTY_SEARCH}">
+                  <af:panelStretchLayout id="pt_ps32"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.PartySearchResultsFlow1.regionModel}"
+                                 id="r22"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End Party popup -->
+              <!--Start Property Location popup -->
+              <af:popup id="assignPropertyLocationPopup"
+                        binding="#{backingBeanScope.PropertyLocationConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="propLocConfig" type="none">
+                  <af:panelStretchLayout id="pl_ps32"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                      <af:region value="#{bindings.PropertyLocationSearchResultsFlow1.regionModel}"
+                                 id="rpl23"/>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End Property Location popup -->    
+              <!--Start  IPv4Address popup -->
+              <af:popup id="assignIPv4AddressPopup"
+                        binding="#{backingBeanScope.IPv4AddressConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="ipv4AddressConfig" type="none">
+                  <af:panelStretchLayout id="pt_ps34"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                          <af:region value="#{bindings.IPv4AddressSearchResultsFlow1.regionModel}"
+                                     id="r27"/>
+                        </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End IPv4Address popup -->
+  
+              <!--Start  IPv4Subnet popup -->
+              <af:popup id="assignIPv4SubnetPopup"
+                        binding="#{backingBeanScope.IPv4SubnetConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="ipv4SubnetConfig" type="none">
+                  <af:panelStretchLayout id="pt_ps35"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                          <af:region value="#{bindings.IPv4SubnetSearchResultsFlow1.regionModel}"
+                                     id="r28"/>
+                        </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End IPv4Subnet popup -->
+              
+              <!--Start  IPv6Subnet popup -->
+              <af:popup id="assignIPv6SubnetPopup"
+                        binding="#{backingBeanScope.IPv6SubnetConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="ipv6SubnetConfig" type="none">
+                  <af:panelStretchLayout id="pt_ps37"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                          <af:region value="#{bindings.IPv6SubnetSearchResultsFlow1.regionModel}"
+                                     id="r29"/>
+                        </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End IPv6Subnet popup -->            
+              <!--Start  IPv6Address popup -->
+              <af:popup id="assignIPv6AddressPopup"
+                        binding="#{backingBeanScope.IPv6AddressConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="ipv6AddressConfig" type="none">
+                  <af:panelStretchLayout id="pt_ps40"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                          <af:region value="#{bindings.IPv6AddressSearchResultsFlow1.regionModel}" id="r32"/>
+                        </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              <!-- End IPv6Address popup -->
+              
+              
+              <!--Start TDM Connectivity popup -->
+              <af:popup id="assignTDMConnectivityPopup"
+                        binding="#{backingBeanScope.TDMConnectivityConfigPopupBinding}"
+                        clientComponent="true" contentDelivery="lazyUncached">
+                <af:dialog id="tdmConnectivityConfig" type="none"
+                    title="#{inventoryUIBundle.CONNECTIVITY_SEARCH}">
+                  <af:panelStretchLayout id="pt_ps33"
+                                         styleClass="invConfigResourceStretchLayout">
+                    <f:facet name="center">
+                          <af:region value="#{bindings.TDMConnectivitySearchResultsFlow1.regionModel}"
+                                     id="r31"/>
+                        </f:facet>
+                  </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                
+<af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.ConfigurationTreeBean.refreshTree}"/>
+              </af:popup>
+              
+              <af:popup id="nofi" contentDelivery="lazyUncached" binding="#{backingBeanScope.nofi}">
+                <af:dialog title="#{inventoryUIBundle.NO_FI_COMPLETE_DESIGN}" type="yesNo"
+                        dialogListener="#{pageFlowScope.ConfigurationSummaryBean.completeDesignVersion}" id="dd4"/>
+              </af:popup>
+          
+              <!-- End TDM Connectivity popup -->
+                  <af:popup id="delsg" contentDelivery="lazyUncached" binding="#{backingBeanScope.associateBIToConfigVersions}">
+                    <af:dialog title="#{inventoryUIBundle.ASSOCIATE_BITOCONFIG_EFFDATE_MESSAGE}" type="yesNo"
+                               dialogListener="#{pageFlowScope.ConfigurationSummaryBean.associateBIToConfigConfirmation}" id="dd2"/>
+                  </af:popup>
+                </af:panelCollection>
+            </af:showDetailHeader>
+          <af:spacer width="10" height="10" id="cs10"/>
+          <af:region value="#{bindings.BusinessInteractionListFlow1.regionModel}"
+                     binding="#{backingBeanScope.BusinessInteractionListRegion}"
+                     rendered="#{pageFlowScope.ConfigurationSummaryBean.renderBIList}"
+                     id="r23"/>
+                     </af:panelGroupLayout>
+        </af:panelHeader>
+        
+        </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

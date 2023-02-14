@@ -1,0 +1,342 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" 
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html" 
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:jvf="http://www.ilog.com/jviews/tlds/jviews-framework-faces.tld"
+          xmlns:jvtf="http://www.ilog.com/jviews/tlds/jviews-tgo-faces.tld"
+          xmlns:jv="http://www.ilog.com/jviews/tlds/jviews-faces.tld"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"  id="pt1">
+    <f:facet name="localArea">
+        <af:panelGroupLayout layout="scroll" id="pgl1" binding="#{backingBeanScope.PJ_view_panelGroupLayout}">
+            <af:resource source="css/style.css" type="css"/>
+            <af:resource source="script/view.js" type="javascript"/>
+            <af:panelGroupLayout id="pgl23" layout="scroll">
+                <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left">
+                    <af:outputText id="otbi" styleClass="invCommonText" noWrap="true" rendered="#{!(PhysicalJumperViewBean.popupMode)}"
+                                   value="#{PhysicalJumperViewBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+                    <af:menuBar id="menuBar1">
+                          <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invSearchMenu"
+                                   rendered="#{!(PhysicalJumperViewBean.popupMode)}"   />
+                    </af:menuBar>
+                    <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionView2}" contentDelivery="lazyUncached">
+                        <af:dialog id="BISearchPopup_d1" type="none"
+                                   title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                            <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                                <f:facet name="center">
+                                        <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}"
+                                                   id="r3"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                        <af:serverListener type="refreshEntity" method="#{PhysicalJumperViewBean.afterBusinessInteractionSelectionChange}"/>
+                    </af:popup>
+                </af:panelGroupLayout>
+            </af:panelGroupLayout>
+            <af:panelHeader text="#{inventoryUIBundle.PHYSICAL_JUMPER} - #{PhysicalJumperViewBean.displayInfo}" id="panelHeader1" helpTopicId="OHW_pjSummary">     
+                <jvf:zoomInteractor id="zoom"/>
+                <jvf:panInteractor id="pan"/>
+                <jvtf:clientSelectInteractor id="select" menuModelId="selectItr" /> 
+                <af:commandButton id="updateADFComponents" binding="#{backingBeanScope.updateADFComponentBinding}" partialSubmit="true" visible="false" styleClass="invisibleComponent"
+                                  accessKey="#{inventoryUIBundle.UPDATE}"/>  
+                <af:panelGroupLayout id="pgl2">
+                            <af:panelGroupLayout id="pgl5" layout="horizontal" styleClass="visualToolbar">
+                                <!-- Declare a grid with six columns to accomodate the buttons -->
+                                <af:toolbar id="tb2">
+                                <af:group id="g1">
+                                         <!-- Declare the image buttons -->
+                                         <!-- Notice how 'onclick' tag attribute is used -->                                                                 
+                                         <af:commandToolbarButton id="ctb1" icon="/images/selectobject_ovr.png"
+                                                                     shortDesc="#{inventoryUIBundle.SELECT}"
+                                                                     hoverIcon="/images/selectobject_ovr.png"
+                                                                     depressedIcon="/images/selectobject_dwn.png">
+                                                <af:clientListener method="selectItem" type="click" />
+                                         </af:commandToolbarButton>                             
+                                         <af:commandToolbarButton id="ctb2" icon="/images/zoomtoselection_ena.png"
+                                                                     shortDesc="#{inventoryUIBundle.ZOOM}"
+                                                                     hoverIcon="/images/zoomtoselection_ovr.png"
+                                                                     depressedIcon="/images/zoomtoselection_dwn.png">
+                                                <af:clientListener method="zoomCanvas" type="click" />
+                                         </af:commandToolbarButton>                             
+                                         <af:commandToolbarButton id="ctb3" icon="/images/pan_ena.png"
+                                                                     shortDesc="#{inventoryUIBundle.PAN}"
+                                                                     hoverIcon="/images/pan_ovr.png"
+                                                                     depressedIcon="/images/pan_dwn.png" >
+                                                <af:clientListener method="panCanvas" type="click" />
+                                         </af:commandToolbarButton>  
+                                         <af:commandToolbarButton id="ctb4" icon="/images/zoombestfit_ena.png"
+                                                                     shortDesc="#{inventoryUIBundle.SHOW_ALL}"
+                                                                     hoverIcon="/images/zoombestfit_ovr.png"
+                                                                     depressedIcon="/images/zoombestfit_dwn.png">
+                                                <af:clientListener method="showAll" type="click" />
+                                         </af:commandToolbarButton>                                                                                                           
+                                    
+                                         <af:commandToolbarButton id="ctb5" icon="/images/zoomin_ena.png"
+                                                                     shortDesc="#{inventoryUIBundle.ZOOM_IN}"
+                                                                     hoverIcon="/images/zoomin_ovr.png"
+                                                                     depressedIcon="/images/zoomin_dwn.png">
+                                                <af:clientListener method="zoomIn" type="click" />
+                                         </af:commandToolbarButton>  
+                                         
+                                         <af:commandToolbarButton id="ctb6" icon="/images/zoomout_ena.png"
+                                                                     shortDesc="#{inventoryUIBundle.ZOOM_OUT}"
+                                                                     hoverIcon="/images/zoomout_ovr.png"
+                                                                     depressedIcon="/images/zoomout_dwn.png">
+                                                <af:clientListener method="zoomOut" type="click" />
+                                         </af:commandToolbarButton>   
+                                    </af:group>
+                                    <af:group id="g2">
+                                         <af:commandToolbarButton shortDesc="Select Ports" id="ctbg6" icon="/images/port.png" rendered="#{PhysicalJumperViewBean.displayPort}"
+                                                 binding="#{PhysicalJumperViewBean.addPortsButton}" actionListener="#{PhysicalJumperViewBean.addPortListener}"
+                                                 partialTriggers="pgl2 pgl5">
+                                              
+                                        </af:commandToolbarButton>
+                                            
+                                            <af:commandToolbarButton shortDesc="Select Device Interfaces" id="ctb9" icon="/images/interface_ena.png" rendered="#{!PhysicalJumperViewBean.displayPort}"
+                                            binding="#{PhysicalJumperViewBean.addDIButton}" actionListener="#{PhysicalJumperViewBean.addDIListener}"
+                                                             partialTriggers="pgl2 pgl5">
+                                            </af:commandToolbarButton>
+                                    
+                                    <af:commandToolbarButton id="ctb10" icon="/images/delete_ena.png"
+                                             shortDesc="#{inventoryUIBundle.DELETE_PHYSICAL_JUMPER}"
+                                             hoverIcon="/images/delete_ena.png"
+                                             depressedIcon="/images/delete_ena.png"
+                                             disabledIcon="/images/delete_dis.png"
+                                             rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=PhysicalJumperView.DELETE;action=view']}">
+                                        <af:clientListener method="deletePhysicalJumper" type="click" />    
+                                    </af:commandToolbarButton>  
+                                     
+                                     <af:commandToolbarButton id="ctb11" icon="/images/linkobject_ena.png"
+                                             shortDesc="#{inventoryUIBundle.CREATE_PHYSICAL_JUMPER}"
+                                             hoverIcon="/images/linkobject_ovr.png"
+                                             depressedIcon="/images/linkobject_ena.png"
+                                             disabledIcon="/images/linkobject_dis.png"
+                                             rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=PhysicalJumperView.CREATE_PHYSICALJUMPER;action=view']}">
+                                            <af:clientListener method="createPhysicalJumpers" type="click" />
+                                     </af:commandToolbarButton> 
+                                     </af:group>
+                                </af:toolbar>                     
+                            </af:panelGroupLayout>    
+                            
+                        <af:popup id="addPortPopup" contentDelivery="lazyUncached"
+                                      binding="#{backingBeanScope.addPortPopup}">
+                                      <!-- @pskalaga_bug_19052830v1 removed from dialog [resize="on" ] to see if sized better -->
+                                <af:dialog id="d1" type="none" >
+                                    <af:panelStretchLayout id="psl3" styleClass="invCommonPanelStretchLayout">
+                                        <f:facet name="center">
+                                        <af:region value="#{bindings.PhysicalPortSearchResultsFlow1.regionModel}"
+                                                   id="r1"/>
+                                    </f:facet>
+                                    </af:panelStretchLayout>
+                                </af:dialog>
+                                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                <af:serverListener type="refreshEntity"
+                                                   method="#{PhysicalJumperViewBean.refresh}"/>
+                                <af:clientListener method="clickCanavas" type="refreshEntity"/>
+                        </af:popup>
+                        <af:popup id="addDIPopup" contentDelivery="lazyUncached"
+                                      binding="#{backingBeanScope.addDIPopup}">
+                                     <!-- @pskalaga_bug_19052830v1 removed from dialog [resize="on" ] to see if sized better -->
+                                <af:dialog id="di1" type="none">
+                                    <af:panelStretchLayout id="psl4" styleClass="invCommonPanelStretchLayout">
+                                        <f:facet name="center">
+                                        <af:region value="#{bindings.DeviceInterfaceSearchResultsFlow1.regionModel}"
+                                                   id="r2"/>
+                                    </f:facet>
+                                    </af:panelStretchLayout>
+                                </af:dialog>
+                                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                <af:serverListener type="refreshEntity"
+                                                   method="#{PhysicalJumperViewBean.refresh}"/>
+                                <af:clientListener method="clickCanavas" type="refreshEntity"/>
+                        </af:popup>
+                        <af:panelGroupLayout id="pgl4" layout="horizontal" valign="top"
+                             halign="left">
+                        <af:panelGroupLayout  id="pgl6" binding="#{backingBeanScope.physicalJumperCanvasArea}">
+                            <!-- <af:serverListener type="jsCreatephysicalJumpersDetails" method="#{PhysicalJumperViewBean.createphysicalJumpersDetails}"/> -->
+                            <af:serverListener type="jsCreateDetails" method="#{PhysicalJumperViewBean.createDetails}"/>
+                            <af:serverListener type="jsCreateParentInfoDetails" method="#{PhysicalJumperViewBean.createParentInfoDetails}"/>                        
+                            <af:serverListener type="jsHandlePopup" method="#{PhysicalJumperViewBean.handlePopup}"/>
+                            <af:serverListener type="jsDisassociateEntity" method="#{PhysicalJumperViewBean.disassociateEntity}"/>
+                            <h:panelGrid border="0" columns="1" styleClass="psheet">
+                               <jvtf:networkView id="networkCanvas" 
+                                                 context="#{defContext}" width="900" height="525"
+                                                 interactorId="select" 
+                                                 binding="#{PhysicalJumperViewBean.physicalJumperView}" imageFormat="PNG"   
+                                                 servlet="oracle.communications.inventory.ui.framework.visualization.servlet.NetworkSyncImageServlet"                                             
+                                                 waitingImage="images/waiting.gif"
+                                                 scrollBar="need" onImageLoaded="expandImage"
+                                                 >
+                                     <jvtf:selectionManager id="selectionManager" imageMode="false" lineColor="black" lineWidth="2"
+                                                        propertyAccessor="#{NetworkInteractorBean.propertyAccessor}"
+                                                        onSelectionChanged="displaySelection(selection)" forceUpdateProperties="false"/> 
+                                  </jvtf:networkView>                           
+                            </h:panelGrid>        
+                        </af:panelGroupLayout>
+                        <!-- <trh:script id="vars" text='var physicalJumpersCanvasId = "#{PhysicalJumperViewBean.clientId}"; '/>  -->
+                        <af:spacer width="10" height="10" id="s2"/>
+                       <h:panelGrid border="1" columns="1" styleClass="psheet" id="pg1">
+                            <h:panelGrid columns="1" border="0" >
+                            <af:panelGroupLayout id="pgl3" layout="vertical">
+                                <h:panelGrid border="0" columns="2">
+                                  <h:graphicImage url="/images/attributegroup_ena.png"/>
+                                  <h:outputText value="#{inventoryUIBundle.DETAILS}" styleClass="psheet-cell-bold-no-border"/>
+                                </h:panelGrid>
+                                <h:panelGrid columns="2" border="0" frame="border" cellpadding="4" cellspacing="1" width="100%" 
+                                        columnClasses="psheet-cell" rowClasses="psheet-cell-bold" styleClass="tableStyle"
+                                        binding="#{PhysicalJumperViewBean.deviceDisplayInfoBinding}"/>                                    
+                                <h:panelGrid id="pg15" binding="#{PhysicalJumperViewBean.networkDetailsGrid}" border="0"
+                                         frame="border" cellpadding="4" cellspacing="1" width="100%"
+                                         columnClasses="psheet-cell" rowClasses="psheet-cell-bold"
+                                         styleClass="tableStyle"/>
+                                
+                            </af:panelGroupLayout>
+                            </h:panelGrid>
+                            <trh:script id="vars" text='var ntwkCanvasId = "#{PhysicalJumperViewBean.clientId}"; '/> 
+                            <trh:script id="sc1">
+                                  var p = "";
+                                  // called by the onSelectionChanged attribute on NetworkView.jsff file. It returns a map of attributes
+                                  //to a javascript variable. These attributes will be used to dynamically build the Details section
+                                  //in NonMapTopologyViewBean.
+                                  function displaySelection(selection) {
+                                    try {
+                                      if (selection.length == 1) {                              
+                                          p = selection[0].getObjectProperties();                                
+                                      }else if(selection.length == 0){
+                                          p = "NOTHING_IS_SELECTED";
+                                      }else if(selection.length > 1){
+                                          p = "MULTIPLE_OBJECTS_ARE_SELECTED";                                    
+                                      }                                                             
+                                      var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);                                     
+                                      AdfCustomEvent.queue(ntwkCanvas, "jsCreateDetails",{props : p},true);                                  
+                                      p = "";
+                                    }catch (e) {
+                                      alert("An error occurred when building property sheet." + e);
+                                    }
+                                  }
+                                  
+                                  
+                                  function handlePipeSearchPopup() {
+                                    p = "associateMultiPipePopup";
+                                    var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                                    AdfCustomEvent.queue(ntwkCanvas, "jsHandlePopup", 
+                                    {
+                                        props : p
+                                    }, true);
+                                }
+            
+                                function handleSearchPopup() {
+                                    p = "associateMultiConnectivityPopup";
+                                    var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);
+                                    AdfCustomEvent.queue(ntwkCanvas, "jsHandlePopup", 
+                                    {
+                                        props : p
+                                    }, true);
+                                }
+                                  function handlePopup(popupId){
+                                      p = popupId;                                               
+                                      var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);                                      
+                                      AdfCustomEvent.queue(ntwkCanvas, "jsHandlePopup", {props : p},true);                                                                            
+                                 }                                                                
+                                
+                                function handlePopupWithLocation(popupId,location){
+                                      p = popupId;
+                                      l = location;
+                                      var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);                                      
+                                      AdfCustomEvent.queue(ntwkCanvas, "jsHandlePopup",{props : p, nlc : l},true);                                                                            
+                                }
+                                function disassociateEntity(eOID, nOID){                            
+                                      var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);                                      
+                                      AdfCustomEvent.queue(ntwkCanvas, "jsDisassociateEntity",  {entityOID : eOID, netNodeOID : nOID},true);
+                                }
+                                  
+                                  function showNetworkViewPage(networkViewFullPageId) {
+                                      showPage(networkViewFullPageId);
+                                      p = popupId;
+                                      var ntwkCanvas = AdfPage.PAGE.findComponentByAbsoluteId(ntwkCanvasId);                                      
+                                      AdfCustomEvent.queue(ntwkCanvas, "jsCreateDetails",{props : p},true);   
+                                  }
+                                                                   function expandImage(){
+                                     networkCanvas.performAction('editAction',['PhysicalJumperViewBean.expandView'], true);
+                                     clickInvisibleButton(updateADFComponentsId);
+                                     showAll();
+                                  }
+                            </trh:script>
+                             <trh:script id="vars2" text='var updateADFComponentsId = "#{PhysicalJumperViewBean.updateADFComponentId}"; '/> 
+                              <trh:script id="saveAsImage" text='var saveAsImageButtonId = "#{PhysicalJumperViewBean.saveAsImageButtonId}"; '/>
+                              <trh:script id="saveFullImage" text='var saveFullImageButtonId = "#{PhysicalJumperViewBean.saveFullImageButtonId}"; '/>
+                             <trh:script id="script2">
+                                    function addNode(){
+                                        networkCanvas.performAction('editAction',['NetworkVisualizationAdapter.addNode'], true);
+                                        clickInvisibleButton(updateADFComponentsId);
+                                    }  
+                                    function addLink(){
+                                        networkCanvas.performAction('editAction',['NetworkVisualizationAdapter.addLink'], true);
+                                        clickInvisibleButton(updateADFComponentsId);
+                                    }  
+                                    function deleteObject(){
+                                        networkCanvas.performAction('editAction',['NetworkVisualizationAdapter.deleteObject'], true);
+                                        clickInvisibleButton(updateADFComponentsId);
+                                    }  
+                                    function saveNodePositions(){
+                                        networkCanvas.performAction('editAction',['NetworkVisualizationAdapter.saveNodePositions'], true);
+                                        clickInvisibleButton(updateADFComponentsId);
+                                    }
+                                    function performLabelLayout(){
+                                        networkCanvas.performAction('editAction',['NetworkVisualizationAdapter.performLabelLayout'], true);
+                                        clickInvisibleButton(updateADFComponentsId);
+                                    }
+                                    function performTopologicalMeshLayout(){
+                                        networkCanvas.performAction('editAction',['NetworkVisualizationAdapter.doTopologicalMeshLayout'], true);
+                                        clickInvisibleButton(updateADFComponentsId);
+                                    }
+                                    function saveAsImage(){
+                                        clickInvisibleButton(saveAsImageButtonId);  
+                                    }   
+                                    function saveFullImage(){
+                                        clickInvisibleButton(saveFullImageButtonId);  
+                                    }
+                                    function deletePhysicalJumper(){
+                                            networkCanvas.performAction('editAction',['PhysicalJumperViewBean.deletePhysicalJumper'], true);
+                                            clickInvisibleButton(updateADFComponentsId);
+                                    }
+                                      
+                                    function createPhysicalJumpers(){
+                                            networkCanvas.performAction('editAction',['PhysicalJumperViewBean.createPhysicalJumpers'], true);
+                                            clickInvisibleButton(updateADFComponentsId);
+                                     }
+                                     function zoomCanvas(){
+                                        networkCanvas.setInteractor(zoom);
+                                      }
+                                      function panCanvas(){
+                                            networkCanvas.setInteractor(pan);
+                                      }
+                                      function showAll(){
+                                            networkCanvas.showAll(true);
+                                      }
+                                      function zoomIn(){
+                                            networkCanvas.zoomIn(true);
+                                      }
+                                      function zoomOut(){
+                                            networkCanvas.zoomOut(true);
+                                      } 
+                                      function selectItem(){
+                                            networkCanvas.setInteractor(select);
+                                      }
+                                      function clickCanavas(){
+                                            clickInvisibleButton(updateADFComponentsId);
+                                    }
+                               </trh:script>
+                          
+                       </h:panelGrid> 
+                       </af:panelGroupLayout>
+                </af:panelGroupLayout>
+            </af:panelHeader>
+        </af:panelGroupLayout>
+    </f:facet>
+</af:pageTemplate>
+</jsp:root>

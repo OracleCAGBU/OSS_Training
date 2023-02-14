@@ -1,0 +1,365 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2016, Oracle and/or its affiliates.
+All rights reserved.*/
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          /*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    pvusuvan    06/10/16 - Created
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core">
+    <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+    <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1" value="#{bindings.pageTemplateBinding}">
+        <f:facet name="localArea">
+            <af:panelStretchLayout id="psl1" topHeight="#{pageFlowScope.VNFSummaryBean.topHeight}" binding="#{backingBeanScope.VNF_summary_panelGroupLayout}">
+                <f:facet name="center">
+                    <af:panelHeader text="#{inventoryUIBundle.VNF_SUMMARY} - #{pageFlowScope.VNFSummaryBean.displayInfo}" id="ph1"
+                                    styleClass="invSummaryPanelHeader" helpTopicId="OHW_vnfDetailsPage">
+                        <f:facet name="menuBar">
+                            <af:group id="g1">
+                                <af:menuBar id="mb1">
+                                    <af:menu id="m1" styleClass="invSummaryMenu" binding="#{pageFlowScope.VNFSummaryBean.actionsMenu}">
+                                        <af:clientListener type="propertyChange" method="goRefreshEntity"/>
+                                        <af:serverListener type="refreshEntity" method="#{pageFlowScope.VNFSummaryBean.refresh}"/>
+                                    </af:menu>
+                                </af:menuBar>
+                            </af:group>
+                        </f:facet>
+                        <!-- VNF Information -->
+                        <af:panelGroupLayout id="pgl1" layout="scroll" binding="#{backingBeanScope.vnfSummPanel}">
+                            <af:messages id="m2" inline="true"/>
+                            <af:showDetailHeader text="#{inventoryUIBundle.VNF_INFORMATION}" disclosed="true" id="sdh1">
+                                <f:facet name="toolbar">
+                                    <af:group id="g2">
+                                        <af:button text="#{inventoryUIBundle.SAVE}" id="b2" accessKey="#{inventoryUIBundle.SAVE_ACCESS_KEY}"
+                                                   actionListener="#{pageFlowScope.VNFSummaryBean.save}" binding="#{backingBeanScope.saveButtonBinding}"
+                                                   disabled="#{!pageFlowScope.VNFSummaryBean.disableEditButton}" action="init">
+                                            <af:setActionListener from="viewing" to="#{pageFlowScope.saveActionOutcome}"/>
+                                        </af:button>
+                                        <af:spacer width="10" height="10" id="s6"/>
+                                        <af:button text="#{inventoryUIBundle.EDIT}" id="b1" actionListener="#{pageFlowScope.VNFSummaryBean.edit}"
+                                                   disabled="#{pageFlowScope.VNFSummaryBean.disableEditButton}"
+                                                   accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                                            <af:setActionListener from="#{pageFlowScope.VNFSummaryBean.entityObject.oid}" to="#{objectId}"/>
+                                        </af:button>
+                                    </af:group>
+                                </f:facet>
+                                <af:poll pollListener="#{pageFlowScope.VNFSummaryBean.pollerListener}" rendered="#{pageFlowScope.VNFSummaryBean.pollEnabled}"
+                                         binding="#{pageFlowScope.VNFSummaryBean.pollComponent}" interval="#{pageFlowScope.VNFSummaryBean.pollerInterval}"
+                                         id="poll1"/>
+                                <af:panelFormLayout id="pfl1" maxColumns="2" rows="2" fieldWidth="67%" labelWidth="33%">
+                                    <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTOR}" id="plam1">
+                                        <af:link text="#{pageFlowScope.VNFSummaryBean.entityObject.specification.name}" id="l1" action="DescriptorSummary"
+                                                 shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}"
+                                                 actionListener="#{bindings.openSubTaskForSpec.execute}">
+                                            <af:setActionListener from="#{pageFlowScope.VNFSummaryBean.entityObject.specification.oid}" to="#{specObjectId}"/>
+                                        </af:link>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}" id="plam2">
+                                        <af:outputText value="#{pageFlowScope.VNFSummaryBean.entityObject.id}" id="ot1"/>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="plam3">
+                                        <af:outputText value="#{pageFlowScope.VNFSummaryBean.entityObject.name}" id="ot2"/>
+                                    </af:panelLabelAndMessage>
+                                    <!--af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}" id="plam4" styleClass="invSummaryPanelLabelAndMessage">
+                                        <af:outputText value="#{pageFlowScope.VNFSummaryBean.entityObject.description}" id="ot3"/>
+                                    </af:panelLabelAndMessage-->
+                                    <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="plam5">
+                                        <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                            <af:spacer width="7" id="s8"/>
+                                            <af:outputText value="#{pageFlowScope.VNFSummaryBean.resourceAssignmentStatus}" id="ot4"
+                                                           binding="#{backingBeanScope.statusBinding}"/>
+                                            <af:spacer width="10" id="s9"/>
+                                            <af:progressIndicator id="si2" binding="#{backingBeanScope.runningIndicator}"
+                                                                  value="#{pageFlowScope.VNFSummaryBean.runningModel}"
+                                                                  rendered="#{pageFlowScope.VNFSummaryBean.displayRunningModel}"/>
+                                            <af:progressIndicator id="si3" binding="#{backingBeanScope.finishedIndicator}"
+                                                                  value="#{pageFlowScope.VNFSummaryBean.finishedModel}"
+                                                                  rendered="#{pageFlowScope.VNFSummaryBean.displayFinishedModel &amp;&amp; !pageFlowScope.VNFSummaryBean.displayRunningModel}"/>
+                                        </af:panelGroupLayout>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{inventoryUIBundle.NETWORK_SERVICE}" id="plam6">
+                                        <af:link text="#{pageFlowScope.VNFSummaryBean.nsDisplayInfo}" id="l2" action="NetworkServiceSummary"
+                                                 actionListener="#{bindings.openSubTaskForNSSummary.execute}"
+                                                 shortDesc="#{pageFlowScope.VNFSummaryBean.nsDisplayInfo eq null ? '&amp;#160;' : inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                            <af:setActionListener from="#{pageFlowScope.VNFSummaryBean.nsOid}" to="#{objectId}"/>
+                                            <af:setActionListener from="#{pageFlowScope.VNFSummaryBean.nsDisplayInfo}" to="#{displayInfo}"/>
+                                        </af:link>
+                                    </af:panelLabelAndMessage>
+                                </af:panelFormLayout>
+                                <!-- This panelFormLayout used to render the characteristics for VNF -->
+                                <af:panelFormLayout id="vnfCharView" binding="#{backingBeanScope.vnfuiHintsViewPanel}" fieldWidth="67%" labelWidth="33%"
+                                                    maxColumns="2" rows="2" rendered="#{pageFlowScope.VNFSummaryBean.viewPanel}">
+                                    <af:iterator id="it1" value="#{pageFlowScope.VNFSummaryBean.characteristics}" var="characteristicDetails">
+                                        <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="plam7"
+                                                                 rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'ALPHANUMERIC' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'CALENDAR' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'DROPDOWN_LIST' || characteristicDetails.characteristic.characteristicSpecification.valueType == 'NUMERIC'}">
+                                            <af:outputText id="ot5"
+                                                           value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                                        </af:panelLabelAndMessage>
+                                        <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="plam8"
+                                                                 rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'URL'}">
+                                            <af:link id="l3" targetFrame="_blank"
+                                                     destination="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                                     inlineStyle="padding-left:6px;">
+                                                <af:outputText id="ot6" truncateAt="50"
+                                                               value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                                            </af:link>
+                                        </af:panelLabelAndMessage>
+                                        <af:panelLabelAndMessage label="" id="plam9"
+                                                                 rendered="#{characteristicDetails.characteristic.characteristicSpecification.controlType == 'CHECKBOX'}">
+                                            <af:selectBooleanCheckbox id="sbc1" readOnly="true"
+                                                                      value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                                                      text="#{characteristicDetails.label}" simple="true"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:iterator>
+                                </af:panelFormLayout>
+                                <af:panelFormLayout id="vnfCharEdit" binding="#{backingBeanScope.uiHintsEditPanel}" fieldWidth="67%" labelWidth="33%"
+                                                    maxColumns="2" rows="2" rendered="#{pageFlowScope.VNFSummaryBean.editPanel}">
+                                    <!-- This is used to render the non-editable characteristics for VNF -->
+                                    <af:iterator id="it2" value="#{pageFlowScope.VNFSummaryBean.nonEditableCharsList}" var="characteristicDetails">
+                                        <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="plam10"
+                                                                 rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'ALPHANUMERIC' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'CALENDAR' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'DROPDOWN_LIST' || characteristicDetails.characteristic.characteristicSpecification.valueType == 'NUMERIC'}">
+                                            <af:outputText id="ot7"
+                                                           value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                                        </af:panelLabelAndMessage>
+                                        <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="plam11"
+                                                                 rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'URL'}">
+                                            <af:link id="l4" targetFrame="_blank"
+                                                     destination="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                                     inlineStyle="padding-left:6px;">
+                                                <af:outputText id="ot8" truncateAt="50"
+                                                               value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                                            </af:link>
+                                        </af:panelLabelAndMessage>
+                                        <af:panelLabelAndMessage label="" id="plam12"
+                                                                 rendered="#{characteristicDetails.characteristic.characteristicSpecification.controlType == 'CHECKBOX'}">
+                                            <af:selectBooleanCheckbox id="sbc2" readOnly="true"
+                                                                      value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                                                      text="#{characteristicDetails.label}" simple="true"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:iterator>
+                                    <!-- This is used to render the editable characteristics for VNF -->
+                                    <af:iterator id="it3" value="#{pageFlowScope.VNFSummaryBean.editableCharsList}" var="characteristicDetails">
+                                        <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="plam13" rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'ALPHANUMERIC' ||
+                                                    characteristicDetails.characteristic.characteristicSpecification.controlType == 'CALENDAR' ||
+                                                    characteristicDetails.characteristic.characteristicSpecification.controlType == 'DROPDOWN_LIST' ||
+                                                    characteristicDetails.characteristic.characteristicSpecification.valueType == 'NUMERIC' ||
+                                                    characteristicDetails.characteristic.characteristicSpecification.valueType == 'URL'}">
+                                            <!--<af:outputText id="ot9" value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>-->
+                                            <af:inputText id="i1"
+                                                          value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                                          autoSubmit="true"/>
+                                        </af:panelLabelAndMessage>
+                                        <!--
+                                    <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="plam14" rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'URL'}">
+                                        <af:link id="l5" targetFrame="_blank" destination="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}" inlineStyle="padding-left:6px;">
+                                            <af:outputText id="ot10" truncateAt="50" value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                                        </af:link>
+                                    </af:panelLabelAndMessage>
+                                    -->
+                                        <af:panelLabelAndMessage label="" id="plam15"
+                                                                 rendered="#{characteristicDetails.characteristic.characteristicSpecification.controlType == 'CHECKBOX'}">
+                                            <af:selectBooleanCheckbox id="sbc3"
+                                                                      value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                                                      text="#{characteristicDetails.label}" simple="true" autoSubmit="true"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:iterator>
+                                </af:panelFormLayout>
+                            </af:showDetailHeader>
+                            <af:spacer width="10" height="10" id="s1"/>
+                            <!-- Configurations -->
+                            <af:panelTabbed id="pt2" styleClass="AFStretchWidth" dimensionsFrom="auto" binding="#{backingBeanScope.panelTab}">
+                                <af:showDetailItem id="vnfsconfig" text="#{inventoryUIBundle.CONFIGURATION}" disclosed="true">
+                                    <af:panelStretchLayout id="psl2" styleClass="AFStretchWidth">
+                                        <f:facet name="center">
+                                            <af:region value="#{bindings.VNFServiceConfigSummaryFlow1.regionModel}" id="r1"
+                                                       binding="#{pageFlowScope.VNFSummaryBean.configRegion}"/>
+                                        </f:facet>
+                                    </af:panelStretchLayout>
+                                </af:showDetailItem>
+                                <af:showDetailItem id="sdv2" text="#{inventoryUIBundle.VIRTUAL_DESCRIPTOR_UNIT}"
+                                                   disclosureListener="#{pageFlowScope.VNFSummaryBean.discloseVDU}">
+                                    <af:panelStretchLayout id="psl3" styleClass="AFStretchWidth">
+                                        <f:facet name="center">
+                                            <af:region value="#{bindings.VDUListFlow1.regionModel}" id="r2"/>
+                                        </f:facet>
+                                    </af:panelStretchLayout>
+                                </af:showDetailItem>
+                                <af:iterator id="it4" value="#{pageFlowScope.VNFSummaryBean.characteristics}" var="charDetails">
+                                    <af:showDetailItem id="sdi101" text="#{charDetails.label}" binding="#{backingBeanScope.dynamicTab}"
+                                                       styleClass="AFStretchWidth" disclosureListener="#{pageFlowScope.VNFSummaryBean.discloseExternalURL}"
+                                                       stretchChildren="first" inlineStyle="height:600px;"
+                                                       rendered="#{(charDetails.characteristic.characteristicSpecification.valueType == 'URL' || charDetails.characteristic.characteristicSpecification.isEntityReference) &amp;&amp; (charDetails.characteristic.value ne null)}">
+                                        <af:panelStretchLayout id="psle2" dimensionsFrom="auto" styleClass="AFStretchWidth">
+                                            <f:facet name="center">
+                                                <af:inlineFrame source="#{charDetails.characteristic.value}" styleClass="AFStretchWidth"
+                                                                inlineStyle="height:600px;"/>
+                                            </f:facet>
+                                        </af:panelStretchLayout>
+                                    </af:showDetailItem>
+                                </af:iterator>
+                            </af:panelTabbed>
+                            <af:spacer width="10" height="10" id="s2"/>
+                            <!-- Device View -->
+                            <af:showDetailHeader text="#{inventoryUIBundle.DEVICE_VIEW}" disclosed="true" id="sdh2" styleClass="invSummaryShowDetailHeader">
+                                <af:panelCollection id="pc1" styleClass="invSummaryPanelCollection">
+                                    <af:treeTable rowBandingInterval="0" id="vnfCPTreeTable" value="#{pageFlowScope.LogicalDeviceTreeBean.treeModel}" var="node"
+                                                  rowSelection="single" styleClass="invSummaryTree" fetchSize="#{pageFlowScope.LogicalDeviceTreeBean.fetchSize}"
+                                                  contentDelivery="immediate" selectionListener="#{pageFlowScope.LogicalDeviceTreeBean.nodeSelectedEvent}"
+                                                  binding="#{backingBeanScope.LD_treeBinding}"
+                                                  rowDisclosureListener="#{pageFlowScope.LogicalDeviceTreeBean.rowDisclosureListener}"
+                                                  disclosedRowKeys="#{pageFlowScope.LogicalDeviceTreeBean.treeDisclosedRowKeys}"
+                                                  expandAllEnabled="#{pageFlowScope.LogicalDeviceTreeBean.expandAllEnabled}" horizontalGridVisible="false"
+                                                  summary="#{inventoryUIBundle.DEVICE_VIEW}">
+                                        <f:facet name="nodeStamp">
+                                            <af:column sortable="false" headerText="#{inventoryUIBundle.VNF}" id="c1" width="500" rowHeader="unstyled"
+                                                       inlineStyle="#{node.data.backGroundColor}">
+                                                <af:panelGroupLayout id="pgl2">
+                                                    <af:image source="#{node.data.icon}" id="nodeIcon" shortDesc="icon" styleClass="invSummaryImage"/>
+                                                    <af:switcher id="idSwitcher" defaultFacet="false"
+                                                                 facetName="#{pageFlowScope.LogicalDeviceTreeBean.disableNodeLink}">
+                                                        <f:facet name="false">
+                                                            <af:link text="#{node.data.label}" id="l6" action="#{pageFlowScope.LogicalDeviceTreeBean.view}"
+                                                                     actionListener="#{pageFlowScope.LogicalDeviceTreeBean.registerRecentItem}"
+                                                                     shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}"/>
+                                                        </f:facet>
+                                                        <f:facet name="true">
+                                                            <af:outputText value="#{node.data.label}" id="ot11"
+                                                                           inlineStyle="#{node.data.inlineTextStyleColor}"/>
+                                                        </f:facet>
+                                                    </af:switcher>
+                                                </af:panelGroupLayout>
+                                            </af:column>
+                                        </f:facet>
+                                        <af:column sortable="false" headerText="#{inventoryUIBundle.SPECIFICATION}" id="c2"
+                                                   inlineStyle="#{node.data.backGroundColor}">
+                                            <af:switcher id="s7" defaultFacet="true" facetName="#{pageFlowScope.LogicalDeviceTreeBean.disableNodeLink}">
+                                                <f:facet name="true">
+                                                    <af:link text="#{node.data.specName}" id="l7" action="DescriptorSummary"
+                                                             actionListener="#{pageFlowScope.LogicalDeviceTreeBean.registerTreeSpec}"
+                                                             shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+                                                        <af:setActionListener from="#{node.data.object.specification.oid}" to="#{specObjectId}"/>
+                                                    </af:link>
+                                                </f:facet>
+                                                <f:facet name="false">
+                                                    <af:outputText value="#{node.data.specName}" id="ot12" inlineStyle="#{node.data.inlineTextStyleColor}"/>
+                                                </f:facet>
+                                            </af:switcher>
+                                        </af:column>
+                                        <af:column sortable="false" headerText="#{inventoryUIBundle.INVENTORY_STATUS}" id="c3"
+                                                   inlineStyle="#{node.data.backGroundColor}">
+                                            <af:outputText value="#{node.data.invStatus}" id="ot13" inlineStyle="#{node.data.inlineTextStyleColor}"/>
+                                            <af:outputText value="#{pageFlowScope.LogicalDeviceTreeBean.inventoryStatusBIDueDate}" id="ot14"/>
+                                            <af:switcher id="s3" defaultFacet="false" facetName="#{pageFlowScope.VNFSummaryBean.popupMode}">
+                                                <f:facet name="false">
+                                                    <af:link text="#{pageFlowScope.LogicalDeviceTreeBean.inventoryStatusBILabel}" id="l8"
+                                                             action="#{pageFlowScope.LogicalDeviceTreeBean.getPendingBiSummaryAction}"
+                                                             actionListener="#{pageFlowScope.LogicalDeviceTreeBean.registerPendingBiRecentItem}"
+                                                             shortDesc="#{pageFlowScope.LogicalDeviceTreeBean.installingBIShortDesc}"
+                                                             disabled="#{pageFlowScope.LogicalDeviceTreeBean.installingBIDisabled}">
+                                                        <af:setActionListener from="#{pageFlowScope.LogicalDeviceTreeBean.invStatusBI.oid}" to="#{objectId}"/>
+                                                    </af:link>
+                                                </f:facet>
+                                                <f:facet name="true">
+                                                    <af:outputText value="#{pageFlowScope.LogicalDeviceTreeBean.inventoryStatusBILabel}" id="ot15"
+                                                                   inlineStyle="#{node.data.inlineTextStyleColor}"/>
+                                                </f:facet>
+                                            </af:switcher>
+                                        </af:column>
+                                        <af:column sortable="false" headerText="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="c4"
+                                                   inlineStyle="#{node.data.backGroundColor}">
+                                            <af:outputText value="#{node.data.raStatus}" id="ot16" inlineStyle="#{node.data.inlineTextStyleColor}"/>
+                                            <af:outputText value="#{pageFlowScope.LogicalDeviceTreeBean.assignmentStatusBIDueDate}" id="ot17"/>
+                                            <af:switcher id="s4" defaultFacet="false" facetName="#{pageFlowScope.VNFSummaryBean.popupMode}">
+                                                <f:facet name="false">
+                                                    <af:link text="#{pageFlowScope.LogicalDeviceTreeBean.assignmentStatusBILabel}" id="l9"
+                                                             action="#{pageFlowScope.LogicalDeviceTreeBean.getPendingBiSummaryAction}"
+                                                             actionListener="#{pageFlowScope.LogicalDeviceTreeBean.registerPendingBiRecentItem}"
+                                                             shortDesc="#{pageFlowScope.LogicalDeviceTreeBean.consumerBIShortDesc}"
+                                                             disabled="#{pageFlowScope.LogicalDeviceTreeBean.consumerBIDisabled}">
+                                                        <af:setActionListener from="#{pageFlowScope.LogicalDeviceTreeBean.asnStatusBI.oid}" to="#{objectId}"/>
+                                                    </af:link>
+                                                </f:facet>
+                                                <f:facet name="true">
+                                                    <af:outputText value="#{pageFlowScope.LogicalDeviceTreeBean.assignmentStatusBILabel}" id="ot18"
+                                                                   inlineStyle="#{node.data.inlineTextStyleColor}"/>
+                                                </f:facet>
+                                            </af:switcher>
+                                        </af:column>
+                                        <af:column sortable="false" headerText="#{inventoryUIBundle.IP_ADDRESS}" id="c5"
+                                                   inlineStyle="#{node.data.backGroundColor}">
+                                            <af:switcher id="s5" defaultFacet="false" facetName="#{node.data.ipAddressSwitcher}">
+                                                <f:facet name="false">
+                                                    <af:iterator id="it5" value="#{node.data.ipAddressList}" var="ipresource">
+                                                        <af:link id="l10" actionListener="#{pageFlowScope.LogicalDeviceTreeBean.viewIPAddress}"
+                                                                 action="#{pageFlowScope.LogicalDeviceTreeBean.getIpResourceAction}"
+                                                                 shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                                            <af:outputText value="#{node.data.ipAddressLabel}" id="ot19"
+                                                                           inlineStyle="#{node.data.inlineTextStyleColor}"/>
+                                                            <f:param name="resourceOid" value="#{ipresource.oid}" id="p1"/>
+                                                            <f:param name="displayInfo" value="#{ipresource.displayInfo}" id="p2"/>
+                                                        </af:link>
+                                                        <br/>
+                                                    </af:iterator>
+                                                </f:facet>
+                                                <f:facet name="true">
+                                                    <af:link id="l11" shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}"
+                                                             action="#{pageFlowScope.LogicalDeviceTreeBean.view}"
+                                                             actionListener="#{pageFlowScope.LogicalDeviceTreeBean.registerRecentItem}">
+                                                        <af:outputText value="#{node.data.ipAddressLabel}" id="ot20"
+                                                                       inlineStyle="#{node.data.inlineTextStyleColor}"/>
+                                                    </af:link>
+                                                </f:facet>
+                                            </af:switcher>
+                                        </af:column>
+                                    </af:treeTable>
+                                </af:panelCollection>
+                            </af:showDetailHeader>
+                            <!-- -->
+                            <af:popup id="p3" binding="#{backingBeanScope.versionUpgradeBinding}" contentDelivery="lazyUncached">
+                                <af:dialog id="d2" title="#{inventoryUIBundle.UPGRADE_VNF_VERSION}" type="okCancel"
+                                           affirmativeTextAndAccessKey="&amp;#{inventoryUIBundle.UPGRADE}"
+                                           cancelTextAndAccessKey="&amp;#{inventoryUIBundle.CANCEL}"
+                                           dialogListener="#{pageFlowScope.VNFSummaryBean.upgradeVNF}">
+                                    <af:panelGroupLayout id="pgl4">
+                                        <af:panelFormLayout id="pfl2" maxColumns="1" rows="2" labelWidth="33%" fieldWidth="67%">
+                                            <af:selectOneChoice id="soc1" label="#{inventoryUIBundle.VERSION}"
+                                                                value="#{pageFlowScope.VNFSummaryBean.selectedVnfVersion}" autoSubmit="true" required="true">
+                                                <f:selectItems id="si1" binding="#{pageFlowScope.VNFSummaryBean.vnfVersions}"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText label="#{inventoryUIBundle.IMAGE}" id="i2" binding="#{backingBeanScope.imageBinding}"
+                                                          disabled="true"/>
+                                        </af:panelFormLayout>
+                                    </af:panelGroupLayout>
+                                </af:dialog>
+                                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                <af:serverListener type="refreshEntity" method="#{pageFlowScope.VNFSummaryBean.refreshPopup}"/>
+                            </af:popup>
+                        </af:panelGroupLayout>
+                        <af:resource type="javascript">
+                                          <!-- The below javascript code is defined to Block the user operations while Save operation is in progress. -->
+              function queueEvent(event) {
+                   event.cancel(); // cancel action event
+                   var source = event.getSource();
+                   var params = {};
+                   var type = "customListener";
+                   var immediate = true;
+                   var isPartial = true;
+                   var customEvent =  new AdfCustomEvent(source, type, params, immediate);
+                   customEvent.preventUserInput();
+                   customEvent.queue(isPartial);
+              }
+                        </af:resource>
+                    </af:panelHeader>
+                </f:facet>
+            </af:panelStretchLayout>
+        </f:facet>
+    </af:pageTemplate>
+</jsp:root>

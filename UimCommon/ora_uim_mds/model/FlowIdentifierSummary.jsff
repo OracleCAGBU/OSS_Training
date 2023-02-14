@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2015, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    4/08/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:cui="/CommsUI">
+		   
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+        <af:panelStretchLayout id="pgl11" binding="#{backingBeanScope.FI_summary_panelGroupLayout}" topHeight="#{pageFlowScope.FlowIdentifierSummaryBean.topHeight}">
+          <!--TITLE & MENUS-->
+         <f:facet name="top">
+            <af:panelGroupLayout id="pgsl23" layout="scroll">
+                <cui:WarningDialog id="wd1" binding="#{backingBeanScope.warningDialog}"/>
+                <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered="#{!pageFlowScope.FlowIdentifierSummaryBean.previewLayout}">
+                    <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                               value="#{pageFlowScope.FlowIdentifierSummaryBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+                    <af:menuBar id="menuBar1">
+                        <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invSummaryMenu"
+                               rendered="#{!(pageFlowScope.FlowIdentifierSummaryBean.popupMode)}"   />
+                    </af:menuBar>
+                    <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch2}" contentDelivery="lazyUncached">
+                        <af:dialog id="BISearchPopup_d1" type="none"
+                               title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                            <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                                <f:facet name="center">
+                                    <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                        <af:serverListener type="refreshEntity" method="#{pageFlowScope.FlowIdentifierSummaryBean.afterBusinessInteractionSelectionChange}"/>
+                    </af:popup>
+                </af:panelGroupLayout>  
+            </af:panelGroupLayout>
+          </f:facet>
+          <f:facet name="center">
+          <af:panelHeader text="#{inventoryUIBundle.FLOWIDENTIFIER_SUMMARY} - #{pageFlowScope.FlowIdentifierSummaryBean.displayInfo}"
+                                  id="sdh1" styleClass="invSummaryPanelHeader" helpTopicId="OHW_flow_idSummary">
+                <f:facet name="context"/>
+                <f:facet name="menuBar">
+                  <af:group id="g2" rendered="#{!pageFlowScope.FlowIdenitiferSummaryBean.previewLayout}">
+                    <af:menuBar id="menuBar2">
+                      <af:menu id="menu5" binding="#{backingBeanScope.InventoryMenuBean.relatedPagesMenu}" styleClass="invSummaryMenu"/>
+                      <af:menu id="menu6" binding="#{backingBeanScope.InventoryMenuBean.actionsMenu}" styleClass="invSummaryMenu"/>
+                    </af:menuBar>
+                  </af:group>
+                </f:facet>
+            <af:panelGroupLayout layout="scroll" id="pgl23">
+            <af:showDetailHeader text="#{inventoryUIBundle.FLOWIDENTIFIER_INFORM}" disclosed="true" id="sdh2">
+              <f:facet name="context"/>
+              <f:facet name="menuBar"/>
+              <f:facet name="toolbar">
+                  <af:commandButton text="#{inventoryUIBundle.EDIT}" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/flowidentifier/flow/FlowIdentifierEditFlow.xml#FlowIdentifierEditFlow']}"
+                                    action="edit" id="cb1" actionListener="#{bindings.openSubTaskForEdit.execute}"
+                                    rendered="#{!pageFlowScope.FlowIdentifierSummaryBean.previewLayout &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=FlowIdentifier.EDIT;action=view']}"
+                                    accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                    <af:setActionListener from="false" to="#{addMode}"/>
+                  </af:commandButton>
+              </f:facet>
+              <f:facet name="legend"/>
+              <f:facet name="info"/>
+              <af:panelFormLayout id="flowiden" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}" id="flowiden-id">
+                      <af:outputText value="#{pageFlowScope.FlowIdentifierSummaryBean.entityObject.id}" id="ot1"/>
+                    </af:panelLabelAndMessage>
+
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}" id="flowiden-specification">
+                      <af:commandImageLink action="SpecificationSummary" id="clSpec" actionListener="#{bindings.openSubTaskForSpec.execute}"
+                                           text="#{pageFlowScope.FlowIdentifierSummaryBean.entityObject.specification.name}"
+                                           shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+                            
+                            <af:setActionListener from="#{pageFlowScope.FlowIdentifierSummaryBean.entityObject.specification.oid}" to="#{specObjectId}"/>
+                      </af:commandImageLink>
+                    </af:panelLabelAndMessage>
+                    
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.DOMAIN}" id="flowiden-domain">
+                                            
+                      <af:commandImageLink action="NetworkAddressDomainSummary" id="nadSummary" 
+                              actionListener="#{bindings.openSubTaskForNADSummary.execute}"
+                              text="#{pageFlowScope.FlowIdentifierSummaryBean.domainName}"
+                              shortDesc="#{inventoryUIBundle.LINK_FOR_DOMAIN_SUMMARY}">
+                       <af:setActionListener from="#{pageFlowScope.FlowIdentifierSummaryBean.entityObject.domain.oid}" to="#{requestScope.oid}"/>
+                      </af:commandImageLink>                   
+                     </af:panelLabelAndMessage>
+                    
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_POOL}" id="flowiden-respool">
+                        <af:commandImageLink action="ResourcePoolSummary" id="rpSummary" 
+                              actionListener="#{bindings.openSubTaskForResourcePoolSummary.execute}"
+                              text="#{pageFlowScope.FlowIdentifierSummaryBean.resourcePoolName}"
+                              shortDesc="#{inventoryUIBundle.LINK_FOR_RESOURCE_POOL_SUMMARY}">
+                       <af:setActionListener from="#{pageFlowScope.FlowIdentifierSummaryBean.resourcePool.oid}" to="#{requestScope.oid}"/>
+                      </af:commandImageLink>   
+                      
+                    </af:panelLabelAndMessage>
+                    
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.IDENTIFIER}" id="flowiden-identifier">
+                      <af:outputText value="#{pageFlowScope.FlowIdentifierSummaryBean.entityObject.identifier}" id="ot2"/>
+                    </af:panelLabelAndMessage>
+                    
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="flowiden-name">
+                      <af:outputText value="#{pageFlowScope.FlowIdentifierSummaryBean.entityObject.name}" id="ot14"/>
+                    </af:panelLabelAndMessage>
+                    
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}" id="flowiden-description">
+                      <af:outputText value="#{pageFlowScope.FlowIdentifierSummaryBean.entityObject.description}" id="ot3"/>
+                    </af:panelLabelAndMessage>
+                                       
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="flowiden-adminState">
+                      <af:outputText value="#{pageFlowScope.FlowIdentifierSummaryBean.inventoryStatus}" id="ot6"/>
+		<!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.FlowIdentifierSummaryBean.popupMode}" id="swis618">
+		<f:facet name="false">
+                        <af:commandImageLink action="#{pageFlowScope.FlowIdentifierSummaryBean.getSummaryAction}"
+                                             actionListener="#{pageFlowScope.FlowIdentifierSummaryBean.registerRecentItem}"
+                                             disabled="#{pageFlowScope.FlowIdentifierSummaryBean.installingBIDisabled}"
+                                             id="bid3"
+                                             shortDesc="#{pageFlowScope.FlowIdentifierSummaryBean.installingBIShortDesc}"
+                                             text="#{pageFlowScope.FlowIdentifierSummaryBean.installingBILabel}">
+                          <af:setActionListener from="#{pageFlowScope.FlowIdentifierSummaryBean.inventoryStatusBI.oid}"
+                                                to="#{objectId}"/>
+                        </af:commandImageLink>
+                      </f:facet>
+		<f:facet name="true">
+		<af:outputText id="swftis618" value="#{pageFlowScope.FlowIdentifierSummaryBean.installingBILabel}"/>
+		</f:facet>
+		</af:switcher>
+		<af:outputText id="installingBIDueDate" value="#{pageFlowScope.FlowIdentifierSummaryBean.installingBIEffectiveDate}"/>
+		<!--RMI 618 End-->
+                    </af:panelLabelAndMessage>
+                    
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="flowiden-ras">
+                      <af:outputText value="#{pageFlowScope.FlowIdentifierSummaryBean.resourceAssignmentStatus}" id="ot12"/>
+		<!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.FlowIdentifierSummaryBean.popupMode}" id="swas618">
+		<f:facet name="false">
+                        <af:commandImageLink action="#{pageFlowScope.FlowIdentifierSummaryBean.getSummaryAction}"
+                                             actionListener="#{pageFlowScope.FlowIdentifierSummaryBean.registerRecentItem}"
+                                             disabled="#{pageFlowScope.FlowIdentifierSummaryBean.consumerBIDisabled}"
+                                             id="bid4"
+                                             shortDesc="#{pageFlowScope.FlowIdentifierSummaryBean.consumerBIShortDesc}"
+                                             text="#{pageFlowScope.FlowIdentifierSummaryBean.consumerBILabel}">
+                          <af:setActionListener from="#{pageFlowScope.FlowIdentifierSummaryBean.assignmentBI.oid}"
+                                                to="#{objectId}"/>
+                        </af:commandImageLink>
+                      </f:facet>
+		<f:facet name="true">
+		<af:outputText id="swftas618" value="#{pageFlowScope.FlowIdentifierSummaryBean.consumerBILabel}"/>
+		</f:facet>
+		</af:switcher>
+		<af:outputText id="consumerBIDueDate" value="#{pageFlowScope.FlowIdentifierSummaryBean.consumerBIEffectiveDate}"/>
+		<!--RMI 618 End-->
+                    </af:panelLabelAndMessage>
+                    
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.STACKING_LEVEL}" id="flowiden-stackingLevel">
+                        <af:outputFormatted binding="#{backingBeanScope.stackingLevel}" value="#{pageFlowScope.FlowIdentifierSummaryBean.entityObject.specification.stackingLevel}" id="ot15"/>
+                    </af:panelLabelAndMessage>
+                    
+                    <af:selectBooleanCheckbox text="#{inventoryUIBundle.PROVIDER_MANAGED}" id="flowiden-providerManged" disabled="true"
+                          value="#{pageFlowScope.FlowIdentifierSummaryBean.entityObject.specification.isProviderManaged}" />
+                    
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="flowiden-lmd" rendered="false">
+                        <af:outputText value="#{pageFlowScope.FlowIdentifierSummaryBean.entityObject.lastModifiedDate}" id="ot4">
+                           <af:convertDateTime pattern="#{pageFlowScope.FlowIdentifierSummaryBean.dateTimeFormat}"/>
+                        </af:outputText>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="flowiden-lmu" rendered="false">
+                        <af:outputText value="#{pageFlowScope.FlowIdentifierSummaryBean.entityObject.lastModifiedUser}" id="ot5"/>
+                    </af:panelLabelAndMessage>                
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="flowiden-crd" rendered="false">
+                      <af:outputText value="#{pageFlowScope.FlowIdentifierSummaryBean.entityObject.createdDate}" id="ot16">
+                          <af:convertDateTime pattern="#{pageFlowScope.FlowIdentifierSummaryBean.dateTimeFormat}"/>
+                      </af:outputText>
+                    </af:panelLabelAndMessage>
+		    <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="flowiden-cru" rendered="false">
+                      <af:outputText value="#{pageFlowScope.FlowIdentifierSummaryBean.entityObject.createdUser}" id="ot20"/>
+                    </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+            </af:showDetailHeader>
+              <af:region value="#{bindings.ConsumerListFlow1.regionModel}" id="r1"/>
+            </af:panelGroupLayout>
+          </af:panelHeader>
+        </f:facet>
+        </af:panelStretchLayout>
+        
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

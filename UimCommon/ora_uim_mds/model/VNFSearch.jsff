@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" 
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:cui="/CommsUI"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+ <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1" value="#{bindings.pageTemplateBinding}">
+        <f:facet name="localArea">
+           <af:panelStretchLayout id="pgl1" binding="#{backingBeanScope.VNF_Results_panelGroupLayout}">
+                <f:facet name="center">
+                    <af:panelHeader text="#{pageFlowScope.InventoryResultsBean.displayInfo}" helpTopicId="OHW_search" id="sdh1">
+                        <af:panelGroupLayout id="pgl2" layout="scroll">
+                            <jsp:include page="/oracle/communications/inventory/ui/framework/page/InventoryQuery.jsff"/>
+                            <af:spacer width="10" height="10" id="s1"/>
+                            <af:showDetailHeader text="#{inventoryUIBundle.SEARCH_RESULTS}" visible="true" disclosed="true" id="rc1">
+                                <af:panelCollection id="pc1" styleClass="invSearchPanelCollection">
+                                    <f:facet name="menus"/>
+                                    <f:facet name="toolbar">
+                                    <af:toolbar id="tb1">
+                                            <af:button text="#{inventoryUIBundle.EXPORT}" id="b2"
+                                                       shortDesc="#{inventoryUIBundle.EXPORT_ALL_ROWS}"
+                                                       immediate="true" icon="/images/exporttoexcel_ena.png"
+                                                       disabledIcon="/images/exporttoexcel_dis.png"
+                                                       partialTriggers="vnfrt">
+                                            <af:exportCollectionActionListener type="excelHTML"
+                                                                                   exportedId="vnfrt"
+                                                                                   filename="#{pageFlowScope.InventoryResultsBean.displayInfo}.xls"
+                                                                                   title="Export"/>
+                                            </af:button>
+                                        </af:toolbar> 
+                                    </f:facet>
+                                    <f:facet name="statusbar">
+                                        <af:toolbar id="t1">
+                                            <af:outputText value="#{pageFlowScope.InventoryResultsBean.displayTotalResults}"
+                                                            id="ol1" styleClass="invSearchOutputLabel"
+                                                            partialTriggers="vnfrt"
+                                                            binding="#{backingBeanScope.totalResultsLabel}"/>
+                                    </af:toolbar>
+                                    </f:facet>
+                                        <af:table id="vnfrt" value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}"
+                                            var="row"
+                                            emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                                            fetchSize="#{pageFlowScope.InventoryResultsBean.fetchSize}"
+                                            filterModel="#{pageFlowScope.InventoryQueryBean.filterModel}"
+                                            queryListener="#{InventoryHelperBean.processQuery}"
+                                            filterVisible="false" 
+                                            varStatus="vs"
+                                            selectionListener="#{pageFlowScope.InventoryResultsBean.selectAction}"
+                                            sortListener="#{bindings.searchResultsIterator.dataControl.dataProvider.processSort}"
+                                            rowSelection="#{pageFlowScope.InventoryResultsBean.rowSelection}" 
+                                            styleClass="invSearchTable"
+                                            selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                                            binding="#{pageFlowScope.InventoryResultsBean.resultsTable}"
+                                            summary="#{inventoryUIBundle.SERVICE_SEARCH_RESULTS}"
+                                                  rowBandingInterval="0">
+                                            <af:column id="c1" sortProperty="id" sortable="true" filterable="true" headerText="#{inventoryUIBundle.ID}" rowHeader="unstyled">
+                                            <af:switcher id="idSwt" defaultFacet="false" facetName="#{pageFlowScope.InventoryResultsBean.popupMode}">
+                                                <f:facet name="false">
+                                                    <af:link id="l1" action="summary" actionListener="#{bindings.openSubTaskForSummary.execute}" text="#{row.id}" shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                                        <af:setActionListener from="#{row.oid}" to="#{objectId}"/>
+                                                    </af:link>
+                                                </f:facet>
+                                                <f:facet name="true">
+                                                    <af:outputText id="ot1" value="#{row.id}"/>
+                                                </f:facet>
+                                            </af:switcher>
+                                        </af:column>
+                                        <af:column sortProperty="name" sortable="true" filterable="true"
+                                                   headerText="#{inventoryUIBundle.NAME}" id="c2"
+                                                   rowHeader="unstyled">
+                                            <af:outputText value="#{row.name}" id="ot2"/>
+                                        </af:column>
+                                        <af:column sortProperty="specification.name" sortable="true" filterable="true"
+                                                   headerText="#{inventoryUIBundle.DESCRIPTOR}" id="c3">
+                                            <af:switcher id="s2"
+                                                         facetName="#{pageFlowScope.InventoryResultsBean.popupMode}"
+                                                         defaultFacet="false">
+                                                <f:facet name="false">
+                                                    <af:link text="#{row.specification.name}" id="l2"
+                                                             action="DescriptorSummary"
+                                                             actionListener="#{bindings.openSubTaskForSpec.execute}">
+                                                        <af:setActionListener from="#{row.specification.oid}"
+                                                                              to="#{specObjectId}"/>
+                                                    </af:link>
+                                                </f:facet>
+                                                <f:facet name="true">
+                                                    <af:outputText value="#{row.specification.name}" id="ot3"/>
+                                                </f:facet>
+                                            </af:switcher>
+                                        </af:column>
+                                        <af:column sortable="false"
+                                                   headerText="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="c4">
+                                            <af:outputText value="#{pageFlowScope.InventoryResultsBean.resourceAssignmentStatus}" id="ot4"/>
+                                        </af:column>
+                                        <af:column sortable="false" headerText="#{inventoryUIBundle.START_DATE}" id="c5"
+                                                   rowHeader="unstyled">
+                                            <af:outputText value="#{row.startDate}" id="ot5">
+                                                <af:convertDateTime pattern="#{pageFlowScope.InventoryResultsBean.dateTimeFormat}"/>
+                                            </af:outputText>
+                                        </af:column>
+                                    </af:table>
+                                </af:panelCollection>
+                            </af:showDetailHeader>
+                        </af:panelGroupLayout>
+                    </af:panelHeader>
+                </f:facet>
+           </af:panelStretchLayout>
+        </f:facet>
+        <f:facet name="contextualArea"/>
+    </af:pageTemplate>
+</jsp:root>

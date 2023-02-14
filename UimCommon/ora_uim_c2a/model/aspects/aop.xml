@@ -1,0 +1,55 @@
+<!-- 
+REPLACE_COPYRIGHT_HERE
+-->
+<aspectj>
+  <aspects>
+   
+	<aspect name="oracle.communications.inventory.extensibility.extension.impl.GlobalRuleExtensionImpl"/>
+	<aspect name="oracle.communications.inventory.extensibility.extension.impl.SpecArgumentExtensionImpl"/>
+	<aspect name="oracle.communications.inventory.extensibility.extension.impl.SpecBasedArgumentExtensionImpl"/>
+
+   <concrete-aspect name="oracle.communications.inventory.extensibility.extension.GlobalRuleCompleteBI" 
+    extends="oracle.communications.inventory.extensibility.extension.GlobalRuleExtension" >
+      <pointcut name="ruleExtensionPoint" expression="call(public * oracle.communications.inventory.api.businessinteraction.impl.BusinessInteractionCompleter.completeBusinessInteractions(java.util.Collection, boolean))"/>
+    </concrete-aspect>
+    
+    <concrete-aspect name="oracle.communications.inventory.extensibility.extension.SpecBasedAsArgument" 
+      extends="oracle.communications.inventory.extensibility.extension.SpecBasedArgumentExtension" >
+      <pointcut name="ruleExtensionPoint" expression="execution(public * oracle.communications.inventory.c2a.DesignManager.processInteraction(oracle.communications.inventory.api.entity.BusinessInteraction))"/>
+    </concrete-aspect>
+    
+    <concrete-aspect name="oracle.communications.inventory.extensibility.extension.GlobalRule" 
+    extends="oracle.communications.inventory.extensibility.extension.GlobalRuleExtension" >
+      <pointcut name="ruleExtensionPoint" expression="call(public * oracle.communications.inventory.api.businessinteraction.BusinessInteractionManager.preProcessInteractionItems(oracle.communications.inventory.api.entity.BusinessInteraction, java.util.List))"/>
+    </concrete-aspect>
+    
+    <concrete-aspect name="oracle.communications.inventory.extensibility.extension.GlobalRuleBI" 
+    extends="oracle.communications.inventory.extensibility.extension.GlobalRuleExtension" >
+      <pointcut name="ruleExtensionPoint" expression="call(public * oracle.communications.inventory.api.businessinteraction.impl.BusinessInteractionCanceler.cancelBusinessInteractions(java.util.Collection, boolean))"/>
+    </concrete-aspect>
+    
+	<concrete-aspect name="oracle.communications.inventory.extensibility.extension.GlobalRuleCompletePII" 
+		extends="oracle.communications.inventory.extensibility.extension.GlobalRuleExtension" >
+		<pointcut name="ruleExtensionPoint" expression="call(public * oracle.communications.inventory.api.businessinteraction.impl.BusinessInteractionServiceFulfillment.processInteractionItems(oracle.communications.inventory.api.entity.BusinessInteraction, java.util.Map))"/>
+	</concrete-aspect>
+    
+  </aspects> 
+  <weaver>
+  	
+  	<include within="oracle.communications.inventory.api.businessinteraction.impl.BusinessInteractionServiceFulfillment"/>
+    <include within="com.metasolv.api.businessinteraction.impl.BusinessInteractionManagerBean"/>
+    <include within="oracle.communications.inventory.api..*"/>
+    <include within="oracle.communications.inventory.c2a..*"/>
+	<include within="com.metasolv.api.*.impl..*"/>
+    <include within="com.metasolv.web.inv..*"/>
+    <include within="com.metasolv.impl.entity..*"/>
+    <include within="com.metasolv.rules..*"/>
+  	<include within="oracle.communications.inventory.api.businessinteraction.impl.BusinessInteractionManagerImpl"/>
+    <include within="oracle.communications.inventory.api..*"/>
+    
+    <include within="oracle.communications.inventory.api.businessinteraction.impl.BusinessInteractionCompleter"/>
+    <include within="oracle.communications.inventory.api.businessinteraction.impl.BusinessInteractionCanceler"/>
+    <include within="oracle.communications.inventory.api.businessinteraction.impl"/>    
+           
+  </weaver>
+</aspectj>

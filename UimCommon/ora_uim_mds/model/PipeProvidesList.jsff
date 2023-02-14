@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved. */
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    3/8/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+        <f:facet name="localArea">
+        <af:panelGroupLayout id="pgl1" layout="scroll" binding="#{backingBeanScope.PP_panelGroupLayout}">
+            <af:panelGroupLayout id="pgl23" layout="scroll">
+                <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left">
+                    <af:outputText id="otbi" styleClass="invCommonText" noWrap="true" 
+                                   value="#{pageFlowScope.PipeProvidesListBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+                    <af:menuBar id="menuBar1">
+                              <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invSearchMenu"
+                                       rendered="#{!(pageFlowScope.PipeProvidesListBean.popupMode)}"   />
+                    </af:menuBar>
+                    <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch7}" contentDelivery="lazyUncached">
+                        <af:dialog id="BISearchPopup_d1" type="none"
+                                   title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                            <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                                <f:facet name="center">
+                                   <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                        <af:serverListener type="refreshEntity" method="#{pageFlowScope.PipeProvidesListBean.afterBusinessInteractionSelectionChange}"/>
+                    </af:popup>
+                </af:panelGroupLayout>
+                </af:panelGroupLayout>
+            <af:panelHeader text="#{inventoryUIBundle.PIPE_PROVIDES} - #{pageFlowScope.PipeProvidesListBean.displayInfo}" id="ph2" helpTopicId="OHW_pipeProvides"> 
+                <af:showDetailHeader text="#{inventoryUIBundle.PIPE_PROVIDES}" disclosed="true" id="sdh1">
+                    <f:facet name="context"/>
+                    <f:facet name="menuBar"/>
+                    <f:facet name="toolbar"/>
+                    <f:facet name="legend"/>
+                    <f:facet name="info"/>
+                    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                        <f:facet name="menus"/>
+                        <f:facet name="toolbar">
+                            <af:toolbar id="t3">
+                              <af:commandToolbarButton text="#{inventoryUIBundle.CREATE}" id="cb1Create" icon="/images/new_ena.png" action="create"
+                               rendered="#{securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/connectivity/flow/PipeEditFlow.xml#PipeEditFlow'] &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=PipeProvides.CREATE;action=view']}">
+                                  <af:setActionListener from="true" to="#{addMode}"/>
+                                  <af:setActionListener from="ASSOCIATE" to="#{pageFlowScope.associateMode}"/>
+                              </af:commandToolbarButton>
+                              <af:spacer width="10" height="10" id="s23"/>
+                              <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}" icon="/images/delete_ena.png" binding="#{backingBeanScope.deleteButton}"
+                                    disabled="#{pageFlowScope.PipeProvidesListBean.resultsTable.selectedRowKeys == null || pageFlowScope.PipeProvidesListBean.resultsTable.selectedRowKeys.size lt 1}"
+                                    rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=PipeProvides.DELETE;action=view']}"
+                                    partialTriggers="t1" id="cb3Delete" actionListener="#{pageFlowScope.PipeProvidesListBean.deleteProvidesPipes}">
+                              </af:commandToolbarButton>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="statusbar">
+                           <af:toolbar id="tb2">
+                               <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(pageFlowScope.PipeProvidesListBean.pipeProvidesCollectionModel.rowCount lt 0) ? 0 :  pageFlowScope.PipeProvidesListBean.pipeProvidesCollectionModel.rowCount}"
+                                           id="ol1" styleClass="invSearchOutputLabel" partialTriggers="t1" binding="#{backingBeanScope.totalResultsLabel}"/>
+                           </af:toolbar>
+                        </f:facet>
+                        <af:table value="#{pageFlowScope.PipeProvidesListBean.pipeProvidesCollectionModel}"
+                                  var="row" emptyText="#{inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET}"
+                                  selectionListener="#{pageFlowScope.PipeProvidesListBean.providesPipeSelectionListener}"
+                                  rowBandingInterval="0" id="t1" rowSelection="#{pageFlowScope.PipeProvidesListBean.rowSelection}"
+                                  binding="#{pageFlowScope.PipeProvidesListBean.resultsTable}"
+                                  summary="#{inventoryUIBundle.PIPE_PROVIDES_LIST}">
+                            <af:column sortProperty="id" sortable="false" headerText="#{inventoryUIBundle.ID}" id="c5">
+                                <af:commandImageLink action="summary" id="cl1" actionListener="#{bindings.openSubTaskForSummary.execute}"
+                                                     text="#{row.id}"
+                                                     shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                    <af:setActionListener from="#{row.oid}" to="#{objectId}"/>
+                                
+                                </af:commandImageLink>
+                            </af:column>
+                            <af:column headerText="#{inventoryUIBundle.NAME}" id="c1"
+                                       rowHeader="unstyled">
+                                <af:outputText value="#{row.name}" id="ot5"/>
+                            </af:column>
+                            <af:column headerText="#{inventoryUIBundle.SPECIFICATION}" id="c3">
+                                <af:commandImageLink action="SpecificationSummary" id="cl21" actionListener="#{bindings.openSubTaskForSpecSummary.execute}"
+                                                text="#{row.specification.name}"
+                                                     shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">        
+                                    
+                                    <af:setActionListener from="#{row.specification.oid}" to="#{specObjectId}"/>
+                                </af:commandImageLink>
+                            </af:column>
+                            <af:column headerText="#{inventoryUIBundle.MEDIUM}" id="c2">
+                                <af:outputText value="#{pageFlowScope.PipeProvidesListBean.medium}" id="ot2"/>
+                            </af:column>
+                            <af:column headerText="#{inventoryUIBundle.TRANSMISSION_SIGNAL_TYPE}" id="c4">
+                                <af:outputText value="#{pageFlowScope.PipeProvidesListBean.transmissionSignalType}" id="ot4"/>
+                            </af:column>
+                            <af:column headerText="#{inventoryUIBundle.INVENTORY_STATUS}" id="c6">
+                                <af:outputText value="#{pageFlowScope.PipeProvidesListBean.inventoryStatus}" id="ot6"/>
+                                    <!-- RMI 618 Start -->
+                                    <af:outputText value="#{pageFlowScope.PipeProvidesListBean.inventoryStatusBIDueDate}" id="pendingBIDueDate1"/>
+                                    <af:switcher id="swispd618" defaultFacet="false"
+                                                 facetName="#{pageFlowScope.PipeProvidesListBean.popupMode}">
+                                        <f:facet name="false">
+                                            <af:commandImageLink text="#{pageFlowScope.PipeProvidesListBean.inventoryStatusBILabel}"
+                                                                 disabled="#{pageFlowScope.PipeProvidesListBean.invStatusDisabled}"
+                                                                 id="isCI1"
+                                                                 shortDesc="#{pageFlowScope.PipeProvidesListBean.invStatusShortDesc}"
+                                                                 action="#{pageFlowScope.PipeProvidesListBean.getPendingBiSummaryAction}"
+                                                                 actionListener="#{pageFlowScope.PipeProvidesListBean.registerPendingBiRecentItem}">
+                                                <af:setActionListener from="#{pageFlowScope.PipeProvidesListBean.inventoryStatusBIOid}"
+                                                                      to="#{objectId}"/>
+                                            </af:commandImageLink>
+                                        </f:facet>
+                                        <f:facet name="true">
+                                            <af:outputText value="#{pageFlowScope.PipeProvidesListBean.inventoryStatusBILabel}"
+                                                           id="swftispd618"/>
+                                        </f:facet>
+                                    </af:switcher>
+                                    <!-- RMI 618 End -->
+                            </af:column>
+                            <af:column headerText="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="c7">
+                              <af:outputText value="#{pageFlowScope.PipeProvidesListBean.resourceAssignmentStatus}" id="ot15"/>
+                                    <!-- RMI 618 Start -->
+                                    <af:outputText value="#{pageFlowScope.PipeProvidesListBean.assignmentBIDueDate}" id="pendingBIDueDate2"/>
+                                    <af:switcher id="swaspd618" defaultFacet="false"
+                                                 facetName="#{pageFlowScope.PipeProvidesListBean.popupMode}">
+                                        <f:facet name="false">
+                                            <af:commandImageLink text="#{pageFlowScope.PipeProvidesListBean.assignmentBILabel}"
+                                                                 disabled="#{pageFlowScope.PipeProvidesListBean.asnStatusDisabled}"
+                                                                 id="asCI"
+                                                                 shortDesc="#{pageFlowScope.PipeProvidesListBean.asnStatusShortDesc}"
+                                                                 action="#{pageFlowScope.PipeProvidesListBean.getPendingBiSummaryAction}"
+                                                                 actionListener="#{pageFlowScope.PipeProvidesListBean.registerPendingBiRecentItem}">
+                                                <af:setActionListener from="#{pageFlowScope.PipeProvidesListBean.asnStatusBIOid}"
+                                                                      to="#{objectId}"/>
+                                            </af:commandImageLink>
+                                        </f:facet>
+                                        <f:facet name="true">
+                                            <af:outputText value="#{pageFlowScope.PipeProvidesListBean.assignmentBILabel}"
+                                                           id="swftaspd618"/>
+                                        </f:facet>
+                                    </af:switcher>
+                                    <!-- RMI 618 End --> 
+                            </af:column>
+                            <af:column headerText="#{inventoryUIBundle.NO_OF_NETWORKS}" id="c10">
+                              <af:outputText value="#{pageFlowScope.PipeProvidesListBean.noOfNetworks}" id="ot10"/>
+                            </af:column>
+                            <af:column headerText="#{inventoryUIBundle.NO_OF_LOGICAL_DEVICE}" id="c11">
+                              <af:outputText value="#{pageFlowScope.PipeProvidesListBean.noOfLogicalDevices}" id="ot11"/>
+                            </af:column>
+                            <af:column headerText="#{inventoryUIBundle.CONDITION_TYPE}" id="column1">
+                              <af:outputText value="#{pageFlowScope.PipeProvidesListBean.conditionType}"  escape="false" id="outputText1"/>
+                            </af:column>
+                        </af:table>
+                    </af:panelCollection>
+                </af:showDetailHeader>
+            </af:panelHeader>
+            </af:panelGroupLayout>
+        </f:facet>
+</af:pageTemplate>
+</jsp:root>

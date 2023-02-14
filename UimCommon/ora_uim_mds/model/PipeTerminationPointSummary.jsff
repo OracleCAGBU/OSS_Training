@@ -1,0 +1,306 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+        <af:panelGroupLayout id="pgl1" layout="scroll" binding="#{backingBeanScope.PTP_summary_panelGroupLayout}">
+           <af:panelGroupLayout id="pgsl23" layout="scroll">
+                <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered="#{!pageFlowScope.PipeTerminationPointSummaryBean.previewLayout}">
+                    <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                                   value="#{pageFlowScope.PipeTerminationPointSummaryBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+                    <af:menuBar id="menuBar1">
+                          <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invSummaryMenu"
+                                   rendered="#{!(pageFlowScope.PipeTerminationPointSummaryBean.popupMode)}"   />
+                    </af:menuBar>
+                    <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch2tp}" contentDelivery="lazyUncached">
+                        <af:dialog id="BISearchPopup_d1" type="none"
+                                   title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                            <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                                <f:facet name="center">
+                                   <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                        <af:serverListener type="refreshEntity" method="#{pageFlowScope.PipeTerminationPointSummaryBean.afterBusinessInteractionSelectionChange}"/>
+                    </af:popup>
+                </af:panelGroupLayout>
+        </af:panelGroupLayout>
+      <af:panelHeader text="#{inventoryUIBundle.TERMINATION_POINT_SUMMARY}" id="ph1" styleClass="invSummaryPanelHeader" helpTopicId="OHW_tpSummary">
+        <f:facet name="context"/>
+        <f:facet name="menuBar">
+            <af:group>
+                <af:menuBar id="menuBar2">
+                    <af:menu id="menu6" binding="#{backingBeanScope.InventoryMenuBean.actionsMenu}" styleClass="invSummaryMenu">
+                        <af:clientListener method="goRefreshEntity" type="propertyChange"/>
+                        <af:serverListener type="refreshEntity" method="#{pageFlowScope.PipeTerminationPointSummaryBean.refresh}"/>
+                    </af:menu>
+                </af:menuBar>
+            </af:group>
+        </f:facet>
+        <f:facet name="toolbar">
+        </f:facet>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:showDetailHeader text="#{inventoryUIBundle.TERMINATION_POINT_INFO}" disclosed="true" id="sdh1" 
+                             styleClass="invSummaryShowDetailHeader">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar">
+                <af:toolbar id="tb1">
+                  <af:commandButton text="#{inventoryUIBundle.EDIT}" action="edit" id="cb1" actionListener="#{bindings.openSubTaskForEdit.execute}"
+                   disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/connectivity/flow/PipeTerminationPointEditFlow.xml#PipeTerminationPointEditFlow']}"
+				   rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Pipe.EDIT;action=view']}"
+                                    accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                      <af:setActionListener from="false" to="#{addMode}"/>
+                  </af:commandButton>
+                </af:toolbar>
+            </f:facet>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:panelFormLayout id="pfl1" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}" id="plam2">
+                <af:outputText value="#{pageFlowScope.PipeTerminationPointSummaryBean.entityObject.id}" id="ot2"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="plam3">
+                    <af:outputText value="#{pageFlowScope.PipeTerminationPointSummaryBean.entityObject.name}" id="ot1"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.NETWORK_LOCATION}" id="plam7">
+                  <af:commandImageLink action="PropertyLocationDetails" actionListener="#{pageFlowScope.PipeTerminationPointSummaryBean.registerRecentItem}" 
+                         shortDesc="#{pageFlowScope.PipeTerminationPointSummaryBean.networkLocation eq null ? null : pageFlowScope.PipeTerminationPointSummaryBean.networkLocation.networkLocationCode}" 
+                         text ="#{pageFlowScope.PipeTerminationPointSummaryBean.networkLocation eq null ? null : pageFlowScope.PipeTerminationPointSummaryBean.networkLocation.networkLocationCode}"
+                         partialTriggers="pc3:t3" id="ot7">                
+                        <af:setActionListener from="#{pageFlowScope.PipeTerminationPointSummaryBean.networkLocation.oid}" to="#{objectId}"/>
+                  </af:commandImageLink>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}" id="plam1">
+                <af:outputText value="#{pageFlowScope.PipeTerminationPointSummaryBean.entityObject.description}" id="ot3"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}" id="plam4">
+                  <af:commandImageLink action="SpecificationSummary" id="cl12"
+                  shortDesc="#{pageFlowScope.PipeTerminationPointSummaryBean.specName eq null ? '&#160;' : inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}"
+                                         disabled="#{pageFlowScope.PipeTerminationPointSummaryBean.specName eq null ? true : false}"
+
+                                text="#{pageFlowScope.PipeTerminationPointSummaryBean.specName}">
+             
+                      <af:setActionListener from="#{pageFlowScope.PipeTerminationPointSummaryBean.entityObject.specification.oid}" to="#{specObjectId}"/>
+                  </af:commandImageLink>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="plam5">
+                 <af:outputText value="#{pageFlowScope.PipeTerminationPointSummaryBean.tpInventoryStatus}" id="ot5"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="plam6">
+                 <af:outputText value="#{pageFlowScope.PipeTerminationPointSummaryBean.resourceAssignmentStatus}" id="ot6"/>
+              </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+        </af:showDetailHeader>
+        <af:spacer width="10" height="10" id="s8"/>
+        <af:region value="#{bindings.PlaceListFlow1.regionModel}" id="r8"/>
+        <af:spacer width="10" height="10" id="s9"/>
+        <af:region value="#{bindings.InventoryGroupListFlow1.regionModel}" id="r9"/>
+        <af:spacer width="10" height="10" id="s1"/>
+        <af:showDetailHeader text="#{inventoryUIBundle.RESOURCE_TERMINATIONS}" disclosed="true" id="sdh4">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:panelCollection id="pc3" styleClass="AFStretchWidth">
+            <f:facet name="menus">
+                 <!-- Menu to display the List of Consumable Resources for PipeTerminationPoint Summary. -->
+                 <af:menu id="menu1" binding="#{pageFlowScope.PipeTerminationPointSummaryBean.itemsMenu}"
+                 rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Pipe.MAINTAIN_TERMINATION_RESOURCES;action=view']}"/>
+              </f:facet>
+            <f:facet name="toolbar">
+                <af:toolbar id="tb4">
+                        <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}" 
+                                   id="ctbDelete" binding="#{backingBeanScope.deleteButton}"
+                                   rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Pipe.MAINTAIN_TERMINATION_RESOURCES;action=view']}"
+                                   icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                   disabled="#{pageFlowScope.PipeTerminationPointSummaryBean.resultsTable.selectedRowKeys.size lt 1 or pageFlowScope.PipeTerminationPointSummaryBean.resultsTable.selectedRowKeys.size eq null}"
+                                   partialTriggers="t3"
+                                   actionListener="#{pageFlowScope.PipeTerminationPointSummaryBean.deleteResourceTerminations}"></af:commandToolbarButton>
+                </af:toolbar>
+            </f:facet>
+            <f:facet name="statusbar">
+               <af:toolbar id="t2">
+                   <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(pageFlowScope.PipeTerminationPointSummaryBean.resourceCollectionModel.rowCount lt 0) ? 0 :  pageFlowScope.PipeTerminationPointSummaryBean.resourceCollectionModel.rowCount}"
+                                  id="ol1" styleClass="invSearchOutputLabel" partialTriggers="t3" binding="#{backingBeanScope.totalResultsLabel}"/>
+               </af:toolbar>
+            </f:facet>
+            <af:table value="#{pageFlowScope.PipeTerminationPointSummaryBean.resourceCollectionModel}" var="row" 
+                      rowSelection="#{pageFlowScope.PipeTerminationPointSummaryBean.rowSelection}"
+                      selectionListener="#{pageFlowScope.PipeTerminationPointSummaryBean.resourceSelectionListener}"
+                      autoHeightRows="#{pageFlowScope.PipeTerminationPointSummaryBean.portletHeight}" contentDelivery="immediate"
+                      emptyText="#{inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET}"
+                      selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                      binding="#{pageFlowScope.PipeTerminationPointSummaryBean.resultsTable}" rowBandingInterval="0" id="t3"
+                      summary="#{inventoryUIBundle.RESOURCE_TERMINATIONS_RESULTS}">
+              <af:column headerText="#{inventoryUIBundle.VERSION}" id="c131" rendered="#{pageFlowScope.PipeTerminationPointSummaryBean.versioned}">
+                <af:commandImageLink id="cl11" action="pipeconfig"
+                                     text="#{pageFlowScope.PipeTerminationPointSummaryBean.versionNumber}"
+                                     shortDesc="#{inventoryUIBundle.LINK_FOR_PIPE_CONFIGURATION}">
+                   
+                    <af:setActionListener from="#{pageFlowScope.PipeTerminationPointSummaryBean.versionOid}" to="#{objectId}"/>
+                </af:commandImageLink>
+              </af:column>
+              <af:column headerText="#{inventoryUIBundle.ID}" id="c13"
+                         rowHeader="unstyled">
+                <af:commandImageLink action="#{pageFlowScope.PipeTerminationPointSummaryBean.getSummaryPage}" id="cl1" actionListener="#{pageFlowScope.PipeTerminationPointSummaryBean.registerRecentItem}"
+                                     text="#{pageFlowScope.PipeTerminationPointSummaryBean.id}"
+                                     shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+                   
+                    <af:setActionListener from="#{pageFlowScope.PipeTerminationPointSummaryBean.oid}" to="#{objectId}"/>
+                </af:commandImageLink>
+              </af:column>
+              <af:column headerText="#{inventoryUIBundle.NAME}" id="c17">
+                <af:outputText value="#{pageFlowScope.PipeTerminationPointSummaryBean.name}" id="ot23"/>
+              </af:column>
+              <af:column headerText="#{inventoryUIBundle.ENTITY_TYPE}" id="c27">
+                <af:outputText value="#{pageFlowScope.PipeTerminationPointSummaryBean.entityType}" id="ot47"/>
+              </af:column>
+              <af:column headerText="#{inventoryUIBundle.SPECIFICATION}" id="c16" >
+                  <af:commandImageLink action="SpecificationSummary" id="cl2" actionListener="#{bindings.openSubTaskForSpec.execute}"
+                                       text="#{pageFlowScope.PipeTerminationPointSummaryBean.specification}"
+                                       shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+                     
+                      <af:setActionListener from="#{pageFlowScope.PipeTerminationPointSummaryBean.specOid}" to="#{specObjectId}"/>
+                  </af:commandImageLink>
+              </af:column>
+              <af:column headerText="#{inventoryUIBundle.INVENTORY_STATUS}" headerNoWrap="true" id="c20">
+                 <af:outputText value="#{pageFlowScope.PipeTerminationPointSummaryBean.inventoryStatus}" id="ot21"/>
+              </af:column>
+              <af:column headerText="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" headerNoWrap="true" id="c21">
+                 <af:outputText value="#{pageFlowScope.PipeTerminationPointSummaryBean.resourceAssignmentStatus}" id="ot25"/>
+              </af:column>
+              <af:column headerText="#{inventoryUIBundle.START_DATE}" id="c14">
+                <af:outputText value="#{pageFlowScope.PipeTerminationPointSummaryBean.startDate}" id="ot27">
+                  <af:convertDateTime pattern="#{bindings.physicalPortAssignments.hints.validFor.startDate.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="#{inventoryUIBundle.END_DATE}" id="c15">
+                <af:outputText value="#{pageFlowScope.PipeTerminationPointSummaryBean.endDate}" id="ot26">
+                  <af:convertDateTime pattern="#{bindings.physicalPortAssignments.hints.validFor.endDate.format}"/>
+                </af:outputText>
+              </af:column>
+               <af:column headerText="#{inventoryUIBundle.PARENT}" align="center" id="parcol">
+                <af:column headerText="#{inventoryUIBundle.NAME}" id="c30">
+                    <af:link action="#{pageFlowScope.PipeTerminationPointSummaryBean.getSummaryPage}" id="c31" 
+                            actionListener="#{pageFlowScope.PipeTerminationPointSummaryBean.registerRecentItemForParent}">
+                        <af:outputText value="#{pageFlowScope.PipeTerminationPointSummaryBean.parentName}" id="ot32"/>
+                        <af:setActionListener from="#{pageFlowScope.PipeTerminationPointSummaryBean.parent.oid}" to="#{objectId}" />
+                    </af:link>
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.SPECIFICATION}" id="c3112">
+                    <af:link action="SpecificationSummary" id="c3113" 
+                            actionListener="#{bindings.openSubTaskForParentSpec.execute}">
+                        <af:outputText value="#{pageFlowScope.PipeTerminationPointSummaryBean.parent.specification.name}" id="ot3214"/>
+                        <af:setActionListener from="#{pageFlowScope.PipeTerminationPointSummaryBean.parent.specification.oid}" to="#{specObjectId}" />
+                    </af:link>
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.TYPE}" id="c3114">
+                    <af:outputText value="#{pageFlowScope.PipeTerminationPointSummaryBean.parentType}" id="ot3215"/>
+                </af:column>
+              </af:column>
+            </af:table>
+            <af:popup id="ppPopup" binding="#{backingBeanScope.popupPipePPBinding}" contentDelivery="lazyUncached">
+                <af:dialog id="d5" type="none"
+                           title="#{inventoryUIBundle.PHYSICAL_PORT}">
+                   <af:panelStretchLayout id="pt_pstpl" styleClass="invCommonPanelStretchLayout">
+                      <f:facet name="center">
+                         <af:region value="#{bindings.PhysicalPortSearchResultsFlow1.regionModel}" id="r3"/>
+                      </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.PipeTerminationPointSummaryBean.refresh}"/>
+            </af:popup>
+            
+            <af:popup id="pcPopup" binding="#{backingBeanScope.popupPipePCBinding}" contentDelivery="lazyUncached">
+                <af:dialog id="d6" type="none"
+                           title="#{inventoryUIBundle.PHYSICAL_CONNECTOR}">
+                   <af:panelStretchLayout id="pt_pstp2" styleClass="invCommonPanelStretchLayout">
+                      <f:facet name="center">
+                         <af:region value="#{bindings.PhysicalConnectorSearchResultsFlow1.regionModel}" id="r4"/>
+                      </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.PipeTerminationPointSummaryBean.refresh}"/>
+            </af:popup>
+            
+            <af:popup id="eqPopup" binding="#{backingBeanScope.popupPipeEQBinding}" contentDelivery="lazyUncached">
+                <af:dialog id="d4" type="none"
+                           title="#{inventoryUIBundle.EQUIPMENT}">
+                   <af:panelStretchLayout id="pt_pstp3" styleClass="invCommonPanelStretchLayout">
+                      <f:facet name="center">
+                        <af:region value="#{bindings.EquipmentSearchResultsFlow1.regionModel}" id="r5"/>
+                      </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.PipeTerminationPointSummaryBean.refresh}"/>
+            </af:popup>
+            
+            <af:popup id="pdPopup" binding="#{backingBeanScope.popupPipePDBinding}" contentDelivery="lazyUncached">
+                <af:dialog id="d7" type="none"
+                           title="#{inventoryUIBundle.PHYSICALDEVICE}">
+                   <af:panelStretchLayout id="pt_pstp4" styleClass="invCommonPanelStretchLayout">
+                      <f:facet name="center">
+                        <af:region value="#{bindings.PhysicalDeviceSearchResultsFlow1.regionModel}" id="r6"/>
+                      </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.PipeTerminationPointSummaryBean.refresh}"/>
+            </af:popup>
+            
+            <af:popup id="diPopup" binding="#{backingBeanScope.popupPipeDIBinding}" contentDelivery="lazyUncached">
+                <af:dialog id="d8" type="none"
+                           title="#{inventoryUIBundle.DEVICE_INTERFACE_SEARCH}">
+                   <af:panelStretchLayout id="pt_pstp5" styleClass="invCommonPanelStretchLayout">
+                      <f:facet name="center">
+                         <af:region value="#{bindings.DeviceInterfaceSearchResultsFlow1.regionModel}" id="r2"/>
+                      </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.PipeTerminationPointSummaryBean.refresh}"/>
+            </af:popup>
+            
+            <af:popup id="ldPopup" binding="#{backingBeanScope.popupLDPipeBinding}" contentDelivery="lazyUncached">
+                <af:dialog id="d3" type="none"
+                           title="#{inventoryUIBundle.LOGICAL_DEVICE}">
+                   <af:panelStretchLayout id="pt_pstp6" styleClass="invCommonPanelStretchLayout">
+                      <f:facet name="center">
+                        <af:region value="#{bindings.LogicalDeviceSearchResultsFlow1.regionModel}" id="r1"/>
+                      </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.PipeTerminationPointSummaryBean.refresh}"/>
+            </af:popup>
+            
+            <af:popup id="nwPopup" binding="#{backingBeanScope.popupPipeNWBinding}" contentDelivery="lazyUncached">
+                <af:dialog id="d73" type="none"
+                           title="#{inventoryUIBundle.NETWORK}">
+                   <af:panelStretchLayout id="pt_pstp7" styleClass="invCommonPanelStretchLayout">
+                      <f:facet name="center">
+                         <af:region value="#{bindings.NetworkSearchResults1.regionModel}" id="r7"/>
+                      </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.PipeTerminationPointSummaryBean.refresh}"/>
+            </af:popup>
+          </af:panelCollection>
+        </af:showDetailHeader>
+      </af:panelHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

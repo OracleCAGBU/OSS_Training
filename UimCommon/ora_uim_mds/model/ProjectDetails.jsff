@@ -1,0 +1,519 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:pf="/platform/functions"
+          xmlns:cui="/CommsUI">
+<c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" value="#{bindings.pageTemplateBinding}" id="pt1">
+    <f:facet name="localArea">
+        <af:panelGroupLayout id="pgl1" layout="scroll">
+           <af:panelGroupLayout id="pgheadl1" layout="scroll">
+             <af:panelHeader text="#{inventoryUIBundle.PROJECT_DETAILS} - #{pageFlowScope.ProjectDetailsBean.displayInfo}"
+                             id="PAGE_TITLE" styleClass="invSummaryPanelHeader" helpTopicId="OHW_projSummary">
+                <f:facet name="toolbar">
+                    <af:toolbar id="tb1">
+                        <af:group id="gr1">
+                <af:menuBar id="menuBar2">
+                  <af:menu id="menu6" binding="#{pageFlowScope.ProjectDetailsBean.actionsMenu}" styleClass="invSummaryMenu" 
+                           disabled="#{pageFlowScope.ProjectDetailsBean.disableActionsMenu}"/>
+                </af:menuBar>
+                <af:popup id="showBOMDetails" binding="#{backingBeanScope.showBOMDetailsPopUp}" contentDelivery="lazyUncached">
+    		<af:dialog type="none" title="#{inventoryUIBundle.BOM_DETAILS}">
+                               <f:facet name="buttonBar">
+					<af:toolbar id="bomtb7" binding="#{backingBeanScope.bomToolbar}">
+						<af:group id="bomg41">
+			  		        <af:spacer width="530"/>
+ 							<af:commandToolbarButton text="#{inventoryUIBundle.EXPORT_TO_XML}" id="expXML21" binding="#{backingBeanScope.bomXMLExport}">
+ 							    <af:fileDownloadActionListener filename="bom.xml"
+                                                               contentType="text/xml; charset=utf-8"
+                                       						   method="#{pageFlowScope.ProjectDetailsBean.exportXML}"/>
+ 							</af:commandToolbarButton>
+ 							 <af:spacer width="10"/>
+							<af:commandToolbarButton text="#{inventoryUIBundle.CLOSE}" id="bomcll12" actionListener="#{pageFlowScope.ProjectDetailsBean.cancelBomPopup}"/>
+						</af:group>
+					</af:toolbar>
+		        </f:facet>
+		       <af:panelGroupLayout id="pglbom" styleClass="AFStretchWidth" inlineStyle="width:720px;">  
+
+                              <af:treeTable id="bomTreeTable1"
+                            value="#{pageFlowScope.ProjectDetailsBean.bomTreeModel}"
+                            binding="#{backingBeanScope.BOM_treeBinding}"
+                            var="node" rowSelection="single" styleClass="AFStretchWidth"
+                            contextMenuSelect="true" contentDelivery="immediate"
+                            rowBandingInterval="0" expandAllEnabled="true"
+                            horizontalGridVisible="false"
+                            autoHeightRows="250"
+                            summary="#{inventoryUIBundle.BUSINESS_INTERACTION_HIERARCHY_TREETABLE}"
+                                            initiallyExpanded="true">
+                <f:facet name="nodeStamp">
+                  <af:column  id="cc91" width="320px" rowHeader="unstyled"
+                             headerText="#{inventoryUIBundle.BOM_ITEM_NAME}">
+                    <af:panelGroupLayout id="pgl21">
+                                <af:outputText value="#{node.label}" id="ot81"/>
+                     </af:panelGroupLayout>
+                  </af:column>
+                 </f:facet>
+                    <af:column  id="cc96" width="180px" rowHeader="unstyled"
+                             headerText="#{inventoryUIBundle.SPECIFICATION}" rendered="#{pageFlowScope.ProjectDetailsBean.viewSpec}">
+                    <af:panelGroupLayout id="pgl216">
+                                <af:outputText value="#{node.specName}" id="ot86"/>
+                     </af:panelGroupLayout>
+                  </af:column>
+
+                   <af:column  id="cc92" width="120px" rowHeader="unstyled"
+                             headerText="#{inventoryUIBundle.ENTITY_TYPE}"  rendered="#{pageFlowScope.ProjectDetailsBean.viewEntityType}">
+                    <af:panelGroupLayout id="pgl211">
+                                <af:outputText value="#{node.entityType}" id="ot82"/>
+                     </af:panelGroupLayout>
+                  </af:column>
+                  <af:column  id="cc93" width="80px" rowHeader="unstyled"
+                             headerText="#{inventoryUIBundle.START_DATE}" rendered="#{pageFlowScope.ProjectDetailsBean.viewDates}">
+                    <af:panelGroupLayout id="pgl212">
+                                <af:outputText value="#{node.startDate}" id="ot83"/>
+                     </af:panelGroupLayout>
+                  </af:column>
+                  <af:column  id="cc94" width="130px" rowHeader="unstyled"
+                             headerText="#{inventoryUIBundle.END_DATE}" rendered="#{pageFlowScope.ProjectDetailsBean.viewDates}">
+                    <af:panelGroupLayout id="pgl213">
+                                <af:outputText value="#{node.endDate}" id="ot84"/>
+                     </af:panelGroupLayout>
+                  </af:column>
+                  <af:column  id="cc95" width="130px" rowHeader="unstyled"
+                             headerText="#{inventoryUIBundle.COST}"  rendered="#{pageFlowScope.ProjectDetailsBean.viewCost}">
+                    <af:panelGroupLayout id="pgl214">
+                                <af:outputText value="#{node.cost}" id="ot85"/>
+                     </af:panelGroupLayout>
+                  </af:column>
+
+            </af:treeTable>
+            </af:panelGroupLayout>
+                </af:dialog>
+                </af:popup>
+                        </af:group>
+                        <af:group id="gr2">
+                            <af:commandToolbarButton text="#{inventoryUIBundle.SAVE}" id="ctb1" disabled="#{pageFlowScope.ProjectDetailsBean.disableButtons}"
+                                                     accessKey="#{inventoryUIBundle.SAVE_ACCESS_KEY}" actionListener="#{pageFlowScope.ProjectDetailsBean.saveProject}"
+                                                     binding="#{backingBeanScope.saveButtonBinding}">
+                                <af:setActionListener from="editing" to="#{pageFlowScope.saveActionOutcome}"/>
+                            </af:commandToolbarButton>
+                            <af:spacer width="4" id="s11"/>
+                            <af:commandToolbarButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="ctb2" disabled="#{pageFlowScope.ProjectDetailsBean.disableButtons}"
+                                                     actionListener="#{pageFlowScope.ProjectDetailsBean.saveProject}" accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}"
+                                                     binding="#{backingBeanScope.saveAndCloseButtonBinding}" action="#{pageFlowScope.ProjectDetailsBean.saveOutcome}">
+                                <af:setActionListener from="viewing" to="#{pageFlowScope.saveActionOutcome}"/>
+                            </af:commandToolbarButton>
+                        </af:group>
+                    </af:toolbar>
+                </f:facet>
+			   </af:panelHeader>
+
+				</af:panelGroupLayout>
+
+                <af:panelStretchLayout id="psl1" dimensionsFrom="auto" styleClass="AFStretchWidth">
+                    <f:facet name="center">
+                           
+                                    <af:panelTabbed id="pt2" dimensionsFrom="auto" styleClass="AFStretchWidth" binding="#{backingBeanScope.projectDetailsTab}">
+                                        <af:showDetailItem id="sdi1" text="#{inventoryUIBundle.PROJECT_DETAILS}" binding="#{backingBeanScope.generalInformationTab}" styleClass="AFStretchWidth"
+                                                           disclosureListener="#{pageFlowScope.ProjectDetailsBean.discloseGeneralInfomationTab}" stretchChildren="first" 
+														   rendered="#{pageFlowScope.ProjectDetailsBean.renderGeneralInfoTab}"   
+														   disclosed="#{pageFlowScope.ProjectDetailsBean.selectedTab == inventoryUIBundle.PROJECT_DETAILS}">
+                                            <af:panelHeader text="">              
+                                            <af:panelStretchLayout id="psl2" styleClass="AFStretchWidth" dimensionsFrom="auto">
+                                                <f:facet name="center">
+												<af:panelGroupLayout id="pgl2biacc">
+                                                    <af:panelGroupLayout id="pgl2" binding="#{pageFlowScope.ProjectDetailsBean.projectDetailsEditViewPanel}">
+                                                        <af:panelGroupLayout id="pgl3" layout="scroll" rendered="#{pageFlowScope.ProjectDetailsBean.editPanel}">
+                                                            <af:showDetailHeader text="#{inventoryUIBundle.GENERAL_INFORMATION}" disclosed="true" id="sdh2" styleClass="AFStretchWidth">
+                                                                <f:facet name="toolbar">
+                                                                    <af:toolbar id="t2">
+                                                                        <af:commandToolbarButton id="ctb5" text="#{inventoryUIBundle.EDIT}" disabled="true"	rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Project.EDIT;action=view']}"/>
+                                                                    </af:toolbar>
+                                                                </f:facet>
+                                                                <af:panelGroupLayout id="pgl6" layout="horizontal" halign="left" valign="top">
+                                                                    <af:panelFormLayout id="pfl1" labelWidth="40%" fieldWidth="60%" maxColumns="2" rows="2">
+
+                                                                        <af:inputText id="it1" value="#{pageFlowScope.ProjectDetailsBean.entityObject.name}" columns="50" autoSubmit="true"
+                                                                                      maximumLength="50" required="true" label="#{inventoryUIBundle.NAME}"/>
+
+                                                                        <af:inputText id="it2" value="#{pageFlowScope.ProjectDetailsBean.entityObject.description}" maximumLength="255" rows="5" columns="50"
+                                                                                      styleClass="invSummaryPanelLabelAndMessage" autoSubmit="true" label="#{inventoryUIBundle.DESCRIPTION}"/>
+
+                                                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="cru">
+                                                                            <af:outputText value="#{pageFlowScope.ProjectDetailsBean.entityObject.createdUser}" id="ot12"/>
+                                                                        </af:panelLabelAndMessage>
+
+                                                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="lmu">
+                                                                            <af:outputText value="#{pageFlowScope.ProjectDetailsBean.entityObject.lastModifiedUser}" id="ot10"/>
+                                                                        </af:panelLabelAndMessage>
+
+                                                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.STATUS}" id="plam2">
+                                                                            <af:outputText value="#{pageFlowScope.ProjectDetailsBean.status}" id="ot16"/>
+                                                                        </af:panelLabelAndMessage>
+
+                                                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="crd">
+                                                                            <af:outputText value="#{pageFlowScope.ProjectDetailsBean.entityObject.createdDate}" id="ot11">
+                                                                                 <af:convertDateTime pattern="#{pageFlowScope.ProjectDetailsBean.dateTimeFormat}"/>
+                                                                            </af:outputText>
+                                                                        </af:panelLabelAndMessage>
+
+                                                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="lmd">
+                                                                            <af:outputText value="#{pageFlowScope.ProjectDetailsBean.entityObject.lastModifiedDate}" id="ot9">
+                                                                               <af:convertDateTime pattern="#{pageFlowScope.ProjectDetailsBean.dateTimeFormat}"/>
+                                                                            </af:outputText>
+                                                                        </af:panelLabelAndMessage>
+
+                                                                        <af:inputDate value="#{pageFlowScope.ProjectDetailsBean.entityObject.dueDate}" label="#{inventoryUIBundle.DUE_DATE}"
+                                                                                      id="id1" autoSubmit="true">
+                                                                            <af:convertDateTime pattern="#{pageFlowScope.ProjectDetailsBean.dateTimeFormat}"/>
+                                                                        </af:inputDate>
+
+                                                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.COMPLETION_DATE}" id="plam1">
+                                                                            <af:outputText value="#{pageFlowScope.ProjectDetailsBean.completionDate}" id="ot15">
+                                                                                <af:convertDateTime pattern="#{pageFlowScope.ProjectDetailsBean.dateTimeFormat}"/>
+                                                                            </af:outputText>
+                                                                        </af:panelLabelAndMessage>
+
+                                                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.NO_OF_ACTIVITIES_COMPLETED}" id="plam3">
+                                                                            <af:poll id="p1" pollListener="#{pageFlowScope.ProjectDetailsBean.pollerListener}"
+                                                                                     binding="#{pageFlowScope.ProjectDetailsBean.pollActivitiesCompleted}"
+                                                                                     interval="#{pageFlowScope.ProjectDetailsBean.pollerInterval}"/>
+                                                                            <af:outputText value="#{pageFlowScope.ProjectDetailsBean.completedActivityLabel}" id="of1" inlineStyle="padding-left:6px;" noWrap="true"/>
+                                                                        </af:panelLabelAndMessage>
+
+                                                                    </af:panelFormLayout>
+                                                                    <af:spacer width="200" id="s32"/>
+                                                                    <!-- The Below PanelFormLayout will be used to render the Entity-Level Characteristics for Project. -->
+                                                                    <af:panelFormLayout id="projectedit" binding="#{backingBeanScope.uiHintsEditPanel}"/>
+                                                                </af:panelGroupLayout>
+
+                                                            </af:showDetailHeader>
+															
+															
+                                                        </af:panelGroupLayout>
+
+                                                        <af:panelGroupLayout id="pgl4" layout="scroll" rendered="#{pageFlowScope.ProjectDetailsBean.viewPanel}">
+                                                            <af:showDetailHeader text="#{inventoryUIBundle.GENERAL_INFORMATION}" disclosed="true" id="sdh3" styleClass="AFStretchWidth" 
+															 rendered="#{!pageFlowScope.ProjectDetailsBean.disableGeneralInfoPortlet and pageFlowScope.ProjectDetailsBean.selectedTab == inventoryUIBundle.PROJECT_DETAILS}">
+                                                                <f:facet name="toolbar">
+                                                                    <af:toolbar id="t3">
+                                                                        <af:commandToolbarButton id="ctb6" text="#{inventoryUIBundle.EDIT}"
+                                                                               disabled="#{pageFlowScope.ProjectDetailsBean.disableEdit}"
+																			   rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Project.EDIT;action=view']}"
+                                                                               actionListener="#{pageFlowScope.ProjectDetailsBean.editProject}"/>
+                                                                    </af:toolbar>
+                                                                </f:facet>
+                                                                <af:panelGroupLayout id="pgl7" layout="horizontal" halign="left" valign="top">
+                                                                    <af:panelFormLayout id="pfl3" maxColumns="1" rows="2">
+
+                                                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="plam17">
+                                                                            <af:outputText id="it11" value="#{pageFlowScope.ProjectDetailsBean.entityObject.name}"/>
+                                                                        </af:panelLabelAndMessage>
+
+                                                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="plm17">
+                                                                            <af:outputText value="#{pageFlowScope.ProjectDetailsBean.entityObject.createdUser}" id="ot22" noWrap="true"/>
+                                                                        </af:panelLabelAndMessage>
+
+                                                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="plam15">
+                                                                            <af:outputText value="#{pageFlowScope.ProjectDetailsBean.entityObject.lastModifiedUser}" id="ot110" noWrap="true"/>
+                                                                        </af:panelLabelAndMessage>
+
+                                                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="plam16">
+                                                                            <af:outputText value="#{pageFlowScope.ProjectDetailsBean.entityObject.createdDate}" id="ot21">
+                                                                                 <af:convertDateTime pattern="#{pageFlowScope.ProjectDetailsBean.dateTimeFormat}"/>
+                                                                            </af:outputText>
+                                                                        </af:panelLabelAndMessage>
+
+                                                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="plam21">
+                                                                            <af:outputText value="#{pageFlowScope.ProjectDetailsBean.entityObject.lastModifiedDate}" id="ot19">
+                                                                               <af:convertDateTime pattern="#{pageFlowScope.ProjectDetailsBean.dateTimeFormat}"/>
+                                                                            </af:outputText>
+                                                                        </af:panelLabelAndMessage>
+
+                                                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.STATUS}" id="plam14">
+                                                                            <af:outputText value="#{pageFlowScope.ProjectDetailsBean.status}" id="ot26"/>
+                                                                        </af:panelLabelAndMessage>
+
+                                                                    
+                                                                         </af:panelFormLayout>
+                                                                         
+                                                                         <af:spacer width="75"/>
+                                                                         
+ 																		<af:panelFormLayout id="pfl3d" maxColumns="1" rows="2">
+ 																		
+                                                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.DUE_DATE}" id="plam19">
+                                                                            <af:outputText value="#{pageFlowScope.ProjectDetailsBean.entityObject.dueDate}" id="ot23">
+                                                                                <af:convertDateTime pattern="#{pageFlowScope.ProjectDetailsBean.dateTimeFormat}"/>
+                                                                            </af:outputText>
+                                                                        </af:panelLabelAndMessage>
+
+                                                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.COMPLETION_DATE}" id="plam22">
+                                                                            <af:outputText value="#{pageFlowScope.ProjectDetailsBean.completionDate}" id="ot25">
+                                                                                <af:convertDateTime pattern="#{pageFlowScope.ProjectDetailsBean.dateTimeFormat}"/>
+                                                                            </af:outputText>
+                                                                        </af:panelLabelAndMessage>
+
+                                                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.NO_OF_ACTIVITIES_COMPLETED}" id="plam23">
+                                                                            <af:poll id="p2" pollListener="#{pageFlowScope.ProjectDetailsBean.pollerListener}"
+                                                                                     binding="#{pageFlowScope.ProjectDetailsBean.pollActivitiesCompleted}"
+                                                                                     interval="#{pageFlowScope.ProjectDetailsBean.pollerInterval}"/>
+                                                                            <af:outputText value="#{pageFlowScope.ProjectDetailsBean.completedActivityLabel}" id="of2" inlineStyle="padding-left:6px;"/>
+                                                                        </af:panelLabelAndMessage>
+
+                                                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.COMPL_BIS}" id="plcb3">
+                                                                             <af:outputText value="#{pageFlowScope.ProjectDetailsBean.completedBusinessInteractions}" id="cof1"/>
+                                                                        </af:panelLabelAndMessage>
+                                                                       
+                                                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}" id="plam18" styleClass="invSummaryPanelLabelAndMessage">
+                                                                            <af:inputText label="#{inventoryUIBundle.DESCRIPTION}" id="it21" value="#{pageFlowScope.ProjectDetailsBean.entityObject.description}"
+                                                                                        rows="5" columns="50" readOnly="true" simple="true"/>
+                                                                        </af:panelLabelAndMessage>
+ 																        
+                                                                    </af:panelFormLayout>
+                                                                    
+                                                                    <af:spacer width="200" id="s33"/>
+                                                                    <!-- The Below PanelFormLayout will be used to render the Entity-Level Characteristics for Project. -->
+                                                                    <af:panelFormLayout id="elcpf" binding="#{backingBeanScope.uiHintsViewPanel}">
+                                                                        <af:iterator id="it123" value="#{pageFlowScope.ProjectDetailsBean.characteristics}" var="characteristicDetails">
+                                                                            <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="onn312" 
+                                                                                rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'ALPHANUMERIC' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'CALENDAR' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'DROPDOWN_LIST' || characteristicDetails.characteristic.characteristicSpecification.valueType == 'NUMERIC'}">
+                                                                                <af:outputText id="ote3" value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                                                                            </af:panelLabelAndMessage>
+                                                                            <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="onn317" rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'URL'}">
+                                                                                 <af:link id="oth3" targetFrame="_blank" destination="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}" inlineStyle="padding-left:6px;">
+                                                                                    <af:outputText id="ot18" truncateAt="50" value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                                                                                </af:link>
+                                                                            </af:panelLabelAndMessage>
+                                                                            <af:panelLabelAndMessage label="" id="onn318" rendered="#{characteristicDetails.characteristic.characteristicSpecification.controlType == 'CHECKBOX'}">
+                                                                                <af:selectBooleanCheckbox id="sbc1" readOnly="true" value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}" text="#{characteristicDetails.label}" simple="true"/>
+                                                                            </af:panelLabelAndMessage>
+                                                                        </af:iterator>
+                                                                    </af:panelFormLayout>
+                                                                    
+                                                                </af:panelGroupLayout>
+
+                                                            </af:showDetailHeader>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelGroupLayout>
+													
+													<af:spacer height="10" id="s11act1"/>
+													
+													    <!--  Business Interactions Table -->
+													<af:showDetailHeader text="#{inventoryUIBundle.MENU_BUSINESS_INTERACTION}" disclosed="true" rendered="#{!pageFlowScope.ProjectDetailsBean.disableBIPortlet and 
+													pageFlowScope.ProjectDetailsBean.selectedTab == inventoryUIBundle.PROJECT_DETAILS}">
+										            <af:panelCollection id="pc2" styleClass="AFStretchWidth" featuresOff="freeze wrap">
+											              <f:facet name="menus"/>
+											              <f:facet name="toolbar">
+											               <af:toolbar id="t1">
+												               <af:commandToolbarButton text="#{inventoryUIBundle.ASSOCIATE}"
+ 													                                    id="ctbCreate" binding="#{backingBeanScope.associateButton}"
+													                                    icon="#{InventoryHelperBean.associateIcon}">
+														            <af:showPopupBehavior popupId="addBIPopup"
+														                                  triggerType="click"/>
+													            	<af:setActionListener from="true" to="#{pageFlowScope.associateBusinessInteraction}"/>
+													            	<af:setActionListener from="true" to="#{pageFlowScope.invokeBI}"/>
+													          </af:commandToolbarButton>
+												         	  <af:spacer width="10" height="10"/>
+													          <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}" 
+													                                   id="ctbDelete"
+													                                   icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+													                                   disabled="#{pageFlowScope.ProjectDetailsBean.disableDeleteBusinessInteraction}"
+													                                   binding ="#{backingBeanScope.biDeleteButton}"
+													                                   actionListener="#{pageFlowScope.ProjectDetailsBean.disassociateBusinessInteraction}"
+													                                   partialTriggers="biTable">
+													         </af:commandToolbarButton>
+     													   </af:toolbar>
+											              </f:facet>
+											              <f:facet name="statusbar">
+                            								<af:toolbar id="bi-cnt">
+                                          						<af:outputText  value="#{inventoryUIBundle.ROW_COUNT} #{(pageFlowScope.ProjectDetailsBean.businessInteractionCount lt 0) ? 0 : pageFlowScope.ProjectDetailsBean.businessInteractionCount}"
+                                                					            styleClass="invSearchOutputLabel" binding ="#{pageFlowScope.ProjectDetailsBean.biResultsLabel}" partialTriggers="biTable" id="otbicnt"/>
+                  								           </af:toolbar>
+                        								 </f:facet>
+											              
+											              <af:table id="biTable"
+										                            value="#{pageFlowScope.ProjectDetailsBean.businessInteractionCollectionModel}" var="row"
+								                                    selectionListener="#{pageFlowScope.ProjectDetailsBean.selectBusinessInteraction}"
+								                                    filterVisible="false" varStatus="vs" contentDelivery="immediate"
+                                  									rowSelection="single"
+																	autoHeightRows="10"
+																	columnStretching="multiple"
+                                  									styleClass="AFStretchWidth"
+								                                    binding="#{pageFlowScope.ProjectDetailsBean.businessInteractionTable}">
+															 <af:column headerText="#{inventoryUIBundle.ID}" id="cc3" rowHeader="unstyled">
+										                            <af:commandImageLink action="BusinessInteractionSummary" id="cl1" actionListener="#{bindings.openSubTaskForBusinessInteraction.execute}"
+										                                                 text="#{row.id}"
+										                                                 shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+										                                <af:setActionListener from="#{row.oid}" to="#{objectId}"/>
+										                             </af:commandImageLink>
+											                </af:column>
+											                <af:column  headerText="#{inventoryUIBundle.NAME}" id="cc4" width="200">
+													            <af:outputText value="#{row.name}" id="ot4"/>
+													        </af:column>
+													        <af:column id="cc10" headerText="#{inventoryUIBundle.SPECIFICATION}" width="200" >
+									                            <af:commandImageLink action="SpecificationSummary" id="clsp1" actionListener="#{bindings.openSubTaskForSpec.execute}"
+													                                                 text="#{row.specification.name}"
+													                                                 shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+										                                <af:setActionListener from="#{row.specification.oid}" to="#{specObjectId}"/>
+  	 							                                </af:commandImageLink>
+											                </af:column>
+													        <af:column headerText="#{inventoryUIBundle.INVENTORY_STATUS}" id="cc8">
+													             <af:outputText value="#{pageFlowScope.ProjectDetailsBean.businessInteractionStatus}" id="ot8"/>
+													        </af:column>
+													        <af:column headerText="#{inventoryUIBundle.EFFECTIVE_DATE}"  id="cc2">
+													             <af:outputText value="#{row.effDate}" id="ot1">
+													                  <af:convertDateTime pattern="#{pageFlowScope.ProjectDetailsBean.dateTimeFormat}"/>
+													             </af:outputText>
+													         </af:column>
+													         <af:column headerText="#{inventoryUIBundle.EXTERNAL_SYSTEM}" align="center" id="colos">
+												                  <af:column headerText="#{inventoryUIBundle.EXTERNAL_MANAGEMENT_DOMAIN}" id="colosdomain">
+												                    <af:outputText value="#{row.externalManagementDomain}" id="otdomain"/>
+												                  </af:column>
+												                  <af:column headerText="#{inventoryUIBundle.EXTERNAL_NAME}" id="colosname">
+												                    <af:outputText value="#{row.externalName}" id="otname"/>
+												                  </af:column>
+												                  <af:column headerText="#{inventoryUIBundle.EXTERNAL_OBJECT_ID}" id="colosobjectid">
+												                    <af:outputText value="#{row.externalObjectId}" id="otobjectid"/>
+												                  </af:column>
+													          </af:column>
+												         </af:table>
+											              <af:popup id="addBIPopup" binding="#{backingBeanScope.popupAssociateBISearch}" contentDelivery="lazyUncached">
+											                <af:dialog title="#{inventoryUIBundle.BUSINESS_INTERACTION_ASSOCIATE}" id="d1" type="none">
+											                <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+											                  <f:facet name="center">                
+											                    <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}"
+											                               id="bir2"/>
+											                  </f:facet>
+											                </af:panelStretchLayout>
+											                  </af:dialog>
+                                                                                                             <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                                                                             <af:serverListener type="refreshEntity" method="#{pageFlowScope.ProjectDetailsBean.refresh}"/>
+											              </af:popup>
+											            </af:panelCollection>
+													
+													<af:spacer height="10" id="s11act"/>
+													
+                                                  <!--  Activities related to Business Interaction -->
+                                                   <af:panelHeader text="#{inventoryUIBundle.BI_ACTIVITIES}">
+                                                      <af:panelCollection id="biacpc2" styleClass="AFStretchWidth" featuresOff="freeze wrap">
+											              <f:facet name="menus"/>
+											              <f:facet name="toolbar" />
+											              <f:facet name="statusbar">
+                            								<af:toolbar id="act-cnt">
+                                          						<af:outputText  value="#{inventoryUIBundle.ROW_COUNT} #{(pageFlowScope.ProjectDetailsBean.activityCount lt 0) ? 0 : pageFlowScope.ProjectDetailsBean.activityCount}"
+                                                					            styleClass="invSearchOutputLabel" binding="#{backingBeanScope.acttotalResultsLabel}" partialTriggers="activityTableID" id="otacnt"/>
+                  								           </af:toolbar>
+                        								 </f:facet>
+											              
+											               <af:table value="#{pageFlowScope.ProjectDetailsBean.activityModel}" var="row"
+											                         emptyText="#{inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET}"
+											                         binding="#{pageFlowScope.ProjectDetailsBean.activityTable}"
+											                         autoHeightRows="15" contentDelivery="immediate"
+											                         styleClass="AFStretchWidth"
+											                         rowSelection="single"
+											                         id="activityTableID"
+											                         columnStretching="multiple"
+											                         summary="#{inventoryUIBundle.ACTIVITY_LIST_SUMMARY}">
+                                
+									                           <af:column sortable="false" headerText="#{inventoryUIBundle.NAME}" rowHeader="unstyled"
+									                              		  id="biacc6" width="50%">
+												                       <af:panelGroupLayout id="pglni" layout="horizontal" halign="left">   
+												                       <af:spacer width="15" id="sp69" rendered="#{!pageFlowScope.ProjectDetailsBean.activityHasCheckList}"/>    
+												                       <af:commandImageLink actionListener="#{bindings.openSubTaskForActivitySummary.execute}"  icon="#{pageFlowScope.ProjectDetailsBean.activityCheckListIcon}" action="ActivityDetails" id="cl22" text="#{row.name}">
+												          					<af:setActionListener from="#{row.oid}" to="#{objectId}"/>
+												          					<af:setActionListener from="#{pageFlowScope.ProjectDetailsBean.businessInteraction.oid}" to="#{workOrder}"/>
+												          			   </af:commandImageLink>
+																	   </af:panelGroupLayout>
+									                   		   </af:column>
+										                    <af:column sortable="false" headerText="#{inventoryUIBundle.PROPOSED_START}" rowHeader="unstyled"
+										                               id="biacc7" width="25%">
+										                                <af:outputText value="#{row.activityStartDate}" id="ot76"/>
+										                    </af:column>
+										                    <af:column sortable="false" headerText="#{inventoryUIBundle.PROPOSED_END}" rowHeader="unstyled"
+										                               id="biacc10" width="25%">
+										                                <af:outputText value="#{row.activityEndDate}" id="ot17"/>
+										                    </af:column>
+										                    <af:column sortable="false" headerText="#{inventoryUIBundle.ACTUAL_START_DATE}" rowHeader="unstyled"
+										                               id="biacc57" width="25%">
+										                                <af:outputText value="#{row.actualStartDate}" id="biacot16"/>
+										                    </af:column>
+										                    <af:column sortable="false" headerText="#{inventoryUIBundle.ACTUAL_END_DATE}" rowHeader="unstyled"
+										                               id="biacc70" width="25%">
+										                                <af:outputText value="#{row.actualEndDate}" id="ot77"/>
+										                    </af:column>
+										                     <af:column sortable="false" headerText="#{inventoryUIBundle.STATUS}" rowHeader="unstyled"
+										                               id="biacc11" width="25%">
+										                            <af:panelGroupLayout id="pgl7e" layout="horizontal" halign="left">
+										                                    <af:image source="#{pageFlowScope.ProjectDetailsBean.activityStatusIcon}" shortDesc="" id="i89"/>
+										                                    <af:spacer width="5" id="sp67"/>
+																			 <af:outputText value="#{pageFlowScope.ProjectDetailsBean.activityStatus}" id="ot29"/>
+										                            </af:panelGroupLayout>
+										                    </af:column>
+										                      
+										                     <af:column sortable="false" headerText="#{inventoryUIBundle.DURATION}" rowHeader="unstyled"
+										                               id="biacc12" width="25%">
+										                                <af:outputText value="#{pageFlowScope.ProjectDetailsBean.activityDuration}"
+										                                               id="biacot19"/>
+										                    </af:column>
+										                     <af:column sortable="false" headerText="#{inventoryUIBundle.ASSIGNED_TO}" rowHeader="unstyled"
+										                               id="biacc13" >
+										                                <af:outputText value="#{pageFlowScope.ProjectDetailsBean.activityResource}" id="ot20"/>
+										                    </af:column>
+										                    <af:column headerText="#{inventoryUIBundle.PERCENT_COMPLETE}" id="c76" width="60%">
+										                                <af:progressIndicator value="#{pageFlowScope.ProjectDetailsBean.progressUpdate}" id="pi2"/>
+										                      </af:column>
+										                     </af:table>
+											            </af:panelCollection>
+                                                    </af:panelHeader>
+                                                    </af:showDetailHeader>
+												 </af:panelGroupLayout>
+                                                </f:facet>
+                                            </af:panelStretchLayout>
+                                            </af:panelHeader>
+                                        </af:showDetailItem>
+
+                                        <af:showDetailItem text="#{inventoryUIBundle.PRJ_ACTIVITIES}" binding="#{backingBeanScope.activityTab}" stretchChildren="first" styleClass="AFStretchWidth"
+                                                           id="sdi2" disclosureListener="#{pageFlowScope.ProjectDetailsBean.discloseActivityTab}"   
+														   disclosed="#{pageFlowScope.ProjectDetailsBean.selectedTab == inventoryUIBundle.PRJ_ACTIVITIES}">
+											 <af:panelSplitter id="ps2" orientation="vertical" styleClass="AFStretchWidth" dimensionsFrom="auto" positionedFromEnd="false" splitterPosition="250">
+												<f:facet name="first">
+                                            <af:panelStretchLayout id="psl3" styleClass="AFStretchWidth" dimensionsFrom="auto">
+                                                <f:facet name="center">
+                                                    <af:region value="#{bindings.ActivityListFlow1.regionModel}" id="r1" binding="#{pageFlowScope.ProjectDetailsBean.activityRegion}"/>
+                                                </f:facet>
+                                            </af:panelStretchLayout>
+
+                                </f:facet>
+                                <!-- The below facet will have the dynamic region for displaying the activity. -->
+                                <f:facet name="second">
+                                    <af:panelSplitter id="ps3" orientation="vertical" styleClass="AFStretchWidth" dimensionsFrom="auto" positionedFromEnd="true" collapsed="true" splitterPosition="400">
+                                        <f:facet name="first">
+                                            <af:panelStretchLayout id="psl5" dimensionsFrom="auto" styleClass="AFStretchWidth">
+                                                <f:facet name="center">
+                                                    <af:region value="#{bindings.dynamicRegion1.regionModel}" id="r2" binding="#{pageFlowScope.ProjectDetailsBean.regionBinding}"/>
+                                                </f:facet>
+                                            </af:panelStretchLayout>
+                                        </f:facet>
+                                        <f:facet name="second">
+                                            <af:panelStretchLayout id="psl6" dimensionsFrom="auto" styleClass="AFStretchWidth">
+                                                <f:facet name="center">
+                                                    <af:region value="#{bindings.ActivityItemsListFlow1.regionModel}" id="r3" binding="#{pageFlowScope.ProjectDetailsBean.itemRegionBinding}"/>
+                                                </f:facet>
+                                            </af:panelStretchLayout>
+                                        </f:facet>
+                                    </af:panelSplitter>
+                                </f:facet>
+                            </af:panelSplitter>
+                                         </af:showDetailItem>
+                                    </af:panelTabbed>
+                    </f:facet>
+                </af:panelStretchLayout>
+
+            <cui:WarningDialog id="wd" binding="#{backingBeanScope.navigationWarningDialog}"/>
+
+        </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

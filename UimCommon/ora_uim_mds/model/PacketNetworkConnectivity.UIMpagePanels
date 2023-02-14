@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/poms/model/layout" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/layout" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xsi:type="PagePanelsType" name="PacketNetworkConnectivity">
+  <com:saveVersion>1</com:saveVersion>
+  
+  <PagePanels accessStrategy="VALUE_LABEL_EL" 
+			  argumentEl="#{pageFlowScope.objectId}" 
+			  beanName="TDMConnectivityCreateBean" 
+			  pageDefName="TDMConnectivityCreatePageDef" 
+			  pageDefPackage="oracle.communications.inventory.ui.connectivity.page" 
+			  pageDefPath="/oracle/communications/inventory/ui/connectivity/page" 
+			  pageFragmentPath="/oracle/communications/inventory/ui/connectivity/page" 
+			  pageJSFFName="TDMConnectivityCreate.jsff" 
+			  pageName="Connectivity Editor" 
+			  panelId="conn" 
+			  panelName="Connectivity Create Panel">
+    <pageType editable="true" summary="false" type="form"/>
+  </PagePanels>
+  
+  <PagePanels accessStrategy="VALUE_LABEL_EL" 
+			  argumentEl="#{pageFlowScope.objectId}" 
+			  beanName="TDMConnectivityDetailsBean" 
+			  pageDefName="TDMConnectivityDetailsPageDef" 
+			  pageDefPackage="oracle.communications.inventory.ui.connectivity.page" 
+			  pageDefPath="/oracle/communications/inventory/ui/connectivity/page" 
+			  pageFragmentPath="/oracle/communications/inventory/ui/connectivity/page" 
+			  pageJSFFName="TDMConnectivityDetails.jsff" 
+			  pageName="Connectivity Editor" 
+			  panelId="connedit" 
+			  panelName="Connectivity Edit Panel">
+    <pageType editable="true" summary="false" type="form"/>
+  </PagePanels>
+
+  <PagePanels accessStrategy="VALUE_LABEL_EL" 
+			  argumentEl="#{pageFlowScope.objectId}" 
+			  beanName="TDMConnectivityDetailsBean" 
+			  pageDefName="TDMConnectivityDetailsPageDef" 
+			  pageDefPackage="oracle.communications.inventory.ui.connectivity.page" 
+			  pageDefPath="/oracle/communications/inventory/ui/connectivity/page" 
+			  pageFragmentPath="/oracle/communications/inventory/ui/connectivity/page" 
+			  pageJSFFName="TDMConnectivityDetails.jsff" 
+			  pageName="Connectivity Details" 
+			  panelId="elcpf" 
+			  panelName="Connectivity Details Panel">
+    <pageType editable="false" summary="true" type="form"/>
+  </PagePanels>
+</com:modelEntity>

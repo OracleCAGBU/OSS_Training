@@ -1,0 +1,44 @@
+package oracle.communications.inventory.rules
+
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.rules.impl.RuleDebug;
+import java.util.*;
+import oracle.communications.inventory.api.entity.*;
+
+global Log log;
+
+rule "Locations"
+		salience 0
+	when
+		place : GeographicPlace()
+		eval(place instanceof GeographicLocation)
+	then
+	    // execute for location
+       	StringBuilder formattedIdentifier = new StringBuilder();
+                     List pc = new ArrayList(place.getCharacteristics());
+	if (pc != null) {
+        		for(int i=0;i<pc.size();i++) {
+    			String value = ((PlaceCharacteristic)pc.get(i)).getValue();
+    			if (value != null) formattedIdentifier.append(value).append(" ");
+    		}
+	}
+    	place.setFormattedIdentifier(formattedIdentifier.toString().trim());    
+end
+
+rule "Addresses"
+		salience 0
+	when
+		place : GeographicPlace()
+		eval(place instanceof GeographicAddress)
+	then
+	    // execute for address
+       	StringBuilder formattedIdentifier = new StringBuilder();
+                     List pc = new ArrayList(place.getCharacteristics());
+	if (pc != null) {
+        		for(int i=0;i<pc.size();i++) {
+    			String value = ((PlaceCharacteristic)pc.get(i)).getValue();
+    			if (value != null) formattedIdentifier.append(value).append(" ");
+    		}
+	}
+    	place.setFormattedIdentifier(formattedIdentifier.toString().trim());    
+end

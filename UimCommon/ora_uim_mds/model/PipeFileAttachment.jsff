@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                     id="pt1">
+        <f:facet name="localArea">
+            <af:group id="g1">
+                <af:panelGroupLayout id="pgl" layout="scroll">
+                    <af:panelHeader text="#{inventoryUIBundle.FILE_ATTACHMENT} - #{pageFlowScope.PipeFileAttachmentBean.displayInfo}"
+                                    id="ph2">
+                        <af:showDetailHeader text="#{inventoryUIBundle.FILE_ATTACHMENT}"
+                                             disclosed="true" id="sdh1">
+                            <f:facet name="context"/>
+                            <f:facet name="menuBar"/>
+                            <f:facet name="toolbar">
+                                <af:commandToolbarButton text="#{inventoryUIBundle.BACK}"
+                                                         id="ctb1"
+                                                         action="back"/>
+                            </f:facet>
+                            <f:facet name="legend"/>
+                            <f:facet name="info"/>
+                            <af:spacer width="10" height="10" id="s2"/>
+                            <af:spacer width="10" height="10" id="s3"/>
+                            <af:panelCollection id="pc1"
+                                                styleClass="AFStretchWidth">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t3">
+                                        <af:spacer width="10" height="10"
+                                                   id="s11"/>
+                                        <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}"
+                                                                 icon="#{InventoryHelperBean.deleteIcon}"
+                                                                 id="cb3Delete"
+                                                                 actionListener="#{pageFlowScope.PipeFileAttachmentBean.onDelete}">
+                                            <af:setActionListener from="true"
+                                                                  to="#{deleteTrail}"/>
+                                        </af:commandToolbarButton>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar">
+                                    <af:toolbar id="t2">
+                                        <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(pageFlowScope.PipeFileAttachmentBean.pipeFileAttachmentCollectionModel.rowCount lt 0) ? 0 :  pageFlowScope.PipeFileAttachmentBean.pipeFileAttachmentCollectionModel.rowCount}"
+                                                       id="otp1"
+                                                       styleClass="invSearchOutputLabel"
+                                                       partialTriggers="t1"
+                                                       binding="#{backingBeanScope.totalResultsLabel}"/>
+                                    </af:toolbar>
+                                </f:facet>
+                                <af:table value="#{pageFlowScope.PipeFileAttachmentBean.pipeFileAttachmentCollectionModel}"
+                                          var="row"
+                                          emptyText="#{inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET}"
+                                          rowBandingInterval="0"
+                                          partialTriggers="::cb3Delete"
+                                          selectionListener="#{pageFlowScope.PipeFileAttachmentBean.pipeFileAttachmentModelSelectionListener}"
+                                          rowSelection="#{pageFlowScope.PipeFileAttachmentBean.rowSelection}"
+                                          id="t1"
+                                          binding="#{pageFlowScope.PipeFileAttachmentBean.resultsTable}">
+                                    <af:column headerText="#{inventoryUIBundle.ID}"
+                                               id="c1">
+                                        <af:link id="cl1">
+                                            <af:fileDownloadActionListener filename="#{row.id}"
+                                                                           contentType="#{row.mimeType}"
+                                                                           method="#{pageFlowScope.PipeFileAttachmentBean.downloadFileAttachment}"/>
+                                            <af:outputText value="#{row.id}"
+                                                           id="ot2"/>
+                                        </af:link>
+                                    </af:column>
+                                    <af:column headerText="#{inventoryUIBundle.NAME}"
+                                               id="c2">
+                                        <af:outputText value="#{row.name}"
+                                                       id="ot3"/>
+                                    </af:column>
+                                    <af:column headerText="#{inventoryUIBundle.DESCRIPTION}"
+                                               id="c3">
+                                        <af:outputText value="#{row.description}"
+                                                       id="ot4"/>
+                                    </af:column>
+                                    <af:column headerText="#{inventoryUIBundle.START_DATE}"
+                                               id="c4">
+                                        <af:outputText value="#{row.startDate}"
+                                                       id="ot5">
+                                          <af:convertDateTime pattern="#{pageFlowScope.PipeFileAttachmentBean.dateTimeFormat}"/>
+                                        </af:outputText>             
+                                    </af:column>
+                                </af:table>
+                            </af:panelCollection>
+                        </af:showDetailHeader>
+                    </af:panelHeader>
+                </af:panelGroupLayout>
+            </af:group>
+        </f:facet>
+    </af:pageTemplate>
+</jsp:root>

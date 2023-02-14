@@ -1,0 +1,361 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pmv_pt1">
+  <?audit suppress oracle.adf.faces.pt-missing-model?>
+  <f:facet name="localArea"> 
+		<af:panelStretchLayout id="pmv_psll1" styleClass="AFStretchWidth" binding="#{backingBeanScope.mapViewLayout}" dimensionsFrom="auto" topHeight="800px;">
+			<f:facet name="top">
+				<af:panelHeader text="#{inventoryUIBundle.MAP_VIEW} - #{PathAnalysisMapViewBean.displayInfo}" id="pmv_ph1" helpTopicId="OHW_networkMap">
+					<f:facet name="context"/>
+					<f:facet name="menuBar"/>
+					<f:facet name="toolbar"/>
+					<f:facet name="legend"/>
+					<f:facet name="info"/>
+					<af:clientListener method="goMap()" type="load"/>
+				  </af:panelHeader>
+			</f:facet>
+			<f:facet name="center">
+				<af:panelGroupLayout id="pmv_pgl1" layout="scroll">
+					<af:popup id="pmv_dynapop2" rendered="true" contentDelivery="lazyUncached"
+							  animate="false" clientComponent="true"
+							  binding="#{PathAnalysisMapViewBean.dynapopMenu2}">
+					  <af:clientListener method="interrupt" type="popupOpened"/>
+					  <af:menu text="menu 1" id="pmv_m1" clientComponent="true">
+						<af:commandMenuItem text="#{inventoryUIBundle.PLACE_SUMMARY}" id="pmv_cmi1" visible="#{PathAnalysisMapViewBean.placeVisible}"
+											action="placeSummary" actionListener="#{bindings.openSubTaskForSummary.execute}">
+						  <af:setActionListener from="#{PathAnalysisMapViewBean.placeId}"
+												to="#{requestScope.oid}"/>
+						</af:commandMenuItem>
+						<af:commandMenuItem text="#{inventoryUIBundle.EQUIPMENT_SUMMARY}" id="pmv_cmi2" visible="#{PathAnalysisMapViewBean.equipmentVisible}"
+											action="equipmentSummary">
+						  <af:setActionListener from="#{PathAnalysisMapViewBean.foiId}"
+												to="#{requestScope.oid}"/>
+						</af:commandMenuItem>
+						<af:commandMenuItem text="#{inventoryUIBundle.NETWORK_SUMMARY}" id="pmv_cmi4" visible="#{PathAnalysisMapViewBean.networkVisible}"
+											action="networkSummary">
+						  <af:setActionListener from="#{PathAnalysisMapViewBean.foiId}"
+												to="#{requestScope.oid}"/>
+						</af:commandMenuItem>
+						<af:commandMenuItem text="#{inventoryUIBundle.CUSTOM_NETWORK_ADDRESS_SUMMARY}" id="pmv_cmi5" visible="#{PathAnalysisMapViewBean.customNetworkAddressVisible}"
+											action="cnaSummary">
+						  <af:setActionListener from="#{PathAnalysisMapViewBean.foiId}"
+												to="#{requestScope.oid}"/>
+						</af:commandMenuItem>            
+						<af:commandMenuItem text="#{inventoryUIBundle.DEVICE_INTERFACE_SUMMARY}" id="pmv_cmi6" visible="#{PathAnalysisMapViewBean.deviceInterfaceVisible}"
+											action="deviceInterfaceSummary">           
+						  <af:setActionListener from="#{PathAnalysisMapViewBean.foiId}"
+												to="#{requestScope.oid}"/>
+						</af:commandMenuItem>                                
+						<af:commandMenuItem text="#{inventoryUIBundle.LOGICAL_DEVICE_SUMMARY}" id="pmv_cmi7" visible="#{PathAnalysisMapViewBean.logicalDeviceVisible}"
+											action="logicalDeviceSummary">
+						  <af:setActionListener from="#{PathAnalysisMapViewBean.foiId}"
+												to="#{requestScope.oid}"/>
+						</af:commandMenuItem>
+						<af:commandMenuItem text="#{inventoryUIBundle.PHYSICAL_DEVICE_SUMMARY}" id="pmv_cmi8" visible="#{PathAnalysisMapViewBean.physicalDeviceVisible}"
+											action="physicalDeviceSummary">
+						  <af:setActionListener from="#{PathAnalysisMapViewBean.foiId}"
+												to="#{requestScope.oid}"/>
+						</af:commandMenuItem>                        
+						<af:commandMenuItem text="#{inventoryUIBundle.PHYSICAL_PORT_SUMMARY}" id="pmv_cmi9" visible="#{PathAnalysisMapViewBean.physicalPortVisible}"
+											action="physicalPortSummary">  
+						  <af:setActionListener from="#{PathAnalysisMapViewBean.foiId}"
+												to="#{requestScope.oid}"/>
+						</af:commandMenuItem>                                
+						<af:commandMenuItem text="#{inventoryUIBundle.PARTY_SUMMARY}" id="pmv_cmi10" visible="#{PathAnalysisMapViewBean.partyVisible}"
+											action="partySummary">
+						  <af:setActionListener from="#{PathAnalysisMapViewBean.foiId}"
+												to="#{requestScope.oid}"/>
+						</af:commandMenuItem>       
+						<af:commandMenuItem text="#{inventoryUIBundle.CUSTOM_OBJECT_SUMMARY}" id="pmv_cmi11" visible="#{PathAnalysisMapViewBean.customObjectVisible}"
+											action="customObjectSummary">
+						  <af:setActionListener from="#{PathAnalysisMapViewBean.foiId}"
+												to="#{requestScope.oid}"/>
+						</af:commandMenuItem>  
+						<af:commandMenuItem text="#{inventoryUIBundle.ASSOCIATED_PIPES}" id="pmv_cmia" visible="#{PathAnalysisMapViewBean.pipesVisible}"
+											action="inventoryAssociationList">  
+									 <af:setActionListener from="#{PathAnalysisMapViewBean.foiId}"
+												to="#{requestScope.oid}"/>
+
+						</af:commandMenuItem>
+						<af:commandMenuItem text="#{inventoryUIBundle.ASSOCIATED_NODES}" id="pmv_cmib" visible="#{PathAnalysisMapViewBean.multiNodePlaceVisible}"
+											actionListener="#{PathAnalysisMapViewBean.associatedNodesAction}" >              
+							<af:showPopupBehavior triggerType="click" popupId="pmv_inventoryAssociationListPopup"/>
+						</af:commandMenuItem>
+						<af:commandMenuItem text="#{inventoryUIBundle.CENTER_MAP}" id="pmv_cmi3" visible="true">
+							<af:clientListener method="setCenter" type="click"/>
+						</af:commandMenuItem>
+						<af:commandMenuItem text="#{inventoryUIBundle.CLOSE_MENU}" id="pmv_cmi12"/>
+
+					  </af:menu>
+					   <af:serverListener type="jsSendInfo" method="#{PathAnalysisMapViewBean.sendInfo}"/>
+					</af:popup>
+					
+					<af:popup id="pmv_inventoryAssociationListPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.inventoryAssociationListBinding}">
+							<af:dialog id="pmv_inventoryAssociationListDialog" 
+											closeIconVisible="true" type="none"
+									   title="#{inventoryUIBundle.INV_ASSOCIATION_LIST}">
+							   <af:panelStretchLayout id="pmv_pt_psl100" styleClass="invSummaryPanelStretchLayout">
+								  <f:facet name="center">
+									  <af:region value="#{bindings.InventoryAssociationListFlow1.regionModel}"
+												 id="pmv_r1"/>
+								  </f:facet>
+								</af:panelStretchLayout>              
+							</af:dialog>                
+					</af:popup>
+					
+					  <f:verbatim>
+					   <div id="map" style="position: absolute; height: auto; top: 50px; left: 0px; bottom: 10px; right: 10px; width: auto; border-style:solid; border-color:Gray; border-width:medium;"/>
+					   <!--div id="map" style="width: auto; height: 800px"/-->
+					  </f:verbatim> 
+					<trh:script source="/resources/oraclemaps.js" id="res1"></trh:script>
+					<trh:script id="vars" text='
+						   var mapCenterLon = parseFloat("#{PathAnalysisMapViewBean.centerMapLongitude}");
+						   var mapCenterLat = parseFloat("#{PathAnalysisMapViewBean.centerMapLatitude}");
+						   var mapZoom      = parseInt("#{PathAnalysisMapViewBean.zoomLevel}"); 
+						   var baseMapName  = "#{PathAnalysisMapViewBean.baseMap}";
+						   var datasource   = "#{PathAnalysisMapViewBean.datasource}";
+						   var mapTileServer = "#{PathAnalysisMapViewBean.mapTileServerUrl}"; 
+						   var copyright    = "#{PathAnalysisMapViewBean.copyright}"; 
+						   var infoStr = "#{PathAnalysisMapViewBean.displayLatLon}";
+						   var legendTitle = "#{PathAnalysisMapViewBean.legendTitle}";  
+						   var overviewMapTitle = "#{PathAnalysisMapViewBean.overviewMapTitle}"; 
+						   var legendName = "#{inventoryUIBundle.MAP_LEGEND}";
+						   var overviewName = "#{inventoryUIBundle.OVERVIEW_MAP}"; 
+						   var coordinates = "#{inventoryUIBundle.COORDINATES}"; 
+						   var baseURL = "#{PathAnalysisMapViewBean.mapviewerUrl}";
+                                                   var dynapop2 = "#{PathAnalysisMapViewBean.dynapop2Ref}";
+						   var mapLegend = "#{PathAnalysisMapViewBean.mapLegend}";
+                                                   
+                                                   var ldNodes= "#{PathAnalysisMapViewBean.logicaldevicesInList}";
+                                                   var pdNodes= "#{PathAnalysisMapViewBean.physicaldevicesInList}";
+                                                   var equipmentNodes= "#{PathAnalysisMapViewBean.equipmentsInList}";
+                                                   var plNodes= "#{PathAnalysisMapViewBean.propertyLocationsInList}";
+                                                   var necNodes= "#{PathAnalysisMapViewBean.necsInList}";
+                                                   var placesNodes= "#{PathAnalysisMapViewBean.placesInList}";
+                                                   var edgesLinks= "#{PathAnalysisMapViewBean.edgesInList}";
+                                                   var pipesLinks= "#{PathAnalysisMapViewBean.pipesInList}";
+                                                   var connectivityLinks= "#{PathAnalysisMapViewBean.connectivitiesInList}";
+                                                   var placeIdMap ="#{PathAnalysisMapViewBean.placeIdMap}";'/>
+
+					<trh:script id="scr2">
+
+					  function goMap() {
+					  
+						   /** Look in the same domain if a URL is not passed in. */
+						   if (baseURL == "null") {
+							   baseURL = "http://" + document.location.host + "/mapviewer/";
+						   }
+						   var imgURL = "http://" + document.location.host + "/Inventory/images/";
+						   var mpoint = MVSdoGeometry.createPoint(mapCenterLon, mapCenterLat, 8307);
+						   mapview = new MVMapView(document.getElementById("map"), baseURL);
+						   mapview.addMapTileLayer(new MVMapTileLayer(baseMapName, mapTileServer));
+						   mapview.setCenter(mpoint);
+						   mapview.setZoomLevel(mapZoom);
+						   mapview.addNavigationPanel("WEST");
+						   var md = new MVMapDecoration(new MVOverviewMap(3), null, null, 200, 150, null, null);
+						   md.setTitleBar(overviewMapTitle, imgURL+"audit.png", overviewName);
+						   md.setCollapsible(true, true);
+						   mapview.addMapDecoration(md);
+						   
+						   var scaleBar = new MVMapDecoration(new MVScaleBar(), 0, 1, null, null, 4, -45);
+						   mapview.addMapDecoration(scaleBar);
+			 
+						   var note = new MVMapDecoration(copyright, 1, 0, 200, null, -200, 3);
+						   mapview.addMapDecoration(note);
+						   
+						   var legend = new MVMapDecoration(mapLegend, null, null,200,340, null, null);
+						   legend.setCollapsible(true, true);
+						   legend.setTitleBar(legendTitle, imgURL+"i.gif", legendName);
+						   mapview.addMapDecoration(legend);
+                                		   mapview.setEventListener("mouse_double_click", displayLatLong);
+						  	 //Network Edges
+                                                          var count = 1;
+                                                            var edgesLinksArray = JSON.parse(edgesLinks);
+                                                            var edgeLink='';
+                                                            for(var index in edgesLinksArray) {
+                                                                    edgeLink = edgeLink + edgesLinksArray[index]+",";
+                                                                    
+                                                            }
+                                                            edgeLink = edgeLink.substring(0,edgeLink.length-1);
+                                                                    var edgeFOI = new MVThemeBasedFOI("edge"+count, datasource + ".EDGE_PA");
+                                                                    edgeFOI.setQueryParameters(edgeLink,edgeLink);
+                                                                    mapview.addThemeBasedFOI(edgeFOI);
+                                                                    edgeFOI.setVisible(true);
+                                                                    
+                                                            
+                                                       
+                                                        //Pipe
+                                                         count = 1;
+                                                            var pipesLinksArray = JSON.parse(pipesLinks);
+                                                            var pipeLink ='';
+                                                            for(var index in pipesLinksArray) {
+                                                                     pipeLink = pipeLink + pipesLinksArray[index]+",";
+                                                                     
+                                                            }
+                                                            pipeLink=pipeLink.substring(0,pipeLink.length-1);
+                                                                    var pipeFOI = new MVThemeBasedFOI("pipe"+count, datasource + ".PIPE_PA");
+                                                                    pipeFOI.setQueryParameters(pipeLink,pipeLink);
+                                                                    mapview.addThemeBasedFOI(pipeFOI);
+                                                                    pipeFOI.setVisible(true);
+                                                                    pipeFOI.setEventListener("mouse_right_click", showContextMenu);
+
+                                                        //Connectivity
+                                                         count = 1;
+                                                            var connectivityLinksArray = JSON.parse(connectivityLinks);
+                                                            var connectivityLink = '';
+                                                            for(var index in connectivityLinksArray) {
+                                                                     connectivityLink = connectivityLink + connectivityLinksArray[index]+",";
+                                                                     
+                                                            }
+                                                            connectivityLink = connectivityLink.substring(0,connectivityLink.length-1);
+                                                            var connectivityFOI = new MVThemeBasedFOI("connectivity"+count, datasource + ".CONNECTIVITY_PA");
+                                                            connectivityFOI.setQueryParameters(connectivityLink,connectivityLink);
+                                                            mapview.addThemeBasedFOI(connectivityFOI);
+                                                            connectivityFOI.setVisible(true);
+                                                            connectivityFOI.setEventListener("mouse_right_click", showContextMenu);
+                                                         
+                                                          //Place
+                                                          count = 1;
+                                                            var placeNodesArray = JSON.parse(placesNodes);
+                                                            for(var index in placeNodesArray) {
+                                                                    var placeNode = placeNodesArray[index];
+                                                                    var placeFOI = new MVThemeBasedFOI("place"+count, datasource + ".PLACE_PA");
+                                                                    placeFOI.setQueryParameters(placeNode);
+                                                                    placeFOI.setMarkerImage(imgURL+"qual_globe_16_light@2x.png", 16, 16);
+                                                                    mapview.addThemeBasedFOI(placeFOI);
+                                                                    placeFOI.setEventListener("mouse_right_click", showContextMenu);
+                                                                    count++;
+                                                            }
+                                                          
+                                                           //Property Location
+                                                            count = 1;
+                                                            var propertyLocationNodesArray = JSON.parse(plNodes);
+                                                            for(var index in propertyLocationNodesArray) {
+                                                                    var propertyLocationNode = propertyLocationNodesArray[index];
+                                                                    var propertyLocationFOI = new MVThemeBasedFOI("propertyLocation"+count, datasource + ".PROPERTY_LOCATION_PA");
+                                                                    propertyLocationFOI.setQueryParameters(propertyLocationNode);
+                                                                    propertyLocationFOI.setMarkerImage(imgURL+"qual_globe_16_mono@2x.png", 16, 16);
+                                                                    mapview.addThemeBasedFOI(propertyLocationFOI);
+                                                                    propertyLocationFOI.setEventListener("mouse_right_click", showContextMenu);
+                                                                    count++;
+                                                            }  
+                                                            
+                                                          
+                                                         
+                                                         //logical device  
+                                                          count = 1;
+                                                            var ldNodesArray = JSON.parse(ldNodes);
+                                                            for(var index in ldNodesArray) {
+                                                                    var ldNode = ldNodesArray[index];
+                                                                    var ldFOI = new MVThemeBasedFOI("logicalDevice"+count, datasource + ".LOGICAL_DEVICE_PA");
+                                                                    ldFOI.setQueryParameters(ldNode);
+                                                                    ldFOI.setMarkerImage(imgURL+"qual_computer02_24_full@2x.png", 12, 12);
+                                                                    mapview.addThemeBasedFOI(ldFOI);
+                                                                    ldFOI.setEventListener("mouse_right_click", showContextMenu);
+                                                                    count++;
+                                                            }
+                                                          
+                                                          //Physical Device
+                                                          count = 1;
+                                                            var pdNodesArray = JSON.parse(pdNodes);
+                                                            for(var index in pdNodesArray) {
+                                                                    var pdNode = pdNodesArray[index];
+                                                                    var pdFOI = new MVThemeBasedFOI("physicalDevice"+count, datasource + ".PHYSICAL_DEVICE_PA");
+                                                                    pdFOI.setQueryParameters(pdNode);
+                                                                    pdFOI.setMarkerImage(imgURL+"qual_computer_48_full.png", 16, 16);
+                                                                    mapview.addThemeBasedFOI(pdFOI);
+                                                                    pdFOI.setEventListener("mouse_right_click", showContextMenu);
+                                                                    count++;
+                                                            }
+                                                            
+                                                          //Equipment
+                                                           count = 1;
+                                                            var equipmentNodesArray = JSON.parse(equipmentNodes);
+                                                            for(var index in equipmentNodesArray) {
+                                                                    var eqNode = equipmentNodesArray[index];
+                                                                    var eqFOI = new MVThemeBasedFOI("equipment"+count, datasource + ".EQUIPMENT_PA");
+                                                                    eqFOI.setQueryParameters(eqNode);
+                                                                    eqFOI.setMarkerImage(imgURL+"qual_server_24_full@2x.png", 12, 12);
+                                                                    mapview.addThemeBasedFOI(eqFOI);
+                                                                    eqFOI.setEventListener("mouse_right_click", showContextMenu);
+                                                                    count++;
+                                                            }
+                                                  mapview.display();
+					  }   
+                                          
+					  
+					  function processMultiNode(){
+						  
+					  }
+
+					   function displayLatLong() {
+						   var location = mapview.getMouseLocation();
+						   var locX;
+						   var locY;
+						   if (mapview.getSrid() == 8307) {
+							   locX = location.getPointX().toFixed(4);
+							   locY = location.getPointY().toFixed(4);
+						   } else {
+							   var transform = mapview.transformGeom(location, 8307);
+							   locX = transform.getPointX().toFixed(4);
+							   locY = transform.getPointY().toFixed(4);
+						   }
+			 
+						   // display it inside the info windowm +
+						   var displayStr = infoStr.replace("locX", locX);
+						   displayStr = displayStr.replace("locY", locY);
+						   mapview.displayInfoWindow(location, displayStr, null, null, null, coordinates);
+					   }
+					   
+					   function setCenter() {
+						   mapview.setCenter(mapview.getMouseLocation());
+					   }
+					   
+					</trh:script>
+					<trh:script id="rightclickmenus">
+						  var foiId = "false";
+						  var msgpop;
+						  var rtx = null; 
+						  var rty = null; 
+						  
+						 /** This function is called when the user right clicks on the map.
+						   *  It displays a context menu at the mouse right click location  */ 
+						  function showContextMenu(point, foi, foiEvent) {    
+							 foiId = foi.id;
+							 
+							 if (foiEvent.pageX) { 
+								rtx = foiEvent.pageX; rty = foiEvent.pageY; 
+							 } 
+							 else { 
+							   rtx = foiEvent.clientX; 
+							   rty = foiEvent.clientY; 
+							 }
+							
+							 msgpop = AdfPage.PAGE.findComponent(dynapop2);
+							AdfCustomEvent.queue(msgpop, "jsSendInfo", {foiId:foiId ,x: rtx, y: rty}, true);
+							
+						  } 
+						  
+						  // This method is added as a fix to the problem of bubbling of the IE browser specific 
+						  // popup menu, upon right clicking on the canvas. 
+						  // The clientCliener is added just before the ilog canvas tag (Ex: networkView, equipmentView and diagrammerView tags)
+						  // All this does is capture the user right-click (contextMenu) action and then
+						  // prevent it from bubbling up to the browser by canceling the event.                                  
+						  function interrupt(event) {                
+							  event.cancel(); 
+							  return false;
+						  }
+						  
+					</trh:script>
+				</af:panelGroupLayout>
+			</f:facet>
+		</af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

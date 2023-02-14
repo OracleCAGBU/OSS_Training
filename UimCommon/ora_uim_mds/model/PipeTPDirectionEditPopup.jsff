@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout layout="scroll" id="pgl1">
+        <af:panelHeader text="#{inventoryUIBundle.MENU_PIPE}" id="ph1" helpTopicId="OHW_pipeDirectInfo">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar">
+              <af:panelGroupLayout id="pgl3" layout="horizontal">
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb4" actionListener="#{pageFlowScope.PipeTPDirectionEditPopupBean.onSave}"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}"/>
+              <af:spacer width="10" height="10" id="s12"/>
+              <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2" action="cancel" actionListener="#{pageFlowScope.PipeTPDirectionEditPopupBean.cancel}" immediate="true"
+                                accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+              </af:panelGroupLayout>
+          </f:facet>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:showDetailHeader text="#{inventoryUIBundle.PIPE_DIRECTIONALITY_INFORMATION}" disclosed="true" id="sdh1">
+            <af:group id="g2">
+              <af:panelGroupLayout id="pgl2">
+              
+               <trh:tableLayout cellSpacing="0" cellPadding="2" width="100%">
+                   <trh:rowLayout>
+                    <trh:cellFormat>
+                          <af:selectOneChoice id="dirTypeDropDown" label="#{inventoryUIBundle.DIRECTIONALITY_TYPE}"  autoSubmit="true" value="#{pageFlowScope.PipeTPDirectionEditPopupBean.directionalityType}"
+                                              valueChangeListener="#{pageFlowScope.PipeTPDirectionEditPopupBean.onChangeDirectionalityType}" showRequired="true">
+                              <f:selectItems binding="#{pageFlowScope.PipeTPDirectionEditPopupBean.directionalityTypes}"/>
+                          </af:selectOneChoice>
+                     </trh:cellFormat>
+                     <trh:cellFormat columnSpan="2">
+                      <af:inputText label="#{inventoryUIBundle.INVENTORY_STATUS}" value="#{pageFlowScope.PipeTPDirectionEditPopupBean.inventoryStatus}" contentStyle="color: #ACA899;" disabled="true" id="it6"/>
+                    </trh:cellFormat>
+                    </trh:rowLayout>
+                    <trh:rowLayout>
+                    <trh:cellFormat>
+                          <af:selectOneChoice id="pipeDirDropDown" label="#{inventoryUIBundle.PIPE_DIRECTION}" autoSubmit="true" showRequired="true" value="#{pageFlowScope.PipeTPDirectionEditPopupBean.pipeDirection}"
+                                              valueChangeListener="#{pageFlowScope.PipeTPDirectionEditPopupBean.onChangePipeDirection}">
+                              <f:selectItems binding="#{pageFlowScope.PipeTPDirectionEditPopupBean.pipeDirections}"/>
+                          </af:selectOneChoice>
+                      </trh:cellFormat>
+                      <trh:cellFormat>
+                     <af:inputText label="#{inventoryUIBundle.DATE}" value="#{pageFlowScope.PipeTPDirectionEditPopupBean.date}" contentStyle="color: #ACA899;" disabled="true" id="it2"/>
+                   </trh:cellFormat>
+                   </trh:rowLayout>
+                  
+                     <trh:rowLayout>
+                   <trh:cellFormat>
+                        <af:inputText label="#{inventoryUIBundle.TERMINATION_ID_1}" value="#{pageFlowScope.PipeTPDirectionEditPopupBean.terminationPointID1}" contentStyle="color: #ACA899;" disabled="true" id="it10"/>
+                      </trh:cellFormat>
+                      <trh:cellFormat>
+                       <af:inputText label="#{inventoryUIBundle.TERMINATION_NAME_1}" value="#{pageFlowScope.PipeTPDirectionEditPopupBean.terminationPointName1}" disabled="true" id="it4"/>
+                    </trh:cellFormat>
+                    <trh:cellFormat>
+                            <af:selectOneChoice id="dirTypeDropDown1" label="#{inventoryUIBundle.DIRECTION_TYPE_1}" disabled="#{pageFlowScope.PipeTPDirectionEditPopupBean.bidirectional}"
+                                      partialTriggers="pipeDirDropDown dirTypeDropDown2" autoSubmit="true"
+                                      value="#{pageFlowScope.PipeTPDirectionEditPopupBean.directionType1}">
+                                <f:selectItems binding="#{pageFlowScope.PipeTPDirectionEditPopupBean.directionTypes1}"/>
+                            </af:selectOneChoice>
+                       </trh:cellFormat>
+                       </trh:rowLayout>
+                       <trh:rowLayout>
+                       <trh:cellFormat> <af:inputText label="#{inventoryUIBundle.TERMINATION_ID_2}" value="#{pageFlowScope.PipeTPDirectionEditPopupBean.terminationPointID2}" contentStyle="color: #ACA899;" disabled="true" id="it7"/>
+                     </trh:cellFormat>
+                      <trh:cellFormat>  <af:inputText label="#{inventoryUIBundle.TERMINATION_NAME_2}" value="#{pageFlowScope.PipeTPDirectionEditPopupBean.terminationPointName2}" disabled="true" id="it3"/>
+                        </trh:cellFormat>
+                       <trh:cellFormat>     <af:selectOneChoice id="dirTypeDropDown2" label="#{inventoryUIBundle.DIRECTION_TYPE_2}" disabled="#{pageFlowScope.PipeTPDirectionEditPopupBean.bidirectional}"
+                                      partialTriggers="pipeDirDropDown dirTypeDropDown1" autoSubmit="true"
+                                      value="#{pageFlowScope.PipeTPDirectionEditPopupBean.directionType2}">
+                                <f:selectItems binding="#{pageFlowScope.PipeTPDirectionEditPopupBean.directionTypes2}"/>
+                            </af:selectOneChoice>
+                       </trh:cellFormat>
+                    </trh:rowLayout>
+                 </trh:tableLayout>
+              </af:panelGroupLayout>
+            </af:group>
+          </af:showDetailHeader>
+        </af:panelHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

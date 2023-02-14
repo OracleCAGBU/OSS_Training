@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:panelStretchLayout id="psl2" styleClass="AFStretchWidth"
+                         dimensionsFrom="auto">
+    <f:facet name="center">
+      <af:panelGroupLayout id="pg1" styleClass="AFStretchWidth" layout="scroll">
+        <af:showDetailHeader text="#{pageFlowScope.RehomeActivityBean.displayInfo}" binding="#{backingBeanScope.rehomeShowDetailHeader}" id="sdh1">
+          <f:facet name="toolbar">
+            <af:toolbar id="t6">
+              <af:commandToolbarButton text="#{inventoryUIBundle.REHOME_CONNECTIVITIES}"
+                                       id="ctbg6"
+                                       binding="#{pageFlowScope.RehomeActivityBean.activityButton}"
+                                       disabled="#{pageFlowScope.RehomeActivityBean.disableRehome}"
+                                       actionListener="#{pageFlowScope.RehomeActivityBean.rehomeListener}"
+                                       ></af:commandToolbarButton>
+            
+            <!-- Rehome Connectivities popup -->
+            <af:popup id="rehomePopup" contentDelivery="lazyUncached"
+                      binding="#{backingBeanScope.rehomePopup}">
+            <!-- @pskalaga_bug_19052830v1 removed from dialog [resize="on" ] to see if sized better -->
+              <af:dialog title="#{inventoryUIBundle.SELECT_REHOME_CONNECTIVITIES}"
+                         id="d1" type="none" >
+                <af:panelStretchLayout id="psl3"
+                                       styleClass="invGroomPopupLayout">
+                  <f:facet name="center">
+                    <af:region value="#{bindings.RehomeConnectivitiesFlow1.regionModel}"
+                               id="r3"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{pageFlowScope.RehomeActivityBean.refresh}"/>
+            </af:popup>
+            </af:toolbar>
+          </f:facet>
+          <af:panelGroupLayout layout="vertical" halign="right" id="pg3">
+            <af:spacer height="10" width="10"/>
+            <af:panelAccordion id="pA1" discloseMany="true"
+                               styleClass="AFStretchWidth"
+                               dimensionsFrom="auto">
+              <af:showDetailItem text="#{inventoryUIBundle.SOURCE}" id="sdi1"
+                                 disclosed="true" flex="1"
+                                 stretchChildren="first"
+                                 disclosureListener="#{pageFlowScope.RehomeActivityBean.sourceDiscloserListener}">
+                <af:panelGroupLayout layout="scroll">
+                  <af:spacer height="10" width="10"/>
+                  <!-- Source Workspace Region -->
+                  <af:region value="#{bindings.SourceWorkspaceFlow.regionModel}"
+                             id="r1"
+                             binding="#{pageFlowScope.RehomeActivityBean.sourceRegionBinding}"/>
+                </af:panelGroupLayout>
+              </af:showDetailItem>
+              <af:showDetailItem text="#{inventoryUIBundle.TARGET}" id="sdi2"
+                                 disclosed="true" flex="1"
+                                 stretchChildren="first"
+                                 disclosureListener="#{pageFlowScope.RehomeActivityBean.targetDiscloserListener}">
+                <af:panelGroupLayout layout="scroll">
+                  <af:spacer height="10" width="10"/>
+                  <!-- Target Workspace Region -->
+                  <af:region value="#{bindings.TargetWorkspaceFlow.regionModel}"
+                             id="r2"
+                             binding="#{pageFlowScope.RehomeActivityBean.targetRegionBinding}"/>
+                </af:panelGroupLayout>
+              </af:showDetailItem>
+            </af:panelAccordion>
+          </af:panelGroupLayout>
+        </af:showDetailHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:panelStretchLayout>
+</jsp:root>

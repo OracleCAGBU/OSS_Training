@@ -1,0 +1,311 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2015, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    pvusuvan    06/04/14 - Bug 18496471 - P-18444052 ENABLE SAVE AS IMAGE FEATURE IN PIPE VISUAL
+    raattulu    3/5/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:jvf="http://www.ilog.com/jviews/tlds/jviews-framework-faces.tld"
+          xmlns:jv="http://www.ilog.com/jviews/tlds/jviews-faces.tld"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:jvdf="http://www.ilog.com/jviews/tlds/jviews-diagrammer-faces.tld"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>          
+ <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+  <f:facet name="localArea">
+  <af:panelGroupLayout id="pgl1" layout="scroll" binding="#{backingBeanScope.EBV_view_panelGroupLayout}">
+      <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <af:resource source="script/view.js" type="javascript"/>
+          <!-- Start of page elements -->
+          <trh:script id="jsffJS">      
+              function closeSubgraphs() {
+                  var params = new Array();
+                  params[0] = "close";
+                  enabledByView.performJSFAction("\#{EnabledByViewBean.closeSubgraphs}", params);
+              }
+              function openSubgraphs() {
+                 var params = new Array();
+                 params[0] = "open";
+                 enabledByView.performJSFAction("\#{EnabledByViewBean.openSubgraphs}", params);
+              }                              
+          </trh:script>
+          <af:panelGroupLayout id="pgl23" layout="scroll">
+                <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left">
+                    <af:outputText id="otbi" styleClass="invCommonText" noWrap="true" 
+                                   value="#{EnabledByViewBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+                    <af:menuBar id="menuBar1">
+                              <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invSearchMenu"
+                                       rendered="#{!(EnabledByViewBean.fromPCV)}"/>
+                    </af:menuBar>
+                    <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch6}" contentDelivery="lazyUncached">
+                        <af:dialog id="BISearchPopup_d1" type="none"
+                                   title="#{inventoryUIBundle.ENABLEDBY_VISUALIZATION}">
+                            <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                                <f:facet name="center">
+                                   <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                        <af:serverListener type="refreshEntity" method="#{EnabledByViewBean.afterBusinessInteractionSelectionChange}"/>
+                    </af:popup>
+                </af:panelGroupLayout>
+         </af:panelGroupLayout>
+   <af:panelHeader text="#{inventoryUIBundle.ENABLEDBY_VISUALIZATION} - #{EnabledByViewBean.displayInfo}" id="panelHeader1" helpTopicId="OHW_pipeEnabledViz">
+    
+    <af:popup id="editPipeTerminationPointPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.editPipeTerminationPointBinding}">
+      <af:dialog title="#{inventoryUIBundle.PIPE_TERMINATION_POINT}" id="editPipeTerminationPointDialog" 
+                                closeIconVisible="true" type="none">
+         <af:panelStretchLayout id="pt_psl4" styleClass="invSummaryPanelStretchLayout">
+            <f:facet name="center">
+                   <af:region value="#{bindings.PipeTerminationPointEditFlow1.regionModel}"
+                              id="r1"/>
+            </f:facet>
+          </af:panelStretchLayout>              
+       </af:dialog>
+     <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+     <af:serverListener type="refreshEntity"
+                        method="#{EnabledByViewBean.refreshCanvasArea}"/>
+   </af:popup>
+
+    <af:link action="#{EnabledByViewBean.getPageAction}"  id="goToPage" visible="false"
+                            binding="#{backingBeanScope.summaryPageLink}">
+              <af:outputText value="#{EnabledByViewBean.fromParameter}" id="ot4"/>
+              <af:setActionListener from="#{EnabledByViewBean.fromParameter}"
+                                    to="#{requestScope.oid}"/>
+            </af:link>
+			    
+    <!-- Bug 18496471 - P-18444052 ENABLE SAVE AS IMAGE FEATURE IN PIPE VISUAL - START -->
+      <af:commandButton id="saveAsImageButtonId" text="Save as Image" visible="false" 
+                        binding="#{backingBeanScope.saveAsImageBinding}" 
+                        partialSubmit="true" styleClass="invisibleComponent">
+        <af:fileDownloadActionListener filename="Pipe_Visual" contentType="image/jpeg" method="#{EnabledByViewBean.saveAsImage}"/>
+      </af:commandButton>
+    <!-- Bug 18496471 - P-18444052 ENABLE SAVE AS IMAGE FEATURE IN PIPE VISUAL - END -->
+    
+    <jvf:zoomInteractor id="zoom"/>
+    <jvf:panInteractor id="pan"/>
+    <jvdf:selectInteractor id="selectInteractor" deletionAllowed="true"/>    
+        <h:panelGrid border="0" columns="1" >
+            <h:panelGrid styleClass="visualToolbar">
+                    <!-- Declare a grid with six columns to accomodate the buttons -->
+                    <af:toolbar id="tb1">
+                     <!-- Declare the image buttons -->
+                     <!-- Notice how 'onclick' tag attribute is used -->
+                     
+                     <af:group id="gp1">
+                        <af:commandToolbarButton id="ctb1"
+                                                 icon="/images/selectobject_ena.png"
+                                                 shortDesc="#{inventoryUIBundle.SELECT}"
+                                                 hoverIcon="/images/selectobject_ovr.png"
+                                                 depressedIcon="/images/selectobject_dwn.png">
+                            <af:clientListener type="click" method="callSelectInteractor"/>
+                        </af:commandToolbarButton>
+                        <af:spacer width="3" height="10" id="s1"/>
+                
+                        <af:commandToolbarButton id="ctb2"
+                                                 icon="/images/zoomtoselection_ena.png"
+                                                 shortDesc="#{inventoryUIBundle.ZOOM}"
+                                                 hoverIcon="/images/zoomtoselection_ovr.png"
+                                                 depressedIcon="/images/zoomtoselection_dwn.png">
+                            <af:clientListener type="click" method="callZoomInteractor"/>
+                        </af:commandToolbarButton>
+                        <af:spacer width="3" height="10" id="s2"/>
+                        
+                        <af:commandToolbarButton id="ctb3"
+                                                 icon="/images/pan_ena.png"
+                                                 shortDesc="#{inventoryUIBundle.PAN}"
+                                                 hoverIcon="/images/pan_ovr.png"
+                                                 depressedIcon="/images/pan_dwn.png">
+                            <af:clientListener type="click" method="callPanInteractor"/>
+                        </af:commandToolbarButton>
+                        <af:spacer width="3" height="10" id="s3"/>
+                        
+                        <af:commandToolbarButton id="ctb4"
+                                                 icon="/images/zoombestfit_ena.png"
+                                                 shortDesc="#{inventoryUIBundle.SHOW_ALL}"
+                                                 hoverIcon="/images/zoombestfit_ovr.png"
+                                                 depressedIcon="/images/zoombestfit_dwn.png">
+                            <af:clientListener type="click" method="callShowAll"/>
+                        </af:commandToolbarButton>
+                        <af:spacer width="3" height="10" id="s4"/>
+                                         
+                        <af:commandToolbarButton id="ctb5"
+                                                 icon="/images/zoomin_ena.png"
+                                                 shortDesc="#{inventoryUIBundle.ZOOM_IN}"
+                                                 hoverIcon="/images/zoomin_ovr.png"
+                                                 depressedIcon="/images/zoomin_dwn.png">
+                            <af:clientListener type="click" method="callZoomIn"/>
+                        </af:commandToolbarButton>
+                        <af:spacer width="3" height="10" id="s5"/>
+                        
+                        <af:commandToolbarButton id="ctb6"
+                                                 icon="/images/zoomout_ena.png"
+                                                 shortDesc="#{inventoryUIBundle.ZOOM_OUT}"
+                                                 hoverIcon="/images/zoomout_ovr.png"
+                                                 depressedIcon="/images/zoomout_dwn.png">
+                            <af:clientListener type="click" method="callZoomOut"/>
+                        </af:commandToolbarButton>
+                        <af:spacer width="3" height="10" id="s6"/>
+                      </af:group>
+                      <af:group id="gp2">
+                        <af:commandToolbarButton id="ctb7"
+                                                 icon="/images/attributegroup_ena.png"
+                                                 shortDesc="#{inventoryUIBundle.OPEN_SUBGRAPHS}"
+                                                 hoverIcon="/images/attributegroup_ovr.png"
+                                                 depressedIcon="/images/attributegroup_dwn.png">
+                            <af:clientListener type="click" method="openSubgraphs"/>
+                        </af:commandToolbarButton>
+                        <af:spacer width="3" height="10" id="s7"/>
+                        <af:commandToolbarButton id="ctb8"
+                                                 icon="/images/closesg_ena.png"
+                                                 shortDesc="#{inventoryUIBundle.CLOSE_SUBGRAPHS}"
+                                                 hoverIcon="/images/closesg_ovr.png"
+                                                 depressedIcon="/images/closegp_dwn.png">
+                            <af:clientListener type="click" method="closeSubgraphs"/>
+                        </af:commandToolbarButton>
+                        <af:spacer width="3" height="10" id="s8"/>
+                      </af:group>
+                    </af:toolbar>
+            </h:panelGrid>
+        <af:panelGroupLayout id="pgl3" layout="horizontal" valign="top"
+                                 halign="left">
+            <af:panelGroupLayout
+                         binding="#{backingBeanScope.enabledByCanvasArea}"
+                         id="panelGroupLayout2">
+            <af:serverListener type="jsCreateConnectivityDetails" method="#{EnabledByViewBean.createConnectivityDetails}"/>   
+            <af:serverListener type="jsHandlePopup" method="#{EnabledByViewBean.handlePopup}"/>
+            <af:serverListener type="jsNavigatePage" method="#{EnabledByViewBean.navigatePage}"/> 
+            <h:panelGrid border="0" columns="1" styleClass="psheet">        
+                <jvdf:diagrammerView id="enabledByView" 
+                                   binding="#{EnabledByViewBean.diagrammerView}"                                  
+                                   width="1000" height="400"
+                                   interactorId="selectInteractor"
+                                   waitingImage="images/waiting.gif" scrollBar="need">                        
+                      <jvdf:selectionManager id="selectionManager" 
+                                            propertyAccessor="#{EnabledByViewBean.propertyAccessor}"
+                                            imageMode="false"
+                                            lineColor="#{EnabledByViewBean.lineColor}"  
+                                            lineWidth="#{EnabledByViewBean.lineWidth}"
+                                            fillOn="true"                                       
+                                            onSelectionChanged="displaySelection(selection)"/>
+              
+                     <jvf:contextualMenu factory="#{EnabledByPopupMenuFactoryBean}"
+                                         itemStyleClass="menuItem" 
+                                         itemHighlightedStyleClass="menuItemHighlighted" 
+                                         itemDisabledStyleClass="menuItemDisabled" />                           
+                </jvdf:diagrammerView>                         
+            </h:panelGrid>
+        </af:panelGroupLayout>
+            <af:spacer width="10" height="10" id="s9"/>
+            <h:panelGrid border="1" columns="1" styleClass="psheet">
+                <h:panelGrid columns="1" border="0">     
+                   <h:panelGrid border="0" columns="2">
+                        <h:graphicImage url="/images/attributegroup_ena.png"/>
+                        <h:outputText value="#{inventoryUIBundle.DETAILS}" styleClass="text"
+                                      style="font-weight:bold"/>
+                   </h:panelGrid>
+                   <h:panelGrid columns="2" border="0" frame="border" cellpadding="4" cellspacing="1" width="100%" 
+                                        columnClasses="psheet-cell" rowClasses="psheet-cell-bold" styleClass="tableStyle"
+                                        binding="#{EnabledByViewBean.pipeDisplayInfoBinding}"/> 
+                    <h:panelGrid border="0" columns="2">
+                        <h:graphicImage url="/images/attributegroup_ena.png"/>
+                        <h:outputText value="#{inventoryUIBundle.DETAILS_OF_SELECTED_ITEM}" styleClass="text" style="font-weight:bold" />
+                    </h:panelGrid>                    
+                    <h:panelGrid id="pg15" binding="#{EnabledByViewBean.enabledByDetailsGrid}" border="0"
+                                       frame="border" cellpadding="4" cellspacing="1" width="100%"
+                                       columnClasses="psheet-cell" rowClasses="psheet-cell-bold"
+                                       styleClass="tableStyle"/>
+                </h:panelGrid>     
+        <trh:script id="vars" text='var enabledByCanvasId = "#{EnabledByViewBean.clientId}"; '/> 
+        <trh:script id="sc1">
+              var p = "";
+              // called by the onSelectionChanged attribute on EnabledByView.jsff file. It returns a map of attributes
+              // to a javascript variable. These attributes will be used to dynamically build the Details section.
+              function displaySelection(selection) {
+                  try {
+                      if (selection.length == 1) {                              
+                          p = selection[0].getObjectProperties();                                
+                      }else if(selection.length == 0){
+                          p = "NOTHING_IS_SELECTED";
+                      } else if(selection.length > 1){
+                          p = "MULTIPLE_OBJECTS_ARE_SELECTED";                                    
+                      }                                                            
+                      var enabledByCanvas = AdfPage.PAGE.findComponentByAbsoluteId(enabledByCanvasId);                                     
+                      AdfCustomEvent.queue(enabledByCanvas, "jsCreateConnectivityDetails",{props : p},true);                                  
+                      p = "";
+                  }catch (e) {
+                      alert("An error occurred when building property sheet." + e);
+                  }
+              }
+              
+              function handlePopup(popupId){
+                  p = popupId;                                               
+                  var enabledByCanvas = AdfPage.PAGE.findComponentByAbsoluteId(enabledByCanvasId);                                      
+                  AdfCustomEvent.queue(enabledByCanvas, "jsHandlePopup", {props : p},true);                                                                            
+              }
+              function navigatePage(pageId,pageAction){
+                 var enabledByCanvas = AdfPage.PAGE.findComponentByAbsoluteId(enabledByCanvasId);
+                 AdfCustomEvent.queue(enabledByCanvas, "jsNavigatePage",{pageId : pageId ,pageAction : pageAction},true);
+                
+              }
+              
+              function callSelectInteractor() {
+                enabledByView.setInteractor(selectInteractor);
+              }
+                
+              function callZoomInteractor() {
+                enabledByView.setInteractor(zoom);
+              }
+              
+              function callPanInteractor() {
+                enabledByView.setInteractor(pan);
+              }
+                
+              function callShowAll() {
+                enabledByView.showAll(true);
+              }
+              
+              function callZoomIn() {
+                enabledByView.zoomIn(true);
+              }
+              
+              function callZoomOut() {
+                enabledByView.zoomOut(true);
+              }
+        </trh:script>
+        
+        <trh:script id="saveAsImage" text='var saveAsImageButtonId = "#{EnabledByViewBean.saveAsImageButtonId}"; '/>            
+        <trh:script id="script2">
+          function saveAsImage() {
+            clickInvisibleButton(saveAsImageButtonId);  
+          }
+        </trh:script>
+            
+        <h:panelGrid rendered="#{EnabledByViewBean.renderPaths}"
+              columns="1" id="ph" binding="#{EnabledByViewBean.pathsGrid}" border="0"
+              frame="border" cellpadding="4" cellspacing="1" width="100%"
+              columnClasses="psheet-cell" rowClasses="psheet-cell-bold"
+              styleClass="tableStyle">                                                  
+        </h:panelGrid>
+     </h:panelGrid>
+        </af:panelGroupLayout>
+        </h:panelGrid>
+   </af:panelHeader>
+   </af:panelGroupLayout>
+  </f:facet>
+  <f:facet name="contextualArea"/>
+ </af:pageTemplate>
+</jsp:root>

@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:showDetailHeader text="#{inventoryUIBundle.PARENT_INVENTORY_GROUPS}"
+                       disclosed="true" id="sdh1">
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+      <f:facet name="toolbar">
+        <af:toolbar id="t1">
+          <af:commandToolbarButton text="#{inventoryUIBundle.ASSOCIATE}" rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=InventoryGroup.ASSOCIATE_IG;action=view']}"
+                                   id="cb1Create" binding="#{backingBeanScope.associateButton}"
+                                   icon="#{InventoryHelperBean.associateIcon}">
+            <af:showPopupBehavior popupId="addParentInvGroupPopup"
+                                  triggerType="click"/>
+            <af:setActionListener from="true"
+                                  to="#{pageFlowScope.addParentInventoryGroup}"/>
+          </af:commandToolbarButton>
+          <af:spacer width="10" height="10"/>
+          <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}"
+                                   id="cblDelete" binding="#{backingBeanScope.deleteButton}"
+                                   icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                   disabled="#{pageFlowScope.ParentInventoryGroupListBean.resultsTable.selectedRowKeys.size lt 1 or pageFlowScope.ParentInventoryGroupListBean.resultsTable.selectedRowKeys.size eq null}"
+                                   partialTriggers="resultsTableId"
+                                   rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=InventoryGroup.DISASSOCIATE_IG;action=view']}"
+                                   actionListener="#{pageFlowScope.ParentInventoryGroupListBean.disassociateInventoryGroup}"></af:commandToolbarButton>
+        </af:toolbar>
+      </f:facet>
+       <f:facet name="statusbar">
+        <af:toolbar>
+         <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount lt 0) ? 0 : bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount}"
+                        styleClass="invSearchOutputLabel"
+                        binding="#{backingBeanScope.totalResultsLabel}"
+                        partialTriggers="resultsTableId"/>
+        </af:toolbar>
+       </f:facet>      
+      <af:table id="resultsTableId"
+                value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}"
+                var="row"
+                emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                fetchSize="#{pageFlowScope.ParentInventoryGroupListBean.fetchSize}"
+                filterModel="#{pageFlowScope.InventoryGroupQueryBean.filterModel}"
+                selectionListener="#{pageFlowScope.ParentInventoryGroupListBean.selectAction}"
+                autoHeightRows="#{pageFlowScope.ParentInventoryGroupListBean.portletHeight}" contentDelivery="immediate"
+                queryListener="#{InventoryHelperBean.processQuery}"
+                filterVisible="false" varStatus="vs"
+                sortListener="#{bindings.searchResultsIterator.dataControl.dataProvider.processSort}"
+                rowSelection="#{pageFlowScope.ParentInventoryGroupListBean.rowSelection}" styleClass="AFStretchWidth"
+                binding="#{pageFlowScope.ParentInventoryGroupListBean.resultsTable}"
+                selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                summary="#{inventoryUIBundle.PARENT_INVENTORY_GROUP_LIST}">
+        <af:column sortProperty="name" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.NAME}" rowHeader="unstyled">
+          <af:commandImageLink action="InventoryGroupSummary" actionListener="#{bindings.openSubTaskForSummary.execute}"
+                               text="#{row.name}"
+                               shortDesc="#{inventoryUIBundle.INVENTORY_GROUP_SUMMARY_LINK}">
+            <af:setActionListener from="#{row.oid}" to="#{objectId}"/>
+            
+          </af:commandImageLink>
+        </af:column>
+        <af:column sortProperty="description" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.DESCRIPTION}">
+          <af:outputText value="#{row.description}"/>
+        </af:column>
+        <af:column sortProperty="specification.name" sortable="true"
+                   filterable="true"
+                   headerText="#{inventoryUIBundle.SPECIFICATION}">
+          <af:commandImageLink action="SpecificationSummary" actionListener="#{bindings.openSubTaskForSpec.execute}"
+                               text="#{row.specification.name}"
+                               shortDesc="#{row.specification.name eq null ? '&#160;' : inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}"
+                               disabled="#{row.specification.name eq null ? true : false}">
+             
+            <af:setActionListener from="#{row.specification.oid}"
+                                  to="#{requestScope.oid}"/>
+          </af:commandImageLink>
+        </af:column>
+        <af:column headerText="#{inventoryUIBundle.START_DATE}">
+          <af:outputText value="#{row.validFor.startDate}">
+            <af:convertDateTime pattern="#{pageFlowScope.ParentInventoryGroupListBean.dateTimeFormat}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="#{inventoryUIBundle.END_DATE}">
+          <af:outputText value="#{row.validFor.endDate}">
+            <af:convertDateTime pattern="#{pageFlowScope.ParentInventoryGroupListBean.dateTimeFormat}"/>
+          </af:outputText>
+        </af:column>
+      </af:table>
+      <af:popup id="addParentInvGroupPopup"
+                binding="#{backingBeanScope.addParentInvGroup}"
+                contentDelivery="lazyUncached">
+        <af:dialog type="none" id="igd" title="#{inventoryUIBundle.INVENTORY_GROUP_SEARCH}">
+          <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="igps">
+            <f:facet name="center">
+              <af:region value="#{bindings.InventoryGroupSearchResultsFlow1.regionModel}" id="igr"/>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.ParentInventoryGroupListBean.refresh}"/>
+      </af:popup>
+    </af:panelCollection>
+  </af:showDetailHeader>
+</jsp:root>

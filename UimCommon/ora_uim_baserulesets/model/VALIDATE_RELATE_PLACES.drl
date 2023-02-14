@@ -1,0 +1,70 @@
+// Name:         PLACERULE_VALIDATE_RELATE_PLACES
+// Description:  Performs validation of the Relate Places
+
+package  oracle.communications.inventory.rules
+
+//list any import classes here.
+import java.lang.*;
+import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+import oracle.communications.inventory.extensibility.rules.impl.RuleDebug;
+import oracle.communications.inventory.api.framework.logging.LogFactory;
+import oracle.communications.platform.persistence.PersistenceHelper;
+
+import oracle.communications.inventory.api.entity.GeographicPlace;
+import oracle.communications.inventory.api.entity.PlaceSpecification;
+import oracle.communications.inventory.api.entity.Specification;
+import oracle.communications.inventory.api.entity.SpecificationRel;
+import oracle.communications.inventory.api.exception.ValidationException;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.specification.SpecManager;
+
+//declare any global variables here
+
+global Log log;
+
+
+
+rule "Validate Relate Places"
+	salience 0
+	when
+            context    : ExtensionPointRuleContext() 
+
+	then 
+			
+			GeographicPlace child = (GeographicPlace)context.getArguments()[0];
+			GeographicPlace parent = (GeographicPlace)context.getArguments()[1];
+			String methodName = context.getMethodName();
+			String targetName = context.getDeclaringTargetType().getSimpleName();
+			
+			
+			 if(parent!= null&&child!= null)
+             {
+            	 	PlaceSpecification parentSpecification = parent.getSpecification();
+             		PlaceSpecification childSpecification = child.getSpecification();
+             		             		
+             		SpecManager specManager = PersistenceHelper.makeSpecManager();
+             		if(specManager != null)
+             		{
+             		List<Specification> specifications = specManager.getRelatedSpecs(parentSpecification, null, parentSpecification.getClass(), false);         
+             		if(specifications != null)
+             		{
+             		if(specifications.contains(childSpecification))
+             		{
+             			log.info("Vlaidation sucessfull");	
+             		}
+             		else
+             		{           			
+             			log.error("place.ValidateRelatePlaces"+child.getId(),parent.getId(),childSpecification.getName(),parentSpecification.getName());
+             		}
+             		}
+             		}
+             		
+             }
+			
+			
+    end

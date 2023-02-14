@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+          
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>        
+  <af:showDetailHeader text="#{pageFlowScope.InventoryGroupListBean.displayInfo}" disclosed="true" id="sdh1">
+    <af:outputText id="igop1" value="#{inventoryUIBundle.INVENTORY_GROUP_LABEL}" rendered="#{pageFlowScope.InventoryGroupListBean.messageForBIContext}"
+                   inlineStyle="color:#2A51A7;"/>
+    <af:panelCollection id="IGList" styleClass="AFStretchWidth">
+      <f:facet name="toolbar">
+        <af:toolbar id="t1">
+          <af:commandToolbarButton text="#{inventoryUIBundle.ASSOCIATE}"
+                                   rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=InventoryGroup.ASSOCIATE;action=view']}"
+                                   id="ctbCreate" binding="#{backingBeanScope.associateButton}"
+                                   icon="#{InventoryHelperBean.associateIcon}">
+            <af:showPopupBehavior popupId="associateInvGroupPopup"
+                                  triggerType="click"/>
+            <af:setActionListener from="true" to="#{pageFlowScope.associateInventoryGroup}"/>
+          </af:commandToolbarButton>
+          <af:spacer width="10" height="10"/>
+          <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}" 
+                                   id="ctbDelete" binding="#{backingBeanScope.deleteButton}"
+                                   rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=InventoryGroup.DELETE;action=view']}"
+                                   icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                   disabled="#{pageFlowScope.InventoryGroupListBean.resultsTable.selectedRowKeys.size lt 1 or pageFlowScope.InventoryGroupListBean.resultsTable.selectedRowKeys.size eq null}"
+                                   partialTriggers="resultsTableId"
+                                   actionListener="#{pageFlowScope.InventoryGroupListBean.disassociateInventoryGroup}"></af:commandToolbarButton>
+        </af:toolbar>
+      </f:facet>
+      <f:facet name="statusbar">
+        <af:toolbar>
+            <af:outputText  value="#{inventoryUIBundle.ROW_COUNT} #{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount lt 0) ? 0 : bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount}"
+              styleClass="invSearchOutputLabel" binding="#{backingBeanScope.totalResultsLabel}" partialTriggers="resultsTableId"/>
+        </af:toolbar>
+      </f:facet>
+      <af:table id="resultsTableId"
+                value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}"
+                var="row"
+                emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                fetchSize="#{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount &lt; 25) ? bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount : 25}"
+                filterModel="#{pageFlowScope.InventoryGroupQueryBean.filterModel}"
+                selectionListener="#{pageFlowScope.InventoryGroupListBean.selectAction}"
+                queryListener="#{InventoryHelperBean.processQuery}"
+                filterVisible="false" varStatus="vs" autoHeightRows="#{pageFlowScope.InventoryGroupListBean.portletHeight}" contentDelivery="immediate"
+                sortListener="#{bindings.searchResultsIterator.dataControl.dataProvider.processSort}"
+                rowSelection="#{pageFlowScope.InventoryGroupListBean.rowSelection}" styleClass="AFStretchWidth"
+                selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                columnStretching="last"
+                binding="#{pageFlowScope.InventoryGroupListBean.resultsTable}"
+                summary="#{inventoryUIBundle.INVENTORY_GROUP_LIST}">
+        <af:column sortProperty="name" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.NAME}" rowHeader="unstyled">
+          <af:commandImageLink action="inventoryGrpsummary" actionListener="#{bindings.openSubTaskForSummary.execute}"
+                               text="#{row.name}"
+                               shortDesc="#{inventoryUIBundle.INVENTORY_GROUP_SUMMARY_LINK}">
+            
+            <af:setActionListener from="#{row.oid}"
+                                  to="#{requestScope.oid}"/>
+          </af:commandImageLink>
+        </af:column>
+        <af:column sortProperty="description" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.DESCRIPTION}">
+          <af:outputText value="#{row.description}"/>
+        </af:column>
+        <af:column sortProperty="specification.name" sortable="true" filterable="true"
+                   headerText="#{inventoryUIBundle.SPECIFICATION}">
+          <af:commandImageLink action="SpecificationSummary" actionListener="#{bindings.openSubTaskForIGSpecSummary.execute}"
+                               text="#{pageFlowScope.InventoryGroupListBean.specDisplayName}"
+                               shortDesc="#{row.specification.name eq null ? '&#160;' : inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}"
+                               disabled="#{row.specification.name eq null ? true : false}">
+            
+            <af:setActionListener from="#{row.specification.oid}"
+                                  to="#{specObjectId}"/>
+          </af:commandImageLink>
+        </af:column>
+        <af:column headerText="#{inventoryUIBundle.START_DATE}">
+          <af:outputText value="#{row.validFor.startDate}">
+           <af:convertDateTime pattern="#{pageFlowScope.InventoryGroupListBean.dateTimeFormat}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="#{inventoryUIBundle.END_DATE}">
+          <af:outputText value="#{row.validFor.endDate}">
+           <af:convertDateTime pattern="#{pageFlowScope.InventoryGroupListBean.dateTimeFormat}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="#{inventoryUIBundle.INVENTORY_GROUP_TYPE}" width="#{pageFlowScope.InventoryGroupListBean.inventoryGroupTypeWidth}">
+         <af:outputText value="#{row.specification.inventoryGroupType.name}"/>
+        </af:column>
+      </af:table>
+      <af:popup id="associateInvGroupPopup"
+                binding="#{backingBeanScope.associateInvGroup}"
+                contentDelivery="lazyUncached">
+        <af:dialog type="none" id="igd" title="#{inventoryUIBundle.INVENTORY_GROUP_SEARCH}">
+           <af:panelStretchLayout styleClass="invCommonPanelStretchLayout" id="igps">
+              <f:facet name="center">        
+                  <af:region value="#{bindings.InventoryGroupSearchResultsFlow1.regionModel}" id="igr"/>
+             </f:facet>
+             </af:panelStretchLayout>          
+        </af:dialog>
+        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+        <af:serverListener type="refreshEntity"
+                           method="#{pageFlowScope.InventoryGroupListBean.refresh}"/>
+      </af:popup>
+    </af:panelCollection>
+  </af:showDetailHeader>
+</jsp:root>

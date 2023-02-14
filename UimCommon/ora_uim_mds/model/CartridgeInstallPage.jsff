@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   id="pt1">
+    <f:facet name="contextualArea"/>
+    <f:facet name="localArea">
+      <af:group id="g1" rendered="true">
+          <af:separator id="s4"/>
+          <af:spacer width="10" height="10" id="s1"/>
+          <br/>
+          <af:inputFile label="Cartridge" id="if1"
+                        value="#{IESDelegateMBean.file}"/>
+          <br/>
+          <af:spacer width="10" height="10" id="s3"/>
+          <br/>
+          <af:commandButton text="Install>>" id="cb1"
+                            action="#{IESDelegateMBean.install}"/>
+          <af:separator id="s5"/>
+      </af:group>
+    </f:facet> 
+  </af:pageTemplate>
+</jsp:root>

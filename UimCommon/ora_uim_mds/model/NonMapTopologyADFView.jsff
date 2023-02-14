@@ -1,0 +1,819 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html" xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+    <c:set var="inventoryUIBundle"
+           value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                     value="#{bindings.tplgptb1}" id="tplgpt1">
+        <f:facet name="localArea">
+            <af:panelSplitter orientation="vertical" id="tplgps7" dimensionsFrom="auto" splitterPosition="290">
+                <f:facet name="first"></f:facet>
+                <f:facet name="second">
+                    <af:decorativeBox id="tplgpb4" dimensionsFrom="auto" topHeight="35" theme="light">
+                        <f:facet name="top">
+                            <af:panelHeader id="tplgph1" styleClass="AFStretchWidth" helpTopicId="OHW_topoView"
+                                            text="#{inventoryUIBundle.TOPOLOGY_VIEW}"></af:panelHeader>
+                        </f:facet>
+                        <f:facet name="center">
+                            <af:panelSplitter orientation="vertical" splitterPosition="125" id="tplgps5"
+                                              dimensionsFrom="auto" collapsed="true"
+                                              binding="#{pageFlowScope.NonMapTopologyADFViewBean.tplgpsBinding}">
+                                <f:facet name="first">
+                                    <af:panelStretchLayout id="tplgpsl20" dimensionsFrom="auto">
+                                        <f:facet name="center">
+                                            <af:panelGroupLayout layout="scroll" id="tplgpgl50">
+                                                <af:panelBox text="#{inventoryUIBundle.FIND_ENTITY}" id="tplgpb2"
+                                                             disclosed="true">
+                                                    <af:panelGroupLayout layout="horizontal" id="tplgpgl8">
+                                                        <af:panelFormLayout id="tplgntwk" labelWidth="35%"
+                                                                            fieldWidth="65%"
+                                                                            binding="#{backingBeanScope.tplgentityPanel}">
+                                                            <af:selectOneChoice label="#{inventoryUIBundle.ENTITY_TYPE}"
+                                                                                contentStyle="width:281px" id="tplgsoc2"
+                                                                                disabled="#{pageFlowScope.NonMapTopologyADFViewBean.disableEntityType}"
+                                                                                value="#{pageFlowScope.NonMapTopologyADFViewBean.selectedEntityType}"
+                                                                                autoSubmit="true"
+                                                                                valueChangeListener="#{pageFlowScope.NonMapTopologyADFViewBean.entityTypeChanged}"
+                                                                                binding="#{backingBeanScope.tplgentityTypeBinding}">
+                                                                <f:selectItems value="#{pageFlowScope.NonMapTopologyADFViewBean.entityTypeList}"
+                                                                               id="tplgsi2"/>
+                                                            </af:selectOneChoice>
+                                                            <af:panelLabelAndMessage id="tplgplm1"
+                                                                                     label="#{inventoryUIBundle.NAME}">
+                                                                <af:panelGroupLayout layout="horizontal" id="tplgpgl9">
+                                                                    <af:inputText value="#{pageFlowScope.NonMapTopologyADFViewBean.entityInfo}"
+                                                                                  simple="true"
+                                                                                  contentStyle="width:281px"
+                                                                                  disabled="#{pageFlowScope.NonMapTopologyADFViewBean.disableEntityInfo}"
+                                                                                  maximumLength="50" id="tplgen"
+                                                                                  autoSubmit="true"
+                                                                                  valueChangeListener="#{pageFlowScope.NonMapTopologyADFViewBean.nameChanged}"
+                                                                                  binding="#{backingBeanScope.tplgentityNameBinding}">
+                                                                        <af:autoSuggestBehavior suggestItems="#{pageFlowScope.NonMapTopologyADFViewBean.getNameHandler}"
+                                                                                                maxSuggestedItems="25"/>
+                                                                    </af:inputText>
+                                                                    <af:spacer width="10"/>
+                                                                    <af:commandImageLink id="tplgsil"
+                                                                                         icon="/images/func_magnifyingglass_16_act.png"
+                                                                                         disabledIcon="/images/func_magnifyingglass_16_dis.png"
+                                                                                         disabled="#{pageFlowScope.NonMapTopologyADFViewBean.disableSearchIcon}"
+                                                                                         binding="#{backingBeanScope.tplgsearchIcon}"
+                                                                                         shortDesc="#{inventoryUIBundle.BROWSE}"
+                                                                                         actionListener="#{pageFlowScope.NonMapTopologyADFViewBean.invokeSearchPopup}"/>
+                                                                    <af:commandImageLink id="tplgclr1"
+                                                                                         icon="/images/clear_ena.png"
+                                                                                         disabledIcon="/images/clear_dis.png"
+                                                                                         disabled="#{pageFlowScope.NonMapTopologyADFViewBean.disableClearIcon}"
+                                                                                         binding="#{backingBeanScope.tplgClrSearchIcon}"
+                                                                                         shortDesc="#{inventoryUIBundle.CLEAR}"
+                                                                                         actionListener="#{pageFlowScope.NonMapTopologyADFViewBean.clearName}"/>
+                                                                </af:panelGroupLayout>
+                                                            </af:panelLabelAndMessage>
+                                                        </af:panelFormLayout>
+                                                        <af:spacer width="5" height="5"/>
+                                                        <af:image source="#{pageFlowScope.NonMapTopologyADFViewBean.selectedEntityIcon}"
+                                                                  shortDesc="#{pageFlowScope.NonMapTopologyADFViewBean.entityShortDesc}"
+                                                                  binding="#{backingBeanScope.tplgiconBinding}">
+                                                            <af:componentDragSource/>
+                                                        </af:image>
+                                                    </af:panelGroupLayout>
+                                                </af:panelBox>
+                                                <af:popup id="tplglds" binding="#{backingBeanScope.tplgsearchLD}"
+                                                          contentDelivery="lazyUncached">
+                                                    <af:dialog id="tplgldd" type="none"
+                                                               title="#{inventoryUIBundle.LOGICAL_DEVICE_SEARCH}">
+                                                        <af:panelStretchLayout id="tplgpslds"
+                                                                               styleClass="invCommonPanelStretchLayout"
+                                                                               dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.LogicalDeviceSearchResultsFlowTplg.regionModel}"
+                                                                           id="tplgr6"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity"
+                                                                       method="#{pageFlowScope.NonMapTopologyADFViewBean.refreshSearchPopup}"/>
+                                                </af:popup>
+                                                <af:popup id="tplgpds" binding="#{backingBeanScope.tplgsearchPD}"
+                                                          contentDelivery="lazyUncached">
+                                                    <af:dialog id="tplgpdd" type="none"
+                                                               title="#{inventoryUIBundle.PHYSICAL_DEVICE_SEARCH}">
+                                                        <af:panelStretchLayout id="tplgpspds"
+                                                                               styleClass="invCommonPanelStretchLayout"
+                                                                               dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.PhysicalDeviceSearchResultsFlowTplg.regionModel}"
+                                                                           id="tplgr7"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity"
+                                                                       method="#{pageFlowScope.NonMapTopologyADFViewBean.refreshSearchPopup}"/>
+                                                </af:popup>
+                                                <af:popup id="tplgeqs" binding="#{backingBeanScope.tplgsearchEQ}"
+                                                          contentDelivery="lazyUncached">
+                                                    <af:dialog id="tplgeqd" type="none"
+                                                               title="#{inventoryUIBundle.EQUIPMENT_SEARCH}">
+                                                        <af:panelStretchLayout id="tplgpseqs"
+                                                                               styleClass="invCommonPanelStretchLayout"
+                                                                               dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.EquipmentSearchResultsFlowTplg.regionModel}"
+                                                                           id="tplgr8"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity"
+                                                                       method="#{pageFlowScope.NonMapTopologyADFViewBean.refreshSearchPopup}"/>
+                                                </af:popup>
+                                                <af:popup id="tplgpps" binding="#{backingBeanScope.tplgsearchPipe}"
+                                                          contentDelivery="lazyUncached">
+                                                    <af:dialog id="tplgpiped" type="none"
+                                                               title="#{inventoryUIBundle.PIPE_SEARCH}">
+                                                        <af:panelStretchLayout id="tplgpipes"
+                                                                               styleClass="invCommonPanelStretchLayout"
+                                                                               dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.PipeSearchResultsFlowTplg.regionModel}"
+                                                                           id="tplgr9"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity"
+                                                                       method="#{pageFlowScope.NonMapTopologyADFViewBean.refreshSearchPopup}"/>
+                                                </af:popup>
+                                                <af:popup id="tplgpcs"
+                                                          binding="#{backingBeanScope.tplgsearchConnectivity}"
+                                                          contentDelivery="lazyUncached">
+                                                    <af:dialog id="tplgconn" type="none"
+                                                               title="#{inventoryUIBundle.CONNECTIVITY_SEARCH}">
+                                                        <af:panelStretchLayout id="tplgconns"
+                                                                               styleClass="invCommonPanelStretchLayout"
+                                                                               dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.TDMConnectivitySearchResultsFlowTplg.regionModel}"
+                                                                           id="tplgr99"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity"
+                                                                       method="#{pageFlowScope.NonMapTopologyADFViewBean.refreshSearchPopup}"/>
+                                                </af:popup>
+                                                <af:popup id="tplgpls" binding="#{backingBeanScope.tplgsearchPlace}"
+                                                          contentDelivery="lazyUncached">
+                                                    <af:dialog id="tplgplaced" type="none"
+                                                               title="#{inventoryUIBundle.PLACE_SEARCH_DIALOG}">
+                                                        <af:panelStretchLayout id="tplgplaces"
+                                                                               styleClass="invCommonPanelStretchLayout"
+                                                                               dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.PlaceSearchResultsFlowTplg.regionModel}"
+                                                                           id="tplgr10"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity"
+                                                                       method="#{pageFlowScope.NonMapTopologyADFViewBean.refreshSearchPopup}"/>
+                                                </af:popup>
+                                                <af:popup id="tplgls" binding="#{backingBeanScope.tplgsearchLocation}"
+                                                          contentDelivery="lazyUncached">
+                                                    <af:dialog id="tplgld" type="none"
+                                                               title="#{inventoryUIBundle.LOCATION_SEARCH}">
+                                                        <af:panelStretchLayout id="tplgpll"
+                                                                               styleClass="invCommonPanelStretchLayout"
+                                                                               dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.LocationSearchResultsFlowTplg.regionModel}"
+                                                                           id="tplgr11"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity"
+                                                                       method="#{pageFlowScope.NonMapTopologyADFViewBean.refreshSearchPopup}"/>
+                                                </af:popup>
+                                                <!-- START - Network Search and Assign Popup -->
+                                                <af:popup id="tplgnw" contentDelivery="lazyUncached"
+                                                          binding="#{backingBeanScope.tplgsearchNetwork}">
+                                                    <af:dialog id="tplgnwd" type="none"
+                                                               title="#{inventoryUIBundle.NETWORK_SEARCH}">
+                                                        <af:panelStretchLayout id="tplgpsl3"
+                                                                               styleClass="invCommonPanelStretchLayout"
+                                                                               dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.NetworkSearchResults1.regionModel}"
+                                                                           id="tplgr3"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity"
+                                                                       method="#{pageFlowScope.NonMapTopologyADFViewBean.refreshSearchPopup}"/>
+                                                </af:popup>
+                                                <!-- END- Network Search and Assign Popup -->
+                                                <!-- START - NetworkNode Search and Assign Popup -->
+                                                <af:popup id="tplgnwn" contentDelivery="lazyUncached"
+                                                          binding="#{backingBeanScope.tplgsearchNetworkNode}">
+                                                    <af:dialog id="tplgnwnd" type="none"
+                                                               title="#{inventoryUIBundle.NETWORKNODE_SEARCH}">
+                                                        <af:panelStretchLayout id="tplgpsl4"
+                                                                               styleClass="invCommonPanelStretchLayout"
+                                                                               dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:region value="#{bindings.NetworkNodeSearchResultsFlowTplg.regionModel}"
+                                                                           id="tplgr4"/>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity"
+                                                                       method="#{pageFlowScope.NonMapTopologyADFViewBean.refreshSearchPopup}"/>
+                                                </af:popup>
+                                                <af:popup id="tplgpp8" binding="#{backingBeanScope.prefPopup}"
+                                                          contentDelivery="lazyUncached">
+                                                    <af:dialog id="tplgpref_d1" type="okCancel"
+                                                               title="#{inventoryUIBundle.PREFERENCES}"
+                                                               binding="#{backingBeanScope.prefDialog}"
+                                                               dialogListener="#{pageFlowScope.NonMapTopologyADFViewBean.savePreferences}"
+                                                               cancelTextAndAccessKey="&amp;#{inventoryUIBundle.CANCEL}"
+                                                               affirmativeTextAndAccessKey="O&amp;K" contentHeight="100"
+                                                               contentWidth="300" stretchChildren="first">
+                                                        <af:panelStretchLayout id="tplgpsl_7"
+                                                                               styleClass="AFStretchWidth"
+                                                                               dimensionsFrom="parent">
+                                                            <f:facet name="center">
+                                                                <af:panelGroupLayout id="tplgpgl234" layout="scroll"
+                                                                                     styleClass="AFStretchWidth">
+                                                                    <af:selectOneRadio value="#{pageFlowScope.NonMapTopologyADFViewBean.nodeType}"
+                                                                                       autoSubmit="true"
+                                                                                       label="#{inventoryUIBundle.NODE_TYPE}"
+                                                                                       id="tplgsor1">
+                                                                        <af:selectItem label="#{inventoryUIBundle.ICON}"
+                                                                                       value="#{inventoryUIBundle.ICON}"
+                                                                                       id="tplgsi5"/>
+                                                                        <af:selectItem label="#{inventoryUIBundle.SHAPE}"
+                                                                                       value="#{inventoryUIBundle.SHAPE}"
+                                                                                       id="tplgsi6"/>
+                                                                    </af:selectOneRadio>
+                                                                    <af:spacer height="5"/>
+                                                                    <af:selectBooleanCheckbox value="#{pageFlowScope.NonMapTopologyADFViewBean.displayLabel}"
+                                                                                              label="#{inventoryUIBundle.DISPLAY_LABEL}"
+                                                                                              id="tplgdl2"/>
+                                                                    <af:spacer height="5"/>
+                                                                    <af:selectOneChoice id="tplgsoc3"
+                                                                                        value="#{pageFlowScope.NonMapTopologyADFViewBean.labelPosition}"
+                                                                                        label="#{inventoryUIBundle.LABEL_POSITION}">
+                                                                        <af:selectItem label="#{inventoryUIBundle.BOTTOM}"
+                                                                                       value="bottom" id="tplgsi1"/>
+                                                                        <af:selectItem label="#{inventoryUIBundle.CENTER}"
+                                                                                       value="center" id="tplgsi3"/>
+                                                                        <af:selectItem label="#{inventoryUIBundle.TOP}"
+                                                                                       value="top" id="tplgsi4"/>
+                                                                    </af:selectOneChoice>
+                                                                </af:panelGroupLayout>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </af:dialog>
+                                                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                                                    <af:serverListener type="refreshEntity"
+                                                                       method="#{pageFlowScope.NonMapTopologyADFViewBean.refresh}"/>
+                                                </af:popup>
+                                            </af:panelGroupLayout>
+                                        </f:facet>
+                                    </af:panelStretchLayout>
+                                </f:facet>
+                                <f:facet name="second">
+                                    <af:panelStretchLayout id="tplgpsl30" dimensionsFrom="auto">
+                                        <f:facet name="center">
+                                            <af:panelGroupLayout layout="scroll" id="tplgpgl60">
+                                                <af:panelSplitter orientation="horizontal" splitterPosition="350"
+                                                                  dimensionsFrom="auto" positionedFromEnd="false">
+                                                    <f:facet name="first">
+                                                        <af:panelStretchLayout id="tplgpsl40" dimensionsFrom="auto">
+                                                            <f:facet name="top">
+                                                                <af:panelGroupLayout layout="scroll" id="tplgpgl923">
+                                                                    <af:toolbox id="tplgtb1"
+                                                                                rendered="#{adfFacesContext.outputMode!= 'printable'}">
+                                                                        <af:group id="tplgg11">
+                                                                            <af:toolbar id="tplgtd1"
+                                                                                        inlineStyle="border-width: 1 px;">
+                                                                                <af:spacer width="5"/>
+                                                                                <af:button id="tplgb1"
+                                                                                           actionListener="#{pageFlowScope.NonMapTopologyADFViewBean.layoutListener}"
+                                                                                           shortDesc="#{inventoryUIBundle.FORCE_DIRECTED_LAYOUT}"
+                                                                                           icon="/images/diagram/viewtreeradial_ena.png"
+                                                                                           disabledIcon="/images/diagram/viewtreeradial_dis.png"
+                                                                                           hoverIcon="/images/diagram/viewtreeradial_dwn.png"/>
+                                                                                <af:spacer width="5"/>
+                                                                                <af:button id="tplgb2"
+                                                                                           actionListener="#{pageFlowScope.NonMapTopologyADFViewBean.layoutListener}"
+                                                                                           shortDesc="#{inventoryUIBundle.CIRCULAR_LAYOUT}"
+                                                                                           icon="/images/diagram/viewtreecircle_ena.png"
+                                                                                           disabledIcon="/images/diagram/viewtreecircle_dis.png"
+                                                                                           hoverIcon="/images/diagram/viewtreecircle_dwn.png"/>
+                                                                                <af:spacer width="5"/>
+                                                                                <af:button id="tplgb4"
+                                                                                           actionListener="#{pageFlowScope.NonMapTopologyADFViewBean.layoutListener}"
+                                                                                           shortDesc="#{inventoryUIBundle.GRID_LAYOUT}"
+                                                                                           icon="/images/diagram/viewtree_horizontal_ena.png"
+                                                                                           disabledIcon="/images/diagram/viewtree_horizontal_dis.png"
+                                                                                           hoverIcon="/images/diagram/viewtree_horizontal_dwn.png"/>
+                                                                            </af:toolbar>
+                                                                            <af:toolbar id="tplgtd6"
+                                                                                        inlineStyle="border-width: 1 px;">
+                                                                                <af:spacer width="5"/>
+                                                                                <af:button id="tplgb13"
+                                                                                           shortDesc="#{inventoryUIBundle.PREFERENCES}"
+                                                                                           actionListener="#{pageFlowScope.NonMapTopologyADFViewBean.launchPreferencesDialog}"
+                                                                                           icon="/images/diagram/navi_gear_24_ena.png"></af:button>
+                                                                                <af:spacer width="5"/>
+                                                                            </af:toolbar>
+                                                                        </af:group>
+                                                                    </af:toolbox>
+                                                                </af:panelGroupLayout>
+                                                            </f:facet>
+                                                            <f:facet name="center">
+                                                                <af:panelGroupLayout layout="scroll" id="tplgpgl70">
+                                                                    <af:panelBox text="#{inventoryUIBundle.SEARCH}"
+                                                                                 id="tplgpb22" disclosed="true">
+                                                                        <af:panelGroupLayout layout="horizontal"
+                                                                                             id="tplgpgl82">
+                                                                            <af:panelFormLayout id="tplgsrch"
+                                                                                                labelWidth="35%"
+                                                                                                fieldWidth="65%"
+                                                                                                binding="#{backingBeanScope.tplgsearchPanel}">
+                                                                                <af:selectOneChoice label="#{inventoryUIBundle.ENTITY_TYPE}"
+                                                                                                    contentStyle="width:200px"
+                                                                                                    id="tplgsoc20"
+                                                                                                    disabled="#{pageFlowScope.NonMapTopologyADFViewBean.disablePanelEntityType}"
+                                                                                                    value="#{pageFlowScope.NonMapTopologyADFViewBean.searchEntityType}"
+                                                                                                    autoSubmit="true"
+                                                                                                    valueChangeListener="#{pageFlowScope.NonMapTopologyADFViewBean.searchEntityTypeChanged}"
+                                                                                                    binding="#{backingBeanScope.tplgsearchEntityTypeBinding}">
+                                                                                    <f:selectItems value="#{pageFlowScope.NonMapTopologyADFViewBean.searchEntityTypeList}"
+                                                                                                   id="tplgsi20"/>
+                                                                                </af:selectOneChoice>
+                                                                                <af:panelLabelAndMessage id="tplgplm10"
+                                                                                                         label="#{inventoryUIBundle.ENTITY}">
+                                                                                    <af:panelGroupLayout layout="horizontal"
+                                                                                                         id="tplgpgl90">
+                                                                                        <af:inputText value="#{pageFlowScope.NonMapTopologyADFViewBean.searchEntityInfo}"
+                                                                                                      simple="true"
+                                                                                                      contentStyle="width:200px"
+                                                                                                      disabled="#{pageFlowScope.NonMapTopologyADFViewBean.disablePanelEntityInfo}"
+                                                                                                      maximumLength="50"
+                                                                                                      id="searchEntity"
+                                                                                                      autoSubmit="true"
+                                                                                                      valueChangeListener="#{pageFlowScope.NonMapTopologyADFViewBean.searchNameChanged}"
+                                                                                                      binding="#{backingBeanScope.tplgsearchEntityNameBinding}">
+                                                                                            <af:autoSuggestBehavior suggestItems="#{pageFlowScope.NonMapTopologyADFViewBean.getNameHandler}"
+                                                                                                                    maxSuggestedItems="25"/>
+                                                                                        </af:inputText>
+                                                                                        <af:spacer width="10"/>
+                                                                                        <af:commandImageLink id="searchPanel"
+                                                                                                             icon="/images/func_magnifyingglass_16_act.png"
+                                                                                                             disabledIcon="/images/func_magnifyingglass_16_dis.png"
+                                                                                                             disabled="#{pageFlowScope.NonMapTopologyADFViewBean.disablePanelSearchIcon}"
+                                                                                                             binding="#{backingBeanScope.tplgpanelSearchIcon}"
+                                                                                                             shortDesc="#{inventoryUIBundle.BROWSE}"
+                                                                                                             actionListener="#{pageFlowScope.NonMapTopologyADFViewBean.invokeSearchPopup}"/>
+                                                                                        <af:commandImageLink id="tplgclr10"
+                                                                                                             icon="/images/clear_ena.png"
+                                                                                                             disabledIcon="/images/clear_dis.png"
+                                                                                                             disabled="#{pageFlowScope.NonMapTopologyADFViewBean.disablePanelClearIcon}"
+                                                                                                             binding="#{backingBeanScope.tplgPanelClrSearchIcon}"
+                                                                                                             shortDesc="#{inventoryUIBundle.CLEAR}"
+                                                                                                             actionListener="#{pageFlowScope.NonMapTopologyADFViewBean.clearSearchName}"/>
+                                                                                    </af:panelGroupLayout>
+                                                                                </af:panelLabelAndMessage>
+                                                                                <af:panelLabelAndMessage id="tplgsbc1_pa"
+                                                                                                         label="#{inventoryUIBundle.TECHNOLOGY}">
+                                                                                    <af:panelGroupLayout layout="horizontal"
+                                                                                                         id="tplgl14">
+                                                                                        <af:inputText value="#{pageFlowScope.NonMapTopologyADFViewBean.technology}"
+                                                                                                      simple="true"
+                                                                                                      contentStyle="width:200px"
+                                                                                                      disabled="false"
+                                                                                                      maximumLength="50"
+                                                                                                      id="tplgen3"
+                                                                                                      autoSubmit="true"
+                                                                                                      valueChangeListener="#{pageFlowScope.NonMapTopologyADFViewBean.technologyChanged}"
+                                                                                                      binding="#{backingBeanScope.tplgtechnologyBinding}"
+                                                                                                      label="#{inventoryUIBundle.TECHNOLOGY}">
+                                                                                            <af:autoSuggestBehavior suggestItems="#{pageFlowScope.NonMapTopologyADFViewBean.getTechnologyHandler}"
+                                                                                                                    maxSuggestedItems="25"/>
+                                                                                        </af:inputText>
+                                                                                    </af:panelGroupLayout>
+                                                                                </af:panelLabelAndMessage>
+                                                                                <af:panelLabelAndMessage id="tplgsbc2_pa"
+                                                                                                         label="#{inventoryUIBundle.RATE_CODE}">
+                                                                                    <af:panelGroupLayout layout="horizontal"
+                                                                                                         id="tplgl15">
+                                                                                        <af:inputText value="#{pageFlowScope.NonMapTopologyADFViewBean.rateCode}"
+                                                                                                      simple="true"
+                                                                                                      contentStyle="width:200px" 
+                                                                                                      maximumLength="50"
+                                                                                                      id="tplgen4"
+                                                                                                      autoSubmit="true"
+                                                                                                      valueChangeListener="#{pageFlowScope.NonMapTopologyADFViewBean.rateCodeChanged}"
+                                                                                                      binding="#{backingBeanScope.tplgrateCodeBinding}"
+                                                                                                      label="#{inventoryUIBundle.RATE_CODE}">
+                                                                                            <af:autoSuggestBehavior suggestItems="#{pageFlowScope.NonMapTopologyADFViewBean.getRateCodeHandler}"
+                                                                                                                    maxSuggestedItems="25"/>
+                                                                                        </af:inputText>
+                                                                                    </af:panelGroupLayout>
+                                                                                </af:panelLabelAndMessage>
+                                                                                <af:panelLabelAndMessage id="tplgsbc8_pa"
+                                                                                                         label="#{inventoryUIBundle.ROLE_NAME}"
+                                                                                                         rendered="true">
+                                                                                    <af:panelGroupLayout layout="horizontal"
+                                                                                                         id="tplgl21">
+                                                                                        <af:inputText label="#{inventoryUIBundle.ROLE_NAME}"
+                                                                                                      value="#{pageFlowScope.NonMapTopologyADFViewBean.role}"
+                                                                                                      simple="true"
+                                                                                                      contentStyle="width:200px"
+                                                                                                      disabled="#{pageFlowScope.NonMapTopologyADFViewBean.disableRole}"
+                                                                                                      maximumLength="50"
+                                                                                                      id="tplgen6"
+                                                                                                      autoSubmit="true"
+                                                                                                      valueChangeListener="#{pageFlowScope.NonMapTopologyADFViewBean.roleChanged}"
+                                                                                                      binding="#{backingBeanScope.tplgroleBinding}">
+                                                                                            <af:autoSuggestBehavior suggestItems="#{pageFlowScope.NonMapTopologyADFViewBean.getRoleHandler}"
+                                                                                                                    maxSuggestedItems="25"/>
+                                                                                        </af:inputText>
+                                                                                    </af:panelGroupLayout>
+                                                                                </af:panelLabelAndMessage>
+                                                                                <af:panelLabelAndMessage id="tplgsbc5_pa"
+                                                                                                         label="#{inventoryUIBundle.DISTANCE}"
+                                                                                                         rendered="true">
+                                                                                    <af:panelGroupLayout layout="horizontal"
+                                                                                                         id="tplgl18"
+                                                                                                         valign="bottom">
+                                                                                        <af:inputText value="#{pageFlowScope.NonMapTopologyADFViewBean.distance}"
+                                                                                                      simple="true"
+                                                                                                      contentStyle="width:85px"
+                                                                                                      disabled="#{pageFlowScope.NonMapTopologyADFViewBean.disableDistance}"
+                                                                                                      maximumLength="50"
+                                                                                                      id="tplgen7"
+                                                                                                      autoSubmit="true"
+                                                                                                      valueChangeListener="#{pageFlowScope.NonMapTopologyADFViewBean.distanceChanged}"
+                                                                                                      binding="#{backingBeanScope.tplgdistanceBinding}"
+                                                                                                      label="#{inventoryUIBundle.DISTANCE}">
+                                                                                            <af:validateRegExp pattern="[+-]?([0-9]*[.])?[0-9]+"
+                                                                                                               messageDetailNoMatch="#{inventoryUIBundle.ENTER_NATURAL_NUMBERS_ONLY}"/>
+                                                                                        </af:inputText>
+                                                                                        <af:selectOneChoice contentStyle="width:100px"
+                                                                                                            id="tplgen80"
+                                                                                                            value="#{pageFlowScope.NonMapTopologyADFViewBean.selectedDistUnit}"
+                                                                                                            autoSubmit="true"
+                                                                                                            disabled="#{pageFlowScope.NonMapTopologyADFViewBean.disableDistUnits}"
+                                                                                                            valueChangeListener="#{pageFlowScope.NonMapTopologyADFViewBean.distUnitChanged}"
+                                                                                                            binding="#{backingBeanScope.tplgdistanceUnitsBinding}">
+                                                                                            <f:selectItems value="#{pageFlowScope.NonMapTopologyADFViewBean.distUnitsList}"
+                                                                                                           id="tplgsi660"/>
+                                                                                        </af:selectOneChoice>
+                                                                                    </af:panelGroupLayout>
+                                                                                </af:panelLabelAndMessage>
+                                                                                <af:selectOneChoice label="#{inventoryUIBundle.HOPS}"
+                                                                                                    contentStyle="width:200px"
+                                                                                                    id="tplgen8"
+                                                                                                    disabled="#{pageFlowScope.NonMapTopologyADFViewBean.disableHops}"
+                                                                                                    value="#{pageFlowScope.NonMapTopologyADFViewBean.selectedHops}"
+                                                                                                    autoSubmit="true"
+                                                                                                    valueChangeListener="#{pageFlowScope.NonMapTopologyADFViewBean.hopsChanged}"
+                                                                                                    binding="#{backingBeanScope.tplghopsBinding}"
+                                                                                                    rendered="true">
+                                                                                    <f:selectItems value="#{pageFlowScope.NonMapTopologyADFViewBean.hopsList}"
+                                                                                                   id="tplgsi66"/>
+                                                                                </af:selectOneChoice>
+                                                                                <trh:tableLayout width="100%"
+                                                                                                 cellSpacing="0"
+                                                                                                 cellPadding="2"
+                                                                                                 id="tplgtl1_pa">
+                                                                                    <trh:rowLayout halign="right"
+                                                                                                   id="tplgrl1_pa">
+                                                                                        <trh:cellFormat width="100%"
+                                                                                                        id="tplgcf1_pa">&amp;nbsp;</trh:cellFormat>
+                                                                                        <trh:cellFormat halign="center"
+                                                                                                        id="tplgcf2_pa">
+                                                                                            <af:commandToolbarButton text="#{inventoryUIBundle.SEARCH}"
+                                                                                                                     id="tplgsearchButton_pa"
+                                                                                                                     actionListener="#{pageFlowScope.NonMapTopologyADFViewBean.queryActionListener}"/>
+                                                                                        </trh:cellFormat>
+                                                                                        <trh:cellFormat halign="center"
+                                                                                                        id="tplgcf3_pa">
+                                                                                            <af:commandToolbarButton text="#{inventoryUIBundle.RESET}"
+                                                                                                                     id="tplgresetButton_pa"
+                                                                                                                     actionListener="#{pageFlowScope.NonMapTopologyADFViewBean.reset}"
+                                                                                                                     accessKey="#{inventoryUIBundle.RESET_ACCESS_KEY}"/>
+                                                                                        </trh:cellFormat>
+                                                                                    </trh:rowLayout>
+                                                                                </trh:tableLayout>
+                                                                            </af:panelFormLayout>
+                                                                        </af:panelGroupLayout>
+                                                                    </af:panelBox>
+                                                                </af:panelGroupLayout>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </f:facet>
+                                                    <f:facet name="second">
+                                                        <af:panelStretchLayout id="tplgpsl50" dimensionsFrom="auto">
+                                                            <f:facet name="center">
+                                                                <af:panelGroupLayout layout="scroll" id="tplgpgl80">
+                                                                    <af:panelSplitter orientation="horizontal"
+                                                                                      splitterPosition="250"
+                                                                                      dimensionsFrom="auto"
+                                                                                      positionedFromEnd="true"
+                                                                                      collapsed="true">
+                                                                        <f:facet name="first">
+                                                                            <af:panelStretchLayout dimensionsFrom="auto"
+                                                                                                   styleClass="AFStretchWidth">
+                                                                                <f:facet name="center">
+                                                                                    <dvt:diagram id="tplgdg1"
+                                                                                                 binding="#{pageFlowScope.NonMapTopologyADFViewBean.tplgdiagram}"
+                                                                                                 controlPanelBehavior="initExpanded"
+                                                                                                 layout="#{pageFlowScope.NonMapTopologyADFViewBean.diagramLayout}"
+                                                                                                 selection="multiple"
+                                                                                                 readOnly="true"
+                                                                                                 minZoom="0" maxZoom="3"
+                                                                                                 summary="Diagram Editor"
+                                                                                                 styleClass="AFStretchWidth"
+                                                                                                 inlineStyle="height: 750px;">
+                                                                                        <?audit suppress oracle.jdeveloper.jsp.validate-children?>
+                                                                                        <af:transition transition="auto"
+                                                                                                       triggerType="dataChange"/>
+                                                                                        <dvt:clientLayout name="forceDirectedLayout"
+                                                                                                          method="DemoEditorLayout.forceDirectedLayout"
+                                                                                                          featureName="DemoEditorLayout">
+                                                                                            <f:attribute name="optimalLinkLength"
+                                                                                                         value="200"/>
+                                                                                            <f:attribute name="setViewport"
+                                                                                                         value="true"/>
+                                                                                        </dvt:clientLayout>
+                                                                                        <dvt:clientLayout name="gridLayout"
+                                                                                                          method="DemoGridLayout.gridLayout"
+                                                                                                          featureName="DemoGridLayout"/>
+                                                                                        <dvt:clientLayout name="circleLayout"
+                                                                                                          method="DemoCircleLayout.circleLayout"
+                                                                                                          featureName="DemoCircleLayout">
+                                                                                            <f:attribute name="center"
+                                                                                                         value="false"/>
+                                                                                        </dvt:clientLayout>
+                                                                                        <dvt:overviewWindow id="tplgow1"
+                                                                                                            disclosed="true"/>
+                                                                                        <dvt:diagramNodes id="tplgdn1"
+                                                                                                          value="#{pageFlowScope.NonMapTopologyADFViewBean.nodesModel}"
+                                                                                                          var="node"
+                                                                                                          rowDisclosureListener="#{pageFlowScope.NonMapTopologyADFViewBean.disclosedNode}"
+                                                                                                          selectionListener="#{pageFlowScope.NonMapTopologyADFViewBean.nodesSelected}"
+                                                                                                          selectedRowKeys="#{pageFlowScope.NonMapTopologyADFViewBean.selectedNodes}"
+                                                                                                          binding="#{pageFlowScope.NonMapTopologyADFViewBean.tplgdiagramNodes}"
+                                                                                                          highlightBehavior="nodeAndLinks">
+                                                                                            <af:dragSource actions="COPY LINK MOVE"
+                                                                                                           defaultAction="MOVE"
+                                                                                                           discriminant="fromDiagram"/>
+                                                                                            <dvt:diagramNode id="tplgnstep1"
+                                                                                                             nodeId="#{node.Nodeid}"
+                                                                                                             draggable="yes"
+                                                                                                             layout="forceDirectedLayout"
+                                                                                                             showNodeActions="true"
+                                                                                                             readOnly="true"
+                                                                                                             showDrill="true"
+                                                                                                             shortDesc="#{node.Label}"
+                                                                                                             rendered="#{pageFlowScope.NonMapTopologyADFViewBean.nodeType eq 'Shape'}">
+                                                                                                <f:facet name="zoom100">
+                                                                                                    <af:panelGroupLayout id="tplgpglm1">
+                                                                                                        <dvt:marker id="tplgmarker1"
+                                                                                                                    shape="circle"
+                                                                                                                    labelDisplay="#{pageFlowScope.NonMapTopologyADFViewBean.displayLabel ? 'on' : 'off'}"
+                                                                                                                    labelPosition="#{pageFlowScope.NonMapTopologyADFViewBean.labelPosition}"
+                                                                                                                    fillColor="#{node.Color}"
+                                                                                                                    borderWidth="2"
+                                                                                                                    value="#{node.Label}"
+                                                                                                                    width="48"
+                                                                                                                    height="48"></dvt:marker>
+                                                                                                    </af:panelGroupLayout>
+                                                                                                </f:facet>
+                                                                                            </dvt:diagramNode>
+                                                                                            <dvt:diagramNode id="tplgnstep"
+                                                                                                             nodeId="#{node.Nodeid}"
+                                                                                                             draggable="yes"
+                                                                                                             layout="forceDirectedLayout"
+                                                                                                             showNodeActions="true"
+                                                                                                             readOnly="true"
+                                                                                                             showDrill="true"
+                                                                                                             shortDesc="#{node.Label}"
+                                                                                                             rendered="#{pageFlowScope.NonMapTopologyADFViewBean.nodeType eq 'Icon'}">
+                                                                                                <f:facet name="zoom100">
+                                                                                                    <af:panelGroupLayout id="tplgpglm11"
+                                                                                                                         inlineStyle="padding:5px;border-width:2px;border-radius:8px;">
+                                                                                                        <dvt:marker id="tplgmarker2"
+                                                                                                                    source="#{node.Icon}"
+                                                                                                                    labelDisplay="#{pageFlowScope.NonMapTopologyADFViewBean.displayLabel ? 'on' : 'off'}"
+                                                                                                                    labelPosition="#{pageFlowScope.NonMapTopologyADFViewBean.labelPosition}"
+                                                                                                                    fillColor="#{node.Color}"
+                                                                                                                    borderWidth="2"
+                                                                                                                    value="#{node.Label}"
+                                                                                                                    width="48"
+                                                                                                                    height="48"></dvt:marker>
+                                                                                                    </af:panelGroupLayout>
+                                                                                                </f:facet>
+                                                                                            </dvt:diagramNode>
+                                                                                        </dvt:diagramNodes>
+                                                                                        <dvt:diagramLinks id="tplgdl1"
+                                                                                                          value="#{pageFlowScope.NonMapTopologyADFViewBean.linksModel}"
+                                                                                                          var="link"
+                                                                                                          selectionListener="#{pageFlowScope.NonMapTopologyADFViewBean.linksSelected}"
+                                                                                                          selectedRowKeys="#{pageFlowScope.NonMapTopologyADFViewBean.selectedLinks}"
+                                                                                                          binding="#{pageFlowScope.NonMapTopologyADFViewBean.tplgdiagramLinks}">
+                                                                                            <dvt:diagramLink id="tplgl6"
+                                                                                                             startNode="#{link.Startnode}"
+                                                                                                             rendered="#{link.EntityType =='Connectivity'}"
+                                                                                                             endNode="#{link.Endnode}"
+                                                                                                             readOnly="false"
+                                                                                                             startConnectorType="none"
+                                                                                                             shortDesc="#{link.Label}"
+                                                                                                             endConnectorType="none"
+                                                                                                             linkStyle="dash"
+                                                                                                             linkWidth="1"
+                                                                                                             linkColor="black"/>
+                                                                                            <dvt:diagramLink id="tplgl7"
+                                                                                                             startNode="#{link.Startnode}"
+                                                                                                             rendered="#{link.EntityType =='Pipe'}"
+                                                                                                             endNode="#{link.Endnode}"
+                                                                                                             readOnly="false"
+                                                                                                             startConnectorType="none"
+                                                                                                             shortDesc="#{link.Label}"
+                                                                                                             endConnectorType="none"
+                                                                                                             linkStyle="solid"
+                                                                                                             linkWidth="1"
+                                                                                                             linkColor="black"/>
+                                                                                        </dvt:diagramLinks>
+                                                                                        <f:facet name="contextMenu">
+                                                                                            <af:popup contentDelivery="lazyUncached"
+                                                                                                      id="tplgnodeMenu">
+                                                                                                <af:menu id="tplgm1">
+                                                                                                    <af:commandMenuItem text="#{inventoryUIBundle.VIEW_SUMMARY}"
+                                                                                                                        id="tplgcmi1"
+                                                                                                                        action="#{pageFlowScope.NonMapTopologyADFViewBean.nodeSummaryAction}"
+                                                                                                                        actionListener="#{pageFlowScope.NonMapTopologyADFViewBean.navigateToSummary}"/>
+                                                                                                    <af:commandMenuItem text="#{inventoryUIBundle.EXPAND_LINK}"
+                                                                                                                        id="tplgcmi2"
+                                                                                                                        actionListener="#{pageFlowScope.NonMapTopologyADFViewBean.expandLink}"/>
+                                                                                                </af:menu>
+                                                                                            </af:popup>
+                                                                                        </f:facet>
+                                                                                        <f:facet name="linkContextMenu">
+                                                                                            <af:popup contentDelivery="lazyUncached"
+                                                                                                      id="tplglinkMenu">
+                                                                                                <af:menu id="tplgm2">
+                                                                                                    <af:commandMenuItem text="#{inventoryUIBundle.VIEW_SUMMARY}"
+                                                                                                                        id="tplgcmi4"
+                                                                                                                        action="#{pageFlowScope.NonMapTopologyADFViewBean.linkSummaryAction}"
+                                                                                                                        actionListener="#{pageFlowScope.NonMapTopologyADFViewBean.navigateToSummary}"/>
+                                                                                                </af:menu>
+                                                                                            </af:popup>
+                                                                                        </f:facet>
+                                                                                        <af:clientListener method="handleClick"
+                                                                                                           type="click"/>
+                                                                                    </dvt:diagram>
+                                                                                </f:facet>
+                                                                                <f:facet name="end"></f:facet>
+                                                                            </af:panelStretchLayout>
+                                                                        </f:facet>
+                                                                        <f:facet name="second">
+                                                                            <af:panelGroupLayout id="tplgpgl2a"
+                                                                                                 layout="scroll">
+                                                                                <af:panelAccordion id="tplgpaEditor"
+                                                                                                   discloseMany="true"
+                                                                                                   dimensionsFrom="auto">
+                                                                                    <af:showDetailItem disclosed="true"
+                                                                                                       id="tplgsdiEditor"
+                                                                                                       text="Editor"
+                                                                                                       flex="1"
+                                                                                                       stretchChildren="first">
+                                                                                        <af:panelGroupLayout id="tplgpgl30"
+                                                                                                             layout="scroll">
+                                                                                            <af:panelFormLayout id="tplgpfl10"
+                                                                                                                maxColumns="1"
+                                                                                                                labelWidth="33%"
+                                                                                                                fieldWidth="67%"
+                                                                                                                binding="#{backingBeanScope.tplgviewPanel}">
+                                                                                                <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}"
+                                                                                                                         id="tplgntwk-id">
+                                                                                                    <af:link id="tplgln2"
+                                                                                                             action="#{pageFlowScope.NonMapTopologyADFViewBean.nodeSummaryAction}"
+                                                                                                             actionListener="#{pageFlowScope.NonMapTopologyADFViewBean.navigateToSummary}">
+                                                                                                        <af:outputText value="#{pageFlowScope.NonMapTopologyADFViewBean.id}"
+                                                                                                                       id="tplgot30"/>
+                                                                                                    </af:link>
+                                                                                                </af:panelLabelAndMessage>
+                                                                                                <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}"
+                                                                                                                         id="tplgntwk-name">
+                                                                                                    <af:outputText value="#{pageFlowScope.NonMapTopologyADFViewBean.name}"
+                                                                                                                   id="tplgot20"/>
+                                                                                                </af:panelLabelAndMessage>
+                                                                                                <af:panelLabelAndMessage label="#{inventoryUIBundle.NETWORK_ENTITY_LOCATION}"
+                                                                                                                         id="tplglogdev-nel"
+                                                                                                                         rendered="#{pageFlowScope.NonMapTopologyADFViewBean.renderLocation}">
+                                                                                                    <af:link id="tplgln1"
+                                                                                                             action="LocationDetails"
+                                                                                                             actionListener="#{pageFlowScope.NonMapTopologyADFViewBean.navigateToSummary}">
+                                                                                                        <af:outputText value="#{pageFlowScope.NonMapTopologyADFViewBean.location}"
+                                                                                                                       id="tplgot50"/>
+                                                                                                    </af:link>
+                                                                                                </af:panelLabelAndMessage>
+                                                                                                <af:spacer height="10"/>
+                                                                                                <af:iterator id="tplgit123"
+                                                                                                             binding="#{backingBeanScope.tplgcharacteristicsBinding}"
+                                                                                                             value="#{pageFlowScope.NonMapTopologyADFViewBean.characteristics}"
+                                                                                                             var="characteristicDetails">
+                                                                                                    <af:panelLabelAndMessage label="#{characteristicDetails.label}"
+                                                                                                                             id="tplgonn312"
+                                                                                                                             rendered="#{(characteristicDetails.characteristic.characteristicSpecification.valueType == 'ALPHANUMERIC' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'CALENDAR' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'DROPDOWN_LIST' || characteristicDetails.characteristic.characteristicSpecification.valueType == 'NUMERIC') and !(characteristicDetails.characteristic.characteristicSpecification.isEntityReference == 'true')}">
+                                                                                                        <af:outputText id="tplgote3"
+                                                                                                                       value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                                                                                                    </af:panelLabelAndMessage>
+                                                                                                    <af:panelLabelAndMessage label="#{characteristicDetails.label}"
+                                                                                                                             id="tplgonn317"
+                                                                                                                             rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'URL'}">
+                                                                                                        <af:link id="tplgoth3"
+                                                                                                                 targetFrame="_blank"
+                                                                                                                 destination="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                                                                                                 inlineStyle="padding-left:6px;">
+                                                                                                            <af:outputText id="tplgot180"
+                                                                                                                           truncateAt="50"
+                                                                                                                           value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                                                                                                        </af:link>
+                                                                                                    </af:panelLabelAndMessage>
+                                                                                                    <af:panelLabelAndMessage label=""
+                                                                                                                             id="tplgonn318"
+                                                                                                                             rendered="#{characteristicDetails.characteristic.characteristicSpecification.controlType == 'CHECKBOX'}">
+                                                                                                        <af:selectBooleanCheckbox id="tplgsbc10"
+                                                                                                                                  readOnly="true"
+                                                                                                                                  value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                                                                                                                  text="#{characteristicDetails.label}"
+                                                                                                                                  simple="true"/>
+                                                                                                    </af:panelLabelAndMessage>
+                                                                                                    <af:panelLabelAndMessage id="tplgonn319"
+                                                                                                                             label="#{characteristicDetails.label}"
+                                                                                                                             rendered="#{characteristicDetails.characteristic.characteristicSpecification.controlType == 'DROPDOWN_LIST' and characteristicDetails.characteristic.characteristicSpecification.isEntityReference == 'true'}">
+                                                                                                        <af:commandLink action="#{pageFlowScope.NonMapTopologyADFViewBean.charSummaryAction}"
+                                                                                                                        actionListener="#{pageFlowScope.NonMapTopologyADFViewBean.navigateToCharSummary}"
+                                                                                                                        text="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}">
+                                                                                                            <af:setActionListener from="#{characteristicDetails.characteristic.referencedEntity}"
+                                                                                                                                  to="#{requestScope.entityLink}"/>
+                                                                                                        </af:commandLink>
+                                                                                                    </af:panelLabelAndMessage>
+                                                                                                    <af:spacer height="10"/>
+                                                                                                </af:iterator>
+                                                                                            </af:panelFormLayout>
+                                                                                        </af:panelGroupLayout>
+                                                                                    </af:showDetailItem>
+                                                                                </af:panelAccordion>
+                                                                                <af:resource type="javascript">
+                                                                                  function queueEvent(event) {
+                                                                                      event.cancel();// cancel action event
+                                                                                      var source = event.getSource();
+                                                                                      var params = {
+                                                                                      };
+                                                                                      var type = "customListener";
+                                                                                      var immediate = true;
+                                                                                      var isPartial = true;
+                                                                                      var customEvent = new AdfCustomEvent(source, type, params, immediate);
+                                                                                      customEvent.preventUserInput();
+                                                                                      customEvent.queue(isPartial);
+                                                                                  }
+
+                                                                                  function handleClick(event) {
+                                                                                      event.cancel();
+                                                                                  }
+                                                                                </af:resource>
+                                                                            </af:panelGroupLayout>
+                                                                        </f:facet>
+                                                                    </af:panelSplitter>
+                                                                </af:panelGroupLayout>
+                                                            </f:facet>
+                                                        </af:panelStretchLayout>
+                                                    </f:facet>
+                                                </af:panelSplitter>
+                                            </af:panelGroupLayout>
+                                        </f:facet>
+                                    </af:panelStretchLayout>
+                                </f:facet>
+                            </af:panelSplitter>
+                        </f:facet>
+                    </af:decorativeBox>
+                </f:facet>
+            </af:panelSplitter>
+        </f:facet>
+    </af:pageTemplate>
+</jsp:root>

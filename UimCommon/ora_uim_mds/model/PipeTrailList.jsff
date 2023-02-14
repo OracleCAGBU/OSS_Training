@@ -1,0 +1,267 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+      <af:showDetailHeader text="#{pageFlowScope.pageTitle}" disclosed="true" id="sdh1" helpTopicId="OHW_pipeEnabledBy"> 
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar">
+                  <af:commandToolbarButton text="#{pageFlowScope.buttonTitle}" id="ctbAPP"
+                                           action="#{pageFlowScope.PipeTrailListBean.findPaths}"
+                                           disabled="#{pageFlowScope.PipeTrailListBean.pathButtonDisabled}">
+                  </af:commandToolbarButton>
+            </f:facet>
+            <f:facet name="legend">
+                <af:panelGroupLayout id="g1"  inlineStyle="vertical-align: middle;" layout="horizontal">
+                  <af:outputLabel value="#{inventoryUIBundle.ORIGINATING_TERMINATION_POINT}:" id="ol1" inlineStyle="vertical-align: middle;"/>
+                  <af:outputText value="#{pageFlowScope.PipeTrailListBean.originatingTP}" noWrap="true" id="c12" binding="#{backingBeanScope.otpBinding}"  inlineStyle="vertical-align: middle;"
+                                 />
+                  <af:spacer width="20" id="tp1"/>
+                  <af:commandImageLink text="#{inventoryUIBundle.CHANGE}/" id="originatingTP" inlineStyle="vertical-align: middle;"
+                                  actionListener="#{pageFlowScope.PipeTrailListBean.invokeTPPopup}"
+                                       shortDesc="#{inventoryUIBundle.FOR}#{inventoryUIBundle.ORIGINATING_TERMINATION_POINT}">
+                  </af:commandImageLink>
+                  <af:commandImageLink text="#{inventoryUIBundle.CLEAR}" id="otp" actionListener="#{pageFlowScope.PipeTrailListBean.onClear}" inlineStyle="vertical-align: middle;"
+                                       shortDesc="#{inventoryUIBundle.FOR}#{inventoryUIBundle.ORIGINATING_TERMINATION_POINT}"/>
+                  <af:spacer width="10" id="s1"/>
+                  <af:spacer width="200" id="s23"/>
+                  <af:outputLabel value="#{inventoryUIBundle.TERMINATING_TERMINATION_POINT}:" id="ol2" inlineStyle="vertical-align: middle;"/>
+                  <af:outputText value="#{pageFlowScope.PipeTrailListBean.terminatingTP}" noWrap="true" id="c14" binding="#{backingBeanScope.ttpBinding}"/>
+                  <af:spacer width="20" id="tp2"/>
+                  <af:commandImageLink text="#{inventoryUIBundle.CHANGE}/" id="terminatingTP" inlineStyle="vertical-align: middle;"
+                                  actionListener="#{pageFlowScope.PipeTrailListBean.invokeTPPopup}"
+                                       shortDesc="#{inventoryUIBundle.FOR}#{inventoryUIBundle.TERMINATING_TERMINATION_POINT}">
+                  </af:commandImageLink>
+                  <af:commandImageLink text="#{inventoryUIBundle.CLEAR}" id="ttp" actionListener="#{pageFlowScope.PipeTrailListBean.onClear}" inlineStyle="vertical-align: middle;"
+                                       shortDesc="#{inventoryUIBundle.FOR}#{inventoryUIBundle.TERMINATING_TERMINATION_POINT}"/>
+                  <af:popup id="pipeTPPopup" binding="#{backingBeanScope.pipeTPBinding}" contentDelivery="lazyUncached">
+                    <af:dialog id="dialog2" type="none"
+                               title="#{inventoryUIBundle.SELECT_PIPE_TERMINATION_POINT}">
+                        <af:panelStretchLayout id="pt_psl4" styleClass="invEditPanelStretchLayout">
+                            <f:facet name="center">
+                                <af:region value="#{bindings.PipeTerminationPointListFlow1.regionModel}" id="r2"/>
+                            </f:facet>
+                        </af:panelStretchLayout>
+                    </af:dialog>
+                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.PipeTrailListBean.refreshTPs}"/>
+                  </af:popup>
+                </af:panelGroupLayout>
+            </f:facet>
+            <f:facet name="info"/>
+          <af:spacer width="10" height="10" id="s2"/>
+          <af:spacer width="10" height="10" id="s3"/>
+          <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+               <f:facet name="menus">
+                 <af:menu text="#{inventoryUIBundle.ASSOCIATE}" id="menuAssociate"  disabled="#{pageFlowScope.PipeTrailListBean.associateButtonDisabled}">
+                
+                    <af:commandMenuItem text="#{inventoryUIBundle.PIPE}" id="cb1Pipe" 
+                                           actionListener="#{pageFlowScope.PipeTrailListBean.invokePipePopup}"
+                                           rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=PipeTrail.ASSOCIATEPIPE;action=view']}"
+                                           binding="#{backingBeanScope.associateButton}">
+                    </af:commandMenuItem>
+                    <af:commandMenuItem text="#{inventoryUIBundle.CONNECTIVITY}" id="cb1TDM" 
+                                           actionListener="#{pageFlowScope.PipeTrailListBean.invokeTDMPopup}"
+                                           rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=PipeTrail.ASSOCIATETDM;action=view']}"
+                                           binding="#{backingBeanScope.tdmButton}">
+                    </af:commandMenuItem>
+              </af:menu>
+              </f:facet>
+              <f:facet name="toolbar">
+                <af:toolbar id="t3">
+                  <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}" 
+                                           disabled="#{pageFlowScope.PipeTrailListBean.resultsTable.selectedRowKeys == null || pageFlowScope.PipeTrailListBean.resultsTable.selectedRowKeys.size lt 1}"
+                                           binding="#{backingBeanScope.deleteButton}"
+                                           partialTriggers="t1" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                           icon="#{InventoryHelperBean.deleteIcon}" id="cb3Delete"
+                                           rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=PipeTrail.DELETE;action=view']}"
+                                           actionListener="#{pageFlowScope.PipeTrailListBean.onDelete}">
+                  </af:commandToolbarButton>
+                  <af:spacer width="10" height="10" id="s13"/>
+                  <af:commandToolbarButton text="#{inventoryUIBundle.SORT}" id="cb4Sort" 
+                                           icon="/images/sequence.png"
+                                           disabled="#{(pageFlowScope.PipeTrailListBean.trailListCollectionModel != null and pageFlowScope.PipeTrailListBean.trailListCollectionModel.rowCount le 0)}"
+                                           binding="#{backingBeanScope.sortButton}"
+                                           actionListener="#{pageFlowScope.PipeTrailListBean.onSort}">
+                  </af:commandToolbarButton>
+                  <af:spacer width="10" height="10" id="s19"/>
+                  <af:commandToolbarButton text="#{inventoryUIBundle.SAVE_AND_UPDATE}" id="cb2Edit" 
+                                           disabled="#{pageFlowScope.PipeTrailListBean.updateButtonDisabled}"
+                                           binding="#{backingBeanScope.editButton}"
+                                           icon="#{InventoryHelperBean.editIcon}"
+                                           rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=PipeTrail.UPDATE;action=view']}"
+                                           actionListener="#{pageFlowScope.PipeTrailListBean.updateTrailPipe}">
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar">
+                    <af:toolbar id="t2">
+                         <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(pageFlowScope.PipeTrailListBean.trailListCollectionModel.rowCount lt 0) ? 0 :  pageFlowScope.PipeTrailListBean.trailListCollectionModel.rowCount}"
+                                           id="otp1" styleClass="invSearchOutputLabel" partialTriggers="t1" binding="#{backingBeanScope.totalResultsLabel}"/>
+                    </af:toolbar>
+              </f:facet>
+            <af:table value="#{pageFlowScope.PipeTrailListBean.trailListCollectionModel}" var="trailRow"
+                      emptyText="#{inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET}"
+                      rowBandingInterval="0"
+                      selectionListener="#{pageFlowScope.PipeTrailListBean.trailModelSelectionListener}" 
+                      styleClass="AFStretchWidth" contentDelivery="immediate"
+                      rowSelection="#{pageFlowScope.PipeTrailListBean.rowSelection}" id="t1" 
+                      autoHeightRows="#{pageFlowScope.P1ipeTrailListBean.portletHeight}"
+                      binding="#{pageFlowScope.PipeTrailListBean.resultsTable}"
+                      summary="#{inventoryUIBundle.PIPE_TRAIL_LIST}">
+              <af:column headerText="#{inventoryUIBundle.SEGMENT_ORDER}" width="50" id="c1"
+                         rowHeader="unstyled">
+                <af:inputText value="#{trailRow.sortOrder}" id="ot2"
+                              label="#{inventoryUIBundle.SEGMENT_ORDER}">
+                    <af:validateRegExp pattern="[0-9]{1,1000}" messageDetailNoMatch="#{inventoryUIBundle.SORT_ORDER_VALIDATION}"/>
+                </af:inputText>
+              </af:column>
+              <af:column headerText="#{inventoryUIBundle.PARENT}" align="center" id="pc">
+                 <af:column headerText="#{inventoryUIBundle.TP}" id="c2">
+                   <af:switcher id="tp1Switcher" defaultFacet="false" facetName="#{trailRow.tp1Terminated}"
+                                rendered="#{pageFlowScope.PipeTrailListBean.renderParent}">
+                        <f:facet name="true"> 
+                            <af:commandImageLink action="#{pageFlowScope.PipeTrailListBean.getTpAction}" id="cl1"
+                                            actionListener="#{pageFlowScope.PipeTrailListBean.getTPActionListener}"
+                                            shortDesc="#{inventoryUIBundle.TERMINATION_POINTS_DETAILS}"
+                                            text="#{trailRow.tp1DisplayInfo}">
+                                
+                                <af:setActionListener from="#{trailRow.tp1EP.oid}" to="#{objectId}"/>
+                                <af:setActionListener from="#{trailRow.tp1DisplayInfo}" to="#{displayInfo}"/>
+                                <af:setPropertyListener from="TP1" to="#{pageFlowScope.tpInfo}" type="action"/>
+                            </af:commandImageLink>
+                        </f:facet>
+                        <f:facet name="false">
+                        <af:outputText value="#{trailRow.tp1DisplayInfo}" id="ot4"/>
+                        </f:facet>
+                    </af:switcher>  
+                  </af:column>
+                  <af:column headerText="#{inventoryUIBundle.PIPE}" id="c3">
+                      <af:switcher id="idSwitcher" defaultFacet="false" 
+                                                   facetName="#{pageFlowScope.PipeTrailListBean.parentFacet}"
+                                   rendered="#{pageFlowScope.PipeTrailListBean.renderParent}">
+                         <f:facet name="true">           
+                            <af:commandImageLink action="#{pageFlowScope.PipeTrailListBean.getAction}" 
+                                            actionListener="#{pageFlowScope.PipeTrailListBean.registerRecentItems}" 
+                                            id="cl4"
+                                                 text="#{trailRow.pipeDisplayInfo}"
+                                                 shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                
+                                <af:setActionListener from="#{trailRow.oid}" to="#{objectId}"/>
+                                 <af:setActionListener from="#{trailRow.pipeDisplayInfo}" to="#{displayInfo}"/>
+                            </af:commandImageLink>
+                        </f:facet> 
+                        <f:facet name="false">           
+                            <af:outputText value="#{trailRow.pipeDisplayInfo}" id="ot1434"/>
+                        </f:facet> 
+                      </af:switcher>
+                  </af:column>
+                  <af:column headerText="#{inventoryUIBundle.TP}" id="c4">
+                     <af:switcher id="tp2Switcher" defaultFacet="false" facetName="#{trailRow.tp2Terminated}"
+                                  rendered="#{pageFlowScope.PipeTrailListBean.renderParent}">
+                        <f:facet name="true"> 
+                            <af:commandImageLink action="#{pageFlowScope.PipeTrailListBean.getTpAction}" id="cl5"
+                                            actionListener="#{pageFlowScope.PipeTrailListBean.getTPActionListener}"
+                                                 text="#{trailRow.tp2DisplayInfo}"
+                                                 shortDesc="#{inventoryUIBundle.TERMINATION_POINTS_DETAILS}">
+                              
+                                <af:setActionListener from="#{trailRow.tp2EP.oid}" to="#{objectId}"/>
+                                <af:setActionListener from="#{trailRow.tp2DisplayInfo}" to="#{displayInfo}"/>
+                                 <af:setPropertyListener from="TP2" to="#{pageFlowScope.tpInfo}" type="action"/>
+                            </af:commandImageLink>
+                        </f:facet>
+                        <f:facet name="false">
+                        <af:outputText value="#{trailRow.tp2DisplayInfo}" id="ot6"/>
+                        </f:facet>
+                    </af:switcher>  
+                 </af:column>
+              </af:column>
+              <af:column headerText="#{inventoryUIBundle.CHILD}" align="center" id="cc7">
+                <af:column headerText="#{inventoryUIBundle.TP}" id="c7">
+                  <af:switcher id="channelTP1Switcher" defaultFacet="false" facetName="#{trailRow.channelTp1Terminated}" >
+                        <f:facet name="true"> 
+                            <af:commandImageLink action="#{pageFlowScope.PipeTrailListBean.getTpAction}" id="cl6"
+                                            actionListener="#{pageFlowScope.PipeTrailListBean.getTPActionListener}"
+                                                 text="#{trailRow.channelTP1DisplayInfo}"
+                                                 shortDesc="#{inventoryUIBundle.TERMINATION_POINTS_DETAILS}">
+                               
+                                <af:setActionListener from="#{trailRow.channelTP1EP.oid}" to="#{objectId}"/>
+                                <af:setActionListener from="#{trailRow.channelTP1DisplayInfo}" to="#{displayInfo}"/>
+                                 <af:setPropertyListener from="CHILDTP1" to="#{pageFlowScope.tpInfo}" type="action"/>
+                            </af:commandImageLink>
+                        </f:facet>
+                        <f:facet name="false">
+                        <af:outputText value="#{trailRow.channelTP1DisplayInfo}" id="ot1"/>
+                        </f:facet>
+                    </af:switcher>  
+                  </af:column>
+                <af:column headerText="#{inventoryUIBundle.PIPE}" id="c5">
+                  <af:switcher id="idSwitcher1" defaultFacet="false" facetName="#{pageFlowScope.PipeTrailListBean.childFacet}">
+                            <f:facet name="true">           
+                                <af:commandImageLink action="#{pageFlowScope.PipeTrailListBean.getAction}" 
+                                                actionListener="#{pageFlowScope.PipeTrailListBean.registerRecentItems}"
+                                                id="c22l1"
+                                                     text="#{trailRow.channelDisplayInfo}"
+                                                     
+                                                     shortDesc="#{trailRow.channelDisplayInfo eq null ? '&#160;' : inventoryUIBundle.LINK_FOR_SUMMARY}"
+                                                     disabled="#{trailRow.channelDisplayInfo eq null ? true : false}">
+                                  
+                                   <af:setActionListener from="#{trailRow.channelOid}" to="#{objectId}"/>
+                                   <af:setActionListener from="#{trailRow.channelPipe.displayInfo}" to="#{displayInfo}"/>
+                                </af:commandImageLink>
+                            </f:facet> 
+                            <f:facet name="false">           
+                               <af:outputText value="#{trailRow.channelDisplayInfo}" id="ot143224" />
+                            </f:facet> 
+                      </af:switcher> 
+                     
+                  </af:column>
+                <af:column headerText="#{inventoryUIBundle.TP}" id="c6">
+                   <af:switcher id="channelTP2Switcher" defaultFacet="false" facetName="#{trailRow.channelTp2Terminated}" >
+                        <f:facet name="true"> 
+                            <af:commandImageLink action="#{pageFlowScope.PipeTrailListBean.getTpAction}" id="cl7"
+                                            actionListener="#{pageFlowScope.PipeTrailListBean.getTPActionListener}"
+                                                 text="#{trailRow.channelTP2DisplayInfo}"
+                                                 shortDesc="#{inventoryUIBundle.TERMINATION_POINTS_DETAILS}">
+                                
+                                <af:setActionListener from="#{trailRow.channelTP2EP.oid}" to="#{objectId}"/>
+                                <af:setActionListener from="#{trailRow.channelTP2DisplayInfo}" to="#{displayInfo}"/>
+                                <af:setPropertyListener from="CHILDTP2" to="#{pageFlowScope.tpInfo}" type="action"/>
+                            </af:commandImageLink>
+                        </f:facet>
+                        <f:facet name="false">
+                        <af:outputText value="#{trailRow.channelTP2DisplayInfo}" id="ot11"/>
+                        </f:facet>
+                    </af:switcher>  
+                </af:column>
+              </af:column>
+            </af:table>
+            <af:popup id="pipeTrailPopup" binding="#{backingBeanScope.pipeTrailBinding}" contentDelivery="lazyUncached">
+                <af:dialog id="dialog1" type="none"
+                           title="#{inventoryUIBundle.PIPES}">
+                    <af:panelStretchLayout id="pt_psl5" styleClass="invCommonPanelStretchLayout">
+                        <f:facet name="center">
+                            <af:region value="#{bindings.PipeSearchResultsFlow1.regionModel}" id="r1"/>
+                        </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.PipeTrailListBean.refresh}"/>
+            </af:popup>
+            <af:popup id="tdmTrailPopup" binding="#{backingBeanScope.tdmTrailBinding}" contentDelivery="lazyUncached">
+                <af:dialog id="dialog3" type="none"
+                           title="#{inventoryUIBundle.CONNECTIVITY}">
+                    <af:panelStretchLayout id="pt_psl6" styleClass="invCommonPanelStretchLayout">
+                        <f:facet name="center">
+                            <af:region value="#{bindings.TDMConnectivitySearchResultsFlow1.regionModel}"  id="r3"/>
+                        </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.PipeTrailListBean.refresh}"/>
+            </af:popup>
+          </af:panelCollection>
+        </af:showDetailHeader>
+</jsp:root>

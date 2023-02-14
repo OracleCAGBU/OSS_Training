@@ -1,0 +1,253 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core">
+		  
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>  
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   value="#{bindings.pageTemplateBinding}" id="pt1">
+    <f:facet name="localArea">
+    <af:group id="g2">
+    <af:panelGroupLayout id="pgl1" binding="#{backingBeanScope.NAD_details_panelGroupLayout}">
+      <af:panelHeader id="ph1" styleClass="invSummaryPanelHeader" helpTopicId="OHW_net_addDetails"
+                      text="#{inventoryUIBundle.NETWORK_ADDRESS_DOMAIN_SUMMARY} - #{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.name}"
+                      binding="#{backingBeanScope.generalInfoTab}" 
+                      partialTriggers="ctb6 ctb1 ctb2">
+            <f:facet name="toolbar">
+                <af:toolbar id="t1">
+                    <af:group id="gr2">
+                        <af:commandToolbarButton text="#{inventoryUIBundle.SAVE}" id="ctb1" disabled="#{pageFlowScope.NetworkAddressDomainDetailsBean.disableSaveButtons}"
+                                                 accessKey="#{inventoryUIBundle.SAVE_ACCESS_KEY}" actionListener="#{pageFlowScope.NetworkAddressDomainDetailsBean.save}" 
+                                                 binding="#{backingBeanScope.saveButtonBinding}"
+                                                 rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=NetworkAddressDomainDetails.SAVE;action=view']}">
+                            <af:setActionListener from="viewing"
+                                                  to="#{pageFlowScope.saveActionOutcome}"/>
+                        </af:commandToolbarButton>
+                        <af:spacer width="10" height="10" id="s11"/>
+                        <af:commandToolbarButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="ctb2" disabled="#{pageFlowScope.NetworkAddressDomainDetailsBean.disableSaveButtons}"
+                                                 actionListener="#{pageFlowScope.NetworkAddressDomainDetailsBean.save}" accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}" 
+                                                 binding="#{backingBeanScope.saveAndCloseButtonBinding}"
+                                                 action="#{pageFlowScope.NetworkAddressDomainDetailsBean.saveOutcome}"
+                                                 rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=NetworkAddressDomainDetails.SAVE_AND_CLOSE;action=view']}">
+                            <af:setActionListener from="toSearch" to="#{pageFlowScope.saveActionOutcome}"/>
+                        </af:commandToolbarButton>
+                        <af:spacer width="10" height="10" id="s12"/>
+                        <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}"
+                                         id="ctb3" action="cancel" accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"
+                                          actionListener="#{pageFlowScope.NetworkAddressDomainDetailsBean.cancel}"
+                                         immediate="true"/>
+                    </af:group>
+                </af:toolbar>
+        </f:facet>
+         <af:spacer width="10" height="10" id="s4"/>
+            <af:panelGroupLayout id="pgl3"
+                                 binding="#{pageFlowScope.NetworkAddressDomainDetailsBean.detailsEditViewPanel}">
+              <af:panelGroupLayout id="pgl4" layout="scroll"
+                                   rendered="#{pageFlowScope.NetworkAddressDomainDetailsBean.renderEditPanel}">
+                <af:showDetailHeader text="#{inventoryUIBundle.NETWORK_ADDRESS_DOMAIN_INFORMATION}" disclosed="true"
+                                     id="sdh1">
+                  <f:facet name="toolbar">
+                    <af:toolbar id="t2">
+                      <af:commandToolbarButton id="ctb5" text="#{inventoryUIBundle.EDIT}"
+                                               actionListener="#{pageFlowScope.NetworkAddressDomainDetailsBean.edit}"
+                                               disabled="#{!pageFlowScope.NetworkAddressDomainDetailsBean.disableSaveButtons}"
+                                               rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=NetworkAddressDomainDetails.EDIT;action=view']}"/>
+                    </af:toolbar>
+                  </f:facet>
+                  <af:panelFormLayout id="nade" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+                    <!--af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="nade-name"/-->
+                    <af:inputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.name}"
+                                  id="nade-name1" label="#{inventoryUIBundle.NAME}"/>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.NETWORK_ADDRESS_TYPE}" id="nade-type">
+                      <!--<af:outputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.specification.networkAddressType}" id="outputText11"/>-->
+                      <af:outputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.networkAddressType1}"
+                                     id="outputText11"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}" id="nade-spec">
+                      <af:link action="SpecificationSummary" id="clSpec"
+                               actionListener="#{bindings.openSubTaskForSpec.execute}">
+                        <af:outputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.specification.name}"
+                                       id="ot4"/>
+                        <af:setActionListener from="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.specification.oid}"
+                                              to="#{specObjectId}"/>
+                      </af:link>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage id="nade-ownedby" label="#{inventoryUIBundle.OWNED_BY}">
+                      <af:inputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.ownedByName}" simple="true"
+                                    id="ownedby"  binding="#{backingBeanScope.ownedByNameDetailsBinding}"
+                                    valueChangeListener="#{pageFlowScope.NetworkAddressDomainDetailsBean.ownedByPartyChanged}"
+                                    columns="35" label="#{inventoryUIBundle.OWNED_BY}">
+                                <af:autoSuggestBehavior suggestItems="#{pageFlowScope.NetworkAddressDomainDetailsBean.getPartyHandler}"/>
+                      </af:inputText>
+                      <af:commandImageLink id="commandImageLink2" icon="/images/search_ena.png"
+                                           shortDesc="#{inventoryUIBundle.BROWSE}">
+                        <af:showPopupBehavior popupId="searchOwnedByPartyPopup" triggerType="click"/>
+                      </af:commandImageLink>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage id="nade-managedby" label="#{inventoryUIBundle.MANAGED_BY}">
+                      <af:inputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.managedByName}" simple="true"
+                                    id="managedby" valueChangeListener="#{pageFlowScope.NetworkAddressDomainDetailsBean.managedByPartyChanged}"
+                                    binding="#{backingBeanScope.managedByNameDetailsBinding}" columns="35"
+                                    label="#{inventoryUIBundle.MANAGED_BY}">
+                            <af:autoSuggestBehavior suggestItems="#{pageFlowScope.NetworkAddressDomainDetailsBean.getPartyHandler}"/>
+                      </af:inputText>
+                      <af:commandImageLink id="commandImageLink3" icon="/images/search_ena.png"
+                                           shortDesc="#{inventoryUIBundle.BROWSE}">
+                        <af:showPopupBehavior popupId="searchManagedByPartyPopup" triggerType="click"/>
+                      </af:commandImageLink>
+                    </af:panelLabelAndMessage>
+                    <af:inputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.description}"
+                                  label="#{inventoryUIBundle.DESCRIPTION}" id="nade-description" maximumLength="175"
+                                  rows="3" columns="35"/>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="nade-lmd"
+                                             rendered="false">
+                      <af:outputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.lastModifiedDate}"
+                                     id="ot9"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="nade-lmu"
+                                             rendered="false">
+                      <af:outputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.lastModifiedUser}"
+                                     id="ot12"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="nade-crd" rendered="false">
+                      <af:outputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.createdDate}"
+                                     id="ot15">
+                        <af:convertDateTime pattern="#{pageFlowScope.NetworkAddressDomainDetailsBean.dateTimeFormat}"/>
+                      </af:outputText>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="nade-cru" rendered="false">
+                      <af:outputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.createdUser}"
+                                     id="ot16"/>
+                    </af:panelLabelAndMessage>
+                  </af:panelFormLayout>
+                </af:showDetailHeader>
+                <af:popup id="searchOwnedByPartyPopup" binding="#{backingBeanScope.searchOwnedByDetailsParty}"
+                          contentDelivery="lazyUncached" rendered="true">
+                  <af:dialog id="d1" type="none" title="#{inventoryUIBundle.PARTY_SEARCH}">
+                    <af:panelStretchLayout id="psl_2" styleClass="invCommonPanelStretchLayout">
+                      <f:facet name="center">
+                        <af:region value="#{bindings.PartySearchResultsFlow1.regionModel}" id="r1"/>
+                      </f:facet>
+                    </af:panelStretchLayout>
+                  </af:dialog>
+                  <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                  <af:serverListener type="refreshEntity"
+                                     method="#{pageFlowScope.NetworkAddressDomainDetailsBean.refresh}"/>
+                </af:popup>
+                <af:popup id="searchManagedByPartyPopup" binding="#{backingBeanScope.searchManagedByDetailsParty}"
+                          contentDelivery="lazyUncached" rendered="true">
+                  <af:dialog id="d2" type="none" title="#{inventoryUIBundle.PARTY_SEARCH}">
+                    <af:panelStretchLayout id="psl_3" styleClass="invCommonPanelStretchLayout">
+                      <f:facet name="center">
+                        <af:region value="#{bindings.PartySearchResultsFlow2.regionModel}" id="r2"/>
+                      </f:facet>
+                    </af:panelStretchLayout>
+                  </af:dialog>
+                  <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                  <af:serverListener type="refreshEntity"
+                                     method="#{pageFlowScope.NetworkAddressDomainDetailsBean.refresh}"/>
+                </af:popup>
+              </af:panelGroupLayout>
+              <af:panelGroupLayout id="pgl5" layout="scroll"
+                                   rendered="#{pageFlowScope.NetworkAddressDomainDetailsBean.renderViewPanel}">
+                <af:showDetailHeader text="#{inventoryUIBundle.NETWORK_ADDRESS_DOMAIN_INFORMATION}" disclosed="true"
+                                     id="showDetailHeader1">
+                  <f:facet name="toolbar">
+                    <af:toolbar id="t3">
+                      <af:commandToolbarButton id="ctb6" text="#{inventoryUIBundle.EDIT}"
+                                               actionListener="#{pageFlowScope.NetworkAddressDomainDetailsBean.edit}"
+                                               rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=NetworkAddressDomainDetails.EDIT;action=view']}"/>
+                    </af:toolbar>
+                  </f:facet>
+                  <af:panelFormLayout id="nadv" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="nadv-name">
+                      <af:outputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.name}"
+                                     id="outputText1"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.NETWORK_ADDRESS_TYPE}" id="nadv-type">
+                      <!--<af:outputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.specification.networkAddressType}" id="outputText12"/>-->
+                      <af:outputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.networkAddressType1}"
+                                     id="outputText12"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}" id="nadv-spec">
+                      <af:link action="SpecificationSummary" id="clSpecv"
+                               actionListener="#{bindings.openSubTaskForSpec.execute}">
+                        <af:outputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.specification.name}"
+                                       id="ot41"/>
+                        <af:setActionListener from="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.specification.oid}"
+                                              to="#{specObjectId}"/>
+                      </af:link>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage id="nadv-ownedby" label="#{inventoryUIBundle.OWNED_BY}">
+                      <af:outputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.networkAddressDomainOwnedBy.name}"
+                                     id="ldacc-idb"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage id="nadv-managedby" label="#{inventoryUIBundle.MANAGED_BY}">
+                      <af:outputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.networkAddressDomainManagedBy.name}"
+                                     id="ldacc-idbm"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}" id="nadv-description">
+                      <af:outputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.description}"
+                                     id="outputText6"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="nadv-lmd"
+                                             rendered="false">
+                      <af:outputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.lastModifiedDate}"
+                                     id="outputText8"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="nadv-lmu"
+                                             rendered="false">
+                      <af:outputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.lastModifiedUser}"
+                                     id="outputText9"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="nadv-crd" rendered="false">
+                      <af:outputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.createdDate}"
+                                     id="ot18">
+                        <af:convertDateTime pattern="#{pageFlowScope.NetworkAddressDomainDetailsBean.dateTimeFormat}"/>
+                      </af:outputText>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="nadv-cru" rendered="false">
+                      <af:outputText value="#{pageFlowScope.NetworkAddressDomainDetailsBean.entityObject.createdUser}"
+                                     id="ot17"/>
+                    </af:panelLabelAndMessage>
+                  </af:panelFormLayout>
+                  <!-- The Below PanelFormLayout will be used to NetworkAddressDomain. -->
+                  <af:panelFormLayout id="elcpf1" binding="#{backingBeanScope.uiHintsViewPanel}" maxColumns="2" rows="2"
+                                      labelWidth="33%" fieldWidth="67%">
+                    <af:iterator id="it1231" value="#{pageFlowScope.NetworkAddressDomainDetailsBean.characteristics}"
+                                 var="characteristicDetails">
+                      <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="onn3121"
+                                               rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'ALPHANUMERIC' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'CALENDAR' || characteristicDetails.characteristic.characteristicSpecification.controlType == 'DROPDOWN_LIST' || characteristicDetails.characteristic.characteristicSpecification.valueType == 'NUMERIC'}">
+                        <af:outputText id="ote3"
+                                       value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                      </af:panelLabelAndMessage>
+                      <af:panelLabelAndMessage label="#{characteristicDetails.label}" id="onn317"
+                                               rendered="#{characteristicDetails.characteristic.characteristicSpecification.valueType == 'URL'}">
+                        <af:link id="oth3" targetFrame="_blank"
+                                 destination="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                 inlineStyle="padding-left:6px;">
+                          <af:outputText id="ot118" truncateAt="50"
+                                         value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"/>
+                        </af:link>
+                      </af:panelLabelAndMessage>
+                      <af:panelLabelAndMessage label="" id="onn318"
+                                               rendered="#{characteristicDetails.characteristic.characteristicSpecification.controlType == 'CHECKBOX'}">
+                        <af:selectBooleanCheckbox id="sbc1" readOnly="true"
+                                                  value="#{characteristicDetails.lovItemLabelsByValue[characteristicDetails.characteristic.value]}"
+                                                  text="#{characteristicDetails.label}" simple="true"/>
+                      </af:panelLabelAndMessage>
+                    </af:iterator>
+                  </af:panelFormLayout>
+                </af:showDetailHeader>
+              </af:panelGroupLayout>
+            </af:panelGroupLayout>
+          </af:panelHeader>
+    </af:panelGroupLayout> 
+    </af:group>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+    <f:facet name="localAreaScroll"/>
+  </af:pageTemplate>
+</jsp:root>

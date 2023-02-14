@@ -1,0 +1,514 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html" 
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:jvf="http://www.ilog.com/jviews/tlds/jviews-framework-faces.tld"
+          xmlns:jvtf="http://www.ilog.com/jviews/tlds/jviews-tgo-faces.tld"
+          xmlns:jv="http://www.ilog.com/jviews/tlds/jviews-faces.tld"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html">
+  <c:set var="bundle"
+         value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  
+      <af:panelGroupLayout id="pgl2" layout="scroll"
+                           binding="#{backingBeanScope.project_Workspace_panelGroupLayout}"
+                           inlineStyle="text-align:left">
+        <af:resource source="css/style.css" type="css"/>
+        <af:resource source="script/view.js" type="javascript"/>
+        <!-- START - Connectivity Search and Associate Popup -->
+        <af:popup id="connectivitySearchPopup" contentDelivery="lazyUncached"
+                  binding="#{backingBeanScope.connectivitySearchPopup}">
+          <af:dialog title="#{inventoryUIBundle.SEARCH_CONNECTIVITY}"
+                     id="associateConnectivityDialog" type="none">
+            <af:panelStretchLayout id="pt_ps231"
+                                   styleClass="invConfigResourceStretchLayout">
+              <f:facet name="center">
+                <af:region value="#{bindings.TDMConnectivitySearchResultsFlow1.regionModel}"
+                           id="r1"/>
+              </f:facet>
+            </af:panelStretchLayout>
+          </af:dialog>
+          <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+          <af:serverListener type="refreshEntity"
+                             method="#{pageFlowScope.ActivityWorkspaceBean.refreshNetworkCanvasArea}"/>
+        </af:popup>
+        <!-- END - Connectivity Search and Associate Popup -->
+        <!-- START - Device Search and Associate Popup -->
+        <af:popup id="ldSearchPopup" contentDelivery="lazyUncached"
+                  binding="#{backingBeanScope.ldSearchPopup}">
+          <af:dialog title="#{inventoryUIBundle.SEARCH_DEVICES}"
+                     id="associateDeviceDialog" type="none">
+            <af:panelStretchLayout id="pt_ds231"
+                                   styleClass="invConfigResourceStretchLayout">
+              <f:facet name="center">
+                <af:region value="#{bindings.LogicalDeviceSearchResultsFlow1.regionModel}"
+                           id="r2"/>
+              </f:facet>
+            </af:panelStretchLayout>
+          </af:dialog>
+          <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+          <af:serverListener type="refreshEntity"
+                             method="#{pageFlowScope.ActivityWorkspaceBean.refreshNetworkCanvasArea}"/>
+        </af:popup>
+        <!-- END - Device Search and Associate Popup -->
+        <!-- START - Network Search and Associate Popup -->
+        <af:popup id="nwSearchPopup" contentDelivery="lazyUncached"
+                  binding="#{backingBeanScope.nwSearchPopup}">
+          <af:dialog title="#{inventoryUIBundle.SEARCH_NETWORKS}"
+                     id="associateNetworkDialog" type="none">
+            <af:panelStretchLayout id="psl1"
+                                   styleClass="invConfigResourceStretchLayout">
+              <f:facet name="center">
+                <af:region value="#{bindings.NetworkSearchResults1.regionModel}"
+                           id="r3"/>
+              </f:facet>
+            </af:panelStretchLayout>
+          </af:dialog>
+          <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+          <af:serverListener type="refreshEntity"
+                             method="#{pageFlowScope.ActivityWorkspaceBean.refreshNetworkCanvasArea}"/>
+        </af:popup>
+        <!-- END - Device Network and Associate Popup -->
+        <!-- Invisible component -->
+        <af:commandButton id="updateADFComponents"
+                          binding="#{backingBeanScope.updateADFComponentBinding}"
+                          partialSubmit="true" visible="false"
+                          styleClass="invisibleComponent"
+                          text="#{inventoryUIBundle.UPDATE}"/>
+        <!-- START - source workspace interactors -->
+        <af:panelBox visible="false" text="sourceInteractors" showHeader="never"
+                     rendered="#{pageFlowScope.workspaceId == 'sourceWorkspace'}">
+          <jvf:zoomInteractor id="sourceWorkspaceZoom"/>
+          <jvf:panInteractor id="sourceWorkspacePan"/>
+          <jvtf:clientSelectInteractor id="sourceWorkspaceSelect"
+                                       menuModelId="selectItr"/>
+        </af:panelBox>
+        <!-- END - source workspace interactors -->
+        <!-- START - target workspace interactors -->
+        <af:panelBox visible="false" text="targetInteractors" showHeader="never"
+                     rendered="#{pageFlowScope.workspaceId == 'targetWorkspace'}">
+          <jvf:zoomInteractor id="targetWorkspaceZoom"/>
+          <jvf:panInteractor id="targetWorkspacePan"/>
+          <jvtf:clientSelectInteractor id="targetWorkspaceSelect"
+                                       menuModelId="selectItr"/>
+        </af:panelBox>
+        <!-- END - target workspace interactors -->
+        
+        <!-- START - workspace tool bar -->
+        <h:panelGrid styleClass="visualToolbar">
+          <af:panelGroupLayout id="pgl199" layout="horizontal">
+            <af:toolbar id="visualToolbar"
+                        styleClass="AFStretchWidth"
+                        binding="#{pageFlowScope.ActivityWorkspaceBean.visualToolBar}">
+              
+                <jv:imageButton title="#{inventoryUIBundle.SELECT}"
+                                style="width: 16px;height: 16px;"
+                                selected="true"
+                                onclick="#{pageFlowScope.workspaceId}.setInteractor(#{pageFlowScope.workspaceId}Select)"
+                                image="/images/selectobject_ena.png"
+                                rolloverImage="/images/selectobject_ovr.png"
+                                selectedImage="/images/selectobject_dwn.png"
+                                buttonGroupId="#{pageFlowScope.workspaceId}Interactors"
+                                binding="#{backingBeanScope.SELECTBUTTON}"/>
+                <af:spacer width="5" height="10" id="s1"/>
+                <jv:imageButton title="#{inventoryUIBundle.ZOOM}"
+                                style="width: 16px;height: 16px;"
+                                onclick="#{pageFlowScope.workspaceId}.setInteractor(#{pageFlowScope.workspaceId}Zoom)"
+                                image="/images/zoomtoselection_ena.png"
+                                rolloverImage="/images/zoomtoselection_ovr.png"
+                                selectedImage="/images/zoomtoselection_dwn.png"
+                                buttonGroupId="#{pageFlowScope.workspaceId}Interactors"/>
+                <af:spacer width="5" height="10" id="s6"/>
+                <jv:imageButton title="#{inventoryUIBundle.PAN}"
+                                style="width: 16px;height: 16px;"
+                                onclick="#{pageFlowScope.workspaceId}.setInteractor(#{pageFlowScope.workspaceId}Pan)"
+                                image="/images/pan_ena.png"
+                                rolloverImage="/images/pan_ovr.png"
+                                selectedImage="/images/pan_dwn.png"
+                                buttonGroupId="#{pageFlowScope.workspaceId}Interactors"
+                                message="#{inventoryUIBundle.PAN}"/>
+                <af:spacer width="5" height="10" id="s3"/>
+                <jv:imageButton title="#{inventoryUIBundle.SHOW_ALL}"
+                                style="width: 16px;height: 16px;"
+                                onclick="#{pageFlowScope.workspaceId}.showAll(true)"
+                                image="/images/zoombestfit_ena.png"
+                                rolloverImage="/images/zoombestfit_ovr.png"
+                                selectedImage="/images/zoombestfit_dwn.png"/>
+                <af:spacer width="5" height="10" id="s8"/>
+                <jv:imageButton title="#{inventoryUIBundle.ZOOM_IN}"
+                                style="width: 16px;height: 16px;"
+                                onclick="#{pageFlowScope.workspaceId}.zoomIn(true)"
+                                image="/images/zoomin_ena.png"
+                                rolloverImage="/images/zoomin_ovr.png"
+                                selectedImage="/images/zoomin_dwn.png"/>
+                <af:spacer width="5" height="10" id="s9"/>
+                <jv:imageButton title="#{inventoryUIBundle.ZOOM_OUT}"
+                                style="width: 16px;height: 16px;"
+                                onclick="#{pageFlowScope.workspaceId}.zoomOut(true)"
+                                image="/images/zoomout_ena.png"
+                                rolloverImage="/images/zoomout_ovr.png"
+                                selectedImage="/images/zoomout_dwn.png"/>
+                <af:spacer width="5" height="10" id="s10"/>
+              
+              
+                <af:switcher facetName="#{pageFlowScope.ActivityWorkspaceBean.facetName}">
+                  <f:facet name="GROOM">
+                    <jv:imageButton title="#{inventoryUIBundle.ADD_CONNECTIVITY}"
+                                    style="width: 16px;height: 16px;"
+                                    onclick="openPopup('#{pageFlowScope.workspaceId}','connectivitySearchPopup')"
+                                    image="/images/connectivity_ena.png"
+                                    rolloverImage="/images/connectivity_ovr.png"
+                                    selectedImage="/images/connectivity_dwn.png"
+                                    enabled="#{pageFlowScope.activityBean.enableActivityButton}"/>
+                  </f:facet>
+                  <f:facet name="REHOME">
+                    <!-- TODO AN: update the rolloverImage and selectedImage for Add devices-->
+                    <jv:imageButton title="#{inventoryUIBundle.ADD_DEVICES}"
+                                    style="width: 16px;height: 16px;"
+                                    onclick="openPopup('#{pageFlowScope.workspaceId}','ldSearchPopup')"
+                                    image="/images/logical-device_ena.png"
+                                    rolloverImage="/images/logical-device_ena.png"
+                                    selectedImage="/images/logical-device_ena.png"
+                                    enabled="#{pageFlowScope.activityBean.enableActivityButton}"/>
+                  </f:facet>
+                  <f:facet name="INSERT_NODE">
+                    <jv:imageButton title="#{inventoryUIBundle.ADD_NETWORKS}"
+                                    style="width: 16px;height: 16px;"
+                                    onclick="openPopup('#{pageFlowScope.workspaceId}','nwSearchPopup')"
+                                    image="/images/cloud_ena.png"
+                                    rolloverImage="/images/cloud_ovr.png"
+                                    selectedImage="/images/cloud_dwn.png"
+                                    enabled="#{pageFlowScope.activityBean.enableActivityButton}"/>
+                  </f:facet>
+                  <f:facet name="REMOVE_NODE">
+                    <jv:imageButton title="#{inventoryUIBundle.ADD_NETWORKS}"
+                                    style="width: 16px;height: 16px;"
+                                    onclick="openPopup('#{pageFlowScope.workspaceId}','nwSearchPopup')"
+                                    image="/images/cloud_ena.png"
+                                    rolloverImage="/images/cloud_ena.png"
+                                    selectedImage="/images/cloud_ena.png"
+                                    enabled="#{pageFlowScope.activityBean.enableActivityButton}"/>
+                  </f:facet>
+                </af:switcher>
+                <af:spacer width="5" height="10" id="s12"/>
+                <!-- TODO AN: update the rolloverImage and selectedImage save positions-->
+                <jv:imageButton title="#{inventoryUIBundle.SAVE_NODE_POSITIONS}"
+                                style="width: 16px;height: 16px;"
+                                onclick="saveNodePositions(#{pageFlowScope.workspaceId}, '#{pageFlowScope.workspaceId}','#{pageFlowScope.ActivityWorkspaceBean.updateADFComponentId}')"
+                                image="/images/save-layout_ena.png"
+                                rolloverImage="/images/save-layout_ena.png"
+                                selectedImage="/images/save-layout_ena.png"/>
+                <af:spacer width="5" height="10" id="s4"/>
+              
+                <jv:imageButton title="#{inventoryUIBundle.CLEAR}"
+                                style="width: 16px;height: 16px;"
+                                onclick="clear('#{pageFlowScope.workspaceId}','#{pageFlowScope.ActivityWorkspaceBean.updateADFComponentId}')"
+                                image="/images/clear_ena.png"
+                                rolloverImage="/images/clear_ovr.png"
+                                selectedImage="/images/clear_dwn.png"
+                                enabled="#{pageFlowScope.ActivityWorkspaceBean.enableClear}"/>
+                 <af:switcher facetName="#{pageFlowScope.ActivityWorkspaceBean.displayDelete}">
+                  <f:facet name="true">               
+                    <jv:imageButton title="#{inventoryUIBundle.DELETE}"
+                                style="width: 16px;height: 16px;"
+                                onclick="deleteObject('#{pageFlowScope.workspaceId}','#{pageFlowScope.ActivityWorkspaceBean.updateADFComponentId}')"
+                                image="/images/delete_ena.png"
+                                enabled="#{pageFlowScope.ActivityWorkspaceBean.enableDelete}"/>
+                    </f:facet>
+                     <f:facet name="false">       
+                     </f:facet>
+                     </af:switcher>
+                             
+              
+              
+                <jv:imageButton title="#{inventoryUIBundle.PERFORM_LABEL_LAYOUT}"
+                                style="width: 16px;height: 16px;"
+                                onclick="performLabelLayout(#{pageFlowScope.workspaceId}, '#{pageFlowScope.workspaceId}','#{pageFlowScope.ActivityWorkspaceBean.updateADFComponentId}')"
+                                image="/images/aligngoals_ena.png"
+                                rolloverImage="/images/aligngoals_ovr.png"
+                                selectedImage="/images/aligngoals_dwn.png"/>
+                <af:spacer width="5" height="10" id="s11"/>
+                <jv:imageButton title="#{inventoryUIBundle.RANDOM_LAYOUT}"
+                                style="width: 16px;height: 16px;"
+                                onclick="doRandomLayout(#{pageFlowScope.workspaceId}, '#{pageFlowScope.workspaceId}','#{pageFlowScope.ActivityWorkspaceBean.updateADFComponentId}')"
+                                image="/images/community_ena.png"
+                                rolloverImage="/images/community_ovr.png"
+                                selectedImage="/images/community_dwn.png"/>
+                <af:spacer width="5" height="10" id="s15"/>
+                <jv:imageButton title="#{inventoryUIBundle.SPRING_EMBEDDER_LAYOUT}"
+                                style="width: 16px;height: 16px;"
+                                onclick="doSpringEmbedderLayout(#{pageFlowScope.workspaceId}, '#{pageFlowScope.workspaceId}','#{pageFlowScope.ActivityWorkspaceBean.updateADFComponentId}')"
+                                image="/images/SpringEmbedderLayout.gif"
+                                rolloverImage="/images/SpringEmbedderLayouth.gif"
+                                selectedImage="/images/SpringEmbedderLayoutd.gif"/>
+                <af:spacer width="5" height="10" id="s5"/>
+                <jv:imageButton style="width: 16px;height: 16px;"
+                                onclick="doUniformLengthEdgesLayout(#{pageFlowScope.workspaceId}, '#{pageFlowScope.workspaceId}','#{pageFlowScope.ActivityWorkspaceBean.updateADFComponentId}')"
+                                image="/images/UniformLengthEdgesLayout.gif"
+                                rolloverImage="/images/UniformLengthEdgesLayouth.gif"
+                                selectedImage="/images/UniformLengthEdgesLayoutd.gif"
+                                title="#{inventoryUIBundle.UNIFORM_LENGTH_EDGES_LAYOUT}"
+                                message="#{inventoryUIBundle.UNIFORM_LENGTH_EDGES_LAYOUT}"/>
+                <af:spacer width="5" height="10" id="s7"/>
+                <jv:imageButton style="width: 16px;height: 16px;"
+                                onclick="doTreeLayout(#{pageFlowScope.workspaceId}, '#{pageFlowScope.workspaceId}','#{pageFlowScope.ActivityWorkspaceBean.updateADFComponentId}')"
+                                image="/images/TreeLayout.gif"
+                                rolloverImage="/images/TreeLayouth.gif"
+                                selectedImage="/images/TreeLayoutd.gif"
+                                title="#{inventoryUIBundle.TREE_LAYOUT}"
+                                message="#{inventoryUIBundle.TREE_LAYOUT}"/>
+                <af:spacer width="5" height="10" id="s13"/>
+                <jv:imageButton style="width: 16px;height: 16px;"
+                                onclick="doHierarchicalLayout(#{pageFlowScope.workspaceId}, '#{pageFlowScope.workspaceId}','#{pageFlowScope.ActivityWorkspaceBean.updateADFComponentId}')"
+                                image="/images/HierarchicalLayout.gif"
+                                rolloverImage="/images/HierarchicalLayouth.gif"
+                                selectedImage="/images/HierarchicalLayoutd.gif"
+                                title="#{inventoryUIBundle.HIERARCHICAL_LAYOUT}"
+                                message="#{inventoryUIBundle.HIERARCHICAL_LAYOUT}"/>
+                <af:spacer width="5" height="10" id="s14"/>
+                <jv:imageButton style="width: 16px;height: 16px;"
+                                onclick="doTopologicalMeshLayout(#{pageFlowScope.workspaceId}, '#{pageFlowScope.workspaceId}','#{pageFlowScope.ActivityWorkspaceBean.updateADFComponentId}')"
+                                image="/images/TopologicalMeshLayout.gif"
+                                rolloverImage="/images/TopologicalMeshLayouth.gif"
+                                selectedImage="/images/TopologicalMeshLayoutd.gif"
+                                title="#{inventoryUIBundle.TOPOLOGICALMESH_LAYOUT}"
+                                message="#{inventoryUIBundle.TOPOLOGICALMESH_LAYOUT}"/>
+                <af:spacer width="5" height="10" id="s16"/>
+                <jv:imageButton style="width: 16px;height: 16px;"
+                                onclick="doCircularLayout(#{pageFlowScope.workspaceId}, '#{pageFlowScope.workspaceId}','#{pageFlowScope.ActivityWorkspaceBean.updateADFComponentId}')"
+                                image="/images/CircularLayout.gif"
+                                rolloverImage="/images/CircularLayouth.gif"
+                                selectedImage="/images/CircularLayoutd.gif"
+                                title="#{inventoryUIBundle.CIRCULAR_LAYOUT}"
+                                message="#{inventoryUIBundle.CIRCULAR_LAYOUT}"/>
+                <af:spacer width="5" height="10" id="s17"/>
+                <jv:imageButton style="width: 16px;height: 16px;"
+                                onclick="doGridLayout(#{pageFlowScope.workspaceId}, '#{pageFlowScope.workspaceId}','#{pageFlowScope.ActivityWorkspaceBean.updateADFComponentId}')"
+                                image="/images/GridLayout.gif"
+                                rolloverImage="/images/GridLayouth.gif"
+                                selectedImage="/images/GridLayoutd.gif"
+                                title="Grid Layout"
+                                message="#{inventoryUIBundle.GRID_LAYOUT}"/>
+
+            </af:toolbar>
+        </af:panelGroupLayout>
+    </h:panelGrid>
+    <!-- END - workspace tool bar -->
+          
+            <af:panelGroupLayout layout="horizontal">
+              <!--START - Dual Canvas  -->
+              <af:panelGroupLayout id="canvasArea" clientComponent="true"
+                                   binding="#{pageFlowScope.ActivityWorkspaceBean.canvasArea}"
+                                   styleClass="AFStretchWidth">
+                <af:serverListener type="jsOpenPopup"
+                                   method="#{pageFlowScope.ActivityWorkspaceBean.handlePopup}"/>
+                <af:serverListener type="jsRefreshNetworkCanvasArea"
+                                   method="#{pageFlowScope.ActivityWorkspaceBean.refreshNetworkCanvasArea}"/>
+                <af:serverListener type="jsCreateDetails"
+                                   method="#{pageFlowScope.ActivityWorkspaceBean.createDetails}"/>
+                <af:serverListener type="jsClear"
+                                   method="#{pageFlowScope.ActivityWorkspaceBean.clear}"/>
+                <af:serverListener type="jsDelete"
+                                   method="#{pageFlowScope.ActivityWorkspaceBean.delete}"/>
+                <af:panelBox id="pb1" text="sourceworkspaceBox" showHeader="never"
+                             rendered="#{pageFlowScope.workspaceId == 'sourceWorkspace'}"
+                             showDisclosure="false" styleClass="AFStretchWidth">
+                  <h:panelGrid border="0" columns="1">
+                    <jvtf:networkView id="sourceWorkspace" context="#{defContext}"
+                                      width="#{pageFlowScope.ActivityWorkspaceBean.canvasWidth}" 
+                                      height="#{pageFlowScope.ActivityWorkspaceBean.canvasHeight}" 
+                                      interactorId="sourceWorkspaceSelect"
+                                      imageFormat="PNG" resizable="true"
+                                      servlet="oracle.communications.inventory.ui.framework.visualization.servlet.NetworkSyncImageServlet"
+                                      network="#{pageFlowScope.ActivityWorkspaceBean.canvasNetwork}"
+                                      waitingImage="images/waiting.gif">
+                      <jvtf:selectionManager imageMode="false" lineColor="blue"
+                                             lineWidth="2"
+                                             propertyAccessor="#{ActivityWorkspaceInteractorBean.propertyAccessor}"
+                                             forceUpdateProperties="false"
+                                             id="sm2"
+                                             onSelectionChanged="displaySelection(selection,'#{pageFlowScope.workspaceId}')"/>
+                    </jvtf:networkView>
+                  </h:panelGrid>
+                </af:panelBox>
+                <af:panelBox id="pb2" text="targetworkspaceBox" showHeader="never"
+                             rendered="#{pageFlowScope.workspaceId == 'targetWorkspace'}"
+                             showDisclosure="false" styleClass="AFStretchWidth">
+                  <h:panelGrid border="0" columns="1">
+                    <jvtf:networkView id="targetWorkspace" context="#{defContext}"
+                                     width="#{pageFlowScope.ActivityWorkspaceBean.canvasWidth}" 
+                                      height="#{pageFlowScope.ActivityWorkspaceBean.canvasHeight}" 
+                                      interactorId="targetWorkspaceSelect"
+                                      imageFormat="PNG" resizable="true"
+                                      servlet="oracle.communications.inventory.ui.framework.visualization.servlet.NetworkSyncImageServlet"
+                                      network="#{pageFlowScope.ActivityWorkspaceBean.canvasNetwork}"
+                                      waitingImage="images/waiting.gif">
+                      <jvtf:selectionManager imageMode="false" lineColor="blue"
+                                             lineWidth="2"
+                                             propertyAccessor="#{ActivityWorkspaceInteractorBean.propertyAccessor}"
+                                             forceUpdateProperties="false"
+                                             id="sm1"
+                                             onSelectionChanged="displaySelection(selection,'#{pageFlowScope.workspaceId}')"/>
+                    </jvtf:networkView>
+                  </h:panelGrid>
+                </af:panelBox>
+              </af:panelGroupLayout>
+              <!--END - Dual Canvas  -->
+              <af:spacer width="10" height="10" id="s2"/>
+              <af:panelGroupLayout layout="vertical" id="pgl1">
+                <af:panelBox text="#{inventoryUIBundle.OVERVIEW}"
+                             showDisclosure="false"
+                             rendered="#{pageFlowScope.workspaceId == 'sourceWorkspace'}">
+                  <jvf:overview id="sourceWorkspaceOverview"
+                                viewId="sourceWorkspace" autoRefresh="true"
+                                height="100" width="135"/>
+                </af:panelBox>
+                <af:panelBox text="#{inventoryUIBundle.OVERVIEW}"
+                             showDisclosure="false"
+                             rendered="#{pageFlowScope.workspaceId == 'targetWorkspace'}">
+                  <jvf:overview id="targetWorkspaceOverview"
+                                viewId="targetWorkspace" autoRefresh="true"
+                                height="100" width="135"/>
+                </af:panelBox>
+                <af:panelBox showDisclosure="false"
+                             text="#{inventoryUIBundle.DETAILS_OF_SELECTED_ITEM}"
+                             binding="#{backingBeanScope.selectedObjectDetails}"/>
+              </af:panelGroupLayout>
+              <trh:script id="sourceClientId"
+                          text='var sourceWorkspaceClientId = "#{pageFlowScope.ActivityWorkspaceBean.clientId}"; '
+                          rendered="#{pageFlowScope.ActivityWorkspaceBean.workspaceId =='sourceWorkspace'}"></trh:script>
+              <trh:script id="targetClientId"
+                          text='var targetWorkspaceClientId = "#{pageFlowScope.ActivityWorkspaceBean.clientId}"; '
+                          rendered="#{pageFlowScope.ActivityWorkspaceBean.workspaceId =='targetWorkspace'}"></trh:script>
+              <trh:script id="script1">
+                function displaySelection(selection, workspaceId) {
+                    try {
+                        if (selection.length == 1) {
+                            p = selection[0].getObjectProperties();
+                        }
+                        else if (selection.length == 0) {
+                            p = "NOTHING_IS_SELECTED";
+                        }
+                        else if (selection.length &gt; 1) {
+                            p = "MULTIPLE_OBJECTS_ARE_SELECTED";
+                        }
+                        var workspaceArea = "";
+                        if (workspaceId == 'sourceWorkspace')
+                            workspaceArea = AdfPage.PAGE.findComponentByAbsoluteId(sourceWorkspaceClientId);
+                        else if (workspaceId == 'targetWorkspace')
+                            workspaceArea = AdfPage.PAGE.findComponentByAbsoluteId(targetWorkspaceClientId);
+                        AdfCustomEvent.queue(workspaceArea, "jsCreateDetails", 
+                        {
+                            props : p
+                        },
+true);
+                        p = "";
+                    }
+                    catch (e) {
+                        alert("An error occurred when building property sheet." + e);
+                    }
+                }
+
+                function updatesourceWorkspaceCanvasId(canvasId) {
+                    sourceWorkspaceClientId = canvasId;
+                }
+
+                function updatetargetWorkspaceCanvasId(canvasId) {
+                    targetWorkspaceClientId = canvasId;
+                }
+
+                function openPopup(workspaceId, popupId) {
+                    p = popupId;
+                    var workspaceArea = "";
+                    if (workspaceId == 'sourceWorkspace')
+                        workspaceArea = AdfPage.PAGE.findComponentByAbsoluteId(sourceWorkspaceClientId);
+                    else if (workspaceId == 'targetWorkspace')
+                        workspaceArea = AdfPage.PAGE.findComponentByAbsoluteId(targetWorkspaceClientId);
+                    AdfCustomEvent.queue(workspaceArea, "jsOpenPopup", 
+                    {
+                        props : p
+                    },
+true);
+                }
+
+                function saveNodePositions(workspace, workspaceId, updateADFComponentsId) {
+                    workspace.performAction('editAction', [workspaceId + 'Adapter.saveNodePositions'], true);
+                    clickInvisibleButton(updateADFComponentsId);
+                }
+
+                function doRandomLayout(workspace, workspaceId, updateADFComponentsId) {
+                    workspace.performAction('editAction', [workspaceId + 'Adapter.doRandomLayout'], true);
+                    clickInvisibleButton(updateADFComponentsId);
+                }
+
+                function performLabelLayout(workspace, workspaceId, updateADFComponentsId) {
+                    workspace.performAction('editAction', [workspaceId + 'Adapter.performLabelLayout'], true);
+                    clickInvisibleButton(updateADFComponentsId);
+                }
+
+                function doSpringEmbedderLayout(workspace, workspaceId, updateADFComponentsId) {
+                    workspace.performAction('editAction', [workspaceId + 'Adapter.doSpringEmbedderLayout'], true);
+                    clickInvisibleButton(updateADFComponentsId);
+                }
+
+                function doUniformLengthEdgesLayout(workspace, workspaceId, updateADFComponentsId) {
+                    workspace.performAction('editAction', [workspaceId + 'Adapter.doUniformLengthEdgesLayout'], true);
+                    clickInvisibleButton(updateADFComponentsId);
+                }
+
+                function doTreeLayout(workspace, workspaceId, updateADFComponentsId) {
+                    workspace.performAction('editAction', [workspaceId + 'Adapter.doTreeLayout'], true);
+                    clickInvisibleButton(updateADFComponentsId);
+                }
+
+                function doHierarchicalLayout(workspace, workspaceId, updateADFComponentsId) {
+                    workspace.performAction('editAction', [workspaceId + 'Adapter.doHierarchicalLayout'], true);
+                    clickInvisibleButton(updateADFComponentsId);
+                }
+
+                function doTopologicalMeshLayout(workspace, workspaceId, updateADFComponentsId) {
+                    workspace.performAction('editAction', [workspaceId + 'Adapter.doTopologicalMeshLayout'], true);
+                    clickInvisibleButton(updateADFComponentsId);
+
+                }
+
+                function doCircularLayout(workspace, workspaceId, updateADFComponentsId) {
+                    workspace.performAction('editAction', [workspaceId + 'Adapter.doCircularLayout'], true);
+                    clickInvisibleButton(updateADFComponentsId);
+                }
+
+                function doGridLayout(workspace, workspaceId, updateADFComponentsId) {
+                    workspace.performAction('editAction', [workspaceId + 'Adapter.doGridLayout'], true);
+                    clickInvisibleButton(updateADFComponentsId);
+                }
+               
+                function clear(workspaceId, updateADFComponentsId) {
+                    var workspaceArea = "";
+                    if (workspaceId == 'sourceWorkspace')
+                        workspaceArea = AdfPage.PAGE.findComponentByAbsoluteId(sourceWorkspaceClientId);
+                    else if (workspaceId == 'targetWorkspace')
+                        workspaceArea = AdfPage.PAGE.findComponentByAbsoluteId(targetWorkspaceClientId);
+                    AdfCustomEvent.queue(workspaceArea, "jsClear", 
+                    {
+                    },
+true);
+                }
+                 
+                function deleteObject(workspaceId, updateADFComponentsId) {
+                    var workspaceArea = "";
+                    if (workspaceId == 'sourceWorkspace')
+                        workspaceArea = AdfPage.PAGE.findComponentByAbsoluteId(sourceWorkspaceClientId);
+                    else if (workspaceId == 'targetWorkspace')
+                        workspaceArea = AdfPage.PAGE.findComponentByAbsoluteId(targetWorkspaceClientId);
+                    AdfCustomEvent.queue(workspaceArea, "jsDelete", 
+                    {
+                    },
+true);
+                }
+              </trh:script>
+            </af:panelGroupLayout>    
+      </af:panelGroupLayout>
+    
+</jsp:root>

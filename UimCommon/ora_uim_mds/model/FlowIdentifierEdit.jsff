@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:pf="/platform/functions"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:cui="/CommsUI">
+		   
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout id="pgl1" binding="#{backingBeanScope.edit_panelGroupLayout}" layout="scroll">
+      <cui:WarningDialog id="wd1" binding="#{backingBeanScope.warningDialog}"/>
+      <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered ="#{!pageFlowScope.FlowIdentifierEditBean.previewLayout}">
+          <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                           rendered="#{!(pageFlowScope.FlowIdentifierEditBean.popupMode)}"
+                           value="#{pageFlowScope.FlowIdentifierEditBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+          <af:menuBar id="menuBar1">
+                  <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invEditMenu"
+                           rendered="#{!(pageFlowScope.FlowIdentifierEditBean.popupMode)}"   />
+          </af:menuBar>
+          <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch3}" contentDelivery="lazyUncached">
+                <af:dialog id="BISearchPopup_d1" type="none"
+                           title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                    <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                        <f:facet name="center">
+                           <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                        </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.FlowIdentifierEditBean.afterBusinessInteractionSelectionChange}"/>
+         </af:popup>
+      </af:panelGroupLayout>
+        <af:panelHeader text="#{pageFlowScope.FlowIdentifierEditBean.message}" id="ph45" messageType="confirmation" rendered="#{pageFlowScope.FlowIdentifierEditBean.addAnotherMode}"/>
+        <af:panelHeader text="#{pageFlowScope.FlowIdentifierEditBean.headerText} - #{pageFlowScope.FlowIdentifierEditBean.displayInfo}" id="ph1" helpTopicId="#{pageFlowScope.FlowIdentifierEditBean.helpTopic}">
+        
+        <f:facet name="toolbar">
+            <af:panelGroupLayout id="pgl3" layout="horizontal" rendered="#{!pageFlowScope.FlowIdentifierEditBean.previewLayout}"> 
+                <!--CRUD Buttons Starts -->                         
+                <af:commandButton text="#{inventoryUIBundle.SAVE}" actionListener="#{pageFlowScope.FlowIdentifierEditBean.save}"
+                                  id="cb31" rendered="#{pageFlowScope.FlowIdentifierEditBean.addMode and !pageFlowScope.FlowIdentifierEditBean.popupMode}"
+                                  action="#{pageFlowScope.FlowIdentifierEditBean.saveOutcome}"
+                                  accessKey="#{inventoryUIBundle.SAVE_ACCESS_KEY}">                
+                 </af:commandButton>                 
+                <af:spacer width="10" height="10" id="s51"/>
+                <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb1"
+                                  actionListener="#{pageFlowScope.FlowIdentifierEditBean.save}" action="#{pageFlowScope.FlowIdentifierEditBean.saveOutcome}"
+                                  accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}"> 
+                   <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>               
+                </af:commandButton>                
+                <af:spacer width="10" height="10" id="s5"/>
+                <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2" action="cancel" actionListener="#{bindings.closeSubTask.execute}" immediate="true"
+                                  accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                <!--CRUD Buttons Ends -->
+           </af:panelGroupLayout>
+        </f:facet>
+
+        
+        <af:panelGroupLayout layout="scroll" id="pgl23">
+            <af:showDetailHeader text="#{inventoryUIBundle.FLOWIDENTIFIER_INFORM}" disclosed="true" id="PAGE_TITLE">
+              <af:group id="g1">
+                <af:spacer height="10" id="spacer1"/>
+                <af:panelGroupLayout id="pgl4"> 
+                  <af:panelFormLayout id="flowiden" maxColumns="2"  binding="#{backingBeanScope.uiHintsPanel}"
+                                      rows="1" labelWidth="27%" fieldWidth="73%">
+
+                    <af:selectOneChoice id="flowiden-specification" label="#{inventoryUIBundle.SPECIFICATION}" autoSubmit="true"
+                                        value="#{pageFlowScope.FlowIdentifierEditBean.selectedSpec}" required="true"
+                                        valueChangeListener="#{pageFlowScope.FlowIdentifierEditBean.specChanged}"
+                                        disabled="#{!(pageFlowScope.FlowIdentifierEditBean.addMode)}">
+                        <f:selectItems binding="#{pageFlowScope.FlowIdentifierEditBean.specifications}" id="si2"/>
+                    </af:selectOneChoice>
+
+                    <af:panelLabelAndMessage id="flowiden-domain" label="#{inventoryUIBundle.DOMAIN}" showRequired="#{pageFlowScope.FlowIdentifierEditBean.domainRequired}" for="flowiden-domainip">
+                    <af:inputText simple="true" 
+                                  value="#{pageFlowScope.FlowIdentifierEditBean.networkAddressDomainName}"
+                                  autoSubmit="true" immediate="true"
+                                  id="flowiden-domainip"
+								  valueChangeListener="#{pageFlowScope.FlowIdentifierEditBean.networkAddressDomainChanged}">
+                        <af:autoSuggestBehavior suggestItems="#{pageFlowScope.FlowIdentifierEditBean.getNetworkAddressDomainHandler}"/>
+                    </af:inputText>             
+                      <af:commandImageLink id="flowiden-sls" immediate="true" blocking="true" icon="/images/search_ena.png" shortDesc="#{inventoryUIBundle.SEARCH}" partialTriggers="flowiden-domainip" >
+                          <af:showPopupBehavior popupId="networkAddressDomainPopup" triggerType="click"/>
+                      </af:commandImageLink>
+                      <af:commandImageLink id="flowiden-clear" immediate="true" icon="/images/clear_ena.png" shortDesc="#{inventoryUIBundle.CLEAR}" partialTriggers="flowiden-domainip" 
+                                             actionListener="#{pageFlowScope.FlowIdentifierEditBean.clearNetworkAddressDomain}">
+                      </af:commandImageLink> 
+                  </af:panelLabelAndMessage> 
+                    
+                      <af:inputText id="flowiden-resourcepool" value="#{pageFlowScope.FlowIdentifierEditBean.resourcePoolName}" 
+                                    label="#{inventoryUIBundle.RESOURCE_POOL}" autoSubmit="true"
+                                    disabled="#{!(pageFlowScope.FlowIdentifierEditBean.addMode) 
+                                            || pageFlowScope.FlowIdentifierEditBean.resourcePoolDisabled}"
+                                    valueChangeListener="#{pageFlowScope.FlowIdentifierEditBean.resourcePoolChaged}">
+                     <af:autoSuggestBehavior  suggestItems="#{pageFlowScope.FlowIdentifierEditBean.getSuggestItems}" />
+                    </af:inputText>
+                    
+                    <af:inputText binding="#{backingBeanScope.identifierPrefixBinding}"
+                                  value="#{pageFlowScope.FlowIdentifierEditBean.identifierPrefix}" 
+                                  label="#{inventoryUIBundle.IDENTIFIER_PREFIX}"
+                                  columns="20"
+                                  maximumLength="20"
+                                  immediate="true"
+                                   valueChangeListener="#{pageFlowScope.FlowIdentifierEditBean.identifierPrefixChanged}"
+                                  disabled="#{pageFlowScope.FlowIdentifierEditBean.createUntaggedOnly}"
+                                   id="flowiden-identifierPrefix" autoSubmit="true" rendered="#{pageFlowScope.FlowIdentifierEditBean.addMode}">
+                    </af:inputText>
+                    
+                    <af:inputText binding="#{backingBeanScope.identifierValueBinding}"
+                                  value="#{pageFlowScope.FlowIdentifierEditBean.identifierValue}" 
+                                  label="#{inventoryUIBundle.IDENTIFIER_VALUE}"
+                                  disabled="#{!(pageFlowScope.FlowIdentifierEditBean.addMode) || pageFlowScope.FlowIdentifierEditBean.createUntaggedOnly}"
+                                  columns="20"
+                                  immediate="true"
+                                  required="true"
+                                  valueChangeListener="#{pageFlowScope.FlowIdentifierEditBean.identifierValueChanged}"
+                                  id="flowiden-identifierValue" autoSubmit="true" rendered="#{!pageFlowScope.FlowIdentifierEditBean.createRangeMode}"
+                                  validator="#{pageFlowScope.FlowIdentifierEditBean.validate}">
+                    </af:inputText>
+                    
+                    <af:inputText binding="#{backingBeanScope.lowerIdentifierValueBinding}"
+                                  value="#{pageFlowScope.FlowIdentifierEditBean.lowerIdentifierValue}" 
+                                  label="#{inventoryUIBundle.LOWER_IDENTIFIER_VALUE}"
+                                  columns="20"
+                                  required="true"
+                                 id="flowiden-lowerIdentifierValue" immediate="true" autoSubmit="true" rendered="#{pageFlowScope.FlowIdentifierEditBean.createRangeMode}">
+                    </af:inputText>
+                    
+                    <af:inputText binding="#{backingBeanScope.upperIdentifierValueBinding}"
+                                  value="#{pageFlowScope.FlowIdentifierEditBean.upperIdentifierValue}" 
+                                  label="#{inventoryUIBundle.UPPER_IDENTIFIER_VALUE}"
+                                  columns="20"
+                                  required="true"
+                                  id="flowiden-upperIdentifierValue" immediate="true" autoSubmit="true" rendered="#{pageFlowScope.FlowIdentifierEditBean.createRangeMode}">
+                    </af:inputText>
+                    
+                     <af:inputText binding="#{backingBeanScope.excludedValuesBinding}"
+                                  value="#{pageFlowScope.FlowIdentifierEditBean.excludedValues}" 
+                                  label="#{inventoryUIBundle.EXCLUDED_VALUES}"
+                                  columns="20"
+                                  id="flowiden-excludedIdentifierValues" 
+                                  autoSubmit="true"
+                                  immediate="true" 
+                                  rendered="#{pageFlowScope.FlowIdentifierEditBean.createRangeMode}" shortDesc="#{inventoryUIBundle.EXCLUDED_VALUES_HINT}">
+                    </af:inputText>
+                    
+                    <af:inputText binding="#{backingBeanScope.nameBinding}"
+                                  value="#{pageFlowScope.FlowIdentifierEditBean.name}" 
+                                  label="#{inventoryUIBundle.NAME}"
+                                  columns="30"
+                                  maximumLength="30"
+                                  immediate="true"
+                                  disabled="#{pageFlowScope.FlowIdentifierEditBean.createUntaggedOnly}"
+                                   id="flowiden-name" autoSubmit="true" rendered="#{!pageFlowScope.FlowIdentifierEditBean.createRangeMode}">
+                    </af:inputText>
+                    
+                    <af:inputText label="#{inventoryUIBundle.DESCRIPTION}"
+                                id="flowiden-desc" maximumLength="255"
+                                rows="5" columns="50"
+                                autoSubmit="true"
+                                immediate="true"
+                                value="#{pageFlowScope.FlowIdentifierEditBean.description}"/>
+                    
+                    <af:selectBooleanCheckbox text="#{inventoryUIBundle.INCLUDE_UNTAGGED}" id="flowiden-incUntagged"                           
+                        value="#{pageFlowScope.FlowIdentifierEditBean.includeUntagged}" rendered="#{pageFlowScope.FlowIdentifierEditBean.addMode &amp;&amp; pageFlowScope.FlowIdentifierEditBean.createRangeMode}"
+                                              disabled= "#{!pageFlowScope.FlowIdentifierEditBean.untaggedAllowed}" />
+                                              
+                    <af:selectBooleanCheckbox text="#{inventoryUIBundle.CREATE_UNTAGGED}" id="flowiden-createUntagged" autoSubmit="true"                          
+                        value="#{pageFlowScope.FlowIdentifierEditBean.createUntaggedOnly}" rendered="#{pageFlowScope.FlowIdentifierEditBean.addMode &amp;&amp; !pageFlowScope.FlowIdentifierEditBean.createRangeMode}"
+                                              valueChangeListener="#{pageFlowScope.FlowIdentifierEditBean.createUntaggedOnlyChanged}"
+                                               disabled= "#{!pageFlowScope.FlowIdentifierEditBean.untaggedAllowed}" />
+                                              
+                    <af:selectBooleanCheckbox text="#{inventoryUIBundle.PROVIDER_MANAGED}" id="flowiden-providerManged" disabled="true"
+                          value="#{pageFlowScope.FlowIdentifierEditBean.providerManaged}" />
+                          
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.STACKING_LEVEL}" id="flowiden-stackingLevel">
+                        <af:outputFormatted binding="#{backingBeanScope.stackingLevel}" value="#{pageFlowScope.FlowIdentifierEditBean.stackingLevel}" id="ot15"/>
+                    </af:panelLabelAndMessage>
+                          
+
+                 </af:panelFormLayout>
+                 <af:spacer height="10" id="spacer2"/>
+                           <af:spacer height="10" id="s39"/>
+                <af:panelGroupLayout layout="scroll" id="pgl9" styleClass="AFStretchWidth" rendered="#{(pageFlowScope.FlowIdentifierEditBean.addMode)}">
+                    <af:showDetail disclosed="true" disclosedText="#{inventoryUIBundle.NEW_FLOWIDENTIFIERS}" id="sd2">
+                        <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                            <f:facet name="menus"/>
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t2">                                    
+                                    <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}"
+                                           id="fiDel"
+                                           disabled="#{pageFlowScope.FlowIdentifierEditBean.newFlowIdentifiersTable.selectedRowKeys.size lt 1 or pageFlowScope.FlowIdentifierEditBean.newFlowIdentifiersTable.selectedRowKeys.size eq null}"
+                                           partialTriggers="t1"
+                                           icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                           rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=FlowIdentifier.DELETE;action=view']}"
+                                           actionListener="#{pageFlowScope.FlowIdentifierEditBean.deleteFlowIdentifiers}" binding="#{backingBeanScope.deleteButton}"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <f:facet name="statusbar"/>
+                            <af:table var="row"
+                                      value="#{pageFlowScope.FlowIdentifierEditBean.newFlowIdentifiersCollectionModel}" 
+                                      rowSelection="multiple" contentDelivery="immediate"
+                                      styleClass="AFStretchWidth" fetchSize="25"
+                                      autoHeightRows="#{pageFlowScope.FlowIdentifierEditBean.portletHeight}"
+                                      binding="#{pageFlowScope.FlowIdentifierEditBean.newFlowIdentifiersTable}"
+                                      rowBandingInterval="0" id="t1" selectionListener="#{pageFlowScope.FlowIdentifierEditBean.flowIdentifiersSelectionListener}"
+                                      summary="#{inventoryUIBundle.NEW_FLOWIDENTIFIERS_TABLE}">
+                            <!--Partial Trigger for CREATE,EDIT and DELETE buttons Ends -->
+                            <af:column sortProperty="id" sortable="true" filterable="true" headerText="#{inventoryUIBundle.ID}" id="c3"
+                                       rowHeader="unstyled"  width="200">
+                              <af:switcher id="idsw" defaultFacet="false" facetName="#{pageFlowScope.InventoryResultsBean.popupMode}">
+                                <f:facet name="false">
+                                  <!-- No action listener is required. Just invoke the 'summary' action -->
+                                  <af:commandImageLink action="summary" id="cl1" actionListener="#{bindings.openSubTaskForSummary.execute}"
+                                                       text="#{row.id}"
+                                                       shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                    <!-- Put the objectId in request scope so that the task flow call can pass it as an input parm -->
+                                    <af:setActionListener from="#{row.oid}" to="#{objectId}"/>
+                                  
+                                  </af:commandImageLink>
+                                </f:facet>
+                                <f:facet name="true">
+                                  <af:outputText value="#{row.id}" id="ot2" />
+                                </f:facet>
+                              </af:switcher>
+                            </af:column>
+                            <af:column sortProperty="specification.name"  sortable="true" filterable="true" headerText="#{inventoryUIBundle.SPECIFICATION}" id="c2" width="#{pageFlowScope.InventoryResultsBean.specWidth}">
+                                  <af:outputText value="#{row.specification.name}"/>
+                            </af:column>
+                            <af:column headerText="#{inventoryUIBundle.IDENTIFIER}" id="c5" width="75">
+                              <af:outputText value="#{row.identifier}" id="ot5"/>
+                            </af:column>
+                            
+                            <af:column headerText="#{inventoryUIBundle.NAME}" id="c6" width="150">
+                              <af:outputText value="#{row.name}" id="ot6" />
+                            </af:column>
+                            
+                            <af:column headerText="#{inventoryUIBundle.DOMAIN}" id="c7" width="150">
+                              <af:outputText value="#{row.domain.name}" id="ot7" />
+                            </af:column>
+                            
+                            <af:column headerText="#{inventoryUIBundle.DESCRIPTION}" id="c8" width="250">
+                              <af:outputText value="#{row.description}" id="ot8" />
+                            </af:column>
+
+                            </af:table>
+                            
+                        </af:panelCollection>
+                    </af:showDetail>
+                </af:panelGroupLayout>
+
+                <af:spacer width="10" height="10" id="s1"/>
+                </af:panelGroupLayout>
+
+              </af:group>      
+            </af:showDetailHeader>
+            
+           <af:popup id="networkAddressDomainPopup" binding="#{backingBeanScope.networkAddressDomainPopup}" contentDelivery="lazyUncached">
+                  <af:dialog title="#{inventoryUIBundle.NETWORK_ADDRESS_DOMAIN_SEARCH}" id="pl" type="none">
+                    <af:panelStretchLayout id="pl_2" styleClass="invCommonPanelStretchLayout">
+                        <f:facet name="center">                 
+                            <af:region value="#{bindings.NetworkAddressDomainSearchResultsFlow1.regionModel}" id="prpl1"/>
+                         </f:facet>
+                     </af:panelStretchLayout>          
+                  </af:dialog>
+                  <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                  <af:serverListener type="refreshEntity" method="#{pageFlowScope.FlowIdentifierEditBean.refresh}"/>
+        </af:popup>
+        
+       </af:panelGroupLayout>
+       </af:panelHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

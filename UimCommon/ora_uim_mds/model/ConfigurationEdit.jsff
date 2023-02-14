@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved. */
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    4/15/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   id="pt1">
+    <f:facet name="localArea">
+    <af:panelGroupLayout id="pgl1"  binding="#{backingBeanScope.edit_panelGroupLayout}"
+                             layout="scroll">
+        <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left"        
+                             rendered="#{!pageFlowScope.ConfigurationEditBean.previewLayout}">
+          <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                         rendered="#{pageFlowScope.ConfigurationEditBean.renderBiMenu}"                         
+                         value="#{pageFlowScope.ConfigurationEditBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+          <af:menuBar id="menuBar1">
+            <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}"
+                     styleClass="invEditMenu" rendered="#{pageFlowScope.ConfigurationEditBean.renderBiMenu}"
+                     disabled="#{pageFlowScope.ConfigurationEditBean.disableBiMenu}"/>
+          </af:menuBar>
+          <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch13}"
+                    contentDelivery="lazyUncached">
+            <af:dialog id="BISearchPopup_d1" type="none" title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+              <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="cer2"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity"
+                               method="#{pageFlowScope.ConfigurationEditBean.afterBusinessInteractionSelectionChange}"/>
+          </af:popup>
+        </af:panelGroupLayout>
+        
+        
+        <af:panelHeader text="#{pageFlowScope.ConfigurationEditBean.entityInfo} #{inventoryUIBundle.CONFIGURATION_INFORMATION} - #{pageFlowScope.ConfigurationEditBean.displayInfo}" 
+      id="ph1" helpTopicId="#{pageFlowScope.ConfigurationEditBean.helpTopic}">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar">
+           <af:panelGroupLayout id="g2" layout="horizontal">
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb1"
+                                actionListener="#{pageFlowScope.ConfigurationEditBean.saveAndClose}" 
+                                action="#{pageFlowScope.ConfigurationEditBean.getSummary}"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+              <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandButton>
+              <af:spacer width="10" height="10" id="s11"/>
+              <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2" action="cancel" actionListener="#{pageFlowScope.ConfigurationEditBean.cancel}"
+                                immediate="true" accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:showDetailHeader text="#{pageFlowScope.ConfigurationEditBean.entityInfo} #{inventoryUIBundle.CONFIGURATION_INFORMATION}" disclosed="true"
+                             id="PAGE_TITLE">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:group id="g1">
+            <af:panelGroupLayout id="pgl13" layout="scroll">
+              <af:panelFormLayout id="pfl1" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+              <af:selectOneChoice id="specDropDown"
+                                    label="#{inventoryUIBundle.SPECIFICATION}"
+                                    autoSubmit="true"
+                                    value="#{pageFlowScope.ConfigurationEditBean.selectedSpec}"
+                                    showRequired="true"
+                                  disabled="#{(!pageFlowScope.ConfigurationEditBean.addMode) or (pageFlowScope.ConfigurationEditBean.disableSpec)}">
+                  <f:selectItems binding="#{pageFlowScope.ConfigurationEditBean.specifications}"
+                                 id="si2"/>
+                </af:selectOneChoice>
+                 <af:inputText value="#{pageFlowScope.ConfigurationEditBean.previousVersion}"
+                              label="#{inventoryUIBundle.PREVIOUS_CONFIGURATION}"
+                              showRequired="true"
+                              contentStyle="text-align:left;"
+                              id="it341" disabled="true">
+                </af:inputText>
+                 <af:inputText value="#{pageFlowScope.ConfigurationEditBean.version}"
+                              label="#{inventoryUIBundle.VERSION}"
+                              contentStyle="text-align:left;"
+                              id="it31" disabled="true">
+                </af:inputText>
+                <af:inputText value="#{pageFlowScope.ConfigurationEditBean.id}"
+                              label="#{inventoryUIBundle.ID}"
+                              maximumLength="50" columns="53"
+                              id="it1">
+                </af:inputText>
+                <af:inputText value="#{pageFlowScope.ConfigurationEditBean.name}"
+                              label="#{inventoryUIBundle.NAME}"
+                              maximumLength="50" columns="53"
+                              id="it2">
+                </af:inputText>
+                
+                  <af:inputDate value="#{pageFlowScope.ConfigurationEditBean.startDate}"
+                                valueChangeListener="#{pageFlowScope.ConfigurationEditBean.startDateChanged}"
+                                autoSubmit="true"
+                                label="#{inventoryUIBundle.START_DATE}"
+                                required="true"
+                                id="inputDate2">
+                  <af:convertDateTime pattern="#{pageFlowScope.ConfigurationEditBean.dateTimeFormat}"/>
+                </af:inputDate>
+              </af:panelFormLayout>
+            </af:panelGroupLayout>
+          </af:group>     
+         </af:showDetailHeader>  
+      </af:panelHeader>
+     </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root> 

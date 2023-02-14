@@ -1,0 +1,358 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:panelGroupLayout layout="scroll" id="pgl23">
+    <af:panelHeader text="#{inventoryUIBundle.RESERVATION} - #{pageFlowScope.ReservationEditBean.displayInfo}" id="ph1"
+                    helpTopicId="#{pageFlowScope.ReservationEditBean.helpTopic}">
+      <f:facet name="context"/>
+      <f:facet name="menuBar"/>
+      <f:facet name="toolbar">
+        <af:panelGroupLayout id="pgl3" layout="horizontal">
+          <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb1"
+                            actionListener="#{pageFlowScope.ReservationEditBean.createReservation}"
+                            action="#{pageFlowScope.ReservationEditBean.saveOutcome}"
+                            accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+            <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+          </af:commandButton>
+          <af:spacer width="10" height="10" id="re12"/>
+          <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2" action="#{pageFlowScope.ReservationEditBean.cancelOutcome}" immediate="true"
+                            actionListener="#{pageFlowScope.ReservationEditBean.cancel}"
+                            accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <af:showDetailHeader text="#{inventoryUIBundle.RESERVATION_INFORMATION}" disclosed="true" id="sdh1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:group id="g2">
+          <af:panelGroupLayout id="pgl2">
+            <af:panelFormLayout id="pfl1" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+              <af:selectOneChoice id="reserverForType" label="#{inventoryUIBundle.RESERVED_FOR_TYPE}"
+                                  disabled="#{!(pageFlowScope.ReservationEditBean.addMode)}" autoSubmit="true"
+                                  required="true" value="#{pageFlowScope.ReservationEditBean.reservedForTypeValue}">
+                <f:selectItems binding="#{pageFlowScope.ReservationEditBean.reservedForTypes}" id="si2"/>
+              </af:selectOneChoice>
+              <af:inputText label="#{inventoryUIBundle.RESERVED_FOR}" id="it1"
+                            value="#{pageFlowScope.ReservationEditBean.reservedFor}" showRequired="true"
+                            disabled="#{!(pageFlowScope.ReservationEditBean.addMode)}" maximumLength="35"/>
+              <af:selectOneChoice id="reservationType" label="#{inventoryUIBundle.RESERVATION_TYPE}" autoSubmit="true"
+                                  required="true" value="#{pageFlowScope.ReservationEditBean.reservationTypeValue}">
+                <f:selectItems binding="#{pageFlowScope.ReservationEditBean.reservationTypes}" id="si1"/>
+              </af:selectOneChoice>
+              <af:inputText label="#{inventoryUIBundle.RESERVATION_NUMBER}" id="it2"
+                            value="#{pageFlowScope.ReservationEditBean.reservationNumber}" disabled="true"/>
+              <af:inputDate value="#{pageFlowScope.ReservationEditBean.startDate}"
+                            label="#{inventoryUIBundle.START_DATE}" required="true" id="inputDate1">
+                <af:convertDateTime pattern="#{pageFlowScope.ReservationEditBean.dateTimeFormat}"/>
+              </af:inputDate>
+              <af:inputDate value="#{pageFlowScope.ReservationEditBean.expiryDate}"
+                            label="#{inventoryUIBundle.EXPIRY_DATE}" id="inputDate2">
+                <af:convertDateTime pattern="#{pageFlowScope.ReservationEditBean.dateTimeFormat}"/>
+              </af:inputDate>
+              <af:inputText label="#{inventoryUIBundle.REASON}" id="it3"
+                            value="#{pageFlowScope.ReservationEditBean.reason}" maximumLength="35"/>
+            </af:panelFormLayout>
+          </af:panelGroupLayout>
+        </af:group>
+      </af:showDetailHeader>
+    </af:panelHeader>
+    <af:panelHeader text="#{inventoryUIBundle.RESERVATION} - #{pageFlowScope.ReservationEditBean.displayInfo}" id="ph2"
+                    rendered="#{pageFlowScope.ReservationEditBean.searchMode}">
+      <f:facet name="context"/>
+      <f:facet name="menuBar"/>
+      <f:facet name="toolbar"/>
+      <f:facet name="legend"/>
+      <f:facet name="info"/>
+      <af:showDetailHeader text="#{inventoryUIBundle.ADD_RESOURCES}" disclosed="true" id="sdh2">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:panelCollection id="pc1" styleClass="invEditPanelCollection">
+          <!-- CustomNetworkAddress search popup -->
+          <af:popup id="servicePopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.popupServiceBinding}">
+            <af:dialog id="d1serv" type="none" title="#{inventoryUIBundle.SERVICE_SEARCH}">
+              <af:panelStretchLayout id="pt_psl1s" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.ServiceSearchResultsFlow1.regionModel}" id="r13"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <af:popup id="cnaPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.popupCNABinding}">
+            <af:dialog id="d1" type="none" title="#{inventoryUIBundle.CUSTOM_NETWORK_ADDRESS_SEARCH}">
+              <af:panelStretchLayout id="pt_psl1" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.CustomNetworkAddressSearchResultsFlow1.regionModel}" id="r1"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <!-- CustomObject search popup -->
+          <af:popup id="coPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.popupCOBinding}">
+            <af:dialog id="d2" type="none" title="#{inventoryUIBundle.CUSTOM_OBJECT_SEARCH}">
+              <af:panelStretchLayout id="pt_psl2" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.CustomObjectSearchResultsFlow1.regionModel}" id="r2"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <!-- DeviceInterface search popup -->
+          <af:popup id="diPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.popupDIBinding}">
+            <af:dialog id="d3" type="none" title="#{inventoryUIBundle.DEVICE_INTERFACE_SEARCH}">
+              <af:panelStretchLayout id="pt_psl3" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.DeviceInterfaceSearchResultsFlow1.regionModel}" id="r3"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <!-- Equipment search popup -->
+          <af:popup id="eqPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.popupEQBinding}">
+            <af:dialog id="d4" type="none" title="#{inventoryUIBundle.EQUIPMENT_SEARCH}">
+              <af:panelStretchLayout id="pt_psl4" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.EquipmentSearchResultsFlow1.regionModel}" id="r4"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <!-- Equipment Holder search popup -->
+          <af:popup id="eqhPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.popupEQHBinding}">
+            <af:dialog id="d5" type="none" title="#{inventoryUIBundle.EQUIPMENT_HOLDER_SEARCH}">
+              <af:panelStretchLayout id="pt_psl5" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.EquipmentHolderSearchResultsFlow1.regionModel}" id="r5"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <!-- FlowIdentifier search popup -->
+          <af:popup id="fiPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.popupFIBinding}">
+            <af:dialog id="d17" type="none" title="#{inventoryUIBundle.FLOW_IDENTIFIER_SEARCH}">
+              <af:panelStretchLayout id="pt_ps27" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.FlowIdentifierSearchResultsFlow1.regionModel}" id="r27"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <!-- Logical Device search popup -->
+          <af:popup id="ldPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.popupLDBinding}">
+            <af:dialog id="d6" type="none" title="#{inventoryUIBundle.LOGICAL_DEVICE_SEARCH}">
+              <af:panelStretchLayout id="pt_psl6" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.LogicalDeviceSearchResultsFlow1.regionModel}" id="r6"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <!-- Logical Device Account search popup -->
+          <af:popup id="ldaPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.popupLDABinding}">
+            <af:dialog id="d7" type="none" title="#{inventoryUIBundle.LOGICAL_DEVICE_ACCOUNT_SEARCH}">
+              <af:panelStretchLayout id="pt_psl7" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.LogicalDeviceAccountSearchResultsFlow1.regionModel}" id="r7"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <!-- Network search popup -->
+          <af:popup id="nwPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.popupNWBinding}">
+            <af:dialog id="d8" type="none" title="#{inventoryUIBundle.NETWORK_SEARCH_RESULTS_DIALOG}">
+              <af:panelStretchLayout id="pt_psl8" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.NetworkSearchResults1.regionModel}" id="r8"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <!-- Physical Connector search popup -->
+          <af:popup id="pcPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.popupPCBinding}">
+            <af:dialog id="d9" type="none" title="#{inventoryUIBundle.PHYSICAL_CONNECTOR_SEARCH}">
+              <af:panelStretchLayout id="pt_psl9" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.PhysicalConnectorSearchResultsFlow1.regionModel}" id="r9"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <!-- Physical Device search popup -->
+          <af:popup id="pdPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.popupPDBinding}">
+            <af:dialog id="d10" type="none" title="#{inventoryUIBundle.PHYSICAL_DEVICE_SEARCH}">
+              <af:panelStretchLayout id="pt_ps20" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.PhysicalDeviceSearchResultsFlow1.regionModel}" id="r10"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <!-- Media stream search popup -->
+          <af:popup id="msPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.popupMSBinding}">
+            <af:dialog id="d20" type="none" title="#{inventoryUIBundle.MEDIA_STREAM_SEARCH}">
+              <af:panelStretchLayout id="pt_ps30" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.MediaStreamSearchResultsFlow1.regionModel}" id="r14"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <!-- Physical Port search popup -->
+          <af:popup id="ppPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.popupPPBinding}">
+            <af:dialog id="d11" type="none" title="#{inventoryUIBundle.PHYSICAL_PORT_SEARCH}">
+              <af:panelStretchLayout id="pt_ps21" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.PhysicalPortSearchResultsFlow1.regionModel}" id="r11"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <!-- Telephone Number search popup -->
+          <af:popup id="tnPopup" contentDelivery="lazyUncached" binding="#{backingBeanScope.popupTNBinding}">
+            <af:dialog id="d12" type="none" title="#{inventoryUIBundle.TELEPHONE_NUMBER_SEARCH}">
+              <af:panelStretchLayout id="pt_ps22" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.TelephoneNumberSearchResultsFlow1.regionModel}" id="r12"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <!-- IPv4 Address search popup -->
+          <af:popup id="ipv4AddressPopup" contentDelivery="lazyUncached"
+                    binding="#{backingBeanScope.popupIPv4AddressBinding}">
+            <af:dialog id="d13" type="none" title="#{inventoryUIBundle.IPv4_ADDRESS_SEARCH}">
+              <af:panelStretchLayout id="pt_ps23" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.IPv4AddressSearchResultsFlow1.regionModel}" id="r15"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <!-- IPv4 Subnet search popup -->
+          <af:popup id="ipv4SubnetPopup" contentDelivery="lazyUncached"
+                    binding="#{backingBeanScope.popupIPv4SubnetBinding}">
+            <af:dialog id="d14" type="none" title="#{inventoryUIBundle.IPv4_SUBNET_SEARCH}">
+              <af:panelStretchLayout id="pt_ps24" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.IPv4SubnetSearchResultsFlow1.regionModel}" id="r16"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <!-- IPv6 Address search popup -->
+          <af:popup id="ipv6AddressPopup" contentDelivery="lazyUncached"
+                    binding="#{backingBeanScope.popupIPv6AddressBinding}">
+            <af:dialog id="d15" type="none" title="#{inventoryUIBundle.IPv6_ADDRESS_SEARCH}">
+              <af:panelStretchLayout id="pt_ps25" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.IPv6AddressSearchResultsFlow1.regionModel}" id="r17"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <!-- IPv6 Subnet search popup -->
+          <af:popup id="ipv6SubnetPopup" contentDelivery="lazyUncached"
+                    binding="#{backingBeanScope.popupIPv6SubnetBinding}">
+            <af:dialog id="d16" type="none" title="#{inventoryUIBundle.IPv6_SUBNET_SEARCH}">
+              <af:panelStretchLayout id="pt_ps26" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.IPv6SubnetSearchResultsFlow1.regionModel}" id="r18"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.ReservationEditBean.refresh}"/>
+          </af:popup>
+          <f:facet name="menus">
+            <!-- Menu to display the List of Consumable Resources for Reservation. -->
+            <af:menu id="menu1" binding="#{pageFlowScope.ReservationEditBean.itemsMenu}"/>
+          </f:facet>
+          <f:facet name="toolbar">
+            <af:toolbar id="t1">
+              <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}" id="cb3Delete"
+                                       actionListener="#{pageFlowScope.ReservationEditBean.deleteResources}"
+                                       disabled="#{pageFlowScope.ReservationEditBean.resultsTable.selectedRowKeys == null || pageFlowScope.ReservationEditBean.resultsTable.selectedRowKeys.size lt 1}"
+                                       partialTriggers="t11" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                       binding="#{backingBeanScope.deleteButton}"
+                                       icon="#{InventoryHelperBean.deleteIcon}"/>
+            </af:toolbar>
+          </f:facet>
+          <f:facet name="statusbar"/>
+          <!-- Table to display the List of Consumable Resources to be associated with Reservation. -->
+          <af:table value="#{pageFlowScope.ReservationEditBean.resources}"
+                    selectionListener="#{pageFlowScope.ReservationEditBean.resourceSelectionListener}" var="row"
+                    binding="#{pageFlowScope.ReservationEditBean.resultsTable}" rowBandingInterval="0"
+                    rowSelection="multiple" id="t11" summary="#{inventoryUIBundle.RESOURCES_LIST}">
+            <af:column headerText="#{inventoryUIBundle.ID}" id="c2" rowHeader="unstyled">
+              <af:commandImageLink action="#{pageFlowScope.ReservationEditBean.getSummaryPage}" id="cl1"
+                                   text="#{row.id}"
+                                   shortDesc="#{inventoryUIBundle.LINK} #{inventoryUIBundle.FOR} #{pageFlowScope.ReservationEditBean.entityType} #{inventoryUIBundle.SUMMARY}">
+                <af:setActionListener from="#{row.oid}" to="#{objectId}"/>
+              </af:commandImageLink>
+            </af:column>
+            <af:column headerText="#{inventoryUIBundle.ENTITY_TYPE}" id="c1">
+              <af:outputText value="#{pageFlowScope.ReservationEditBean.entityType}" id="ot1"/>
+            </af:column>
+            <af:column headerText="#{inventoryUIBundle.SPECIFICATION}" id="c4">
+              <af:outputText value="#{row.specification.name}" id="ot4"/>
+            </af:column>
+            <af:column headerText="#{inventoryUIBundle.RESERVATION_TYPE}" id="c6">
+              <af:outputText value="#{pageFlowScope.ReservationEditBean.reservationType}" id="ot3"/>
+            </af:column>
+            <af:column headerText="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="c7">
+              <af:outputText value="#{pageFlowScope.ReservationEditBean.resourceAssignmentStatus}" id="ot5"/>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:showDetailHeader>
+    </af:panelHeader>
+  </af:panelGroupLayout>
+  <!--af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout id="rel1"/>
+    </f:facet>
+  </af:pageTemplate-->
+</jsp:root>

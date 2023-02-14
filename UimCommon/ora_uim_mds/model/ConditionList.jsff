@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:cui="/CommsUI"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+ 
+      <af:showDetailHeader text="#{pageFlowScope.InventoryResultsBean.displayInfo}" disclosed="true" id="sdh1">
+        <cui:WarningDialog id="wd" binding="#{backingBeanScope.navigationWarningDialog}"/>
+        <af:panelCollection id="pc1" styleClass="AFStretchWidth" featuresOff="#{pageFlowScope.InventoryResultsBean.turnOffFeatures}">
+          <f:facet name="toolbar">
+            <af:toolbar id="t3">
+                  <af:button text="#{inventoryUIBundle.CREATE}" id="cb1Create" icon="#{InventoryHelperBean.createIcon}"
+                                         actionListener="#{pageFlowScope.InventoryResultsBean.registerRecentItemForCreate}"
+                                           action="create" rendered="#{(!pageFlowScope.InventoryResultsBean.popupMode) &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Condition.CREATE;action=view']}">
+                      <af:setActionListener from="true" to="#{addMode}"/>
+                  </af:button>
+                  
+                  <af:button text="#{inventoryUIBundle.CREATE}" id="cb1" icon="#{InventoryHelperBean.createIcon}"
+                                           actionListener="#{pageFlowScope.InventoryResultsBean.launchCreate}" rendered="#{(pageFlowScope.InventoryResultsBean.popupMode) &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Condition.CREATE;action=view']}">
+                      <af:setActionListener from="true" to="#{addMode}"/>
+                  </af:button>
+                  <af:spacer width="10" height="10" id="s11"/>
+                  <af:button text="#{inventoryUIBundle.EDIT}" id="cb2Edit" icon="#{InventoryHelperBean.editIcon}" 
+                                           disabledIcon="#{InventoryHelperBean.disEditIcon}"
+                                           disabled="#{pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size != 1}"
+                                           rendered="#{(!pageFlowScope.InventoryResultsBean.popupMode)&amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Condition.EDIT;action=view']}"
+                                           action="edit" partialTriggers="resultsTableId" actionListener="#{bindings.openSubTaskForEdit.execute}"
+                                           binding="#{backingBeanScope.editclButton}"
+                                           accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                     <af:setActionListener from= "#{bindings.searchResultsIterator.currentRow.dataProvider.oid}" to="#{objectId}"/>
+                     <af:setActionListener from="false" to="#{addMode}"/>
+                  </af:button>
+                  
+                  <af:button text="#{inventoryUIBundle.EDIT}" id="cb2" icon="#{InventoryHelperBean.editIcon}" 
+                                           disabledIcon="#{InventoryHelperBean.disEditIcon}"
+                                           disabled="#{pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size != 1}"
+                                           partialTriggers="resultsTableId" actionListener="#{pageFlowScope.InventoryResultsBean.launchEdit}"
+                                           rendered="#{(pageFlowScope.InventoryResultsBean.popupMode)&amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Condition.EDIT;action=view']}"
+                                           binding="#{backingBeanScope.ebBinding}"
+                                           accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                     <af:setActionListener from= "#{bindings.searchResultsIterator.currentRow.dataProvider.oid}" to="#{objectId}"/>
+                     <af:setActionListener from="false" to="#{addMode}"/>
+                  </af:button>
+                  
+                  <af:spacer width="10" height="10" id="s12"/>
+                  <af:button text="#{inventoryUIBundle.DELETE}" icon="#{InventoryHelperBean.deleteIcon}"
+                                           partialTriggers="resultsTableId" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                           disabled="#{pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size lt 1 or pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size eq null}"
+                                           id="cb3Delete" actionListener="#{InventoryHelperBean.deleteAction}"
+                                           rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Condition.DELETE;action=view']}"
+                                           binding="#{backingBeanScope.deleteclButton}"/>
+                                           
+                    <af:popup id="rep" contentDelivery="lazyUncached" binding="#{backingBeanScope.cepBinding}">
+                        <af:dialog id="d2" type="none" title="">
+                          <af:panelStretchLayout id="pt_psl2" styleClass="invDirectionalityLayout">
+                            <f:facet name="center">
+                                <af:region value="#{bindings.ConditionEditFlow1.regionModel}" id="r1" binding="#{backingBeanScope.cerBinding}"/>
+                            </f:facet>
+                          </af:panelStretchLayout>
+                        </af:dialog>
+                        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                        <af:serverListener type="refreshEntity" method="#{pageFlowScope.InventoryResultsBean.refresh}"/>
+                  </af:popup>
+                                           
+            </af:toolbar>
+          </f:facet>
+          <f:facet name="statusbar">
+              <af:toolbar id="rst2">
+                <af:outputText  value="#{inventoryUIBundle.ROW_COUNT} #{(bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount lt 0) ? 0 : bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.rowCount}"
+                            id="rsol1" styleClass="invSearchOutputLabel" binding="#{backingBeanScope.totalResultsLabel}" partialTriggers="resultsTableId"/>
+              </af:toolbar>
+          </f:facet>
+            <af:table id="resultsTableId"
+                    value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}" contentDelivery="immediate"
+                    var="row"
+                    emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                    fetchSize="#{pageFlowScope.InventoryResultsBean.fetchSize}"
+                    queryListener="#{InventoryHelperBean.processQuery}"
+                    autoHeightRows="#{pageFlowScope.InventoryResultsBean.portletHeight}"
+                    varStatus="vs"
+                    selectionListener="#{pageFlowScope.InventoryResultsBean.selectAction}"
+                    rowSelection="#{pageFlowScope.InventoryResultsBean.rowSelection}"
+                    styleClass="AFStretchWidth"
+                    selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                    binding="#{pageFlowScope.InventoryResultsBean.resultsTable}"
+                    columnStretching = "last"
+                    summary="#{inventoryUIBundle.CONDITIONS_LIST}">
+                  <af:column headerText="#{inventoryUIBundle.CONDITION_TYPE}" id="c1"
+                             rowHeader="unstyled">
+                     <af:link id="cl1" action="#{InventoryHelperBean.refreshAndEdit}" actionListener="#{pageFlowScope.InventoryResultsBean.registerRecentItemForEdit}"
+                                     shortDesc="#{inventoryUIBundle.CONDITION_INFORMATION_LINK}">
+                        <af:outputText value="#{pageFlowScope.InventoryResultsBean.conditionTypeValue}" escape="false" id="ot3"/>                            
+                        <af:setActionListener from= "#{row.oid}" to="#{objectId}"/>
+                     </af:link>
+                  </af:column>
+                  <af:column headerText="#{inventoryUIBundle.REASON}" id="c5">
+                    <af:outputText value="#{row.reason}" id="ot2"/>
+                  </af:column>
+                  <af:column headerText="#{inventoryUIBundle.START_DATE}" id="c4"> 
+                    <af:outputText value="#{row.validFor.startDate}" id="ot1">
+                     <af:convertDateTime pattern="#{pageFlowScope.InventoryResultsBean.dateTimeFormat}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column headerText="#{inventoryUIBundle.END_DATE}" id="c3">
+                    <af:outputText value="#{row.validFor.endDate}" id="ot5">
+                     <af:convertDateTime pattern="#{pageFlowScope.InventoryResultsBean.dateTimeFormat}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column headerText="#{inventoryUIBundle.DESCRIPTION}" id="c2">
+                    <af:outputText value="#{row.description}" id="ot4"/>
+                  </af:column>
+            </af:table>
+      </af:panelCollection>
+    </af:showDetailHeader>
+   
+</jsp:root>

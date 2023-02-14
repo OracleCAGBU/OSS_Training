@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/poms/model/layout" 
+      xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/layout" xmlns:com="http://www.mslv.com/studio/core/model/common" xsi:type="PagePanelsType" 
+      name="Service">
+   <com:saveVersion>1</com:saveVersion>
+  
+
+   <PagePanels accessStrategy="VALUE_LABEL_EL" 
+         pageFragmentPath="/oracle/communications/inventory/ui/service/page"
+         pageDefPath="/oracle/communications/inventory/ui/service/page"
+         pageDefPackage="oracle.communications.inventory.ui.service.page"
+         pageJSFFName="ServiceEdit.jsff" 
+         pageName="Service Editor"
+         pageDefName="ServiceEditPageDef" 
+         panelId="service"
+         panelName="Service Edit Panel" 
+         argumentEl="#{pageFlowScope.objectId}" 
+         beanName="ServiceEditBean" >
+      <pageType summary="false" type="form" editable="true"/>   
+   </PagePanels>
+
+   <PagePanels 
+         accessStrategy="VALUE_LABEL_EL" 
+         pageFragmentPath="/oracle/communications/inventory/ui/service/page"
+         pageDefPath="/oracle/communications/inventory/ui/service/page"
+         pageDefPackage="oracle.communications.inventory.ui.service.page"
+         pageJSFFName="ServiceSummary.jsff" 
+         pageName="Service Summary"
+         pageDefName="ServiceSummaryPageDef" 
+         panelId="service"
+         panelName="Service Summary Panel" 
+         argumentEl="#{pageFlowScope.objectId}"
+         beanName="ServiceSummaryBean"  >
+      <pageType summary="true" type="form" editable="false"/>
+   </PagePanels>
+   
+</com:modelEntity>

@@ -1,0 +1,4393 @@
+<?xml version="1.0" encoding="UTF-8"?><extent>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/ora_uim_baserulesets/model/ADDRESS_RANGE_VALIDATION.ruleset#7.4.1.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-0" version="0">
+    <field name="name">"ADDRESS_RANGE_VALIDATION"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">"package oracle.communications.inventory.rules&#13;
+&#13;
+import java.util.ArrayList;&#13;
+import org.apache.commons.lang.StringUtils;&#13;
+import org.apache.commons.lang.math.NumberUtils;&#13;
+import oracle.communications.inventory.api.entity.GeographicAddress;&#13;
+import oracle.communications.inventory.api.entity.GeographicAddressRange;&#13;
+import oracle.communications.inventory.api.entity.PlaceCharacteristic;&#13;
+import oracle.communications.inventory.api.framework.logging.Log;&#13;
+import oracle.communications.inventory.api.framework.resource.MessageResource;&#13;
+&#13;
+global Log log;&#13;
+&#13;
+&#13;
+function boolean validateMixedRange(String from, String to, Log log) {&#13;
+    String fromAlpha = null;&#13;
+    String fromNumeric = null;&#13;
+    String toAlpha = null;&#13;
+    String toNumeric = null;&#13;
+    boolean alphaIsRanged = false;&#13;
+    boolean alphaSameLength = false;&#13;
+    boolean numbersSame = false;&#13;
+    for (int i=0; i&lt; from.length(); i++) {&#13;
+      String fromTemp = StringUtils.substring(from, i,i+1);&#13;
+      if (StringUtils.isAlpha(fromTemp)) {&#13;
+        if (StringUtils.isNotBlank(fromAlpha)) {&#13;
+          fromAlpha += fromTemp;&#13;
+        }&#13;
+        else {&#13;
+          fromAlpha = fromTemp;&#13;
+        }&#13;
+      }&#13;
+      else if(StringUtils.isNumeric(fromTemp)){&#13;
+        if (StringUtils.isNotBlank(fromNumeric)) {&#13;
+          fromNumeric += fromTemp;&#13;
+        }&#13;
+        else {&#13;
+          fromNumeric = fromTemp;&#13;
+        }&#13;
+      }&#13;
+      else {&#13;
+        log.error("place.addressRange.invalidCharacter");&#13;
+        return false;&#13;
+      }&#13;
+    }&#13;
+    for (int i=0; i&lt; to.length(); i++) {&#13;
+      String toTemp = StringUtils.substring(to, i,i+1);&#13;
+      if (StringUtils.isAlpha(toTemp)) {&#13;
+        if (StringUtils.isNotBlank(toAlpha)) {&#13;
+          toAlpha += toTemp;&#13;
+        }&#13;
+        else {&#13;
+          toAlpha = toTemp;&#13;
+        }&#13;
+      }&#13;
+      else if (StringUtils.isNumeric(toTemp)){&#13;
+        if (StringUtils.isNotBlank(toNumeric)) {&#13;
+          toNumeric += toTemp;&#13;
+        }&#13;
+        else {&#13;
+          toNumeric = toTemp;&#13;
+        }&#13;
+      }        &#13;
+      else {&#13;
+        log.error("place.addressRange.invalidCharacter");&#13;
+        return false;&#13;
+      }&#13;
+    }&#13;
+    if (fromNumeric.equals(toNumeric)) {&#13;
+      numbersSame = true;&#13;
+    }&#13;
+    if (fromAlpha == null || toAlpha == null) {&#13;
+      log.error("place.addressRange.alphaNotEqual");&#13;
+      return false; &#13;
+    }&#13;
+    if (fromAlpha.equals(toAlpha)) {&#13;
+      alphaSameLength = true;&#13;
+    }&#13;
+    else if (fromAlpha.length() == toAlpha.length()) {&#13;
+      alphaSameLength = true;&#13;
+      alphaIsRanged = true;&#13;
+    }&#13;
+    if (alphaSameLength) {&#13;
+      if (alphaIsRanged &amp;&amp; !numbersSame) {&#13;
+        log.error("place.addressRange.bothNotEqual");&#13;
+        return false;&#13;
+      }&#13;
+    }&#13;
+    else {&#13;
+      log.error("place.addressRange.alphaNotEqual");&#13;
+      return false;&#13;
+    }&#13;
+    return true;&#13;
+  }&#13;
+  &#13;
+function boolean validateAddressRange(GeographicAddressRange range, Log log) {&#13;
+    String from = null;&#13;
+    String to = null;&#13;
+    String type = null;  &#13;
+    //refer to addressRange.properties file for localization of these words  &#13;
+    final String from_prefix = MessageResource.getMessage("addressRange.from_prefix")+"_";&#13;
+    final String to_prefix = MessageResource.getMessage("addressRange.to_prefix")+"_";&#13;
+    final String road = MessageResource.getMessage("addressRange.road");&#13;
+    final String region = MessageResource.getMessage("addressRange.region");&#13;
+    &#13;
+  	ArrayList pc = new ArrayList(range.getCharacteristics());&#13;
+	if (pc != null) {&#13;
+	    for(int i=0;i &lt; pc.size();i++) {&#13;
+	      String value = ((PlaceCharacteristic)pc.get(i)).getValue();&#13;
+	      String name = ((PlaceCharacteristic)pc.get(i)).getName();&#13;
+	      if (name.equals(road)|| name.equals(region)) {&#13;
+	        if (StringUtils.isBlank(value)) {&#13;
+	          log.error("place.fieldIsNull", name);&#13;
+	          return false;&#13;
+	        }&#13;
+	      }&#13;
+	      else if (name.startsWith(from_prefix)) {&#13;
+	        if (StringUtils.isNotBlank(value) &amp;&amp; StringUtils.isBlank(from)) {&#13;
+	          from = value;&#13;
+	        }&#13;
+	        else {&#13;
+	          log.error("place.addressRange.tooManyRanges");&#13;
+	          return false;&#13;
+	        }&#13;
+	      }&#13;
+	      else if (name.startsWith(to_prefix)) {&#13;
+	        if (StringUtils.isNotBlank(value) &amp;&amp; StringUtils.isBlank(to)) {&#13;
+	          to = value;&#13;
+	        }&#13;
+	        else {&#13;
+	          log.error("place.addressRange.tooManyRanges");&#13;
+	          return false;&#13;
+	        }&#13;
+	      }            &#13;
+	    }&#13;
+ 	}&#13;
+	//analyze range values&#13;
+  	if (StringUtils.isNotBlank(from) &amp;&amp; StringUtils.isNotBlank(to)) {&#13;
+	    if (StringUtils.isAlpha(from) &amp;&amp; StringUtils.isAlpha(to)) {&#13;
+	      //each must have same number of characters&#13;
+	      if (from.length() != to.length()) {&#13;
+	        log.error("place.addressRange.stringsNotEqual");&#13;
+	        return false;&#13;
+	      }&#13;
+	    }&#13;
+	    else if (StringUtils.isNumeric(from) &amp;&amp; StringUtils.isNumeric(to)) {&#13;
+	      int intFrom = NumberUtils.toInt(from);&#13;
+	      int intTo = NumberUtils.toInt(to);&#13;
+	      if (intFrom &gt; intTo) {&#13;
+	        log.error("place.addressRange.fromGreaterThanTo");&#13;
+	        return false;&#13;
+	      }&#13;
+	    }&#13;
+	    else {&#13;
+	      //must be mixed alphanumeric &#13;
+	      return ValidateMixedRange.validateMixedRange(from, to, log);&#13;
+	    }&#13;
+	}&#13;
+  	else {&#13;
+	    log.error("place.addressRange.notFullyDefined");&#13;
+	    return false;&#13;
+  	}&#13;
+  	return true;&#13;
+}&#13;
+&#13;
+  &#13;
+rule "AddressRangeValidation"&#13;
+		salience 0&#13;
+	when&#13;
+		range : GeographicAddressRange()	&#13;
+			&#13;
+	then&#13;
+		log.debug( "", new Object[] { "entering AddressRangeValidationRules: " + range.getName() } );&#13;
+	    // execute for address&#13;
+	    boolean isValid = validateAddressRange(range, log);&#13;
+	    if (isValid) {&#13;
+	    	log.info( "place.addressrange.validationSuccessful", new Object[] { "" } );&#13;
+	    } &#13;
+    	&#13;
+end&#13;
+"</field>
+    <field format="enum_name" name="runExtensionLanguage">GROOVY</field>
+    <field name="extensionContent">"/**
+ * This ruleset validates the content of an input GeographicAddressRange object. If a validation error is encountered, the ruleset logs
+ an error. If a validation error is not encountered, processing continues. You can customize the base ruleset to perform custom validations 
+ as required by your business needs, and configure the ruleset to run when an address is associated with an address  range in UIM.
+ */
+import oracle.communications.inventory.api.entity.GeographicAddressRange;
+import oracle.communications.inventory.api.entity.PlaceCharacteristic;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.framework.resource.MessageResource;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
+
+Object param1=ruleParameters[0];
+
+if(param1 instanceof List&lt;GeographicAddressRange&gt;)
+{
+for(GeographicAddressRange range:param1)
+{	
+log.debug( "", "entering AddressRangeValidationRules: " + range.getName() );
+// validate address
+boolean isValid = validateAddressRange(range, log);
+if (isValid) {
+	log.info("place.addressrange.validationSuccessful");
+}
+log.info("place.addressrange.validationSuccessful");
+}
+}
+def boolean validateMixedRange(String from, String to, Log log) {
+	String fromAlpha = null;
+	String fromNumeric = null;
+	String toAlpha = null;
+	String toNumeric = null;
+	boolean alphaIsRanged = false;
+	boolean alphaSameLength = false;
+	boolean numbersSame = false;
+	for (int i=0; i&lt; from.length(); i++) {
+		String fromTemp = StringUtils.substring(from, i,i+1);
+		if (StringUtils.isAlpha(fromTemp)) {
+			if (StringUtils.isNotBlank(fromAlpha)) {
+				fromAlpha += fromTemp;
+			}
+			else {
+				fromAlpha = fromTemp;
+			}
+		}
+		else if(StringUtils.isNumeric(fromTemp)){
+			if (StringUtils.isNotBlank(fromNumeric)) {
+				fromNumeric += fromTemp;
+			}
+			else {
+				fromNumeric = fromTemp;
+			}
+		}
+		else {
+			log.error("place.addressRange.invalidCharacter");
+			return false;
+		}
+	}
+	for (int i=0; i&lt; to.length(); i++) {
+		String toTemp = StringUtils.substring(to, i,i+1);
+		if (StringUtils.isAlpha(toTemp)) {
+			if (StringUtils.isNotBlank(toAlpha)) {
+				toAlpha += toTemp;
+			}
+			else {
+				toAlpha = toTemp;
+			}
+		}
+		else if (StringUtils.isNumeric(toTemp)){
+			if (StringUtils.isNotBlank(toNumeric)) {
+				toNumeric += toTemp;
+			}
+			else {
+				toNumeric = toTemp;
+			}
+		}
+		else {
+			log.error("place.addressRange.invalidCharacter");
+			return false;
+		}
+	}
+	if (fromNumeric.equals(toNumeric)) {
+		numbersSame = true;
+	}
+	if (fromAlpha == null || toAlpha == null) {
+		log.error("place.addressRange.alphaNotEqual");
+		return false;
+	}
+	if (fromAlpha.equals(toAlpha)) {
+		alphaSameLength = true;
+	}
+	else if (fromAlpha.length() == toAlpha.length()) {
+		alphaSameLength = true;
+		alphaIsRanged = true;
+	}
+	if (alphaSameLength) {
+		if (alphaIsRanged &amp;&amp; !numbersSame) {
+			log.error("place.addressRange.bothNotEqual");
+			return false;
+		}
+	}
+	else {
+		log.error("place.addressRange.alphaNotEqual");
+		return false;
+	}
+	return true;
+}
+
+def boolean validateAddressRange(GeographicAddressRange range, Log log) {
+	String from = null;
+	String to = null;
+	String type = null;
+	//refer to addressRange.properties file for localization of these words
+	final String from_prefix = MessageResource.getMessage("addressRange.from_prefix")+"_";
+	final String to_prefix = MessageResource.getMessage("addressRange.to_prefix")+"_";
+	final String road = MessageResource.getMessage("addressRange.road");
+	final String region = MessageResource.getMessage("addressRange.region");
+
+	ArrayList pc = new ArrayList(range.getCharacteristics());
+	if (pc != null) {
+		for(int i=0;i &lt; pc.size();i++) {
+			String value = ((PlaceCharacteristic)pc.get(i)).getValue();
+			String name = ((PlaceCharacteristic)pc.get(i)).getName();
+			if (name.equals(road)|| name.equals(region)) {
+				if (StringUtils.isBlank(value)) {
+					log.error("place.fieldIsNull", name);
+					return false;
+				}
+			}
+			else if (name.startsWith(from_prefix)) {
+				if (StringUtils.isNotBlank(value) &amp;&amp; StringUtils.isBlank(from)) {
+					from = value;
+				}
+				else {
+					log.error("place.addressRange.tooManyRanges");
+					return false;
+				}
+			}
+			else if (name.startsWith(to_prefix)) {
+				if (StringUtils.isNotBlank(value) &amp;&amp; StringUtils.isBlank(to)) {
+					to = value;
+				}
+				else {
+					log.error("place.addressRange.tooManyRanges");
+					return false;
+				}
+			}
+		}
+	}
+	//analyze range values
+	if (StringUtils.isNotBlank(from) &amp;&amp; StringUtils.isNotBlank(to)) {
+		if (StringUtils.isAlpha(from) &amp;&amp; StringUtils.isAlpha(to)) {
+			//each must have same number of characters
+			if (from.length() != to.length()) {
+				log.error("place.addressRange.stringsNotEqual");
+				return false;
+			}
+		}
+		else if (StringUtils.isNumeric(from) &amp;&amp; StringUtils.isNumeric(to)) {
+			int intFrom = NumberUtils.toInt(from);
+			int intTo = NumberUtils.toInt(to);
+			if (intFrom &gt; intTo) {
+				log.error("place.addressRange.fromGreaterThanTo");
+				return false;
+			}
+		}
+		else {
+			//must be mixed alphanumeric
+			return ValidateMixedRange.validateMixedRange(from, to, log);
+		}
+	}
+	else {
+		log.error("place.addressRange.notFullyDefined");
+		return false;
+	}
+	return true;
+}
+
+
+
+"</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/ora_uim_baserulesets/model/CONVERT_LD_SR1_TO_SR2.ruleset#7.4.1.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-1" version="0">
+    <field name="name">"CONVERT_LD_SR1_TO_SR2"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">"package oracle.communications.inventory.rules
+
+//-------------------------------------------------------------------------------------------------
+// IMPORTS
+//-------------------------------------------------------------------------------------------------
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.Iterator;
+
+import javax.transaction.UserTransaction;
+
+import au.com.bytecode.opencsv.CSVReader;
+
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.rules.impl.RuleDebug;
+
+import oracle.communications.inventory.api.entity.DeviceInterface;
+import oracle.communications.inventory.api.entity.LogicalDevice;
+import oracle.communications.inventory.api.util.Utils;
+import oracle.communications.platform.persistence.PersistenceHelper;
+import oracle.communications.platform.persistence.Persistent;
+import oracle.communications.inventory.api.common.container.ImportInventoryContainer;
+import oracle.communications.inventory.api.common.container.ImportInventoryResult;
+import oracle.communications.inventory.extensibility.rules.ExtensionPointManager;
+import oracle.communications.inventory.extensibility.rules.ExtensionPointSearchCriteria;
+import oracle.communications.inventory.api.entity.LogicalDeviceSpecification;
+import oracle.communications.platform.persistence.Finder;
+import oracle.communications.inventory.api.logicaldevice.LogicalDeviceManager;
+import oracle.communications.inventory.api.logicaldevice.LogicalDeviceSearchCriteria;
+import oracle.communications.inventory.api.logicaldevice.impl.LogicalDeviceCreator;
+import oracle.communications.inventory.api.entity.DeviceInterface;
+import oracle.communications.inventory.api.logicaldevice.impl.LogicalDeviceUpdater;
+
+//-------------------------------------------------------------------------------------------------
+// GLOBALS
+//-------------------------------------------------------------------------------------------------
+
+global Log log;
+
+//-------------------------------------------------------------------------------------------------
+// FUNCTIONS
+//-------------------------------------------------------------------------------------------------
+
+function ImportInventoryResult convertLogicalDevices(Object attachment, Log log, boolean displayOnly) {
+    int specCount = 0;
+    int failedCount = 0;
+    UserTransaction ut = null;
+    try {
+        List records = null;
+        CSVReader cvs = new CSVReader(new StringReader(attachment.toString()),'#');
+        records = cvs.readAll();
+
+        List ldList = new ArrayList();
+        for (int r=0; r&lt;records.size(); r++) {
+            String[] record = (String[]) records.get(r);
+            ldList.add(record[0]);
+        }
+
+        if (Utils.isEmpty(ldList)) {
+            log.info("", new String [] {"No Logical Device Specification found"});
+        }
+        
+        Iterator ldSpecListItr = ldList.iterator();
+        while (ldSpecListItr.hasNext()) {
+            try {
+                ut = PersistenceHelper.makePersistenceManager().getTransaction();
+                ut.begin();
+                
+                String specName = (String) ldSpecListItr.next();
+                
+                log.debug("", new String [] {"Processing the spec " + specName});
+                
+                Finder f = null;
+                f = PersistenceHelper.makeFinder();
+                LogicalDeviceManager ldMgr = PersistenceHelper.makeLogicalDeviceManager();
+                Collection&lt;LogicalDeviceSpecification&gt; specList = f.findByName(LogicalDeviceSpecification.class, specName);
+                if (specList.size() &gt; 0) {
+                    LogicalDeviceSearchCriteria criteria = ldMgr.makeLogicalDeviceSearchCriteria();
+                    criteria.setLogicalDeviceSpecs(specList.toArray(new LogicalDeviceSpecification[specList.size()]));
+                    Collection&lt;LogicalDevice&gt; ldListResult = ldMgr.findLogicalDevice(criteria);
+                    log.debug("", new String [] {"  Found " + ldListResult.size() + " logical devices"});
+                    LogicalDeviceCreator ldc = new LogicalDeviceCreator();
+                    LogicalDeviceUpdater ldu = new LogicalDeviceUpdater();
+                    int i = 1;
+                    for (LogicalDevice ld : ldListResult) {
+                        log.debug("", new String [] {"    " + i + ") Converting Logical device " + ld.getId()});
+                        Set &lt;DeviceInterface&gt; deviceInterfaceList = ld.getAllDeviceInterfaces();
+                        int j = 1;
+                        for ( DeviceInterface deviceInterface : deviceInterfaceList ) {
+                            log.debug("", new String [] {"      " + j + ") Converting Device Interface " + deviceInterface.getId()});
+                            /*if (deviceInterface.getRateCode() != null ) {
+                                log.debug("", new String [] {"             Device Interface Rate Code BEFORE = " + deviceInterface.getRateCode().getName()});
+                            }
+                            else {
+                                log.debug("", new String [] {"             Device Interface Rate Code BEFORE = -"});
+                            }
+                            */
+                            ldc.setRateCodeOnDeviceInterface(deviceInterface);
+                            //log.debug("", new String [] {"             Device Interface Rate Code AFTER = " + deviceInterface.getRateCode().getName()});
+                            j++;
+                        }
+                        i++;
+                    }
+                }
+                f.reset();
+                specCount++;
+                ut.commit();
+            }
+            catch (Throwable t) {
+                failedCount++;
+                if (ut != null) {
+                    try {
+                        ut.rollback();
+                    } catch (Exception e){}
+                }
+                log.exception("", new Exception(), new String[] {"convert LD from SR1 to SR2 error", t.getLocalizedMessage()});
+            }
+            finally {
+            log.debug("", new String [] {"In Finally"});
+            }
+        }
+    } catch(Exception e) {
+        log.exception("", e, new String[] {"Error", e.getLocalizedMessage()});
+    }
+    log.debug("", new String [] {"Before return"});
+    ImportInventoryResult result = new ImportInventoryResult();
+    result.setImportedCount(specCount);
+    return result;
+}
+
+function boolean checkFileType(ImportInventoryContainer container,Log log)
+{
+        String fileName =container.getUploadedFilename();
+        if(fileName==null){
+            log.error("import.noUpload",new String[] {".txt"} );
+            return false;
+        }else if(!fileName.contains(".txt")){
+        	log.error("import.fileUploadTextType");
+        	return false;
+        }
+        return true;
+}
+
+rule "CONVERT LD SR1 TO SR2"
+        salience 0
+    when
+        container: ImportInventoryContainer()
+    then
+        // set the following boolean variable to false if delete is to be truly executed
+        if(checkFileType(container,log)){
+        	boolean displayOnly = true;
+        	ImportInventoryResult result = convertLogicalDevices(container.getAttachment(), log, displayOnly);
+        	log.debug("", new String [] {"Returned"});
+        	//log.info("", new String [] {"Executed and converted " + result.getImportedCount() + " Logical Device Specifications"});
+        	drools.insert(result);
+         }
+end"</field>
+    <field format="enum_name" name="runExtensionLanguage">GROOVY</field>
+    <field name="extensionContent">"//-------------------------------------------------------------------------------------------------
+// IMPORTS
+//-------------------------------------------------------------------------------------------------
+
+import javax.transaction.UserTransaction;
+
+import oracle.communications.inventory.api.common.container.ImportInventoryContainer;
+import oracle.communications.inventory.api.common.container.ImportInventoryResult;
+import oracle.communications.inventory.api.entity.DeviceInterface;
+import oracle.communications.inventory.api.entity.LogicalDevice;
+import oracle.communications.inventory.api.entity.LogicalDeviceSpecification;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.logicaldevice.LogicalDeviceManager;
+import oracle.communications.inventory.api.logicaldevice.LogicalDeviceSearchCriteria;
+import oracle.communications.inventory.api.logicaldevice.impl.LogicalDeviceCreator;
+import oracle.communications.inventory.api.logicaldevice.impl.LogicalDeviceUpdater;
+import oracle.communications.inventory.api.util.Utils;
+import oracle.communications.platform.persistence.Finder;
+import oracle.communications.platform.persistence.PersistenceHelper;
+import com.opencsv.CSVReader;
+
+//-------------------------------------------------------------------------------------------------
+// GLOBALS
+//-------------------------------------------------------------------------------------------------
+
+log.debug("", "CONVERT LD SR1 TO SR2 rule");
+// set the following boolean variable to false if delete is to be truly executed
+if(checkFileType(importInventoryContainer,log)){
+	boolean displayOnly = true;
+	ImportInventoryResult result = convertLogicalDevices(importInventoryContainer.getAttachment(), log, displayOnly);
+	log.debug("", "Returned from CONVERT LD rule");
+	//log.info("", new String [] {"Executed and converted " + result.getImportedCount() + " Logical Device Specifications"});
+	//drools.insert(result);
+	return result;
+}
+
+//-------------------------------------------------------------------------------------------------
+// FUNCTIONS
+//-------------------------------------------------------------------------------------------------
+
+def ImportInventoryResult convertLogicalDevices(Object attachment, Log log, boolean displayOnly) {
+	int specCount = 0;
+	int failedCount = 0;
+	UserTransaction ut = null;
+	try {
+		List records = null;
+		CSVReader cvs = new CSVReader(new StringReader(attachment.toString()), '#'.toCharacter());
+		records = cvs.readAll();
+
+		List ldList = new ArrayList();
+		for (int r=0; r&lt;records.size(); r++) {
+			String[] record = (String[]) records.get(r);
+			ldList.add(record[0]);
+		}
+
+		if (Utils.isEmpty(ldList)) {
+			log.info("", "No Logical Device Specification found");
+		}
+
+		Iterator ldSpecListItr = ldList.iterator();
+		while (ldSpecListItr.hasNext()) {
+			try {
+				ut = PersistenceHelper.makePersistenceManager().getTransaction();
+				ut.begin();
+
+				String specName = (String) ldSpecListItr.next();
+
+				log.debug("", "Processing the spec " + specName);
+
+				Finder f = null;
+				f = PersistenceHelper.makeFinder();
+				LogicalDeviceManager ldMgr = PersistenceHelper.makeLogicalDeviceManager();
+				Collection&lt;LogicalDeviceSpecification&gt; specList = f.findByName(LogicalDeviceSpecification.class, specName);
+				if (specList.size() &gt; 0) {
+					LogicalDeviceSearchCriteria criteria = ldMgr.makeLogicalDeviceSearchCriteria();
+					criteria.setLogicalDeviceSpecs(specList.toArray(new LogicalDeviceSpecification[specList.size()]));
+					Collection&lt;LogicalDevice&gt; ldListResult = ldMgr.findLogicalDevice(criteria);
+					log.debug("", "  Found " + ldListResult.size() + " logical devices");
+					LogicalDeviceCreator ldc = new LogicalDeviceCreator();
+					LogicalDeviceUpdater ldu = new LogicalDeviceUpdater();
+					int i = 1;
+					for (LogicalDevice ld : ldListResult) {
+						log.debug("", "    " + i + ") Converting Logical device " + ld.getId());
+						Set &lt;DeviceInterface&gt; deviceInterfaceList = ld.getAllDeviceInterfaces();
+						int j = 1;
+						for ( DeviceInterface deviceInterface : deviceInterfaceList ) {
+							log.debug("", "      " + j + ") Converting Device Interface " + deviceInterface.getId());
+							/*if (deviceInterface.getRateCode() != null ) {
+							 log.debug("", new String [] {"             Device Interface Rate Code BEFORE = " + deviceInterface.getRateCode().getName()});
+							 }
+							 else {
+							 log.debug("", new String [] {"             Device Interface Rate Code BEFORE = -"});
+							 }
+							 */
+							ldc.setRateCodeOnDeviceInterface(deviceInterface);
+							//log.debug("", new String [] {"             Device Interface Rate Code AFTER = " + deviceInterface.getRateCode().getName()});
+							j++;
+						}
+						i++;
+					}
+				}
+				f.reset();
+				specCount++;
+				ut.commit();
+			}
+			catch (Throwable t) {
+				failedCount++;
+				if (ut != null) {
+					try {
+						ut.rollback();
+					} catch (Exception e){}
+				}
+				log.exception("", new Exception(), "convert LD from SR1 to SR2 error" + t.getLocalizedMessage());
+			}
+			finally {
+				log.debug("", "In Finally");
+			}
+		}
+	} catch(Exception e) {
+		log.exception("", e, "Error " + e.getLocalizedMessage());
+	}
+	log.debug("", "Before return");
+	ImportInventoryResult result = new ImportInventoryResult();
+	result.setImportedCount(specCount);
+	return result;
+}
+
+def boolean checkFileType(ImportInventoryContainer container,Log log)
+{
+	String fileName =container.getUploadedFilename();
+	if(fileName==null){
+		log.error("import.noUpload", ".txt" );
+		return false;
+	}else if(!fileName.contains(".txt")){
+		log.error("import.fileUploadTextType");
+		return false;
+	}
+	return true;
+}
+
+"</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/ora_uim_baserulesets/model/CREATE_ADDRESS_CHARACTERISTIC_MAP.ruleset#7.4.1.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-2" version="0">
+    <field name="name">"CREATE_ADDRESS_CHARACTERISTIC_MAP"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">"package oracle.communications.inventory.rules
+
+import java.util.ArrayList;
+import java.util.*;
+import java.lang.*;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
+import oracle.communications.inventory.api.entity.GeographicAddress;
+import oracle.communications.inventory.api.entity.PlaceCharacteristic;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.framework.logging.LogFactory;
+import oracle.communications.platform.persistence.impl.EntityField;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+import oracle.communications.inventory.api.framework.resource.MessageResource;
+
+global Log log;
+// This is called from other address/address range rules 
+
+function Map createMap(GeographicAddress address) {
+	//this list of characteristic names must correspond to the list of characteristic names used on the address specifications
+  	final String LANE = MessageResource.getMessage("addressRange.lane");
+  	final String SUBLANE = MessageResource.getMessage("addressRange.sublane");
+  	final String CITY_NUMBER = MessageResource.getMessage("addressRange.cityNumber");
+  	final String RURAL_NUMBER = MessageResource.getMessage("addressRange.ruralNumber");
+  	final String FLOOR = MessageResource.getMessage("addressRange.floor");
+  	final String ROOM = MessageResource.getMessage("addressRange.room");
+  	final String BUILDING = MessageResource.getMessage("addressRange.building");
+  	final String TOWN = MessageResource.getMessage("addressRange.town");
+  	final String TEAM = MessageResource.getMessage("addressRange.team");
+  	final String TO = MessageResource.getMessage("addressRange.to_prefix")+"_";
+  	final String FROM = MessageResource.getMessage("addressRange.from_prefix")+"_";
+ 	Map&lt;String, String&gt; addrMap = new HashMap&lt;String, String&gt;();
+    //set the input address component variables
+    ArrayList&lt;PlaceCharacteristic&gt; pc = new ArrayList&lt;PlaceCharacteristic&gt;(address.getCharacteristics());
+    if (pc != null) {
+      for(int i=0;i &lt; pc.size();i++) {
+        String value = (pc.get(i)).getValue();
+        String name = (pc.get(i)).getName();
+        if (name.equals(LANE)) {
+          if (StringUtils.isNotBlank(value)) {
+            addrMap.put(LANE, value);
+          }
+        }
+      	else if (name.equals(SUBLANE)) {
+        	if (StringUtils.isNotBlank(value)) {
+          		addrMap.put(SUBLANE, value);
+        	}
+      	}
+          else if (name.equals(CITY_NUMBER)) {
+            if (StringUtils.isNotBlank(value)) {
+              addrMap.put(CITY_NUMBER, value);
+            }  
+          }
+          else if (name.equals(FLOOR)) {
+            if (StringUtils.isNotBlank(value)) {
+              addrMap.put(FLOOR, value);
+            }  
+          }
+          else if (name.equals(ROOM)) {
+            if (StringUtils.isNotBlank(value)) {
+              addrMap.put(ROOM, value);
+            }  
+          }
+          else if (name.equals(BUILDING)) {
+            if (StringUtils.isNotBlank(value)) {
+              addrMap.put(BUILDING, value);
+            }  
+          }
+          if (name.equals(RURAL_NUMBER)) {
+            if (StringUtils.isNotBlank(value)) {
+              addrMap.put(RURAL_NUMBER, value);
+            }  
+          }
+          else if (name.equals(TEAM)) {
+            if (StringUtils.isNotBlank(value)) {
+              addrMap.put(TEAM, value);
+            }  
+          }          
+        } // end of loop
+      }	//end of if
+      return addrMap;
+	} //end of function
+	
+
+rule "Create Address Characteristic Map"
+		salience 0
+	when
+		address : GeographicAddress()	
+	then		
+		log.debug( "", new Object[] { "Create Address Characteristic Map: " + address.getName() } );		
+		Map&lt;String, String&gt; addrMap = new HashMap&lt;String, String&gt;();
+		addrMap = createMap(address);
+		insert(addrMap);
+
+end"</field>
+    <field format="enum_name" name="runExtensionLanguage">GROOVY</field>
+    <field name="extensionContent">"import oracle.communications.inventory.api.entity.GeographicAddress;
+import oracle.communications.inventory.api.entity.PlaceCharacteristic;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.framework.resource.MessageResource;
+
+import org.apache.commons.lang.StringUtils;
+
+
+Object param1=ruleParameters[0];
+if(param1 instanceof List&lt;GeographicAddress&gt;)
+{
+for(GeographicAddress address:param1)
+{	
+// This is called from other address/address range rules
+
+log.debug( "", "Create Address Characteristic Map: " + address.getName() );
+Map&lt;String, String&gt; addrMap = new HashMap&lt;String, String&gt;();
+addrMap = createMap(address);
+return addrMap;
+}
+}
+
+def Map createMap(GeographicAddress address) {
+	//this list of characteristic names must correspond to the list of characteristic names used on the address specifications
+	final String LANE = MessageResource.getMessage("addressRange.lane");
+	final String SUBLANE = MessageResource.getMessage("addressRange.sublane");
+	final String CITY_NUMBER = MessageResource.getMessage("addressRange.cityNumber");
+	final String RURAL_NUMBER = MessageResource.getMessage("addressRange.ruralNumber");
+	final String FLOOR = MessageResource.getMessage("addressRange.floor");
+	final String ROOM = MessageResource.getMessage("addressRange.room");
+	final String BUILDING = MessageResource.getMessage("addressRange.building");
+	final String TOWN = MessageResource.getMessage("addressRange.town");
+	final String TEAM = MessageResource.getMessage("addressRange.team");
+	final String TO = MessageResource.getMessage("addressRange.to_prefix")+"_";
+	final String FROM = MessageResource.getMessage("addressRange.from_prefix")+"_";
+	Map&lt;String, String&gt; addrMap = new HashMap&lt;String, String&gt;();
+	//set the input address component variables
+	ArrayList&lt;PlaceCharacteristic&gt; pc = new ArrayList&lt;PlaceCharacteristic&gt;(address.getCharacteristics());
+	if (pc != null) {
+		for(int i=0;i &lt; pc.size();i++) {
+			String value = (pc.get(i)).getValue();
+			String name = (pc.get(i)).getName();
+			if (name.equals(LANE)) {
+				if (StringUtils.isNotBlank(value)) {
+					addrMap.put(LANE, value);
+				}
+			}
+			else if (name.equals(SUBLANE)) {
+				if (StringUtils.isNotBlank(value)) {
+					addrMap.put(SUBLANE, value);
+				}
+			}
+			else if (name.equals(CITY_NUMBER)) {
+				if (StringUtils.isNotBlank(value)) {
+					addrMap.put(CITY_NUMBER, value);
+				}
+			}
+			else if (name.equals(FLOOR)) {
+				if (StringUtils.isNotBlank(value)) {
+					addrMap.put(FLOOR, value);
+				}
+			}
+			else if (name.equals(ROOM)) {
+				if (StringUtils.isNotBlank(value)) {
+					addrMap.put(ROOM, value);
+				}
+			}
+			else if (name.equals(BUILDING)) {
+				if (StringUtils.isNotBlank(value)) {
+					addrMap.put(BUILDING, value);
+				}
+			}
+			if (name.equals(RURAL_NUMBER)) {
+				if (StringUtils.isNotBlank(value)) {
+					addrMap.put(RURAL_NUMBER, value);
+				}
+			}
+			else if (name.equals(TEAM)) {
+				if (StringUtils.isNotBlank(value)) {
+					addrMap.put(TEAM, value);
+				}
+			}
+		} // end of loop
+	}	//end of if
+	return addrMap;
+} //end of function
+
+"</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/ora_uim_baserulesets/model/EncryptText.ruleset#7.4.1.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-3" version="0">
+    <field name="name">"EncryptText"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">""</field>
+    <field format="enum_name" name="runExtensionLanguage">GROOVY</field>
+    <field name="extensionContent">"/*==============================================================================================================&#13;
+ * Copyright (c) 2016, Oracle and/or its affiliates. All rights reserved.&#13;
+ *&#13;
+ * This sample file, which has been provided by Oracle Corporation as part of an Oracle� product for use&#13;
+ * ONLY by licensed users of the product, includes CONFIDENTIAL and PROPRIETARY information of Oracle&#13;
+ * Corporation.&#13;
+ *&#13;
+ * This material is the confidential property of Oracle Corporation or its licensors and may be used,&#13;
+ * reproduced, stored, or transmitted only in accordance with a valid Oracle license or sublicense&#13;
+ * agreement.&#13;
+ * &#13;
+ * USE OF THIS SOFTWARE IS GOVERNED BY THE TERMS AND CONDITIONS OF THE LICENSE&#13;
+ * AGREEMENT AND LIMITED WARRANTY FURNISHED WITH THE PRODUCT.&#13;
+ *&#13;
+ * IN PARTICULAR, YOU WILL INDEMNIFY AND HOLD ORACLE CORPORATION, ITS RELATED COMPANIES AND ITS SUPPLIERS,&#13;
+ * HARMLESS FROM AND AGAINST ANY CLAIMS OR LIABILITIES ARISING OUT OF THE USE, REPRODUCTION, OR DISTRIBUTION&#13;
+ * OF YOUR PROGRAMS, INCLUDING ANY CLAIMS OR LIABILITIES ARISING OUT OF OR RESULTING FROM THE USE,&#13;
+ * MODIFICATION, OR DISTRIBUTION OF PROGRAMS OR FILES CREATED FROM, BASED ON, AND/OR DERIVED FROM THIS&#13;
+ * SAMPLE SOURCE CODE FILE.&#13;
+ * =============================================================================================================*/&#13;
+&#13;
+import oracle.communications.platform.security.impl.JCEEncrypt;&#13;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;&#13;
+import oracle.communications.inventory.api.common.container.ImportInventoryContainer;&#13;
+import oracle.communications.inventory.api.framework.logging.Log;&#13;
+&#13;
+&#13;
+log.debug ("", "System Export");&#13;
+if(checkFileType(importInventoryContainer,log)){&#13;
+	JCEEncrypt encrypt = new JCEEncrypt();&#13;
+	BufferedReader br = null;&#13;
+	try {&#13;
+	File file = importInventoryContainer.getFile();	&#13;
+	if(file != null) {&#13;
+		br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));&#13;
+		String line = "";&#13;
+		String text = new String();&#13;
+		while( (line = br.readLine())!= null ){&#13;
+		       text += line;&#13;
+		}&#13;
+		log.info ("","Encrypted text is : "+encrypt.encryptObject(text));&#13;
+	} else {&#13;
+		br = new BufferedReader(new StringReader(importInventoryContainer.getAttachment().toString()));&#13;
+		String line = "";&#13;
+		String text = new String();&#13;
+		while( (line = br.readLine())!= null ){&#13;
+			text += line;&#13;
+		}&#13;
+		log.info ("","Encrypted text is : "+encrypt.encryptObject(text));&#13;
+	}&#13;
+	&#13;
+	} catch(Exception exception) {&#13;
+	throw exception;&#13;
+	} finally {&#13;
+	br.close();&#13;
+	}&#13;
+}&#13;
+&#13;
+&#13;
+def boolean checkFileType(ImportInventoryContainer container,Log log)&#13;
+{&#13;
+	String fileName =container.getUploadedFilename();&#13;
+	if(fileName==null){&#13;
+		log.error("import.noUpload",".txt" );&#13;
+		return false;&#13;
+	}else if(!fileName.contains(".txt")){&#13;
+		log.error("import.fileUploadTextType");&#13;
+		return false;&#13;
+	}&#13;
+	return true;&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+"</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/ora_uim_baserulesets/model/FIND_ADDRESS_RANGE.ruleset#7.4.1.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-4" version="0">
+    <field name="name">"FIND_ADDRESS_RANGE"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">"package oracle.communications.inventory.rules&#13;
+&#13;
+import java.util.ArrayList;&#13;
+import java.util.*;&#13;
+import java.lang.*;&#13;
+import oracle.communications.inventory.extensibility.rules.*;&#13;
+import oracle.communications.platform.persistence.PersistenceHelper;&#13;
+import oracle.communications.inventory.api.place.AddressRangeManager;&#13;
+import org.apache.commons.lang.StringUtils;&#13;
+import oracle.communications.inventory.api.entity.GeographicAddress;&#13;
+import oracle.communications.inventory.api.entity.GeographicAddressRange;&#13;
+import oracle.communications.inventory.api.entity.PlaceCharacteristic;&#13;
+import oracle.communications.inventory.api.framework.logging.Log;&#13;
+import oracle.communications.platform.persistence.Finder;&#13;
+import oracle.communications.platform.persistence.impl.EntityField;&#13;
+import oracle.communications.inventory.extensibility.rules.RulesExecutor;&#13;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;&#13;
+import oracle.communications.inventory.api.framework.resource.MessageResource;&#13;
+&#13;
+&#13;
+global Log log;&#13;
+&#13;
+   &#13;
+ &#13;
+ function GeographicAddressRange queryAddressRange(GeographicAddress address, Log log) {&#13;
+    GeographicAddressRange returnAddress = null;&#13;
+      Finder finder = null;&#13;
+      StringBuilder filterStr = new StringBuilder("");&#13;
+      List&lt;String&gt; parms = new ArrayList&lt;String&gt;();&#13;
+      List&lt;Object&gt; parmValues = new ArrayList&lt;Object&gt;();&#13;
+      final String region = MessageResource.getMessage("addressRange.region"); &#13;
+      String regionValue = null;&#13;
+      final String road = MessageResource.getMessage("addressRange.road"); &#13;
+      String roadValue = null;&#13;
+      final String town = MessageResource.getMessage("addressRange.town"); &#13;
+      String townValue = null;&#13;
+&#13;
+      //determine address format city or rural based on incoming object and get appropriate characteristic values&#13;
+      try {&#13;
+        ArrayList pc = new ArrayList(address.getCharacteristics());&#13;
+        if (pc != null) {&#13;
+          for(int i=0;i &lt; pc.size();i++) {&#13;
+            String value = ((PlaceCharacteristic)pc.get(i)).getValue();&#13;
+            String name = ((PlaceCharacteristic)pc.get(i)).getName();&#13;
+            if (name.equals(region)) {&#13;
+              if (StringUtils.isBlank(value)) {&#13;
+                log.error("place.fieldIsNull", name);&#13;
+                return null;&#13;
+              }&#13;
+              regionValue = value;&#13;
+            }&#13;
+            else if (name.equals(road)) {&#13;
+              if (StringUtils.isBlank(value)) {&#13;
+                log.error("place.fieldIsNull", name);&#13;
+                return null;&#13;
+              }&#13;
+              roadValue = value;&#13;
+            }&#13;
+            else if (name.equals(town)) {&#13;
+              if (StringUtils.isBlank(value)) {&#13;
+                log.error("place.fieldIsNull", name);&#13;
+                return null;&#13;
+              }&#13;
+              townValue = value;&#13;
+            }&#13;
+          }&#13;
+        }&#13;
+        finder = PersistenceHelper.makeFinder();&#13;
+        finder.setResultClass(GeographicAddressRange.class);&#13;
+    &#13;
+        // Add eager fetch classes.      &#13;
+        List&lt;EntityField&gt; eagerFetchEntityFields = new ArrayList&lt;EntityField&gt;();&#13;
+        eagerFetchEntityFields.add(GeographicAddressRange._characteristics); &#13;
+        eagerFetchEntityFields.add(GeographicAddressRange._specification);&#13;
+        //finder.setEagerFetchFields(eagerFetchEntityFields);     &#13;
+        &#13;
+        // Add parameters       &#13;
+        parms.add("region");&#13;
+        parmValues.add(region);&#13;
+        parms.add("regionValue");&#13;
+        parmValues.add(regionValue);        &#13;
+        &#13;
+        //set up filter string, region is common to both formats       &#13;
+        filterStr.append(" characteristics.contains(vCharacteristic1) ");&#13;
+        filterStr.append(" &amp;&amp; (vCharacteristic1.name == region &amp;&amp; vCharacteristic1.value == regionValue)");&#13;
+        &#13;
+        finder.declareVariables(new Class [] {PlaceCharacteristic.class, PlaceCharacteristic.class},&#13;
+                                                        new String [] {"vCharacteristic1", "vCharacteristic2"});&#13;
+        //if roadValue is populated, then we are searching for city formatted ranges&#13;
+        if (roadValue != null) {&#13;
+          filterStr.append(" &amp;&amp; characteristics.contains(vCharacteristic2) ");&#13;
+          filterStr.append(" &amp;&amp; (vCharacteristic2.name == road &amp;&amp; vCharacteristic2.value == roadValue)");&#13;
+          parms.add("road");&#13;
+          parmValues.add(road);&#13;
+          parms.add("roadValue");&#13;
+          parmValues.add(roadValue);&#13;
+        }     &#13;
+        &#13;
+        //if townValue is formatted, then we are searching for rural formatted ranges&#13;
+        else if (townValue != null) {&#13;
+          filterStr.append(" &amp;&amp; characteristics.contains(vCharacteristic2) ");&#13;
+          filterStr.append(" &amp;&amp; (vCharacteristic2.name == town &amp;&amp; vCharacteristic2.value == townValue)");&#13;
+          parms.add("town");&#13;
+          parmValues.add(town);&#13;
+          parms.add("townValue");&#13;
+          parmValues.add(townValue);&#13;
+        }&#13;
+        finder.setJPQLFilter(filterStr.toString());        &#13;
+        finder.setParameters(parms.toArray(new String[parms.size()]), parmValues.toArray(new Object[parmValues.size()]));&#13;
+        Collection ranges = finder.findMatches();      &#13;
+        AddressRangeManager rangeManager = PersistenceHelper.makeAddressRangeManager(); &#13;
+        &#13;
+        //create a characteristic map with just the populated characteristics&#13;
+        Map&lt;String, String&gt; addrMap = new HashMap&lt;String, String&gt;();&#13;
+        List resultList = new ArrayList();&#13;
+        RulesExecutor rulesExecutor = PersistenceHelper.makeRulesExecutor();&#13;
+     	resultList = rulesExecutor.execute("CREATE ADDRESS CHARACTERISTIC MAP", Map.class, address);&#13;
+        addrMap = (HashMap) resultList.get(0);&#13;
+        &#13;
+        //find the range this address belongs to&#13;
+        returnAddress = rangeManager.processRanges(ranges, addrMap);&#13;
+      }&#13;
+      catch(Exception e) {&#13;
+        log.error("", e, address.getName());&#13;
+      }&#13;
+      finally {&#13;
+        if (finder != null)&#13;
+          finder.close();&#13;
+      } &#13;
+      return returnAddress;&#13;
+  } &#13;
+  &#13;
+rule "Find Address Range"&#13;
+		salience 0&#13;
+	when&#13;
+		address : GeographicAddress()	&#13;
+		context : ExtensionPointRuleContext()&#13;
+	then		&#13;
+		log.debug( "", new Object[] { "Starting Find Address Range: " + address.getName() } );&#13;
+	    // execute for address&#13;
+	    GeographicAddressRange range = queryAddressRange(address, log);	      &#13;
+	    context.setReturnValue(range);&#13;
+end&#13;
+"</field>
+    <field format="enum_name" name="runExtensionLanguage">GROOVY</field>
+    <field name="extensionContent">"import oracle.communications.inventory.api.entity.GeographicAddress;
+import oracle.communications.inventory.api.entity.GeographicAddressRange;
+import oracle.communications.inventory.api.entity.PlaceCharacteristic;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.framework.resource.MessageResource;
+import oracle.communications.inventory.api.place.AddressRangeManager;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+import oracle.communications.inventory.extensibility.rules.*;
+import oracle.communications.platform.persistence.Finder;
+import oracle.communications.platform.persistence.PersistenceHelper;
+import oracle.communications.platform.persistence.impl.EntityField;
+
+import org.apache.commons.lang.StringUtils;
+
+
+Object param1=ruleParameters[0];
+
+if(param1 instanceof List&lt;GeographicAddress&gt;)
+{
+for(GeographicAddress address:param1)
+{
+log.debug( "",  "Starting Find Address Range: " + address.getName() );
+// execute for address
+GeographicAddressRange range = queryAddressRange(address, log);
+extensionPointRuleContext.setReturnValue(range);
+
+}
+}
+
+
+def GeographicAddressRange queryAddressRange(GeographicAddress address, Log log) {
+	GeographicAddressRange returnAddress = null;
+	Finder finder = null;
+	StringBuilder filterStr = new StringBuilder("");
+	List&lt;String&gt; parms = new ArrayList&lt;String&gt;();
+	List&lt;Object&gt; parmValues = new ArrayList&lt;Object&gt;();
+	final String region = MessageResource.getMessage("addressRange.region");
+	String regionValue = null;
+	final String road = MessageResource.getMessage("addressRange.road");
+	String roadValue = null;
+	final String town = MessageResource.getMessage("addressRange.town");
+	String townValue = null;
+
+	//determine address format city or rural based on incoming object and get appropriate characteristic values
+	try {
+		ArrayList pc = new ArrayList(address.getCharacteristics());
+		if (pc != null) {
+			for(int i=0;i &lt; pc.size();i++) {
+				String value = ((PlaceCharacteristic)pc.get(i)).getValue();
+				String name = ((PlaceCharacteristic)pc.get(i)).getName();
+				if (name.equals(region)) {
+					if (StringUtils.isBlank(value)) {
+						log.error("place.fieldIsNull", name);
+						return null;
+					}
+					regionValue = value;
+				}
+				else if (name.equals(road)) {
+					if (StringUtils.isBlank(value)) {
+						log.error("place.fieldIsNull", name);
+						return null;
+					}
+					roadValue = value;
+				}
+				else if (name.equals(town)) {
+					if (StringUtils.isBlank(value)) {
+						log.error("place.fieldIsNull", name);
+						return null;
+					}
+					townValue = value;
+				}
+			}
+		}
+		finder = PersistenceHelper.makeFinder();
+		finder.setResultClass(GeographicAddressRange.class);
+
+		// Add eager fetch classes.
+		List&lt;EntityField&gt; eagerFetchEntityFields = new ArrayList&lt;EntityField&gt;();
+		eagerFetchEntityFields.add(GeographicAddressRange._characteristics);
+		eagerFetchEntityFields.add(GeographicAddressRange._specification);
+		//finder.setEagerFetchFields(eagerFetchEntityFields);
+
+		// Add parameters
+		parms.add("region");
+		parmValues.add(region);
+		parms.add("regionValue");
+		parmValues.add(regionValue);
+
+		//set up filter string, region is common to both formats
+		filterStr.append(" characteristics.contains(vCharacteristic1) ");
+		filterStr.append(" &amp;&amp; (vCharacteristic1.name == region &amp;&amp; vCharacteristic1.value == regionValue)");
+		Class[] classArray = [
+			PlaceCharacteristic.class,
+			PlaceCharacteristic.class
+		];
+		String[] stringArray = [
+			"vCharacteristic1",
+			"vCharacteristic2"
+		];
+		finder.declareVariables(classArray,stringArray);
+
+		//if roadValue is populated, then we are searching for city formatted ranges
+		if (roadValue != null) {
+			filterStr.append(" &amp;&amp; characteristics.contains(vCharacteristic2) ");
+			filterStr.append(" &amp;&amp; (vCharacteristic2.name == road &amp;&amp; vCharacteristic2.value == roadValue)");
+			parms.add("road");
+			parmValues.add(road);
+			parms.add("roadValue");
+			parmValues.add(roadValue);
+		}
+
+		//if townValue is formatted, then we are searching for rural formatted ranges
+		else if (townValue != null) {
+			filterStr.append(" &amp;&amp; characteristics.contains(vCharacteristic2) ");
+			filterStr.append(" &amp;&amp; (vCharacteristic2.name == town &amp;&amp; vCharacteristic2.value == townValue)");
+			parms.add("town");
+			parmValues.add(town);
+			parms.add("townValue");
+			parmValues.add(townValue);
+		}
+		finder.setJPQLFilter(filterStr.toString());
+		finder.setParameters(parms.toArray(new String[parms.size()]), parmValues.toArray(new Object[parmValues.size()]));
+		Collection ranges = finder.findMatches();
+		AddressRangeManager rangeManager = PersistenceHelper.makeAddressRangeManager();
+
+		//create a characteristic map with just the populated characteristics
+		Map&lt;String, String&gt; addrMap = new HashMap&lt;String, String&gt;();
+		List resultList = new ArrayList();
+		GroovyRulesExecutor groovyRulesExecutor = PersistenceHelper.makeGroovyRulesExecutor();
+		resultList = groovyRulesExecutor.execute("CREATE_ADDRESS_CHARACTERISTIC_MAP", Map.class, address);
+		addrMap = (HashMap) resultList.get(0);
+		//find the range this address belongs to
+		returnAddress = rangeManager.processRanges(ranges, addrMap);
+	}
+	catch(Exception e) {
+		log.error("", e, address.getName());
+	}
+	finally {
+		if (finder != null)
+			finder.close();
+	}
+	return returnAddress;
+}
+
+
+"</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/ora_uim_baserulesets/model/IMPORT_INVENTORY.ruleset#7.4.1.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-5" version="0">
+    <field name="name">"IMPORT_INVENTORY"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">"package oracle.communications.inventory.rules
+
+/*
+This ruleset takes a input file(config.txt) and performs the following on the input file.
+    1.  Creates an instance of telephone number if it does not exists in the system. 
+    2.  Creates an instance of logical device account if it does not exists in the system. 
+    3.  Creates an instance of equipment if it does not exists in the system. 
+    4.  Validates and creates a custom involvement between the telephone number and logical device account. 
+    5.  Validates and creates a custom involvement between the logical device account and equipment. 
+
+The format of the input file, config.txt, file should be as follows:
+TN,LDA,Equipment 
+&lt;TelephoneNumber id&gt;,&lt;Logical device account id&gt;,&lt;Equipment id&gt;
+
+Before executing the ruleset the following should be replaced in config.txt file.
+&lt;TelephoneNumber id&gt; is the ID (Existing/New) for telephone number.
+&lt;Logical device account id&gt; is the ID( Existing/New) for Logical device account.
+&lt;Equipment id&gt;  is the ID (Existing/New) for Equipment
+
+Steps to execute the ruleset:
+   1.  Create Telephone number, Logical device account &amp; Equipmentspecifications in SCE and 
+       install the cartridge into UIM. 
+   2.  Modify the hardcoded spec names(SampleEquipmentSpec, SampleLDASpec &amp; SampleTelephoneNumberSpec) 
+       in the rule set to the above created spec names. 
+   3.  Install the baserulset cartridge into UIM application. 
+   4.  Click on the "Import inventory" link in left navigation bar. 
+   5.  Select the IMPORT_INVENTORY ruleset and browse for the input file. 
+   6.  Click on the proceed.   
+   Result: A custom involvement will be created between the supplied Telephone 
+           number and Logical device account, Logical device account and equipment. 
+*/
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.StringReader;
+
+import java.util.*;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.transaction.UserTransaction;
+import javax.xml.rpc.soap.SOAPFaultException;
+
+import com.opencsv.CSVReader;
+
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.rules.impl.RuleDebug;
+import oracle.communications.inventory.api.entity.*;
+
+import oracle.communications.platform.persistence.PersistenceHelper;
+import oracle.communications.platform.persistence.Persistent;
+import oracle.communications.inventory.api.common.AttachmentManager;
+import oracle.communications.inventory.api.common.CustomInvolvementSearchCriteria;
+import oracle.communications.inventory.api.entity.AttachmentType;
+import oracle.communications.inventory.api.common.AttachmentSearchCriteria;
+import oracle.communications.inventory.api.common.container.ImportInventoryContainer;
+import oracle.communications.inventory.api.common.container.ImportInventoryResult;
+import oracle.communications.inventory.api.entity.common.Attachment;
+import oracle.communications.inventory.api.equipment.EquipmentManager;
+import oracle.communications.inventory.api.equipment.EquipmentSearchCriteria;
+import oracle.communications.inventory.api.logicaldevice.account.LogicalDeviceAccountManager;
+import oracle.communications.inventory.api.logicaldevice.account.LogicalDeviceAccountSearchCriteria;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.framework.logging.LogFactory;
+import oracle.communications.platform.persistence.CriteriaItem;
+import oracle.communications.platform.persistence.CriteriaOperator;
+import oracle.communications.inventory.api.number.TelephoneNumberManager;
+import oracle.communications.inventory.api.number.TelephoneNumberSearchCriteria;
+import oracle.communications.inventory.api.number.container.TelephoneNumberData;
+import oracle.communications.inventory.api.number.container.TelephoneNumberResult;
+import oracle.communications.inventory.api.entity.EquipmentSpecification;
+import oracle.communications.platform.persistence.Finder;
+import oracle.communications.inventory.api.entity.Specification;
+import oracle.communications.inventory.api.entity.common.CustomInvolvement;
+import oracle.communications.inventory.api.entity.Equipment;
+import oracle.communications.inventory.api.entity.LogicalDeviceAccount;
+import oracle.communications.inventory.api.entity.TelephoneNumber;
+
+global Log log;
+
+    function boolean validateAttachment(AttachmentManager am, Persistent from, Persistent to) {
+        boolean ok = false;
+        if (from == null || to == null) return false;
+        CustomInvolvementSearchCriteria criteria = am.makeCustomInvolvementSearchCriteria();
+        AttachmentType[] at = new AttachmentType[]{AttachmentType.PRECONFIGURED};
+        criteria.setAttachmentType(at);
+        criteria.setFromEntity(from);
+        criteria.setRange( 0, 1 );
+        try {
+            List col = am.findCustomInvolvement( criteria );
+            ok = col.size() &lt;= 0;
+        } catch(Exception e) {
+            ok = false;
+        }
+        if (ok) {
+            criteria.setToEntity(to);
+            //criteria.setFromEntity(null);
+            try {
+                Collection col = am.findCustomInvolvement( criteria );
+                ok = col.size() &lt;= 0;
+            } catch(Exception e) {
+                ok = false;
+            }
+        }
+        return ok;
+    }
+
+    function Equipment getSIM(String sim, Log log) {
+        Equipment returnEquipment = null;
+        Equipment equipment =null;
+        Finder f=null;
+        EquipmentSpecification eqpSpec=null;
+        boolean found = false;
+        EquipmentManager manager = PersistenceHelper.makeEquipmentManager();
+        EquipmentSearchCriteria criteria = manager.makeEquipmentSearchCriteria();
+        CriteriaItem id = criteria.makeCriteriaItem();
+		id.setName("id");
+        id.setValue(sim);
+        id.setOperator(CriteriaOperator.EQUALS);
+        criteria.setId(id);
+        equipment = manager.makeEquipment();
+        equipment.setId(sim);
+        try {
+            Collection&lt;Equipment&gt; equipList = manager.findEquipment(criteria);
+            if (equipList != null &amp;&amp; !equipList.isEmpty()) {
+                found = true;
+                returnEquipment = equipList.iterator().next();
+                log.debug("",new Object[]{"Found existing equipment="+sim});
+            }
+        } catch(Exception e) {
+            found = false;
+        }
+        if (!found) {
+            UserTransaction ut = null;
+            try {
+                ut = PersistenceHelper.makePersistenceManager().getTransaction();
+                ut.begin();
+				f=PersistenceHelper.makeFinder();
+                Collection&lt;Specification&gt; specList =(Collection&lt;Specification&gt;) f.findByName(Specification.class, "SampleEquipmentSpec");
+                eqpSpec=(EquipmentSpecification)specList.iterator().next();
+                equipment.setSpecification(eqpSpec);
+                Collection&lt;Equipment&gt; list = new ArrayList&lt;Equipment&gt;();
+                list.add(equipment);
+                manager.createEquipment(list);
+                ut.commit();
+                log.debug("",new Object[]{"Created new Equipment="+sim});
+                Collection&lt;Equipment&gt; equipList = manager.findEquipment(criteria);
+                if (equipList != null &amp;&amp; !equipList.isEmpty()) {
+                    found = true;
+                    returnEquipment = equipList.iterator().next();
+                }
+            } catch (Throwable t) {
+                if (ut != null) {
+                    try {
+                        found = false;
+                        ut.rollback();
+                    } catch (Exception e){}
+                }
+                try {
+                    log.exception("", new Exception(), new String[] {"getSIM", t.getLocalizedMessage()});
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            finally {
+				if (f!=null){
+					f.close();
+				}
+            }
+            if (!found) {
+                returnEquipment = null;
+            }
+        }
+        return returnEquipment;
+    }
+
+   function TelephoneNumber getTN(String tn, Log log) {
+           TelephoneNumber telephoneNumber = null;
+           TelephoneNumberData tnData = new TelephoneNumberData();
+           String id = tn;
+           tnData.setRangeFrom(tn);
+           tnData.setTelephoneNumberSpecName("SampleTelephoneNumberSpec");
+           TelephoneNumberManager tnMaintainer = PersistenceHelper.makeTelephoneNumberManager();
+           List l = new ArrayList();
+           TelephoneNumberSearchCriteria tnCriteria = tnMaintainer.makeTelephoneNumberSearchCriteria();
+           CriteriaItem rangeFromCi = tnCriteria.makeCriteriaItem();
+           rangeFromCi.setName("id");
+           rangeFromCi.setOperator(CriteriaOperator.EQUALS);
+           rangeFromCi.setValue(id);
+           l.add(rangeFromCi);
+           tnCriteria.addCriteriaItems(l);
+                            
+           List entity = null;
+           TelephoneNumberManager tnManager=null;
+           try {
+           			tnManager = PersistenceHelper.makeTelephoneNumberManager();
+                    entity=tnManager.findTelephoneNumbers(tnCriteria);
+            } catch(Exception e) {
+            	e.printStackTrace();
+            }
+            if(entity != null &amp;&amp; entity.size() &gt; 0) {
+            		log.debug("",new Object[]{"found existing tn for id = " + id});
+                    telephoneNumber = (TelephoneNumber)entity.toArray()[0];
+            } else {
+            		log.debug("",new Object[]{"creating new tn for id = " + id});
+                    TelephoneNumberResult tnResult=null;
+            		try {
+						  UserTransaction ut = null;
+            			  ut = PersistenceHelper.makePersistenceManager().getTransaction();
+            			  ut.begin();
+                          tnResult = tnManager.createTelephoneNumbers(tnData);
+						  ut.commit();
+                     } catch (Exception e) {
+                              e.printStackTrace();
+                     } 
+                     if (tnResult != null) {
+                        int tnCount = tnResult.getNumberOfCreatedTelephoneNumbers();
+                        if (tnCount &gt; 0) {
+                            oracle.communications.inventory.api.number.container.TelephoneNumber[] tns = tnResult.getTelephoneNumbers();
+                            if (tns!= null) {
+                                 try {
+                                          entity = tnManager.findTelephoneNumbers(new String[]{tns[0].getUnformattedPhoneNumber()},false);
+                                          telephoneNumber = (TelephoneNumber)entity.toArray()[0];                                                 
+                                } catch(Exception e) {
+                                    log.debug("",new Object[]{"unable to find tn"});
+                               }
+                               log.debug("",new Object[]{"returned 1 tn!!!"});
+                            } else {
+                                  log.debug("",new Object[]{"although 1 was created, nothing was returned!!!"});
+                            }
+                         }
+              } else {
+                       log.debug("",new Object[]{"the TN result was null!!!"});
+              }
+           }
+      return telephoneNumber;
+  }
+
+function LogicalDeviceAccount getPSID(String psid, Log log)  {
+    LogicalDeviceAccountManager mgr = PersistenceHelper.makeLogicalDeviceAccountManager();
+        LogicalDeviceAccount account = null;
+    boolean found = false;
+    try {
+        LogicalDeviceAccountSearchCriteria criteria = mgr.makeLogicalDeviceAccountSearchCriteria();
+        CriteriaItem item = criteria.makeCriteriaItem();    	
+        item.setName("id");
+        item.setOperator(CriteriaOperator.EQUALS);
+        item.setValue(psid);
+        criteria.setId(item);
+        Collection accounts = mgr.findLogicalDeviceAccounts(criteria);
+        if (accounts != null &amp;&amp; accounts.size() &gt; 0) { 
+            account = (LogicalDeviceAccount)accounts.toArray()[0];
+            found = true;
+        }
+    }
+    catch (Throwable t) {
+        found = false;
+    }
+    if (!found) {
+        UserTransaction ut = null;
+        try {
+            List specs = new ArrayList(mgr.getAllLogicalDeviceAccountSpecifications());
+            LogicalDeviceAccountSpecification nes = null;	        	
+            for(int i=0;i&lt;specs.size();i++) {
+                LogicalDeviceAccountSpecification spec = (LogicalDeviceAccountSpecification)specs.get(i);
+                if ("SampleLDASpec".equals(spec.getName())) {
+                    nes = spec;
+                    break;
+                }
+            }
+            ut = PersistenceHelper.makePersistenceManager().getTransaction();
+            ut.begin();
+            account = mgr.makeLogicalDeviceAccount();
+            account.setAdminState(InventoryState.INSTALLED);
+            account.setId(psid);
+            account.setSpecification(nes);
+            List&lt;LogicalDeviceAccount&gt; ldaList = new ArrayList&lt;LogicalDeviceAccount&gt; (1);
+            ldaList.add(account);
+            List&lt;LogicalDeviceAccount&gt; list = mgr.createLogicalDeviceAccounts(ldaList);
+			if(!list.isEmpty()){
+				account = list.get(0);
+			}
+            ut.commit();
+        } catch (Throwable t) {
+            if (ut != null) {
+                try {
+                    found = false;
+                    ut.rollback();
+                } catch (Exception e){}
+            }
+            log.exception("", new Exception(), new String[] {"getPSID", t.getLocalizedMessage()});
+        }
+        finally {
+        }
+    }
+    return account;
+}
+
+
+    
+function boolean isEmpty(String string) {
+    if (string == null || "".equals(string))
+        return true;
+    return false;
+}
+
+
+  
+  function ImportInventoryResult importInventoryAttachment(Object attachment, Log log) {
+		int importedCount = 0; 
+                   
+                   try {
+                       List records = null; //r.readAll();
+                   BufferedReader checker = new BufferedReader(new StringReader(attachment.toString()));
+                       String importSpec = checker.readLine();
+                       checker.close();
+                       String[] fields = importSpec.split(",");
+                       int tnIndex = -1, simIndex = -1, psidIndex = -1;
+                       for(int i=0;i&lt;fields.length;i++) {
+                           if ("TN".equals(fields[i])) {
+                               tnIndex = i;
+                           } else if ("EQUIP".equals(fields[i])|| "Equipment".equals(fields[i])) {
+                               simIndex = i;
+                           } else if ("LDA".equals(fields[i])) {
+                               psidIndex = i;
+                           }
+                       }
+                       records = new ArrayList(); 
+                       if (fields.length &gt; 1) {
+                       
+                           // The uploaded file is saved using a charset.  This is usually the default charset of the client that 
+                           // creates this file.  This charset must be used to decode the String returned by 
+                           // ImportInventoryContainer.getAttachment().  
+                           // Use the following to decode the ImportInventoryContainer.getAttachment() String: 
+                           //     CSVReader cvs = new CSVReader(new StringReader(new String(container.getAttachment().getBytes(), "&lt;uploaded file charset&gt;"))); 
+                           // If charset is GB2312, 
+                           //     CSVReader cvs = new CSVReader(new StringReader(new String(container.getAttachment().getBytes(), "GB2312"))); 
+                           // If charset is UTF-8, 
+                           //     CSVReader cvs = new CSVReader(new StringReader(new String(container.getAttachment().getBytes(), "UTF-8"))); 
+                           // So, you must advise user to save file in a pre-defined charset in order to decode the file correctly.
+                       CSVReader cvs = new CSVReader(new StringReader(attachment.toString()));
+
+                           records = cvs.readAll();
+                       } else {
+                       BufferedReader lineReader = new BufferedReader(new StringReader(attachment.toString()));
+                           String line = null;
+                           while((line = lineReader.readLine()) != null) {
+                               records.add(new String[]{line});
+                           }
+                       }
+                               
+                       // System.out.println("records.size()=" + records.size());
+                       // start at 2nd record, since 1st is format of file
+                       for (int r=1;r&lt;records.size();r++) {
+                           //System.out.println("record=" + r);
+                           String[] record = (String[])records.get(r);
+                           if (record == null) continue;
+                           // TODO: calls to apis go here
+                           String tn = null;
+                           if (tnIndex &gt;= 0 &amp;&amp; record.length &gt; tnIndex) tn = record[tnIndex];
+                           String sim = null;
+                           if (simIndex &gt;= 0 &amp;&amp; record.length &gt; simIndex) sim = record[simIndex];
+                           String psid = null;
+                           if (psidIndex &gt;= 0 &amp;&amp; record.length &gt; psidIndex) psid = record[psidIndex];
+                           if (IsEmpty.isEmpty(tn) &amp;&amp; IsEmpty.isEmpty(sim) &amp;&amp; IsEmpty.isEmpty(psid))
+                               continue;
+
+                           TelephoneNumber telephoneNumber = null;
+                           if (tnIndex &gt;= 0) {
+                               telephoneNumber = GetTN.getTN(tn,log);
+                           }
+                           LogicalDeviceAccount account = null;
+                           if (psidIndex &gt;= 0) account = GetPSID.getPSID(psid,log);
+                           Equipment equipment = null;
+                           if (simIndex &gt;= 0) equipment = GetSIM.getSIM(sim,log);
+                           importedCount ++;
+                           UserTransaction ut = null;
+                           Finder f = PersistenceHelper.makeFinder();
+                           try {
+                               ut = PersistenceHelper.makePersistenceManager().getTransaction();
+                               ut.begin();
+                               Collection&lt;CustomInvolvementSpecification&gt; customInvolvementSpecs =
+			                   f.findByName(CustomInvolvementSpecification.class,
+			                                "PreconfigureSpec");
+			                   if(customInvolvementSpecs == null || customInvolvementSpecs.size() == 0) {
+				                	log.error("custom.involvementSpecificationNotFound","PreconfigureSpec" );
+				                	continue;
+			                   }	
+			                   CustomInvolvementSpecification customInvolvementSpec = customInvolvementSpecs.iterator().next();
+                               AttachmentManager am = PersistenceHelper.makeAttachmentManager();
+                               boolean tnToPsidAttach = ValidateAttachment.validateAttachment(am,telephoneNumber,account);
+                               boolean psidToEquipmentAttach = ValidateAttachment.validateAttachment(am,account,equipment);
+                               Collection &lt;CustomInvolvement&gt; list = new ArrayList &lt;CustomInvolvement&gt; (2);
+                               if (tnToPsidAttach) {
+                                   CustomInvolvement tnToPsid = am.makeCustomInvolvement();
+                                   tnToPsid.setAttachmentType(AttachmentType.PRECONFIGURED);
+                                   tnToPsid.setFromEntity(telephoneNumber);
+                                   tnToPsid.setToEntity(account);
+                                   tnToPsid.setSpecification(customInvolvementSpec);
+                                   list.add (tnToPsid);
+                               }
+                               if (psidToEquipmentAttach) {
+                                   CustomInvolvement psidToEquipment = am.makeCustomInvolvement();
+                                   psidToEquipment.setAttachmentType(AttachmentType.PRECONFIGURED);
+                                   psidToEquipment.setFromEntity(account);
+                                   psidToEquipment.setToEntity(equipment);
+                                   psidToEquipment.setSpecification(customInvolvementSpec);
+                                   list.add (psidToEquipment);                                   
+                               } 
+                               am.createCustomInvolvement(list);
+                               if (tnToPsidAttach || psidToEquipmentAttach) {
+                                   ut.commit();
+                               } else {
+                                   ut.rollback();
+                               }
+                           }
+                           catch (Throwable t) {
+                               if (ut != null) {
+                                   try {
+                                       ut.rollback();
+                                   } catch (Exception e){e.printStackTrace();}
+                               }
+                               log.exception("", new Exception(), new String[] {"importInventory", t.getLocalizedMessage()});
+                           }
+                           finally {
+                           }
+                           
+                           // TODO: validate &amp; make associations
+                       }
+                   } catch(IOException io) {
+                          log.error("",io,new String[]{"Error"});
+                   }
+                   ImportInventoryResult result = new ImportInventoryResult();
+                   result.setImportedCount(importedCount);
+                   
+                   
+                   return result; 
+}
+
+function boolean checkFileType(ImportInventoryContainer container,Log log)
+{
+        String fileName =container.getUploadedFilename();
+        if(fileName==null){
+            log.error("import.noUpload",new String[] {".txt"} );
+            return false;
+        }else if(!fileName.contains(".txt")){
+        	log.error("import.fileUploadTextType");
+        	return false;
+        }else if(!(container.getAttachment().length()!=0)){
+        	log.error("import.fileUploadDataRequired");
+        	return false;
+        }
+        return true;
+}
+
+rule "Import Inventory"
+        salience 0
+    when
+        container: ImportInventoryContainer()
+    then
+        // System.out.println("spec=" + container.getSpecification());
+        // System.out.println("attachment=" + container.getAttachment());
+         if(checkFileType(container,log)){
+        	ImportInventoryResult result = importInventoryAttachment(container.getAttachment(), log);
+        	drools.insert(result);
+         }
+end
+"</field>
+    <field format="enum_name" name="runExtensionLanguage">GROOVY</field>
+    <field name="extensionContent">"/*
+ This ruleset takes a input file(config.txt) and performs the following on the input file.
+ 1.  Creates an instance of telephone number if it does not exists in the system. 
+ 2.  Creates an instance of logical device account if it does not exists in the system. 
+ 3.  Creates an instance of equipment if it does not exists in the system. 
+ 4.  Validates and creates a custom involvement between the telephone number and logical device account. 
+ 5.  Validates and creates a custom involvement between the logical device account and equipment. 
+ The format of the input file, config.txt, file should be as follows:
+ TN,LDA,Equipment 
+ &lt;TelephoneNumber id&gt;,&lt;Logical device account id&gt;,&lt;Equipment id&gt;
+ Before executing the ruleset the following should be replaced in config.txt file.
+ &lt;TelephoneNumber id&gt; is the ID (Existing/New) for telephone number.
+ &lt;Logical device account id&gt; is the ID( Existing/New) for Logical device account.
+ &lt;Equipment id&gt;  is the ID (Existing/New) for Equipment
+ Steps to execute the ruleset:
+ 1.  Create Telephone number, Logical device account &amp; Equipmentspecifications in SCE and 
+ install the cartridge into UIM. 
+ 2.  Modify the hardcoded spec names(SampleEquipmentSpec, SampleLDASpec &amp; SampleTelephoneNumberSpec) 
+ in the rule set to the above created spec names. 
+ 3.  Install the baserulset cartridge into UIM application. 
+ 4.  Click on the "Import inventory" link in left navigation bar. 
+ 5.  Select the IMPORT_INVENTORY ruleset and browse for the input file. 
+ 6.  Click on the proceed.   
+ Result: A custom involvement will be created between the supplied Telephone 
+ number and Logical device account, Logical device account and equipment. 
+ */
+
+import javax.transaction.UserTransaction;
+import oracle.communications.inventory.api.common.AttachmentManager;
+import oracle.communications.inventory.api.common.CustomInvolvementSearchCriteria;
+import oracle.communications.inventory.api.common.container.ImportInventoryContainer;
+import oracle.communications.inventory.api.common.container.ImportInventoryResult;
+import oracle.communications.inventory.api.entity.*;
+import oracle.communications.inventory.api.entity.common.CustomInvolvement;
+import oracle.communications.inventory.api.equipment.EquipmentManager;
+import oracle.communications.inventory.api.equipment.EquipmentSearchCriteria;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.logicaldevice.account.LogicalDeviceAccountManager;
+import oracle.communications.inventory.api.logicaldevice.account.LogicalDeviceAccountSearchCriteria;
+import oracle.communications.inventory.api.number.TelephoneNumberManager;
+import oracle.communications.inventory.api.number.TelephoneNumberSearchCriteria;
+import oracle.communications.inventory.api.number.container.TelephoneNumberData;
+import oracle.communications.inventory.api.number.container.TelephoneNumberResult;
+import oracle.communications.platform.persistence.CriteriaItem;
+import oracle.communications.platform.persistence.CriteriaOperator;
+import oracle.communications.platform.persistence.Finder;
+import oracle.communications.platform.persistence.PersistenceHelper;
+import oracle.communications.platform.persistence.Persistent;
+import com.opencsv.CSVReader;
+
+
+log.debug ("", "Import Inventory");
+if(checkFileType(importInventoryContainer,log)){
+	ImportInventoryResult result = importInventoryAttachment(importInventoryContainer.getAttachment(), log);
+	return result;
+}
+
+
+def boolean validateAttachment(AttachmentManager am, Persistent from, Persistent to) {
+	boolean ok = false;
+	if (from == null || to == null) return false;
+	CustomInvolvementSearchCriteria criteria = am.makeCustomInvolvementSearchCriteria();
+	AttachmentType[] atArray = [AttachmentType.PRECONFIGURED];
+	criteria.setAttachmentType(atArray);
+	criteria.setFromEntity(from);
+	criteria.setRange( 0, 1 );
+	try {
+		List col = am.findCustomInvolvement( criteria );
+		ok = col.size() &lt;= 0;
+	} catch(Exception e) {
+		ok = false;
+	}
+	if (ok) {
+		criteria.setToEntity(to);
+		try {
+			Collection col = am.findCustomInvolvement( criteria );
+			ok = col.size() &lt;= 0;
+		} catch(Exception e) {
+			ok = false;
+		}
+	}
+	return ok;
+}
+
+def Equipment getSIM(String sim, Log log) {
+	Equipment returnEquipment = null;
+	Equipment equipment =null;
+	Finder f=null;
+	EquipmentSpecification eqpSpec=null;
+	boolean found = false;
+	EquipmentManager manager = PersistenceHelper.makeEquipmentManager();
+	EquipmentSearchCriteria criteria = manager.makeEquipmentSearchCriteria();
+	CriteriaItem id = criteria.makeCriteriaItem();
+	id.setValue(sim);
+	id.setOperator(CriteriaOperator.EQUALS);
+	criteria.setId(id);
+	equipment = manager.makeEquipment();
+	equipment.setId(sim);
+	try {
+		Collection&lt;Equipment&gt; equipList = manager.findEquipment(criteria);
+		if (equipList != null &amp;&amp; !equipList.isEmpty()) {
+			found = true;
+			returnEquipment = equipList.iterator().next();
+			log.debug("","Found existing equipment="+sim);
+		}
+	} catch(Exception e) {
+		found = false;
+	}
+	if (!found) {
+		UserTransaction ut = null;
+		try {
+			ut = PersistenceHelper.makePersistenceManager().getTransaction();
+			ut.begin();
+
+			Collection&lt;Specification&gt; specList =f.findByName(Specification.class, "SampleEquipmentSpec");
+			eqpSpec=(EquipmentSpecification)specList.iterator().next();
+			equipment.setSpecification(eqpSpec);
+			Collection&lt;Equipment&gt; list = new ArrayList&lt;Equipment&gt;();
+			list.add(equipment);
+			manager.createEquipment(list);
+			ut.commit();
+			log.debug("","Created new Equipment="+sim);
+			Collection&lt;Equipment&gt; equipList = manager.findEquipment(criteria);
+			if (equipList != null &amp;&amp; !equipList.isEmpty()) {
+				found = true;
+				returnEquipment = equipList.iterator().next();
+			}
+		} catch (Throwable t) {
+			if (ut != null) {
+				try {
+					found = false;
+					ut.rollback();
+				} catch (Exception e){}
+			}
+			try {
+				log.exception("", new Exception(), "getSIM " + t.getLocalizedMessage());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		finally {
+		}
+		if (!found) {
+			returnEquipment = null;
+		}
+	}
+	return returnEquipment;
+}
+
+def TelephoneNumber getTN(String tn, Log log) {
+	TelephoneNumber telephoneNumber = null;
+		
+	TelephoneNumberManager tnMaintainer = PersistenceHelper.makeTelephoneNumberManager();
+	List l = new ArrayList();
+	TelephoneNumberSearchCriteria tnCriteria = tnMaintainer.makeTelephoneNumberSearchCriteria();
+	CriteriaItem rangeFromCi = tnCriteria.makeCriteriaItem();
+	rangeFromCi.setName("id");
+	rangeFromCi.setOperator(CriteriaOperator.EQUALS);
+	rangeFromCi.setValue(tn);
+	l.add(rangeFromCi);
+	tnCriteria.addCriteriaItems(l);
+
+	List entity = null;
+	TelephoneNumberManager tnManager=null;
+	try {
+		tnManager = PersistenceHelper.makeTelephoneNumberManager();
+		entity=tnManager.findTelephoneNumbers(tnCriteria);
+	} catch(Exception e) {
+		e.printStackTrace();
+	}
+	if(entity != null &amp;&amp; entity.size() &gt; 0) {
+		log.debug("","found existing tn for id = " + tn);
+		telephoneNumber = (TelephoneNumber)entity.toArray()[0];
+	} else {
+		UserTransaction ut = null;
+		ut = PersistenceHelper.makePersistenceManager().getTransaction();
+		ut.begin();
+		log.debug("","creating new tn for id = " + tn);
+		TelephoneNumberResult tnResult=null;
+		try {
+			TelephoneNumberData tnData =  new TelephoneNumberData();
+			tnData.setRangeFrom(tn);
+			tnData.setTelephoneNumberSpecName("SampleTelephoneNumberSpec");
+			tnResult = tnManager.createTelephoneNumbers(tnData);
+			ut.commit();
+		} catch (Exception e) {
+			if (ut != null) {
+				try {
+					found = false;
+					ut.rollback();
+				} catch (Exception e1){}
+			}
+			e.printStackTrace();
+		}
+		if (tnResult != null) {
+			int tnCount = tnResult.getNumberOfCreatedTelephoneNumbers();
+			if (tnCount &gt; 0) {
+				oracle.communications.inventory.api.number.container.TelephoneNumber[] tns = tnResult.getTelephoneNumbers();
+				if (tns!= null) {
+					try {
+						String[] stringArray = [
+							tns[0].getUnformattedPhoneNumber()
+						];
+						entity = tnManager.findTelephoneNumbers(stringArray,false);
+						telephoneNumber = (TelephoneNumber)entity.toArray()[0];
+					} catch(Exception e) {
+						log.debug("","unable to find tn");
+					}
+					log.debug("","returned 1 tn!");
+				} else {
+					log.debug("","although 1 was created, nothing was returned!");
+				}
+			}
+		} else {
+			log.debug("","the TN result was null!!!");
+		}
+	}
+	return telephoneNumber;
+}
+
+def LogicalDeviceAccount getPSID(String psid, Log log)  {
+	LogicalDeviceAccountManager mgr = PersistenceHelper.makeLogicalDeviceAccountManager();
+	LogicalDeviceAccount account = null;
+	boolean found = false;
+	try {
+		LogicalDeviceAccountSearchCriteria criteria = mgr.makeLogicalDeviceAccountSearchCriteria();
+		CriteriaItem item = criteria.makeCriteriaItem();
+		item.setName("id");
+		item.setOperator(CriteriaOperator.EQUALS);
+		item.setValue(psid);
+		criteria.setId(item);
+		Collection accounts = mgr.findLogicalDeviceAccounts(criteria);
+		if (accounts != null &amp;&amp; accounts.size() &gt; 0) {
+			account = (LogicalDeviceAccount)accounts.toArray()[0];
+			found = true;
+		}
+	}
+	catch (Throwable t) {
+		found = false;
+	}
+	if (!found) {
+		UserTransaction ut = null;
+		try {
+			List specs = new ArrayList(mgr.getAllLogicalDeviceAccountSpecifications());
+			LogicalDeviceAccountSpecification nes = null;
+			for(int i=0;i&lt;specs.size();i++) {
+				LogicalDeviceAccountSpecification spec = (LogicalDeviceAccountSpecification)specs.get(i);
+				if ("SampleLDASpec".equals(spec.getName())) {
+					nes = spec;
+					break;
+				}
+			}
+			ut = PersistenceHelper.makePersistenceManager().getTransaction();
+			ut.begin();
+			account = mgr.makeLogicalDeviceAccount();
+			account.setAdminState(InventoryState.INSTALLED);
+			account.setId(psid);
+			account.setSpecification(nes);
+			List&lt;LogicalDeviceAccount&gt; ldaList = new ArrayList&lt;LogicalDeviceAccount&gt; (1);
+			ldaList.add(account);
+			List&lt;LogicalDeviceAccount&gt; list = mgr.createLogicalDeviceAccounts(ldaList);
+			if(!list.isEmpty()){
+				account = list.get(0);
+			}
+			ut.commit();
+		} catch (Throwable t) {
+			if (ut != null) {
+				try {
+					found = false;
+					ut.rollback();
+				} catch (Exception e){}
+			}
+			log.exception("", new Exception(), "getPSID " + t.getLocalizedMessage());
+		}
+		finally {
+		}
+	}
+	return account;
+}
+
+
+
+def boolean isEmpty(String string) {
+	if (string == null || "".equals(string))
+		return true;
+	return false;
+}
+
+
+
+def ImportInventoryResult importInventoryAttachment(Object attachment, Log log) {
+	int importedCount = 0;
+
+	try {
+		List records = null; //r.readAll();
+		BufferedReader checker = new BufferedReader(new StringReader(attachment.toString()));
+		String importSpec = checker.readLine();
+		checker.close();
+		String[] fields = importSpec.split(",");
+		int tnIndex = -1, simIndex = -1, psidIndex = -1;
+		for(int i=0;i&lt;fields.length;i++) {
+			if ("TN".equals(fields[i])) {
+				tnIndex = i;
+			} else if ("Equipment".equals(fields[i])) {
+				simIndex = i;
+			} else if ("LDA".equals(fields[i])) {
+				psidIndex = i;
+			}
+		}
+		records = new ArrayList();
+		if (fields.length &gt; 1) {
+
+			// The uploaded file is saved using a charset.  This is usually the default charset of the client that
+			// creates this file.  This charset must be used to decode the String returned by
+			// ImportInventoryContainer.getAttachment().
+			// Use the following to decode the ImportInventoryContainer.getAttachment() String:
+			//     CSVReader cvs = new CSVReader(new StringReader(new String(container.getAttachment().getBytes(), "&lt;uploaded file charset&gt;")));
+			// If charset is GB2312,
+			//     CSVReader cvs = new CSVReader(new StringReader(new String(container.getAttachment().getBytes(), "GB2312")));
+			// If charset is UTF-8,
+			//     CSVReader cvs = new CSVReader(new StringReader(new String(container.getAttachment().getBytes(), "UTF-8")));
+			// So, you must advise user to save file in a pre-defined charset in order to decode the file correctly.
+			CSVReader cvs = new CSVReader(new StringReader(attachment.toString()));
+
+			records = cvs.readAll();
+		} else {
+			BufferedReader lineReader = new BufferedReader(new StringReader(attachment.toString()));
+			String line = null;
+			while((line = lineReader.readLine()) != null) {
+				String [] stringArray = [line];
+				records.add(stringArray);
+			}
+		}
+
+		//System.out.println("records.size()=" + records.size());
+		// start at 2nd record, since 1st is format of file
+		for (int r=1;r&lt;records.size();r++) {
+			//System.out.println("record=" + r);
+			String[] record = (String[])records.get(r);
+			if (record == null) continue;
+			// calls to apis
+			String tn = null;
+			if (tnIndex &gt;= 0 &amp;&amp; record.length &gt; tnIndex) tn = record[tnIndex];
+			String sim = null;
+			if (simIndex &gt;= 0 &amp;&amp; record.length &gt; simIndex) sim = record[simIndex];
+			String psid = null;
+			if (psidIndex &gt;= 0 &amp;&amp; record.length &gt; psidIndex) psid = record[psidIndex];
+			if (isEmpty(tn) &amp;&amp; isEmpty(sim) &amp;&amp; isEmpty(psid))
+				continue;
+
+			TelephoneNumber telephoneNumber = null;
+			if (tnIndex &gt;= 0) {
+				telephoneNumber = getTN(tn,log);
+			}
+			LogicalDeviceAccount account = null;
+			if (psidIndex &gt;= 0) account = getPSID(psid,log);
+			Equipment equipment = null;
+			if (simIndex &gt;= 0) equipment = getSIM(sim,log);
+			importedCount ++;
+			UserTransaction ut = null;
+			Finder f = PersistenceHelper.makeFinder();
+			try {
+				ut = PersistenceHelper.makePersistenceManager().getTransaction();
+				ut.begin();
+				Collection&lt;CustomInvolvementSpecification&gt; customInvolvementSpecs =
+                f.findByName(CustomInvolvementSpecification.class,
+                             "PreconfigureSpec");
+                if(customInvolvementSpecs == null || customInvolvementSpecs.size == 0) {
+                	log.error("custom.involvementSpecificationNotFound","PreconfigureSpec" );
+                	continue;
+                }	
+                CustomInvolvementSpecification customInvolvementSpec = customInvolvementSpecs.iterator().next();              
+				AttachmentManager am = PersistenceHelper.makeAttachmentManager();
+				boolean tnToPsidAttach = validateAttachment(am,telephoneNumber,account);
+				boolean psidToEquipmentAttach = validateAttachment(am,account,equipment);
+				Collection &lt;CustomInvolvement&gt; list = new ArrayList &lt;CustomInvolvement&gt; (2);
+				if (tnToPsidAttach) {
+					CustomInvolvement tnToPsid = am.makeCustomInvolvement();
+					tnToPsid.setAttachmentType(AttachmentType.PRECONFIGURED);
+					tnToPsid.setFromEntity(telephoneNumber);
+					tnToPsid.setToEntity(account);
+					tnToPsid.setSpecification(customInvolvementSpec);
+					list.add (tnToPsid);					
+				}
+				if (psidToEquipmentAttach) {
+					CustomInvolvement psidToEquipment = am.makeCustomInvolvement();
+					psidToEquipment.setAttachmentType(AttachmentType.PRECONFIGURED);
+					psidToEquipment.setFromEntity(account);
+					psidToEquipment.setToEntity(equipment);
+					psidToEquipment.setSpecification(customInvolvementSpec);
+					list.add (psidToEquipment);					
+				}
+				am.createCustomInvolvement(list);
+				if (tnToPsidAttach || psidToEquipmentAttach) {
+					ut.commit();					
+				} else {
+					ut.rollback();
+				}
+			}
+			catch (Throwable t) {
+				if (ut != null) {
+					try {
+						ut.rollback();
+					} catch (Exception e){e.printStackTrace();}
+				}
+				log.exception("", new Exception(), "importInventory " + t.getLocalizedMessage());
+			}
+			finally {
+			}
+
+			// validate &amp; make associations
+		}
+	} catch(IOException io) {
+		log.error("",io,"Error");
+	}
+	ImportInventoryResult result = new ImportInventoryResult();
+	result.setImportedCount(importedCount);
+
+
+	return result;
+}
+
+def boolean checkFileType(ImportInventoryContainer container,Log log)
+{
+	String fileName =container.getUploadedFilename();
+	if(fileName==null){
+		log.error("import.noUpload",".txt" );
+		return false;
+	}else if(!fileName.contains(".txt")){
+		log.error("import.fileUploadTextType");
+		return false;
+	}
+	return true;
+}
+
+
+"</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/ora_uim_baserulesets/model/PLACE_FORMAT_IDENTIFIER.ruleset#7.4.1.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-6" version="0">
+    <field name="name">"PLACE_FORMAT_IDENTIFIER"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">"package oracle.communications.inventory.rules
+
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.rules.impl.RuleDebug;
+import java.util.*;
+import oracle.communications.inventory.api.entity.*;
+
+global Log log;
+
+rule "Locations"
+		salience 0
+	when
+		place : GeographicPlace()
+		eval(place instanceof GeographicLocation)
+	then
+	    // execute for location
+       	StringBuilder formattedIdentifier = new StringBuilder();
+                     List pc = new ArrayList(place.getCharacteristics());
+	if (pc != null) {
+        		for(int i=0;i&lt;pc.size();i++) {
+    			String value = ((PlaceCharacteristic)pc.get(i)).getValue();
+    			if (value != null) formattedIdentifier.append(value).append(" ");
+    		}
+	}
+    	place.setFormattedIdentifier(formattedIdentifier.toString().trim());    
+end
+
+rule "Addresses"
+		salience 0
+	when
+		place : GeographicPlace()
+		eval(place instanceof GeographicAddress)
+	then
+	    // execute for address
+       	StringBuilder formattedIdentifier = new StringBuilder();
+                     List pc = new ArrayList(place.getCharacteristics());
+	if (pc != null) {
+        		for(int i=0;i&lt;pc.size();i++) {
+    			String value = ((PlaceCharacteristic)pc.get(i)).getValue();
+    			if (value != null) formattedIdentifier.append(value).append(" ");
+    		}
+	}
+    	place.setFormattedIdentifier(formattedIdentifier.toString().trim());    
+end
+"</field>
+    <field format="enum_name" name="runExtensionLanguage">GROOVY</field>
+    <field name="extensionContent">"import oracle.communications.inventory.api.entity.*;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.entity.GeographicPlace;
+import oracle.communications.inventory.api.entity.GeographicLocation;
+import oracle.communications.inventory.api.entity.GeographicAddress;
+
+Object param1=ruleParameters[0] ;
+if(param1 instanceof List&lt;GeographicPlace&gt;)
+{
+for(GeographicPlace place:param1){
+	if (place instanceof GeographicLocation) {
+		// execute for location
+		StringBuilder formattedIdentifier = new StringBuilder();
+		List pc = new ArrayList(place.getCharacteristics());
+		if (pc != null) {
+			for(int i=0;i&lt;pc.size();i++) {
+				String value = ((PlaceCharacteristic)pc.get(i)).getValue();
+				if (value != null) formattedIdentifier.append(value).append(" ");
+			}
+		}
+		place.setFormattedIdentifier(formattedIdentifier.toString().trim());
+	}
+	if (place instanceof GeographicAddress) {
+	
+	
+		// execute for address
+		StringBuilder formattedIdentifier = new StringBuilder();
+		List pc = new ArrayList(place.getCharacteristics());
+		if (pc != null) {
+			for(int i=0;i&lt;pc.size();i++) {
+				String value = ((PlaceCharacteristic)pc.get(i)).getValue();
+				if (value != null) formattedIdentifier.append(value).append(" ");
+			}
+		}
+		place.setFormattedIdentifier(formattedIdentifier.toString().trim());
+	}
+}
+println("executed successfully");
+}"</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/ora_uim_baserulesets/model/RECALL_DISCONNECTED_TN.ruleset#7.4.1.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-7" version="0">
+    <field name="name">"RECALL_DISCONNECTED_TN"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">"package oracle.communications.inventory.rules
+
+import javax.transaction.UserTransaction;
+
+import oracle.communications.platform.persistence.PersistenceHelper;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.rules.impl.RuleDebug;
+import java.lang.*;
+import java.util.*;
+import oracle.communications.inventory.api.entity.AssignmentState;
+import oracle.communications.inventory.api.ObjectState;
+import oracle.communications.inventory.api.entity.TNAssignment;
+import oracle.communications.platform.persistence.Finder;
+import oracle.communications.platform.persistence.PersistenceHelper;
+import oracle.communications.platform.persistence.PersistenceManager;
+
+import oracle.communications.inventory.api.util.*;
+import oracle.communications.inventory.extensibility.extension.util.*;
+import oracle.communications.inventory.api.framework.config.SystemConfig;
+import oracle.communications.inventory.api.entity.*;
+import oracle.communications.inventory.api.entity.TNCharacteristic;
+import oracle.communications.inventory.api.entity.common.AssignmentAction;
+import oracle.communications.inventory.api.entity.common.ConsumableResource;
+import oracle.communications.inventory.api.common.TransitionManager;
+
+
+global Log log;
+
+rule "Recall Disconnected Telephone Number"
+    salience 0
+    when
+        context: ExtensionPointRuleContext()
+    then
+        log.debug("", new Object[]{"timerExpired extension point has been invoked"});
+        
+        Finder finder = null;
+        TNAssignment tnAssignment = null;
+        PersistenceManager pm = null;
+        UserTransaction ut = null;
+        try {
+        
+            pm = PersistenceHelper.makePersistenceManager();
+            
+            // Define the expiry for changing TRANSITIONAL to UNASSIGNED state
+	        GregorianCalendar stateExpiry = new GregorianCalendar();
+	        int durationInDays = 30;
+	        stateExpiry.add(GregorianCalendar.DAY_OF_MONTH, durationInDays);
+	         
+	         int queryLimit = SystemConfig.getInstance().getIntProperty("tn.recallTNSearchResultsLimit", 500);
+	            
+	        // For testing only; to set the TRANSITIONAL duration to 1 minute
+	        //int durationInMins = 1;
+	        //stateExpiry.add(GregorianCalendar.MINUTE,durationInMins);
+	          
+	        boolean finished = false;   
+	        do
+            { 
+                ut = pm.getTransaction();
+	            ut.begin();
+	            
+	            finder = PersistenceHelper.makeFinder();
+	            String filter = "o.stateExpiry &lt; :pCurrentDate AND " + 
+	                             "(o.adminState = :pDisconnectedState OR o.adminState = :pTransitionalState)  AND o.objectState = :pObjectState";
+	            finder.setResultClass(TNAssignment.class);
+	            finder.setJPQLFilter(filter);
+	            finder.setParameters(new String[]{"pCurrentDate", "pDisconnectedState", "pTransitionalState", "pObjectState"}, 
+	                                 new Object[]{new Date(), AssignmentState.DISCONNECTED, AssignmentState.TRANSITIONAL, ObjectState.ACTIVE});
+	            finder.setRange( 0, queryLimit );
+            
+                Collection candidates = finder.findMatches();
+                if ( candidates.isEmpty() ) finished = true;
+		            
+	            Iterator itr = candidates.iterator();
+	            while (itr.hasNext()) {
+	                
+	                tnAssignment = (TNAssignment) itr.next();
+						if (tnAssignment == null) {
+							continue;
+						}
+						AssignmentState currentState = tnAssignment.getAdminState();
+						TelephoneNumber telephoneNumber = null;
+						telephoneNumber = tnAssignment.getTelephoneNumber();
+						if (telephoneNumber == null){
+							continue;
+						}
+						
+						Set&lt;TNCharacteristic&gt; tnCharacteristic = telephoneNumber.getCharacteristics();
+						Object[] tnCharArray = tnCharacteristic.toArray();
+						String poolValue = null;
+						String tnTypeCharValue = null;
+						String tnCharacteristicName = SystemConfig.getInstance().getProperty("tn.portabilityCharacteristicName","tnType");
+						String tnCharacteristicPool = "Pool";
+						// loop thru all characteristics and fetch tnType and pool values
+						for( int j = 0; j &lt; tnCharArray.length; j++ ){
+							TNCharacteristic tnChar = (TNCharacteristic)tnCharArray[j];
+							if ( tnCharacteristicPool.equals(tnChar.getName())){
+								poolValue = tnChar.getValue();
+							}
+							if ( tnCharacteristicName.equals(tnChar.getName())){
+								tnTypeCharValue = tnChar.getValue();
+							}
+						}
+						log.debug("", new Object[]{"tnType : " + tnTypeCharValue + "pool : " + poolValue});
+						
+						//Assignment state DISCONNECTED
+						if ((AssignmentState.DISCONNECTED.getValueAsString()).equals(currentState.getValueAsString())) {
+							TransitionManager tmDiscon = PersistenceHelper.makeTransitionManager(tnAssignment);
+							
+							
+							
+							
+							//Change state of owned number and set stateExpiry 
+							if ((("OWNED").equals(tnTypeCharValue)) ||(("").equals(tnTypeCharValue))){
+								log.debug("", new Object[]{"timerExpired extension point change DISCONNECT state for "  + tnTypeCharValue});
+								tmDiscon.transition(tnAssignment, AssignmentAction.EXPIRE);
+								tnAssignment.setStateExpiry(stateExpiry.getTime());
+							}
+							
+							//Change state of PortedIn and TollFree numbers
+							//2 Step process: 1st EXPIRE changes DISCONNECTED TO TRANSITIONAL and 2nd TRANSITIONAL to UNASSIGNED
+							else if ((("PORTEDIN").equals(tnTypeCharValue)) ||
+									(("TOLLFREE").equals(tnTypeCharValue))){									
+								log.debug("", new Object[]{"timerExpired extension point change DISCONNECT state for "  + tnTypeCharValue});
+								tmDiscon.transition(tnAssignment, AssignmentAction.EXPIRE);
+								ConsumableResource consumableResource = tnAssignment.getResource();
+								if(consumableResource==null) {
+									return;
+								}
+								consumableResource.setCurrentAssignment(null);
+								tmDiscon.transition(tnAssignment, AssignmentAction.EXPIRE);									
+								
+								tnAssignment.setStateExpiry(null);
+								tmDiscon.transition(telephoneNumber, ResourceAction.DEACTIVATE);
+							}
+							
+							//Change state of PORTEDOUT numbers
+							else if (("PORTEDOUT").equals(tnTypeCharValue)){
+								log.debug("", new Object[]{"timerExpired extension point change DISCONNECT state for "  + tnTypeCharValue});
+								tmDiscon.transition(tnAssignment, AssignmentAction.EXPIRE_PORTED_TN);
+								tnAssignment.setStateExpiry(null);
+								tmDiscon.transition(telephoneNumber, ResourceAction.DEACTIVATE);
+							}
+							
+							//Fail safe in case no tnType found
+							else {
+								log.debug("", new Object[]{"timerExpired extension point change DISCONNECT state for unknown tnType"});
+								tmDiscon.transition(tnAssignment, AssignmentAction.EXPIRE);
+								tnAssignment.setStateExpiry(stateExpiry.getTime());
+							}
+						}
+						
+						//Assignment State TRANSITIONAL
+						else if ((AssignmentState.TRANSITIONAL.getValueAsString()).equals(currentState.getValueAsString())) {
+							TransitionManager tmTrans = PersistenceHelper.makeTransitionManager(tnAssignment);
+							
+							//In case of OWNED and blank tnTYpes transition the state of TN
+							if ((("OWNED").equals(tnTypeCharValue))|| (("").equals(tnTypeCharValue))) {
+								ConsumableResource consumableResource = tnAssignment.getResource();
+								if(consumableResource==null) {
+									return;
+								}
+								consumableResource.setCurrentAssignment(null);
+								log.debug("", new Object[]{"timerExpired extension point change TRANSITIONAL state for "  + tnTypeCharValue});
+								tmTrans.transition(tnAssignment, AssignmentAction.EXPIRE);
+								tnAssignment.setStateExpiry(null);
+							}
+							//Fail safe in case no tnType found
+							else{
+								ConsumableResource consumableResource = tnAssignment.getResource();
+								if(consumableResource==null) {
+									return;
+								}
+								consumableResource.setCurrentAssignment(null);
+								log.debug("", new Object[]{"timerExpired extension point change TRANSITIONAL state for unknown tnType"});
+								tmTrans.transition(tnAssignment, AssignmentAction.EXPIRE);
+								tnAssignment.setStateExpiry(null);
+							}
+						}
+						
+	            }
+	            
+		        ut.commit();
+            }
+            while ( ! finished );
+        }
+        catch (Throwable t) {
+            if ( ut != null )
+            {
+                try
+                {
+                    ut.rollback();
+                }
+                catch ( Exception notUsed ) {}
+            }
+            
+            if (tnAssignment != null)
+                log.error("consumer.failedToExpiredDisconnectedTN", new Object[]{tnAssignment.getTelephoneNumber().getName(), t.getLocalizedMessage()});
+            else
+                log.error("consumer.failedToFindTNAssignment", new Object[]{t.getLocalizedMessage()});
+        }
+        finally {
+            if (pm != null)
+                pm.close();
+                
+            if (finder != null)
+                finder.close();
+        }
+
+end"</field>
+    <field format="enum_name" name="runExtensionLanguage">GROOVY</field>
+    <field name="extensionContent">"import javax.transaction.UserTransaction;
+import oracle.communications.inventory.api.entity.AssignmentState;
+import oracle.communications.inventory.api.entity.TNAssignment;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.util.*;
+import oracle.communications.inventory.api.ObjectState;
+import oracle.communications.inventory.extensibility.extension.util.*;
+import oracle.communications.platform.persistence.Finder;
+import oracle.communications.platform.persistence.PersistenceHelper;
+import oracle.communications.platform.persistence.PersistenceManager;
+
+log.debug("", "Recall Disconnected Telephone Number");
+
+log.debug("", "timerExpired extension point has been invoked");
+
+Finder finder = null;
+TNAssignment tnAssignment = null;
+PersistenceManager pm = null;
+UserTransaction ut = null;
+try {
+
+	pm = PersistenceHelper.makePersistenceManager();
+
+	// Define the expiry for changing TRANSITIONAL to UNASSIGNED state
+	GregorianCalendar stateExpiry = new GregorianCalendar();
+	int durationInDays = 30;
+	stateExpiry.add(GregorianCalendar.DAY_OF_MONTH, durationInDays);
+
+	// For testing only; to set the TRANSITIONAL duration to 1 minute
+	//int durationInMins = 1;
+	//stateExpiry.add(GregorianCalendar.MINUTE,durationInMins);
+
+	boolean finished = false;
+	// there is no do/while loop in groovy so we will substitute it with this
+	// for(;;){ // infinite for
+	//  ...
+	// 	   if (conditionBreak){ //condition to break
+	//			break
+	//	   }
+	// }
+
+	for (;;) // do
+	{
+		ut = pm.getTransaction();
+		ut.begin();
+
+		finder = PersistenceHelper.makeFinder();
+		String filter = "o.stateExpiry &lt; :pCurrentDate AND " +
+				"(o.adminState = :pDisconnectedState OR o.adminState = :pTransitionalState)  AND o.objectState = :pObjectState";
+		finder.setResultClass(TNAssignment.class);
+		finder.setJPQLFilter(filter);
+		String[] stringArray = [
+			"pCurrentDate",
+			"pDisconnectedState",
+			"pTransitionalState",
+			"pObjectState"
+		];
+		Object[] objectArray = [
+			new Date(),
+			AssignmentState.DISCONNECTED,
+			AssignmentState.TRANSITIONAL,
+			ObjectState.ACTIVE
+		];
+		finder.setParameters(stringArray, objectArray);
+		finder.setRange( 0, 500 );
+
+		Collection candidates = finder.findMatches();
+
+		if ( candidates.isEmpty() ) finished = true;
+
+		Iterator itr = candidates.iterator();
+		while (itr.hasNext()) {
+			tnAssignment = (TNAssignment)itr.next();
+			AssignmentState currentState = tnAssignment.getAdminState();
+			// Change DISCONNECTED to TRANSITIONAL state
+			if (currentState.getValueAsString().equals(AssignmentState.DISCONNECTED.getValueAsString())) {
+				tnAssignment.setAdminState(AssignmentState.TRANSITIONAL);
+				tnAssignment.setStateExpiry(stateExpiry.getTime());
+			}
+			// Change TRANSITIONAL to UNASSIGNED state
+			else if (currentState.getValueAsString().equals(AssignmentState.TRANSITIONAL.getValueAsString())) {
+				tnAssignment.setAdminState(AssignmentState.UNASSIGNED);
+				tnAssignment.getResource().setCurrentAssignment(null);
+				tnAssignment.setStateExpiry(null);
+			}
+		}
+
+		ut.commit();
+		if (finished) {
+			break;
+		}
+	}
+	// while ( ! finished );
+}
+catch (Throwable t) {
+	if ( ut != null )
+	{
+		try
+		{
+			ut.rollback();
+		}
+		catch ( Exception notUsed ) {}
+	}
+
+	if (tnAssignment != null)
+		log.error("consumer.failedToExpiredDisconnectedTN", tnAssignment.getTelephoneNumber().getName() + t.getLocalizedMessage());
+	else
+		log.error("consumer.failedToFindTNAssignment", t.getLocalizedMessage());
+}
+finally {
+	if (pm != null)
+		pm.close();
+
+	if (finder != null)
+		finder.close();
+}
+
+"</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/ora_uim_baserulesets/model/RESERVATION_CHECK_REDEEMER.ruleset#7.4.1.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-8" version="0">
+    <field name="name">"RESERVATION_CHECK_REDEEMER"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">"package  oracle.communications.inventory.rules
+
+import java.util.*;
+import java.lang.*;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+import oracle.communications.inventory.api.entity.common.EntityConsumer;
+import oracle.communications.inventory.api.entity.common.ConsumableResource;
+
+global Log log;
+function boolean checkRedeemer(EntityConsumer ec, ConsumableResource cr){
+	return true;
+}
+
+rule "Check For Redeemer"
+        salience 0
+	when
+	    entityconsumer : EntityConsumer ()
+	    consumableresource : ConsumableResource ()
+	    context : ExtensionPointRuleContext()
+	then
+		log.debug( "", new Object[] { "Test in debug" } );
+		boolean returnvalue = checkRedeemer(entityconsumer, consumableresource);
+		context.setReturnValue(returnvalue);
+end"</field>
+    <field format="enum_name" name="runExtensionLanguage">GROOVY</field>
+    <field name="extensionContent">"
+
+import oracle.communications.inventory.api.entity.common.ConsumableResource;
+import oracle.communications.inventory.api.entity.common.EntityConsumer;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+
+
+if(ruleParameters[0] instanceof EntityConsumer &amp;&amp; ruleParameters[0] instanceof ConsumableResource)
+{
+EntityConsumer entityconsumer = ruleParameters[0];
+ConsumableResource consumableresource=ruleParameters[1];
+
+
+log.debug( "", "Rule Reservation Check Redeemer");
+boolean returnvalue = checkRedeemer(entityconsumer, consumableresource);
+extensionPointRuleContext.setReturnValue(returnvalue);
+}
+
+def boolean checkRedeemer(EntityConsumer ec, ConsumableResource cr){
+	return true;
+}
+
+"</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/ora_uim_baserulesets/model/RESERVATION_EXPIRATION.ruleset#7.4.1.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-9" version="0">
+    <field name="name">"RESERVATION_EXPIRATION"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">"package oracle.communications.inventory.rules
+
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.rules.impl.RuleDebug;
+import java.util.*;
+import java.lang.*;
+import oracle.communications.inventory.api.entity.*;
+import oracle.communications.inventory.api.entity.common.Reservation;
+import oracle.communications.inventory.api.entity.ReservationType;
+import oracle.communications.inventory.extensibility.extension.util.*;
+
+global Log log;
+
+rule "Set default short term expiry"
+		salience 0
+	when
+	   context: ExtensionPointRuleContext() 
+	then
+        	List reservations = (List)context.getArguments()[0];
+                GregorianCalendar shortTermExpiry = new GregorianCalendar();
+		int shortTermDurationInMinutes = 10;
+		shortTermExpiry.add(GregorianCalendar.MINUTE, shortTermDurationInMinutes);
+                GregorianCalendar longTermExpiry = new GregorianCalendar();
+		int longTermDurationInDays = 40;
+                longTermExpiry.add(GregorianCalendar.DAY_OF_MONTH, longTermDurationInDays);
+                for( Object object: reservations){
+                   Reservation reservation = (Reservation)object;
+                   if(reservation.getReservationType().equals(ReservationType.SHORTTERM))
+              		reservation.setExpiry(shortTermExpiry.getTime());
+                   else 
+                        reservation.setExpiry(longTermExpiry.getTime());
+                } 
+end
+"</field>
+    <field format="enum_name" name="runExtensionLanguage">GROOVY</field>
+    <field name="extensionContent">"
+
+import oracle.communications.inventory.api.entity.*;
+import oracle.communications.inventory.api.entity.common.Reservation;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.extension.util.*;
+
+
+log.debug ("", "Rule Reservation Expiration - Set default short term expiry")
+Binding binding=this.getBinding();
+Map&lt;String,Object&gt; map= binding.getVariables();
+if(map.get("extensionPointRuleContext")!=null)
+{
+ExtensionPointRuleContext extensionPointRuleContext=binding.getVariable("extensionPointRuleContext");
+List reservations = (List)extensionPointRuleContext.getArguments()[0];
+GregorianCalendar shortTermExpiry = new GregorianCalendar();
+int shortTermDurationInMinutes = 10;
+shortTermExpiry.add(GregorianCalendar.MINUTE, shortTermDurationInMinutes);
+GregorianCalendar longTermExpiry = new GregorianCalendar();
+int longTermDurationInDays = 40;
+longTermExpiry.add(GregorianCalendar.DAY_OF_MONTH, longTermDurationInDays);
+for( Object object: reservations){
+	Reservation reservation = (Reservation)object;
+	if(reservation.getReservationType().equals(ReservationType.SHORTTERM))
+		reservation.setExpiry(shortTermExpiry.getTime());
+	else
+		reservation.setExpiry(longTermExpiry.getTime());
+}
+}"</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/ora_uim_baserulesets/model/SYSTEM_EXPORT.ruleset#7.4.1.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-10" version="0">
+    <field name="name">"SYSTEM_EXPORT"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">"package oracle.communications.inventory.rules
+
+/*
+This ruleset exports database entities into XML format.  The downloadable export file will
+be a binary zip file suitable for import using the SYSTEM IMPORT ruleset.  Input into this
+rule is a config file containing two sections:
+
+Queries in the form:
+&lt;ClassName&gt;#&lt;QueryString&gt; 
+The following are two sample queries:
+oracle.communications.inventory.api.entity.TelephoneNumberSpecification#o.name LIKE 'Sample'
+oracle.communications.inventory.api.entity.TelephoneNumberSpecification#o.lastModifiedUser='inventory'
+
+And instructions in the form:
+commitSize=&lt;NumericValue&gt; 
+duplicateAction=&lt;ActionValue&gt; 
+relationshipsToInclude=&lt;IncludeValue&gt;
+Where &lt;NumericValue&gt; is any valid number greater than 1 and up to a reasonable export size.
+And &lt;ActionValue&gt; is equal to Error, Update, Ignore
+And &lt;IncludeValue&gt; is equal to None, Meta, Data, All
+
+The following are the contents of a sample export config that will pull all Specifications
+whose name begins with 'Sample' and where the maximum export size is set at 1000 entities.
+If any duplicates are found in the target store an error is raised and no action is taken. 
+Relationships to metadata such as related specs, extension points, rulesets et. al.  
+are exported as well.
+
+oracle.communications.inventory.api.entity.Specification#o.name LIKE 'Sample'
+duplicateAction=Error
+relationshipsToInclude=Meta
+
+*/
+import javax.transaction.UserTransaction;
+import oracle.communications.platform.persistence.PersistenceHelper;
+import oracle.communications.inventory.api.framework.logging.impl.FeedbackProviderImpl;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.common.XmlExtractor;
+import oracle.communications.inventory.api.common.impl.XmlExtractorImpl;
+import oracle.communications.inventory.api.common.container.ImportInventoryResult;
+import oracle.communications.inventory.api.common.container.ImportInventoryContainer;
+import javax.transaction.SystemException;
+
+global Log log;
+
+function ImportInventoryResult exportToXml( ImportInventoryContainer container, Log log) 
+{
+    ImportInventoryResult result = null;
+    UserTransaction ut = null;
+    try 
+      {
+         ut = PersistenceHelper.makePersistenceManager().getTransaction();
+         ut.begin();
+         XmlExtractor extractor = new XmlExtractorImpl( );
+         result = extractor.performExport( container );
+         if (FeedbackProviderImpl.hasErrors()){
+                 ut.rollback();
+          }else{
+         	 ut.commit();
+         }
+     }
+     catch (Exception e) {
+         if (ut != null) {
+           try {
+                 ut.rollback();
+           } catch (SystemException f) { }
+         }
+         log.error("import.generalError", e, new String[] {"Error"} );
+      }
+      finally {
+      }
+   return result;
+}
+
+function boolean checkFileType(ImportInventoryContainer container,Log log)
+{
+        String fileName =container.getUploadedFilename();
+        if(fileName==null){
+            log.error("import.noUpload",new String[] {".txt"} );
+            return false;
+        }else if(!fileName.contains(".txt")){
+        	log.error("import.fileUploadTextType");
+        	return false;
+        }
+        return true;
+}
+
+rule "XML Export"
+    salience 0
+    when
+        container: ImportInventoryContainer()
+    then
+    	if(checkFileType(container,log)){
+        	ImportInventoryResult result = exportToXml( container, log );
+        	drools.insert( result ); 
+      	} 
+end"</field>
+    <field format="enum_name" name="runExtensionLanguage">GROOVY</field>
+    <field name="extensionContent">"
+
+/*
+ This ruleset exports database entities into XML format.  The downloadable export file will
+ be a binary zip file suitable for import using the SYSTEM IMPORT ruleset.  Input into this
+ rule is a config file containing two sections:
+ Queries in the form:
+ &lt;ClassName&gt;#&lt;QueryString&gt; 
+ The following are two sample queries:
+ oracle.communications.inventory.api.entity.TelephoneNumberSpecification#o.name LIKE 'Sample'
+ oracle.communications.inventory.api.entity.TelephoneNumberSpecification#o.lastModifiedUser='inventory'
+ And instructions in the form:
+ commitSize=&lt;NumericValue&gt; 
+ duplicateAction=&lt;ActionValue&gt; 
+ relationshipsToInclude=&lt;IncludeValue&gt;
+ Where &lt;NumericValue&gt; is any valid number greater than 1 and up to a reasonable export size.
+ And &lt;ActionValue&gt; is equal to Error, Update, Ignore
+ And &lt;IncludeValue&gt; is equal to None, Meta, Data, All
+ The following are the contents of a sample export config that will pull all Specifications
+ whose name begins with 'Sample' and where the maximum export size is set at 1000 entities.
+ If any duplicates are found in the target store an error is raised and no action is taken. 
+ Relationships to metadata such as related specs, extension points, rulesets et. al.  
+ are exported as well.
+ oracle.communications.inventory.api.entity.Specification#o.name LIKE 'Sample'
+ duplicateAction=Error
+ relationshipsToInclude=Meta
+ */
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
+
+import oracle.communications.inventory.api.common.XmlExtractor;
+import oracle.communications.inventory.api.common.container.ImportInventoryContainer;
+import oracle.communications.inventory.api.common.container.ImportInventoryResult;
+import oracle.communications.inventory.api.common.impl.XmlExtractorImpl;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.framework.logging.impl.FeedbackProviderImpl;
+import oracle.communications.platform.persistence.PersistenceHelper;
+
+
+log.debug ("", "System Export");
+if(checkFileType(importInventoryContainer,log)){
+	ImportInventoryResult result = exportToXml( importInventoryContainer, log );
+	return result;
+}
+
+
+def ImportInventoryResult exportToXml( ImportInventoryContainer container, Log log)
+{
+	ImportInventoryResult result = null;
+	UserTransaction ut = null;
+	try
+	{
+		ut = PersistenceHelper.makePersistenceManager().getTransaction();
+		ut.begin();
+		XmlExtractor extractor = new XmlExtractorImpl( );
+		result = extractor.performExport( container );
+		if (FeedbackProviderImpl.hasErrors()){
+			ut.rollback();
+		}else{
+			ut.commit();
+		}
+	}
+	catch (Exception e) {
+		if (ut != null) {
+			try {
+				ut.rollback();
+			} catch (SystemException f) { }
+		}
+		log.error("import.generalError", e, "Error" );
+	}
+	finally {
+	}
+	return result;
+}
+
+def boolean checkFileType(ImportInventoryContainer container,Log log)
+{
+	String fileName =container.getUploadedFilename();
+	if(fileName==null){
+		log.error("import.noUpload",".txt" );
+		return false;
+	}else if(!fileName.contains(".txt")){
+		log.error("import.fileUploadTextType");
+		return false;
+	}
+	return true;
+}
+
+"</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/ora_uim_baserulesets/model/SYSTEM_IMPORT.ruleset#7.4.1.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-11" version="0">
+    <field name="name">"SYSTEM_IMPORT"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">"package oracle.communications.inventory.rules
+
+/*
+This ruleset imports XML formatted data into the system.
+For C4 this will consist of a zip bundle that was previously
+extracted using the SYSTEM EXPORT rule.
+Last Updated 8-30-2007.
+*/
+import javax.transaction.UserTransaction;
+import oracle.communications.platform.persistence.PersistenceHelper;
+import oracle.communications.inventory.api.framework.logging.impl.FeedbackProviderImpl;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.common.XmlIngestor;
+import oracle.communications.inventory.api.common.impl.XmlIngestorImpl;
+import oracle.communications.inventory.api.common.container.ImportInventoryResult;
+import oracle.communications.inventory.api.common.container.ImportInventoryContainer;
+import javax.transaction.SystemException;
+
+global Log log;
+
+function ImportInventoryResult importFromXml( ImportInventoryContainer container, Log log) 
+{
+    ImportInventoryResult result = null;
+    UserTransaction ut = null;
+    try 
+      {
+        ut = PersistenceHelper.makePersistenceManager().getTransaction();
+        ut.begin();
+        XmlIngestor ingestor = new XmlIngestorImpl( );
+        result = ingestor.performImport( container );
+        if (FeedbackProviderImpl.hasErrors()){
+              ut.rollback();
+         }else{
+              ut.commit();
+         }
+     }
+     catch (Exception e) {
+         if (ut != null) {
+           try {
+                 ut.rollback();
+           } catch (SystemException f) { }
+         }
+         log.error("import.generalError", e, new String[] {"Error"} );
+      }
+      finally {
+      }
+  return result;
+}
+
+function boolean checkFileType(ImportInventoryContainer container,Log log)
+{
+        String fileName =container.getUploadedFilename();
+        if(fileName==null){
+            log.error("import.noUpload",new String[] {".zip"} );
+            return false;
+        }else if(!fileName.contains(".zip")){
+        	log.error("import.fileUploadZipType");
+        	return false;
+        }
+        return true;
+}
+
+rule "XML Import"
+    salience 0
+    when
+        container: ImportInventoryContainer()
+    then
+    	if(checkFileType(container,log)){
+        	ImportInventoryResult result = importFromXml( container, log );
+        	drools.insert( result ); 
+        }
+end"</field>
+    <field format="enum_name" name="runExtensionLanguage">GROOVY</field>
+    <field name="extensionContent">"
+
+/*
+ This ruleset imports XML formatted data into the system.
+ For C4 this will consist of a zip bundle that was previously
+ extracted using the SYSTEM EXPORT rule.
+ Last Updated 8-30-2007.
+ */
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
+
+import oracle.communications.inventory.api.common.XmlIngestor;
+import oracle.communications.inventory.api.common.container.ImportInventoryContainer;
+import oracle.communications.inventory.api.common.container.ImportInventoryResult;
+import oracle.communications.inventory.api.common.impl.XmlIngestorImpl;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.framework.logging.impl.FeedbackProviderImpl;
+import oracle.communications.platform.persistence.PersistenceHelper;
+
+
+log.debug ("", "System Import");
+if(checkFileType(importInventoryContainer,log)){
+	ImportInventoryResult result = importFromXml( importInventoryContainer, log );
+	return result;
+}
+
+
+def ImportInventoryResult importFromXml( ImportInventoryContainer container, Log log)
+{
+	ImportInventoryResult result = null;
+	UserTransaction ut = null;
+	try
+	{
+		ut = PersistenceHelper.makePersistenceManager().getTransaction();
+		ut.begin();
+		XmlIngestor ingestor = new XmlIngestorImpl( );
+		result = ingestor.performImport( container );
+		if (FeedbackProviderImpl.hasErrors()){
+			ut.rollback();
+		}else{
+			ut.commit();
+		}
+	}
+	catch (FileNotFoundException e) {
+		if (ut != null) {
+			try {
+				ut.rollback();
+			} catch (SystemException f) { }
+		}
+		log.error("");
+	}
+	catch (Exception e) {
+		if (ut != null) {
+			try {
+				ut.rollback();
+			} catch (SystemException f) { }
+		}
+		log.error("import.generalError", e, "Error" );
+	}
+	finally {
+	}
+	return result;
+}
+
+def boolean checkFileType(ImportInventoryContainer container,Log log)
+{
+	String fileName =container.getUploadedFilename();
+	if(fileName==null){
+		log.error("import.noUpload", ".zip" );
+		return false;
+	}else if(!fileName.contains(".zip")){
+		log.error("import.fileUploadZipType");
+		return false;
+	}
+	return true;
+}
+
+"</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/ora_uim_baserulesets/model/TELEPHONE_NUMBER_FORMATTING.ruleset#7.4.1.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-12" version="0">
+    <field name="name">"TELEPHONE_NUMBER_FORMATTING"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">"package oracle.communications.inventory.rules
+
+import java.util.*;
+import java.lang.*;
+
+import oracle.communications.inventory.api.entity.TelephoneNumber;
+import oracle.communications.inventory.api.entity.TelephoneNumberSpecification;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+
+global Log log;
+
+//-------------------------------------------------------------------------------------------------
+// FUNCTIONS
+//-------------------------------------------------------------------------------------------------
+
+function String getEditMask(TelephoneNumberSpecification tnSpec) {
+    // The character # is reserved and represents a required digit.
+    // The default mask is eight required digits.
+    String editMask = "##########";
+    if ( tnSpec == null )
+        return editMask;
+     
+    // Define the edit mask based on the spec name   
+    if(tnSpec.getName().equals("TNspec NPA-NXX"))
+        editMask = "###-###-####";
+            
+    return editMask;
+}
+
+//-------------------------------------------------------------------------------------------------
+// RULES
+//-------------------------------------------------------------------------------------------------
+
+rule "Get TN Edit Mask"
+        salience 0
+	when
+	    telephoneNumberSpecification : TelephoneNumberSpecification()
+	    context : ExtensionPointRuleContext()
+	then
+	    String editMask = getEditMask(telephoneNumberSpecification);
+	    context.setReturnValue(editMask);  
+end"</field>
+    <field format="enum_name" name="runExtensionLanguage">GROOVY</field>
+    <field name="extensionContent">"import oracle.communications.inventory.api.entity.TelephoneNumberSpecification;
+import oracle.communications.inventory.api.entity.TelephoneNumber;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+
+
+ArrayList&lt;Object&gt; ruleParams = new ArrayList&lt;Object&gt;();
+ruleParams=this.binding.getVariable("ruleParameters");
+for(Object obj:ruleParams)
+{
+if(obj instanceof TelephoneNumber)
+{
+TelephoneNumberSpecification telephoneNumberSpecification=((TelephoneNumber)obj).getSpecification();
+
+//-------------------------------------------------------------------------------------------------
+// RULE
+//-------------------------------------------------------------------------------------------------
+
+log.debug ("", "Get TN Edit Mask");
+String editMask = getEditMask(telephoneNumberSpecification);
+
+extensionPointRuleContext.setReturnValue(editMask);
+
+
+}
+}
+
+//-------------------------------------------------------------------------------------------------
+// FUNCTIONS
+//-------------------------------------------------------------------------------------------------
+
+def String getEditMask(TelephoneNumberSpecification tnSpec) {
+	// The character # is reserved and represents a required digit.
+	// The default mask is eight required digits.
+	String editMask = "##########";
+	if ( tnSpec == null )
+		return editMask;
+
+	// Define the edit mask based on the spec name
+	if(tnSpec.getName().equals("TNspec NPA-NXX"))
+		editMask = "###-###-####";
+	if(tnSpec.getName().equals("NANPA"))
+		editMask = "+# (###) ###-####";
+
+	return editMask;
+}"</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/ora_uim_baserulesets/model/TELEPHONE_NUMBER_GRADING.ruleset#7.4.1.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-13" version="0">
+    <field name="name">"TELEPHONE_NUMBER_GRADING"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">"package oracle.communications.inventory.rules&#13;
+&#13;
+import java.util.HashSet;&#13;
+import java.util.regex.Pattern;&#13;
+&#13;
+&#13;
+import oracle.communications.inventory.api.characteristic.impl.CharacteristicHelper;&#13;
+import oracle.communications.inventory.api.entity.CharacteristicSpecification;&#13;
+import oracle.communications.inventory.api.entity.Specification;&#13;
+import oracle.communications.inventory.api.entity.TelephoneNumber;&#13;
+import oracle.communications.inventory.api.entity.common.CharValue;&#13;
+import oracle.communications.platform.persistence.PersistenceHelper;&#13;
+&#13;
+&#13;
+import java.util.*;&#13;
+import java.util.regex.*;&#13;
+import oracle.communications.inventory.api.*;&#13;
+import oracle.communications.inventory.api.entity.*;&#13;
+import oracle.communications.inventory.api.entity.common.*;&#13;
+import oracle.communications.inventory.api.characteristic.impl.*;&#13;
+import oracle.communications.inventory.api.framework.logging.Log;&#13;
+import oracle.communications.inventory.extensibility.rules.impl.RuleDebug;&#13;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;&#13;
+&#13;
+global Log log;&#13;
+/*&#13;
+// this function strips any formatting off of the phone number&#13;
+function String getTelephoneNumber(oracle.communications.inventory.api.entity.TelephoneNumber telephoneNumber) {&#13;
+      String id = telephoneNumber.getId();&#13;
+      if (id != null) {&#13;
+        return telephoneNumber.getId().replaceAll("\\D", "");&#13;
+      } else {&#13;
+        return "";&#13;
+      }&#13;
+}   &#13;
+function Pattern getLuckyPattern() {&#13;
+      // Lucky Numbers&#13;
+      String AAA = "(\\d)\\1\\1$";&#13;
+      String luckyNumberPatterns = AAA;&#13;
+      // compile the pattern&#13;
+      return Pattern.compile(luckyNumberPatterns);&#13;
+}&#13;
+function Pattern getExcludeFromLuckyNumberPattern() {&#13;
+          // Exclude from lucky Numbers&#13;
+          String excludeFromLuckyNumberPatterns = "1818$|2828$|3838$|6868$";&#13;
+          // compile the pattern&#13;
+          return Pattern.compile(excludeFromLuckyNumberPatterns);&#13;
+}&#13;
+function Pattern getUnluckyPattern() {&#13;
+      // Unlucky Numbers&#13;
+      String unluckyNumberPatterns = "4$";&#13;
+      // compile the pattern&#13;
+      return Pattern.compile(unluckyNumberPatterns);&#13;
+}&#13;
+function Pattern getGoldenPattern() {&#13;
+      // Golden Numbers&#13;
+      String numberPatterns = "158$|168$|518$|888$|1818$|1688$|1890$|1898$|2828$|3388$|3838$|6688$|6868$|7788$|1234$|5678$|7891$|0000$|1111$|3333$|6666$|7777$|9999$";&#13;
+      String AAAA = "(\\d)\\1\\1\\1$";&#13;
+      String AABBCC = "(\\d)\\2(\\d)\\3(\\d)\\4$";&#13;
+      String ABABAB = "(\\d\\d)\\5\\5$";&#13;
+      String ABABABAB = "(\\d\\d)\\6\\6\\6$";&#13;
+      String ABCDE = "01234$|12345$|23456$|34567$|45678$|56789$";&#13;
+      String EDCBA = "98765$|87654$|76543$|65432$|54321$|43210$";&#13;
+      StringBuilder sb = new StringBuilder();&#13;
+      sb.append(numberPatterns);&#13;
+      sb.append("|");&#13;
+      sb.append(AAAA);&#13;
+      sb.append("|");&#13;
+      sb.append(AABBCC);&#13;
+      sb.append("|");&#13;
+      sb.append(ABABAB);&#13;
+      sb.append("|");&#13;
+      sb.append(ABABABAB);&#13;
+      sb.append("|");&#13;
+      sb.append(ABCDE);&#13;
+      sb.append("|");&#13;
+      sb.append(ABCDE);&#13;
+      sb.append("|");&#13;
+      sb.append(EDCBA);&#13;
+      String goldenNumberPatterns = sb.toString();&#13;
+      // compile the pattern&#13;
+      return Pattern.compile(goldenNumberPatterns);&#13;
+}&#13;
+function void setGrade(TelephoneNumber telephoneNumber, String grade, Log log) {&#13;
+      try {&#13;
+        String characteristicName = "Grade";&#13;
+        CharValue charValue = CharacteristicHelper.getCharacteristic(telephoneNumber, characteristicName);&#13;
+        // if the grade has been set on the tn, then the user manually entered the grade.&#13;
+        // In this case we don't want to set it.&#13;
+        if (charValue == null) {&#13;
+          Specification spec = telephoneNumber.getSpecification();&#13;
+          CharacteristicSpecification characteristicSpecification = PersistenceHelper.makeCharacteristicManager().getCharacteristicSpecification&#13;
+            (spec, characteristicName);&#13;
+          if (characteristicSpecification != null) {&#13;
+            charValue = telephoneNumber.makeCharacteristicInstance();&#13;
+            charValue.setCharacteristicSpecification(characteristicSpecification);&#13;
+            charValue.setName(characteristicSpecification.getName());&#13;
+            charValue.setValue(grade);&#13;
+            HashSet charValues = (HashSet)telephoneNumber.getCharacteristics();&#13;
+            if (charValues == null) {&#13;
+              charValues = new HashSet();&#13;
+            }&#13;
+            charValues.add(charValue);&#13;
+            telephoneNumber.setCharacteristics(charValues);&#13;
+          } else {&#13;
+            log.warn("", "The spec " + spec.getName() + " does not have a characteristic named " &#13;
+                + characteristicName + ". The telephone numbers were not graded.");&#13;
+          }&#13;
+        }&#13;
+      } catch (Exception e) {&#13;
+          log.error("", e, "An exception occured while processing rule.");&#13;
+      }&#13;
+}&#13;
+*/&#13;
+rule "Set the grade"&#13;
+    salience 0&#13;
+  when&#13;
+    telephoneNumber : TelephoneNumber(specification != null)&#13;
+  then&#13;
+  /*&#13;
+    if (getUnluckyPattern().matcher(getTelephoneNumber(telephoneNumber)).find()) {&#13;
+      setGrade(telephoneNumber, "UNLUCKY", log);&#13;
+    } else if (getGoldenPattern().matcher(getTelephoneNumber(telephoneNumber)).find()) {&#13;
+      setGrade(telephoneNumber, "GOLDEN", log);&#13;
+    } else if (getLuckyPattern().matcher(getTelephoneNumber(telephoneNumber)).find()&#13;
+        &amp;&amp; !getExcludeFromLuckyNumberPattern().matcher(getTelephoneNumber(telephoneNumber)).find()) {&#13;
+      setGrade(telephoneNumber, "LUCKY", log);&#13;
+    } else {&#13;
+      setGrade(telephoneNumber, "NORMAL", log);&#13;
+    }   &#13;
+   */ &#13;
+end&#13;
+&#13;
+rule "Set Grade Create Extension"&#13;
+      salience 1&#13;
+  when&#13;
+    context : ExtensionPointRuleContext()&#13;
+  then&#13;
+  /*&#13;
+    List tns = null;&#13;
+    boolean refresh = false;&#13;
+    String signature = context.getSignature();&#13;
+    if( signature.matches(".*updateTelephoneNumbers.*"))&#13;
+    {&#13;
+      Object[] args = context.getArguments();&#13;
+      if(null != args) &#13;
+      {&#13;
+        // TN List Is First Parameter On Update EP&#13;
+        tns = (List) args[0];&#13;
+        refresh = true;&#13;
+      }&#13;
+    }&#13;
+    else if( signature.matches(".*createTelephoneNumbers.*"))&#13;
+    {&#13;
+        // TN List Is Return Value On After Create EP&#13;
+        tns = (List) context.getReturnValue();&#13;
+    }&#13;
+    if (tns != null &amp;&amp; !tns.isEmpty()) &#13;
+    {&#13;
+      Iterator tnItr = tns.iterator();&#13;
+      while (tnItr.hasNext()) &#13;
+      {&#13;
+        TelephoneNumber telephoneNumber = (TelephoneNumber) tnItr.next();&#13;
+        if( refresh )&#13;
+        {&#13;
+          // Need To Refresh On An After Update EP&#13;
+          telephoneNumber = telephoneNumber.refresh();&#13;
+        }&#13;
+        if (getUnluckyPattern().matcher(getTelephoneNumber(telephoneNumber)).find()) &#13;
+        {&#13;
+          setGrade(telephoneNumber, "UNLUCKY", log);&#13;
+        } &#13;
+        else if (getGoldenPattern().matcher(getTelephoneNumber(telephoneNumber)).find()) &#13;
+        {&#13;
+          setGrade(telephoneNumber, "GOLDEN", log);&#13;
+        } &#13;
+        else if (getLuckyPattern().matcher(getTelephoneNumber(telephoneNumber)).find()&#13;
+          &amp;&amp; !getExcludeFromLuckyNumberPattern().matcher(getTelephoneNumber(telephoneNumber)).find()) &#13;
+        {&#13;
+          setGrade(telephoneNumber, "LUCKY", log);&#13;
+        } &#13;
+        else &#13;
+        {&#13;
+          setGrade(telephoneNumber, "NORMAL", log);&#13;
+        }&#13;
+      }&#13;
+    }&#13;
+    */&#13;
+end"</field>
+    <field format="enum_name" name="runExtensionLanguage">GROOVY</field>
+    <field name="extensionContent">"import java.util.regex.*;
+
+import oracle.communications.inventory.api.*;
+import oracle.communications.inventory.api.characteristic.impl.*;
+import oracle.communications.inventory.api.entity.*;
+import oracle.communications.inventory.api.entity.common.*;
+import oracle.communications.inventory.api.entity.common.CharValue;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+import oracle.communications.platform.persistence.PersistenceHelper;
+
+
+ArrayList&lt;Object&gt; ruleParams = new ArrayList&lt;Object&gt;();
+ruleParams=this.binding.getVariable("ruleParameters");
+for(Object obj:ruleParams)
+{
+if(obj instanceof TelephoneNumber)
+{
+TelephoneNumber telephoneNumber=(TelephoneNumber)obj;
+
+setTheGrade (log, telephoneNumber);
+setGradeCreateExtension (log, extensionPointRuleContext);
+}
+}
+def void setTheGrade(Log log, TelephoneNumber telephoneNumber) {
+	log.debug ("", "Set the grade before Set Grade Create Extension");
+	if (telephoneNumber != null &amp;&amp;
+	telephoneNumber.getSpecification() != null) {
+		if (getUnluckyPattern().matcher(getTelephoneNumber(telephoneNumber)).find()) {
+			setGrade(telephoneNumber, "UNLUCKY", log);
+		} else if (getGoldenPattern().matcher(getTelephoneNumber(telephoneNumber)).find()) {
+			setGrade(telephoneNumber, "GOLDEN", log);
+		} else if (getLuckyPattern().matcher(getTelephoneNumber(telephoneNumber)).find()
+		&amp;&amp; !getExcludeFromLuckyNumberPattern().matcher(getTelephoneNumber(telephoneNumber)).find()) {
+			setGrade(telephoneNumber, "LUCKY", log);
+		} else {
+			setGrade(telephoneNumber, "NORMAL", log);
+		}
+	}
+}
+def void setGradeCreateExtension(Log log, ExtensionPointRuleContext context) {
+	log.debug ("", "Set Grade Create Extension");
+	List tns = null;
+	boolean refresh = false;
+	String signature = context.getSignature();
+	if( signature.matches(".*updateTelephoneNumbers.*"))
+	{
+		Object[] args = context.getArguments();
+		if(null != args)
+		{
+			// TN List Is First Parameter On Update EP
+			tns = (List) args[0];
+			refresh = true;
+		}
+	}
+	else if( signature.matches(".*createTelephoneNumbers.*"))
+	{
+		// TN List Is Return Value On After Create EP
+		tns = (List) context.getReturnValue();
+	}
+	if (tns != null &amp;&amp; !tns.isEmpty())
+	{
+		Iterator tnItr = tns.iterator();
+		while (tnItr.hasNext())
+		{
+			TelephoneNumber telephoneNumberLocal = (TelephoneNumber) tnItr.next();
+			if( refresh )
+			{
+				// Need To Refresh On An After Update EP
+				telephoneNumberLocal = telephoneNumberLocal.refresh();
+			}
+			if (getUnluckyPattern().matcher(getTelephoneNumber(telephoneNumberLocal)).find())
+			{
+				setGrade(telephoneNumberLocal, "UNLUCKY", log);
+			}
+			else if (getGoldenPattern().matcher(getTelephoneNumber(telephoneNumberLocal)).find())
+			{
+				setGrade(telephoneNumberLocal, "GOLDEN", log);
+			}
+			else if (getLuckyPattern().matcher(getTelephoneNumber(telephoneNumberLocal)).find()
+			&amp;&amp; !getExcludeFromLuckyNumberPattern().matcher(getTelephoneNumber(telephoneNumberLocal)).find())
+			{
+				setGrade(telephoneNumberLocal, "LUCKY", log);
+			}
+			else
+			{
+				setGrade(telephoneNumberLocal, "NORMAL", log);
+			}
+		}
+	}
+}
+
+
+// this function strips any formatting off of the phone number
+def String getTelephoneNumber(oracle.communications.inventory.api.entity.TelephoneNumber telephoneNumber) {
+	String id = telephoneNumber.getId();
+	if (id != null) {
+		return telephoneNumber.getId().replaceAll("\\D", "");
+	} else {
+		return "";
+	}
+}
+def Pattern getLuckyPattern() {
+	// Lucky Numbers
+	String AAA = '(\\d)\\1\\1$' ;
+	String luckyNumberPatterns = AAA;
+	// compile the pattern
+	return Pattern.compile(luckyNumberPatterns);
+}
+def Pattern getExcludeFromLuckyNumberPattern() {
+	// Exclude from lucky Numbers
+	String excludeFromLuckyNumberPatterns = '1818$|2828$|3838$|6868$';
+	// compile the pattern
+	return Pattern.compile(excludeFromLuckyNumberPatterns);
+}
+def Pattern getUnluckyPattern() {
+	// Unlucky Numbers
+	String unluckyNumberPatterns = '4$';
+	// compile the pattern
+	return Pattern.compile(unluckyNumberPatterns);
+}
+def Pattern getGoldenPattern() {
+	// Golden Numbers
+	String numberPatterns = '158$|168$|518$|888$|1818$|1688$|1890$|1898$|2828$|3388$|3838$|6688$|6868$|7788$|1234$|5678$|7891$|0000$|1111$|3333$|6666$|7777$|9999$';
+	String AAAA = '(\\d)\\1\\1\\1$';
+	String AABBCC = '(\\d)\\2(\\d)\\3(\\d)\\4$';
+	String ABABAB = '(\\d\\d)\\5\\5$';
+	String ABABABAB = '(\\d\\d)\\6\\6\\6$';
+	String ABCDE = '01234$|12345$|23456$|34567$|45678$|56789$';
+	String EDCBA = '98765$|87654$|76543$|65432$|54321$|43210$';
+	StringBuilder sb = new StringBuilder();
+	sb.append(numberPatterns);
+	sb.append("|");
+	sb.append(AAAA);
+	sb.append("|");
+	sb.append(AABBCC);
+	sb.append("|");
+	sb.append(ABABAB);
+	sb.append("|");
+	sb.append(ABABABAB);
+	sb.append("|");
+	sb.append(ABCDE);
+	sb.append("|");
+	sb.append(ABCDE);
+	sb.append("|");
+	sb.append(EDCBA);
+	String goldenNumberPatterns = sb.toString();
+	// compile the pattern
+	return Pattern.compile(goldenNumberPatterns);
+}
+def void setGrade(TelephoneNumber telephoneNumber, String grade, Log log) {
+	try {
+		String characteristicName = "Grade";
+		CharValue charValue = CharacteristicHelper.getCharacteristic(telephoneNumber, characteristicName);
+		// if the grade has been set on the tn, then the user manually entered the grade.
+		// In this case we don't want to set it.
+		if (charValue == null) {
+			Specification spec = telephoneNumber.getSpecification();
+			CharacteristicSpecification characteristicSpecification =
+					PersistenceHelper.makeCharacteristicManager().getCharacteristicSpecification(spec, characteristicName);
+			if (characteristicSpecification != null) {
+				charValue = telephoneNumber.makeCharacteristicInstance();
+				charValue.setCharacteristicSpecification(characteristicSpecification);
+				charValue.setName(characteristicSpecification.getName());
+				charValue.setValue(grade);
+				HashSet charValues = (HashSet)telephoneNumber.getCharacteristics();
+				if (charValues == null) {
+					charValues = new HashSet();
+				}
+				charValues.add(charValue);
+				telephoneNumber.setCharacteristics(charValues);
+			} else {
+				log.warn("", "The spec " + spec.getName() + " does not have a characteristic named "
+						+ characteristicName + ". The telephone numbers were not graded.");
+			}
+		}
+	} catch (Exception e) {
+		log.error("", e, "An exception occured while processing rule.");
+	}
+}
+"</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/ora_uim_baserulesets/model/TN_SELECTION.ruleset#7.4.1.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-14" version="0">
+    <field name="name">"TN_SELECTION"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">"package  oracle.communications.inventory.rules
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+import oracle.communications.platform.persistence.PersistenceHelper;
+import oracle.communications.platform.persistence.Persistent;
+import oracle.communications.inventory.api.entity.*;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.platform.persistence.CriteriaOperator;
+import oracle.communications.platform.persistence.CriteriaItem;
+import oracle.communications.platform.persistence.Finder;
+import oracle.communications.inventory.api.location.*;
+import oracle.communications.inventory.api.characteristic.container.CharacteristicData;
+import oracle.communications.inventory.api.number.container.TelephoneNumberSelectionCriteria;
+import oracle.communications.inventory.api.specification.SpecManager;
+import oracle.communications.inventory.api.specification.SpecSearchCriteria;
+import oracle.communications.inventory.api.util.Utils;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+
+global Log log;
+/*
+function ServiceSpecification getServiceSpecification(String specName, Log log) {
+    Finder finder = null;
+    ServiceSpecification serviceSpec = null;
+    if (Utils.isEmpty(specName)) return serviceSpec;
+
+    try {
+        finder = PersistenceHelper.makeFinder();
+        Collection&lt;ServiceSpecification&gt; serviceSpecs = finder.findByName(ServiceSpecification.class, specName);
+        if (serviceSpecs != null &amp;&amp; serviceSpecs.size()&gt;0) {
+            serviceSpec = serviceSpecs.iterator().next();
+        }
+        else {
+            log.exception("number.cantFindServiceSpecByName", new java.lang.IllegalArgumentException(), specName);
+            return null;
+        }
+    } catch (Exception e) {
+        log.exception("number.cantFindServiceSpecByName", e, specName);
+    }
+    finally {
+        if (finder != null)
+            finder.close();
+    }
+    return serviceSpec;
+}
+
+function List getPreSelectedTelephoneNumbers(TelephoneNumberSelectionCriteria criteria, Log log) {
+    String[] selectedTNs = criteria.getSelectedTN();
+    List&lt;TelephoneNumber&gt; tnCandidates = null;
+    
+    if (!Utils.isEmpty(selectedTNs)) {
+        // The user specified the TN, find the TNs.
+        tnCandidates = PersistenceHelper.makeTelephoneNumberManager().findTelephoneNumbers(selectedTNs, false);
+        if (tnCandidates.size() == 0) {
+            log.exception("number.selectedTNNotFound", new java.lang.IllegalArgumentException());
+        }
+        if (tnCandidates.size() &lt; selectedTNs.length) {
+            log.warn("number.notAllSelectedTNWereFound", selectedTNs.length, tnCandidates.size());
+        }
+    }
+    
+    return tnCandidates;
+}
+
+function List getInvGroupsForServiceSpec(ServiceSpecification serviceSpec, Log log) {
+    InventoryGroupManager inventoryGroupManager = PersistenceHelper.makeInventoryGroupManager();
+    List groups = inventoryGroupManager.getInventoryGroupsForResource(serviceSpec);
+    if (groups == null || groups.isEmpty())
+        log.exception("", new java.lang.IllegalArgumentException(), new Object[] { "The chosen service specification does not have any groups." });
+    return groups;
+}
+
+function InventoryGroup validateGroup(ServiceSpecification serviceSpec, TelephoneNumberSelectionCriteria selectionCriteria, Log log) {
+    // If the group name is specified, make sure it is part of the ServiceSpec groups.
+    String groupName = selectionCriteria.getGroup();
+    InventoryGroupManager mgr = PersistenceHelper.makeInventoryGroupManager();
+    List groups = GetInvGroupsForServiceSpec.getInvGroupsForServiceSpec(serviceSpec, log);
+    if (serviceSpec != null &amp;&amp; !Utils.isEmpty(groupName) &amp;&amp; groups != null) {
+        boolean foundGroup = false;
+        Iterator groupIterator = groups.iterator();
+        while (groupIterator.hasNext()) {
+            InventoryGroup inventoryGroup = (InventoryGroup) groupIterator.next();
+            String name = inventoryGroup.getName();
+            if (groupName.equalsIgnoreCase(name)) {
+                foundGroup = true;
+                return inventoryGroup;
+            }
+        }
+        if (!foundGroup)
+            log.exception("", new java.lang.IllegalArgumentException(), new Object[] { "The chosen inventory group is not part of the chosen service specification group." });
+    }
+    else if (serviceSpec == null &amp;&amp; !Utils.isEmpty(groupName)) {
+        InventoryGroupSearchCriteria criteria = mgr.makeInventoryGroupSearchCriteria();
+        CriteriaItem name = criteria.makeCriteriaItem();
+        name.setOperator( CriteriaOperator.EQUALS );
+        name.setValue( groupName );
+        criteria.setName( name );
+        groups = mgr.findInventoryGroup( criteria );
+        if (!Utils.isEmpty(groups))
+            return (InventoryGroup) groups.iterator().next();
+    }
+    return null;
+}
+
+function List selectTn(ServiceSpecification serviceSpec, TelephoneNumberSelectionCriteria criteria, Log log) {
+    // Define the number of telephone numbers can be auto-selected.
+    int autoSelectCounts = 1;
+    // bug 7613315; commented out ValidateGroup
+    InventoryGroup group = null;//ValidateGroup.validateGroup(serviceSpec, criteria, log);
+    log.debug("" , new String[] { "group: " + group });
+    Finder finder = null;
+    try {
+        List groups = null;
+        
+        // If service spec was specified, use it to narrow down the inventory groups.
+        log.debug("" , new String[] { "serviceSpec: "+serviceSpec });
+        if (serviceSpec != null) {
+            groups = GetInvGroupsForServiceSpec.getInvGroupsForServiceSpec(serviceSpec, log);
+            if (Utils.isEmpty(groups))
+                return null;
+        }
+        log.debug("" , new String[] { "groups.isEmpty: "+Utils.isEmpty(groups) });
+        
+        // If group was specified, add it to the inventory groups.
+        if (group != null) {
+            if (groups == null)
+                groups = new ArrayList();
+            groups.add(group);
+        }
+        log.debug("" , new String[] { "groups.isEmpty: "+Utils.isEmpty(groups) });
+        
+        // If pre-selected TNs was specified, use it to narrow down the TN candidates.
+        List tnCandidates = GetPreSelectedTelephoneNumbers.getPreSelectedTelephoneNumbers(criteria, log);
+        log.debug("" , new String[] { "tnCandidates.isEmpty: "+Utils.isEmpty(tnCandidates) });
+        
+        // After narrowing down the TN candidates, need to execute the find
+        // using are criteria based on core assignment logic (i.e. only
+        // return available and assignable TNs)
+        finder = PersistenceHelper.makeFinder();
+        finder.setResultClass(oracle.communications.inventory.api.entity.TelephoneNumber.class);
+        finder.setCandidates(tnCandidates);
+
+        List parameters = new ArrayList();
+        List values = new ArrayList();
+        List variableTypes = new ArrayList();
+        List variables = new ArrayList();
+        
+        // Only INSTALLED TNs.
+        String filter = "adminState == pState";
+        parameters.add( "pState" );
+        values.add( InventoryState.INSTALLED );
+        
+        // TNs with matching characteristics.
+        CharacteristicData [] characteristicData = criteria.getCharacteristics();
+        for ( int i = 0; characteristicData != null &amp;&amp; i &lt; characteristicData.length; ++i ) {
+            CharacteristicData characteristic = characteristicData[i];
+            String charName = characteristic.getName();
+            // TODO: multi-valued is not yet supported -- so just use the first one.
+            String charValue = characteristic.getValue()[0];
+            filter += " &amp;&amp; ( characteristics.contains(vCharacteristic" + i + ") &amp;&amp; ";
+            filter += "      ( vCharacteristic" + i + ".name == pCharName" + i + " &amp;&amp; ";
+            filter += "        vCharacteristic" + i + ".value == pCharValue" + i + " ) )";
+            parameters.add( "pCharName" + i );
+            values.add( charName );
+            parameters.add( "pCharValue" + i );
+            values.add( charValue );
+            variableTypes.add( TNCharacteristic.class );
+            variables.add( "vCharacteristic" + i );
+        }
+
+        // TNs with matching patterns.
+        if ( !Utils.isEmpty( criteria.getPattern() ) ) {
+            if ( criteria.getEndedWithPattern() ) {
+                filter += " &amp;&amp; "
+                    + CriteriaOperator.translateStringMatch( "name", "pName",
+                        CriteriaOperator.ENDS_WITH );
+            }
+            else {
+                filter += " &amp;&amp; "
+                    + CriteriaOperator.translateStringMatch( "name", "pName",
+                        CriteriaOperator.CONTAINS );
+            }
+            parameters.add( "pName" );
+            values.add( criteria.getPattern() );
+        }
+
+        if ( !Utils.isEmpty( groups ) ) {
+            String f = "this.groups.contains(vInvGroupRef) &amp;&amp; pGroups.contains(vInvGroupRef.invGroup)";
+            parameters.add( "pGroups" );
+            values.add( groups );
+
+            variables.add( "vInvGroupRef" );
+            variableTypes.add( InvGroupRef.class );
+
+            filter += " &amp;&amp; " + f;
+        }
+        
+        // Handle the consumers - no consumer OR (no blocking, no reservations, and no assignments)
+        filter += " &amp;&amp; (consumers.isEmpty() ||"
+            + " ("
+            + "     !(consumers.contains(vCondition) &amp;&amp; vCondition.type == pBlockedType &amp;&amp; vCondition.endDate &gt; pCurrentDate) &amp;&amp;"
+            + "     !(consumers.contains(vReservation) &amp;&amp; vReservation.reservationType != null &amp;&amp; vReservation.endDate &gt; pCurrentDate) &amp;&amp;"
+            + "     !(consumers.contains(vAssignment) &amp;&amp; vAssignment.serviceConsumer != null &amp;&amp; (vAssignment.endDate &gt; pCurrentDate || vAssignment.adminState != pUnassignedState))";
+        filter += " ))";
+        
+        parameters.add( "pCurrentDate" );
+        values.add( Utils.getCurrentDate() );
+        parameters.add( "pBlockedType" );
+        values.add( ConditionType.BLOCKED );
+        parameters.add( "pUnassignedState" );
+        values.add( AssignmentState.UNASSIGNED );
+        variableTypes.add( TNCondition.class );
+        variables.add( "vCondition" );
+        variableTypes.add( TNAssignment.class );
+        variables.add( "vAssignment" );
+        variableTypes.add( TNReservation.class );
+        variables.add( "vReservation" );
+        
+        finder.setFilter(filter);
+
+        finder.setParameters((String[]) parameters.toArray(new String[parameters.size()]), 
+            (Object[]) values.toArray(new Object[values.size()]));
+        finder.declareVariables((Class[]) variableTypes.toArray(new Class[variableTypes.size()]),
+            (String[]) variables.toArray(new String[variables.size()]));
+        
+        int count = criteria.getMaxResults();
+        // If NOT manualSelect, then the user wants the system to automatically
+        // selects the TN.  Otherwise, if manualSelect, then return the maxResults
+        // of TN for use to select.
+        if (!criteria.getManualSelect()) {
+            count = 1;
+        }
+        finder.setRange(0, count);
+        
+        finder.setOrdering( "name ascending" );
+        
+        // convert the collection to a list
+        Collection tnCollection = finder.findMatches();
+        List tnList = new ArrayList();
+        tnList.addAll(tnCollection);
+        return tnList;
+    } finally {
+        if (finder != null) {
+            finder.close();
+        }
+    }
+}
+*/
+
+rule "Select Telephone Numbers"
+        salience 0
+    when
+        selectionCriteria : TelephoneNumberSelectionCriteria()
+        context : ExtensionPointRuleContext()
+    then
+        log.debug("" , new String[] { "Select Telephone Numbers" });
+        /*
+        ServiceSpecification serviceSpec = getServiceSpecification(selectionCriteria.getServiceSpecName(), log);
+        List allTelephoneNumbers = selectTn(serviceSpec, selectionCriteria, log);
+        for (int i = 0; allTelephoneNumbers != null &amp;&amp; i &lt; allTelephoneNumbers.size(); i++) {
+            log.debug("" , new String[] { "TN:"+i+" "+allTelephoneNumbers.get(i) });
+            
+        }
+        
+        context.setReturnValue( allTelephoneNumbers );
+        */
+end"</field>
+    <field format="enum_name" name="runExtensionLanguage">GROOVY</field>
+    <field name="extensionContent">"import oracle.communications.inventory.api.characteristic.container.CharacteristicData;
+import oracle.communications.inventory.api.entity.*;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.group.InventoryGroupManager;
+import oracle.communications.inventory.api.group.InventoryGroupSearchCriteria;
+import oracle.communications.inventory.api.location.*;
+import oracle.communications.inventory.api.number.container.TelephoneNumberSelectionCriteria;
+import oracle.communications.inventory.api.util.Utils;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+import oracle.communications.platform.persistence.CriteriaItem;
+import oracle.communications.platform.persistence.CriteriaOperator;
+import oracle.communications.platform.persistence.Finder;
+import oracle.communications.platform.persistence.PersistenceHelper;
+
+Object param1=ruleParameters[0];
+if(param1 instanceof TelephoneNumberSelectionCriteria)
+{
+TelephoneNumberSelectionCriteria selectionCriteria=param1;
+
+log.debug("" ,  "Select Telephone Numbers" );
+selectTelephoneNumbers (log, selectionCriteria, extensionPointRuleContext);
+}
+
+def void selectTelephoneNumbers (Log log,TelephoneNumberSelectionCriteria selectionCriteria, ExtensionPointRuleContext context) {
+
+	ServiceSpecification serviceSpec = getServiceSpecification(selectionCriteria.getServiceSpecName(), log);
+	List allTelephoneNumbers = selectTn(serviceSpec, selectionCriteria, log);
+	for (int i = 0; allTelephoneNumbers != null &amp;&amp; i &lt; allTelephoneNumbers.size(); i++) {
+		log.debug("" , "TN:"+i+" "+allTelephoneNumbers.get(i) );
+
+	}
+
+	context.setReturnValue( allTelephoneNumbers );
+}
+
+def ServiceSpecification getServiceSpecification(String specName, Log log) {
+	Finder finder = null;
+	ServiceSpecification serviceSpec = null;
+	if (Utils.isEmpty(specName)) return serviceSpec;
+
+	try {
+		finder = PersistenceHelper.makeFinder();
+		Collection&lt;ServiceSpecification&gt; serviceSpecs = finder.findByName(ServiceSpecification.class, specName);
+		if (serviceSpecs != null &amp;&amp; serviceSpecs.size()&gt;0) {
+			serviceSpec = serviceSpecs.iterator().next();
+		}
+		else {
+			log.exception("number.cantFindServiceSpecByName", new java.lang.IllegalArgumentException(), specName);
+			return null;
+		}
+	} catch (Exception e) {
+		log.exception("number.cantFindServiceSpecByName", e, specName);
+	}
+	finally {
+		if (finder != null)
+			finder.close();
+	}
+	return serviceSpec;
+}
+
+def List getPreSelectedTelephoneNumbers(TelephoneNumberSelectionCriteria criteria, Log log) {
+	String[] selectedTNs = criteria.getSelectedTN();
+	List&lt;TelephoneNumber&gt; tnCandidates = null;
+
+	if (!Utils.isEmpty(selectedTNs)) {
+		// The user specified the TN, find the TNs.
+		tnCandidates = PersistenceHelper.makeTelephoneNumberManager().findTelephoneNumbers(selectedTNs, false);
+		if (tnCandidates.size() == 0) {
+			log.exception("number.selectedTNNotFound", new java.lang.IllegalArgumentException());
+		}
+		if (tnCandidates.size() &lt; selectedTNs.length) {
+			log.warn("number.notAllSelectedTNWereFound", selectedTNs.length, tnCandidates.size());
+		}
+	}
+
+	return tnCandidates;
+}
+
+def List getInvGroupsForServiceSpec(ServiceSpecification serviceSpec, Log log) {
+	InventoryGroupManager inventoryGroupManager = PersistenceHelper.makeInventoryGroupManager();
+	List groups = inventoryGroupManager.getInventoryGroupsForResource(serviceSpec);
+	if (groups == null || groups.isEmpty())
+		log.exception("", new java.lang.IllegalArgumentException(), "The chosen service specification does not have any groups." );
+	return groups;
+}
+
+def InventoryGroup validateGroup(ServiceSpecification serviceSpec, TelephoneNumberSelectionCriteria selectionCriteria, Log log) {
+	// If the group name is specified, make sure it is part of the ServiceSpec groups.
+	String groupName = selectionCriteria.getGroup();
+	InventoryGroupManager mgr = PersistenceHelper.makeInventoryGroupManager();
+	List groups = GetInvGroupsForServiceSpec.getInvGroupsForServiceSpec(serviceSpec, log);
+	if (serviceSpec != null &amp;&amp; !Utils.isEmpty(groupName) &amp;&amp; groups != null) {
+		boolean foundGroup = false;
+		Iterator groupIterator = groups.iterator();
+		while (groupIterator.hasNext()) {
+			InventoryGroup inventoryGroup = (InventoryGroup) groupIterator.next();
+			String name = inventoryGroup.getName();
+			if (groupName.equalsIgnoreCase(name)) {
+				foundGroup = true;
+				return inventoryGroup;
+			}
+		}
+		if (!foundGroup)
+			log.exception("", new java.lang.IllegalArgumentException(), "The chosen inventory group is not part of the chosen service specification group." );
+	}
+	else if (serviceSpec == null &amp;&amp; !Utils.isEmpty(groupName)) {
+		InventoryGroupSearchCriteria criteria = mgr.makeInventoryGroupSearchCriteria();
+		CriteriaItem name = criteria.makeCriteriaItem();
+		name.setOperator( CriteriaOperator.EQUALS );
+		name.setValue( groupName );
+		criteria.setName( name );
+		groups = mgr.findInventoryGroup( criteria );
+		if (!Utils.isEmpty(groups))
+			return (InventoryGroup) groups.iterator().next();
+	}
+	return null;
+}
+
+def List selectTn(ServiceSpecification serviceSpec, TelephoneNumberSelectionCriteria criteria, Log log) {
+	// Define the number of telephone numbers can be auto-selected.
+	int autoSelectCounts = 1;
+	// bug 7613315; commented out ValidateGroup
+	InventoryGroup group = null;//ValidateGroup.validateGroup(serviceSpec, criteria, log);
+	log.debug("" , "group: " + group );
+	Finder finder = null;
+	try {
+		List groups = null;
+
+		// If service spec was specified, use it to narrow down the inventory groups.
+		log.debug("" , "serviceSpec: "+serviceSpec );
+		if (serviceSpec != null) {
+			groups = GetInvGroupsForServiceSpec.getInvGroupsForServiceSpec(serviceSpec, log);
+			if (Utils.isEmpty(groups))
+				return null;
+		}
+		log.debug("" ,  "groups.isEmpty: "+Utils.isEmpty(groups) );
+
+		// If group was specified, add it to the inventory groups.
+		if (group != null) {
+			if (groups == null)
+				groups = new ArrayList();
+			groups.add(group);
+		}
+		log.debug("" ,  "groups.isEmpty: "+Utils.isEmpty(groups) );
+
+		// If pre-selected TNs was specified, use it to narrow down the TN candidates.
+		List tnCandidates = GetPreSelectedTelephoneNumbers.getPreSelectedTelephoneNumbers(criteria, log);
+		log.debug("" ,  "tnCandidates.isEmpty: " + Utils.isEmpty(tnCandidates) );
+
+		// After narrowing down the TN candidates, need to execute the find
+		// using are criteria based on core assignment logic (i.e. only
+		// return available and assignable TNs)
+		finder = PersistenceHelper.makeFinder();
+		finder.setResultClass(oracle.communications.inventory.api.entity.TelephoneNumber.class);
+		finder.setCandidates(tnCandidates);
+
+		List parameters = new ArrayList();
+		List values = new ArrayList();
+		List variableTypes = new ArrayList();
+		List variables = new ArrayList();
+
+		// Only INSTALLED TNs.
+		String filter = "adminState == pState";
+		parameters.add( "pState" );
+		values.add( InventoryState.INSTALLED );
+
+		// TNs with matching characteristics.
+		CharacteristicData [] characteristicData = criteria.getCharacteristics();
+		for ( int i = 0; characteristicData != null &amp;&amp; i &lt; characteristicData.length; ++i ) {
+			CharacteristicData characteristic = characteristicData[i];
+			String charName = characteristic.getName();
+			// multi-valued is not yet supported -- so just use the first one.
+			String charValue = characteristic.getValue()[0];
+			filter += " &amp;&amp; ( characteristics.contains(vCharacteristic" + i + ") &amp;&amp; ";
+			filter += "      ( vCharacteristic" + i + ".name == pCharName" + i + " &amp;&amp; ";
+			filter += "        vCharacteristic" + i + ".value == pCharValue" + i + " ) )";
+			parameters.add( "pCharName" + i );
+			values.add( charName );
+			parameters.add( "pCharValue" + i );
+			values.add( charValue );
+			variableTypes.add( TNCharacteristic.class );
+			variables.add( "vCharacteristic" + i );
+		}
+
+		// TNs with matching patterns.
+		if ( !Utils.isEmpty( criteria.getPattern() ) ) {
+			if ( criteria.getEndedWithPattern() ) {
+				filter += " &amp;&amp; "
+				+ CriteriaOperator.translateStringMatch( "name", "pName",
+						CriteriaOperator.ENDS_WITH );
+			}
+			else {
+				filter += " &amp;&amp; "
+				+ CriteriaOperator.translateStringMatch( "name", "pName",
+						CriteriaOperator.CONTAINS );
+			}
+			parameters.add( "pName" );
+			values.add( criteria.getPattern() );
+		}
+
+		if ( !Utils.isEmpty( groups ) ) {
+			String f = "this.groups.contains(vInvGroupRef) &amp;&amp; pGroups.contains(vInvGroupRef.invGroup)";
+			parameters.add( "pGroups" );
+			values.add( groups );
+
+			variables.add( "vInvGroupRef" );
+			variableTypes.add( InvGroupRef.class );
+
+			filter += " &amp;&amp; " + f;
+		}
+
+		// Handle the consumers - no consumer OR (no blocking, no reservations, and no assignments)
+		filter += " &amp;&amp; (consumers.isEmpty() ||"
+		+ " ("
+		+ "     !(consumers.contains(vCondition) &amp;&amp; vCondition.type == pBlockedType &amp;&amp; vCondition.endDate &gt; pCurrentDate) &amp;&amp;"
+		+ "     !(consumers.contains(vReservation) &amp;&amp; vReservation.reservationType != null &amp;&amp; vReservation.endDate &gt; pCurrentDate) &amp;&amp;"
+		+ "     !(consumers.contains(vAssignment) &amp;&amp; vAssignment.serviceConsumer != null &amp;&amp; (vAssignment.endDate &gt; pCurrentDate || vAssignment.adminState != pUnassignedState))";
+		filter += " ))";
+
+		parameters.add( "pCurrentDate" );
+		values.add( Utils.getCurrentDate() );
+		parameters.add( "pBlockedType" );
+		values.add( ConditionType.BLOCKED );
+		parameters.add( "pUnassignedState" );
+		values.add( AssignmentState.UNASSIGNED );
+		variableTypes.add( TNCondition.class );
+		variables.add( "vCondition" );
+		variableTypes.add( TNAssignment.class );
+		variables.add( "vAssignment" );
+		variableTypes.add( TNReservation.class );
+		variables.add( "vReservation" );
+
+		finder.setFilter(filter);
+
+		finder.setParameters((String[]) parameters.toArray(new String[parameters.size()]),
+				(Object[]) values.toArray(new Object[values.size()]));
+		finder.declareVariables((Class[]) variableTypes.toArray(new Class[variableTypes.size()]),
+				(String[]) variables.toArray(new String[variables.size()]));
+
+		int count = criteria.getMaxResults();
+		// If NOT manualSelect, then the user wants the system to automatically
+		// selects the TN.  Otherwise, if manualSelect, then return the maxResults
+		// of TN for use to select.
+		if (!criteria.getManualSelect()) {
+			count = 1;
+		}
+		finder.setRange(0, count);
+
+		finder.setOrdering( "name ascending" );
+
+		// convert the collection to a list
+		Collection tnCollection = finder.findMatches();
+		List tnList = new ArrayList();
+		tnList.addAll(tnCollection);
+		return tnList;
+	} finally {
+		if (finder != null) {
+			finder.close();
+		}
+	}
+}
+
+"</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/ora_uim_baserulesets/model/TRAIL_PIPE_TOPOLOGY_EDGE.ruleset#7.4.1.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-15" version="0">
+    <field name="name">"TRAIL_PIPE_TOPOLOGY_EDGE"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">"// Name:         TOPOLOGYRULE_TRAIL_PIPE_TOPOLOGY_EDGE
+// Description:  Provides a mechanism for a trail pipe to become a topology edge.
+
+package oracle.communications.inventory.rules
+
+//list any import classes here.
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+import oracle.communications.inventory.extensibility.rules.impl.RuleDebug;
+import oracle.communications.inventory.api.framework.logging.LogFactory;
+import oracle.communications.platform.persistence.PersistenceHelper;
+
+import oracle.communications.inventory.api.entity.PipeSpecification;
+import oracle.communications.inventory.api.entity.Specification;
+import oracle.communications.inventory.api.exception.ValidationException;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.specification.SpecManager;
+
+//declare any global variables here
+
+global Log log;
+
+
+
+rule "Trail Pipe Topology Edge"
+	salience 0
+	when
+            context    : ExtensionPointRuleContext() 
+
+	then 
+			//return true;
+			context.setReturnValue(true);			
+    end
+"</field>
+    <field format="enum_name" name="runExtensionLanguage">GROOVY</field>
+    <field name="extensionContent">"/* # Name:         TRAIL_PIPE_TOPOLOGY_EDGE
+ * # Description:  Provides a mechanism for a trail pipe to become a topology edge.
+ */
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+
+
+log.debug ("", "Trail Pipe Topology Edge");
+
+Binding binding=this.getBinding();
+Map&lt;String,Object&gt; map= binding.getVariables();
+
+if(map.get("extensionPointRuleContext")!=null)
+{
+ExtensionPointRuleContext extensionPointRuleContext=binding.getVariable("extensionPointRuleContext");
+extensionPointRuleContext.setReturnValue(true);
+}
+
+"</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/ora_uim_baserulesets/model/VALIDATE_ADDRESS_FOR_RANGE.ruleset#7.4.1.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-16" version="0">
+    <field name="name">"VALIDATE_ADDRESS_FOR_RANGE"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">"package oracle.communications.inventory.rules
+
+import java.util.ArrayList;
+import java.util.*;
+import java.lang.*;
+import oracle.communications.inventory.extensibility.rules.*;
+import oracle.communications.platform.persistence.PersistenceHelper;
+import oracle.communications.inventory.api.place.AddressRangeManager;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
+import oracle.communications.inventory.api.entity.GeographicAddress;
+import oracle.communications.inventory.api.entity.GeographicAddressRange;
+import oracle.communications.inventory.api.entity.Specification;
+import oracle.communications.inventory.api.entity.PlaceCharacteristic;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.framework.logging.LogFactory;
+import oracle.communications.platform.persistence.Finder;
+import oracle.communications.platform.persistence.impl.EntityField;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+import oracle.communications.inventory.api.framework.resource.MessageResource;
+
+global Log log;
+ 
+function GeographicAddressRange validate(GeographicAddressRange range, GeographicAddress address) {
+	GeographicAddressRange returnAddress = null;
+	AddressRangeManager rangeManager = PersistenceHelper.makeAddressRangeManager();      
+	  //create a characteristic map with just the populated characteristics
+	  Map&lt;String, String&gt; addrMap = new HashMap&lt;String, String&gt;();
+	  List resultList = new ArrayList();
+	  RulesExecutor rulesExecutor = PersistenceHelper.makeRulesExecutor();	  
+	  resultList = rulesExecutor.execute("CREATE ADDRESS CHARACTERISTIC MAP", Map.class, address);
+	  addrMap = (HashMap) resultList.get(0);       
+      Collection&lt;GeographicAddressRange&gt; ranges = new ArrayList&lt;GeographicAddressRange&gt;();
+      ranges.add(range);
+      //verify whether this range is valid for this address
+      returnAddress = rangeManager.processRanges(ranges, addrMap);
+    return returnAddress;
+} 
+  
+rule "Validate Address For Range"
+		salience 0
+	when
+		range : GeographicAddressRange()	
+		address : GeographicAddress()
+		context : ExtensionPointRuleContext()
+	then		
+		log.debug( "", new Object[] { "Starting Validate Address Range. Range= "+range.getName()+" Address = " + address.getName() } );
+	    // execute for address
+	    GeographicAddressRange rangeResult = validate(range, address);      
+	    context.setReturnValue(rangeResult);
+end
+"</field>
+    <field format="enum_name" name="runExtensionLanguage">GROOVY</field>
+    <field name="extensionContent">"import oracle.communications.inventory.api.entity.GeographicAddress;
+import oracle.communications.inventory.api.entity.GeographicAddressRange;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.place.AddressRangeManager;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+import oracle.communications.inventory.extensibility.rules.*;
+import oracle.communications.platform.persistence.PersistenceHelper;
+
+
+ArrayList&lt;Object&gt; ruleParams = new ArrayList&lt;Object&gt;();
+ruleParams=this.binding.getVariable("ruleParameters");
+if(ruleParams.get(0) instanceof GeographicAddressRange &amp;&amp; ruleParams.get(1) instanceof GeographicAddress)
+{
+GeographicAddressRange range=ruleParams.get(0);
+GeographicAddress address=ruleParams.get(1);
+
+
+log.debug( "", "Starting Validate Address Range. Range= "+range.getName()+" Address = " + address.getName() );
+// execute for address
+GeographicAddressRange rangeResult = validate(range, address);
+extensionPointRuleContext.setReturnValue(rangeResult);
+}
+
+def GeographicAddressRange validate(GeographicAddressRange range, GeographicAddress address) {
+	GeographicAddressRange returnAddress = null;
+	AddressRangeManager rangeManager = PersistenceHelper.makeAddressRangeManager();
+	//create a characteristic map with just the populated characteristics
+	Map&lt;String, String&gt; addrMap = new HashMap&lt;String, String&gt;();
+	List resultList = new ArrayList();
+	GroovyRulesExecutor groovyRulesExecutor = PersistenceHelper.makeGroovyRulesExecutor();
+	resultList = groovyRulesExecutor.execute("CREATE_ADDRESS_CHARACTERISTIC_MAP", Map.class, address);
+	addrMap = (HashMap) resultList.get(0);
+	Collection&lt;GeographicAddressRange&gt; ranges = new ArrayList&lt;GeographicAddressRange&gt;();
+	ranges.add(range);
+	//verify whether this range is valid for this address
+	returnAddress = rangeManager.processRanges(ranges, addrMap);
+	return returnAddress;
+}
+
+
+
+"</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/ora_uim_baserulesets/model/VALIDATE_RELATE_PLACES.ruleset#7.4.1.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-17" version="0">
+    <field name="name">"VALIDATE_RELATE_PLACES"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">"// Name:         PLACERULE_VALIDATE_RELATE_PLACES
+// Description:  Performs validation of the Relate Places
+
+package  oracle.communications.inventory.rules
+
+//list any import classes here.
+import java.lang.*;
+import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+import oracle.communications.inventory.extensibility.rules.impl.RuleDebug;
+import oracle.communications.inventory.api.framework.logging.LogFactory;
+import oracle.communications.platform.persistence.PersistenceHelper;
+
+import oracle.communications.inventory.api.entity.GeographicPlace;
+import oracle.communications.inventory.api.entity.PlaceSpecification;
+import oracle.communications.inventory.api.entity.Specification;
+import oracle.communications.inventory.api.entity.SpecificationRel;
+import oracle.communications.inventory.api.exception.ValidationException;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.specification.SpecManager;
+
+//declare any global variables here
+
+global Log log;
+
+
+
+rule "Validate Relate Places"
+	salience 0
+	when
+            context    : ExtensionPointRuleContext() 
+
+	then 
+			
+			GeographicPlace child = (GeographicPlace)context.getArguments()[0];
+			GeographicPlace parent = (GeographicPlace)context.getArguments()[1];
+			String methodName = context.getMethodName();
+			String targetName = context.getDeclaringTargetType().getSimpleName();
+			
+			
+			 if(parent!= null&amp;&amp;child!= null)
+             {
+            	 	PlaceSpecification parentSpecification = parent.getSpecification();
+             		PlaceSpecification childSpecification = child.getSpecification();
+             		             		
+             		SpecManager specManager = PersistenceHelper.makeSpecManager();
+             		if(specManager != null)
+             		{
+             		List&lt;Specification&gt; specifications = specManager.getRelatedSpecs(parentSpecification, null, parentSpecification.getClass(), false);         
+             		if(specifications != null)
+             		{
+             		if(specifications.contains(childSpecification))
+             		{
+             			log.info("Vlaidation sucessfull");	
+             		}
+             		else
+             		{           			
+             			log.error("place.ValidateRelatePlaces"+child.getId(),parent.getId(),childSpecification.getName(),parentSpecification.getName());
+             		}
+             		}
+             		}
+             		
+             }
+			
+			
+    end
+"</field>
+    <field format="enum_name" name="runExtensionLanguage">GROOVY</field>
+    <field name="extensionContent">"/*
+ * # Name:         VALIDATE_RELATE_PLACES
+ * # Description:  Performs validation of the Relate Places
+ */
+import oracle.communications.inventory.api.entity.GeographicPlace;
+import oracle.communications.inventory.api.entity.PlaceSpecification;
+import oracle.communications.inventory.api.entity.Specification;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.specification.SpecManager;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+import oracle.communications.platform.persistence.PersistenceHelper;
+
+
+log.debug ("", "Validate Relate Places");
+Binding binding=this.getBinding();
+Map&lt;String,Object&gt; map= binding.getVariables();
+
+if(map.get("extensionPointRuleContext")!=null)
+{
+ExtensionPointRuleContext extensionPointRuleContext=binding.getVariable("extensionPointRuleContext");
+GeographicPlace child = (GeographicPlace)extensionPointRuleContext.getArguments()[0];
+GeographicPlace parent = (GeographicPlace)extensionPointRuleContext.getArguments()[1];
+String methodName = extensionPointRuleContext.getMethodName();
+String targetName = extensionPointRuleContext.getDeclaringTargetType().getSimpleName();
+
+if(parent!= null&amp;&amp;child!= null)
+{
+	PlaceSpecification parentSpecification = parent.getSpecification();
+	PlaceSpecification childSpecification = child.getSpecification();
+
+	SpecManager specManager = PersistenceHelper.makeSpecManager();
+	if(specManager != null)
+	{
+		List&lt;Specification&gt; specifications = specManager.getRelatedSpecs(parentSpecification, null, parentSpecification.getClass(), false);
+		if(specifications != null)
+		{
+			if(specifications.contains(childSpecification))
+			{
+				log.info("Vlaidation sucessfull");
+			}
+			else
+			{
+				log.error("place.ValidateRelatePlaces"+child.getId(),parent.getId(),childSpecification.getName(),parentSpecification.getName());
+			}
+		}
+	}
+}
+}
+
+
+
+"</field>
+  </object>
+</extent>

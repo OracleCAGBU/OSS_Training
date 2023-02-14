@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="inventoryuiBundle"
+         value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:panelStretchLayout id="psl1" dimensionsFrom="auto">
+    <f:facet name="center">
+      <af:panelGroupLayout id="pgl1" layout="scroll" styleClass="AFStretchWidth">
+        <af:panelGroupLayout id="pgl2"
+                             rendered="#{pageFlowScope.PNFCreateBean.addMode || pageFlowScope.PNFCreateBean.editMode}"
+                             halign="left" valign="top" layout="horizontal">
+          <af:panelFormLayout id="pfl1" binding="#{backingBeanScope.pnfpfBinding}">
+            <f:facet name="footer"/>
+            <af:panelLabelAndMessage label="#{inventoryuiBundle.NAME}" id="plam2" for="it1">
+              <af:inputText id="it1" label="#{inventoryuiBundle.NAME}" simple="true" autoSubmit="true"
+                            valueChangeListener="#{pageFlowScope.PNFCreateBean.pnfValueChange}"
+                            value="#{pageFlowScope.PNFCreateBean.pnfReqInfo.name}"
+                            binding="#{backingBeanScope.ldNameBinding}">
+                <af:autoSuggestBehavior suggestItems="#{pageFlowScope.PNFCreateBean.getPNFNames}"/>
+              </af:inputText>
+              <af:commandImageLink id="ldacc-ldcreate" icon="/images/search_ena.png"
+                                   shortDesc="#{inventoryUIBundle.BROWSE}">
+                <af:showPopupBehavior popupId="p1" triggerType="click"/>
+                <af:setActionListener from="true" to="#{pageFlowScope.invokeLDSearch}"/>
+              </af:commandImageLink>
+            </af:panelLabelAndMessage>
+            <af:panelLabelAndMessage label="#{inventoryuiBundle.ID}" id="plam1">
+              <af:inputText label="#{inventoryuiBundle.ID}" id="it2" simple="true" disabled="true"
+                            value="#{pageFlowScope.PNFCreateBean.pnfReqInfo.id}" partialTriggers="it1"
+                            binding="#{backingBeanScope.ldIdBinding}"/>
+              <af:link id="l1" icon="/images/search_ena.png" rendered="false">
+                <af:showPopupBehavior popupId="p1"/>
+                <af:setActionListener from="true" to="#{pageFlowScope.invokeLDSearch}"/>
+              </af:link>
+            </af:panelLabelAndMessage>
+            <af:panelLabelAndMessage label="#{inventoryuiBundle.DESCRIPTOR}" id="plam5">
+              <af:inputText label="#{inventoryuiBundle.SPECIFICATION}" id="it5" simple="true"
+                            value="#{pageFlowScope.PNFCreateBean.pnfReqInfo.descriptorName}" partialTriggers="it1" disabled="true"
+                            binding="#{backingBeanScope.ldDescBinding}"/>
+            </af:panelLabelAndMessage>
+          </af:panelFormLayout>
+          <af:popup id="p1" binding="#{backingBeanScope.searchLD}"
+                    contentDelivery="lazyUncached">
+            <af:dialog id="d1" type="none" title="#{inventoryuiBundle.PHYSICAL_NETWORK_FUNCTION_SEARCH}">
+              <f:facet name="buttonBar"/>
+              <af:panelStretchLayout id="psl2" styleClass="invCommonPanelStretchLayout">
+                <f:facet name="center">
+                  <af:region value="#{bindings.LogicalDeviceSearchResultsFlow1.regionModel}" id="r1"/>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:dialog>
+            <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+            <af:serverListener type="refreshEntity" method="#{pageFlowScope.PNFCreateBean.refresh}"/>
+          </af:popup>
+        </af:panelGroupLayout>
+        <af:panelGroupLayout id="pgl3" rendered="#{pageFlowScope.PNFCreateBean.viewMode}" layout="horizontal"
+                             halign="left" valign="top">
+          <af:panelFormLayout id="pfl2">
+            <f:facet name="footer"/>
+            <af:panelLabelAndMessage label="#{inventoryuiBundle.NAME}" id="plam3">
+              <af:link id="it3" text="#{pageFlowScope.PNFCreateBean.pnfResponseInfo.name}"
+                       action="LogicalDeviceSummaryFlow"
+                       actionListener="#{bindings.openSubTaskForLogicalDeviceSummary.execute}">
+                <af:setActionListener from="#{pageFlowScope.PNFCreateBean.logicalDevice.oid}"
+                                      to="#{requestScope.objectId}"/>
+              </af:link>
+            </af:panelLabelAndMessage>
+            <af:panelLabelAndMessage label="#{inventoryuiBundle.ID}" id="plam4">
+              <af:outputText id="it4" value="#{pageFlowScope.PNFCreateBean.pnfResponseInfo.id}"/>
+            </af:panelLabelAndMessage>
+            <af:panelLabelAndMessage label="#{inventoryuiBundle.DESCRIPTOR}" id="plam6">
+              <af:link id="ot1" text="#{pageFlowScope.PNFCreateBean.pnfResponseInfo.descriptorName}"
+                       action="SpecificationSummaryFlow1">
+                <af:setActionListener from="#{pageFlowScope.PNFCreateBean.pnfSpec.oid}"
+                                      to="#{requestScope.specObjectId}"/>
+              </af:link>
+            </af:panelLabelAndMessage>
+          </af:panelFormLayout>
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:panelStretchLayout>
+</jsp:root>

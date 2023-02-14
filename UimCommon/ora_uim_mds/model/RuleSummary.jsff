@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved. */
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    3/12/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout>
+       
+          <af:panelHeader text="#{pageFlowScope.RuleSummaryBean.displayInfo}" helpTopicId="OHW_ruleSets" styleClass="invSummaryPanelHeader">
+          <af:panelGroupLayout layout="scroll" id="pgl23">
+          <af:showDetailHeader text="#{inventoryUIBundle.MENU_RULE_SET}" disclosed="true" styleClass="invSummaryShowDetailHeader">
+            <af:panelFormLayout>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}">
+                <af:outputText value="#{pageFlowScope.RuleSummaryBean.entityObject.name}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}" styleClass="invSummaryPanelLabelAndMessage">
+                <af:outputText value="#{pageFlowScope.RuleSummaryBean.entityObject.description}"/>
+              </af:panelLabelAndMessage>
+              <af:inputText label="#{inventoryUIBundle.MENU_RULE_SET}" columns="100" rows="45"
+                            readOnly="true" value="#{pageFlowScope.RuleSummaryBean.ruleXml}"/>
+            </af:panelFormLayout>
+          </af:showDetailHeader>
+           </af:panelGroupLayout>
+        </af:panelHeader>
+     
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

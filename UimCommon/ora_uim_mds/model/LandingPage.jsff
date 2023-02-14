@@ -1,0 +1,248 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2014, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    3/1/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:h="http://java.sun.com/jsf/html">
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>		  
+  <af:pageTemplate viewId="/oracle/communications/inventory/ui/framework/templates/InventoryUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelStretchLayout id="psl1" dimensionsFrom="auto" styleClass="AFStretchWidth">
+        <f:facet name="center">
+            <af:masonryLayout id="ml1">
+                <af:panelBox id="pb1" text="#{inventoryUIBundle.WORK_MANAGEMENT}" showDisclosure="false" styleClass="AFMasonryTileSize1x2" inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                binding="#{backingBeanScope.panel_WM}" rendered="#{pageFlowScope.LandingPageBean.render_WM}">
+                    <af:menuBar id="mb1">
+						<af:spacer id="spr1" width="50"/>
+                        <af:link icon="/images/landing/qual_linesdots_48_full@2x.png" id="m1" shortDesc="#{inventoryUIBundle.WORK_MANAGEMENT}" inlineStyle="width:auto;height:auto;">
+                            <af:showPopupBehavior popupId="p1" triggerType="mouseHover" align="endAfter" alignId="m1"/>
+                        </af:link>
+                    </af:menuBar>
+					<af:popup id="p1" contentDelivery="immediate">
+						<af:commandMenuItem id="cmi1" text="#{inventoryUIBundle.MENU_BUSINESS_INTERACTION}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="businessinteraction" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/businessinteraction/flow/BusinessInteractionSearchResultsFlow.xml#BusinessInteractionSearchResultsFlow']}"/>
+						<af:commandMenuItem id="cmi2" text="#{inventoryUIBundle.PROJECTS}" action="project" actionListener="#{pageFlowScope.LandingPageBean.navigate}" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/project/flow/ProjectSearchResultsFlow.xml#ProjectSearchResultsFlow']}"/>
+						<af:commandMenuItem id="cmi3" text="#{inventoryUIBundle.MENU_WORK_ORDERS}" action="businessinteraction"
+											actionListener="#{pageFlowScope.LandingPageBean.navigate}" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/businessinteraction/flow/BusinessInteractionSearchResultsFlow.xml#BusinessInteractionSearchResultsFlow']}">
+							<af:setPropertyListener from="true" to="#{pageFlowScope.workOrder}" type="action"/>
+						</af:commandMenuItem>
+						<af:commandMenuItem id="cmi4" text="#{inventoryUIBundle.MY_WORK_ORDERS}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="worklist" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/businessinteraction/flow/WorkListFlow.xml#WorkListFlow']}"/>   
+						<af:commandMenuItem id="cmi5" text="#{inventoryUIBundle.MY_GROUP_WORK_ORDERS}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="worklist" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/businessinteraction/flow/WorkListFlow.xml#WorkListFlow']}">   
+							<af:setPropertyListener from="true" to="#{pageFlowScope.isGroupList}" type="action"/>
+						</af:commandMenuItem>
+					</af:popup>
+                    <af:outputFormatted id="t1" value="#{inventoryUIBundle.WORK_MANAGEMENT_DESC}"/>
+                </af:panelBox>
+                <af:panelBox id="pb2" text="#{inventoryUIBundle.SERVICE_MANAGEMENT}" showDisclosure="false" styleClass="AFMasonryTileSize1x2" inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                binding="#{backingBeanScope.panel_SM}" rendered="#{pageFlowScope.LandingPageBean.render_SM}">
+                    <af:menuBar id="mb2">
+						<af:spacer id="spr2" width="50"/>
+                        <af:link icon="/images/landing/qual_globe_48_mono@2x.png" id="m2" shortDesc="#{inventoryUIBundle.SERVICE_MANAGEMENT}" inlineStyle="width:auto;height:auto;">
+                            <af:showPopupBehavior popupId="p2" triggerType="mouseHover" align="endAfter" alignId="m2"/>
+                        </af:link>
+                    </af:menuBar>
+					<af:popup id="p2" contentDelivery="immediate">
+						<af:commandMenuItem id="cmi6" text="#{inventoryUIBundle.MENU_SERVICES}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="service" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/service/flow/ServiceSearchResultsFlow.xml#ServiceSearchResultsFlow']}"/>
+					</af:popup>
+                    <af:outputFormatted id="t2" value="#{inventoryUIBundle.SERVICE_MANAGEMENT_DESC}"/>
+                </af:panelBox>
+                <af:panelBox id="pb3" text="#{inventoryUIBundle.NSO}" showDisclosure="false" styleClass="AFMasonryTileSize1x2" inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                binding="#{backingBeanScope.panel_NSO}" rendered="#{pageFlowScope.LandingPageBean.render_NSO}">
+                    <af:menuBar id="mb3">
+						<af:spacer id="spr3" width="50"/>
+                        <af:link icon="/images/landing/NSO_LP_Icon.png" id="m3" shortDesc="#{inventoryUIBundle.NSO}" inlineStyle="width:auto;height:auto;">
+                            <af:showPopupBehavior popupId="p3" triggerType="mouseHover" align="endAfter" alignId="m3"/>
+                        </af:link>
+                    </af:menuBar>
+					<af:popup id="p3" contentDelivery="immediate">
+						<af:commandMenuItem id="cmi7" text="#{inventoryUIBundle.MENU_ORCHESTRATION_REQUESTS}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="orchestrationrequest" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/nso/ui/orchestrationrequest/flow/OrchestrationRequestSearchResultsFlow.xml#OrchestrationRequestSearchResultsFlow']}"/>
+						<af:commandMenuItem id="cmi8" text="#{inventoryUIBundle.MENU_NETWORK_SERVICES}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="networkservice" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/nso/ui/ns/flow/NetworkServiceSearchResultsFlow.xml#NetworkServiceSearchResultsFlow']}"/>
+						<af:commandMenuItem id="cmi9" text="#{inventoryUIBundle.MENU_VNFS}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="vnf" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/nso/ui/vnf/flow/VNFSearchResultsFlow.xml#VNFSearchResultsFlow']}"/>
+					</af:popup>
+                    <af:outputFormatted id="t3" value="#{inventoryUIBundle.NSO_DESC}"/>
+                </af:panelBox>
+                <af:panelBox id="pb4" text="#{inventoryUIBundle.LOGICAL_RESOURCE_MANAGEMENT}" showDisclosure="false" styleClass="AFMasonryTileSize1x2" inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                binding="#{backingBeanScope.panel_LRM}" rendered="#{pageFlowScope.LandingPageBean.render_LRM}">
+                    <af:menuBar id="mb4">
+						<af:spacer id="spr4" width="50"/>
+                        <af:link icon="/images/landing/qual_computercloud_48_full@2x.png" id="m4" shortDesc="#{inventoryUIBundle.LOGICAL_RESOURCE_MANAGEMENT}" inlineStyle="width:auto;height:auto;">
+							<af:showPopupBehavior popupId="p4" triggerType="mouseHover" align="endAfter" alignId="m4"/>
+                        </af:link>
+                    </af:menuBar>
+					<af:popup id="p4" contentDelivery="immediate">
+						<af:commandMenuItem id="cmi10" text="#{inventoryUIBundle.MENU_LOGICAL_DEVICE}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="logicaldevice" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/logicaldevice/flow/LogicalDeviceSearchResultsFlow.xml#LogicalDeviceSearchResultsFlow']}"/>
+						<af:commandMenuItem id="cmi11" text="#{inventoryUIBundle.MENU_LOGICAL_DEVICE_ACCOUNT}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="lda" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/logicaldeviceaccount/flow/LogicalDeviceAccountSearchResultsFlow.xml#LogicalDeviceAccountSearchResultsFlow']}"/>
+						<!--af:commandMenuItem id="cmi12" text="#{inventoryUIBundle.MENU_TELEPHONE_NUMBER}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="telephonenumber" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/number/flow/TelephoneNumberSearchResultsFlow.xml#TelephoneNumberSearchResultsFlow']}"/-->
+						<af:commandMenuItem id="cmi112" text="#{inventoryUIBundle.MENU_TELEPHONE_NUMBER}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="telephoneNumber" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/number/flow/TelephoneNumbersLandingPageFlow.xml#TelephoneNumbersLandingPageFlow']}"/>
+						<af:commandMenuItem id="cmi13" text="#{inventoryUIBundle.MENU_IPAM4}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="ipv4" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/ip/flow/IPv4SearchResultsFlow.xml#IPv4SearchResultsFlow']}"/>
+						<af:commandMenuItem id="cmi14" text="#{inventoryUIBundle.MENU_IPAM6}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="ipv6" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/ip/flow/IPv6SearchResultsFlow.xml#IPv6SearchResultsFlow']}"/>
+						<af:commandMenuItem id="cmi15" text="#{inventoryUIBundle.MENU_FLOWIDENTIFIER}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="flowidentifier" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/flowidentifier/flow/FlowIdentifierSearchResultsFlow.xml#FlowIdentifierSearchResultsFlow']}"/>
+						<af:commandMenuItem id="cmi30" text="#{inventoryUIBundle.MENU_MEDIA_STREAM}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="mediastream" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/mediaresource/flow/MediaStreamSearchResultsFlow.xml#MediaStreamSearchResultsFlow']}"/>
+						<af:commandMenuItem id="cmi38" text="#{inventoryUIBundle.MENU_DEVICE_INTERFACE}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="deviceinterface" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/deviceinterface/flow/DeviceInterfaceSearchResultsFlow.xml#DeviceInterfaceSearchResultsFlow']}"/>
+					</af:popup>
+                    <af:outputFormatted id="t4" value="#{inventoryUIBundle.LOGICAL_RESOURCE_MANAGEMENT_DESC}"/>
+                </af:panelBox>
+                <af:panelBox id="pb5" text="#{inventoryUIBundle.EQUIPMENT_MANAGEMENT}" showDisclosure="false" styleClass="AFMasonryTileSize1x2" inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;" 
+                binding="#{backingBeanScope.panel_EM}" rendered="#{pageFlowScope.LandingPageBean.render_EM}">
+                    <af:menuBar id="mb5">
+						<af:spacer id="spr5" width="50"/>
+                        <af:link icon="/images/landing/qual_harddrive_48_mono@2x.png" id="m5" shortDesc="#{inventoryUIBundle.EQUIPMENT_MANAGEMENT}" inlineStyle="width:auto;height:auto;">
+                            <af:showPopupBehavior popupId="p5" triggerType="mouseHover" align="endAfter" alignId="m5"/>
+                        </af:link>
+                    </af:menuBar>
+					<af:popup id="p5" contentDelivery="immediate">
+						<af:commandMenuItem id="cmi16" text="#{inventoryUIBundle.MENU_PHYSICAL_DEVICE}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="physicaldevice" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/physicaldevice/flow/PhysicalDeviceSearchResultsFlow.xml#PhysicalDeviceSearchResultsFlow']}"/>
+                        <af:commandMenuItem id="cmi17" text="#{inventoryUIBundle.MENU_EQUIPMENT}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="equipment" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/equipment/flow/EquipmentSearchResultsFlow.xml#EquipmentSearchResultsFlow']}"/>
+					</af:popup>
+                    <af:outputFormatted id="t5" value="#{inventoryUIBundle.EQUIPMENT_MANAGEMENT_DESC}"/>
+                </af:panelBox>
+                <af:panelBox id="pb6" text="#{inventoryUIBundle.CONNECTIVITY_MANAGEMENT}" showDisclosure="false" styleClass="AFMasonryTileSize1x2" inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                binding="#{backingBeanScope.panel_CM}" rendered="#{pageFlowScope.LandingPageBean.render_CM}">
+                    <af:menuBar id="mb6">
+						<af:spacer id="spr6" width="50"/>
+                        <af:link icon="/images/landing/qual_nodes_48_full@2x.png" id="m6" shortDesc="#{inventoryUIBundle.CONNECTIVITY_MANAGEMENT}" inlineStyle="width:auto;height:auto;">
+                            <af:showPopupBehavior popupId="p6" triggerType="mouseHover" align="endAfter" alignId="m6"/>
+                        </af:link>
+                    </af:menuBar>
+					<af:popup id="p6" contentDelivery="immediate">
+						<af:commandMenuItem id="cmi18" text="#{inventoryUIBundle.MENU_CONNECTIVITY}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="connectivity" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/connectivity/flow/TDMConnectivitySearchResultsFlow.xml#TDMConnectivitySearchResultsFlow']}"/>
+                        <af:commandMenuItem id="cmi19" text="#{inventoryUIBundle.MENU_PIPE}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="pipe" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/connectivity/flow/PipeSearchResultsFlow.xml#PipeSearchResultsFlow']}"/>
+					</af:popup>
+                    <af:outputFormatted id="t6" value="#{inventoryUIBundle.CONNECTIVITY_MANAGEMENT_DESC}"/>
+                </af:panelBox>
+                <af:panelBox id="pb7" text="#{inventoryUIBundle.NETWORK_MANAGEMENT}" showDisclosure="false" styleClass="AFMasonryTileSize1x2" inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                binding="#{backingBeanScope.panel_NM}" rendered="#{pageFlowScope.LandingPageBean.render_NM}">
+                    <af:menuBar id="mb7">
+						<af:spacer id="spr7" width="50"/>
+                        <af:link icon="/images/landing/qual_clouds_48_full@2x.png" id="m7" shortDesc="#{inventoryUIBundle.NETWORK_MANAGEMENT}" inlineStyle="width:auto;height:auto;">
+                            <af:showPopupBehavior popupId="p7" triggerType="mouseHover" align="endAfter" alignId="m7"/>
+                        </af:link>
+                    </af:menuBar>
+					<af:popup id="p7" contentDelivery="immediate">
+						<af:commandMenuItem id="cmi20" text="#{inventoryUIBundle.MENU_NETWORK}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="network" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/network/flow/NetworkSearchResultsFlow.xml#NetworkSearchResults']}"/>
+                        <af:commandMenuItem id="cmi21" text="#{inventoryUIBundle.MENU_TOPOLOGY}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="topology" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/nonmaptopology/flow/NonMapTopologyADFViewFlow.xml#NonMapTopologyADFViewFlow']}"/>                        
+					</af:popup>
+                    <af:outputFormatted id="t7" value="#{inventoryUIBundle.NETWORK_MANAGEMENT_DESC}"/>
+                </af:panelBox>
+                <af:panelBox id="pb8" text="#{inventoryUIBundle.RESOURCE_GROUP_MANAGEMENT}" showDisclosure="false" styleClass="AFMasonryTileSize1x2" inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                binding="#{backingBeanScope.panel_RGM}" rendered="#{pageFlowScope.LandingPageBean.render_RGM}">
+                    <af:menuBar id="mb8">
+						<af:spacer id="spr8" width="50"/>
+                        <af:link icon="/images/landing/qual_globegear_48_full@2x.png" id="m8" shortDesc="#{inventoryUIBundle.RESOURCE_GROUP_MANAGEMENT}" inlineStyle="width:auto;height:auto;">
+                            <af:showPopupBehavior popupId="p8" triggerType="mouseHover" align="endAfter" alignId="m8"/>
+                        </af:link>
+                    </af:menuBar>
+					<af:popup id="p8" contentDelivery="immediate">
+						<af:commandMenuItem id="cmi22" text="#{inventoryUIBundle.MENU_NAD}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="networkaddressdomain" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/networkaddress/flow/NetworkAddressDomainSearchResultsFlow.xml#NetworkAddressDomainSearchResultsFlow']}"/>
+                        <af:commandMenuItem id="cmi23" text="#{inventoryUIBundle.MENU_INVENTORY_GROUP}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="inventorygroup" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/inventorygroup/flow/InventoryGroupSearchResultsFlow.xml#InventoryGroupSearchResultsFlow']}"/>                        
+					</af:popup>
+                    <af:outputFormatted id="t8" value="#{inventoryUIBundle.RESOURCE_GROUP_MANAGEMENT_DESC}"/>
+                </af:panelBox>
+                <af:panelBox id="pb9" text="#{inventoryUIBundle.LOCATION_MANAGEMENT}" showDisclosure="false" styleClass="AFMasonryTileSize1x2" inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                binding="#{backingBeanScope.panel_LM}" rendered="#{pageFlowScope.LandingPageBean.render_LM}">
+                    <af:menuBar id="mb9">
+						<af:spacer id="spr9" width="50"/>
+                        <af:link icon="/images/landing/location.png" id="m9" shortDesc="#{inventoryUIBundle.LOCATION_MANAGEMENT}" inlineStyle="width:auto;height:auto;">
+                            <af:showPopupBehavior popupId="p9" triggerType="mouseHover" align="endAfter" alignId="m9"/>
+                        </af:link>
+                    </af:menuBar>
+					<af:popup id="p9" contentDelivery="immediate">
+						<af:commandMenuItem id="cmi24" text="#{inventoryUIBundle.MENU_PLACE}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="place" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/place/flow/PlaceSearchResultsFlow.xml#PlaceSearchResultsFlow']}"/>
+                        <af:commandMenuItem id="cmi25" text="#{inventoryUIBundle.MENU_LOCATION}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="location" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/location/flow/LocationSearchResultsFlow.xml#LocationSearchResultsFlow']}"/>                        
+					</af:popup>
+                    <af:outputFormatted id="t9" value="#{inventoryUIBundle.LOCATION_MANAGEMENT_DESC}"/>
+                </af:panelBox>
+                <af:panelBox id="pb10" text="#{inventoryUIBundle.CUSTOM_RESOURCE_MANAGEMENT}" showDisclosure="false" styleClass="AFMasonryTileSize1x2" inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                binding="#{backingBeanScope.panel_CRM}" rendered="#{pageFlowScope.LandingPageBean.render_CRM}">
+                    <af:menuBar id="mb10">
+						<af:spacer id="spr10" width="50"/>
+                        <af:link icon="/images/landing/qual_computer02_48_full@2x.png" id="m10" shortDesc="#{inventoryUIBundle.CUSTOM_RESOURCE_MANAGEMENT}" inlineStyle="width:auto;height:auto;">
+                            <af:showPopupBehavior popupId="p10" triggerType="mouseHover" align="endAfter" alignId="m10"/>
+                        </af:link>
+                    </af:menuBar>
+					<af:popup id="p10" contentDelivery="immediate">
+						<af:commandMenuItem id="cmi26" text="#{inventoryUIBundle.MENU_CUSTOM_NETWORK_ADDRESS}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="cna" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/customnetworkaddress/flow/CustomNetworkAddressSearchResultsFlow.xml#CustomNetworkAddressSearchResultsFlow']}"/>
+                        <af:commandMenuItem id="cmi27" text="#{inventoryUIBundle.MENU_CUSTOM_OBJECT}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="customobject" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/customobject/flow/CustomObjectSearchResultsFlow.xml#CustomObjectSearchResultsFlow']}"/>                        
+					</af:popup>
+                    <af:outputFormatted id="t10" value="#{inventoryUIBundle.CUSTOM_RESOURCE_MANAGEMENT_DESC}"/>
+                </af:panelBox>
+				<af:panelBox id="pb15" text="#{inventoryUIBundle.MENU_RESERVATIONS}" showDisclosure="false" styleClass="AFMasonryTileSize1x2" inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                binding="#{backingBeanScope.panel_MR}" rendered="#{pageFlowScope.LandingPageBean.render_MR}">
+                    <af:menuBar id="mb15">
+						<af:spacer id="spr11" width="50"/>
+                        <af:link icon="/images/landing/qual_lock_48_mono@2x.png" id="m15" shortDesc="#{inventoryUIBundle.MENU_RESERVATIONS}" inlineStyle="width:auto;height:auto;">
+                            <af:showPopupBehavior popupId="p11" triggerType="mouseHover" align="endAfter" alignId="m15"/>
+                        </af:link>
+                    </af:menuBar>
+					<af:popup id="p11" contentDelivery="immediate">
+						<af:commandMenuItem id="cmi28" text="#{inventoryUIBundle.MENU_RESERVATIONS}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="reservation" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/consumer/flow/ReservationSearchResultsFlow.xml#ReservationSearchResultsFlow']}"/>
+					</af:popup>
+                    <af:outputFormatted id="t15" value="#{inventoryUIBundle.RESERVATIONS_DESC}"/>
+                </af:panelBox>
+                <af:panelBox id="pb12" text="#{inventoryUIBundle.MENU_PARTY}" showDisclosure="false" styleClass="AFMasonryTileSize1x2" inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                binding="#{backingBeanScope.panel_MP}" rendered="#{pageFlowScope.LandingPageBean.render_MP}">
+                    <af:menuBar id="mb12">
+						<af:spacer id="spr12" width="50"/>
+                        <af:link icon="/images/landing/qual_peopletwo_48_full@2x.png" id="m12" shortDesc="#{inventoryUIBundle.MENU_PARTY}" inlineStyle="width:auto;height:auto;">
+                            <af:showPopupBehavior popupId="p12" triggerType="mouseHover" align="endAfter" alignId="m12"/>
+                        </af:link>
+                    </af:menuBar>
+					<af:popup id="p12" contentDelivery="immediate">
+						<af:commandMenuItem id="cmi29" text="#{inventoryUIBundle.MENU_PARTIES}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="party" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/party/flow/PartySearchResultsFlow.xml#PartySearchResultsFlow']}"/>
+					</af:popup>
+                    <af:outputFormatted id="t12" value="#{inventoryUIBundle.PARTY_DESC}"/>
+                </af:panelBox>
+                <af:panelBox id="pb14" text="#{inventoryUIBundle.ADMIN}" showDisclosure="false" styleClass="AFMasonryTileSize1x2" inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                binding="#{backingBeanScope.panel_ADMIN}" rendered="#{pageFlowScope.LandingPageBean.render_ADMIN}">
+                    <af:menuBar id="mb14">
+						<af:spacer id="spr13" width="50"/>
+                        <af:link icon="/images/landing/qual_gears_48_full@2x.png" id="m14" shortDesc="#{inventoryUIBundle.ADMIN}" inlineStyle="width:auto;height:auto;">
+                            <af:showPopupBehavior popupId="p13" triggerType="mouseHover" align="endAfter" alignId="m14"/>
+                        </af:link>
+                    </af:menuBar>
+					<af:popup id="p13" contentDelivery="immediate">
+						<af:commandMenuItem id="cmi31" text="#{inventoryUIBundle.MENU_EXECUTE_RULE}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="executerule" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/admin/flow/ExecuteRuleFlow.xml#ExecuteRuleFlow']}"/>
+						<af:commandMenuItem id="cmi32" text="#{inventoryUIBundle.REBUILD_TOPOLOGY}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="rebuildtopology" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/admin/flow/RebuildTopologyFlow.xml#RebuildTopologyFlow']}"/>
+						<af:commandMenuItem id="cmi33" text="#{inventoryUIBundle.MENU_RULE_SET}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="ruleset" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/rule/flow/RuleSearchResultsFlow.xml#RuleSearchResultsFlow']}"/>
+						<af:commandMenuItem id="cmi34" text="#{inventoryUIBundle.MENU_SEQUENCE_SPEC}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="sequencespec" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/sequencespecification/flow/SequenceSpecificationSearchResultsFlow.xml#SequenceSpecificationSearchResultsFlow']}"/>
+						<af:commandMenuItem id="cmi35" text="#{inventoryUIBundle.MENU_SPECIFICATION_CHARACTERISTICS}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="charspec" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/characteristic/flow/CharacteristicSpecificationSearchResultsFlow.xml#CharacteristicSearchResultsFlow']}"/>
+						<af:commandMenuItem id="cmi36" text="#{inventoryUIBundle.MENU_SPECIFICATION}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="specification" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/specification/flow/SpecificationSearchResultsFlow.xml#SpecificationSearchResultsFlow']}"/>
+						<af:commandMenuItem id="cmi37" text="#{inventoryUIBundle.MENU_TAGS}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="tag" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/tag/flow/TagSearchResultsFlow.xml#TagSearchResultsFlow']}"/>
+					</af:popup>
+                    <af:outputFormatted id="t14" value="#{inventoryUIBundle.ADMIN_DESC}"/>
+                </af:panelBox>
+				
+				<af:panelBox id="pb16" text="#{inventoryUIBundle.MENU_OPERATIONAL_ANALYSIS}" showDisclosure="false" styleClass="AFMasonryTileSize1x2" inlineStyle="height:200px; width:250px; border:1px solid; border-radius:20px; padding:10px;text-align:center;"
+                binding="#{backingBeanScope.panel_OA}" rendered="#{pageFlowScope.LandingPageBean.render_OA}">
+                    <af:menuBar id="mb16">
+						<af:spacer id="spr14" width="50"/>
+                        <af:link icon="/images/landing/qual_puzzle_48_full@2x.png" id="m16" shortDesc="#{inventoryUIBundle.MENU_OPERATIONAL_ANALYSIS}" inlineStyle="width:auto;height:auto;">
+                            <af:showPopupBehavior popupId="p14" triggerType="mouseHover" align="endAfter" alignId="m16"/>
+                        </af:link>
+                    </af:menuBar>
+					<af:popup id="p14" contentDelivery="immediate">
+						<af:commandMenuItem id="cmi39" text="#{inventoryUIBundle.MENU_OUTAGE_IMPACTS}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="outageImpacts" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/outageImpacts/flow/OutageImpactsFlow.xml#OutageImpactsFlow']}"/>
+					<af:commandMenuItem id="cmi40" text="#{inventoryUIBundle.PATH_ANALYSIS}" actionListener="#{pageFlowScope.LandingPageBean.navigate}" action="pathAnalysisSearch" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/operationalanalysis/flow/PathAnalysisSearchFlow.xml#PathAnalysisSearchFlow']}"/>
+                                        </af:popup>
+                    <af:outputFormatted id="t16" value="#{inventoryUIBundle.MENU_OPERATIONAL_ANALYSIS}"/>
+                </af:panelBox>
+            </af:masonryLayout>
+        </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+    <f:facet name="metaContainer"/>
+  </af:pageTemplate>
+</jsp:root>
