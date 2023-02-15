@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/core/model/common" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:dom="http://xmlns.oracle.com/communications/sce/model/common/entity" xmlns:map="http://www.oracle.com/communications/studio/core/model/common/map" xsi:type="dom:BindingSetType" name="ACT_BROADBAND_RFS">
+  <displayName lang="[default]">ACT_BROADBAND_RFS</displayName>
+  <saveVersion>5</saveVersion>
+  <id>vLeNrg9mSXyVAWGGKThi7g</id>
+  <data:dataElementNode virtual="true">
+    <id>vLeNrg9mSXyVAWGGKThi7g</id>
+    <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+    <data:name>ACT_BROADBAND_RFS</data:name>
+    <data:displayName lang="[default]">ACT_BROADBAND_RFS</data:displayName>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <id>Bou6E1VhQZOy5bZqWNfC4Q</id>
+    <elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</elementType>
+    <data:dataElementId>vLeNrg9mSXyVAWGGKThi7g</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <dom:bindingContributor>
+    <id>6dF51NHDQ0CL-jMQKYdxng</id>
+    <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetcontributor</elementType>
+    <dom:derivedFromContext>true</dom:derivedFromContext>
+    <dom:contributorEntityRefs>
+      <entity>Broadband_RFS</entity>
+      <entityType>rsrcSrvc</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetcontributor.contributor.entityRef</relationship>
+    </dom:contributorEntityRefs>
+  </dom:bindingContributor>
+  <dom:bindingContributor>
+    <id>P+c3I6JJTkWCPR7FuHJ6mw</id>
+    <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetcontributor</elementType>
+    <dom:contributorElementRefs>
+      <entity>Broadband_RFS</entity>
+      <entityType>rsrcSrvc</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetcontributor.contributor.elementRef</relationship>
+      <element>YkS+UxGAS1mClzuiQHDluw</element>
+      <elementType>oracle.communications.sce.common.entity.entities.service.resource.rfstocomponentref</elementType>
+      <elementName>CPE_CI</elementName>
+    </dom:contributorElementRefs>
+    <dom:contributorEntityRefs>
+      <entity>Broadband_RFS</entity>
+      <entityType>rsrcSrvc</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetcontributor.contributor.entityRef</relationship>
+    </dom:contributorEntityRefs>
+    <dom:contributorEntityRefs>
+      <entity>CPE</entity>
+      <entityType>cmnResource</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetcontributor.contributor.entityRef</relationship>
+    </dom:contributorEntityRefs>
+  </dom:bindingContributor>
+  <dom:bindingSetRuleItemMapModel>
+    <id>8b20lsmmQ-uOsfLfMo5nqA</id>
+    <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemmapmodel</elementType>
+    <map:mapBlock xsi:type="dom:BindingSetRuleItemElementType">
+      <id>nZ9GASmARpi06RitzCSOcg</id>
+      <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitem</elementType>
+      <map:source xsi:type="dom:BindingSetRuleItemSourceElementType">
+        <id>T15oyxCGR8CS+oeHHR8iag</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource.bindingsetruleitem.source</relationship>
+          <element>P+c3I6JJTkWCPR7FuHJ6mw::4mNGrZgBQfapTKNKNTJa1w</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>SerialNumber</elementName>
+        </map:element>
+      </map:source>
+      <map:target xsi:type="dom:BindingSetRuleItemTargetElementType">
+        <id>atqqaomMR92LEbs66rWX2A</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget.bindingset.target</relationship>
+          <element>/ACT_BROADBAND_RFS/SerialNumber</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>SerialNumber</elementName>
+        </map:element>
+      </map:target>
+    </map:mapBlock>
+    <map:mapBlock xsi:type="dom:BindingSetRuleItemElementType">
+      <id>eUq-cvzmTUem8G1RR1MNDQ</id>
+      <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitem</elementType>
+      <map:source xsi:type="dom:BindingSetRuleItemSourceElementType">
+        <id>rqxMUm6KToCCOPgrNtzutA</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource.bindingsetruleitem.source</relationship>
+          <element>P+c3I6JJTkWCPR7FuHJ6mw::pJkV6X6HS1CW40coPFUvUg</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>Vendor</elementName>
+        </map:element>
+      </map:source>
+      <map:target xsi:type="dom:BindingSetRuleItemTargetElementType">
+        <id>ODh6Dm-YSLql8KopeG8lDQ</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget.bindingset.target</relationship>
+          <element>/ACT_BROADBAND_RFS/Vendor</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>Vendor</elementName>
+        </map:element>
+      </map:target>
+    </map:mapBlock>
+    <map:mapBlock xsi:type="dom:BindingSetRuleItemElementType">
+      <id>nkYw1PGaRuG0lhlos-WfIg</id>
+      <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitem</elementType>
+      <map:source xsi:type="dom:BindingSetRuleItemSourceElementType">
+        <id>X1NcwTAcTse+uH+Khv1HXw</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource.bindingsetruleitem.source</relationship>
+          <element>6dF51NHDQ0CL-jMQKYdxng::F+x98QvZQFiVziWLVui0mA</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>UploadSpeed</elementName>
+        </map:element>
+      </map:source>
+      <map:target xsi:type="dom:BindingSetRuleItemTargetElementType">
+        <id>MIsKTRysRDSdctp1++g+Eg</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget.bindingset.target</relationship>
+          <element>/ACT_BROADBAND_RFS/UploadSpeed</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>UploadSpeed</elementName>
+        </map:element>
+      </map:target>
+    </map:mapBlock>
+    <map:mapBlock xsi:type="dom:BindingSetRuleItemElementType">
+      <id>UxGal4-ZTJCKLd3huf8XRA</id>
+      <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitem</elementType>
+      <map:source xsi:type="dom:BindingSetRuleItemSourceElementType">
+        <id>FKgqqRhbSEOnQ7IE-R2H3Q</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource.bindingsetruleitem.source</relationship>
+          <element>P+c3I6JJTkWCPR7FuHJ6mw::fwuZZp9TRUuR8LgT88lhaQ</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>Model</elementName>
+        </map:element>
+      </map:source>
+      <map:target xsi:type="dom:BindingSetRuleItemTargetElementType">
+        <id>AcPp8RhUTf6nWelimeIPOA</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget.bindingset.target</relationship>
+          <element>/ACT_BROADBAND_RFS/Model</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>Model</elementName>
+        </map:element>
+      </map:target>
+    </map:mapBlock>
+    <map:mapBlock xsi:type="dom:BindingSetRuleItemElementType">
+      <id>tXKBuESxTg68OomFiqtBug</id>
+      <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitem</elementType>
+      <map:source xsi:type="dom:BindingSetRuleItemSourceElementType">
+        <id>YhHUFyp2Skm5OqZmZI44jw</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource.bindingsetruleitem.source</relationship>
+          <element>6dF51NHDQ0CL-jMQKYdxng::F8S4ZC+1QpujVnPQ1P6zjw</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>Password</elementName>
+        </map:element>
+      </map:source>
+      <map:target xsi:type="dom:BindingSetRuleItemTargetElementType">
+        <id>05UzOB0OQrSN1uMwYn7MQA</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget.bindingset.target</relationship>
+          <element>/ACT_BROADBAND_RFS/Password</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>Password</elementName>
+        </map:element>
+      </map:target>
+    </map:mapBlock>
+    <map:mapBlock xsi:type="dom:BindingSetRuleItemElementType">
+      <id>sPnhYth6SUCAZ8tH11USlA</id>
+      <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitem</elementType>
+      <map:source xsi:type="dom:BindingSetRuleItemSourceElementType">
+        <id>4KKM2sRMSyOT8vD7+tAT-A</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource.bindingsetruleitem.source</relationship>
+          <element>P+c3I6JJTkWCPR7FuHJ6mw::UQYLGswmQeOWiXPbDtl9nA</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>MACAddress</elementName>
+        </map:element>
+      </map:source>
+      <map:target xsi:type="dom:BindingSetRuleItemTargetElementType">
+        <id>I24XPTLaQCWMpq3QqEBHqw</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget.bindingset.target</relationship>
+          <element>/ACT_BROADBAND_RFS/MACAddress</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>MACAddress</elementName>
+        </map:element>
+      </map:target>
+    </map:mapBlock>
+    <map:mapBlock xsi:type="dom:BindingSetRuleItemElementType">
+      <id>Tn1my56BRNa-Su9vjXimKg</id>
+      <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitem</elementType>
+      <map:source xsi:type="dom:BindingSetRuleItemSourceElementType">
+        <id>7Xyp0XKzR7SRgd7id5Mq3Q</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource.bindingsetruleitem.source</relationship>
+          <element>P+c3I6JJTkWCPR7FuHJ6mw::EaX5bibbTwG5AfpO29rFxg</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>CPEType</elementName>
+        </map:element>
+      </map:source>
+      <map:target xsi:type="dom:BindingSetRuleItemTargetElementType">
+        <id>Po7xqDZETUq8f4NckXrh2Q</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget.bindingset.target</relationship>
+          <element>/ACT_BROADBAND_RFS/DeviceType</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>DeviceType</elementName>
+        </map:element>
+      </map:target>
+    </map:mapBlock>
+    <map:mapBlock xsi:type="dom:BindingSetRuleItemElementType">
+      <id>PIoQl2XgQ2OSySjtuvxlyg</id>
+      <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitem</elementType>
+      <map:source xsi:type="dom:BindingSetRuleItemSourceElementType">
+        <id>qtP6ZT65RdetaujSR3Aj1A</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource.bindingsetruleitem.source</relationship>
+          <element>P+c3I6JJTkWCPR7FuHJ6mw::JDH7+QhHTfScKJx6vysuLg</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>IPAddress</elementName>
+        </map:element>
+      </map:source>
+      <map:target xsi:type="dom:BindingSetRuleItemTargetElementType">
+        <id>bk8JdsM8SV2XdbuWSQCxlw</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget.bindingset.target</relationship>
+          <element>/ACT_BROADBAND_RFS/IPAddress</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>IPAddress</elementName>
+        </map:element>
+      </map:target>
+    </map:mapBlock>
+    <map:mapBlock xsi:type="dom:BindingSetRuleItemElementType">
+      <id>fvDE0KxoQXmWgyhnkoPx6Q</id>
+      <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitem</elementType>
+      <map:source xsi:type="dom:BindingSetRuleItemSourceElementType">
+        <id>P-4AgZN0TKOH-JoIp0YEQQ</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource.bindingsetruleitem.source</relationship>
+          <element>6dF51NHDQ0CL-jMQKYdxng::M7UQMqyUSJG36llZI49yqg</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>DownloadSpeed</elementName>
+        </map:element>
+      </map:source>
+      <map:target xsi:type="dom:BindingSetRuleItemTargetElementType">
+        <id>jOsoYK0mQn+6pvdtaqD6mQ</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget.bindingset.target</relationship>
+          <element>/ACT_BROADBAND_RFS/DownloadSpeed</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>DownloadSpeed</elementName>
+        </map:element>
+      </map:target>
+    </map:mapBlock>
+    <map:mapBlock xsi:type="dom:BindingSetRuleItemElementType">
+      <id>TSyhsw3xR1aq2ZEV7gxC9Q</id>
+      <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitem</elementType>
+      <map:source xsi:type="dom:BindingSetRuleItemSourceElementType">
+        <id>VkIvaybISo+G4vZPG-C5bg</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemsource.bindingsetruleitem.source</relationship>
+          <element>6dF51NHDQ0CL-jMQKYdxng::gwtR-c5ESZWiwNRz0oQ0QA</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>Username</elementName>
+        </map:element>
+      </map:source>
+      <map:target xsi:type="dom:BindingSetRuleItemTargetElementType">
+        <id>nKvsPkbKRraI60kdTu2J+w</id>
+        <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget</elementType>
+        <map:element>
+          <entity>ACT_BROADBAND_RFS</entity>
+          <entityType>bindingSet</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingsetruleitemtarget.bindingset.target</relationship>
+          <element>/ACT_BROADBAND_RFS/Username</element>
+          <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+          <elementName>Username</elementName>
+        </map:element>
+      </map:target>
+    </map:mapBlock>
+  </dom:bindingSetRuleItemMapModel>
+  <dom:bindingContext>
+    <id>OWZVHUACQBuodZxbGT5qLA</id>
+    <elementType>oracle.communications.sce.common.entity.entities.bindingset.bindingcontext</elementType>
+    <dom:context>/Broadband_RFS</dom:context>
+    <dom:bindingType>INPUT</dom:bindingType>
+    <dom:actionFamily>INCLUDEALL</dom:actionFamily>
+    <dom:contextEntityRefs>
+      <entity>Broadband_RFS</entity>
+      <entityType>rsrcSrvc</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingcontext.context.entityRef</relationship>
+    </dom:contextEntityRefs>
+    <dom:bindingSetActionEntityRefs>
+      <entity>TA_ACT_BROADBAND_RFS</entity>
+      <entityType>cmnAction</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingcontext.BindingSetActionRef</relationship>
+    </dom:bindingSetActionEntityRefs>
+    <dom:subject>
+      <entity>Broadband_RFS</entity>
+      <entityType>rsrcSrvc</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.bindingset.bindingcontext.contextSubjectRef</relationship>
+    </dom:subject>
+  </dom:bindingContext>
+</modelEntity>
