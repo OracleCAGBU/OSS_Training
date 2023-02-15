@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/orchestration" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:osm="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="OrderRecognitionRuleType" name="TOM_OrderRecognition">
+  <com:displayName>TOM_OrderRecognition</com:displayName>
+  <com:saveVersion>13</com:saveVersion>
+  <com:id>hGsl--+G--+h--+fSGUoyg</com:id>
+  <namespace>TOM_TechnicalOrderFulfillment</namespace>
+  <inputMessage>
+    <com:entity>OracleComms_OSM_TOM_Orchestration</com:entity>
+    <com:entityType>xsd</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.orderRecognitionRule.inputMessage</com:relationship>
+    <com:element>inputMessage</com:element>
+    <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+    <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/scf/scf</com:namespace>
+    <com:baseElement>xmlData</com:baseElement>
+    <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/scf/scf</com:baseNamespace>
+  </inputMessage>
+  <targetOrder>
+    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+    <com:entityType>order</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.orderRecognitionRule.targetOrder</com:relationship>
+  </targetOrder>
+  <recognitionRule xsi:type="osm:XqueryExpressionFileRuleType">
+    <osm:fileUri>http://www.tomtraining.com/recognition_rule/_OrderRecognition.xquery</osm:fileUri>
+  </recognitionRule>
+  <relevancy>5</relevancy>
+  <orderDataRule xsi:type="osm:XqueryExpressionFileRuleType">
+    <osm:fileUri>http://www.tomtraining.com/recognition_rule/_OrderData.xquery</osm:fileUri>
+  </orderDataRule>
+  <orderHeaderRules>
+    <reference xsi:type="osm:XqueryExpressionFileRuleType">
+      <osm:fileUri>http://www.tomtraining.com/recognition_rule/_OrderReference.xquery</osm:fileUri>
+    </reference>
+  </orderHeaderRules>
+  <orderTemplateContribution>
+    <ord:nodeExtension>
+      <ord:path>/inputMessage</ord:path>
+      <ord:xmlType>true</ord:xmlType>
+    </ord:nodeExtension>
+    <ord:orderData>
+      <com:entity>OracleComms_OSM_TOM_Orchestration</com:entity>
+      <com:entityType>xsd</com:entityType>
+      <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
+      <com:element>inputMessage</com:element>
+      <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+      <com:elementName>inputMessage</com:elementName>
+      <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/scf/scf</com:namespace>
+      <com:baseElement>xmlData</com:baseElement>
+      <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/scf/scf</com:baseNamespace>
+    </ord:orderData>
+  </orderTemplateContribution>
+</com:modelEntity>

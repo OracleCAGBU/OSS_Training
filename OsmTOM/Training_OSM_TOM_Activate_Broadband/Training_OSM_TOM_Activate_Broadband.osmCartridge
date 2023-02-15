@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/cartridge" xmlns:cart="http://xmlns.oracle.com/communications/sce/osm/model/cartridge" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xsi:type="provisioningCartridgeType" name="Training_OSM_TOM_Activate_Broadband">
+  <com:displayName lang="[default]">Training_OSM_TOM_Activate_Broadband</com:displayName>
+  <com:saveVersion>9</com:saveVersion>
+  <com:id>IMkwm0sPSMic1LxVZECM2g</com:id>
+  <com:provider>OSM Cartridge Provider</com:provider>
+  <com:version>
+    <com:major>1</com:major>
+    <com:minor>0</com:minor>
+    <com:maintenance>0</com:maintenance>
+    <com:servicePack>0</com:servicePack>
+    <com:eFix>0</com:eFix>
+  </com:version>
+  <com:targetApplicationVersion>
+    <com:major>7</com:major>
+    <com:minor>4</com:minor>
+    <com:maintenance>0</com:maintenance>
+  </com:targetApplicationVersion>
+  <com:sealed>false</com:sealed>
+  <com:deploymentList displayName="Orders" includeAll="true" relationship="com.mslv.studio.provisioning.cartridge.packageActions">
+    <com:modelID>com.mslv.studio.provisioning.order</com:modelID>
+    <com:elementLocationName>model</com:elementLocationName>
+  </com:deploymentList>
+  <com:deploymentList displayName="Java Libraries" includeAll="true" relationship="com.mslv.studio.provisioning.cartridge.packageLibrary">
+    <com:extension>jar</com:extension>
+    <com:elementLocationName>lib</com:elementLocationName>
+  </com:deploymentList>
+  <com:deploymentList displayName="Resources" includeAll="true" relationship="com.mslv.studio.provisioning.cartridge.packageResources">
+    <com:extension>*</com:extension>
+    <com:elementLocationName>resources</com:elementLocationName>
+  </com:deploymentList>
+  <com:propertyCategory name="Cartridge Management">
+    <com:property name="PURGE_CARTRIDGE_BEFORE_DEPLOY">
+      <com:defaultValue>false</com:defaultValue>
+    </com:property>
+    <com:property name="ENTITY_CONFLICT_ACTION_ON_DEPLOY">
+      <com:defaultValue>replace</com:defaultValue>
+    </com:property>
+    <com:property name="PURGE_ORDER_ON_UNDEPLOY">
+      <com:defaultValue>true</com:defaultValue>
+    </com:property>
+    <com:property name="FAST_CARTRIDGE_UNDEPLOY">
+      <com:defaultValue>true</com:defaultValue>
+    </com:property>
+    <com:property name="DEFAULT_CARTRIDGE">
+      <com:defaultValue>true</com:defaultValue>
+    </com:property>
+  </com:propertyCategory>
+  <com:propertyCategory name="Model">
+    <com:property name="DEFAULT_AUTOMATION_USER">
+      <com:defaultValue>oms-automation</com:defaultValue>
+    </com:property>
+    <com:property name="DEFAULT_REQUEST_QUEUE">
+      <com:defaultValue></com:defaultValue>
+    </com:property>
+    <com:property name="DEFAULT_RESPONSE_QUEUE">
+      <com:defaultValue>mslv/oms/oms1/internal/jms/events</com:defaultValue>
+    </com:property>
+    <com:property name="DEFAULT_MESSAGE_PROPERTY_SELECTOR">
+      <com:defaultValue></com:defaultValue>
+    </com:property>
+    <com:property name="ACTIVATION_ENVIRONMENT_ID">
+      <com:defaultValue>DEV</com:defaultValue>
+    </com:property>
+    <com:property name="CARTRIDGE_VERSION">
+      <com:defaultValue>1.0.0.0.0</com:defaultValue>
+    </com:property>
+  </com:propertyCategory>
+  <com:dependencies>
+    <com:minVersion inclusive="true">1.0.0.0.0</com:minVersion>
+    <com:maxVersion inclusive="false"></com:maxVersion>
+    <com:projectRef>
+      <com:entity>Training_OSM_TOM_Orchestration</com:entity>
+      <com:entityType>osmCartridge</com:entityType>
+      <com:relationship>unknown</com:relationship>
+    </com:projectRef>
+    <com:dependencyType>design</com:dependencyType>
+  </com:dependencies>
+  <com:dependencies>
+    <com:minVersion inclusive="true">1.0.0.0.0</com:minVersion>
+    <com:maxVersion inclusive="false"></com:maxVersion>
+    <com:projectRef>
+      <com:entity>SC_CISCO_ISP</com:entity>
+      <com:entityType>activationCartridge</com:entityType>
+      <com:relationship>unknown</com:relationship>
+    </com:projectRef>
+    <com:dependencyType>design</com:dependencyType>
+  </com:dependencies>
+  <com:dependencies>
+    <com:minVersion inclusive="true">1.0.0.0.0</com:minVersion>
+    <com:maxVersion inclusive="false"></com:maxVersion>
+    <com:projectRef>
+      <com:entity>Training_Model_Broadband_RFS_TA</com:entity>
+      <com:entityType>ddCartridge</com:entityType>
+      <com:relationship>unknown</com:relationship>
+    </com:projectRef>
+    <com:dependencyType>design</com:dependencyType>
+  </com:dependencies>
+  <com:dependencyViolationErrorLevel>error</com:dependencyViolationErrorLevel>
+  <com:cartridgePackageName></com:cartridgePackageName>
+  <com:catridgeElement>
+    <com:id>d9idm8zuR4ebvQNpMvBMpA</com:id>
+    <com:elementType>oracle.communications.studio.model.StudioCartridgeElement</com:elementType>
+  </com:catridgeElement>
+  <activationEnvID></activationEnvID>
+  <activationResponseQueue></activationResponseQueue>
+  <cacheMaxSize>50</cacheMaxSize>
+  <cacheTimeout>60</cacheTimeout>
+  <standalone>false</standalone>
+  <exportedEntityList includeAll="true" relationship="com.mslv.studio.provisioning.provisioningCartridge.exportedEntityList.entity">
+    <com:id>A6FKFvwZR+61F1IQBq1nnA</com:id>
+    <com:elementType>com.mslv.studio.provisioning.provisioningCartridge.exportedEntityList</com:elementType>
+    <modelID>com.mslv.studio.core.dataDictionary</modelID>
+    <elementLocationName>dataDictionary</elementLocationName>
+  </exportedEntityList>
+  <exportedEntityList includeAll="true" relationship="com.mslv.studio.provisioning.provisioningCartridge.exportedEntityList.entity">
+    <com:id>vqjpEDWKSCG2dWAQm5l55g</com:id>
+    <com:elementType>com.mslv.studio.provisioning.provisioningCartridge.exportedEntityList</com:elementType>
+    <modelID>oracle.communications.sce.osm.orchestration.decompositionRule</modelID>
+    <elementLocationName>model</elementLocationName>
+  </exportedEntityList>
+  <exportedEntityList includeAll="true" relationship="com.mslv.studio.provisioning.provisioningCartridge.exportedEntityList.entity">
+    <com:id>K+2ZSzs4RCqGr-pLz9LKZA</com:id>
+    <com:elementType>com.mslv.studio.provisioning.provisioningCartridge.exportedEntityList</com:elementType>
+    <modelID>com.mslv.studio.provisioning.order</modelID>
+    <elementLocationName>model</elementLocationName>
+  </exportedEntityList>
+  <exportedEntityList includeAll="true" relationship="com.mslv.studio.provisioning.provisioningCartridge.exportedEntityList.entity">
+    <com:id>BV5bCT4VTvC2D2P1ijneGw</com:id>
+    <com:elementType>com.mslv.studio.provisioning.provisioningCartridge.exportedEntityList</com:elementType>
+    <modelID>oracle.communications.sce.osm.orchestration.orderComponentSpec</modelID>
+    <elementLocationName>model</elementLocationName>
+  </exportedEntityList>
+  <exportedEntityList includeAll="true" relationship="com.mslv.studio.provisioning.provisioningCartridge.exportedEntityList.entity">
+    <com:id>dnaU7v1XS9aHP1VFh4o2PQ</com:id>
+    <com:elementType>com.mslv.studio.provisioning.provisioningCartridge.exportedEntityList</com:elementType>
+    <modelID>oracle.communications.sce.osm.orchestration.orderRecognitionRule</modelID>
+    <elementLocationName>model</elementLocationName>
+  </exportedEntityList>
+  <exportedEntityList includeAll="true" relationship="com.mslv.studio.provisioning.provisioningCartridge.exportedEntityList.entity">
+    <com:id>SQ1VpfBPRZKqqAJ5PjPCaQ</com:id>
+    <com:elementType>com.mslv.studio.provisioning.provisioningCartridge.exportedEntityList</com:elementType>
+    <modelID>com.mslv.studio.provisioning.process</modelID>
+    <modelID>oracle.communications.sce.osm.orchestration.orchestrationProcess</modelID>
+    <elementLocationName>model</elementLocationName>
+  </exportedEntityList>
+  <exportedEntityList includeAll="true" relationship="com.mslv.studio.provisioning.provisioningCartridge.exportedEntityList.entity">
+    <com:id>V78QB+TJS4ypFoKFdukTPQ</com:id>
+    <com:elementType>com.mslv.studio.provisioning.provisioningCartridge.exportedEntityList</com:elementType>
+    <modelID>oracle.communications.sce.osm.orchestration.productSpec</modelID>
+    <elementLocationName>model</elementLocationName>
+  </exportedEntityList>
+  <exportedEntityList includeAll="true" relationship="com.mslv.studio.provisioning.provisioningCartridge.exportedEntityList.entity">
+    <com:id>8qG82zLHSvOe0OseMxf-eA</com:id>
+    <com:elementType>com.mslv.studio.provisioning.provisioningCartridge.exportedEntityList</com:elementType>
+    <modelID>com.mslv.studio.provisioning.task.manualTask</modelID>
+    <modelID>com.mslv.studio.provisioning.task.automatedTask</modelID>
+    <elementLocationName>model</elementLocationName>
+  </exportedEntityList>
+  <referencedCartridges includeAll="true" relationship="com.mslv.studio.provisioning.provisioningCartridge.referencedCartridges.cartridge">
+    <com:id>IC8dWTPGSMKPfEnkeb7Emg</com:id>
+    <com:elementType>com.mslv.studio.provisioning.provisioningCartridge.referencedCartridges</com:elementType>
+  </referencedCartridges>
+  <referencedEntityList includeAll="true" relationship="com.mslv.studio.provisioning.provisioningCartridge.referencedEntityList.entity">
+    <com:id>BjjggoRJSJer-uO0j5qfdg</com:id>
+    <com:elementType>com.mslv.studio.provisioning.provisioningCartridge.referencedEntityList</com:elementType>
+    <modelID>com.mslv.studio.core.dataDictionary</modelID>
+    <elementLocationName>dataDictionary</elementLocationName>
+  </referencedEntityList>
+  <referencedEntityList includeAll="true" relationship="com.mslv.studio.provisioning.provisioningCartridge.referencedEntityList.entity">
+    <com:id>SlLIg9EuSqug08exsNH4kg</com:id>
+    <com:elementType>com.mslv.studio.provisioning.provisioningCartridge.referencedEntityList</com:elementType>
+    <modelID>oracle.communications.sce.osm.orchestration.decompositionRule</modelID>
+    <elementLocationName>model</elementLocationName>
+  </referencedEntityList>
+  <referencedEntityList includeAll="true" relationship="com.mslv.studio.provisioning.provisioningCartridge.referencedEntityList.entity">
+    <com:id>ga3bgA8TT8Gxjuhe8kFECQ</com:id>
+    <com:elementType>com.mslv.studio.provisioning.provisioningCartridge.referencedEntityList</com:elementType>
+    <modelID>com.mslv.studio.provisioning.order</modelID>
+    <elementLocationName>model</elementLocationName>
+  </referencedEntityList>
+  <referencedEntityList includeAll="true" relationship="com.mslv.studio.provisioning.provisioningCartridge.referencedEntityList.entity">
+    <com:id>5EQ+NGYpQA+p7DHwRNIe5A</com:id>
+    <com:elementType>com.mslv.studio.provisioning.provisioningCartridge.referencedEntityList</com:elementType>
+    <modelID>oracle.communications.sce.osm.orchestration.orderComponentSpec</modelID>
+    <elementLocationName>model</elementLocationName>
+  </referencedEntityList>
+  <referencedEntityList includeAll="true" relationship="com.mslv.studio.provisioning.provisioningCartridge.referencedEntityList.entity">
+    <com:id>0+JepJruSUCaU0RgVQaGUQ</com:id>
+    <com:elementType>com.mslv.studio.provisioning.provisioningCartridge.referencedEntityList</com:elementType>
+    <modelID>oracle.communications.sce.osm.orchestration.orderRecognitionRule</modelID>
+    <elementLocationName>model</elementLocationName>
+  </referencedEntityList>
+  <referencedEntityList includeAll="true" relationship="com.mslv.studio.provisioning.provisioningCartridge.referencedEntityList.entity">
+    <com:id>ByM-1yCMQxuBQpPTp9IEiA</com:id>
+    <com:elementType>com.mslv.studio.provisioning.provisioningCartridge.referencedEntityList</com:elementType>
+    <modelID>com.mslv.studio.provisioning.process</modelID>
+    <modelID>oracle.communications.sce.osm.orchestration.orchestrationProcess</modelID>
+    <elementLocationName>model</elementLocationName>
+  </referencedEntityList>
+  <referencedEntityList includeAll="true" relationship="com.mslv.studio.provisioning.provisioningCartridge.referencedEntityList.entity">
+    <com:id>TC+uNmzcT-SC63PxLK6ppw</com:id>
+    <com:elementType>com.mslv.studio.provisioning.provisioningCartridge.referencedEntityList</com:elementType>
+    <modelID>oracle.communications.sce.osm.orchestration.productSpec</modelID>
+    <elementLocationName>model</elementLocationName>
+  </referencedEntityList>
+  <referencedEntityList includeAll="true" relationship="com.mslv.studio.provisioning.provisioningCartridge.referencedEntityList.entity">
+    <com:id>O3j5CDlMStiyiHKyFpvJTQ</com:id>
+    <com:elementType>com.mslv.studio.provisioning.provisioningCartridge.referencedEntityList</com:elementType>
+    <modelID>com.mslv.studio.provisioning.task.manualTask</modelID>
+    <modelID>com.mslv.studio.provisioning.task.automatedTask</modelID>
+    <elementLocationName>model</elementLocationName>
+  </referencedEntityList>
+  <psrContainer>
+    <com:entity>Training_Model_Broadband_RFS_TA</com:entity>
+    <com:entityType>ddCartridge</com:entityType>
+    <com:relationship>Id.ddcartridge</com:relationship>
+  </psrContainer>
+</com:modelEntity>

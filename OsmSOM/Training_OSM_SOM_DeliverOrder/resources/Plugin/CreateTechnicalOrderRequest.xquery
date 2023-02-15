@@ -15,7 +15,7 @@ declare namespace xsl                               = "http://www.w3.org/1999/XS
 declare namespace oms                               = "urn:com:metasolv:oms:xmlapi:1";
 declare namespace toibns                            = "http://xmlns.oracle.com/communications/studio/ordermanagement/transformation";
 declare namespace cttransns                         = "COM_SalesOrderFulfillment";
-declare namespace techord                           = "http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/TechnicalOrder/V1";
+declare namespace techord                           = "http://www.tomtraining.com/inputMessage";
 declare namespace UUID                              = "java:java.util.UUID";
 
 declare option saxon:output "method=xml";
@@ -62,9 +62,9 @@ declare function local:createSoapMessage(
           xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
           xmlns:ebo="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/TechnicalOrder/V1"
           xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
-          xmlns:techord="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/TechnicalOrder/V1">
+          xmlns:techord="http://www.tomtraining.com/inputMessage">
     {
-        soaplib:createHeaderForCustomCredential($sUimUsername, $sUimPassword),
+        soaplib:createHeaderForCustomCredential($sUsername, $sPassword),
         local:addBody( $eTaskData ) 
     }
     </soapenv:Envelope>            
@@ -103,7 +103,7 @@ declare function local:addProcessTechnicalOrderEBM(
     let $tomEbmId := systeminteractionmodule:generateUniqueId()
     let $tomOrderId := fn:normalize-space($eTaskData/oms:Reference/text()) 
     (: <ebo:ProcessTechnicalOrderEBM> :)    
-    let $elementname := fn:QName($eboNamespace, concat($eboPrefix, $TechnicalOrderEBM))
+    let $elementname := fn:QName($techebm:techordNamespace, concat($techebm:techordPrefix, $TechnicalOrderEBM))
 
     return
         element{$elementname}{

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet
+      title="Verify Order Recognition Rule">
+  <intro>
+      <description>
+         This cheat sheet guides you through the order recognition rule created by the design pattern.
+      </description>
+   </intro>
+    <item
+         title="Verify Order Recognition Rules: TOM_OrderRecognition">
+      <description>
+		The recognition rule has the <b>Description</b>, <b>Namespace</b>, <b>Input Message</b>, and <b>Target Order</b> set according to the entries in the design pattern. 
+		<br/><br/>
+		Template XQuery modules for <b>Recognition Rule</b> in the <b>Recognition</b> subtab and <b>Order Data Rule</b> in the <b>Transformation</b> subtab have been placed in the <b>resources/OrderRecognitionRule</b> directory, and the location of these files has been added to the catalog.xml file using the ResourceURI value entered in the design pattern. These XQuery templates need to be modified for your specific business logic.
+	 </description>
+      <subitem
+            label="Open Recognition Rule: TOM_OrderRecognition"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_TOM_Orchestration/model/TOM_OrderRecognition.orderRecognitionRule)"/>
+      </subitem>
+      <subitem
+            label="Open _OrderData.xquery"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_TOM_Orchestration/resources/OrderRecognitionRule/_OrderData.xquery)"/>
+      </subitem>
+      <subitem
+            label="Open _OrderRecognition.xquery"
+            skip="true">
+         <command
+               required="false"
+               serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_TOM_Orchestration/resources/OrderRecognitionRule/_OrderRecognition.xquery)"/>
+      </subitem>
+   </item>
+   </cheatsheet>

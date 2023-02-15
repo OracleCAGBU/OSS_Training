@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:proc="http://xmlns.oracle.com/communications/sce/osm/model/process" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/process" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:task="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="proc:processType" name="ActivateBroadbandProcess" workstream="false">
+  <com:displayName>ActivateBroadbandProcess</com:displayName>
+  <com:saveVersion>6</com:saveVersion>
+  <com:id>1GfQuo4NRHOsv6lwgVQnKg</com:id>
+  <proc:orderType>
+    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+    <com:entityType>order</com:entityType>
+    <com:relationship>orderRef</com:relationship>
+  </proc:orderType>
+  <proc:expectedDuration>P0Y0M0DT0H0M86400S</proc:expectedDuration>
+  <proc:startTask>Start1</proc:startTask>
+  <proc:activity id="Start1" name="Start">
+    <proc:diagramLocation>
+      <proc:Xcoordinate>50.0</proc:Xcoordinate>
+      <proc:Ycoordinate>50.0</proc:Ycoordinate>
+    </proc:diagramLocation>
+  </proc:activity>
+  <proc:activity xsi:type="proc:taskRef" id="Task1" name="ActivateBroadbandTask">
+    <proc:diagramLocation>
+      <proc:Xcoordinate>175.0</proc:Xcoordinate>
+      <proc:Ycoordinate>48.0</proc:Ycoordinate>
+    </proc:diagramLocation>
+    <proc:task>
+      <com:entity>ActivateBroadband</com:entity>
+      <com:entityType>activationTask</com:entityType>
+      <com:relationship>taskRef</com:relationship>
+    </proc:task>
+  </proc:activity>
+  <proc:activity xsi:type="proc:endType" id="End2" name="End">
+    <proc:diagramLocation>
+      <proc:Xcoordinate>360.0</proc:Xcoordinate>
+      <proc:Ycoordinate>52.0</proc:Ycoordinate>
+    </proc:diagramLocation>
+  </proc:activity>
+  <proc:activity xsi:type="proc:taskRef" id="Task5" name="BroadbandFalloutTask">
+    <proc:diagramLocation>
+      <proc:Xcoordinate>261.0</proc:Xcoordinate>
+      <proc:Ycoordinate>171.0</proc:Ycoordinate>
+    </proc:diagramLocation>
+    <proc:task>
+      <com:entity>BroadbandFalloutTask</com:entity>
+      <com:entityType>manualTask</com:entityType>
+      <com:relationship>taskRef</com:relationship>
+    </proc:task>
+  </proc:activity>
+  <proc:transition id="Flow3" name="success">
+    <proc:from>Task1</proc:from>
+    <proc:to>End2</proc:to>
+    <proc:status>success</proc:status>
+    <proc:mandatoryCheck>false</proc:mandatoryCheck>
+  </proc:transition>
+  <proc:transition id="Flow6" name="finish">
+    <proc:from>Task5</proc:from>
+    <proc:to>End2</proc:to>
+    <proc:status>finish</proc:status>
+    <proc:mandatoryCheck>true</proc:mandatoryCheck>
+  </proc:transition>
+  <proc:transition id="Flow7" name="retry">
+    <proc:from>Task5</proc:from>
+    <proc:to>Task1</proc:to>
+    <proc:status>retry</proc:status>
+    <proc:mandatoryCheck>true</proc:mandatoryCheck>
+  </proc:transition>
+  <proc:transition id="Flow8" name="failed">
+    <proc:from>Task1</proc:from>
+    <proc:to>Task5</proc:to>
+    <proc:status>failed</proc:status>
+    <proc:mandatoryCheck>false</proc:mandatoryCheck>
+  </proc:transition>
+  <proc:transition id="Flow9" name="updateOrderFailed">
+    <proc:from>Task1</proc:from>
+    <proc:to>Task5</proc:to>
+    <proc:status>updateOrderFailed</proc:status>
+    <proc:mandatoryCheck>false</proc:mandatoryCheck>
+  </proc:transition>
+  <proc:transition id="Flow10" name="">
+    <proc:from>Start1</proc:from>
+    <proc:to>Task1</proc:to>
+    <proc:status></proc:status>
+    <proc:mandatoryCheck>true</proc:mandatoryCheck>
+  </proc:transition>
+</com:modelEntity>

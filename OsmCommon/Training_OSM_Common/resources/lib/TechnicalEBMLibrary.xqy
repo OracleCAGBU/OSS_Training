@@ -21,7 +21,7 @@ declare variable $techebm:printStream                           := javaSystem:ou
 (: Prefixes required to create QNames :)
 declare variable $techebm:corecomPrefix                         := "corecom:";
 declare variable $techebm:corecomNamespace                      := "http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2";
-declare variable $techebm:techordNamespace                      := "http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/TechnicalOrder/V1";
+declare variable $techebm:techordNamespace                      := "http://www.tomtraining.com/inputMessage";
 declare variable $techebm:techordPrefix                         := "techord:";
 
 (: String constants :)

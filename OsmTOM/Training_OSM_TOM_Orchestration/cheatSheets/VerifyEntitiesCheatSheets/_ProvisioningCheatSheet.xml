@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet
+      title="Verify Provisioning Entities">
+  <intro>
+      <description>
+        This cheat sheet guides you through the provisioning entities created by the design pattern.
+      </description>
+   </intro>
+   <item
+         skip="true"
+         title="Verify Data Schema: OracleComms_OSM_TOM_Orchestration">
+      <description>
+		The data schema has a structure named <b>inputMessage</b>. This structure is used as the <b>Input Message</b> in the order recognition rule, and represents the incoming order. Other elements in the data schema include properties defined for the order item specification, like <b>LineId</b> and <b> LineName</b>.
+      </description>
+	  <command
+            required="false"
+            serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_TOM_Orchestration/dataDictionary/OracleComms_OSM_TOM_Orchestration.xsd)"/>
+   </item>
+    <item
+         skip="true"
+         title="Verify Role: TOM_Role">
+      <description>
+		The role created by the design pattern has all of the permissions selected by default.
+      </description>
+	  <command
+            required="false"
+            serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_TOM_Orchestration/model/TOM_Role.rolePermissions)"/>
+   </item>
+   <item
+         skip="true"
+         title="Verify Order: TOM_ProvisionTechnicalOrderFulfillment">
+      <description>
+          Attributes that have been defined for the order item specification are added to the ControlData structure, which you can see in the <b>Order Template</b> tab.
+	      <br/><br/>Select the <b>Details</b> tab on the order to see the values for <b>LifeCyclePolicy</b>,<b> Default Process</b>, and <b>Creation Task</b> that have been populated. 
+	      <br/><br/>Select the <b>Amendable</b> tab to view or set whether the order can be amended. If the order is amendable, before you can deploy the cartridge you must define a <b>Key</b> value in this tab for the order to be created successfully.  You <i>must</i> replace the default value of <b>true()</b> in the <b>Expression</b> field with an XPath expression pointing to the data value on the order that is used to match the amendment order with the existing OSM order.
+	      <br/><br/>The <b>Role</b> that has been created and assigned to the order is shown in the <b>Permissions</b> tab.
+      </description>
+	  <command
+            required="false"
+            serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_TOM_Orchestration/model/TOM_ProvisionTechnicalOrderFulfillment.order)"/>
+   </item>
+   <item
+         skip="true"
+         title="Verify Order Lifecycle Policy: TOM_OrderLifecyclePolicy">
+      <description>
+		By default, the following transitions are enabled:
+                <br/><b>Completed &gt; Update Order,</b> 
+                <br/><b>In Progress &gt; Raise Exception,</b> 
+                <br/><b>In Progress &gt; Update Order,</b> 
+                <br/><b>Not Started &gt; Delete Order,</b> 
+                <br/><b>Not Started &gt; Update Order</b>
+      </description>
+	  <command
+            required="false"
+            serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_TOM_Orchestration/model/TOM_OrderLifecyclePolicy.orderPolicy)"/>
+   </item>
+      <item
+         skip="true"
+         title="Verify Task: TOM_CreationTask">
+      <description>
+        	This manual task is used as the creation task for the order. The order item attributes have been added to the ControlData structure in the <b>Task Data</b> tab. The role is assigned to the task in the <b>Permissions</b> tab.
+	 </description>
+	 <command
+            required="false"
+            serialization="org.eclipse.ui.navigate.openResource(filePath=/Training_OSM_TOM_Orchestration/model/TOM_CreationTask.manualTask)"/>
+   </item>
+</cheatsheet>
