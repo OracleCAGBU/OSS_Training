@@ -150,4 +150,21 @@
       <xs:maxLength value="40"/>
     </xs:restriction>
   </xs:simpleType>
+    <xs:complexType name="Properties">
+    <xs:sequence>
+                                                          <xs:element maxOccurs="unbounded" minOccurs="0" name="ServiceAction" type="tns:ServiceAction"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="AccessTechnology" type="tns:AccessTechnology"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="CustomerSegment" type="tns:CustomerSegment"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="PayType" type="tns:PayType"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="PlanName" type="tns:PlanName"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="DownloadSpeed" type="tns:DownloadSpeed"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="UploadSpeed" type="tns:UploadSpeed"/>
+        </xs:sequence>
+  </xs:complexType>
+    <xs:complexType name="User_Credentials">
+    <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="Username" type="tns:Username"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Password" type="tns:Password"/>
+        </xs:sequence>
+  </xs:complexType>
 </xs:schema>

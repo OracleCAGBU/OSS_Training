@@ -393,6 +393,223 @@
         <dataElements/>
         <primitiveType>string</primitiveType>
       </element>
+      <element id="ds=Training_Model_Service_DataModel+dataElement=Properties" type="dataElement" typeName="Schema Element" kind="Element" name="Properties" path="/Properties">
+        <displayName lang="default">Properties</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements>
+          <element id="ds=Training_Model_Service_DataModel+dataElement=Properties/ServiceAction" type="dataElement" typeName="Schema Element" kind="Element" name="ServiceAction" path="/Properties/ServiceAction">
+            <displayName lang="default">Service Action</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=Training_Model_Service_DataModel+dataElement=ServiceAction" type="Schema Element" name="Type" kind="Element">
+                <target name="ServiceAction" typeName="Schema Element"/>
+                <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=Training_Model_Service_DataModel+dataElement=Properties/AccessTechnology" type="dataElement" typeName="Schema Element" kind="Element" name="AccessTechnology" path="/Properties/AccessTechnology">
+            <displayName lang="default">Access Technology</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=Training_Model_Service_DataModel+dataElement=AccessTechnology" type="Schema Element" name="Type" kind="Element">
+                <target name="AccessTechnology" typeName="Schema Element"/>
+                <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=Training_Model_Service_DataModel+dataElement=Properties/CustomerSegment" type="dataElement" typeName="Schema Element" kind="Element" name="CustomerSegment" path="/Properties/CustomerSegment">
+            <displayName lang="default">Customer Segment</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=Training_Model_Service_DataModel+dataElement=CustomerSegment" type="Schema Element" name="Type" kind="Element">
+                <target name="CustomerSegment" typeName="Schema Element"/>
+                <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=Training_Model_Service_DataModel+dataElement=Properties/PayType" type="dataElement" typeName="Schema Element" kind="Element" name="PayType" path="/Properties/PayType">
+            <displayName lang="default">Pay Type</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=Training_Model_Service_DataModel+dataElement=PayType" type="Schema Element" name="Type" kind="Element">
+                <target name="PayType" typeName="Schema Element"/>
+                <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=Training_Model_Service_DataModel+dataElement=Properties/PlanName" type="dataElement" typeName="Schema Element" kind="Element" name="PlanName" path="/Properties/PlanName">
+            <displayName lang="default">Plan Name</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=Training_Model_Service_DataModel+dataElement=PlanName" type="Schema Element" name="Type" kind="Element">
+                <target name="PlanName" typeName="Schema Element"/>
+                <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=Training_Model_Service_DataModel+dataElement=Properties/DownloadSpeed" type="dataElement" typeName="Schema Element" kind="Element" name="DownloadSpeed" path="/Properties/DownloadSpeed">
+            <displayName lang="default">Download Speed</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=Training_Model_Service_DataModel+dataElement=DownloadSpeed" type="Schema Element" name="Type" kind="Element">
+                <target name="DownloadSpeed" typeName="Schema Element"/>
+                <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=Training_Model_Service_DataModel+dataElement=Properties/UploadSpeed" type="dataElement" typeName="Schema Element" kind="Element" name="UploadSpeed" path="/Properties/UploadSpeed">
+            <displayName lang="default">Upload Speed</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=Training_Model_Service_DataModel+dataElement=UploadSpeed" type="Schema Element" name="Type" kind="Element">
+                <target name="UploadSpeed" typeName="Schema Element"/>
+                <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+        </dataElements>
+        <primitiveType>structure</primitiveType>
+      </element>
+      <element id="ds=Training_Model_Service_DataModel+dataElement=User_Credentials" type="dataElement" typeName="Schema Element" kind="Element" name="User_Credentials" path="/User_Credentials">
+        <displayName lang="default">User Credentials</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements>
+          <element id="ds=Training_Model_Service_DataModel+dataElement=User_Credentials/Username" type="dataElement" typeName="Schema Element" kind="Element" name="Username" path="/User_Credentials/Username">
+            <displayName lang="default">Username</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=Training_Model_Service_DataModel+dataElement=Username" type="Schema Element" name="Type" kind="Element">
+                <target name="Username" typeName="Schema Element"/>
+                <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=Training_Model_Service_DataModel+dataElement=User_Credentials/Password" type="dataElement" typeName="Schema Element" kind="Element" name="Password" path="/User_Credentials/Password">
+            <displayName lang="default">Password</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=Training_Model_Service_DataModel+dataElement=Password" type="Schema Element" name="Type" kind="Element">
+                <target name="Password" typeName="Schema Element"/>
+                <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+        </dataElements>
+        <primitiveType>structure</primitiveType>
+      </element>
     </dataElements>
   </entity>
 </model:Model>

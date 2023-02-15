@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:ResourceFacingService" id="rfs=Broadband_RFS" type="rfs" typeName="Resource Facing Service" name="Broadband_RFS" resource="\Training_Model_Broadband_Service\model\RFS\Broadband_RFS.rsrcSrvc">
+    <displayName lang="default">Broadband_RFS</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="mprj=Training_Model_Broadband_Service" type="Model Project" name="Dependency">
+        <target name="Training_Model_Broadband_Service" typeName="Model Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="rfs=Broadband_RFS+dataElement=M3t9PLslQaGKUveZH0Ylpg" type="dataElement" typeName="Data Element" kind="Element" name="User_Credentials" path="/Broadband_RFS/User_Credentials">
+        <displayName lang="default">User Credentials</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <base>
+          <relation ref="ds=Training_Model_Service_DataModel+dataElement=User_Credentials" type="Schema Element" name="Type" kind="Element">
+            <target name="User_Credentials" typeName="Schema Element"/>
+            <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements>
+          <element id="rfs=Broadband_RFS+dataElement=gwtR-c5ESZWiwNRz0oQ0QA" type="dataElement" typeName="Data Element" kind="Element" name="Username" path="/Broadband_RFS/User_Credentials/Username">
+            <displayName lang="default">Username</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=Training_Model_Service_DataModel+dataElement=User_Credentials/Username" type="Schema Element" name="Type" kind="Element">
+                <target name="Username" typeName="Schema Element"/>
+                <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="rfs=Broadband_RFS+dataElement=F8S4ZC+1QpujVnPQ1P6zjw" type="dataElement" typeName="Data Element" kind="Element" name="Password" path="/Broadband_RFS/User_Credentials/Password">
+            <displayName lang="default">Password</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=Training_Model_Service_DataModel+dataElement=User_Credentials/Password" type="Schema Element" name="Type" kind="Element">
+                <target name="Password" typeName="Schema Element"/>
+                <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+        </dataElements>
+        <tag>
+          <name>Persisted</name>
+          <description>Persisted Attribute</description>
+        </tag>
+        <primitiveType>structure</primitiveType>
+      </element>
+      <element id="rfs=Broadband_RFS+dataElement=h08l4DHVR3uFCDef92JJFg" type="dataElement" typeName="Data Element" kind="Element" name="Properties" path="/Broadband_RFS/Properties">
+        <displayName lang="default">Properties</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <base>
+          <relation ref="ds=Training_Model_Service_DataModel+dataElement=Properties" type="Schema Element" name="Type" kind="Element">
+            <target name="Properties" typeName="Schema Element"/>
+            <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements>
+          <element id="rfs=Broadband_RFS+dataElement=28-sx0I+SMqc-a35RwTJNQ" type="dataElement" typeName="Data Element" kind="Element" name="ServiceAction" path="/Broadband_RFS/Properties/ServiceAction">
+            <displayName lang="default">Service Action</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=Training_Model_Service_DataModel+dataElement=Properties/ServiceAction" type="Schema Element" name="Type" kind="Element">
+                <target name="ServiceAction" typeName="Schema Element"/>
+                <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="rfs=Broadband_RFS+dataElement=sChYJM5RSXG00hZ4LZBJjw" type="dataElement" typeName="Data Element" kind="Element" name="AccessTechnology" path="/Broadband_RFS/Properties/AccessTechnology">
+            <displayName lang="default">Access Technology</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=Training_Model_Service_DataModel+dataElement=Properties/AccessTechnology" type="Schema Element" name="Type" kind="Element">
+                <target name="AccessTechnology" typeName="Schema Element"/>
+                <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="rfs=Broadband_RFS+dataElement=ZIHx-02yQdSHlxOOD+PeLA" type="dataElement" typeName="Data Element" kind="Element" name="CustomerSegment" path="/Broadband_RFS/Properties/CustomerSegment">
+            <displayName lang="default">Customer Segment</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=Training_Model_Service_DataModel+dataElement=Properties/CustomerSegment" type="Schema Element" name="Type" kind="Element">
+                <target name="CustomerSegment" typeName="Schema Element"/>
+                <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="rfs=Broadband_RFS+dataElement=8603hthjTLGiis1pjKl6qQ" type="dataElement" typeName="Data Element" kind="Element" name="PayType" path="/Broadband_RFS/Properties/PayType">
+            <displayName lang="default">Pay Type</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=Training_Model_Service_DataModel+dataElement=Properties/PayType" type="Schema Element" name="Type" kind="Element">
+                <target name="PayType" typeName="Schema Element"/>
+                <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="rfs=Broadband_RFS+dataElement=xSLc3BzjTA22xd6hDgttLQ" type="dataElement" typeName="Data Element" kind="Element" name="PlanName" path="/Broadband_RFS/Properties/PlanName">
+            <displayName lang="default">Plan Name</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=Training_Model_Service_DataModel+dataElement=Properties/PlanName" type="Schema Element" name="Type" kind="Element">
+                <target name="PlanName" typeName="Schema Element"/>
+                <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="rfs=Broadband_RFS+dataElement=M7UQMqyUSJG36llZI49yqg" type="dataElement" typeName="Data Element" kind="Element" name="DownloadSpeed" path="/Broadband_RFS/Properties/DownloadSpeed">
+            <displayName lang="default">Download Speed</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=Training_Model_Service_DataModel+dataElement=Properties/DownloadSpeed" type="Schema Element" name="Type" kind="Element">
+                <target name="DownloadSpeed" typeName="Schema Element"/>
+                <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="rfs=Broadband_RFS+dataElement=F+x98QvZQFiVziWLVui0mA" type="dataElement" typeName="Data Element" kind="Element" name="UploadSpeed" path="/Broadband_RFS/Properties/UploadSpeed">
+            <displayName lang="default">Upload Speed</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">40</maxLength>
+            <base>
+              <relation ref="ds=Training_Model_Service_DataModel+dataElement=Properties/UploadSpeed" type="Schema Element" name="Type" kind="Element">
+                <target name="UploadSpeed" typeName="Schema Element"/>
+                <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+        </dataElements>
+        <tag>
+          <name>Persisted</name>
+          <description>Persisted Attribute</description>
+        </tag>
+        <primitiveType>structure</primitiveType>
+      </element>
+    </dataElements>
+    <realization>
+      <element id="rfs=Broadband_RFS+rfs.rfsr=EmWX2YHERhCeI2p1tl6IWA" type="rfs.rfsr" typeName="Resource Facing Service Realization" kind="Element" name="Broadband_RFS Resource Facing Service Realization" path="Broadband_RFS Resource Facing Service Realization">
+        <designPattern>defaultRFSRealization</designPattern>
+        <rfsSystem>UIM</rfsSystem>
+        <rfsRealization>UIM_SERVICE</rfsRealization>
+      </element>
+    </realization>
+    <fulfillmentPatterns>
+      <element id="rfs=Broadband_RFS+rfs.rfsfp=6I-9dgb-R7mRHE1KOEreSg" type="rfs.rfsfp" typeName="Resource Facing Service Fulfillment Pattern" kind="Element" name="Broadband_RFS Resource Facing Service Fulfillment Pattern" path="Broadband_RFS Resource Facing Service Fulfillment Pattern">
+        <key>Broadband_RFS</key>
+      </element>
+    </fulfillmentPatterns>
+    <components>
+      <element id="rfs=Broadband_RFS+rfs.rfstcr=YkS+UxGAS1mClzuiQHDluw" type="rfs.rfstcr" typeName="RFS To Component Ref" kind="Element" name="CPE_CI" path="/CPE_CI">
+        <note lang="default"></note>
+        <options>
+          <relation ref="res=CPE" type="Resource" name="Options" kind="Entity">
+            <target name="CPE" typeName="Resource"/>
+          </relation>
+        </options>
+        <maxOccurs>1</maxOccurs>
+        <relationshipType>Composition.Exclusive</relationshipType>
+        <component>Resource</component>
+      </element>
+      <element id="rfs=Broadband_RFS+rfs.rfstcr=581kzOfWQAq0EVBEG-62ug" type="rfs.rfstcr" typeName="RFS To Component Ref" kind="Element" name="Service_Address_CI" path="/Service_Address_CI">
+        <note lang="default"></note>
+        <options>
+          <relation ref="res=Address" type="Resource" name="Options" kind="Entity">
+            <target name="Address" typeName="Resource"/>
+          </relation>
+        </options>
+        <maxOccurs>1</maxOccurs>
+        <relationshipType>Composition.Reference</relationshipType>
+        <component>Resource</component>
+      </element>
+    </components>
+  </entity>
+</model:Model>

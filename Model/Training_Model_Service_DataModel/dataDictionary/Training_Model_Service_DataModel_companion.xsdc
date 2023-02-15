@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:provisioning="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:specification="http://www.mslv.com/studio/inventory/model/specification" xsi:type="com:dataDictionaryCompanionType" name="Training_Model_Service_DataModel_companion">
   <com:displayName>Training_Model_Service_DataModel</com:displayName>
-  <com:saveVersion>10</com:saveVersion>
+  <com:saveVersion>17</com:saveVersion>
   <com:id>DW8bu6nGSmC5Z00-o7eA0w</com:id>
   <com:dataDictionaryNode>
     <com:entity>Training_Model_Service_DataModel</com:entity>
@@ -1541,6 +1541,586 @@
         <com:id>dGCgwGeuR7WDLXfctwT6jQ</com:id>
         <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
         <data:dataElementId>ProductAction</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </com:detail>
+    </com:dataDictionaryDetails>
+  </com:dataDictionaryNode>
+  <com:dataDictionaryNode>
+    <com:entity>Training_Model_Service_DataModel</com:entity>
+    <com:entityType>xsd</com:entityType>
+    <com:relationship>com.mslv.studio.core.data.dictionary.extension</com:relationship>
+    <com:element>Properties</com:element>
+    <com:elementType>Properties</com:elementType>
+    <com:baseElement>(Reusable Structure)</com:baseElement>
+    <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+    <com:dataElementId>Properties</com:dataElementId>
+    <com:displayName lang="en"></com:displayName>
+    <com:displayName>Properties</com:displayName>
+    <com:extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </com:extension>
+    <com:minCardinality>0</com:minCardinality>
+    <com:maxCardinality>1</com:maxCardinality>
+    <com:dataDictionaryDetails>
+      <com:detail xsi:type="data:dataElementInformationDetails">
+        <com:id>Wyw+RXXrQROFdUnNfaGCig</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+        <data:dataElementId>Properties</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="layout:hintDetail">
+        <com:id>SoEuAMj1QwCy2+RV4Cq4KA</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+        <data:dataElementId>Properties</data:dataElementId>
+        <layout:hints/>
+      </com:detail>
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <com:id>aK8PPQA2QwyMfQbKykq2Mw</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
+        <data:dataElementId>Properties</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="specification:CharElementDetailType">
+        <com:id>4RTegMR6SsuzTNwz-q5obQ</com:id>
+        <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+        <data:dataElementId>Properties</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementCommonDetail">
+        <com:id>ZWT9sE-zTGKrqWbPrSXddQ</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+        <data:dataElementId>Properties</data:dataElementId>
+        <data:defaultValue></data:defaultValue>
+        <data:key></data:key>
+        <data:deprecated>false</data:deprecated>
+        <data:abstract>false</data:abstract>
+        <data:sensitive>false</data:sensitive>
+        <data:minLength>0</data:minLength>
+        <data:maxLength>40</data:maxLength>
+        <data:minMultiplicity>0</data:minMultiplicity>
+        <data:maxMultiplicity>1</data:maxMultiplicity>
+      </com:detail>
+    </com:dataDictionaryDetails>
+  </com:dataDictionaryNode>
+  <com:dataDictionaryNode>
+    <com:entity>Training_Model_Service_DataModel</com:entity>
+    <com:entityType>xsd</com:entityType>
+    <com:relationship>com.mslv.studio.core.data.dictionary.extension</com:relationship>
+    <com:element>User_Credentials</com:element>
+    <com:elementType>User_Credentials</com:elementType>
+    <com:baseElement>(Reusable Structure)</com:baseElement>
+    <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+    <com:dataElementId>User_Credentials</com:dataElementId>
+    <com:displayName lang="en"></com:displayName>
+    <com:displayName>User Credentials</com:displayName>
+    <com:extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </com:extension>
+    <com:minCardinality>0</com:minCardinality>
+    <com:maxCardinality>1</com:maxCardinality>
+    <com:dataDictionaryDetails>
+      <com:detail xsi:type="data:dataElementCommonDetail">
+        <com:id>YZQExljYQqmy1G1t0udYDg</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+        <data:dataElementId>User_Credentials</data:dataElementId>
+        <data:defaultValue></data:defaultValue>
+        <data:key></data:key>
+        <data:deprecated>false</data:deprecated>
+        <data:abstract>false</data:abstract>
+        <data:sensitive>false</data:sensitive>
+        <data:minLength>0</data:minLength>
+        <data:maxLength>40</data:maxLength>
+        <data:minMultiplicity>0</data:minMultiplicity>
+        <data:maxMultiplicity>1</data:maxMultiplicity>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementInformationDetails">
+        <com:id>w-m8MuSLTKO4aa+VFc+KKA</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+        <data:dataElementId>User_Credentials</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="layout:hintDetail">
+        <com:id>fBt8Pz9RSVuhM5Heon2cgA</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+        <data:dataElementId>User_Credentials</data:dataElementId>
+        <layout:hints/>
+      </com:detail>
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <com:id>uZYjcwWlQDGYorDc-bRf+A</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
+        <data:dataElementId>User_Credentials</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="specification:CharElementDetailType">
+        <com:id>xcY+TlAtSQSvCRR-ZITIjw</com:id>
+        <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+        <data:dataElementId>User_Credentials</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </com:detail>
+    </com:dataDictionaryDetails>
+  </com:dataDictionaryNode>
+  <com:dataDictionaryNode>
+    <com:entity>Training_Model_Service_DataModel</com:entity>
+    <com:entityType>xsd</com:entityType>
+    <com:relationship>com.mslv.studio.core.data.dictionary.extension</com:relationship>
+    <com:element>User_Credentials/Username</com:element>
+    <com:elementType>tns:Username</com:elementType>
+    <com:baseElement>Username</com:baseElement>
+    <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_Model_Service_DataModel/Training_Model_Service_DataModel</com:baseNamespace>
+    <com:dataElementId>User_Credentials/Username</com:dataElementId>
+    <com:displayName lang="en"></com:displayName>
+    <com:displayName>Username</com:displayName>
+    <com:extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </com:extension>
+    <com:dataDictionaryDetails>
+      <com:detail xsi:type="data:dataElementCommonDetail">
+        <com:id>O6wXdfZ0R-2qBdL6N1DzJA</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+        <data:dataElementId>User_Credentials/Username</data:dataElementId>
+        <data:key></data:key>
+        <data:deprecated>false</data:deprecated>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementEnumerationDetail">
+        <com:id>PYsQUUlJTMqr2CtXwXQ6BQ</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+        <data:dataElementId>User_Credentials/Username</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementInformationDetails">
+        <com:id>oEwgNktXRjGqSU4Gc4GLTg</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+        <data:dataElementId>User_Credentials/Username</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="layout:hintDetail">
+        <com:id>1HXHoB1jSLS91+qxuLE++w</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+        <data:dataElementId>User_Credentials/Username</data:dataElementId>
+        <layout:hints/>
+      </com:detail>
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <com:id>L4d8dt3xRXWnSpUVY4KiRQ</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
+        <data:dataElementId>User_Credentials/Username</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="specification:CharElementDetailType">
+        <com:id>BxYtPVAWSVm9D0PdyLkcPQ</com:id>
+        <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+        <data:dataElementId>User_Credentials/Username</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </com:detail>
+    </com:dataDictionaryDetails>
+  </com:dataDictionaryNode>
+  <com:dataDictionaryNode>
+    <com:entity>Training_Model_Service_DataModel</com:entity>
+    <com:entityType>xsd</com:entityType>
+    <com:relationship>com.mslv.studio.core.data.dictionary.extension</com:relationship>
+    <com:element>User_Credentials/Password</com:element>
+    <com:elementType>tns:Password</com:elementType>
+    <com:baseElement>Password</com:baseElement>
+    <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_Model_Service_DataModel/Training_Model_Service_DataModel</com:baseNamespace>
+    <com:dataElementId>User_Credentials/Password</com:dataElementId>
+    <com:displayName lang="en"></com:displayName>
+    <com:displayName>Password</com:displayName>
+    <com:extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </com:extension>
+    <com:dataDictionaryDetails>
+      <com:detail xsi:type="data:dataElementCommonDetail">
+        <com:id>svvj4-1IRsWEpDzYGMSE5A</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+        <data:dataElementId>User_Credentials/Password</data:dataElementId>
+        <data:key></data:key>
+        <data:deprecated>false</data:deprecated>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementEnumerationDetail">
+        <com:id>zRTj8Fb9RLOzp8eXSqzX7Q</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+        <data:dataElementId>User_Credentials/Password</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementInformationDetails">
+        <com:id>ggKBxceRRgaPJ0yIEInr7w</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+        <data:dataElementId>User_Credentials/Password</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="layout:hintDetail">
+        <com:id>ip578gsARseDxGL4CdeKFg</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+        <data:dataElementId>User_Credentials/Password</data:dataElementId>
+        <layout:hints/>
+      </com:detail>
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <com:id>Gza5gvHeTKqdTRUt3xqtPQ</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
+        <data:dataElementId>User_Credentials/Password</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="specification:CharElementDetailType">
+        <com:id>20nPXkJjQYOxLA-1x6DkyA</com:id>
+        <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+        <data:dataElementId>User_Credentials/Password</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </com:detail>
+    </com:dataDictionaryDetails>
+  </com:dataDictionaryNode>
+  <com:dataDictionaryNode>
+    <com:entity>Training_Model_Service_DataModel</com:entity>
+    <com:entityType>xsd</com:entityType>
+    <com:relationship>com.mslv.studio.core.data.dictionary.extension</com:relationship>
+    <com:element>Properties/ServiceAction</com:element>
+    <com:elementType>tns:ServiceAction</com:elementType>
+    <com:baseElement>ServiceAction</com:baseElement>
+    <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_Model_Service_DataModel/Training_Model_Service_DataModel</com:baseNamespace>
+    <com:dataElementId>Properties/ServiceAction</com:dataElementId>
+    <com:displayName lang="en"></com:displayName>
+    <com:displayName>Service Action</com:displayName>
+    <com:extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </com:extension>
+    <com:dataDictionaryDetails>
+      <com:detail xsi:type="data:dataElementCommonDetail">
+        <com:id>dIfW5g--SUqXs5a2p46XMQ</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+        <data:dataElementId>Properties/ServiceAction</data:dataElementId>
+        <data:key></data:key>
+        <data:deprecated>false</data:deprecated>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementEnumerationDetail">
+        <com:id>NEAfWi-bQwSUNUfuXA0CbQ</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+        <data:dataElementId>Properties/ServiceAction</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementInformationDetails">
+        <com:id>+W-EMQSKRN230vSg9fYhnA</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+        <data:dataElementId>Properties/ServiceAction</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="layout:hintDetail">
+        <com:id>kecjts6tRFK3AYLk6PWY5Q</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+        <data:dataElementId>Properties/ServiceAction</data:dataElementId>
+        <layout:hints/>
+      </com:detail>
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <com:id>cxQIC5QlQ+ihFaB7eGqjAA</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
+        <data:dataElementId>Properties/ServiceAction</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="specification:CharElementDetailType">
+        <com:id>C2oRCJMyTbGEoS-27cvkiQ</com:id>
+        <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+        <data:dataElementId>Properties/ServiceAction</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </com:detail>
+    </com:dataDictionaryDetails>
+  </com:dataDictionaryNode>
+  <com:dataDictionaryNode>
+    <com:entity>Training_Model_Service_DataModel</com:entity>
+    <com:entityType>xsd</com:entityType>
+    <com:relationship>com.mslv.studio.core.data.dictionary.extension</com:relationship>
+    <com:element>Properties/AccessTechnology</com:element>
+    <com:elementType>tns:AccessTechnology</com:elementType>
+    <com:baseElement>AccessTechnology</com:baseElement>
+    <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_Model_Service_DataModel/Training_Model_Service_DataModel</com:baseNamespace>
+    <com:dataElementId>Properties/AccessTechnology</com:dataElementId>
+    <com:displayName lang="en"></com:displayName>
+    <com:displayName>Access Technology</com:displayName>
+    <com:extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </com:extension>
+    <com:dataDictionaryDetails>
+      <com:detail xsi:type="data:dataElementCommonDetail">
+        <com:id>f6eGVQYhRGSmIu7wFm+p7w</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+        <data:dataElementId>Properties/AccessTechnology</data:dataElementId>
+        <data:key></data:key>
+        <data:deprecated>false</data:deprecated>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementEnumerationDetail">
+        <com:id>zvAac4-VSNuNEpSihccOhw</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+        <data:dataElementId>Properties/AccessTechnology</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementInformationDetails">
+        <com:id>BmbTN5PEQ7eePmp7iA5U+w</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+        <data:dataElementId>Properties/AccessTechnology</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="layout:hintDetail">
+        <com:id>bAVccONsTgmSIDIm13Cm5g</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+        <data:dataElementId>Properties/AccessTechnology</data:dataElementId>
+        <layout:hints/>
+      </com:detail>
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <com:id>F7Xs7v9MT8qBInTzYe4VUQ</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
+        <data:dataElementId>Properties/AccessTechnology</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="specification:CharElementDetailType">
+        <com:id>FRAhwYutTVywP1CjVX0PzA</com:id>
+        <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+        <data:dataElementId>Properties/AccessTechnology</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </com:detail>
+    </com:dataDictionaryDetails>
+  </com:dataDictionaryNode>
+  <com:dataDictionaryNode>
+    <com:entity>Training_Model_Service_DataModel</com:entity>
+    <com:entityType>xsd</com:entityType>
+    <com:relationship>com.mslv.studio.core.data.dictionary.extension</com:relationship>
+    <com:element>Properties/CustomerSegment</com:element>
+    <com:elementType>tns:CustomerSegment</com:elementType>
+    <com:baseElement>CustomerSegment</com:baseElement>
+    <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_Model_Service_DataModel/Training_Model_Service_DataModel</com:baseNamespace>
+    <com:dataElementId>Properties/CustomerSegment</com:dataElementId>
+    <com:displayName lang="en"></com:displayName>
+    <com:displayName>Customer Segment</com:displayName>
+    <com:extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </com:extension>
+    <com:dataDictionaryDetails>
+      <com:detail xsi:type="data:dataElementCommonDetail">
+        <com:id>My6jwu9bRYC3o2fS6ef8-Q</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+        <data:dataElementId>Properties/CustomerSegment</data:dataElementId>
+        <data:key></data:key>
+        <data:deprecated>false</data:deprecated>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementEnumerationDetail">
+        <com:id>SMJKyhE9SWG98IRp8mL1GQ</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+        <data:dataElementId>Properties/CustomerSegment</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementInformationDetails">
+        <com:id>1lFUszPxQuGYjUOydAyVWw</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+        <data:dataElementId>Properties/CustomerSegment</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="layout:hintDetail">
+        <com:id>r-FCpGkwS2akBK+OT-YSEA</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+        <data:dataElementId>Properties/CustomerSegment</data:dataElementId>
+        <layout:hints/>
+      </com:detail>
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <com:id>zXN+dNNrQPOm5Qtf3exOGQ</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
+        <data:dataElementId>Properties/CustomerSegment</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="specification:CharElementDetailType">
+        <com:id>VfQAbphEQKOwjbVntvTLTg</com:id>
+        <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+        <data:dataElementId>Properties/CustomerSegment</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </com:detail>
+    </com:dataDictionaryDetails>
+  </com:dataDictionaryNode>
+  <com:dataDictionaryNode>
+    <com:entity>Training_Model_Service_DataModel</com:entity>
+    <com:entityType>xsd</com:entityType>
+    <com:relationship>com.mslv.studio.core.data.dictionary.extension</com:relationship>
+    <com:element>Properties/PayType</com:element>
+    <com:elementType>tns:PayType</com:elementType>
+    <com:baseElement>PayType</com:baseElement>
+    <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_Model_Service_DataModel/Training_Model_Service_DataModel</com:baseNamespace>
+    <com:dataElementId>Properties/PayType</com:dataElementId>
+    <com:displayName lang="en"></com:displayName>
+    <com:displayName>Pay Type</com:displayName>
+    <com:extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </com:extension>
+    <com:dataDictionaryDetails>
+      <com:detail xsi:type="data:dataElementCommonDetail">
+        <com:id>zeJqhj3ESzKvETxmyU5TMg</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+        <data:dataElementId>Properties/PayType</data:dataElementId>
+        <data:key></data:key>
+        <data:deprecated>false</data:deprecated>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementEnumerationDetail">
+        <com:id>wDYQHtL+Rd+HVV4IB7Z1eA</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+        <data:dataElementId>Properties/PayType</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementInformationDetails">
+        <com:id>39qgTJslSaGQ3F9fH4Fbkg</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+        <data:dataElementId>Properties/PayType</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="layout:hintDetail">
+        <com:id>MO0g7zRnSZ2x9ihUavkXTA</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+        <data:dataElementId>Properties/PayType</data:dataElementId>
+        <layout:hints/>
+      </com:detail>
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <com:id>uExKqbfuQTq3fbImqbLtqA</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
+        <data:dataElementId>Properties/PayType</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="specification:CharElementDetailType">
+        <com:id>eS29t5W0Rt2kHxUNWsmeOA</com:id>
+        <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+        <data:dataElementId>Properties/PayType</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </com:detail>
+    </com:dataDictionaryDetails>
+  </com:dataDictionaryNode>
+  <com:dataDictionaryNode>
+    <com:entity>Training_Model_Service_DataModel</com:entity>
+    <com:entityType>xsd</com:entityType>
+    <com:relationship>com.mslv.studio.core.data.dictionary.extension</com:relationship>
+    <com:element>Properties/PlanName</com:element>
+    <com:elementType>tns:PlanName</com:elementType>
+    <com:baseElement>PlanName</com:baseElement>
+    <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_Model_Service_DataModel/Training_Model_Service_DataModel</com:baseNamespace>
+    <com:dataElementId>Properties/PlanName</com:dataElementId>
+    <com:displayName lang="en"></com:displayName>
+    <com:displayName>Plan Name</com:displayName>
+    <com:extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </com:extension>
+    <com:dataDictionaryDetails>
+      <com:detail xsi:type="data:dataElementCommonDetail">
+        <com:id>wihZBBWtSs2nvRF2JB+SYw</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+        <data:dataElementId>Properties/PlanName</data:dataElementId>
+        <data:key></data:key>
+        <data:deprecated>false</data:deprecated>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementEnumerationDetail">
+        <com:id>ldiCneShRX2rQKlrzik7DQ</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+        <data:dataElementId>Properties/PlanName</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementInformationDetails">
+        <com:id>COANkQ5ATcu-lGSEd1gqBw</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+        <data:dataElementId>Properties/PlanName</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="layout:hintDetail">
+        <com:id>EcwMn+XtRCqAiMbXRT8aNQ</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+        <data:dataElementId>Properties/PlanName</data:dataElementId>
+        <layout:hints/>
+      </com:detail>
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <com:id>JfLf90DqSuKQmwM7l1Rbhg</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
+        <data:dataElementId>Properties/PlanName</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="specification:CharElementDetailType">
+        <com:id>dbZT8VraSySvCnEOHPPmFw</com:id>
+        <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+        <data:dataElementId>Properties/PlanName</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </com:detail>
+    </com:dataDictionaryDetails>
+  </com:dataDictionaryNode>
+  <com:dataDictionaryNode>
+    <com:entity>Training_Model_Service_DataModel</com:entity>
+    <com:entityType>xsd</com:entityType>
+    <com:relationship>com.mslv.studio.core.data.dictionary.extension</com:relationship>
+    <com:element>Properties/DownloadSpeed</com:element>
+    <com:elementType>tns:DownloadSpeed</com:elementType>
+    <com:baseElement>DownloadSpeed</com:baseElement>
+    <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_Model_Service_DataModel/Training_Model_Service_DataModel</com:baseNamespace>
+    <com:dataElementId>Properties/DownloadSpeed</com:dataElementId>
+    <com:displayName lang="en"></com:displayName>
+    <com:displayName>Download Speed</com:displayName>
+    <com:extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </com:extension>
+    <com:dataDictionaryDetails>
+      <com:detail xsi:type="data:dataElementCommonDetail">
+        <com:id>WuSrYq9JSRGUVYphctS-4A</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+        <data:dataElementId>Properties/DownloadSpeed</data:dataElementId>
+        <data:key></data:key>
+        <data:deprecated>false</data:deprecated>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementEnumerationDetail">
+        <com:id>YcdE2aR+SpiqOpBxazyPOg</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+        <data:dataElementId>Properties/DownloadSpeed</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementInformationDetails">
+        <com:id>GEFNI9iMRumXorfgGMNBBg</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+        <data:dataElementId>Properties/DownloadSpeed</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="layout:hintDetail">
+        <com:id>y3Pm9wLETOSi2PMA94aZ0A</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+        <data:dataElementId>Properties/DownloadSpeed</data:dataElementId>
+        <layout:hints/>
+      </com:detail>
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <com:id>QjH4SUZTQtC8k2bWiViomA</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
+        <data:dataElementId>Properties/DownloadSpeed</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="specification:CharElementDetailType">
+        <com:id>NOsm77PTSjunS6NE0RhufA</com:id>
+        <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+        <data:dataElementId>Properties/DownloadSpeed</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </com:detail>
+    </com:dataDictionaryDetails>
+  </com:dataDictionaryNode>
+  <com:dataDictionaryNode>
+    <com:entity>Training_Model_Service_DataModel</com:entity>
+    <com:entityType>xsd</com:entityType>
+    <com:relationship>com.mslv.studio.core.data.dictionary.extension</com:relationship>
+    <com:element>Properties/UploadSpeed</com:element>
+    <com:elementType>tns:UploadSpeed</com:elementType>
+    <com:baseElement>UploadSpeed</com:baseElement>
+    <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_Model_Service_DataModel/Training_Model_Service_DataModel</com:baseNamespace>
+    <com:dataElementId>Properties/UploadSpeed</com:dataElementId>
+    <com:displayName lang="en"></com:displayName>
+    <com:displayName>Upload Speed</com:displayName>
+    <com:extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </com:extension>
+    <com:dataDictionaryDetails>
+      <com:detail xsi:type="data:dataElementCommonDetail">
+        <com:id>-uMe47eaQ1mLEfJc40rmzA</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+        <data:dataElementId>Properties/UploadSpeed</data:dataElementId>
+        <data:key></data:key>
+        <data:deprecated>false</data:deprecated>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementEnumerationDetail">
+        <com:id>EoDGYFbzS3+RGAFCwnvxEA</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+        <data:dataElementId>Properties/UploadSpeed</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementInformationDetails">
+        <com:id>9ECPv7++TiaifgOFmMwk+Q</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+        <data:dataElementId>Properties/UploadSpeed</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="layout:hintDetail">
+        <com:id>-2GWoKrVTHyvN7sNU-7diA</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+        <data:dataElementId>Properties/UploadSpeed</data:dataElementId>
+        <layout:hints/>
+      </com:detail>
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <com:id>m0CJQW3BT42ri0pykoLYmw</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
+        <data:dataElementId>Properties/UploadSpeed</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="specification:CharElementDetailType">
+        <com:id>JgrghHpdTS6FSpjToMTtxw</com:id>
+        <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+        <data:dataElementId>Properties/UploadSpeed</data:dataElementId>
         <specification:startTimestamp>0</specification:startTimestamp>
         <specification:endTimestamp>0</specification:endTimestamp>
       </com:detail>

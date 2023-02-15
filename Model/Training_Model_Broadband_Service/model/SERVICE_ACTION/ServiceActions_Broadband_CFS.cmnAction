@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/core/model/common" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:dom="http://xmlns.oracle.com/communications/sce/model/common/entity" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:specification="http://www.mslv.com/studio/inventory/model/specification" xmlns:transformation="http://xmlns.oracle.com/communications/studio/model/osm/transformation" xsi:type="dom:ActionType" name="ServiceActions_Broadband_CFS">
   <displayName lang="[default]">ServiceActions_Broadband_CFS</displayName>
-  <saveVersion>65</saveVersion>
+  <saveVersion>70</saveVersion>
   <id>4tA1SKq+QzOmEOWvT5LIKQ</id>
   <data:dataElementNode virtual="true">
     <id>4tA1SKq+QzOmEOWvT5LIKQ</id>
@@ -608,7 +608,7 @@
           <entityType>actionType</entityType>
           <relationship>unknown</relationship>
         </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
         <data:specializedActionName>Suspend</data:specializedActionName>
@@ -617,16 +617,7 @@
           <entityType>actionType</entityType>
           <relationship>unknown</relationship>
         </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
-        <data:specializedActionName>Move</data:specializedActionName>
-        <data:actionCode>
-          <entity>Move</entity>
-          <entityType>actionType</entityType>
-          <relationship>unknown</relationship>
-        </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
         <data:specializedActionName>Resume</data:specializedActionName>
@@ -635,25 +626,34 @@
           <entityType>actionType</entityType>
           <relationship>unknown</relationship>
         </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>ChangeCPE</entity>
           <entityType>actionType</entityType>
-          <relationship>unknown</relationship>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Change</data:specializedActionName>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
         <data:actionCode>
-          <entity>Change</entity>
+          <entity>ChangeUploadSpeed</entity>
           <entityType>actionType</entityType>
-          <relationship>unknown</relationship>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -730,7 +730,7 @@
           <entityType>actionType</entityType>
           <relationship>unknown</relationship>
         </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
         <data:specializedActionName>Suspend</data:specializedActionName>
@@ -739,16 +739,7 @@
           <entityType>actionType</entityType>
           <relationship>unknown</relationship>
         </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
-        <data:specializedActionName>Move</data:specializedActionName>
-        <data:actionCode>
-          <entity>Move</entity>
-          <entityType>actionType</entityType>
-          <relationship>unknown</relationship>
-        </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
         <data:specializedActionName>Resume</data:specializedActionName>
@@ -757,27 +748,48 @@
           <entityType>actionType</entityType>
           <relationship>unknown</relationship>
         </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>ChangeCPE</entity>
           <entityType>actionType</entityType>
-          <relationship>unknown</relationship>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Change</data:specializedActionName>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
         <data:actionCode>
-          <entity>Change</entity>
+          <entity>ChangeUploadSpeed</entity>
           <entityType>actionType</entityType>
-          <relationship>unknown</relationship>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="transformation:TransformationDetailsElementType">
+    <id>GrtJ2wO5QQqAYgzwm7cCQQ</id>
+    <elementType>oracle.communications.studio.osm.transformation.entities.data.transformationdetails</elementType>
+    <data:dataElementId>EizARXZ0SAySXqL6NfTpAQ</data:dataElementId>
+    <transformation:supportsReversePropagation>false</transformation:supportsReversePropagation>
+    <transformation:supportsForwardPropagation>false</transformation:supportsForwardPropagation>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="transformation:DataKeyElementType">
+    <id>cMUTun19TWeFmsVxsNrF1w</id>
+    <elementType>oracle.communications.studio.osm.transformation.entities.data.datakey</elementType>
+    <data:dataElementId>EizARXZ0SAySXqL6NfTpAQ</data:dataElementId>
   </data:dataElementDetails>
   <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
     <id>SJr56HTnTFyaJcGxBFuKEA</id>
@@ -834,22 +846,13 @@
     <data:dataElementId>E-nIauJLRVS+xncShP-fcg</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
-        <data:actionCode>
-          <entity>Add</entity>
-          <entityType>actionType</entityType>
-          <relationship>unknown</relationship>
-        </data:actionCode>
-        <data:directionAttribute>REQUIRED OUT</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
           <entity>Disconnect</entity>
           <entityType>actionType</entityType>
           <relationship>unknown</relationship>
         </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
         <data:specializedActionName>Suspend</data:specializedActionName>
@@ -858,16 +861,7 @@
           <entityType>actionType</entityType>
           <relationship>unknown</relationship>
         </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
-        <data:specializedActionName>Move</data:specializedActionName>
-        <data:actionCode>
-          <entity>Move</entity>
-          <entityType>actionType</entityType>
-          <relationship>unknown</relationship>
-        </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
         <data:specializedActionName>Resume</data:specializedActionName>
@@ -876,16 +870,34 @@
           <entityType>actionType</entityType>
           <relationship>unknown</relationship>
         </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Change</data:specializedActionName>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
         <data:actionCode>
-          <entity>Change</entity>
+          <entity>ChangeCPE</entity>
           <entityType>actionType</entityType>
-          <relationship>unknown</relationship>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -947,15 +959,6 @@
     <data:dataElementId>ZzGY2D9zT0qTEX76I-LMLQ</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Move</data:specializedActionName>
-        <data:actionCode>
-          <entity>Move</entity>
-          <entityType>actionType</entityType>
-          <relationship>unknown</relationship>
-        </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Suspend</data:specializedActionName>
         <data:actionCode>
           <entity>Suspend</entity>
@@ -983,20 +986,29 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>ChangeCPE</entity>
           <entityType>actionType</entityType>
-          <relationship>unknown</relationship>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Change</data:specializedActionName>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
         <data:actionCode>
-          <entity>Change</entity>
+          <entity>ChangeUploadSpeed</entity>
           <entityType>actionType</entityType>
-          <relationship>unknown</relationship>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
@@ -1344,9 +1356,54 @@
     <data:dataElementId>8pl52mPOT4e3B0PNUC-iLg</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -1408,9 +1465,54 @@
     <data:dataElementId>bRBe+GjFQoClgQ4iLxFs1w</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -1481,9 +1583,54 @@
     <data:dataElementId>-ezdC2y9TLuby+tGeuqdKQ</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -1545,9 +1692,54 @@
     <data:dataElementId>CwMp4FK1Q0GbHFIDG1TLhg</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -1609,9 +1801,54 @@
     <data:dataElementId>+Up1r21GRty9dkSBcK3AOw</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -1673,9 +1910,54 @@
     <data:dataElementId>KiXUFZH-QySpg7bnRidVTw</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -1737,9 +2019,54 @@
     <data:dataElementId>Qs2V5wmkTKaqMgukTzUWcA</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -1801,9 +2128,54 @@
     <data:dataElementId>-kAupJfVTdSDch1oWVAR2w</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -1865,9 +2237,54 @@
     <data:dataElementId>vmvImEiTQruVHmRAoUSqxA</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -1929,9 +2346,54 @@
     <data:dataElementId>7SngMXsUQRa6FRLhdKpdJg</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -1993,9 +2455,54 @@
     <data:dataElementId>E4g5QVwWQBe0VYjfXqavOg</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -2066,9 +2573,54 @@
     <data:dataElementId>F0vzCk1lTo+8FOVVnAW0zQ</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -2118,9 +2670,54 @@
     <data:dataElementId>jpTN2MELRZGFjwWLNHbIdA</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -2182,9 +2779,54 @@
     <data:dataElementId>wr9KsgX8R+SnAsF-VC+m5g</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -2234,9 +2876,54 @@
     <data:dataElementId>8CvoGRwmRPeSHyLtpJYmYQ</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -2298,15 +2985,72 @@
     <data:dataElementId>BE8fbNb8Tb+QN9NA5qjmHQ</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="transformation:TransformationDetailsElementType">
+    <id>VOUyJ5x5SuOOfcQPbiD0og</id>
+    <elementType>oracle.communications.studio.osm.transformation.entities.data.transformationdetails</elementType>
+    <data:dataElementId>BE8fbNb8Tb+QN9NA5qjmHQ</data:dataElementId>
+    <transformation:supportsReversePropagation>false</transformation:supportsReversePropagation>
+    <transformation:supportsForwardPropagation>false</transformation:supportsForwardPropagation>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="transformation:DataKeyElementType">
+    <id>5NKQamDIQ7SZqZZO5V+i6g</id>
+    <elementType>oracle.communications.studio.osm.transformation.entities.data.datakey</elementType>
+    <data:dataElementId>BE8fbNb8Tb+QN9NA5qjmHQ</data:dataElementId>
   </data:dataElementDetails>
   <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
     <id>CuRne3XJTeGbGF2ehesDkQ</id>
@@ -2350,9 +3094,54 @@
     <data:dataElementId>yuKTSAybS6CpfQdJ0UgAWA</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -2414,9 +3203,54 @@
     <data:dataElementId>ljLRzhmuQnyJ88jvVzuhKg</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -2478,15 +3312,72 @@
     <data:dataElementId>f2g8v00bSvyFJ-4BpabJ3Q</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="transformation:TransformationDetailsElementType">
+    <id>9P0z1dtVQJCkF2h3LDgOVQ</id>
+    <elementType>oracle.communications.studio.osm.transformation.entities.data.transformationdetails</elementType>
+    <data:dataElementId>f2g8v00bSvyFJ-4BpabJ3Q</data:dataElementId>
+    <transformation:supportsReversePropagation>false</transformation:supportsReversePropagation>
+    <transformation:supportsForwardPropagation>false</transformation:supportsForwardPropagation>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="transformation:DataKeyElementType">
+    <id>zeX05QymSkKjeaHCCSzBTA</id>
+    <elementType>oracle.communications.studio.osm.transformation.entities.data.datakey</elementType>
+    <data:dataElementId>f2g8v00bSvyFJ-4BpabJ3Q</data:dataElementId>
   </data:dataElementDetails>
   <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
     <id>MZHboguGQ1WJAQYr9HAVKQ</id>
@@ -2530,9 +3421,54 @@
     <data:dataElementId>yl7kxJyNQLqXQmAspQJFzA</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -2594,15 +3530,72 @@
     <data:dataElementId>r1YC9xHqS5qc3Sm7GiILwA</data:dataElementId>
     <data:actionCodeList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Add</data:specializedActionName>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
         <data:actionCode>
-          <entity>Add</entity>
+          <entity>Disconnect</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Suspend</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Resume</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeCPE</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeUploadSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="transformation:TransformationDetailsElementType">
+    <id>UONp5PqNTPeK+5x+PCYlNA</id>
+    <elementType>oracle.communications.studio.osm.transformation.entities.data.transformationdetails</elementType>
+    <data:dataElementId>r1YC9xHqS5qc3Sm7GiILwA</data:dataElementId>
+    <transformation:supportsReversePropagation>false</transformation:supportsReversePropagation>
+    <transformation:supportsForwardPropagation>false</transformation:supportsForwardPropagation>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="transformation:DataKeyElementType">
+    <id>gpkxi6xJRuWt4jM5wt8nuQ</id>
+    <elementType>oracle.communications.studio.osm.transformation.entities.data.datakey</elementType>
+    <data:dataElementId>r1YC9xHqS5qc3Sm7GiILwA</data:dataElementId>
   </data:dataElementDetails>
   <dom:classification>
     <id>MsrWmAPkQhuCaQ0zvcJzVw</id>
@@ -2622,10 +3615,10 @@
   <dom:realization>
     <id>p+TGdNf5RX6kEjK-W5dMpQ</id>
     <elementType>oracle.communications.sce.common.entity.entities.action.actionrealization</elementType>
-    <dom:designPattern></dom:designPattern>
+    <dom:designPattern>defaultActionRealization</dom:designPattern>
     <dom:actionRealizationDesignPattern xsi:nil="true"/>
     <dom:actionSystemType>UIM</dom:actionSystemType>
-    <dom:actionRealizationType>NONE</dom:actionRealizationType>
+    <dom:actionRealizationType>RULESET</dom:actionRealizationType>
   </dom:realization>
   <dom:extension>
     <id>lSUprBHhRP63JjWQ6ougKw</id>
@@ -2655,16 +3648,6 @@
       </dom:actionCode>
     </dom:specializedActionList>
     <dom:specializedActionList>
-      <id>m+iIdUxTRsSFtSNQnYIscw</id>
-      <elementType>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode</elementType>
-      <dom:specializedActionName>Move</dom:specializedActionName>
-      <dom:actionCode>
-        <entity>Move</entity>
-        <entityType>actionType</entityType>
-        <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-      </dom:actionCode>
-    </dom:specializedActionList>
-    <dom:specializedActionList>
       <id>VUiJ5eO8SRS9yGKppbI9Kw</id>
       <elementType>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode</elementType>
       <dom:specializedActionName>Resume</dom:specializedActionName>
@@ -2675,21 +3658,31 @@
       </dom:actionCode>
     </dom:specializedActionList>
     <dom:specializedActionList>
-      <id>AQVC8qzXT9et09oqcVuiIA</id>
+      <id>XbSsCbizRB+1Cvrb+wu12A</id>
       <elementType>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode</elementType>
-      <dom:specializedActionName>Add</dom:specializedActionName>
+      <dom:specializedActionName>ChangeCPE</dom:specializedActionName>
       <dom:actionCode>
-        <entity>Add</entity>
+        <entity>ChangeCPE</entity>
         <entityType>actionType</entityType>
         <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
       </dom:actionCode>
     </dom:specializedActionList>
     <dom:specializedActionList>
-      <id>nSimNCH0QHOEuZ3rF0t2fw</id>
+      <id>reegHObRTsi7QSlrhIqf6g</id>
       <elementType>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode</elementType>
-      <dom:specializedActionName>Change</dom:specializedActionName>
+      <dom:specializedActionName>ChangeUploadSpeed</dom:specializedActionName>
       <dom:actionCode>
-        <entity>Change</entity>
+        <entity>ChangeUploadSpeed</entity>
+        <entityType>actionType</entityType>
+        <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+      </dom:actionCode>
+    </dom:specializedActionList>
+    <dom:specializedActionList>
+      <id>6C1sFr-uQn6YNL-SkQ1Hog</id>
+      <elementType>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode</elementType>
+      <dom:specializedActionName>Create</dom:specializedActionName>
+      <dom:actionCode>
+        <entity>Create</entity>
         <entityType>actionType</entityType>
         <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
       </dom:actionCode>

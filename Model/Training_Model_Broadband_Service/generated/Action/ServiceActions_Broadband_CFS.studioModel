@@ -737,8 +737,8 @@
     </dataElements>
     <realization>
       <element id="act=ServiceActions_Broadband_CFS+act.ar=p+TGdNf5RX6kEjK-W5dMpQ" type="act.ar" typeName="Action Realization" kind="Element" name="ServiceActions_Broadband_CFS Action Realization" path="ServiceActions_Broadband_CFS Action Realization">
-        <designPattern></designPattern>
-        <actionRealization>NONE</actionRealization>
+        <designPattern>defaultActionRealization</designPattern>
+        <actionRealization>RULESET</actionRealization>
         <actionSystem>UIM</actionSystem>
       </element>
     </realization>
@@ -774,13 +774,6 @@
               </relation>
             </actionCode>
           </element>
-          <element id="act=ServiceActions_Broadband_CFS+act.sac=m+iIdUxTRsSFtSNQnYIscw" type="act.sac" typeName="Specialized Action Code" kind="Element" name="Move" path="/Unknown/Move" specializedActionName="Move">
-            <actionCode>
-              <relation ref="ac=Move" type="Action Code" name="Action Code" kind="Entity">
-                <target name="Move" typeName="Action Code"/>
-              </relation>
-            </actionCode>
-          </element>
           <element id="act=ServiceActions_Broadband_CFS+act.sac=VUiJ5eO8SRS9yGKppbI9Kw" type="act.sac" typeName="Specialized Action Code" kind="Element" name="Resume" path="/Unknown/Resume" specializedActionName="Resume">
             <actionCode>
               <relation ref="ac=Resume" type="Action Code" name="Action Code" kind="Entity">
@@ -788,17 +781,24 @@
               </relation>
             </actionCode>
           </element>
-          <element id="act=ServiceActions_Broadband_CFS+act.sac=AQVC8qzXT9et09oqcVuiIA" type="act.sac" typeName="Specialized Action Code" kind="Element" name="Add" path="/Unknown/Add" specializedActionName="Add">
+          <element id="act=ServiceActions_Broadband_CFS+act.sac=XbSsCbizRB+1Cvrb+wu12A" type="act.sac" typeName="Specialized Action Code" kind="Element" name="ChangeCPE" path="/Unknown/ChangeCPE" specializedActionName="ChangeCPE">
             <actionCode>
-              <relation ref="ac=Add" type="Action Code" name="Action Code" kind="Entity">
-                <target name="Add" typeName="Action Code"/>
+              <relation ref="ac=ChangeCPE" type="Action Code" name="Action Code" kind="Entity">
+                <target name="ChangeCPE" typeName="Action Code"/>
               </relation>
             </actionCode>
           </element>
-          <element id="act=ServiceActions_Broadband_CFS+act.sac=nSimNCH0QHOEuZ3rF0t2fw" type="act.sac" typeName="Specialized Action Code" kind="Element" name="Change" path="/Unknown/Change" specializedActionName="Change">
+          <element id="act=ServiceActions_Broadband_CFS+act.sac=reegHObRTsi7QSlrhIqf6g" type="act.sac" typeName="Specialized Action Code" kind="Element" name="ChangeUploadSpeed" path="/Unknown/ChangeUploadSpeed" specializedActionName="ChangeUploadSpeed">
             <actionCode>
-              <relation ref="ac=Change" type="Action Code" name="Action Code" kind="Entity">
-                <target name="Change" typeName="Action Code"/>
+              <relation ref="ac=ChangeUploadSpeed" type="Action Code" name="Action Code" kind="Entity">
+                <target name="ChangeUploadSpeed" typeName="Action Code"/>
+              </relation>
+            </actionCode>
+          </element>
+          <element id="act=ServiceActions_Broadband_CFS+act.sac=6C1sFr-uQn6YNL-SkQ1Hog" type="act.sac" typeName="Specialized Action Code" kind="Element" name="Create" path="/Unknown/Create" specializedActionName="Create">
+            <actionCode>
+              <relation ref="ac=Create" type="Action Code" name="Action Code" kind="Entity">
+                <target name="Create" typeName="Action Code"/>
               </relation>
             </actionCode>
           </element>
@@ -810,37 +810,191 @@
           <relation ref="ac=Suspend" type="Action Code" name="Action Code" kind="Entity">
             <target name="Suspend" typeName="Action Code"/>
           </relation>
-          <relation ref="ac=Move" type="Action Code" name="Action Code" kind="Entity">
-            <target name="Move" typeName="Action Code"/>
-          </relation>
           <relation ref="ac=Resume" type="Action Code" name="Action Code" kind="Entity">
             <target name="Resume" typeName="Action Code"/>
           </relation>
-          <relation ref="ac=Add" type="Action Code" name="Action Code" kind="Entity">
-            <target name="Add" typeName="Action Code"/>
+          <relation ref="ac=ChangeCPE" type="Action Code" name="Action Code" kind="Entity">
+            <target name="ChangeCPE" typeName="Action Code"/>
           </relation>
-          <relation ref="ac=Change" type="Action Code" name="Action Code" kind="Entity">
-            <target name="Change" typeName="Action Code"/>
+          <relation ref="ac=ChangeUploadSpeed" type="Action Code" name="Action Code" kind="Entity">
+            <target name="ChangeUploadSpeed" typeName="Action Code"/>
+          </relation>
+          <relation ref="ac=Create" type="Action Code" name="Action Code" kind="Entity">
+            <target name="Create" typeName="Action Code"/>
           </relation>
         </actionRelations>
       </element>
     </actionCodes>
     <actionCodeDataMapList>
-      <element id="ac=Add+4tA1SKq+QzOmEOWvT5LIKQ" actionCodeId="Add">
+      <element id="ac=Disconnect+4tA1SKq+QzOmEOWvT5LIKQ" actionCodeId="Disconnect">
         <dataElementList>
-          <element directionAttribute="REQUIRED_IN">
+          <element directionAttribute="OPTIONAL_IN">
             <relation ref="act=ServiceActions_Broadband_CFS+dataElement=Gs2RAhdhSUCuXv9U1GgYew" type="Data Element" name="Dependency" kind="Element">
               <target name="Commercial_ID" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
             </relation>
           </element>
-          <element directionAttribute="REQUIRED_IN">
+          <element directionAttribute="OPTIONAL_IN">
             <relation ref="act=ServiceActions_Broadband_CFS+dataElement=EizARXZ0SAySXqL6NfTpAQ" type="Data Element" name="Dependency" kind="Element">
               <target name="Customer_ID" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
             </relation>
           </element>
-          <element directionAttribute="REQUIRED_OUT">
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=E-nIauJLRVS+xncShP-fcg" type="Data Element" name="Dependency" kind="Element">
+              <target name="Subject_ID" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=ZzGY2D9zT0qTEX76I-LMLQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="ServiceAddress" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=8pl52mPOT4e3B0PNUC-iLg" type="Data Element" name="Dependency" kind="Element">
+              <target name="PartyName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=bRBe+GjFQoClgQ4iLxFs1w" type="Data Element" name="Dependency" kind="Element">
+              <target name="ServiceAction" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=-ezdC2y9TLuby+tGeuqdKQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="AccessTechnology" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=CwMp4FK1Q0GbHFIDG1TLhg" type="Data Element" name="Dependency" kind="Element">
+              <target name="CustomerSegment" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=+Up1r21GRty9dkSBcK3AOw" type="Data Element" name="Dependency" kind="Element">
+              <target name="PayType" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=KiXUFZH-QySpg7bnRidVTw" type="Data Element" name="Dependency" kind="Element">
+              <target name="PlanName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=Qs2V5wmkTKaqMgukTzUWcA" type="Data Element" name="Dependency" kind="Element">
+              <target name="UploadSpeed" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=-kAupJfVTdSDch1oWVAR2w" type="Data Element" name="Dependency" kind="Element">
+              <target name="DownloadSpeed" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=vmvImEiTQruVHmRAoUSqxA" type="Data Element" name="Dependency" kind="Element">
+              <target name="SerialNumber" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=7SngMXsUQRa6FRLhdKpdJg" type="Data Element" name="Dependency" kind="Element">
+              <target name="MACAddress" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=E4g5QVwWQBe0VYjfXqavOg" type="Data Element" name="Dependency" kind="Element">
+              <target name="IPAddress" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=F0vzCk1lTo+8FOVVnAW0zQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="CPEType" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=jpTN2MELRZGFjwWLNHbIdA" type="Data Element" name="Dependency" kind="Element">
+              <target name="Vendor" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=wr9KsgX8R+SnAsF-VC+m5g" type="Data Element" name="Dependency" kind="Element">
+              <target name="Model" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=8CvoGRwmRPeSHyLtpJYmYQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="Username" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=BE8fbNb8Tb+QN9NA5qjmHQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="Password" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=yuKTSAybS6CpfQdJ0UgAWA" type="Data Element" name="Dependency" kind="Element">
+              <target name="BuildingName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=ljLRzhmuQnyJ88jvVzuhKg" type="Data Element" name="Dependency" kind="Element">
+              <target name="Street_HouseNumber" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=f2g8v00bSvyFJ-4BpabJ3Q" type="Data Element" name="Dependency" kind="Element">
+              <target name="Street_VillageName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=yl7kxJyNQLqXQmAspQJFzA" type="Data Element" name="Dependency" kind="Element">
+              <target name="Longitude" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=r1YC9xHqS5qc3Sm7GiILwA" type="Data Element" name="Dependency" kind="Element">
+              <target name="Latitude" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+        </dataElementList>
+      </element>
+      <element id="ac=Create+4tA1SKq+QzOmEOWvT5LIKQ" actionCodeId="Create">
+        <dataElementList>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=Gs2RAhdhSUCuXv9U1GgYew" type="Data Element" name="Dependency" kind="Element">
+              <target name="Commercial_ID" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=EizARXZ0SAySXqL6NfTpAQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="Customer_ID" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
             <relation ref="act=ServiceActions_Broadband_CFS+dataElement=E-nIauJLRVS+xncShP-fcg" type="Data Element" name="Dependency" kind="Element">
               <target name="Subject_ID" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
@@ -980,21 +1134,21 @@
           </element>
         </dataElementList>
       </element>
-      <element id="ac=Disconnect+4tA1SKq+QzOmEOWvT5LIKQ" actionCodeId="Disconnect">
+      <element id="ac=ChangeCPE+4tA1SKq+QzOmEOWvT5LIKQ" actionCodeId="ChangeCPE">
         <dataElementList>
-          <element directionAttribute="REQUIRED_IN">
+          <element directionAttribute="OPTIONAL_IN">
             <relation ref="act=ServiceActions_Broadband_CFS+dataElement=Gs2RAhdhSUCuXv9U1GgYew" type="Data Element" name="Dependency" kind="Element">
               <target name="Commercial_ID" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
             </relation>
           </element>
-          <element directionAttribute="REQUIRED_IN">
+          <element directionAttribute="OPTIONAL_IN">
             <relation ref="act=ServiceActions_Broadband_CFS+dataElement=EizARXZ0SAySXqL6NfTpAQ" type="Data Element" name="Dependency" kind="Element">
               <target name="Customer_ID" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
             </relation>
           </element>
-          <element directionAttribute="REQUIRED_IN">
+          <element directionAttribute="OPTIONAL_IN">
             <relation ref="act=ServiceActions_Broadband_CFS+dataElement=E-nIauJLRVS+xncShP-fcg" type="Data Element" name="Dependency" kind="Element">
               <target name="Subject_ID" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
@@ -1006,31 +1160,283 @@
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
             </relation>
           </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=8pl52mPOT4e3B0PNUC-iLg" type="Data Element" name="Dependency" kind="Element">
+              <target name="PartyName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=bRBe+GjFQoClgQ4iLxFs1w" type="Data Element" name="Dependency" kind="Element">
+              <target name="ServiceAction" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=-ezdC2y9TLuby+tGeuqdKQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="AccessTechnology" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=CwMp4FK1Q0GbHFIDG1TLhg" type="Data Element" name="Dependency" kind="Element">
+              <target name="CustomerSegment" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=+Up1r21GRty9dkSBcK3AOw" type="Data Element" name="Dependency" kind="Element">
+              <target name="PayType" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=KiXUFZH-QySpg7bnRidVTw" type="Data Element" name="Dependency" kind="Element">
+              <target name="PlanName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=Qs2V5wmkTKaqMgukTzUWcA" type="Data Element" name="Dependency" kind="Element">
+              <target name="UploadSpeed" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=-kAupJfVTdSDch1oWVAR2w" type="Data Element" name="Dependency" kind="Element">
+              <target name="DownloadSpeed" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=vmvImEiTQruVHmRAoUSqxA" type="Data Element" name="Dependency" kind="Element">
+              <target name="SerialNumber" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=7SngMXsUQRa6FRLhdKpdJg" type="Data Element" name="Dependency" kind="Element">
+              <target name="MACAddress" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=E4g5QVwWQBe0VYjfXqavOg" type="Data Element" name="Dependency" kind="Element">
+              <target name="IPAddress" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=F0vzCk1lTo+8FOVVnAW0zQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="CPEType" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=jpTN2MELRZGFjwWLNHbIdA" type="Data Element" name="Dependency" kind="Element">
+              <target name="Vendor" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=wr9KsgX8R+SnAsF-VC+m5g" type="Data Element" name="Dependency" kind="Element">
+              <target name="Model" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=8CvoGRwmRPeSHyLtpJYmYQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="Username" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=BE8fbNb8Tb+QN9NA5qjmHQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="Password" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=yuKTSAybS6CpfQdJ0UgAWA" type="Data Element" name="Dependency" kind="Element">
+              <target name="BuildingName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=ljLRzhmuQnyJ88jvVzuhKg" type="Data Element" name="Dependency" kind="Element">
+              <target name="Street_HouseNumber" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=f2g8v00bSvyFJ-4BpabJ3Q" type="Data Element" name="Dependency" kind="Element">
+              <target name="Street_VillageName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=yl7kxJyNQLqXQmAspQJFzA" type="Data Element" name="Dependency" kind="Element">
+              <target name="Longitude" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=r1YC9xHqS5qc3Sm7GiILwA" type="Data Element" name="Dependency" kind="Element">
+              <target name="Latitude" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
         </dataElementList>
       </element>
-      <element id="ac=Move+4tA1SKq+QzOmEOWvT5LIKQ" actionCodeId="Move">
+      <element id="ac=ChangeUploadSpeed+4tA1SKq+QzOmEOWvT5LIKQ" actionCodeId="ChangeUploadSpeed">
         <dataElementList>
-          <element directionAttribute="REQUIRED_IN">
+          <element directionAttribute="OPTIONAL_IN">
             <relation ref="act=ServiceActions_Broadband_CFS+dataElement=Gs2RAhdhSUCuXv9U1GgYew" type="Data Element" name="Dependency" kind="Element">
               <target name="Commercial_ID" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
             </relation>
           </element>
-          <element directionAttribute="REQUIRED_IN">
+          <element directionAttribute="OPTIONAL_IN">
             <relation ref="act=ServiceActions_Broadband_CFS+dataElement=EizARXZ0SAySXqL6NfTpAQ" type="Data Element" name="Dependency" kind="Element">
               <target name="Customer_ID" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
             </relation>
           </element>
-          <element directionAttribute="REQUIRED_IN">
+          <element directionAttribute="OPTIONAL_IN">
             <relation ref="act=ServiceActions_Broadband_CFS+dataElement=E-nIauJLRVS+xncShP-fcg" type="Data Element" name="Dependency" kind="Element">
               <target name="Subject_ID" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
             </relation>
           </element>
-          <element directionAttribute="REQUIRED_IN">
+          <element directionAttribute="OPTIONAL_IN">
             <relation ref="act=ServiceActions_Broadband_CFS+dataElement=ZzGY2D9zT0qTEX76I-LMLQ" type="Data Element" name="Dependency" kind="Element">
               <target name="ServiceAddress" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=8pl52mPOT4e3B0PNUC-iLg" type="Data Element" name="Dependency" kind="Element">
+              <target name="PartyName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=bRBe+GjFQoClgQ4iLxFs1w" type="Data Element" name="Dependency" kind="Element">
+              <target name="ServiceAction" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=-ezdC2y9TLuby+tGeuqdKQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="AccessTechnology" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=CwMp4FK1Q0GbHFIDG1TLhg" type="Data Element" name="Dependency" kind="Element">
+              <target name="CustomerSegment" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=+Up1r21GRty9dkSBcK3AOw" type="Data Element" name="Dependency" kind="Element">
+              <target name="PayType" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=KiXUFZH-QySpg7bnRidVTw" type="Data Element" name="Dependency" kind="Element">
+              <target name="PlanName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=Qs2V5wmkTKaqMgukTzUWcA" type="Data Element" name="Dependency" kind="Element">
+              <target name="UploadSpeed" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=-kAupJfVTdSDch1oWVAR2w" type="Data Element" name="Dependency" kind="Element">
+              <target name="DownloadSpeed" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=vmvImEiTQruVHmRAoUSqxA" type="Data Element" name="Dependency" kind="Element">
+              <target name="SerialNumber" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=7SngMXsUQRa6FRLhdKpdJg" type="Data Element" name="Dependency" kind="Element">
+              <target name="MACAddress" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=E4g5QVwWQBe0VYjfXqavOg" type="Data Element" name="Dependency" kind="Element">
+              <target name="IPAddress" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=F0vzCk1lTo+8FOVVnAW0zQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="CPEType" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=jpTN2MELRZGFjwWLNHbIdA" type="Data Element" name="Dependency" kind="Element">
+              <target name="Vendor" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=wr9KsgX8R+SnAsF-VC+m5g" type="Data Element" name="Dependency" kind="Element">
+              <target name="Model" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=8CvoGRwmRPeSHyLtpJYmYQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="Username" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=BE8fbNb8Tb+QN9NA5qjmHQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="Password" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=yuKTSAybS6CpfQdJ0UgAWA" type="Data Element" name="Dependency" kind="Element">
+              <target name="BuildingName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=ljLRzhmuQnyJ88jvVzuhKg" type="Data Element" name="Dependency" kind="Element">
+              <target name="Street_HouseNumber" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=f2g8v00bSvyFJ-4BpabJ3Q" type="Data Element" name="Dependency" kind="Element">
+              <target name="Street_VillageName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=yl7kxJyNQLqXQmAspQJFzA" type="Data Element" name="Dependency" kind="Element">
+              <target name="Longitude" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=r1YC9xHqS5qc3Sm7GiILwA" type="Data Element" name="Dependency" kind="Element">
+              <target name="Latitude" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
             </relation>
           </element>
@@ -1038,19 +1444,19 @@
       </element>
       <element id="ac=Suspend+4tA1SKq+QzOmEOWvT5LIKQ" actionCodeId="Suspend">
         <dataElementList>
-          <element directionAttribute="REQUIRED_IN">
+          <element directionAttribute="OPTIONAL_IN">
             <relation ref="act=ServiceActions_Broadband_CFS+dataElement=Gs2RAhdhSUCuXv9U1GgYew" type="Data Element" name="Dependency" kind="Element">
               <target name="Commercial_ID" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
             </relation>
           </element>
-          <element directionAttribute="REQUIRED_IN">
+          <element directionAttribute="OPTIONAL_IN">
             <relation ref="act=ServiceActions_Broadband_CFS+dataElement=EizARXZ0SAySXqL6NfTpAQ" type="Data Element" name="Dependency" kind="Element">
               <target name="Customer_ID" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
             </relation>
           </element>
-          <element directionAttribute="REQUIRED_IN">
+          <element directionAttribute="OPTIONAL_IN">
             <relation ref="act=ServiceActions_Broadband_CFS+dataElement=E-nIauJLRVS+xncShP-fcg" type="Data Element" name="Dependency" kind="Element">
               <target name="Subject_ID" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
@@ -1062,31 +1468,129 @@
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
             </relation>
           </element>
-        </dataElementList>
-      </element>
-      <element id="ac=Change+4tA1SKq+QzOmEOWvT5LIKQ" actionCodeId="Change">
-        <dataElementList>
           <element directionAttribute="REQUIRED_IN">
-            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=Gs2RAhdhSUCuXv9U1GgYew" type="Data Element" name="Dependency" kind="Element">
-              <target name="Commercial_ID" typeName="Data Element"/>
-              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
-            </relation>
-          </element>
-          <element directionAttribute="REQUIRED_IN">
-            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=EizARXZ0SAySXqL6NfTpAQ" type="Data Element" name="Dependency" kind="Element">
-              <target name="Customer_ID" typeName="Data Element"/>
-              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
-            </relation>
-          </element>
-          <element directionAttribute="REQUIRED_IN">
-            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=E-nIauJLRVS+xncShP-fcg" type="Data Element" name="Dependency" kind="Element">
-              <target name="Subject_ID" typeName="Data Element"/>
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=8pl52mPOT4e3B0PNUC-iLg" type="Data Element" name="Dependency" kind="Element">
+              <target name="PartyName" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
             </relation>
           </element>
           <element directionAttribute="OPTIONAL_IN">
-            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=ZzGY2D9zT0qTEX76I-LMLQ" type="Data Element" name="Dependency" kind="Element">
-              <target name="ServiceAddress" typeName="Data Element"/>
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=bRBe+GjFQoClgQ4iLxFs1w" type="Data Element" name="Dependency" kind="Element">
+              <target name="ServiceAction" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=-ezdC2y9TLuby+tGeuqdKQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="AccessTechnology" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=CwMp4FK1Q0GbHFIDG1TLhg" type="Data Element" name="Dependency" kind="Element">
+              <target name="CustomerSegment" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=+Up1r21GRty9dkSBcK3AOw" type="Data Element" name="Dependency" kind="Element">
+              <target name="PayType" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=KiXUFZH-QySpg7bnRidVTw" type="Data Element" name="Dependency" kind="Element">
+              <target name="PlanName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=Qs2V5wmkTKaqMgukTzUWcA" type="Data Element" name="Dependency" kind="Element">
+              <target name="UploadSpeed" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=-kAupJfVTdSDch1oWVAR2w" type="Data Element" name="Dependency" kind="Element">
+              <target name="DownloadSpeed" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=vmvImEiTQruVHmRAoUSqxA" type="Data Element" name="Dependency" kind="Element">
+              <target name="SerialNumber" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=7SngMXsUQRa6FRLhdKpdJg" type="Data Element" name="Dependency" kind="Element">
+              <target name="MACAddress" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=E4g5QVwWQBe0VYjfXqavOg" type="Data Element" name="Dependency" kind="Element">
+              <target name="IPAddress" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=F0vzCk1lTo+8FOVVnAW0zQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="CPEType" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=jpTN2MELRZGFjwWLNHbIdA" type="Data Element" name="Dependency" kind="Element">
+              <target name="Vendor" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=wr9KsgX8R+SnAsF-VC+m5g" type="Data Element" name="Dependency" kind="Element">
+              <target name="Model" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=8CvoGRwmRPeSHyLtpJYmYQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="Username" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=BE8fbNb8Tb+QN9NA5qjmHQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="Password" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=yuKTSAybS6CpfQdJ0UgAWA" type="Data Element" name="Dependency" kind="Element">
+              <target name="BuildingName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=ljLRzhmuQnyJ88jvVzuhKg" type="Data Element" name="Dependency" kind="Element">
+              <target name="Street_HouseNumber" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=f2g8v00bSvyFJ-4BpabJ3Q" type="Data Element" name="Dependency" kind="Element">
+              <target name="Street_VillageName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=yl7kxJyNQLqXQmAspQJFzA" type="Data Element" name="Dependency" kind="Element">
+              <target name="Longitude" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=r1YC9xHqS5qc3Sm7GiILwA" type="Data Element" name="Dependency" kind="Element">
+              <target name="Latitude" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
             </relation>
           </element>
@@ -1094,19 +1598,19 @@
       </element>
       <element id="ac=Resume+4tA1SKq+QzOmEOWvT5LIKQ" actionCodeId="Resume">
         <dataElementList>
-          <element directionAttribute="REQUIRED_IN">
+          <element directionAttribute="OPTIONAL_IN">
             <relation ref="act=ServiceActions_Broadband_CFS+dataElement=Gs2RAhdhSUCuXv9U1GgYew" type="Data Element" name="Dependency" kind="Element">
               <target name="Commercial_ID" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
             </relation>
           </element>
-          <element directionAttribute="REQUIRED_IN">
+          <element directionAttribute="OPTIONAL_IN">
             <relation ref="act=ServiceActions_Broadband_CFS+dataElement=EizARXZ0SAySXqL6NfTpAQ" type="Data Element" name="Dependency" kind="Element">
               <target name="Customer_ID" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
             </relation>
           </element>
-          <element directionAttribute="REQUIRED_IN">
+          <element directionAttribute="OPTIONAL_IN">
             <relation ref="act=ServiceActions_Broadband_CFS+dataElement=E-nIauJLRVS+xncShP-fcg" type="Data Element" name="Dependency" kind="Element">
               <target name="Subject_ID" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
@@ -1115,6 +1619,132 @@
           <element directionAttribute="OPTIONAL_IN">
             <relation ref="act=ServiceActions_Broadband_CFS+dataElement=ZzGY2D9zT0qTEX76I-LMLQ" type="Data Element" name="Dependency" kind="Element">
               <target name="ServiceAddress" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=8pl52mPOT4e3B0PNUC-iLg" type="Data Element" name="Dependency" kind="Element">
+              <target name="PartyName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=bRBe+GjFQoClgQ4iLxFs1w" type="Data Element" name="Dependency" kind="Element">
+              <target name="ServiceAction" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=-ezdC2y9TLuby+tGeuqdKQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="AccessTechnology" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=CwMp4FK1Q0GbHFIDG1TLhg" type="Data Element" name="Dependency" kind="Element">
+              <target name="CustomerSegment" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=+Up1r21GRty9dkSBcK3AOw" type="Data Element" name="Dependency" kind="Element">
+              <target name="PayType" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=KiXUFZH-QySpg7bnRidVTw" type="Data Element" name="Dependency" kind="Element">
+              <target name="PlanName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=Qs2V5wmkTKaqMgukTzUWcA" type="Data Element" name="Dependency" kind="Element">
+              <target name="UploadSpeed" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=-kAupJfVTdSDch1oWVAR2w" type="Data Element" name="Dependency" kind="Element">
+              <target name="DownloadSpeed" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=vmvImEiTQruVHmRAoUSqxA" type="Data Element" name="Dependency" kind="Element">
+              <target name="SerialNumber" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=7SngMXsUQRa6FRLhdKpdJg" type="Data Element" name="Dependency" kind="Element">
+              <target name="MACAddress" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=E4g5QVwWQBe0VYjfXqavOg" type="Data Element" name="Dependency" kind="Element">
+              <target name="IPAddress" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=F0vzCk1lTo+8FOVVnAW0zQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="CPEType" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=jpTN2MELRZGFjwWLNHbIdA" type="Data Element" name="Dependency" kind="Element">
+              <target name="Vendor" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=wr9KsgX8R+SnAsF-VC+m5g" type="Data Element" name="Dependency" kind="Element">
+              <target name="Model" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=8CvoGRwmRPeSHyLtpJYmYQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="Username" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=BE8fbNb8Tb+QN9NA5qjmHQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="Password" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=yuKTSAybS6CpfQdJ0UgAWA" type="Data Element" name="Dependency" kind="Element">
+              <target name="BuildingName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=ljLRzhmuQnyJ88jvVzuhKg" type="Data Element" name="Dependency" kind="Element">
+              <target name="Street_HouseNumber" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=f2g8v00bSvyFJ-4BpabJ3Q" type="Data Element" name="Dependency" kind="Element">
+              <target name="Street_VillageName" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=yl7kxJyNQLqXQmAspQJFzA" type="Data Element" name="Dependency" kind="Element">
+              <target name="Longitude" typeName="Data Element"/>
+              <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="OPTIONAL_IN">
+            <relation ref="act=ServiceActions_Broadband_CFS+dataElement=r1YC9xHqS5qc3Sm7GiILwA" type="Data Element" name="Dependency" kind="Element">
+              <target name="Latitude" typeName="Data Element"/>
               <inEntity name="ServiceActions_Broadband_CFS" typeName="Action"/>
             </relation>
           </element>

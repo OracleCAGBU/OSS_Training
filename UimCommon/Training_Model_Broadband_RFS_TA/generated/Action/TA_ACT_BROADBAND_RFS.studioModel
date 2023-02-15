@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:Action" id="act=TA_ACT_BROADBAND_RFS" type="act" typeName="Action" name="TA_ACT_BROADBAND_RFS" resource="\Training_Model_Broadband_RFS_TA\model\TECHNICALACTIONS\BROADBAND_RFS\TA_ACT_BROADBAND_RFS.cmnAction">
+    <displayName lang="default">TA_ACT_BROADBAND_RFS</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="mprj=Training_Model_Broadband_RFS_TA" type="Model Project" name="Dependency">
+        <target name="Training_Model_Broadband_RFS_TA" typeName="Model Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="act=TA_ACT_BROADBAND_RFS+dataElement=OhcfMOe1REy0glW4dm2kfg" type="dataElement" typeName="Data Element" kind="Element" name="SerialNumber" path="/TA_ACT_BROADBAND_RFS/SerialNumber">
+        <displayName lang="default">Serial Number</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=Training_Model_Service_DataModel+dataElement=SerialNumber" type="Schema Element" name="Type" kind="Element">
+            <target name="SerialNumber" typeName="Schema Element"/>
+            <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="act=TA_ACT_BROADBAND_RFS+dataElement=1230Ijq+SAu4eQaPf1rg8w" type="dataElement" typeName="Data Element" kind="Element" name="MACAddress" path="/TA_ACT_BROADBAND_RFS/MACAddress">
+        <displayName lang="default">MACAddress</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=Training_Model_Service_DataModel+dataElement=MACAddress" type="Schema Element" name="Type" kind="Element">
+            <target name="MACAddress" typeName="Schema Element"/>
+            <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="act=TA_ACT_BROADBAND_RFS+dataElement=BxQomoAgQVO1HonmrsG9gg" type="dataElement" typeName="Data Element" kind="Element" name="IPAddress" path="/TA_ACT_BROADBAND_RFS/IPAddress">
+        <displayName lang="default">IPAddress</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=Training_Model_Service_DataModel+dataElement=IPAddress" type="Schema Element" name="Type" kind="Element">
+            <target name="IPAddress" typeName="Schema Element"/>
+            <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="act=TA_ACT_BROADBAND_RFS+dataElement=40HrnmwqSl2rGM8vHPOp1A" type="dataElement" typeName="Data Element" kind="Element" name="DeviceType" path="/TA_ACT_BROADBAND_RFS/DeviceType">
+        <displayName lang="default">Device Type</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=Training_Model_Service_DataModel+dataElement=DeviceType" type="Schema Element" name="Type" kind="Element">
+            <target name="DeviceType" typeName="Schema Element"/>
+            <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="act=TA_ACT_BROADBAND_RFS+dataElement=nrxPalKETRi5c2cFNO8fnQ" type="dataElement" typeName="Data Element" kind="Element" name="Model" path="/TA_ACT_BROADBAND_RFS/Model">
+        <displayName lang="default">Model</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=Training_Model_Service_DataModel+dataElement=Model" type="Schema Element" name="Type" kind="Element">
+            <target name="Model" typeName="Schema Element"/>
+            <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="act=TA_ACT_BROADBAND_RFS+dataElement=ZEK3VGCWS-2BCC7pGBigrw" type="dataElement" typeName="Data Element" kind="Element" name="Username" path="/TA_ACT_BROADBAND_RFS/Username">
+        <displayName lang="default">Username</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=Training_Model_Service_DataModel+dataElement=Username" type="Schema Element" name="Type" kind="Element">
+            <target name="Username" typeName="Schema Element"/>
+            <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="act=TA_ACT_BROADBAND_RFS+dataElement=p10mrzzFT8CCjzDvSeg4ww" type="dataElement" typeName="Data Element" kind="Element" name="Password" path="/TA_ACT_BROADBAND_RFS/Password">
+        <displayName lang="default">Password</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=Training_Model_Service_DataModel+dataElement=Password" type="Schema Element" name="Type" kind="Element">
+            <target name="Password" typeName="Schema Element"/>
+            <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="act=TA_ACT_BROADBAND_RFS+dataElement=z+VlfJoCQ5qVsnibgIW+Gg" type="dataElement" typeName="Data Element" kind="Element" name="DownloadSpeed" path="/TA_ACT_BROADBAND_RFS/DownloadSpeed">
+        <displayName lang="default">Download Speed</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=Training_Model_Service_DataModel+dataElement=DownloadSpeed" type="Schema Element" name="Type" kind="Element">
+            <target name="DownloadSpeed" typeName="Schema Element"/>
+            <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="act=TA_ACT_BROADBAND_RFS+dataElement=hcU0wFrJRzCmmlqQHijq8A" type="dataElement" typeName="Data Element" kind="Element" name="UploadSpeed" path="/TA_ACT_BROADBAND_RFS/UploadSpeed">
+        <displayName lang="default">Upload Speed</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=Training_Model_Service_DataModel+dataElement=UploadSpeed" type="Schema Element" name="Type" kind="Element">
+            <target name="UploadSpeed" typeName="Schema Element"/>
+            <inEntity name="Training_Model_Service_DataModel" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+    </dataElements>
+    <realization>
+      <element id="act=TA_ACT_BROADBAND_RFS+act.ar=4JjwmhNzQx66Y3XRfhKsKw" type="act.ar" typeName="Action Realization" kind="Element" name="TA_ACT_BROADBAND_RFS Action Realization" path="TA_ACT_BROADBAND_RFS Action Realization">
+        <designPattern></designPattern>
+        <actionRealization>NONE</actionRealization>
+        <actionSystem>ASAP</actionSystem>
+      </element>
+    </realization>
+    <classification>
+      <element id="act=TA_ACT_BROADBAND_RFS+act.cla=H4KlLtyQRjmNMkVgLdTM5Q" type="act.cla" typeName="Classification" kind="Element" name="TA_ACT_BROADBAND_RFS Classification" path="TA_ACT_BROADBAND_RFS Classification">
+        <subject>
+          <relation ref="rfs=Broadband_RFS" type="Resource Facing Service" name="Subject" kind="Entity">
+            <target name="Broadband_RFS" typeName="Resource Facing Service"/>
+          </relation>
+        </subject>
+        <actionType>
+          <relation ref="fa=Technical" type="Functional Area" name="Action Type" kind="Entity">
+            <target name="Technical" typeName="Functional Area"/>
+          </relation>
+        </actionType>
+        <actionTarget>
+          <relation ref="rfs=Broadband_RFS" type="Resource Facing Service" name="Target" kind="Entity">
+            <target name="Broadband_RFS" typeName="Resource Facing Service"/>
+          </relation>
+        </actionTarget>
+        <key>TA_ACT_BROADBAND_RFS</key>
+      </element>
+    </classification>
+    <actionCodes>
+      <element id="act=TA_ACT_BROADBAND_RFS+act.ac=EBi0VlWdToil6jN+d+HALA" type="act.ac" typeName="Action Codes" kind="Element" name="TA_ACT_BROADBAND_RFS Action Codes" path="TA_ACT_BROADBAND_RFS Action Codes">
+        <actionApplicationRole>
+          <relation ref="ar=Activation" type="Application Role" name="Application Role" kind="Entity">
+            <target name="Activation" typeName="Application Role"/>
+          </relation>
+        </actionApplicationRole>
+        <specializedActionList>
+          <element id="act=TA_ACT_BROADBAND_RFS+act.sac=15W8GgWrRj68h5691dISfQ" type="act.sac" typeName="Specialized Action Code" kind="Element" name="Create" path="/Unknown/Create" specializedActionName="Create">
+            <actionCode>
+              <relation ref="ac=Create" type="Action Code" name="Action Code" kind="Entity">
+                <target name="Create" typeName="Action Code"/>
+              </relation>
+            </actionCode>
+          </element>
+          <element id="act=TA_ACT_BROADBAND_RFS+act.sac=McgbLM2ZQeeT-OP0TzVvCA" type="act.sac" typeName="Specialized Action Code" kind="Element" name="ChangeCPE" path="/Unknown/ChangeCPE" specializedActionName="ChangeCPE">
+            <actionCode>
+              <relation ref="ac=Modify" type="Action Code" name="Action Code" kind="Entity">
+                <target name="Modify" typeName="Action Code"/>
+              </relation>
+            </actionCode>
+          </element>
+          <element id="act=TA_ACT_BROADBAND_RFS+act.sac=BgPmugPcQAu-Wqd5uyBUNQ" type="act.sac" typeName="Specialized Action Code" kind="Element" name="ChangeUploadSpeed" path="/Unknown/ChangeUploadSpeed" specializedActionName="ChangeUploadSpeed">
+            <actionCode>
+              <relation ref="ac=Modify" type="Action Code" name="Action Code" kind="Entity">
+                <target name="Modify" typeName="Action Code"/>
+              </relation>
+            </actionCode>
+          </element>
+          <element id="act=TA_ACT_BROADBAND_RFS+act.sac=PX3FPk1vRP6cIrIE8aeRKQ" type="act.sac" typeName="Specialized Action Code" kind="Element" name="Suspend" path="/Unknown/Suspend" specializedActionName="Suspend">
+            <actionCode>
+              <relation ref="ac=Modify" type="Action Code" name="Action Code" kind="Entity">
+                <target name="Modify" typeName="Action Code"/>
+              </relation>
+            </actionCode>
+          </element>
+          <element id="act=TA_ACT_BROADBAND_RFS+act.sac=l26SedxZSg+qF-rBtjiMlw" type="act.sac" typeName="Specialized Action Code" kind="Element" name="Resume" path="/Unknown/Resume" specializedActionName="Resume">
+            <actionCode>
+              <relation ref="ac=Modify" type="Action Code" name="Action Code" kind="Entity">
+                <target name="Modify" typeName="Action Code"/>
+              </relation>
+            </actionCode>
+          </element>
+          <element id="act=TA_ACT_BROADBAND_RFS+act.sac=dd-B3ttcT4GqdXkKRQhibw" type="act.sac" typeName="Specialized Action Code" kind="Element" name="Disconnect" path="/Unknown/Disconnect" specializedActionName="Disconnect">
+            <actionCode>
+              <relation ref="ac=Remove" type="Action Code" name="Action Code" kind="Entity">
+                <target name="Remove" typeName="Action Code"/>
+              </relation>
+            </actionCode>
+          </element>
+        </specializedActionList>
+        <actionRelations>
+          <relation ref="ac=Create" type="Action Code" name="Action Code" kind="Entity">
+            <target name="Create" typeName="Action Code"/>
+          </relation>
+          <relation ref="ac=Modify" type="Action Code" name="Action Code" kind="Entity">
+            <target name="Modify" typeName="Action Code"/>
+          </relation>
+          <relation ref="ac=Modify" type="Action Code" name="Action Code" kind="Entity">
+            <target name="Modify" typeName="Action Code"/>
+          </relation>
+          <relation ref="ac=Modify" type="Action Code" name="Action Code" kind="Entity">
+            <target name="Modify" typeName="Action Code"/>
+          </relation>
+          <relation ref="ac=Modify" type="Action Code" name="Action Code" kind="Entity">
+            <target name="Modify" typeName="Action Code"/>
+          </relation>
+          <relation ref="ac=Remove" type="Action Code" name="Action Code" kind="Entity">
+            <target name="Remove" typeName="Action Code"/>
+          </relation>
+        </actionRelations>
+      </element>
+    </actionCodes>
+    <actionCodeDataMapList>
+      <element id="ac=Disconnect+dEr8aF2rTPm3pBuebvAxBQ" actionCodeId="Disconnect">
+        <dataElementList>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=OhcfMOe1REy0glW4dm2kfg" type="Data Element" name="Dependency" kind="Element">
+              <target name="SerialNumber" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=1230Ijq+SAu4eQaPf1rg8w" type="Data Element" name="Dependency" kind="Element">
+              <target name="MACAddress" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=BxQomoAgQVO1HonmrsG9gg" type="Data Element" name="Dependency" kind="Element">
+              <target name="IPAddress" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=40HrnmwqSl2rGM8vHPOp1A" type="Data Element" name="Dependency" kind="Element">
+              <target name="DeviceType" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=nrxPalKETRi5c2cFNO8fnQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="Model" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=ZEK3VGCWS-2BCC7pGBigrw" type="Data Element" name="Dependency" kind="Element">
+              <target name="Username" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=p10mrzzFT8CCjzDvSeg4ww" type="Data Element" name="Dependency" kind="Element">
+              <target name="Password" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=z+VlfJoCQ5qVsnibgIW+Gg" type="Data Element" name="Dependency" kind="Element">
+              <target name="DownloadSpeed" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=hcU0wFrJRzCmmlqQHijq8A" type="Data Element" name="Dependency" kind="Element">
+              <target name="UploadSpeed" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+        </dataElementList>
+      </element>
+      <element id="ac=Create+dEr8aF2rTPm3pBuebvAxBQ" actionCodeId="Create">
+        <dataElementList>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=OhcfMOe1REy0glW4dm2kfg" type="Data Element" name="Dependency" kind="Element">
+              <target name="SerialNumber" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=1230Ijq+SAu4eQaPf1rg8w" type="Data Element" name="Dependency" kind="Element">
+              <target name="MACAddress" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=BxQomoAgQVO1HonmrsG9gg" type="Data Element" name="Dependency" kind="Element">
+              <target name="IPAddress" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=40HrnmwqSl2rGM8vHPOp1A" type="Data Element" name="Dependency" kind="Element">
+              <target name="DeviceType" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=nrxPalKETRi5c2cFNO8fnQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="Model" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=ZEK3VGCWS-2BCC7pGBigrw" type="Data Element" name="Dependency" kind="Element">
+              <target name="Username" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=p10mrzzFT8CCjzDvSeg4ww" type="Data Element" name="Dependency" kind="Element">
+              <target name="Password" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=z+VlfJoCQ5qVsnibgIW+Gg" type="Data Element" name="Dependency" kind="Element">
+              <target name="DownloadSpeed" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=hcU0wFrJRzCmmlqQHijq8A" type="Data Element" name="Dependency" kind="Element">
+              <target name="UploadSpeed" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+        </dataElementList>
+      </element>
+      <element id="ac=ChangeCPE+dEr8aF2rTPm3pBuebvAxBQ" actionCodeId="ChangeCPE">
+        <dataElementList>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=OhcfMOe1REy0glW4dm2kfg" type="Data Element" name="Dependency" kind="Element">
+              <target name="SerialNumber" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=1230Ijq+SAu4eQaPf1rg8w" type="Data Element" name="Dependency" kind="Element">
+              <target name="MACAddress" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=BxQomoAgQVO1HonmrsG9gg" type="Data Element" name="Dependency" kind="Element">
+              <target name="IPAddress" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=40HrnmwqSl2rGM8vHPOp1A" type="Data Element" name="Dependency" kind="Element">
+              <target name="DeviceType" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=nrxPalKETRi5c2cFNO8fnQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="Model" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=ZEK3VGCWS-2BCC7pGBigrw" type="Data Element" name="Dependency" kind="Element">
+              <target name="Username" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=p10mrzzFT8CCjzDvSeg4ww" type="Data Element" name="Dependency" kind="Element">
+              <target name="Password" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=z+VlfJoCQ5qVsnibgIW+Gg" type="Data Element" name="Dependency" kind="Element">
+              <target name="DownloadSpeed" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=hcU0wFrJRzCmmlqQHijq8A" type="Data Element" name="Dependency" kind="Element">
+              <target name="UploadSpeed" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+        </dataElementList>
+      </element>
+      <element id="ac=ChangeUploadSpeed+dEr8aF2rTPm3pBuebvAxBQ" actionCodeId="ChangeUploadSpeed">
+        <dataElementList>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=OhcfMOe1REy0glW4dm2kfg" type="Data Element" name="Dependency" kind="Element">
+              <target name="SerialNumber" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=1230Ijq+SAu4eQaPf1rg8w" type="Data Element" name="Dependency" kind="Element">
+              <target name="MACAddress" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=BxQomoAgQVO1HonmrsG9gg" type="Data Element" name="Dependency" kind="Element">
+              <target name="IPAddress" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=40HrnmwqSl2rGM8vHPOp1A" type="Data Element" name="Dependency" kind="Element">
+              <target name="DeviceType" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=nrxPalKETRi5c2cFNO8fnQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="Model" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=ZEK3VGCWS-2BCC7pGBigrw" type="Data Element" name="Dependency" kind="Element">
+              <target name="Username" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=p10mrzzFT8CCjzDvSeg4ww" type="Data Element" name="Dependency" kind="Element">
+              <target name="Password" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=z+VlfJoCQ5qVsnibgIW+Gg" type="Data Element" name="Dependency" kind="Element">
+              <target name="DownloadSpeed" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=hcU0wFrJRzCmmlqQHijq8A" type="Data Element" name="Dependency" kind="Element">
+              <target name="UploadSpeed" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+        </dataElementList>
+      </element>
+      <element id="ac=Suspend+dEr8aF2rTPm3pBuebvAxBQ" actionCodeId="Suspend">
+        <dataElementList>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=OhcfMOe1REy0glW4dm2kfg" type="Data Element" name="Dependency" kind="Element">
+              <target name="SerialNumber" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=1230Ijq+SAu4eQaPf1rg8w" type="Data Element" name="Dependency" kind="Element">
+              <target name="MACAddress" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=BxQomoAgQVO1HonmrsG9gg" type="Data Element" name="Dependency" kind="Element">
+              <target name="IPAddress" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=40HrnmwqSl2rGM8vHPOp1A" type="Data Element" name="Dependency" kind="Element">
+              <target name="DeviceType" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=nrxPalKETRi5c2cFNO8fnQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="Model" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=ZEK3VGCWS-2BCC7pGBigrw" type="Data Element" name="Dependency" kind="Element">
+              <target name="Username" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=p10mrzzFT8CCjzDvSeg4ww" type="Data Element" name="Dependency" kind="Element">
+              <target name="Password" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=z+VlfJoCQ5qVsnibgIW+Gg" type="Data Element" name="Dependency" kind="Element">
+              <target name="DownloadSpeed" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=hcU0wFrJRzCmmlqQHijq8A" type="Data Element" name="Dependency" kind="Element">
+              <target name="UploadSpeed" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+        </dataElementList>
+      </element>
+      <element id="ac=Resume+dEr8aF2rTPm3pBuebvAxBQ" actionCodeId="Resume">
+        <dataElementList>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=OhcfMOe1REy0glW4dm2kfg" type="Data Element" name="Dependency" kind="Element">
+              <target name="SerialNumber" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=1230Ijq+SAu4eQaPf1rg8w" type="Data Element" name="Dependency" kind="Element">
+              <target name="MACAddress" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=BxQomoAgQVO1HonmrsG9gg" type="Data Element" name="Dependency" kind="Element">
+              <target name="IPAddress" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=40HrnmwqSl2rGM8vHPOp1A" type="Data Element" name="Dependency" kind="Element">
+              <target name="DeviceType" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=nrxPalKETRi5c2cFNO8fnQ" type="Data Element" name="Dependency" kind="Element">
+              <target name="Model" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=ZEK3VGCWS-2BCC7pGBigrw" type="Data Element" name="Dependency" kind="Element">
+              <target name="Username" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=p10mrzzFT8CCjzDvSeg4ww" type="Data Element" name="Dependency" kind="Element">
+              <target name="Password" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=z+VlfJoCQ5qVsnibgIW+Gg" type="Data Element" name="Dependency" kind="Element">
+              <target name="DownloadSpeed" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+          <element directionAttribute="REQUIRED_IN">
+            <relation ref="act=TA_ACT_BROADBAND_RFS+dataElement=hcU0wFrJRzCmmlqQHijq8A" type="Data Element" name="Dependency" kind="Element">
+              <target name="UploadSpeed" typeName="Data Element"/>
+              <inEntity name="TA_ACT_BROADBAND_RFS" typeName="Action"/>
+            </relation>
+          </element>
+        </dataElementList>
+      </element>
+    </actionCodeDataMapList>
+  </entity>
+</model:Model>

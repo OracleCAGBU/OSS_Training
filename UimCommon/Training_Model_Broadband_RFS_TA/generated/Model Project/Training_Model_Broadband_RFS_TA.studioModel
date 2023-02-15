@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="model:Project" id="mprj=Training_Model_Broadband_RFS_TA" type="mprj" typeName="Model Project" name="Training_Model_Broadband_RFS_TA" resource="\Training_Model_Broadband_RFS_TA\Training_Model_Broadband_RFS_TA.ddCartridge">
+    <displayName lang="default">Training_Model_Broadband_RFS_TA</displayName>
+    <note lang="default"/>
+    <version>
+      <major>1</major>
+      <minor>0</minor>
+      <maintenance>0</maintenance>
+      <servicePack>0</servicePack>
+      <efix>0</efix>
+      <build>3</build>
+    </version>
+    <dependencies>
+      <element id="mprj=Training_Model_Broadband_RFS_TA+prjd=OracleComms_Model_Base" type="prjd" typeName="Project Dependency" name="OracleComms_Model_Base">
+        <supportedVersion>
+          <minVersion exclusive="false">1.0.0.0.0</minVersion>
+          <maxVersion exclusive="true"></maxVersion>
+        </supportedVersion>
+        <project>
+          <relation ref="mprj=OracleComms_Model_Base" type="Model Project" name="Dependency">
+            <target name="OracleComms_Model_Base" typeName="Model Project"/>
+          </relation>
+        </project>
+      </element>
+      <element id="mprj=Training_Model_Broadband_RFS_TA+prjd=OracleComms_Model_BaseCatalog" type="prjd" typeName="Project Dependency" name="OracleComms_Model_BaseCatalog">
+        <supportedVersion>
+          <minVersion exclusive="false">1.0.0.0.0</minVersion>
+          <maxVersion exclusive="true"></maxVersion>
+        </supportedVersion>
+        <project>
+          <relation ref="mprj=OracleComms_Model_BaseCatalog" type="Model Project" name="Dependency">
+            <target name="OracleComms_Model_BaseCatalog" typeName="Model Project"/>
+          </relation>
+        </project>
+      </element>
+      <element id="mprj=Training_Model_Broadband_RFS_TA+prjd=OracleComms_Model_Common" type="prjd" typeName="Project Dependency" name="OracleComms_Model_Common">
+        <supportedVersion>
+          <minVersion exclusive="false">1.0.0.0.0</minVersion>
+          <maxVersion exclusive="true"></maxVersion>
+        </supportedVersion>
+        <project>
+          <relation ref="mprj=OracleComms_Model_Common" type="Model Project" name="Dependency">
+            <target name="OracleComms_Model_Common" typeName="Model Project"/>
+          </relation>
+        </project>
+      </element>
+      <element id="mprj=Training_Model_Broadband_RFS_TA+prjd=Training_Model_Service_DataModel" type="prjd" typeName="Project Dependency" name="Training_Model_Service_DataModel">
+        <supportedVersion>
+          <minVersion exclusive="false">1.0.0.0.0</minVersion>
+          <maxVersion exclusive="true"></maxVersion>
+        </supportedVersion>
+        <project>
+          <relation ref="mprj=Training_Model_Service_DataModel" type="Model Project" name="Dependency">
+            <target name="Training_Model_Service_DataModel" typeName="Model Project"/>
+          </relation>
+        </project>
+      </element>
+      <element id="mprj=Training_Model_Broadband_RFS_TA+prjd=Broadband_CFS" type="prjd" typeName="Project Dependency" name="Broadband_CFS">
+        <supportedVersion>
+          <minVersion exclusive="false">1.0.0.0.0</minVersion>
+          <maxVersion exclusive="true"></maxVersion>
+        </supportedVersion>
+        <project>
+          <relation ref="ivprj=Broadband_CFS" type="Inventory Project" name="Dependency">
+            <target name="Broadband_CFS" typeName="Inventory Project"/>
+          </relation>
+        </project>
+      </element>
+      <element id="mprj=Training_Model_Broadband_RFS_TA+prjd=Training_Model_Broadband_Service" type="prjd" typeName="Project Dependency" name="Training_Model_Broadband_Service">
+        <supportedVersion>
+          <minVersion exclusive="false">1.0.0.0.0</minVersion>
+          <maxVersion exclusive="true"></maxVersion>
+        </supportedVersion>
+        <project>
+          <relation ref="mprj=Training_Model_Broadband_Service" type="Model Project" name="Dependency">
+            <target name="Training_Model_Broadband_Service" typeName="Model Project"/>
+          </relation>
+        </project>
+      </element>
+    </dependencies>
+    <identifier>Training_Model_Broadband_RFS_TA</identifier>
+    <provider>Studio Data Dictionary Provider</provider>
+    <sealed>false</sealed>
+    <package></package>
+  </entity>
+</model:Model>
