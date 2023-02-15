@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:data="http://xmlns.oracle.com/communications/studio/model/data" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="data:DataSchema" id="ds=Activation_Schema" type="ds" typeName="Data Schema" name="Activation_Schema" resource="\ActivationRoutingDictionary\dataDictionary\Activation_Schema.xsd">
+    <displayName lang="default">DDCM</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="mprj=ActivationRoutingDictionary" type="Model Project" name="Dependency">
+        <target name="ActivationRoutingDictionary" typeName="Model Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="ds=Activation_Schema+dataElement=MCLI" type="dataElement" typeName="Schema Element" kind="Element" name="MCLI" path="/MCLI">
+        <displayName lang="default">MCLI</displayName>
+        <minOccurs inherited="false">1</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">254</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=Activation_Schema+dataElement=LINE" type="dataElement" typeName="Schema Element" kind="Element" name="LINE" path="/LINE">
+        <displayName lang="default">LINE</displayName>
+        <minOccurs inherited="false">1</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">4</minLength>
+        <maxLength inherited="false">4</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=Activation_Schema+dataElement=NXX" type="dataElement" typeName="Schema Element" kind="Element" name="NXX" path="/NXX">
+        <displayName lang="default">NXX</displayName>
+        <minOccurs inherited="false">1</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">3</minLength>
+        <maxLength inherited="false">3</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=Activation_Schema+dataElement=NPA" type="dataElement" typeName="Schema Element" kind="Element" name="NPA" path="/NPA">
+        <displayName lang="default">NPA</displayName>
+        <minOccurs inherited="false">1</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">3</minLength>
+        <maxLength inherited="false">3</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=Activation_Schema+dataElement=ID_ROUTING" type="dataElement" typeName="Schema Element" kind="Element" name="ID_ROUTING" path="/ID_ROUTING">
+        <displayName lang="default">ID ROUTING</displayName>
+        <minOccurs inherited="false">1</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">254</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=Activation_Schema+dataElement=USER_ROUTING" type="dataElement" typeName="Schema Element" kind="Element" name="USER_ROUTING" path="/USER_ROUTING">
+        <displayName lang="default">USER ROUTING</displayName>
+        <minOccurs inherited="false">1</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">254</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=Activation_Schema+dataElement=COMM_PARM" type="dataElement" typeName="Schema Element" kind="Element" name="COMM_PARM" path="/COMM_PARM">
+        <displayName lang="default">COMM PARM</displayName>
+        <minOccurs inherited="false">1</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements>
+          <element id="ds=Activation_Schema+dataElement=COMM_PARM/NE_ID.HOST_IPADDR" type="dataElement" typeName="Schema Element" kind="Element" name="NE_ID.HOST_IPADDR" path="/COMM_PARM/NE_ID.HOST_IPADDR">
+            <displayName lang="default">NE ID HOST IPADDR</displayName>
+            <minOccurs inherited="false">1</minOccurs>
+            <maxOccurs inherited="false">1</maxOccurs>
+            <defaultValue inherited="false"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="false">false</sensitive>
+            <minLength inherited="false">0</minLength>
+            <maxLength inherited="false">254</maxLength>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=Activation_Schema+dataElement=COMM_PARM/NE_ID.PORT" type="dataElement" typeName="Schema Element" kind="Element" name="NE_ID.PORT" path="/COMM_PARM/NE_ID.PORT">
+            <displayName lang="default">NE ID PORT</displayName>
+            <minOccurs inherited="false">1</minOccurs>
+            <maxOccurs inherited="false">1</maxOccurs>
+            <defaultValue inherited="false"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="false">false</sensitive>
+            <minLength inherited="false">0</minLength>
+            <maxLength inherited="false">254</maxLength>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=Activation_Schema+dataElement=COMM_PARM/NE_ID.HOST_USERNAME" type="dataElement" typeName="Schema Element" kind="Element" name="NE_ID.HOST_USERNAME" path="/COMM_PARM/NE_ID.HOST_USERNAME">
+            <displayName lang="default">NE ID HOST USERNAME</displayName>
+            <minOccurs inherited="false">1</minOccurs>
+            <maxOccurs inherited="false">1</maxOccurs>
+            <defaultValue inherited="false"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="false">false</sensitive>
+            <minLength inherited="false">0</minLength>
+            <maxLength inherited="false">254</maxLength>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=Activation_Schema+dataElement=COMM_PARM/NE_ID.HOST_PASSWORD" type="dataElement" typeName="Schema Element" kind="Element" name="NE_ID.HOST_PASSWORD" path="/COMM_PARM/NE_ID.HOST_PASSWORD">
+            <displayName lang="default">NE ID HOST PASSWORD</displayName>
+            <minOccurs inherited="false">1</minOccurs>
+            <maxOccurs inherited="false">1</maxOccurs>
+            <defaultValue inherited="false"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="false">false</sensitive>
+            <minLength inherited="false">0</minLength>
+            <maxLength inherited="false">254</maxLength>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=Activation_Schema+dataElement=COMM_PARM/NE_ID.IOR" type="dataElement" typeName="Schema Element" kind="Element" name="NE_ID.IOR" path="/COMM_PARM/NE_ID.IOR">
+            <displayName lang="default">NE ID IOR</displayName>
+            <minOccurs inherited="false">0</minOccurs>
+            <maxOccurs inherited="false">1</maxOccurs>
+            <defaultValue inherited="false"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="false">false</sensitive>
+            <minLength inherited="false">0</minLength>
+            <maxLength inherited="false">254</maxLength>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=Activation_Schema+dataElement=COMM_PARM/NE_ID.USERNAME" type="dataElement" typeName="Schema Element" kind="Element" name="NE_ID.USERNAME" path="/COMM_PARM/NE_ID.USERNAME">
+            <displayName lang="default">NE ID USERNAME</displayName>
+            <minOccurs inherited="false">0</minOccurs>
+            <maxOccurs inherited="false">1</maxOccurs>
+            <defaultValue inherited="false"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="false">false</sensitive>
+            <minLength inherited="false">0</minLength>
+            <maxLength inherited="false">254</maxLength>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+        </dataElements>
+        <primitiveType>structure</primitiveType>
+      </element>
+    </dataElements>
+  </entity>
+</model:Model>
