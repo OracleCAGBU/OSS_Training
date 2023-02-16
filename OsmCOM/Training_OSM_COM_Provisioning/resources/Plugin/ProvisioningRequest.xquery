@@ -34,6 +34,8 @@ declare variable $createOrder           := "CreateOrder";
 declare variable $ebmName               := "{http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/ProvisioningOrder/V1}ProcessProvisioningOrderEBM";
 declare variable $eboName               := "{http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/ProvisioningOrder/V1}ProvisioningOrderEBO";
 declare variable $currentORRVersion     := '%{CARTRIDGE_VERSION}';
+declare variable $osmURI                := "/osm/wsapi";
+declare variable $mimeContextType       := "text/xml; charset=UTF-8";
 
 (: Generate unique Id :)
 
@@ -282,5 +284,7 @@ return
     (
         log:info($log, fn:concat('GetOrder.Response : ', $sTaskData)),
         log:info($log, fn:concat('SOM Order Payload : ', $sSomRequest)),
+        outboundMessage:setStringProperty( $outboundMessage, "URI", $osmURI),
+        outboundMessage:setStringProperty( $outboundMessage, "_wls_mimehdrContent_Type", $mimeContextType),
         $sSomRequest
     )
