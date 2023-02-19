@@ -1,4 +1,5 @@
 (:  Fetch contents of Fulfillment Pattern from  productSpecMapping.xml :)
+(: test comment :)
 
 (: Declare OSM name space :)
 declare namespace osm="http://xmlns.oracle.com/communications/ordermanagement/model";
