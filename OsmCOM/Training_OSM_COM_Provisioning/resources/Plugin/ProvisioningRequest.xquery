@@ -350,7 +350,7 @@ let $sTaskData                      := saxon:serialize($eTaskData, <xsl:output m
 
 return
     (
-        log:info($log, fn:concat('GetOrder.Response : ', $sTaskData)),
+      (:  log:info($log, fn:concat('GetOrder.Response : ', $sTaskData)), :)
         log:info($log, fn:concat('SOM Order Payload : ', $sSomRequest)),
         outboundMessage:setStringProperty( $outboundMessage, "URI", $osmURI),
         outboundMessage:setStringProperty( $outboundMessage, "_wls_mimehdrContent_Type", $mimeContextType),
