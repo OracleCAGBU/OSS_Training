@@ -65,6 +65,9 @@ declare function compsbinding:getAttributeEntryCustom(
     let $eResult                    :=
 
         (
+          if($sProductAction='Add')
+          then
+          (
             if($eMap/attributes/attribute[key = 'PartyName'] and fn:exists($sPartyName)) then
                 element {QName($sConceptualModelUri, 'PartyName')}{
                     $sPartyName
@@ -106,6 +109,8 @@ declare function compsbinding:getAttributeEntryCustom(
                     $sProductAction
                 }
             else()
+          )
+          else()
         )
     return 
     (
