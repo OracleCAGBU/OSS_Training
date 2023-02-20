@@ -13,6 +13,7 @@ declare namespace xsl                               = "http://www.w3.org/1999/XS
 declare namespace oms                               = "urn:com:metasolv:oms:xmlapi:1";
 declare namespace toibns                            = "http://xmlns.oracle.com/communications/studio/ordermanagement/transformation";
 declare namespace cttransns                         = "COM_SalesOrderFulfillment";
+ declare namespace im                                = "COM_SalesOrderFulfillment";
 
 declare option saxon:output "method=xml";
 declare option saxon:output "saxon:indent-spaces=4";
@@ -200,12 +201,19 @@ declare function local:createProvisioningOrderLineItems(
     let $eComponent := $eOrderData/oms:_root/oms:ControlData/oms:Functions/oms:ProvisioningFunction
     let $sComponentKey := $eComponent/oms:componentKey/text()
     let $eTransformedOrderLineItems := $eComponent/oms:transformedOrderItem
-    
+    let $eSourceOrderLineItems := $eComponent/oms:orderItem
     return(
+    if (fn:exists($eTransformedOrderLineItems)) then (
         for $eTransformedOrderLineItem in $eTransformedOrderLineItems
         let $eSourceLineOrderItems       := systeminteractionmodule:getSourceLineOrderItemsFromTransformedLineItem($eTransformedOrderLineItem,$eMappingContext,$eComponent)
         let $ePrimarySourceLineOrderItem := systeminteractionmodule:getPrimarySourceLineOrderItemsFromTransformedLineItem($eTransformedOrderLineItem,$eMappingContext,$eComponent)
         return local:createProvisioningOrderLineItemFromTransformedLineItem($eOrderData,$eTransformedOrderLineItem,$ePrimarySourceLineOrderItem,$eSourceLineOrderItems)
+    
+    ) else (
+         for $eSourceOrderLineItem in $eSourceOrderLineItems
+        return local:createProvisioningOrderLineItemFromSourceOrderLineItem($eOrderData,$eSourceOrderLineItem)
+        )
+    
     )
     
 };
@@ -272,7 +280,67 @@ declare function local:createProvisioningOrderLineItemFromTransformedLineItem(
         </provord:ProvisioningOrderLine>
     )
 };
-
+(: Function to create ProvisionOrderLine Item for Mobile:)
+declare function local:createProvisioningOrderLineItemFromSourceOrderLineItem(
+    $eOrderData as element()*,
+    $eSourceOrderLineItem as element()*) as element()*
+{
+    let $sOrderLineId := $eSourceOrderLineItem/oms:orderItemRef/oms:LineId/text()
+    let $sOrderReference := $eOrderData/oms:Reference/text()
+    let $sRecognitionSpec := fn:normalize-space(data($eSourceOrderLineItem/oms:orderItemRef/oms:Recognition))
+    let $sRecognition := fn:substring-before($sRecognitionSpec, 'Spec')
+    let $sFic := fn:substring-after($sRecognition, '}')
+    
+    return(
+        <provord:ProvisioningOrderLine>
+            <corecom:Identification xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2">
+                <corecom:BusinessComponentID schemeID="PROVISIONINGORDER_LINEID" schemeAgencyID="COMMON">{$sOrderLineId}</corecom:BusinessComponentID>
+                <corecom:ID schemeID="SALESORDER_LINEID" schemeAgencyID="SEBL_01">{$sOrderLineId}</corecom:ID>
+            </corecom:Identification>
+            <provord:ServiceActionCode>{data($eSourceOrderLineItem/oms:orderItemRef/oms:Action)}</provord:ServiceActionCode>
+            <provord:ServicePointCode />
+            <provord:MilestoneCode />
+            <corecom:Status xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2">
+                <corecom:Code></corecom:Code>
+            </corecom:Status>
+            <corecom:ServiceAddress xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2">
+                <corecom:LineOne></corecom:LineOne>
+                <corecom:CityName></corecom:CityName>
+                <corecom:StateName></corecom:StateName>
+                <corecom:CountryCode></corecom:CountryCode>
+                <corecom:PostalCode></corecom:PostalCode>
+            </corecom:ServiceAddress>
+            <corecom:SalesOrderLineReference xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2">
+                <corecom:SalesOrderLineIdentification>
+                    <corecom:BusinessComponentID schemeID="SALESORDER_ID" schemeAgencyID="COMMON">{fn:data($eOrderData/oms:_root/oms:Order/oms:OrderNumber)}</corecom:BusinessComponentID>
+                    <corecom:ID xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/SalesOrder/V2"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xmlns:sord="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/SalesOrder/V2"
+                        schemeAgencyID="SEBL_01" schemeID="SALESORDER_LINEID">{$sOrderLineId}</corecom:ID>
+                </corecom:SalesOrderLineIdentification>
+            </corecom:SalesOrderLineReference>
+            <corecom:ItemReference xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2">
+                <corecom:ItemIdentification>
+                    <corecom:BusinessComponentID schemeAgencyID="COMMON" schemeID="ITEM_ID">{$sOrderLineId}</corecom:BusinessComponentID>
+                </corecom:ItemIdentification>
+                <corecom:Name>{data($eSourceOrderLineItem/oms:orderItemRef/oms:LineName)}</corecom:Name>
+                <corecom:ClassificationCode listID="PermittedTypeCode" />
+                <corecom:ClassificationCode listID="BillingProductTypeCode" />
+                <corecom:ClassificationCode listID="FulfillmentItemCode">{$sFic}</corecom:ClassificationCode>
+                <corecom:TypeCode>SERVICE</corecom:TypeCode>
+                <corecom:Description>{data($eSourceOrderLineItem/oms:orderItemRef/oms:LineName)}</corecom:Description>
+                <corecom:FulfillmentCompositionTypeCode />
+                <corecom:FulfillmentSuccessCode />
+                <corecom:NetworkItemTypeCode />
+                <corecom:PrimaryClassificationCode>{data($eSourceOrderLineItem/oms:orderItemRef/oms:LineName)}</corecom:PrimaryClassificationCode>
+            </corecom:ItemReference>
+            <provord:ProvisioningOrderSchedule>
+                <provord:RequestedDeliveryDateTime>{data($eSourceOrderLineItem/oms:orderItemRef/oms:RequestedDeliveryDate)}</provord:RequestedDeliveryDateTime>          
+            </provord:ProvisioningOrderSchedule>
+                                 
+        </provord:ProvisioningOrderLine>
+    )
+};
 
 
 let $sEbmId                         := local:generateUniqueId($sOrderId, $sVersion)
