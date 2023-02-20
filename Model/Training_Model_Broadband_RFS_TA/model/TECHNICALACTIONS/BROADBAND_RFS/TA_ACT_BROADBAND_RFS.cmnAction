@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/core/model/common" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:dom="http://xmlns.oracle.com/communications/sce/model/common/entity" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:specification="http://www.mslv.com/studio/inventory/model/specification" xmlns:transformation="http://xmlns.oracle.com/communications/studio/model/osm/transformation" xsi:type="dom:ActionType" name="TA_ACT_BROADBAND_RFS">
   <displayName lang="[default]">TA_ACT_BROADBAND_RFS</displayName>
-  <saveVersion>11</saveVersion>
+  <saveVersion>12</saveVersion>
   <id>dEr8aF2rTPm3pBuebvAxBQ</id>
   <data:dataElementNode virtual="true">
     <id>dEr8aF2rTPm3pBuebvAxBQ</id>
@@ -165,6 +165,22 @@
         <element>Vendor</element>
         <elementType>com.mslv.studio.core.data.dictionary.node</elementType>
         <elementName>Vendor</elementName>
+      </data:baseElement>
+      <data:primitiveType>string</data:primitiveType>
+    </data:dataElement>
+    <data:dataElement virtual="false">
+      <id>soTDlvlBRdeT4iMbY4f8lg</id>
+      <elementType>oracle.communications.studio.model.data.StudioModelDataElement</elementType>
+      <data:name>Old_SerialNumber</data:name>
+      <data:displayName lang="[default]">Old Serial Number</data:displayName>
+      <data:displayName lang="en"></data:displayName>
+      <data:baseElement>
+        <entity>Training_Model_Service_DataModel</entity>
+        <entityType>xsd</entityType>
+        <relationship>oracle.communications.studio.model.data.baseType</relationship>
+        <element>Old_SerialNumber</element>
+        <elementType>com.mslv.studio.core.data.dictionary.node</elementType>
+        <elementName>Old_SerialNumber</elementName>
       </data:baseElement>
       <data:primitiveType>string</data:primitiveType>
     </data:dataElement>
@@ -1173,6 +1189,103 @@
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>Modify</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Suspend</data:specializedActionName>
+        <data:actionCode>
+          <entity>Modify</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Resume</data:specializedActionName>
+        <data:actionCode>
+          <entity>Modify</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Disconnect</data:specializedActionName>
+        <data:actionCode>
+          <entity>Remove</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+    </data:actionCodeList>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <id>It6cAj8FTWKwkA46HayxOw</id>
+    <elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</elementType>
+    <data:dataElementId>soTDlvlBRdeT4iMbY4f8lg</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementEnumerationDetail">
+    <id>fqNhzgSJTKGaCxPCIjXsbQ</id>
+    <elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</elementType>
+    <data:dataElementId>soTDlvlBRdeT4iMbY4f8lg</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <id>vmRnZWgtQfCxt3g0iKyGgA</id>
+    <elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</elementType>
+    <data:dataElementId>soTDlvlBRdeT4iMbY4f8lg</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <id>FNQa-cZLTF2k12cjJZhXTA</id>
+    <elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</elementType>
+    <data:dataElementId>soTDlvlBRdeT4iMbY4f8lg</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+    <id>wB26vztvRY+XwLHIj99GEw</id>
+    <elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</elementType>
+    <data:dataElementId>soTDlvlBRdeT4iMbY4f8lg</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="specification:CharElementDetailType">
+    <id>igDV6cXrSpu7f-Kk0-Ledw</id>
+    <elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</elementType>
+    <data:dataElementId>soTDlvlBRdeT4iMbY4f8lg</data:dataElementId>
+    <specification:startTimestamp>0</specification:startTimestamp>
+    <specification:endTimestamp>0</specification:endTimestamp>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataMapElementDetail">
+    <id>BupOJH60QLe2Ko2h5-dcow</id>
+    <elementType>oracle.communications.sce.common.entity.core.dataMapElementDetail</elementType>
+    <data:dataElementId>soTDlvlBRdeT4iMbY4f8lg</data:dataElementId>
+    <data:actionCodeList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>Create</data:specializedActionName>
+        <data:actionCode>
+          <entity>Create</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeCPE</data:specializedActionName>
+        <data:actionCode>
+          <entity>Modify</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
@@ -1182,7 +1295,7 @@
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
         <data:specializedActionName>Suspend</data:specializedActionName>
@@ -1191,7 +1304,7 @@
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
         <data:specializedActionName>Resume</data:specializedActionName>
@@ -1200,7 +1313,7 @@
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
         <data:specializedActionName>Disconnect</data:specializedActionName>
@@ -1209,7 +1322,7 @@
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>

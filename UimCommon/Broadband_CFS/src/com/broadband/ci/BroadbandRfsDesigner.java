@@ -261,8 +261,12 @@ public class BroadbandRfsDesigner extends BaseDesigner {
 			debug(log,"Inside SA_CHANGEUPLOADSPEED");
 			//if(configItemTypeList.iterator().hasNext() && configItemTypeList.iterator().next().getName().equals(Constants.PARAM_PROPERTIES))
 			ServiceConfigurationItem sci = designManager.aquireConfigItem(scvConVers, Constants.PARAM_PROPERTIES);
-			paramSpeed.put(Constants.PARAM_UPLOADSPEED, paramMap.get(Constants.PARAM_UPLOADSPEED));
 			
+			debug(log, "PARAM_UPLOADSPEED " + paramMap.get(Constants.PARAM_UPLOADSPEED));
+			paramSpeed.put(Constants.PARAM_UPLOADSPEED, paramMap.get(Constants.PARAM_UPLOADSPEED));
+			debug(log, "PARAM_DOWNLOADSPEED " + paramMap.get(Constants.PARAM_DOWNLOADSPEED));
+			paramSpeed.put(Constants.PARAM_DOWNLOADSPEED, paramMap.get(Constants.PARAM_DOWNLOADSPEED));
+
 			UimHelper.setConfigItemChars(scvConVers, sci, paramSpeed);
 		} 
 		

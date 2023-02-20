@@ -50,6 +50,10 @@
 			<act:name>UploadSpeed</act:name>
 			<act:type>string</act:type>
 		</act:parameter>
+		<act:parameter>
+			<act:name>Vendor</act:name>
+			<act:type>string</act:type>
+		</act:parameter>
 		<act:applicationRole>Activation</act:applicationRole>
 	   </act:action>
 	<!--CHANGEUPLOADSPEED@TA_ACT_BROADBAND_RFS-->
@@ -144,6 +148,10 @@
 		</act:parameter>
 		<act:parameter>
 			<act:name>UploadSpeed</act:name>
+			<act:type>string</act:type>
+		</act:parameter>
+		<act:parameter>
+			<act:name>Old_SerialNumber</act:name>
 			<act:type>string</act:type>
 		</act:parameter>
 	      <act:applicationRole>Activation</act:applicationRole>
@@ -375,6 +383,10 @@
 	        <act:path>./CPE_CI/Assignment[(@State='PENDING_ASSIGN')]/Model</act:path>
 	     </act:binding>
 	     <act:binding>
+	        <act:parameter>Vendor</act:parameter>
+	        <act:path>./CPE_CI/Assignment[(@State='PENDING_ASSIGN')]/Vendor</act:path>
+	     </act:binding>
+	     <act:binding>
 	        <act:parameter>Username</act:parameter>
 	        <act:path>./User_Credentials/Username</act:path>
 	     </act:binding>
@@ -443,6 +455,10 @@
 	     <act:binding>
 	        <act:parameter>SerialNumber</act:parameter>
 	        <act:path>./CPE_CI/Assignment[(@State='PENDING_ASSIGN')]/SerialNumber</act:path>
+	     </act:binding>
+	     <act:binding>
+	        <act:parameter>Old_SerialNumber</act:parameter>
+	        <act:path>./CPE_CI/Assignment[(@State='PENDING_UNASSIGN')]/SerialNumber</act:path>
 	     </act:binding>
 	     <act:binding>
 	        <act:parameter>MACAddress</act:parameter>
