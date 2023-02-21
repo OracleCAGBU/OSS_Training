@@ -461,7 +461,9 @@ declare function systeminteractionmodule:createOrderDataUpdateForDesignInteracti
                                 return
                                 <orderItem>
                                     {
-                                        let $osmCorrelator := $orderData/oms:Reference
+                                        let $osmCorrelator := if(fn:contains($baseLineIDValue,'CSO'))
+                                                              then fn:substring-after($baseLineIDValue, 'CSO_')
+                                                              else $baseLineIDValue
                                         let $service := $processResponse/bi:interaction/invbi:body/invbi:item/invbi:entity[ser:externalIdentity/ent:externalObjectId=$osmCorrelator]
                                         let $serviceAssignment  :=  $service/ser:configuration/con:configurationItem/con:configurationItem/con:entityAssignment/con:entity[ser:specification/spec:entityClass="Service"]
                                         (: Find the child service being assigned :)
