@@ -256,9 +256,7 @@ declare function systeminteractionmodule:addService(
     let $invSpec := $orderitem/oms:ServiceSpecification
     
     (: UIM expects serivceAction to start with 'create' not 'add' :)
-    let $serviceAction := if($action = $uimlib:PSR_addAction)
-        then ($uimlib:PSR_createAction)
-        else ($action)
+    let $serviceAction := $action
     
     (: Service Correlation ID  :)
     let $serviceCorrelationID := fn:substring-after($orderitem/oms:LineId/text(),'CSO_')
