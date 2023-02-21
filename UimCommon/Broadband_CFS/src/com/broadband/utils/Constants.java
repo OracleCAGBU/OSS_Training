@@ -27,16 +27,16 @@ public class Constants {
 	
 	
 	/* SERVICE ACTIONS */
-	public static final String SA_CREATE = "create";
-	public static final String SA_CHANGE = "change";
-	public static final String SA_SUSPEND = "suspend";
-	public static final String SA_RESUME = "resume";
-	public static final String SA_DISCONNECT = "disconnect";
+	public static final String SA_CREATE = "Create";
+	public static final String SA_CHANGE = "Change";
+	public static final String SA_SUSPEND = "Suspend";
+	public static final String SA_RESUME = "Resume";
+	public static final String SA_DISCONNECT = "Disconnect";
 	public static final String SA_INVALID_ACTION = "invalid_action";
 	public static final String SA_NULL_ACTION = "null_action";
 	public static final String SA_NO_ACTION = "no_action";
-	public static final String SA_CHANGECPE = "changeCPE";
-	public static final String SA_CHANGEUPLOADSPEED = "changeUploadSpeed";
+	public static final String SA_CHANGECPE = "ChangeCPE";
+	public static final String SA_CHANGEUPLOADSPEED = "ChangeUploadSpeed";
 
 	public static final String SA_CHANGEMEDIUM = "changeMedium";
 	public static final String SA_CHANGEPAYTYPE = "PrepaidToPostpaid";

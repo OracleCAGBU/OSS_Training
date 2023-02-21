@@ -67,15 +67,15 @@ public class GetEntityAction {
 			if (action != null && action.length() > 0){
 				debug("Action not null " + action);
 
-				if ( action.equals(Constants.SA_CREATE) ) 
+				if ( action.equalsIgnoreCase(Constants.SA_CREATE) ) 
 					convertedAction = Constants.SA_CREATE;
-				else if ( action.equals(Constants.SA_CHANGE) || action.equals(Constants.SA_CHANGECPE) || action.equals(Constants.SA_CHANGEUPLOADSPEED) )
+				else if ( action.equalsIgnoreCase(Constants.SA_CHANGE) || action.equalsIgnoreCase(Constants.SA_CHANGECPE) || action.equalsIgnoreCase(Constants.SA_CHANGEUPLOADSPEED) )
 					convertedAction = Constants.SA_CHANGE;
-				else if ( action.equals(Constants.SA_RESUME) ) 
+				else if ( action.equalsIgnoreCase(Constants.SA_RESUME) ) 
 					convertedAction = Constants.SA_RESUMEWITHCONFIGURATION;
-				else if( action.equals(Constants.SA_SUSPEND)) 
+				else if( action.equalsIgnoreCase(Constants.SA_SUSPEND)) 
 					convertedAction = Constants.SA_SUSPENDWITHCONFIGURATION;
-				else if ( action.equals(Constants.SA_DISCONNECT) )
+				else if ( action.equalsIgnoreCase(Constants.SA_DISCONNECT) )
 					convertedAction = Constants.SA_DISCONNECT;
 				else
 					convertedAction = "no_action";
