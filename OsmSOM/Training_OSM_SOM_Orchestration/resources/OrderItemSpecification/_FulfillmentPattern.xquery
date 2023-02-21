@@ -6,6 +6,9 @@ declare namespace osm="http://xmlns.oracle.com/communications/ordermanagement/mo
 (: Declare incoming order name space:)
 declare namespace fulfillord="http://www.somtraining.com/inputMessage";
 declare namespace corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2";
+declare namespace log= "java:org.apache.commons.logging.Log";
+
+declare variable $log external;
 
 
      let $productSpecMap := vf:instance('ProductSpecMap')
@@ -15,11 +18,21 @@ declare namespace corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common
      let $productSpecName := fn:normalize-space($orderItem/corecom:ItemReference/corecom:PrimaryClassificationCode/text())
      
 	return
-		if ($productSpecName != '')
-		then
+	(
+		if ($productSpecName = ('SIM Card','4G','Mobile Service') ) then (
+		 log:info($log, fn:concat('Inside if productSpecMap:',$productSpecName)),
+		
+		'SOFP_MOBILE_Standard'
+		)
+		else if ($productSpecName != '') then (
+		 log:info($log, fn:concat('Inside else sif productSpecMap:',$productSpecName)),
+		
 			fn:normalize-space($productSpecMap/productSpec[fn:lower-case(@name)=fn:lower-case($productSpecName)]/fulfillmentPattern/text())
-		else
-			'SOFP_BROADBAND_Standard'
-			
+			 
+		)
+		else (
+		 log:info($log, fn:concat('Inside else productSpecMap:',$productSpecName)))
+		 
+	)		
 		
 		

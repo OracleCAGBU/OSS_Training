@@ -11,4 +11,4 @@ declare namespace im="http://www.somtraining.com/inputMessage";
 (:    fn:normalize-space(osm:properties/im:LineId/text())       :)
 
 (: TO DO: Write XQuery to identify LineId :)
-fn:normalize-space(osm:properties/im:LineId/text())
+fn:normalize-space(osm:properties/*:LineId/text())

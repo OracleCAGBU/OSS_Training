@@ -117,7 +117,7 @@ declare function systeminteractionmodule:addCaptureInteraction(
         element {$elementname } {
             uimlib:createQualifiedElementFromString($uimlib:comNamespace, $uimlib:comPrefix, $uimlib:header, ''),
             systeminteractionmodule:addInteraction('',$orderData),
-            uimlib:createQualifiedElementFromString($uimlib:biNamespace, $uimlib:biPrefix, $uimlib:executeProcess, $uimlib:true),
+            uimlib:createQualifiedElementFromString($uimlib:biNamespace, $uimlib:biPrefix, $uimlib:executeProcess, $uimlib:false),
             uimlib:createQualifiedElementFromString($uimlib:biNamespace, $uimlib:biPrefix, $uimlib:responseLevel, $uimlib:AllExpandedLevel)
         }
 };
@@ -184,7 +184,8 @@ declare function systeminteractionmodule:addInteractionHeader(
     let $bicorrIDModified       := if(fn:empty($bicorrID))
                                    then ''
                                    else $bicorrID
-    let $friendlyReference := $orderData/oms:Reference
+    let $friendlyReference      := $orderData/oms:Reference
+    let $interactionName        := "Broadband CFS Create Order"        
     
       where (exists($orderData))
         return
@@ -196,7 +197,7 @@ declare function systeminteractionmodule:addInteractionHeader(
                 if($taskName=$uimlib:CaptureBITask)then(
                 uimlib:createQualifiedSpecificationName($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:sBIOrder),
                 uimlib:createQualifiedElementFromString($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:action, $uimlib:CREATE),         
-                uimlib:createQualifiedElementFromString($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:name, $uimlib:ossintegration),
+                uimlib:createQualifiedElementFromString($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:name, $interactionName),
                (: uimlib:createFriendlyQualifiedExternalIdentity($uimlib:invbiNamespace, $uimlib:invbiPrefix, $bicorrID, $friendlyReference),:)
                 uimlib:createQualifiedElementFromString($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:effDate, (current-dateTime() cast as xs:string) )
                 )else()
@@ -255,12 +256,10 @@ declare function systeminteractionmodule:addService(
     let $invSpec := $orderitem/oms:ServiceSpecification
     
     (: UIM expects serivceAction to start with 'create' not 'add' :)
-    let $serviceAction := if($action = $uimlib:PSR_addAction)
-        then ($uimlib:PSR_createAction)
-        else ($action)
+    let $serviceAction := $action
     
     (: Service Correlation ID  :)
-    let $serviceCorrelationID := $orderData/oms:Reference/text()
+    let $serviceCorrelationID := fn:substring-after($orderitem/oms:LineId/text(),'CSO_')
      
     where(exists($orderitem))
     return
@@ -460,7 +459,9 @@ declare function systeminteractionmodule:createOrderDataUpdateForDesignInteracti
                                 return
                                 <orderItem>
                                     {
-                                        let $osmCorrelator := $orderData/oms:Reference
+                                        let $osmCorrelator := if(fn:contains($baseLineIDValue,'CSO'))
+                                                              then fn:substring-after($baseLineIDValue, 'CSO_')
+                                                              else $baseLineIDValue
                                         let $service := $processResponse/bi:interaction/invbi:body/invbi:item/invbi:entity[ser:externalIdentity/ent:externalObjectId=$osmCorrelator]
                                         let $serviceAssignment  :=  $service/ser:configuration/con:configurationItem/con:configurationItem/con:entityAssignment/con:entity[ser:specification/spec:entityClass="Service"]
                                         (: Find the child service being assigned :)
