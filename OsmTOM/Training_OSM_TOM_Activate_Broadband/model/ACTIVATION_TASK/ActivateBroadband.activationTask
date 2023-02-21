@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:act="http://xmlns.oracle.com/communications/sce/integration/model/task/activation" xmlns="http://xmlns.oracle.com/communications/sce/integration/model/task/activation" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:task="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="act:activationTaskType" name="ActivateBroadband">
   <com:displayName>ActivateBroadbandTask</com:displayName>
-  <com:saveVersion>25</com:saveVersion>
+  <com:saveVersion>34</com:saveVersion>
   <com:id>kmXz2420QliXYWo6fNefDQ</com:id>
   <task:orderType>
     <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -545,6 +545,312 @@
         &lt;mslv-sa:value>&#xD;
             &lt;xsl:value-of&#xD;
                 select=&quot;$orderItemRef[osm:Action = 'Create' and osm:SpecializedAction = 'CREATE@TA_ACT_BROADBAND_RFS']/osm:dynamicParams/*[local-name()='DownloadSpeed']&quot;&#xD;
+            />&#xD;
+        &lt;/mslv-sa:value>&#xD;
+    &lt;/xsl:if>&#xD;
+    &lt;mslv-sa:type>REQUIRED_SCALAR&lt;/mslv-sa:type>&#xD;
+&lt;/mslv-sa:serviceValue></act:binding>
+        <act:bindingType>XSLT</act:bindingType>
+      </act:parameterBinding>
+    </act:serviceAction>
+    <act:serviceAction>
+      <act:viewNode>/</act:viewNode>
+      <act:serviceAction>
+        <com:entity>C_CHANGE_FIBER_PLAN</com:entity>
+        <com:entityType>serviceAction</com:entityType>
+        <com:relationship>oracle.communications.sce.integration.task.serviceAction</com:relationship>
+      </act:serviceAction>
+      <act:parameterBinding>
+        <act:saParameterName>
+          <com:entity>C_CHANGE_FIBER_PLAN</com:entity>
+          <com:entityType>serviceAction</com:entityType>
+          <com:relationship>parameter.ServiceAction</com:relationship>
+          <com:element>MCLI</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        </act:saParameterName>
+        <act:binding>'CISCO_ISP_1-0'</act:binding>
+      </act:parameterBinding>
+      <act:parameterBinding>
+        <act:saParameterName>
+          <com:entity>C_CHANGE_FIBER_PLAN</com:entity>
+          <com:entityType>serviceAction</com:entityType>
+          <com:relationship>parameter.ServiceAction</com:relationship>
+          <com:element>MACAddress</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        </act:saParameterName>
+        <act:binding>&lt;mslv-sa:serviceValue xsi:type=&quot;mslv-sa:ASAPServiceValue&quot;&#xD;
+    xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;>&#xD;
+    &lt;mslv-sa:name>MACAddress&lt;/mslv-sa:name>&#xD;
+    &lt;xsl:variable name=&quot;orderItemRef&quot;  select=&quot;osm:ControlData/osm:Functions/osm:ActivateBroadbandFunction/osm:orderItem/osm:orderItemRef&quot; />&#xD;
+    &lt;xsl:if&#xD;
+        test=&quot;$orderItemRef[osm:Action = 'Modify'] and $orderItemRef[osm:SpecializedAction = 'CHANGEUPLOADSPEED@TA_ACT_BROADBAND_RFS']&quot;>&#xD;
+        &lt;mslv-sa:value>&#xD;
+            &lt;xsl:value-of&#xD;
+                select=&quot;$orderItemRef[osm:Action = 'Modify' and osm:SpecializedAction = 'CHANGEUPLOADSPEED@TA_ACT_BROADBAND_RFS']/osm:dynamicParams/*[local-name()='MACAddress']&quot;&#xD;
+            />&#xD;
+        &lt;/mslv-sa:value>&#xD;
+    &lt;/xsl:if>&#xD;
+    &lt;mslv-sa:type>REQUIRED_SCALAR&lt;/mslv-sa:type>&#xD;
+&lt;/mslv-sa:serviceValue></act:binding>
+        <act:bindingType>XSLT</act:bindingType>
+      </act:parameterBinding>
+      <act:parameterBinding>
+        <act:saParameterName>
+          <com:entity>C_CHANGE_FIBER_PLAN</com:entity>
+          <com:entityType>serviceAction</com:entityType>
+          <com:relationship>parameter.ServiceAction</com:relationship>
+          <com:element>UploadSpeed</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        </act:saParameterName>
+        <act:binding>&lt;mslv-sa:serviceValue xsi:type=&quot;mslv-sa:ASAPServiceValue&quot;&#xD;
+    xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;>&#xD;
+    &lt;mslv-sa:name>UploadSpeed&lt;/mslv-sa:name>&#xD;
+    &lt;xsl:variable name=&quot;orderItemRef&quot;  select=&quot;osm:ControlData/osm:Functions/osm:ActivateBroadbandFunction/osm:orderItem/osm:orderItemRef&quot; />&#xD;
+    &lt;xsl:if&#xD;
+        test=&quot;$orderItemRef[osm:Action = 'Modify'] and $orderItemRef[osm:SpecializedAction = 'CHANGEUPLOADSPEED@TA_ACT_BROADBAND_RFS']&quot;>&#xD;
+        &lt;mslv-sa:value>&#xD;
+            &lt;xsl:value-of&#xD;
+                select=&quot;$orderItemRef[osm:Action = 'Modify' and osm:SpecializedAction = 'CHANGEUPLOADSPEED@TA_ACT_BROADBAND_RFS']/osm:dynamicParams/*[local-name()='UploadSpeed']&quot;&#xD;
+            />&#xD;
+        &lt;/mslv-sa:value>&#xD;
+    &lt;/xsl:if>&#xD;
+    &lt;mslv-sa:type>REQUIRED_SCALAR&lt;/mslv-sa:type>&#xD;
+&lt;/mslv-sa:serviceValue></act:binding>
+        <act:bindingType>XSLT</act:bindingType>
+      </act:parameterBinding>
+      <act:parameterBinding>
+        <act:saParameterName>
+          <com:entity>C_CHANGE_FIBER_PLAN</com:entity>
+          <com:entityType>serviceAction</com:entityType>
+          <com:relationship>parameter.ServiceAction</com:relationship>
+          <com:element>DownloadSpeed</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        </act:saParameterName>
+        <act:binding>&lt;mslv-sa:serviceValue xsi:type=&quot;mslv-sa:ASAPServiceValue&quot;&#xD;
+    xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;>&#xD;
+    &lt;mslv-sa:name>DownloadSpeed&lt;/mslv-sa:name>&#xD;
+    &lt;xsl:variable name=&quot;orderItemRef&quot;  select=&quot;osm:ControlData/osm:Functions/osm:ActivateBroadbandFunction/osm:orderItem/osm:orderItemRef&quot; />&#xD;
+    &lt;xsl:if&#xD;
+        test=&quot;$orderItemRef[osm:Action = 'Modify'] and $orderItemRef[osm:SpecializedAction = 'CHANGEDOWNLOADSPEED@TA_ACT_BROADBAND_RFS']&quot;>&#xD;
+        &lt;mslv-sa:value>&#xD;
+            &lt;xsl:value-of&#xD;
+                select=&quot;$orderItemRef[osm:Action = 'Modify' and osm:SpecializedAction = 'CHANGEDOWNLOADSPEED@TA_ACT_BROADBAND_RFS']/osm:dynamicParams/*[local-name()='DownloadSpeed']&quot;&#xD;
+            />&#xD;
+        &lt;/mslv-sa:value>&#xD;
+    &lt;/xsl:if>&#xD;
+    &lt;mslv-sa:type>REQUIRED_SCALAR&lt;/mslv-sa:type>&#xD;
+&lt;/mslv-sa:serviceValue></act:binding>
+        <act:bindingType>XSLT</act:bindingType>
+      </act:parameterBinding>
+    </act:serviceAction>
+    <act:serviceAction>
+      <act:viewNode>/</act:viewNode>
+      <act:serviceAction>
+        <com:entity>C_CHANGE_FIBER_CPE</com:entity>
+        <com:entityType>serviceAction</com:entityType>
+        <com:relationship>oracle.communications.sce.integration.task.serviceAction</com:relationship>
+      </act:serviceAction>
+      <act:parameterBinding>
+        <act:saParameterName>
+          <com:entity>C_CHANGE_FIBER_CPE</com:entity>
+          <com:entityType>serviceAction</com:entityType>
+          <com:relationship>parameter.ServiceAction</com:relationship>
+          <com:element>MCLI</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        </act:saParameterName>
+        <act:binding>'CISCO_ISP_1-0'</act:binding>
+      </act:parameterBinding>
+      <act:parameterBinding>
+        <act:saParameterName>
+          <com:entity>C_CHANGE_FIBER_CPE</com:entity>
+          <com:entityType>serviceAction</com:entityType>
+          <com:relationship>parameter.ServiceAction</com:relationship>
+          <com:element>MACAddress</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        </act:saParameterName>
+        <act:binding>&lt;mslv-sa:serviceValue xsi:type=&quot;mslv-sa:ASAPServiceValue&quot;&#xD;
+    xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;>&#xD;
+    &lt;mslv-sa:name>MACAddress&lt;/mslv-sa:name>&#xD;
+    &lt;xsl:variable name=&quot;orderItemRef&quot;  select=&quot;osm:ControlData/osm:Functions/osm:ActivateBroadbandFunction/osm:orderItem/osm:orderItemRef&quot; />&#xD;
+    &lt;xsl:if&#xD;
+        test=&quot;$orderItemRef[osm:Action = 'Modify'] and $orderItemRef[osm:SpecializedAction = 'CHANGECPE@TA_ACT_BROADBAND_RFS']&quot;>&#xD;
+        &lt;mslv-sa:value>&#xD;
+            &lt;xsl:value-of&#xD;
+                select=&quot;$orderItemRef[osm:Action = 'Modify' and osm:SpecializedAction = 'CHANGECPE@TA_ACT_BROADBAND_RFS']/osm:dynamicParams/*[local-name()='MACAddress']&quot;&#xD;
+            />&#xD;
+        &lt;/mslv-sa:value>&#xD;
+    &lt;/xsl:if>&#xD;
+    &lt;mslv-sa:type>REQUIRED_SCALAR&lt;/mslv-sa:type>&#xD;
+&lt;/mslv-sa:serviceValue></act:binding>
+        <act:bindingType>XSLT</act:bindingType>
+      </act:parameterBinding>
+      <act:parameterBinding>
+        <act:saParameterName>
+          <com:entity>C_CHANGE_FIBER_CPE</com:entity>
+          <com:entityType>serviceAction</com:entityType>
+          <com:relationship>parameter.ServiceAction</com:relationship>
+          <com:element>SerialNumber</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        </act:saParameterName>
+        <act:binding>&lt;mslv-sa:serviceValue xsi:type=&quot;mslv-sa:ASAPServiceValue&quot;&#xD;
+    xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;>&#xD;
+    &lt;mslv-sa:name>SerialNumber&lt;/mslv-sa:name>&#xD;
+    &lt;xsl:variable name=&quot;orderItemRef&quot;  select=&quot;osm:ControlData/osm:Functions/osm:ActivateBroadbandFunction/osm:orderItem/osm:orderItemRef&quot; />&#xD;
+    &lt;xsl:if&#xD;
+        test=&quot;$orderItemRef[osm:Action = 'Modify'] and $orderItemRef[osm:SpecializedAction = 'CHANGECPE@TA_ACT_BROADBAND_RFS']&quot;>&#xD;
+        &lt;mslv-sa:value>&#xD;
+            &lt;xsl:value-of&#xD;
+                select=&quot;$orderItemRef[osm:Action = 'Modify' and osm:SpecializedAction = 'CHANGECPE@TA_ACT_BROADBAND_RFS']/osm:dynamicParams/*[local-name()='SerialNumber']&quot;&#xD;
+            />&#xD;
+        &lt;/mslv-sa:value>&#xD;
+    &lt;/xsl:if>&#xD;
+    &lt;mslv-sa:type>REQUIRED_SCALAR&lt;/mslv-sa:type>&#xD;
+&lt;/mslv-sa:serviceValue></act:binding>
+        <act:bindingType>XSLT</act:bindingType>
+      </act:parameterBinding>
+      <act:parameterBinding>
+        <act:saParameterName>
+          <com:entity>C_CHANGE_FIBER_CPE</com:entity>
+          <com:entityType>serviceAction</com:entityType>
+          <com:relationship>parameter.ServiceAction</com:relationship>
+          <com:element>Old_SerialNumber</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        </act:saParameterName>
+        <act:binding>&lt;mslv-sa:serviceValue xsi:type=&quot;mslv-sa:ASAPServiceValue&quot;&#xD;
+    xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;>&#xD;
+    &lt;mslv-sa:name>Old_SerialNumber&lt;/mslv-sa:name>&#xD;
+    &lt;xsl:variable name=&quot;orderItemRef&quot;  select=&quot;osm:ControlData/osm:Functions/osm:ActivateBroadbandFunction/osm:orderItem/osm:orderItemRef&quot; />&#xD;
+    &lt;xsl:if&#xD;
+        test=&quot;$orderItemRef[osm:Action = 'Modify'] and $orderItemRef[osm:SpecializedAction = 'CHANGECPE@TA_ACT_BROADBAND_RFS']&quot;>&#xD;
+        &lt;mslv-sa:value>&#xD;
+            &lt;xsl:value-of&#xD;
+                select=&quot;$orderItemRef[osm:Action = 'Modify' and osm:SpecializedAction = 'CHANGECPE@TA_ACT_BROADBAND_RFS']/osm:dynamicParams/*[local-name()='Old_SerialNumber']&quot;&#xD;
+            />&#xD;
+        &lt;/mslv-sa:value>&#xD;
+    &lt;/xsl:if>&#xD;
+    &lt;mslv-sa:type>REQUIRED_SCALAR&lt;/mslv-sa:type>&#xD;
+&lt;/mslv-sa:serviceValue></act:binding>
+        <act:bindingType>XSLT</act:bindingType>
+      </act:parameterBinding>
+    </act:serviceAction>
+    <act:serviceAction>
+      <act:viewNode>/</act:viewNode>
+      <act:serviceAction>
+        <com:entity>C_SUSPEND_FIBER</com:entity>
+        <com:entityType>serviceAction</com:entityType>
+        <com:relationship>oracle.communications.sce.integration.task.serviceAction</com:relationship>
+      </act:serviceAction>
+      <act:parameterBinding>
+        <act:saParameterName>
+          <com:entity>C_SUSPEND_FIBER</com:entity>
+          <com:entityType>serviceAction</com:entityType>
+          <com:relationship>parameter.ServiceAction</com:relationship>
+          <com:element>MCLI</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        </act:saParameterName>
+        <act:binding>'CISCO_ISP_1-0'</act:binding>
+      </act:parameterBinding>
+      <act:parameterBinding>
+        <act:saParameterName>
+          <com:entity>C_SUSPEND_FIBER</com:entity>
+          <com:entityType>serviceAction</com:entityType>
+          <com:relationship>parameter.ServiceAction</com:relationship>
+          <com:element>MACAddress</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        </act:saParameterName>
+        <act:binding>&lt;mslv-sa:serviceValue xsi:type=&quot;mslv-sa:ASAPServiceValue&quot;&#xD;
+    xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;>&#xD;
+    &lt;mslv-sa:name>MACAddress&lt;/mslv-sa:name>&#xD;
+    &lt;xsl:variable name=&quot;orderItemRef&quot;  select=&quot;osm:ControlData/osm:Functions/osm:ActivateBroadbandFunction/osm:orderItem/osm:orderItemRef&quot; />&#xD;
+    &lt;xsl:if&#xD;
+        test=&quot;$orderItemRef[osm:Action = 'Suspend'] and $orderItemRef[osm:SpecializedAction = 'SUSPEND@TA_ACT_BROADBAND_RFS']&quot;>&#xD;
+        &lt;mslv-sa:value>&#xD;
+            &lt;xsl:value-of&#xD;
+                select=&quot;$orderItemRef[osm:Action = 'Suspend' and osm:SpecializedAction = 'SUSPEND@TA_ACT_BROADBAND_RFS']/osm:dynamicParams/*[local-name()='MACAddress']&quot;&#xD;
+            />&#xD;
+        &lt;/mslv-sa:value>&#xD;
+    &lt;/xsl:if>&#xD;
+    &lt;mslv-sa:type>REQUIRED_SCALAR&lt;/mslv-sa:type>&#xD;
+&lt;/mslv-sa:serviceValue></act:binding>
+        <act:bindingType>XSLT</act:bindingType>
+      </act:parameterBinding>
+    </act:serviceAction>
+    <act:serviceAction>
+      <act:viewNode>/</act:viewNode>
+      <act:serviceAction>
+        <com:entity>C_RESUME_FIBER</com:entity>
+        <com:entityType>serviceAction</com:entityType>
+        <com:relationship>oracle.communications.sce.integration.task.serviceAction</com:relationship>
+      </act:serviceAction>
+      <act:parameterBinding>
+        <act:saParameterName>
+          <com:entity>C_RESUME_FIBER</com:entity>
+          <com:entityType>serviceAction</com:entityType>
+          <com:relationship>parameter.ServiceAction</com:relationship>
+          <com:element>MCLI</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        </act:saParameterName>
+        <act:binding>'CISCO_ISP_1-0'</act:binding>
+      </act:parameterBinding>
+      <act:parameterBinding>
+        <act:saParameterName>
+          <com:entity>C_RESUME_FIBER</com:entity>
+          <com:entityType>serviceAction</com:entityType>
+          <com:relationship>parameter.ServiceAction</com:relationship>
+          <com:element>MACAddress</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        </act:saParameterName>
+        <act:binding>&lt;mslv-sa:serviceValue xsi:type=&quot;mslv-sa:ASAPServiceValue&quot;&#xD;
+    xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;>&#xD;
+    &lt;mslv-sa:name>MACAddress&lt;/mslv-sa:name>&#xD;
+    &lt;xsl:variable name=&quot;orderItemRef&quot;  select=&quot;osm:ControlData/osm:Functions/osm:ActivateBroadbandFunction/osm:orderItem/osm:orderItemRef&quot; />&#xD;
+    &lt;xsl:if&#xD;
+        test=&quot;$orderItemRef[osm:Action = 'Resume'] and $orderItemRef[osm:SpecializedAction = 'RESUME@TA_ACT_BROADBAND_RFS']&quot;>&#xD;
+        &lt;mslv-sa:value>&#xD;
+            &lt;xsl:value-of&#xD;
+                select=&quot;$orderItemRef[osm:Action = 'Resume' and osm:SpecializedAction = 'RESUME@TA_ACT_BROADBAND_RFS']/osm:dynamicParams/*[local-name()='MACAddress']&quot;&#xD;
+            />&#xD;
+        &lt;/mslv-sa:value>&#xD;
+    &lt;/xsl:if>&#xD;
+    &lt;mslv-sa:type>REQUIRED_SCALAR&lt;/mslv-sa:type>&#xD;
+&lt;/mslv-sa:serviceValue></act:binding>
+        <act:bindingType>XSLT</act:bindingType>
+      </act:parameterBinding>
+    </act:serviceAction>
+    <act:serviceAction>
+      <act:viewNode>/</act:viewNode>
+      <act:serviceAction>
+        <com:entity>C_TERMINATE_FIBER</com:entity>
+        <com:entityType>serviceAction</com:entityType>
+        <com:relationship>oracle.communications.sce.integration.task.serviceAction</com:relationship>
+      </act:serviceAction>
+      <act:parameterBinding>
+        <act:saParameterName>
+          <com:entity>C_TERMINATE_FIBER</com:entity>
+          <com:entityType>serviceAction</com:entityType>
+          <com:relationship>parameter.ServiceAction</com:relationship>
+          <com:element>MCLI</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        </act:saParameterName>
+        <act:binding>'CISCO_ISP_1-0'</act:binding>
+      </act:parameterBinding>
+      <act:parameterBinding>
+        <act:saParameterName>
+          <com:entity>C_TERMINATE_FIBER</com:entity>
+          <com:entityType>serviceAction</com:entityType>
+          <com:relationship>parameter.ServiceAction</com:relationship>
+          <com:element>MACAddress</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        </act:saParameterName>
+        <act:binding>&lt;mslv-sa:serviceValue xsi:type=&quot;mslv-sa:ASAPServiceValue&quot;&#xD;
+    xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;>&#xD;
+    &lt;mslv-sa:name>MACAddress&lt;/mslv-sa:name>&#xD;
+    &lt;xsl:variable name=&quot;orderItemRef&quot;  select=&quot;osm:ControlData/osm:Functions/osm:ActivateBroadbandFunction/osm:orderItem/osm:orderItemRef&quot; />&#xD;
+    &lt;xsl:if&#xD;
+        test=&quot;$orderItemRef[osm:Action = 'Disconnect'] and $orderItemRef[osm:SpecializedAction = 'DISCONNECT@TA_ACT_BROADBAND_RFS']&quot;>&#xD;
+        &lt;mslv-sa:value>&#xD;
+            &lt;xsl:value-of&#xD;
+                select=&quot;$orderItemRef[osm:Action = 'Disconnect' and osm:SpecializedAction = 'DISCONNECT@TA_ACT_BROADBAND_RFS']/osm:dynamicParams/*[local-name()='MACAddress']&quot;&#xD;
             />&#xD;
         &lt;/mslv-sa:value>&#xD;
     &lt;/xsl:if>&#xD;
