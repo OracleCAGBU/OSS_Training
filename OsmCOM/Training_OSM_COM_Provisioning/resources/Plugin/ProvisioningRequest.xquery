@@ -332,7 +332,7 @@ declare function local:createProvisioningOrderLineItemFromSourceOrderLineItem(
                 <corecom:FulfillmentCompositionTypeCode />
                 <corecom:FulfillmentSuccessCode />
                 <corecom:NetworkItemTypeCode />
-                <corecom:PrimaryClassificationCode>{data($eSourceOrderLineItem/oms:orderItemRef/oms:LineName)}</corecom:PrimaryClassificationCode>
+                <corecom:PrimaryClassificationCode>{data($eSourceOrderLineItem/oms:orderItemRef/oms:ProductSpecification)}</corecom:PrimaryClassificationCode>
             </corecom:ItemReference>
             <provord:ProvisioningOrderSchedule>
                 <provord:RequestedDeliveryDateTime>{data($eSourceOrderLineItem/oms:orderItemRef/oms:RequestedDeliveryDate)}</provord:RequestedDeliveryDateTime>          
