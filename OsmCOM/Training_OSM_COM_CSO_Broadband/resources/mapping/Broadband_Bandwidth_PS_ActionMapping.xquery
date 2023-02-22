@@ -20,6 +20,6 @@ let $uploadSpeed                 := $sourceOrderItem//*:UploadSpeed/text()
 return
 (
 if($sourceValue='Modify' and fn:string-length($uploadSpeed)>0)
-then 'ChangeUploadSpeed'
-else $sourceValue
+then 'ChangeSpeed'
+else $currentTargetValue
 )

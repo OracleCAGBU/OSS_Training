@@ -21,5 +21,5 @@ return
 (
 if($sourceValue='Modify' and fn:string-length($serialNumber)>0)
 then 'ChangeCPE'
-else $sourceValue
+else $currentTargetValue
 )
