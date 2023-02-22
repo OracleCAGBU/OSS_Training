@@ -176,7 +176,7 @@ public class BaseDesigner extends BaseInvManager {
 				scvConVers = designer.designAdd(scvConVers, orderItem);
 			} else if (serviceAction.equalsIgnoreCase(Constants.SA_CHANGE) || 
 					serviceAction.equalsIgnoreCase(Constants.SA_CHANGECPE) || 
-					serviceAction.equalsIgnoreCase(Constants.SA_CHANGEUPLOADSPEED)) {
+					serviceAction.equalsIgnoreCase(Constants.SA_CHANGESPEED)) {
 				debug(log,"inside design Change : " + serviceAction);
 				designer.serviceAction = serviceAction;				
 				scvConVers = designer.designChange(scvConVers, orderItem);

@@ -56,9 +56,9 @@
 		</act:parameter>
 		<act:applicationRole>Activation</act:applicationRole>
 	   </act:action>
-	<!--CHANGEUPLOADSPEED@TA_ACT_BROADBAND_RFS-->
+	<!--CHANGESPEED@TA_ACT_BROADBAND_RFS-->
 	   <act:action>
-	      <act:name>CHANGEUPLOADSPEED@TA_ACT_BROADBAND_RFS</act:name>
+	      <act:name>CHANGESPEED@TA_ACT_BROADBAND_RFS</act:name>
 	      <act:actionCode>Modify</act:actionCode>
 	      <act:subject>
 	         <act:specification>Broadband_RFS</act:specification>
@@ -309,7 +309,7 @@
 		      <act:path>/root/after</act:path>
 		   </act:diff>
 		   <act:action>CREATE@TA_ACT_BROADBAND_RFS</act:action>
-		   <act:action>CHANGEUPLOADSPEED@TA_ACT_BROADBAND_RFS</act:action>
+		   <act:action>CHANGESPEED@TA_ACT_BROADBAND_RFS</act:action>
 		   <act:action>CHANGECPE@TA_ACT_BROADBAND_RFS</act:action>
 		   <act:action>SUSPEND@TA_ACT_BROADBAND_RFS</act:action>
 		   <act:action>RESUME@TA_ACT_BROADBAND_RFS</act:action>
@@ -321,7 +321,7 @@
 		      <act:path>/root/after/Properties</act:path>
 		   </act:diff>
 		   <act:action>CREATE@TA_ACT_BROADBAND_RFS</act:action>
-		   <act:action>CHANGEUPLOADSPEED@TA_ACT_BROADBAND_RFS</act:action>
+		   <act:action>CHANGESPEED@TA_ACT_BROADBAND_RFS</act:action>
 		   <act:action>CHANGECPE@TA_ACT_BROADBAND_RFS</act:action>
 		   <act:action>SUSPEND@TA_ACT_BROADBAND_RFS</act:action>
 		   <act:action>RESUME@TA_ACT_BROADBAND_RFS</act:action>
@@ -333,7 +333,7 @@
 		      <act:path>/root/after/CPE_CI</act:path>
 		   </act:diff>
 		   <act:action>CREATE@TA_ACT_BROADBAND_RFS</act:action>
-		   <act:action>CHANGEUPLOADSPEED@TA_ACT_BROADBAND_RFS</act:action>
+		   <act:action>CHANGESPEED@TA_ACT_BROADBAND_RFS</act:action>
 		   <act:action>CHANGECPE@TA_ACT_BROADBAND_RFS</act:action>
 		   <act:action>SUSPEND@TA_ACT_BROADBAND_RFS</act:action>
 		   <act:action>RESUME@TA_ACT_BROADBAND_RFS</act:action>
@@ -345,7 +345,7 @@
 		      <act:path>/root/after/User_Credentials</act:path>
 		   </act:diff>
 		   <act:action>CREATE@TA_ACT_BROADBAND_RFS</act:action>
-		   <act:action>CHANGEUPLOADSPEED@TA_ACT_BROADBAND_RFS</act:action>
+		   <act:action>CHANGESPEED@TA_ACT_BROADBAND_RFS</act:action>
 		   <act:action>CHANGECPE@TA_ACT_BROADBAND_RFS</act:action>
 		   <act:action>SUSPEND@TA_ACT_BROADBAND_RFS</act:action>
 		   <act:action>RESUME@TA_ACT_BROADBAND_RFS</act:action>
@@ -403,10 +403,10 @@
 	        <act:path>./Properties/UploadSpeed</act:path>
 	     </act:binding>
 	  </act:generator>
-	<!--CHANGEUPLOADSPEED@TA_ACT_BROADBAND_RFS-->
+	<!--CHANGESPEED@TA_ACT_BROADBAND_RFS-->
 	  <act:generator>
-	     <act:action>CHANGEUPLOADSPEED@TA_ACT_BROADBAND_RFS</act:action>
-	     <act:condition>boolean(count(/root/after/Properties[ServiceAction='ChangeUploadSpeed'])>0)</act:condition>
+	     <act:action>CHANGESPEED@TA_ACT_BROADBAND_RFS</act:action>
+	     <act:condition>boolean(count(/root/after/Properties[ServiceAction='ChangeSpeed'])>0)</act:condition>
 	     <act:subject>/root/service</act:subject>
 	     <act:target>/root/service</act:target>
 	     <act:binding>

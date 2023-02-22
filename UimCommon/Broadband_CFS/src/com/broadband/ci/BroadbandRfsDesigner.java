@@ -260,7 +260,7 @@ public class BroadbandRfsDesigner extends BaseDesigner {
 				}
 			}*/
 			
-		} else if(serviceAction.equals(Constants.SA_CHANGEUPLOADSPEED)) {
+		} else if(serviceAction.equals(Constants.SA_CHANGESPEED)) {
 			HashMap<String,String> paramSpeed = new HashMap<String,String>();
 
 			debug(log,"Inside SA_CHANGEUPLOADSPEED");

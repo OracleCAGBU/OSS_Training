@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/core/model/common" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:dom="http://xmlns.oracle.com/communications/sce/model/common/entity" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:specification="http://www.mslv.com/studio/inventory/model/specification" xmlns:transformation="http://xmlns.oracle.com/communications/studio/model/osm/transformation" xsi:type="dom:ActionType" name="ServiceActions_Broadband_CFS">
   <displayName lang="[default]">ServiceActions_Broadband_CFS</displayName>
-  <saveVersion>70</saveVersion>
+  <saveVersion>71</saveVersion>
   <id>4tA1SKq+QzOmEOWvT5LIKQ</id>
   <data:dataElementNode virtual="true">
     <id>4tA1SKq+QzOmEOWvT5LIKQ</id>
@@ -638,18 +638,18 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Create</data:specializedActionName>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
         <data:actionCode>
-          <entity>Create</entity>
+          <entity>ChangeSpeed</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -760,18 +760,18 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Create</data:specializedActionName>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
         <data:actionCode>
-          <entity>Create</entity>
+          <entity>ChangeSpeed</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -882,18 +882,18 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Create</data:specializedActionName>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
         <data:actionCode>
-          <entity>Create</entity>
+          <entity>ChangeSpeed</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -995,18 +995,18 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
+        <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
+          <entity>Create</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>Create</data:specializedActionName>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
         <data:actionCode>
-          <entity>Create</entity>
+          <entity>ChangeSpeed</entity>
           <entityType>actionType</entityType>
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
@@ -1392,15 +1392,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -1408,6 +1399,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -1501,15 +1501,6 @@
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -1517,6 +1508,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -1619,15 +1619,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -1635,6 +1626,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -1728,15 +1728,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -1744,6 +1735,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -1837,15 +1837,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -1853,6 +1844,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -1946,15 +1946,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -1962,6 +1953,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -2055,15 +2055,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>REQUIRED IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -2071,6 +2062,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -2164,15 +2164,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -2180,6 +2171,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -2273,15 +2273,6 @@
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -2289,6 +2280,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -2382,15 +2382,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -2398,6 +2389,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -2491,15 +2491,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -2507,6 +2498,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -2609,15 +2609,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -2625,6 +2616,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -2706,15 +2706,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -2722,6 +2713,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -2815,15 +2815,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -2831,6 +2822,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -2912,15 +2912,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -2928,6 +2919,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -3021,15 +3021,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -3037,6 +3028,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -3130,15 +3130,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -3146,6 +3137,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -3239,15 +3239,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -3255,6 +3246,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -3348,15 +3348,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -3364,6 +3355,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -3457,15 +3457,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -3473,6 +3464,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -3566,15 +3566,6 @@
         <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
       <data:actionCodeDataList>
-        <data:specializedActionName>ChangeUploadSpeed</data:specializedActionName>
-        <data:actionCode>
-          <entity>ChangeUploadSpeed</entity>
-          <entityType>actionType</entityType>
-          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-        </data:actionCode>
-        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
-      </data:actionCodeDataList>
-      <data:actionCodeDataList>
         <data:specializedActionName>Create</data:specializedActionName>
         <data:actionCode>
           <entity>Create</entity>
@@ -3582,6 +3573,15 @@
           <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
         </data:actionCode>
         <data:directionAttribute>REQUIRED IN</data:directionAttribute>
+      </data:actionCodeDataList>
+      <data:actionCodeDataList>
+        <data:specializedActionName>ChangeSpeed</data:specializedActionName>
+        <data:actionCode>
+          <entity>ChangeSpeed</entity>
+          <entityType>actionType</entityType>
+          <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+        </data:actionCode>
+        <data:directionAttribute>OPTIONAL IN</data:directionAttribute>
       </data:actionCodeDataList>
     </data:actionCodeList>
   </data:dataElementDetails>
@@ -3668,21 +3668,21 @@
       </dom:actionCode>
     </dom:specializedActionList>
     <dom:specializedActionList>
-      <id>reegHObRTsi7QSlrhIqf6g</id>
-      <elementType>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode</elementType>
-      <dom:specializedActionName>ChangeUploadSpeed</dom:specializedActionName>
-      <dom:actionCode>
-        <entity>ChangeUploadSpeed</entity>
-        <entityType>actionType</entityType>
-        <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
-      </dom:actionCode>
-    </dom:specializedActionList>
-    <dom:specializedActionList>
       <id>6C1sFr-uQn6YNL-SkQ1Hog</id>
       <elementType>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode</elementType>
       <dom:specializedActionName>Create</dom:specializedActionName>
       <dom:actionCode>
         <entity>Create</entity>
+        <entityType>actionType</entityType>
+        <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
+      </dom:actionCode>
+    </dom:specializedActionList>
+    <dom:specializedActionList>
+      <id>wumrSuP3SiOCw8ERWKA5KQ</id>
+      <elementType>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode</elementType>
+      <dom:specializedActionName>ChangeSpeed</dom:specializedActionName>
+      <dom:actionCode>
+        <entity>ChangeSpeed</entity>
         <entityType>actionType</entityType>
         <relationship>oracle.communications.sce.common.entity.entities.action.actioncodestospecializedactioncode.actionTypeRef</relationship>
       </dom:actionCode>

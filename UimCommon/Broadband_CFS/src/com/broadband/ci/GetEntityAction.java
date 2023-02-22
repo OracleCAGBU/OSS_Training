@@ -63,13 +63,13 @@ public class GetEntityAction {
 			}
 			debug("isInserviceForChange : "+isInserviceForChange);
 			debug("Received action : " + action);
-			debug("Constants.SA_CHANGE : " + Constants.SA_CHANGECPE + " " +  Constants.SA_CHANGE + " " + Constants.SA_CHANGEUPLOADSPEED);
+			debug("Constants.SA_CHANGE : " + Constants.SA_CHANGECPE + " " +  Constants.SA_CHANGE + " " + Constants.SA_CHANGESPEED);
 			if (action != null && action.length() > 0){
 				debug("Action not null " + action);
 
 				if ( action.equalsIgnoreCase(Constants.SA_CREATE) ) 
 					convertedAction = Constants.SA_CREATE;
-				else if ( action.equalsIgnoreCase(Constants.SA_CHANGE) || action.equalsIgnoreCase(Constants.SA_CHANGECPE) || action.equalsIgnoreCase(Constants.SA_CHANGEUPLOADSPEED) )
+				else if ( action.equalsIgnoreCase(Constants.SA_CHANGE) || action.equalsIgnoreCase(Constants.SA_CHANGECPE) || action.equalsIgnoreCase(Constants.SA_CHANGESPEED) )
 					convertedAction = Constants.SA_CHANGE;
 				else if ( action.equalsIgnoreCase(Constants.SA_RESUME) ) 
 					convertedAction = Constants.SA_RESUMEWITHCONFIGURATION;
