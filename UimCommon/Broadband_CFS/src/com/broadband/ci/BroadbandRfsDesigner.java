@@ -203,15 +203,20 @@ public class BroadbandRfsDesigner extends BaseDesigner {
 
 		if(serviceAction.equals(Constants.SA_CHANGECPE)) {
 			
+			HashMap<String,String> paramLD = new HashMap<String,String>();
+			paramLD.put(Constants.CHAR_SERIAL_NUMBER, paramMap.get(Constants.CHAR_SERIAL_NUMBER));
+			
+			if(Utils.checkBlank(paramMap.get(Constants.CHAR_SERIAL_NUMBER))) {
+				log.validationException("", new oracle.communications.inventory.api.exception.ValidationException(),
+						new Object[] { "Mandatory parameter SerialNumber is missing" });		
+			}
+			
 			ServiceConfigurationItem cpeCI = designManager.aquireConfigItem(scvConVers, Constants.PARAM_CPE_CI);
 			
 			if(!Utils.checkNull(cpeCI) && !Utils.checkNull(cpeCI.getAssignment())) 
 				//un-assigning the previous CPE 
 				UimHelper.unallocateResourceToConfigItem(scvConVers, cpeCI);
-			
-			HashMap<String,String> paramLD = new HashMap<String,String>();
-			paramLD.put(Constants.CHAR_SERIAL_NUMBER, paramMap.get(Constants.CHAR_SERIAL_NUMBER));
-			
+						
 			LogicalDevice ld = null;
 			List<LogicalDevice> ldList = UimHelper.findLogicalDevices(Constants.SPEC_CPE, null, paramLD, CriteriaOperator.EQUALS, null, null, null);
 			
@@ -266,9 +271,13 @@ public class BroadbandRfsDesigner extends BaseDesigner {
 			paramSpeed.put(Constants.PARAM_UPLOADSPEED, paramMap.get(Constants.PARAM_UPLOADSPEED));
 			debug(log, "PARAM_DOWNLOADSPEED " + paramMap.get(Constants.PARAM_DOWNLOADSPEED));
 			paramSpeed.put(Constants.PARAM_DOWNLOADSPEED, paramMap.get(Constants.PARAM_DOWNLOADSPEED));
-
+			
 			UimHelper.setConfigItemChars(scvConVers, sci, paramSpeed);
-		} 
+			
+			if(Utils.checkBlank(paramMap.get(Constants.PARAM_UPLOADSPEED)) && Utils.checkBlank(paramMap.get(Constants.PARAM_DOWNLOADSPEED)))
+				log.validationException("", new oracle.communications.inventory.api.exception.ValidationException(),
+						new Object[] { "Mandatory parameters UploadSpeed/DownloadSpeed are missing" });		
+			} 
 		
 		UimHelper.setConfigItemCharValue(scvConVers, Constants.PARAM_PROPERTIES, "ServiceAction", serviceAction);
 		
