@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:act="http://xmlns.oracle.com/communications/sce/integration/model/task/activation" xmlns="http://xmlns.oracle.com/communications/sce/integration/model/task/activation" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:task="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="act:activationTaskType" name="ActivateBroadband">
   <com:displayName>ActivateBroadbandTask</com:displayName>
-  <com:saveVersion>40</com:saveVersion>
+  <com:saveVersion>53</com:saveVersion>
   <com:id>kmXz2420QliXYWo6fNefDQ</com:id>
   <task:orderType>
     <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -225,6 +225,7 @@
       <act:parameterBinding>
         <act:header>parentKey</act:header>
         <act:binding></act:binding>
+        <act:bindingType>XPATH</act:bindingType>
       </act:parameterBinding>
       <act:parameterBinding>
         <act:header>origin</act:header>
@@ -232,19 +233,19 @@
       </act:parameterBinding>
       <act:parameterBinding>
         <act:header>organizationUnit</act:header>
-        <act:binding></act:binding>
+        <act:binding>'STUDIO'</act:binding>
       </act:parameterBinding>
       <act:parameterBinding>
         <act:header>timeout</act:header>
-        <act:binding></act:binding>
+        <act:binding>'-1'</act:binding>
       </act:parameterBinding>
       <act:parameterBinding>
         <act:header>secureData</act:header>
-        <act:binding></act:binding>
+        <act:binding>'true'</act:binding>
       </act:parameterBinding>
       <act:parameterBinding>
         <act:header>maximumDelayFail</act:header>
-        <act:binding></act:binding>
+        <act:binding>'0'</act:binding>
       </act:parameterBinding>
       <act:parameterBinding>
         <act:header>rollbackState</act:header>
@@ -252,27 +253,27 @@
       </act:parameterBinding>
       <act:parameterBinding>
         <act:header>rollbackIfFail</act:header>
-        <act:binding></act:binding>
+        <act:binding>'true'</act:binding>
       </act:parameterBinding>
       <act:parameterBinding>
         <act:header>batchGroup</act:header>
-        <act:binding></act:binding>
+        <act:binding>''</act:binding>
       </act:parameterBinding>
       <act:parameterBinding>
         <act:header>asdlTimeout</act:header>
-        <act:binding></act:binding>
+        <act:binding>'-1'</act:binding>
       </act:parameterBinding>
       <act:parameterBinding>
         <act:header>asdlRetry</act:header>
-        <act:binding></act:binding>
+        <act:binding>'5'</act:binding>
       </act:parameterBinding>
       <act:parameterBinding>
         <act:header>asdlRetryInterval</act:header>
-        <act:binding></act:binding>
+        <act:binding>'120'</act:binding>
       </act:parameterBinding>
       <act:parameterBinding>
         <act:header>asdlDelayFail</act:header>
-        <act:binding></act:binding>
+        <act:binding>'false'</act:binding>
       </act:parameterBinding>
       <act:parameterBinding>
         <act:header>externalSystemId</act:header>
