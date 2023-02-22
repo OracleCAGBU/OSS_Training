@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:Q1="http://www.oracle.org/cgbu/osmipsa/infoparm" xmlns:Q2="http://www.oracle.com/cgbu/ipsa/osmipsa/ws" xmlns:tns="http://xmlns.oracle.com/communications/sce/dictionary/osm_asap_integration/ASAP" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/communications/sce/dictionary/osm_asap_integration/ASAP">
+                            <xs:import namespace="http://www.oracle.com/cgbu/ipsa/osmipsa/ws" schemaLocation="IPSA.xsd"/>
+    <xs:simpleType name="ActivationOrderID">
+    <xs:annotation>
+    <xs:documentation>The work order ID that uniquely identifies the work order in ASAP/IPSA.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:complexType name="CommandHistory">
+    <xs:annotation>
+		<xs:documentation>CommandHistory contains data that return from queryManagedEntitiesRequest. It's only used for ASAP.</xs:documentation>
+	</xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="value">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:restriction base="xs:anyType">
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="item">
+                  <xs:complexType>
+                    <xs:complexContent>
+                      <xs:restriction base="xs:anyType">
+                        <xs:sequence>
+                          <xs:element maxOccurs="1" minOccurs="0" name="asdlCommand">
+                          <xs:annotation>
+							<xs:documentation>The name of the ASDL that generates the log entry. If there is no current ASDL for the log entry this field is null.</xs:documentation>
+						  </xs:annotation>   
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="100"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element maxOccurs="1" minOccurs="0" name="asdlState">
+                          <xs:annotation>
+							<xs:documentation>Status of the ASDL.
+If defined, this field is updated while processing the ASDL
+and its rollback ASDL.
+Possible values include:
+- ASDL_NEP_COMPLETE 10
+- ASDL_NEP_FAIL 11
+- ASDL_NEP_RBACK_COMP 12
+- ASDL_NEP_RBACK_FAIL 13
+- ASDL_INITIAL 14
+- ASDL_NEP_FAIL_CONTINUE 17
+- ASDL_NEP_FAIL_DELAYED 20
+These values are defined in sarm_defs.h.</xs:documentation>
+						</xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="100"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element maxOccurs="1" minOccurs="0" name="asdlId">
+                          <xs:annotation>
+							<xs:documentation>The ID of the ASDL that generated the log entry. If there is no current ASDL for the log entry this field is null.</xs:documentation>
+						  </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="100"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element maxOccurs="1" minOccurs="0" name="neId">
+                          <xs:annotation>
+							<xs:documentation>The Host NE to which the ASDL is routed by the SARM.</xs:documentation>
+						  </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="100"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element maxOccurs="1" minOccurs="0" name="description">
+                          <xs:annotation>
+							<xs:documentation>A description of the ASDL.</xs:documentation>
+						  </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="1000"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element maxOccurs="1" minOccurs="0" name="actualCompletionDate">
+                          <xs:annotation>
+							<xs:documentation>The completion date and time of the ASDL processing.</xs:documentation>
+						  </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="100"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element maxOccurs="1" minOccurs="0" name="queueDate">
+                          <xs:annotation>
+							<xs:documentation>The date and time when the ASDL was placed in the SARM provisioning queue.</xs:documentation>
+						</xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="100"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element maxOccurs="1" minOccurs="0" name="startDate">
+                          <xs:annotation>
+							<xs:documentation>The date and time when provisioning starts for this ASDL.
+The difference between this value and the queue_dts
+represents the time the ASDL spent in the queue of pending
+ASDLs before being transmitted to the NEP for provisioning.</xs:documentation>
+						</xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="100"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element maxOccurs="1" minOccurs="0" name="retryCount">
+                          <xs:annotation>
+							<xs:documentation>A count of the number of times the ASDL was retried at the NE.</xs:documentation>
+						  </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="100"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:restriction>
+                    </xs:complexContent>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:restriction>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+    <xs:complexType name="DetailedParameters">
+    <xs:annotation>
+		<xs:documentation>DetailedParameters contains data that return from getOrderByKeyRequest. It's only used for ASAP.</xs:documentation>
+	</xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="orderValue">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:restriction base="xs:anyType">
+              <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="0" name="orderKey">
+                  <xs:complexType>
+                    <xs:complexContent>
+                      <xs:restriction base="xs:anyType">
+                        <xs:sequence>
+                          <xs:element maxOccurs="1" minOccurs="0" name="primaryKey">
+                           <xs:annotation>
+							<xs:documentation>The work order ID that uniquely identifies the work order in ASAP.</xs:documentation>
+						  </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="100"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:restriction>
+                    </xs:complexContent>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element maxOccurs="1" minOccurs="0" name="actualCompletionDate">
+                <xs:annotation>
+					<xs:documentation>The data and time that work order is completed in ASAP.</xs:documentation>
+				</xs:annotation>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:minLength value="0"/>
+                      <xs:maxLength value="100"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:element>
+              </xs:sequence>
+            </xs:restriction>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="infoParm">
+      <xs:annotation>
+				<xs:documentation>It contains information parameters that are returned to the SRP from the NEP State Tables or JInterpreter programs. These parameters contain information that is returned to the requesting external system as Compound parameters.
+					These values are made available from within an infoParms. They can be retrieved by querying an order (eg getOrderByKeyRequest) after some provisioning has occurred.</xs:documentation>
+	  </xs:annotation>
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:restriction base="xs:anyType">
+              <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="0" name="label">
+                <xs:annotation>
+					<xs:documentation>The parameter label.</xs:documentation>
+				</xs:annotation>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:minLength value="0"/>
+                      <xs:maxLength value="1000"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:element>
+                <xs:element maxOccurs="1" minOccurs="0" name="group">
+                <xs:annotation>
+							<xs:documentation>NE parameter group information returned to the Host system.
+This parameter group is set in the State Tables or JInterpreter programs before the
+Information parameters are returned to the SARM.</xs:documentation>
+							</xs:annotation>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:minLength value="0"/>
+                      <xs:maxLength value="1000"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:element>
+                <xs:element maxOccurs="1" minOccurs="0" name="dataValue">
+                <xs:annotation>
+                <xs:documentation>The actual data value.</xs:documentation>
+				</xs:annotation>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:minLength value="0"/>
+                      <xs:maxLength value="1000"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:element>
+                <xs:element maxOccurs="1" minOccurs="0" name="serviceId">
+                <xs:annotation>
+							<xs:documentation>The ID of the ASAPService (CSDL) being processed when the Information
+							parameter was generated. This CSDL ID is the same as in table tbl_srq_csdl and enables the SRP to track which ASAPService (CSDL) the information parameter belongs to.</xs:documentation>
+				</xs:annotation>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:minLength value="0"/>
+                      <xs:maxLength value="100"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:element>
+                <xs:element maxOccurs="1" minOccurs="0" name="description">
+                <xs:annotation>
+                <xs:documentation>The parameter description.</xs:documentation>
+				</xs:annotation>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:minLength value="0"/>
+                      <xs:maxLength value="1000"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:element>
+                <xs:element maxOccurs="1" minOccurs="0" name="serviceKey">
+                <xs:annotation>
+							<xs:documentation>The ASAPService (CSDL) command name and sequence number in the work order that was being processed when the Information parameter was generated.</xs:documentation>
+				</xs:annotation>
+                  <xs:complexType>
+                    <xs:complexContent>
+                      <xs:restriction base="xs:anyType">
+                        <xs:sequence>
+                          <xs:element maxOccurs="1" minOccurs="0" name="applicationDN">
+                          <xs:annotation>
+								<xs:documentation>A part of serviceKey.</xs:documentation>
+						  </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="100"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element maxOccurs="1" minOccurs="0" name="type">
+                          <xs:annotation>
+								<xs:documentation>A part of serviceKey.</xs:documentation>
+						  </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="100"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element maxOccurs="1" minOccurs="0" name="primaryKey">
+                          <xs:annotation>
+								<xs:documentation>The work order ID that uniquely identifies the work order in ASAP.</xs:documentation>
+						  </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="100"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element maxOccurs="1" minOccurs="0" name="serviceSequenceNumber">
+                          <xs:annotation>
+							<xs:documentation>Sequence number uniquely identifies an ASAPService within an ASAPOrderValue</xs:documentation>
+						  </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="100"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:restriction>
+                    </xs:complexContent>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:restriction>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element maxOccurs="1" minOccurs="0" name="rollbackExceptions">
+      <xs:annotation>
+			<xs:documentation>Exceptions flag indicating to the SRP if there are any
+exceptions during the rolling back of the work order. Such exceptions are generally the result of a 'Fail but Continue' status being returned to the SARM for one of the rollback ASDLs on the work order. This field is set by the SARM and communicated to the relevant SRP, which then requests the exception details. The
+possible values include:
+(Y) ASAP_WO_ROLLBACK_EXCEPTIONS--the rollback of work order completed with exceptions.
+(N) ASAP_WO_NO_ROLLBACK_EXCEPTIONS--the rollback of work order completed without any exceptions.
+The flag is passed back to the SRP by the SARM in the Work Order Completion Event or Failure Event.
+(rollback_exceptions in tbl_wrk_ord)</xs:documentation>
+		</xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="0"/>
+            <xs:maxLength value="100"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+    <xs:complexType name="EventData">
+    <xs:annotation>
+		<xs:documentation>ASAP or IPSA publish events for each createOrderByValueRequest. EventData contains data that are returned.</xs:documentation>
+	</xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="orderKey">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:restriction base="xs:anyType">
+              <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="0" name="primaryKey">
+                <xs:annotation>
+					<xs:documentation>The work order ID that uniquely identifies the work order in ASAP</xs:documentation>
+				 </xs:annotation>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:minLength value="0"/>
+                      <xs:maxLength value="100"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:element>
+              </xs:sequence>
+            </xs:restriction>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element maxOccurs="1" minOccurs="0" name="reason">
+      <xs:annotation>
+			<xs:documentation>The reason that the service failed/succeed.</xs:documentation>
+	   </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="0"/>
+            <xs:maxLength value="1000"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element maxOccurs="1" minOccurs="0" name="eventTime">
+      <xs:annotation>
+		<xs:documentation>The date and time that the work order event was placed into the audit log.</xs:documentation>
+	  </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="0"/>
+            <xs:maxLength value="100"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element maxOccurs="1" minOccurs="0" name="currentState">
+      <xs:annotation>
+		<xs:documentation>The current state of the work order.</xs:documentation>
+	  </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="0"/>
+            <xs:maxLength value="100"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element maxOccurs="1" minOccurs="0" name="rollbackExcept">
+      <xs:annotation>
+			<xs:documentation>This value is set if exceptions occured during rolling back of the work order.</xs:documentation>
+	  </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="0"/>
+            <xs:maxLength value="100"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+       <xs:element maxOccurs="1" minOccurs="0" name="infoParms">
+       <xs:annotation>
+			<xs:documentation>Information parameters are generated by the IP Service Activator Web Service when it publishes an orderCompleteEvent, orderFailEvent, or orderTimeoutEvent. In cases where an activation task is configured with IPSA service action(s) which require an IP Service Activator transaction to fulfill the activation request, the ‘transaction’ structure in the InfoParms structure for the orderCompleteEvent, orderFailEvent or orderTimeoutEvent will contain information relating to the IP Service Activator transaction. In cases where an activation task is configured with IPSA service action(s) which lookup data (ie navigation service actions), the IP Service Activator Web Service will return the results in the infoParms structure in the activation orderCompleteEvent response, with one infoParm per IPSA service action. infoParms is returned as part of EventData only when the system is IPSA.</xs:documentation>
+		</xs:annotation>
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:restriction base="xs:anyType">
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="infoParm">
+                <xs:annotation>
+				<xs:documentation>The information parameters that are returned to caller from IP Service Activator Web Service. Each infoParam includes an xmlValue which contains either the result of the specific IP Service Activator Web Service query in case of an IPSA service action which looks up data (ie navigation service actions). Otherwise, details of the IP Service Activator transaction created to fulfill the activation request.</xs:documentation>
+				</xs:annotation>
+                  <xs:complexType>
+                    <xs:complexContent>
+                      <xs:restriction base="xs:anyType">
+                        <xs:sequence>
+                          <xs:element maxOccurs="1" minOccurs="0" name="xmlValue">
+                          <xs:annotation>
+							<xs:documentation>The value of the parameter. It has its own structure, please see IPSA.xsd for details.</xs:documentation>
+						  </xs:annotation>
+                            <xs:complexType>
+                              <xs:complexContent>
+                                  <xs:extension base="Q2:IpsaInfoParm"/>
+                              </xs:complexContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element maxOccurs="1" minOccurs="0" name="label">
+                          <xs:annotation>
+							<xs:documentation>The parameter label.</xs:documentation>
+						  </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="1000"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element maxOccurs="1" minOccurs="0" name="group">
+                          <xs:annotation>
+                            <xs:documentation>The reference ID for the IPSA query service action. This ID is set in the activation request, and returned in the activation response to enable the OSM cartridge to correlate an Information parameter to an OSM order item.</xs:documentation>
+							</xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="1000"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element maxOccurs="1" minOccurs="0" name="serviceId">
+                          <xs:annotation>
+							<xs:documentation>The ID of the IPSA service action being processed when the Information parameter was generated. This ID enables tracking of which IPSA service action the information parameter belongs to.</xs:documentation>
+						  </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="100"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element maxOccurs="1" minOccurs="0" name="description">
+                          <xs:annotation>
+							<xs:documentation>The description of the parameter.</xs:documentation>
+						  </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="1000"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element maxOccurs="1" minOccurs="0" name="serviceKey">
+                          <xs:annotation>
+							<xs:documentation>The serviceKey contains the IPSA service action command name in the work order that was being processed when the Information parameter was generated.</xs:documentation>
+							</xs:annotation>
+                            <xs:complexType>
+                              <xs:complexContent>
+                                <xs:restriction base="xs:anyType">
+                                  <xs:sequence>
+                                    <xs:element maxOccurs="1" minOccurs="0" name="applicationDN">
+                                    <xs:annotation>
+										<xs:documentation>A part of serviceKey.</xs:documentation>
+						  			</xs:annotation>
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:minLength value="0"/>
+                                          <xs:maxLength value="100"/>
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element maxOccurs="1" minOccurs="0" name="type">
+                                    <xs:annotation>
+										<xs:documentation>A part of serviceKey.</xs:documentation>
+						  			</xs:annotation>
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:minLength value="0"/>
+                                          <xs:maxLength value="100"/>
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element maxOccurs="1" minOccurs="0" name="primaryKey">
+                                    <xs:annotation>
+										<xs:documentation>The work order ID that uniquely identifies the work order in IPSA.</xs:documentation>
+									</xs:annotation>
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:minLength value="0"/>
+                                          <xs:maxLength value="100"/>
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element maxOccurs="1" minOccurs="0" name="serviceSequenceNumber">
+                                    <xs:annotation>
+										<xs:documentation>Not used by IP Service Activator Web Service.</xs:documentation>
+									</xs:annotation>
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:minLength value="0"/>
+                                          <xs:maxLength value="100"/>
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:element>
+                                  </xs:sequence>
+                                </xs:restriction>
+                              </xs:complexContent>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:restriction>
+                    </xs:complexContent>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:restriction>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+        </xs:sequence>
+  </xs:complexType>
+    <xs:complexType name="ExceptionData">
+    <xs:annotation>
+		<xs:documentation>When a work order is sent to ASAP or IPSA, sometimes ASAP or IPSA will reject the order. The exception message is included in this structure. ExceptionData is used by both ASAP and IPSA.</xs:documentation>
+	</xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="message">
+      <xs:annotation>
+		<xs:documentation>The exception message.</xs:documentation>
+	  </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="0"/>
+            <xs:maxLength value="1000"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
