@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/orchestration" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:osm="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="OrderComponentSpec" name="ActivateBroadbandFunction">
   <com:displayName lang="[default]">ActivateBroadbandFunction</com:displayName>
-  <com:saveVersion>7</com:saveVersion>
+  <com:saveVersion>9</com:saveVersion>
   <com:id>5GS2Wxz-TQymXY+YYjw7Hw</com:id>
   <namespace>TOM_TechnicalOrderFulfillment</namespace>
   <extends>
@@ -514,7 +514,7 @@
             <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
             <com:element>ActivateBroadbandFunction/componentKey</com:element>
             <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-            <com:elementName>componentKey</com:elementName>
+            <com:elementName>ActivateBroadbandFunction/componentKey</com:elementName>
             <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:namespace>
             <com:baseElement>string</com:baseElement>
             <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -639,7 +639,7 @@
                     <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                     <com:element>ExtendedConfiguration/ActivationResponse/EventData/orderKey/primaryKey</com:element>
                     <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                    <com:elementName>primaryKey</com:elementName>
+                    <com:elementName>ExtendedConfiguration/ActivationResponse/EventData/orderKey/primaryKey</com:elementName>
                     <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/osm_asap_integration/ASAP</com:namespace>
                     <com:baseElement>string</com:baseElement>
                     <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -725,7 +725,7 @@
                         <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                         <com:element>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/discover</com:element>
                         <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                        <com:elementName>discover</com:elementName>
+                        <com:elementName>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/discover</com:elementName>
                         <com:namespace>http://www.oracle.com/cgbu/ipsa/osmipsa/ws</com:namespace>
                         <com:baseElement>string60</com:baseElement>
                         <com:baseNamespace>http://www.oracle.com/cgbu/ipsa/osmipsa/ws</com:baseNamespace>
@@ -757,7 +757,7 @@
                           <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                           <com:element>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/getObject/objectId</com:element>
                           <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                          <com:elementName>objectId</com:elementName>
+                          <com:elementName>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/getObject/objectId</com:elementName>
                           <com:namespace>http://www.oracle.com/cgbu/ipsa/osmipsa/ws</com:namespace>
                           <com:baseElement>long</com:baseElement>
                           <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -822,7 +822,7 @@
                             <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                             <com:element>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/getAttributes/attribute/attributeName</com:element>
                             <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                            <com:elementName>attributeName</com:elementName>
+                            <com:elementName>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/getAttributes/attribute/attributeName</com:elementName>
                             <com:namespace>http://www.oracle.com/cgbu/ipsa/osmipsa/ws</com:namespace>
                             <com:baseElement>string256</com:baseElement>
                             <com:baseNamespace>http://www.oracle.com/cgbu/ipsa/osmipsa/ws</com:baseNamespace>
@@ -877,7 +877,7 @@
                             <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                             <com:element>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/getChildren/eomObject/objectId</com:element>
                             <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                            <com:elementName>objectId</com:elementName>
+                            <com:elementName>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/getChildren/eomObject/objectId</com:elementName>
                             <com:namespace>http://www.oracle.com/cgbu/ipsa/osmipsa/ws</com:namespace>
                             <com:baseElement>long</com:baseElement>
                             <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -932,7 +932,7 @@
                             <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                             <com:element>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/getParents/eomObject/objectId</com:element>
                             <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                            <com:elementName>objectId</com:elementName>
+                            <com:elementName>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/getParents/eomObject/objectId</com:elementName>
                             <com:namespace>http://www.oracle.com/cgbu/ipsa/osmipsa/ws</com:namespace>
                             <com:baseElement>long</com:baseElement>
                             <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -998,7 +998,7 @@
                             <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                             <com:element>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/getParameters/eomObject/objectId</com:element>
                             <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                            <com:elementName>objectId</com:elementName>
+                            <com:elementName>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/getParameters/eomObject/objectId</com:elementName>
                             <com:namespace>http://www.oracle.com/cgbu/ipsa/osmipsa/ws</com:namespace>
                             <com:baseElement>long</com:baseElement>
                             <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -1053,7 +1053,7 @@
                             <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                             <com:element>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/getTargets/eomObject/objectId</com:element>
                             <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                            <com:elementName>objectId</com:elementName>
+                            <com:elementName>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/getTargets/eomObject/objectId</com:elementName>
                             <com:namespace>http://www.oracle.com/cgbu/ipsa/osmipsa/ws</com:namespace>
                             <com:baseElement>long</com:baseElement>
                             <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -1098,7 +1098,7 @@
                           <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                           <com:element>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/getTransactionStatus/transactionId</com:element>
                           <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                          <com:elementName>transactionId</com:elementName>
+                          <com:elementName>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/getTransactionStatus/transactionId</com:elementName>
                           <com:namespace>http://www.oracle.com/cgbu/ipsa/osmipsa/ws</com:namespace>
                           <com:baseElement>long</com:baseElement>
                           <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -1163,7 +1163,7 @@
                             <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                             <com:element>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/find/eomObject/objectId</com:element>
                             <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                            <com:elementName>objectId</com:elementName>
+                            <com:elementName>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/find/eomObject/objectId</com:elementName>
                             <com:namespace>http://www.oracle.com/cgbu/ipsa/osmipsa/ws</com:namespace>
                             <com:baseElement>long</com:baseElement>
                             <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -1218,7 +1218,7 @@
                             <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                             <com:element>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/findParameters/eomObject/objectId</com:element>
                             <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                            <com:elementName>objectId</com:elementName>
+                            <com:elementName>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/findParameters/eomObject/objectId</com:elementName>
                             <com:namespace>http://www.oracle.com/cgbu/ipsa/osmipsa/ws</com:namespace>
                             <com:baseElement>long</com:baseElement>
                             <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -1263,7 +1263,7 @@
                           <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                           <com:element>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/transaction/transactionId</com:element>
                           <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                          <com:elementName>transactionId</com:elementName>
+                          <com:elementName>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/xmlValue/transaction/transactionId</com:elementName>
                           <com:namespace>http://www.oracle.com/cgbu/ipsa/osmipsa/ws</com:namespace>
                           <com:baseElement>long</com:baseElement>
                           <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -1363,7 +1363,7 @@
                         <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                         <com:element>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/serviceKey/applicationDN</com:element>
                         <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                        <com:elementName>applicationDN</com:elementName>
+                        <com:elementName>ExtendedConfiguration/ActivationResponse/EventData/infoParms/infoParm/serviceKey/applicationDN</com:elementName>
                         <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/osm_asap_integration/ASAP</com:namespace>
                         <com:baseElement>string</com:baseElement>
                         <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -1431,7 +1431,7 @@
                     <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                     <com:element>ExtendedConfiguration/ActivationResponse/DetailedParameters/orderValue/orderKey</com:element>
                     <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                    <com:elementName>orderKey</com:elementName>
+                    <com:elementName>ExtendedConfiguration/ActivationResponse/DetailedParameters/orderValue/orderKey</com:elementName>
                     <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/osm_asap_integration/ASAP</com:namespace>
                     <com:baseElement>(Local Structure)</com:baseElement>
                     <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -1475,7 +1475,7 @@
                     <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                     <com:element>ExtendedConfiguration/ActivationResponse/DetailedParameters/infoParm/label</com:element>
                     <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                    <com:elementName>label</com:elementName>
+                    <com:elementName>ExtendedConfiguration/ActivationResponse/DetailedParameters/infoParm/label</com:elementName>
                     <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/osm_asap_integration/ASAP</com:namespace>
                     <com:baseElement>string</com:baseElement>
                     <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -1540,7 +1540,7 @@
                       <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                       <com:element>ExtendedConfiguration/ActivationResponse/DetailedParameters/infoParm/serviceKey/applicationDN</com:element>
                       <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                      <com:elementName>applicationDN</com:elementName>
+                      <com:elementName>ExtendedConfiguration/ActivationResponse/DetailedParameters/infoParm/serviceKey/applicationDN</com:elementName>
                       <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/osm_asap_integration/ASAP</com:namespace>
                       <com:baseElement>string</com:baseElement>
                       <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -1628,7 +1628,7 @@
                       <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                       <com:element>ExtendedConfiguration/ActivationResponse/CommandHistory/value/item/asdlCommand</com:element>
                       <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                      <com:elementName>asdlCommand</com:elementName>
+                      <com:elementName>ExtendedConfiguration/ActivationResponse/CommandHistory/value/item/asdlCommand</com:elementName>
                       <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/osm_asap_integration/ASAP</com:namespace>
                       <com:baseElement>string</com:baseElement>
                       <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -1740,7 +1740,7 @@
                   <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                   <com:element>ExtendedConfiguration/ActivationResponse/ExceptionData/message</com:element>
                   <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                  <com:elementName>message</com:elementName>
+                  <com:elementName>ExtendedConfiguration/ActivationResponse/ExceptionData/message</com:elementName>
                   <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/osm_asap_integration/ASAP</com:namespace>
                   <com:baseElement>string</com:baseElement>
                   <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>

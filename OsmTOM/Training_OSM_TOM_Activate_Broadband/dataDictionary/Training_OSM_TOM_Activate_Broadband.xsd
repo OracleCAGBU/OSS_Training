@@ -9,25 +9,104 @@
   </xs:complexType>
     <xs:complexType name="ActivationResponse">
     <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="ActivationOrderID" type="Q2:ActivationOrderID"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ActivationOrderID">
+        <xs:simpleType>
+          <xs:restriction base="Q2:ActivationOrderID"/>
+        </xs:simpleType>
+      </xs:element>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="EventData">
         <xs:complexType>
           <xs:complexContent>
-            <xs:extension base="Q2:EventData"/>
+            <xs:extension base="Q2:EventData">
+              <xs:sequence>
+                <xs:element name="ActivationOrderID" type="Q2:ActivationOrderID"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="EventData">
+                  <xs:complexType>
+                    <xs:complexContent>
+                      <xs:extension base="Q2:EventData"/>
+                    </xs:complexContent>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="CommandHistory">
+                  <xs:complexType>
+                    <xs:complexContent>
+                      <xs:extension base="Q2:CommandHistory"/>
+                    </xs:complexContent>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="DetailedParameters">
+                  <xs:complexType>
+                    <xs:complexContent>
+                      <xs:extension base="Q2:DetailedParameters"/>
+                    </xs:complexContent>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:extension>
           </xs:complexContent>
         </xs:complexType>
       </xs:element>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="DetailedParameters">
         <xs:complexType>
           <xs:complexContent>
-            <xs:extension base="Q2:DetailedParameters"/>
+            <xs:extension base="Q2:DetailedParameters">
+              <xs:sequence>
+                <xs:element name="ActivationOrderID" type="Q2:ActivationOrderID"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="EventData">
+                  <xs:complexType>
+                    <xs:complexContent>
+                      <xs:extension base="Q2:EventData"/>
+                    </xs:complexContent>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="CommandHistory">
+                  <xs:complexType>
+                    <xs:complexContent>
+                      <xs:extension base="Q2:CommandHistory"/>
+                    </xs:complexContent>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="DetailedParameters">
+                  <xs:complexType>
+                    <xs:complexContent>
+                      <xs:extension base="Q2:DetailedParameters"/>
+                    </xs:complexContent>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:extension>
           </xs:complexContent>
         </xs:complexType>
       </xs:element>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="CommandHistory">
         <xs:complexType>
           <xs:complexContent>
-            <xs:extension base="Q2:CommandHistory"/>
+            <xs:extension base="Q2:CommandHistory">
+              <xs:sequence>
+                <xs:element name="ActivationOrderID" type="Q2:ActivationOrderID"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="EventData">
+                  <xs:complexType>
+                    <xs:complexContent>
+                      <xs:extension base="Q2:EventData"/>
+                    </xs:complexContent>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="CommandHistory">
+                  <xs:complexType>
+                    <xs:complexContent>
+                      <xs:extension base="Q2:CommandHistory"/>
+                    </xs:complexContent>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="DetailedParameters">
+                  <xs:complexType>
+                    <xs:complexContent>
+                      <xs:extension base="Q2:DetailedParameters"/>
+                    </xs:complexContent>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:extension>
           </xs:complexContent>
         </xs:complexType>
       </xs:element>

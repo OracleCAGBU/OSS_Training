@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xmlns:task="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xmlns:aut="http://xmlns.oracle.com/communications/sce/osm/model/process/task/automation" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xsi:type="manualTaskType" name="TOM_CreationTask">
   <com:displayName>TOM_CreationTask</com:displayName>
-  <com:saveVersion>6</com:saveVersion>
+  <com:saveVersion>7</com:saveVersion>
   <com:id>--+H---s--+4AUYv--+MIg</com:id>
   <orderType>
     <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
     <com:entityType>order</com:entityType>
     <com:relationship>com.mslv.studio.provisioning.task.manual.orderType</com:relationship>
   </orderType>
+  <orderTemplateRef>
+    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+    <com:entityType>order</com:entityType>
+    <com:relationship>ora.task.orderTemplateRef</com:relationship>
+    <com:element>/inputMessage</com:element>
+    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+  </orderTemplateRef>
   <orderTemplateRef>
     <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
     <com:entityType>order</com:entityType>
@@ -75,7 +82,6 @@
         <com:relationship>ora.task.orderTemplateRef</com:relationship>
         <com:element>/ControlData/OrderItem/ParentLineId</com:element>
         <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-        <childRefNode>false</childRefNode>
       </childNode>
       <childNode>
         <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -119,6 +125,13 @@
         <com:element>/ControlData/OrderItem/dynamicParams</com:element>
         <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
       </childNode>
+    </childNode>
+    <childNode>
+      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+      <com:entityType>order</com:entityType>
+      <com:relationship>ora.task.orderTemplateRef</com:relationship>
+      <com:element>/ControlData/OrderFulfillmentState</com:element>
+      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
     </childNode>
     <childNode>
       <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -1037,23 +1050,13 @@
           </childNode>
         </childNode>
       </childNode>
-      <childRefNode>false</childRefNode>
-    </childNode>
-    <childNode>
-      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-      <com:entityType>order</com:entityType>
-      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-      <com:element>/ControlData/OrderFulfillmentState</com:element>
-      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
     </childNode>
   </orderTemplateRef>
-  <orderTemplateRef>
-    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-    <com:entityType>order</com:entityType>
-    <com:relationship>ora.task.orderTemplateRef</com:relationship>
-    <com:element>/inputMessage</com:element>
-    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-  </orderTemplateRef>
+  <viewNodeExtension>
+    <path>/inputMessage</path>
+    <editable>true</editable>
+    <defaultValue></defaultValue>
+  </viewNodeExtension>
   <viewNodeExtension>
     <path>/ControlData</path>
     <editable>true</editable>
@@ -1100,22 +1103,7 @@
     <defaultValue></defaultValue>
   </viewNodeExtension>
   <viewNodeExtension>
-    <path>/inputMessage</path>
-    <editable>true</editable>
-    <defaultValue></defaultValue>
-  </viewNodeExtension>
-  <viewNodeExtension>
     <path>/ControlData/OrderItem/ParentLineId</path>
-    <editable>true</editable>
-    <defaultValue></defaultValue>
-  </viewNodeExtension>
-  <viewNodeExtension>
-    <path>/ControlData/Functions</path>
-    <editable>true</editable>
-    <defaultValue></defaultValue>
-  </viewNodeExtension>
-  <viewNodeExtension>
-    <path>/ControlData/OrderFulfillmentState</path>
     <editable>true</editable>
     <defaultValue></defaultValue>
   </viewNodeExtension>
@@ -1146,6 +1134,16 @@
   </viewNodeExtension>
   <viewNodeExtension>
     <path>/ControlData/OrderItem/dynamicParams</path>
+    <editable>true</editable>
+    <defaultValue></defaultValue>
+  </viewNodeExtension>
+  <viewNodeExtension>
+    <path>/ControlData/OrderFulfillmentState</path>
+    <editable>true</editable>
+    <defaultValue></defaultValue>
+  </viewNodeExtension>
+  <viewNodeExtension>
+    <path>/ControlData/Functions</path>
     <editable>true</editable>
     <defaultValue></defaultValue>
   </viewNodeExtension>
