@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aut="http://xmlns.oracle.com/communications/sce/osm/model/process/task/automation" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:task="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="task:automatedTaskType" name="ProvisioningTask">
   <com:displayName>ProvisioningTask</com:displayName>
-  <com:saveVersion>8</com:saveVersion>
+  <com:saveVersion>11</com:saveVersion>
   <com:id>Ya8ENa5sRJyVqdp5eECSdw</com:id>
   <task:orderType>
     <com:entity>COM_SalesOrderFulfillment</com:entity>
@@ -487,7 +487,7 @@
         <aut:jndiName>%{COM_OUTBOUND_CREATE_PROV_REQUEST_QUEUE_JNDI}</aut:jndiName>
       </aut:to>
       <aut:replyTo>
-        <aut:jndiName>%{COM_INBOUND_CREATE_PROV_RESPONSE_QUEUE_JNDI}</aut:jndiName>
+        <aut:jndiName>%{COM_INBOUND_UPDATE_FULFILLMENT_ORDER_QUEUE_JNDI}</aut:jndiName>
       </aut:replyTo>
       <aut:sendNullMessage>false</aut:sendNullMessage>
       <aut:script>
@@ -502,5 +502,31 @@
     </prov:implementation>
     <prov:failTaskOnException>false</prov:failTaskOnException>
     <task:compensationType>do</task:compensationType>
+  </task:automationComponent>
+  <task:automationComponent xsi:type="task:externalAutomationPlugin">
+    <prov:name>ProvisioningResponseBean</prov:name>
+    <prov:type>xQueryAutomator</prov:type>
+    <prov:ejbName>ProvisioningTask.automatedtask.training_osm_com_provisioning.ProvisioningResponseBean</prov:ejbName>
+    <prov:runAs>%{DEFAULT_AUTOMATION_USER}</prov:runAs>
+    <prov:implementation xsi:type="aut:XqueryAutomator">
+      <aut:script>
+        <aut:url>http://www.training.com/com/provisioning/resources/plugin/ProvisioningCompletionResponse.xquery</aut:url>
+        <aut:file></aut:file>
+        <aut:resource></aut:resource>
+        <aut:cache>
+          <aut:maxSize>50</aut:maxSize>
+          <aut:timeout>15000</aut:timeout>
+        </aut:cache>
+      </aut:script>
+      <aut:updateOrder>false</aut:updateOrder>
+    </prov:implementation>
+    <task:jmsSource>
+      <aut:from>
+        <aut:jndiName>%{COM_INBOUND_UPDATE_FULFILLMENT_ORDER_QUEUE_JNDI}</aut:jndiName>
+      </aut:from>
+    </task:jmsSource>
+    <task:correlation xsi:type="aut:messagePropertyCorrelationType">
+      <aut:property>COM_ORDER_CORRELATION_PROPERTY</aut:property>
+    </task:correlation>
   </task:automationComponent>
 </com:modelEntity>

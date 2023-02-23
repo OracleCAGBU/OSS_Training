@@ -13,7 +13,7 @@ declare namespace xsl                               = "http://www.w3.org/1999/XS
 declare namespace oms                               = "urn:com:metasolv:oms:xmlapi:1";
 declare namespace toibns                            = "http://xmlns.oracle.com/communications/studio/ordermanagement/transformation";
 declare namespace cttransns                         = "COM_SalesOrderFulfillment";
- declare namespace im                                = "COM_SalesOrderFulfillment";
+declare namespace im                                = "COM_SalesOrderFulfillment";
 
 declare option saxon:output "method=xml";
 declare option saxon:output "saxon:indent-spaces=4";
@@ -26,6 +26,7 @@ declare variable $outboundMessage external;
 declare variable $eTaskData             := fn:root(.)/oms:GetOrder.Response;
 declare variable $sTaskName             := context:getTaskMnemonic($context);
 declare variable $sOrderId              := $eTaskData/oms:OrderID/text();
+declare variable $sOrderHistId          := $eTaskData/oms:OrderHistID/text();
 declare variable $sVersion              := $eTaskData/oms:Version/text();
 declare variable $sUsername             := 'oms-automation';
 declare variable $sPassword             := 'admin123';
@@ -185,6 +186,9 @@ declare function local:addDataArea(
                         <corecom:ID schemeID="SALESORDER_ID" schemeAgencyID="SEBL_01">{$sOrderNumber}</corecom:ID>
                     </corecom:SalesOrderIdentification>
                 </corecom:SalesOrderReference>
+                <corecom:Correlation>
+                    <corecom:COMCorrelationID>{fn:concat($sOrderId,'_',$sOrderHistId)}</corecom:COMCorrelationID>
+                </corecom:Correlation>
                 {
                     local:createProvisioningOrderLineItems($eOrderData,$sEbmId)
                 }     
@@ -352,6 +356,7 @@ return
     (
       (:  log:info($log, fn:concat('GetOrder.Response : ', $sTaskData)), :)
         log:info($log, fn:concat('SOM Order Payload : ', $sSomRequest)),
+        outboundMessage:setJMSCorrelationID( $outboundMessage, fn:concat($sOrderId,'_',$sOrderHistId) ),
         outboundMessage:setStringProperty( $outboundMessage, "URI", $osmURI),
         outboundMessage:setStringProperty( $outboundMessage, "_wls_mimehdrContent_Type", $mimeContextType),
         $sSomRequest
