@@ -29,6 +29,7 @@ declare variable $outboundMessage external;
 declare variable $eTaskData             := fn:root(.)/oms:GetOrder.Response;
 declare variable $sTaskName             := context:getTaskMnemonic($context);
 declare variable $sOrderId              := $eTaskData/oms:OrderID/text();
+declare variable $sOrderHistId          := $eTaskData/oms:OrderHistID/text();
 declare variable $sVersion              := $eTaskData/oms:Version/text();
 declare variable $sUsername             := 'oms-automation';
 declare variable $sPassword             := 'admin123';
@@ -174,6 +175,9 @@ declare function local:addDataArea(
                 <corecom:Command></corecom:Command>                                                                                    
                 <corecom:PartialFulfillmentAllowedIndicator>Default</corecom:PartialFulfillmentAllowedIndicator> 
                 <corecom:PartialFulfillmentAllowedThreshold>2</corecom:PartialFulfillmentAllowedThreshold> 
+                <corecom:Correlation>
+                    <corecom:SOMCorrelationID>{fn:concat($sOrderId,'_',$sOrderHistId)}</corecom:SOMCorrelationID>
+                </corecom:Correlation>
                 <corecom:Status>
                     <corecom:Code>IN PROGRESS</corecom:Code>
                     <corecom:ReasonCode/>
@@ -691,6 +695,7 @@ let $sTomRequest                          := saxon:serialize($eTomRequest, <xsl:
 return
     (
         log:info($log, fn:concat('TOM Order Request : ', $sTomRequest)),
+        outboundMessage:setJMSCorrelationID( $outboundMessage, fn:concat($sOrderId,'_',$sOrderHistId) ),
         outboundMessage:setStringProperty( $outboundMessage, "URI", $osmURI),
         outboundMessage:setStringProperty( $outboundMessage, "_wls_mimehdrContent_Type", $mineContextType),
         $eTomRequest

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/core/model/common" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:provisioning="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:specification="http://www.mslv.com/studio/inventory/model/specification" xsi:type="dataDictionaryCompanionType" name="OracleComms_OSM_SOM_Orchestration_companion">
   <displayName>OracleComms_OSM_SOM_Orchestration</displayName>
-  <saveVersion>18</saveVersion>
+  <saveVersion>19</saveVersion>
   <id>---CKGA0--+---+mf60rqA</id>
   <dataDictionaryNode>
     <entity>OracleComms_OSM_SOM_Orchestration</entity>
@@ -5317,6 +5317,67 @@
         <id>ZgMYhWvHQ9SV1CLFxppp3w</id>
         <elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</elementType>
         <data:dataElementId>TechnicalAction</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </detail>
+    </dataDictionaryDetails>
+  </dataDictionaryNode>
+  <dataDictionaryNode>
+    <entity>OracleComms_OSM_SOM_Orchestration</entity>
+    <entityType>xsd</entityType>
+    <relationship>com.mslv.studio.core.data.dictionary.extension</relationship>
+    <element>COMCorrelationID</element>
+    <elementType>anyType</elementType>
+    <baseElement>string</baseElement>
+    <baseNamespace>http://www.w3.org/2001/XMLSchema</baseNamespace>
+    <dataElementId>COMCorrelationID</dataElementId>
+    <displayName lang="en"></displayName>
+    <displayName>SOMCorrelation ID</displayName>
+    <extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </extension>
+    <minCardinality>0</minCardinality>
+    <maxCardinality>1</maxCardinality>
+    <dataDictionaryDetails>
+      <detail xsi:type="data:dataElementCommonDetail">
+        <id>kbtAE-V1TrCULEYKra8whg</id>
+        <elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</elementType>
+        <data:dataElementId>COMCorrelationID</data:dataElementId>
+        <data:defaultValue></data:defaultValue>
+        <data:key></data:key>
+        <data:deprecated>false</data:deprecated>
+        <data:abstract>false</data:abstract>
+        <data:sensitive>false</data:sensitive>
+        <data:minLength>0</data:minLength>
+        <data:maxLength>40</data:maxLength>
+        <data:minMultiplicity>0</data:minMultiplicity>
+        <data:maxMultiplicity>1</data:maxMultiplicity>
+      </detail>
+      <detail xsi:type="data:dataElementEnumerationDetail">
+        <id>QMfhPWXARdeqtDhqk0jpFg</id>
+        <elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</elementType>
+        <data:dataElementId>COMCorrelationID</data:dataElementId>
+      </detail>
+      <detail xsi:type="data:dataElementInformationDetails">
+        <id>qRgTA2D1Q5ioCKsiN8iHpQ</id>
+        <elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</elementType>
+        <data:dataElementId>COMCorrelationID</data:dataElementId>
+      </detail>
+      <detail xsi:type="layout:hintDetail">
+        <id>pjXmF2+gTfWzPlIKuhGZFg</id>
+        <elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</elementType>
+        <data:dataElementId>COMCorrelationID</data:dataElementId>
+        <layout:hints/>
+      </detail>
+      <detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <id>exlpmJ6MQ0mZTgwiGfRR0w</id>
+        <elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</elementType>
+        <data:dataElementId>COMCorrelationID</data:dataElementId>
+      </detail>
+      <detail xsi:type="specification:CharElementDetailType">
+        <id>IlY8Zp-4SPOnBCH6w7bqvQ</id>
+        <elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</elementType>
+        <data:dataElementId>COMCorrelationID</data:dataElementId>
         <specification:startTimestamp>0</specification:startTimestamp>
         <specification:endTimestamp>0</specification:endTimestamp>
       </detail>
