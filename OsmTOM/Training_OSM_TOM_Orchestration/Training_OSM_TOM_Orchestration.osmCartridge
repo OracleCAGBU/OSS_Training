@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/cartridge" xmlns:cart="http://xmlns.oracle.com/communications/sce/osm/model/cartridge" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xsi:type="provisioningCartridgeType" name="Training_OSM_TOM_Orchestration">
   <com:displayName lang="[default]">Training_OSM_TOM_Orchestration</com:displayName>
-  <com:saveVersion>5</com:saveVersion>
+  <com:saveVersion>6</com:saveVersion>
   <com:id>X-RHzlkmSgG22Ec2fkeVXA</com:id>
   <com:provider>OSM Cartridge Provider</com:provider>
   <com:version>
@@ -64,6 +64,9 @@
     </com:property>
     <com:property name="CARTRIDGE_VERSION">
       <com:defaultValue>1.0.0.0.0</com:defaultValue>
+    </com:property>
+    <com:property name="TOM_TO_OSM_ORDER_UPDATE_QUEUE">
+      <com:defaultValue>oracle/communications/ordermanagement/TomToSomOrderUpdateQueue</com:defaultValue>
     </com:property>
   </com:propertyCategory>
   <com:dependencies>

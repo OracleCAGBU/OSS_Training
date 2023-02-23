@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/core/model/common" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:provisioning="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:specification="http://www.mslv.com/studio/inventory/model/specification" xsi:type="dataDictionaryCompanionType" name="OracleComms_OSM_TOM_Orchestration_companion">
   <displayName>OracleComms_OSM_TOM_Orchestration</displayName>
-  <saveVersion>6</saveVersion>
+  <saveVersion>7</saveVersion>
   <id>---CKGA0--+---+mf60rqA</id>
   <dataDictionaryNode>
     <entity>OracleComms_OSM_TOM_Orchestration</entity>
@@ -258,6 +258,10 @@
     <baseElement>xmlData</baseElement>
     <baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/test/patternSchema</baseNamespace>
     <dataElementId>inputMessage</dataElementId>
+    <extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </extension>
+    <maxCardinality>1</maxCardinality>
     <dataDictionaryDetails>
       <detail xsi:type="data:dataElementCommonDetail">
         <id>Pf9fiIsPSkqVTw0Ty0GLJQ</id>
@@ -268,6 +272,29 @@
         <data:abstract>false</data:abstract>
         <data:minMultiplicity>0</data:minMultiplicity>
         <data:maxMultiplicity>1</data:maxMultiplicity>
+      </detail>
+      <detail xsi:type="data:dataElementInformationDetails">
+        <id>GlTxpaz0S1GuPBhLP2ge6w</id>
+        <elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</elementType>
+        <data:dataElementId>inputMessage</data:dataElementId>
+      </detail>
+      <detail xsi:type="layout:hintDetail">
+        <id>MbGui2MZQy6iL9wnFP2szQ</id>
+        <elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</elementType>
+        <data:dataElementId>inputMessage</data:dataElementId>
+        <layout:hints/>
+      </detail>
+      <detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <id>Snlg5GShQ3qayq6ZxM-PVQ</id>
+        <elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</elementType>
+        <data:dataElementId>inputMessage</data:dataElementId>
+      </detail>
+      <detail xsi:type="specification:CharElementDetailType">
+        <id>C2oOH1XaREOs6x64yf1teA</id>
+        <elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</elementType>
+        <data:dataElementId>inputMessage</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
       </detail>
     </dataDictionaryDetails>
   </dataDictionaryNode>
@@ -543,6 +570,67 @@
         <id>4+RZevrLRhC92AM0X0T5eg</id>
         <elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</elementType>
         <data:dataElementId>SpecificationGroup</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </detail>
+    </dataDictionaryDetails>
+  </dataDictionaryNode>
+  <dataDictionaryNode>
+    <entity>OracleComms_OSM_TOM_Orchestration</entity>
+    <entityType>xsd</entityType>
+    <relationship>com.mslv.studio.core.data.dictionary.extension</relationship>
+    <element>SOMCorrelationID</element>
+    <elementType>anyType</elementType>
+    <baseElement>string</baseElement>
+    <baseNamespace>http://www.w3.org/2001/XMLSchema</baseNamespace>
+    <dataElementId>SOMCorrelationID</dataElementId>
+    <displayName lang="en"></displayName>
+    <displayName>TOMCorrelation ID</displayName>
+    <extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </extension>
+    <minCardinality>0</minCardinality>
+    <maxCardinality>1</maxCardinality>
+    <dataDictionaryDetails>
+      <detail xsi:type="data:dataElementCommonDetail">
+        <id>Xi7KIcocSO+Cu6uTHaIEsg</id>
+        <elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</elementType>
+        <data:dataElementId>SOMCorrelationID</data:dataElementId>
+        <data:defaultValue></data:defaultValue>
+        <data:key></data:key>
+        <data:deprecated>false</data:deprecated>
+        <data:abstract>false</data:abstract>
+        <data:sensitive>false</data:sensitive>
+        <data:minLength>0</data:minLength>
+        <data:maxLength>40</data:maxLength>
+        <data:minMultiplicity>0</data:minMultiplicity>
+        <data:maxMultiplicity>1</data:maxMultiplicity>
+      </detail>
+      <detail xsi:type="data:dataElementEnumerationDetail">
+        <id>2871eRu2QF2MSg72bg+9+A</id>
+        <elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</elementType>
+        <data:dataElementId>SOMCorrelationID</data:dataElementId>
+      </detail>
+      <detail xsi:type="data:dataElementInformationDetails">
+        <id>9jApEixXTtqwqKrjSBNWIg</id>
+        <elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</elementType>
+        <data:dataElementId>SOMCorrelationID</data:dataElementId>
+      </detail>
+      <detail xsi:type="layout:hintDetail">
+        <id>3BnMpcu6SC2k742-62n2Jw</id>
+        <elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</elementType>
+        <data:dataElementId>SOMCorrelationID</data:dataElementId>
+        <layout:hints/>
+      </detail>
+      <detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <id>ArPV2-2MTg6dFHvzv00cUA</id>
+        <elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</elementType>
+        <data:dataElementId>SOMCorrelationID</data:dataElementId>
+      </detail>
+      <detail xsi:type="specification:CharElementDetailType">
+        <id>7OgltfcCQhulKsUZar6FHQ</id>
+        <elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</elementType>
+        <data:dataElementId>SOMCorrelationID</data:dataElementId>
         <specification:startTimestamp>0</specification:startTimestamp>
         <specification:endTimestamp>0</specification:endTimestamp>
       </detail>

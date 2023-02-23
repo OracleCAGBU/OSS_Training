@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xsi:type="orderType" name="TOM_ProvisionTechnicalOrderFulfillment">
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:automation="http://xmlns.oracle.com/communications/sce/osm/model/process/task/automation" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:task="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="orderType" name="TOM_ProvisionTechnicalOrderFulfillment">
   <com:displayName>TOM_ProvisionTechnicalOrderFulfillment</com:displayName>
-  <com:saveVersion>19</com:saveVersion>
+  <com:saveVersion>24</com:saveVersion>
   <com:id>---brYUg--+DS9xQ--+jNQ</com:id>
   <amendable>false</amendable>
   <keyDef name="Key">
@@ -697,6 +697,9 @@
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/retryCount</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/SOMCorrelationID</path>
     </nodeExtension>
     <orderData>
       <com:entity>OracleComms_OSM_CommonDataDictionary</com:entity>
@@ -1495,6 +1498,17 @@
         </childNode>
       </childNode>
     </orderData>
+    <orderData>
+      <com:entity>OracleComms_OSM_TOM_Orchestration</com:entity>
+      <com:entityType>xsd</com:entityType>
+      <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
+      <com:element>SOMCorrelationID</com:element>
+      <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+      <com:elementName>SOMCorrelationID</com:elementName>
+      <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_TOM_Orchestration/OracleComms_OSM_TOM_Orchestration</com:namespace>
+      <com:baseElement>string</com:baseElement>
+      <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+    </orderData>
   </orderTemplate>
   <rule name="null_rule"/>
   <orderStatePolicy>
@@ -1523,4 +1537,37 @@
       <com:relationship>com.mslv.studio.provisioning.queryTask</com:relationship>
     </detailTask>
   </orderPermission>
+  <milestoneEvents name="TOM_ProvisionTechnicalOrderFulfillment_completion">
+    <milestone>completion</milestone>
+    <automationComponent xsi:type="task:internalAutomationPlugin">
+      <prov:name>TOMOrderCompletionEvent</prov:name>
+      <prov:type>xQuerySender</prov:type>
+      <prov:ejbName>TOM_ProvisionTechnicalOrderFulfillment.order.training_osm_tom_orchestration.TOMOrderCompletionEvent</prov:ejbName>
+      <prov:runAs>%{DEFAULT_AUTOMATION_USER}</prov:runAs>
+      <prov:implementation xsi:type="automation:XquerySender">
+        <automation:to>
+          <automation:jndiName>%{TOM_TO_OSM_ORDER_UPDATE_QUEUE}</automation:jndiName>
+        </automation:to>
+        <automation:replyTo>
+          <automation:jndiName>%{DEFAULT_RESPONSE_QUEUE}</automation:jndiName>
+        </automation:replyTo>
+        <automation:sendNullMessage>false</automation:sendNullMessage>
+        <automation:script>
+          <automation:url>http://www.tomtraining.com/milestone/TOMCompletionEvent.xquery</automation:url>
+          <automation:file></automation:file>
+          <automation:resource></automation:resource>
+          <automation:cache>
+            <automation:maxSize>50</automation:maxSize>
+            <automation:timeout>15000</automation:timeout>
+          </automation:cache>
+        </automation:script>
+      </prov:implementation>
+      <task:compensationType>do</task:compensationType>
+    </automationComponent>
+    <notificationView>
+      <com:entity>TOM_QueryTask</com:entity>
+      <com:entityType>manualTask</com:entityType>
+      <com:relationship>com.mslv.studio.provisioning.order.notificationView</com:relationship>
+    </notificationView>
+  </milestoneEvents>
 </com:modelEntity>

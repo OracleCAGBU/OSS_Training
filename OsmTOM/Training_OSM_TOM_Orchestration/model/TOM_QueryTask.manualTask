@@ -1052,6 +1052,13 @@
       </task:childNode>
     </task:childNode>
   </task:orderTemplateRef>
+  <task:orderTemplateRef>
+    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+    <com:entityType>order</com:entityType>
+    <com:relationship>ora.task.orderTemplateRef</com:relationship>
+    <com:element>/SOMCorrelationID</com:element>
+    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+  </task:orderTemplateRef>
   <task:viewNodeExtension>
     <task:path>/inputMessage</task:path>
     <task:editable>true</task:editable>
@@ -1784,6 +1791,11 @@
   </task:viewNodeExtension>
   <task:viewNodeExtension>
     <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/ExceptionData/message</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/SOMCorrelationID</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
