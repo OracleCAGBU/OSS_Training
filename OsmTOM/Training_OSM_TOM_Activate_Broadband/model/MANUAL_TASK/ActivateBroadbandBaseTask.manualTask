@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aut="http://xmlns.oracle.com/communications/sce/osm/model/process/task/automation" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:task="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="task:manualTaskType" name="ActivateBroadbandBaseTask">
   <com:displayName>ActivateBroadbandBaseTask</com:displayName>
-  <com:saveVersion>7</com:saveVersion>
+  <com:saveVersion>11</com:saveVersion>
   <com:id>cXBsRx6fSVObY+Sn49uUqQ</com:id>
   <task:orderType>
     <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -14,6 +14,118 @@
     <com:relationship>ora.task.orderTemplateRef</com:relationship>
     <com:element>/ControlData</com:element>
     <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+    <task:childNode>
+      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+      <com:entityType>order</com:entityType>
+      <com:relationship>ora.task.orderTemplateRef</com:relationship>
+      <com:element>/ControlData/OrderItem</com:element>
+      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      <task:childNode>
+        <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/PointOfNoReturn</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/OrderItemFulfillmentState</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/FulfillmentPattern</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/LineId</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/LineName</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/ProductSpecification</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/RequestedDeliveryDate</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/ParentLineId</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/Recognition</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/Action</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/SpecializedAction</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/xmlData</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/SpecificationGroup</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/dynamicParams</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+    </task:childNode>
+    <task:childNode>
+      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+      <com:entityType>order</com:entityType>
+      <com:relationship>ora.task.orderTemplateRef</com:relationship>
+      <com:element>/ControlData/OrderFulfillmentState</com:element>
+      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+    </task:childNode>
     <task:childNode>
       <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
       <com:entityType>order</com:entityType>
@@ -79,6 +191,7 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ActivateBroadbandFunction/orderItem/orderItemRef/PointOfNoReturn</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -86,6 +199,7 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ActivateBroadbandFunction/orderItem/orderItemRef/OrderItemFulfillmentState</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -93,6 +207,7 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ActivateBroadbandFunction/orderItem/orderItemRef/FulfillmentPattern</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -100,6 +215,7 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ActivateBroadbandFunction/orderItem/orderItemRef/LineId</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -107,6 +223,7 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ActivateBroadbandFunction/orderItem/orderItemRef/LineName</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -114,6 +231,7 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ActivateBroadbandFunction/orderItem/orderItemRef/ProductSpecification</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -121,6 +239,7 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ActivateBroadbandFunction/orderItem/orderItemRef/RequestedDeliveryDate</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -128,6 +247,7 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ActivateBroadbandFunction/orderItem/orderItemRef/ParentLineId</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -135,6 +255,7 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ActivateBroadbandFunction/orderItem/orderItemRef/Recognition</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -142,6 +263,7 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ActivateBroadbandFunction/orderItem/orderItemRef/Action</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -149,6 +271,7 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ActivateBroadbandFunction/orderItem/orderItemRef/SpecializedAction</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -156,6 +279,7 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ActivateBroadbandFunction/orderItem/orderItemRef/xmlData</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -163,6 +287,7 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ActivateBroadbandFunction/orderItem/orderItemRef/SpecificationGroup</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -170,7 +295,9 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ActivateBroadbandFunction/orderItem/orderItemRef/dynamicParams</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
+            <task:childRefNode>true</task:childRefNode>
           </task:childNode>
         </task:childNode>
         <task:childNode>
@@ -917,16 +1044,48 @@
         </task:childNode>
       </task:childNode>
     </task:childNode>
-    <task:childNode>
-      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-      <com:entityType>order</com:entityType>
-      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-      <com:element>/ControlData/OrderFulfillmentState</com:element>
-      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-    </task:childNode>
+  </task:orderTemplateRef>
+  <task:orderTemplateRef>
+    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+    <com:entityType>order</com:entityType>
+    <com:relationship>ora.task.orderTemplateRef</com:relationship>
+    <com:element>/inputMessage</com:element>
+    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+  </task:orderTemplateRef>
+  <task:orderTemplateRef>
+    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+    <com:entityType>order</com:entityType>
+    <com:relationship>ora.task.orderTemplateRef</com:relationship>
+    <com:element>/SOMCorrelationID</com:element>
+    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
   </task:orderTemplateRef>
   <task:viewNodeExtension>
     <task:path>/ControlData</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/PointOfNoReturn</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/inputMessage</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/SOMCorrelationID</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderFulfillmentState</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
@@ -957,6 +1116,106 @@
   </task:viewNodeExtension>
   <task:viewNodeExtension>
     <task:path>/ControlData/Functions/ActivateBroadbandFunction/orderItem</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/ActivationOrderID</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/ExceptionData</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/OrderItemFulfillmentState</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/FulfillmentPattern</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/LineId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/LineName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/ProductSpecification</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/RequestedDeliveryDate</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/ParentLineId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/Recognition</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/Action</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/SpecializedAction</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/xmlData</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/SpecificationGroup</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/dynamicParams</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
@@ -1042,26 +1301,6 @@
   </task:viewNodeExtension>
   <task:viewNodeExtension>
     <task:path>/ControlData/Functions/ActivateBroadbandFunction/orderItem/orderItemRef/dynamicParams</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/ActivationOrderID</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
@@ -1421,11 +1660,6 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
     <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/orderValue</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
@@ -1506,11 +1740,6 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
     <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/value</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
@@ -1566,17 +1795,7 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/ExceptionData</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
     <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/ExceptionData/message</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/ControlData/OrderFulfillmentState</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
