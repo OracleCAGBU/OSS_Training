@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:FulfillmentPattern" id="ofp=Broadband.Product.Spec" type="ofp" typeName="Orchestration Fulfillment Pattern" name="Broadband.Product.Spec" resource="\L3-DD-OSM\model\Broadband.Product.Spec.productSpec">
+    <displayName lang="default">Broadband.Product.Spec</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=L3-DD-OSM" type="Order and Service Management Project" name="Dependency">
+        <target name="L3-DD-OSM" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <fulfillmentModes>
+      <relation ref="fm=ORDER" type="Fulfillment Mode" name="Fullfillment Mode" kind="Entity">
+        <target name="ORDER" typeName="Fulfillment Mode"/>
+      </relation>
+    </fulfillmentModes>
+    <orchestrationPlanComponents>
+      <relation ref="ocs=ShipOrderFunction" type="Order Component Specification" name="FulfillmentModeOrderComponentSpecs" kind="Entity">
+        <target name="ShipOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=InitiateBillingFunction" type="Order Component Specification" name="FulfillmentModeOrderComponentSpecs" kind="Entity">
+        <target name="InitiateBillingFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=FulfillBillingFunction" type="Order Component Specification" name="FulfillmentModeOrderComponentSpecs" kind="Entity">
+        <target name="FulfillBillingFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=InstallOrderFunction" type="Order Component Specification" name="FulfillmentModeOrderComponentSpecs" kind="Entity">
+        <target name="InstallOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=ProvisioningOrderFunction" type="Order Component Specification" name="FulfillmentModeOrderComponentSpecs" kind="Entity">
+        <target name="ProvisioningOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+    </orchestrationPlanComponents>
+    <transitionFromOrchestrationPlanComponents>
+      <relation ref="ocs=ShipOrderFunction" type="Order Component Specification" name="oracle.communications.sce.osm.orchestration.productSpec.from.orchPlanComponent" kind="Entity">
+        <target name="ShipOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=InstallOrderFunction" type="Order Component Specification" name="oracle.communications.sce.osm.orchestration.productSpec.from.orchPlanComponent" kind="Entity">
+        <target name="InstallOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=ProvisioningOrderFunction" type="Order Component Specification" name="oracle.communications.sce.osm.orchestration.productSpec.from.orchPlanComponent" kind="Entity">
+        <target name="ProvisioningOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+    </transitionFromOrchestrationPlanComponents>
+    <transitionToOrchestrationPlanComponents>
+      <relation ref="ocs=FulfillBillingFunction" type="Order Component Specification" name="oracle.communications.sce.osm.orchestration.productSpec.to.orchPlanComponent" kind="Entity">
+        <target name="FulfillBillingFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=InstallOrderFunction" type="Order Component Specification" name="oracle.communications.sce.osm.orchestration.productSpec.to.orchPlanComponent" kind="Entity">
+        <target name="InstallOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=ProvisioningOrderFunction" type="Order Component Specification" name="oracle.communications.sce.osm.orchestration.productSpec.to.orchPlanComponent" kind="Entity">
+        <target name="ProvisioningOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+    </transitionToOrchestrationPlanComponents>
+    <realizes>
+      <relation ref="fp=InternetFulfillmentPattern" type="Fulfillment Pattern" name="Realization" kind="Entity">
+        <target name="InternetFulfillmentPattern" typeName="Fulfillment Pattern"/>
+      </relation>
+    </realizes>
+    <plans>
+      <element xsi:type="osm:Plan" id="ofp=Broadband.Product.Spec+osm.orch.productSpec.plan=SDiFq6qkRZa3xCVicsWO3A" type="osm.orch.productSpec.plan" typeName="Orchestration Plan Element" kind="Element" name="ORDER" path="/ORDER"/>
+    </plans>
+    <pointOfNoReturnValues>
+      <element xsi:type="osm:PointOfNoReturn" id="ofp=Broadband.Product.Spec+osm.orch.productSpec.pointOfNoReturn=ymMDc8tgTWmHJBlE99qyyQ" type="osm.orch.productSpec.pointOfNoReturn" typeName="Point of No Return Value" kind="Element" name="INSTALL_PLANNED" path="/INSTALL_PLANNED"/>
+      <element xsi:type="osm:PointOfNoReturn" id="ofp=Broadband.Product.Spec+osm.orch.productSpec.pointOfNoReturn=adI2eXd4RQWNqPNjN8ez6w" type="osm.orch.productSpec.pointOfNoReturn" typeName="Point of No Return Value" kind="Element" name="INSTALL_COMPLETED" path="/INSTALL_COMPLETED"/>
+    </pointOfNoReturnValues>
+    <extend>
+      <relation ref="ofp=Base.Product.Spec" type="Orchestration Fulfillment Pattern" name="Parent" kind="Entity">
+        <target name="Base.Product.Spec" typeName="Orchestration Fulfillment Pattern"/>
+      </relation>
+    </extend>
+  </entity>
+</model:Model>

@@ -1,0 +1,34 @@
+<model:fulfillmentStateMap xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="ProvisioningOrder-kXHqSCVEQcKCl-SSDTHfEQ" namespace="osm7Order1.com">
+  <model:mappingCriteria>
+    <model:productSpec>
+      <model:name>Base.Product.Spec</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:productSpec>
+    <model:orderItem>
+      <model:name>OrderItemSpecification</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:orderItem>
+    <model:orchestrationSequence>
+      <model:name>OrchestrationSequence</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:orchestrationSequence>
+    <model:fulfillmentMode>
+      <model:name>ORDER</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:fulfillmentMode>
+    <model:stageOrderComponentSpec>
+      <model:stage>DefineOrchestrationFunctions</model:stage>
+      <model:orderComponentSpec>
+        <model:name>ProvisioningOrderFunction</model:name>
+        <model:namespace>osm7Order1.com</model:namespace>
+      </model:orderComponentSpec>
+    </model:stageOrderComponentSpec>
+  </model:mappingCriteria>
+  <model:fulfillmentStateMapping>
+    <model:externalFulfillmentState>IN_PROGRESS-HPSDOMAIN_PROVISION_START</model:externalFulfillmentState>
+    <model:fulfillmentState>
+      <model:name>IN_PROGRESS-PROVISION_START</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:fulfillmentState>
+  </model:fulfillmentStateMapping>
+</model:fulfillmentStateMap>

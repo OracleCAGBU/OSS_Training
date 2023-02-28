@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:OrderComponentSpecification" id="ocs=WFMSystem" type="ocs" typeName="Order Component Specification" name="WFMSystem" resource="\L3-DD-OSM\model\SYSTEM\WFMSystem.orderComponentSpec">
+    <displayName lang="default">WFMSystem</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=L3-DD-OSM" type="Order and Service Management Project" name="Dependency">
+        <target name="L3-DD-OSM" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <componentElements>
+      <element xsi:type="osm:Component" id="ocs=WFMSystem+osm.orch.orderComponentSpec.element=1RF2xJwoRdGVBsRuzz92nQ" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="WFMSystem" path="/FulfillmentSystem/WFMSystem">
+        <components>
+          <element xsi:type="osm:Component" id="ocs=WFM-ALL+osm.orch.orderComponentSpec.element=1OCg3sPLR7iyf91jfJbB1Q" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="WFM-ALL" path="/FulfillmentSystem/WFMSystem/WFM-ALL"/>
+        </components>
+      </element>
+    </componentElements>
+    <extend>
+      <relation ref="ocs=FulfillmentSystem" type="Order Component Specification" name="Extends" kind="Entity">
+        <target name="FulfillmentSystem" typeName="Order Component Specification"/>
+      </relation>
+    </extend>
+  </entity>
+</model:Model>

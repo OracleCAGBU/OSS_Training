@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:Order" id="ord=L3-DD-OSMOrder" type="ord" typeName="Order" name="L3-DD-OSMOrder" resource="\L3-DD-OSM\model\L3-DD-OSMOrder.order">
+    <displayName lang="default">L3-DD-OSMOrder</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=L3-DD-OSM" type="Order and Service Management Project" name="Dependency">
+        <target name="L3-DD-OSM" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <orderTemplateNode>
+      <relation ref="ds=L3-DD-OSM" type="Data Schema" name="Order Template Node" kind="Entity">
+        <target name="L3-DD-OSM" typeName="Data Schema"/>
+      </relation>
+    </orderTemplateNode>
+    <creationTask>
+      <relation ref="mtsk=OrderCreationTask" type="Manual Task" name="Creation Task" kind="Entity">
+        <target name="OrderCreationTask" typeName="Manual Task"/>
+      </relation>
+    </creationTask>
+    <queryTask>
+      <relation ref="mtsk=OrderDebugTask" type="Manual Task" name="Query View" kind="Entity">
+        <target name="OrderDebugTask" typeName="Manual Task"/>
+      </relation>
+    </queryTask>
+    <defaultProcess>
+      <relation ref="op=OrderOrchestrationProcess" type="Orchestration Process" name="Default Process" kind="Entity">
+        <target name="OrderOrchestrationProcess" typeName="Orchestration Process"/>
+      </relation>
+    </defaultProcess>
+    <roles>
+      <relation ref="rol=osm7ddRole" type="Role" name="Permission" kind="Entity">
+        <target name="osm7ddRole" typeName="Role"/>
+      </relation>
+    </roles>
+    <lifeCyclePolicy>
+      <relation ref="olp=OrderLifecyclePolicy" type="Order Lifecycle Policy" name="Policy" kind="Entity">
+        <target name="OrderLifecyclePolicy" typeName="Order Lifecycle Policy"/>
+      </relation>
+    </lifeCyclePolicy>
+    <referenceDataNodes>
+      <relation ref="ocs=ShipOrderFunction" type="Order Component Specification" name="Order Template Reference Node" kind="Entity">
+        <target name="ShipOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=InitiateBillingFunction" type="Order Component Specification" name="Order Template Reference Node" kind="Entity">
+        <target name="InitiateBillingFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=FulfillBillingFunction" type="Order Component Specification" name="Order Template Reference Node" kind="Entity">
+        <target name="FulfillBillingFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=InstallOrderFunction" type="Order Component Specification" name="Order Template Reference Node" kind="Entity">
+        <target name="InstallOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=ProvisioningOrderFunction" type="Order Component Specification" name="Order Template Reference Node" kind="Entity">
+        <target name="ProvisioningOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+    </referenceDataNodes>
+    <orderTemplateNodes>
+      <element xsi:type="osm:OrderTemplateNode" id="ord=L3-DD-OSMOrder+prov.order.node=/ControlData" type="prov.order.node" typeName="Order Node Element" kind="Element" name="ControlData" path="/ControlData"/>
+      <element xsi:type="osm:OrderTemplateNode" id="ord=L3-DD-OSMOrder+prov.order.node=/CustomerOrderXml" type="prov.order.node" typeName="Order Node Element" kind="Element" name="CustomerOrderXml" path="/CustomerOrderXml"/>
+      <element xsi:type="osm:OrderTemplateNode" id="ord=L3-DD-OSMOrder+prov.order.node=/OrderId" type="prov.order.node" typeName="Order Node Element" kind="Element" name="OrderId" path="/OrderId"/>
+      <element xsi:type="osm:OrderTemplateNode" id="ord=L3-DD-OSMOrder+prov.order.node=/OrderNumber" type="prov.order.node" typeName="Order Node Element" kind="Element" name="OrderNumber" path="/OrderNumber"/>
+      <element xsi:type="osm:OrderTemplateNode" id="ord=L3-DD-OSMOrder+prov.order.node=/Revision" type="prov.order.node" typeName="Order Node Element" kind="Element" name="Revision" path="/Revision"/>
+    </orderTemplateNodes>
+    <rules>
+      <element xsi:type="osm:OrderRule" id="ord=L3-DD-OSMOrder+prov.order.rule=vGR+9jwTS3+zWnSiVyPAYQ" type="prov.order.rule" typeName="Order Template Rule Element" kind="Element" name="null_rule" path="null_rule"/>
+    </rules>
+  </entity>
+</model:Model>

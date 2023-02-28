@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:ManualTask" id="mtsk=ShippingDebugTask" type="mtsk" typeName="Manual Task" name="ShippingDebugTask" resource="\L3-DD-OSM\model\TASK\ShippingDebugTask.manualTask">
+    <displayName lang="default">ShippingDebugTask</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=L3-DD-OSM" type="Order and Service Management Project" name="Dependency">
+        <target name="L3-DD-OSM" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <order>
+      <relation ref="ord=L3-DD-OSMOrder" type="Order" name="Order" kind="Entity">
+        <target name="L3-DD-OSMOrder" typeName="Order"/>
+      </relation>
+    </order>
+    <taskDataElements>
+      <element xsi:type="osm:TaskData" id="mtsk=ShippingDebugTask+prov.task.data.node=/ControlData" type="prov.task.data.node" typeName="Task Data Element" kind="Element" name="ControlData" path="/ControlData"/>
+    </taskDataElements>
+    <roles>
+      <relation ref="rol=osm7ddRole" type="Role" name="Permissions" kind="Entity">
+        <target name="osm7ddRole" typeName="Role"/>
+      </relation>
+    </roles>
+  </entity>
+</model:Model>

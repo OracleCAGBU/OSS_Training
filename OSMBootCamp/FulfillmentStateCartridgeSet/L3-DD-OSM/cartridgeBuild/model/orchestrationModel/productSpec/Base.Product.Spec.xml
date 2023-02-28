@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:productSpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="Base.Product.Spec" namespace="osm7Order1.com">
+  <model:description>Base.Product.Spec</model:description>
+  <model:orchestrationPlan>
+    <model:fulfillmentMode>
+      <model:name>ORDER</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:fulfillmentMode>
+    <model:component>
+      <model:name>ShipOrderFunction</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+      <model:condition>
+        <model:booleanExpression xsi:type="model:XqueryExpressionRuleType" enabled="true">
+          <model:xquery><![CDATA[fn:false()]]></model:xquery>
+        </model:booleanExpression>
+      </model:condition>
+    </model:component>
+    <model:component>
+      <model:name>FulfillBillingFunction</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+      <model:condition>
+        <model:booleanExpression xsi:type="model:XqueryExpressionRuleType" enabled="true">
+          <model:xquery><![CDATA[false()]]></model:xquery>
+        </model:booleanExpression>
+      </model:condition>
+    </model:component>
+    <model:component>
+      <model:name>ProvisioningOrderFunction</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:component>
+    <model:component>
+      <model:name>InitiateBillingFunction</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+      <model:condition>
+        <model:booleanExpression xsi:type="model:XqueryExpressionRuleType" enabled="true">
+          <model:xquery><![CDATA[fn:false()]]></model:xquery>
+        </model:booleanExpression>
+      </model:condition>
+    </model:component>
+    <model:transition name="Base.Product.Spec-ORDER--ShipOrderFunction-FulfillBillingFunction">
+      <model:from>
+        <model:component>
+          <model:name>ShipOrderFunction</model:name>
+          <model:namespace>osm7Order1.com</model:namespace>
+        </model:component>
+      </model:from>
+      <model:to>
+        <model:name>FulfillBillingFunction</model:name>
+        <model:namespace>osm7Order1.com</model:namespace>
+      </model:to>
+      <model:waitForCondition xsi:type="model:TaskStateWaitForConditionType">
+        <model:state>
+          <model:name>completed</model:name>
+          <model:namespace>default</model:namespace>
+        </model:state>
+      </model:waitForCondition>
+      <model:orderItemDependencyCriteria xsi:type="model:IdentityIntersectionOrderItemRelationship" name="Base.Product.Spec-ORDER--ShipOrderFunction-FulfillBillingFunctionOrderItemRelationship"/>
+    </model:transition>
+    <model:transition name="Base.Product.Spec-ORDER--InitiateBillingFunction-ShipOrderFunction">
+      <model:from>
+        <model:component>
+          <model:name>InitiateBillingFunction</model:name>
+          <model:namespace>osm7Order1.com</model:namespace>
+        </model:component>
+      </model:from>
+      <model:to>
+        <model:name>ShipOrderFunction</model:name>
+        <model:namespace>osm7Order1.com</model:namespace>
+      </model:to>
+      <model:waitForCondition xsi:type="model:TaskStateWaitForConditionType">
+        <model:state>
+          <model:name>completed</model:name>
+          <model:namespace>default</model:namespace>
+        </model:state>
+      </model:waitForCondition>
+      <model:orderItemDependencyCriteria xsi:type="model:IdentityIntersectionOrderItemRelationship" name="Base.Product.Spec-ORDER--InitiateBillingFunction-ShipOrderFunctionOrderItemRelationship"/>
+    </model:transition>
+  </model:orchestrationPlan>
+</model:productSpec>

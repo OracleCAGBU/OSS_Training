@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:OrderComponentSpecification" id="ocs=InitiateBillingFunction" type="ocs" typeName="Order Component Specification" name="InitiateBillingFunction" resource="\L3-DD-OSM\model\FUNCTION\InitiateBillingFunction.orderComponentSpec">
+    <displayName lang="default">InitiateBillingFunction</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=L3-DD-OSM" type="Order and Service Management Project" name="Dependency">
+        <target name="L3-DD-OSM" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <baseTask>
+      <relation ref="mtsk=BillingDebugTask" type="Manual Task" name="Base Task" kind="Entity">
+        <target name="BillingDebugTask" typeName="Manual Task"/>
+      </relation>
+    </baseTask>
+    <process>
+      <relation ref="pro=BillingProcess" type="Process" name="Process" kind="Entity">
+        <target name="BillingProcess" typeName="Process"/>
+      </relation>
+    </process>
+    <componentElements>
+      <element xsi:type="osm:Component" id="ocs=InitiateBillingFunction+osm.orch.orderComponentSpec.element=WUH+OARPSD6rNAlyV6r92Q" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="InitiateBillingFunction" path="/FulfillmentFunction/BillingFunction/InitiateBillingFunction"/>
+    </componentElements>
+    <orderTemplateNodes>
+      <element xsi:type="osm:OrderTemplateNode" id="ocs=InitiateBillingFunction+prov.order.node=/ControlData" type="prov.order.node" typeName="Order Node Element" kind="Element" name="ControlData" path="/ControlData"/>
+    </orderTemplateNodes>
+    <extend>
+      <relation ref="ocs=BillingFunction" type="Order Component Specification" name="Extends" kind="Entity">
+        <target name="BillingFunction" typeName="Order Component Specification"/>
+      </relation>
+    </extend>
+  </entity>
+</model:Model>

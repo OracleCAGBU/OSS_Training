@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:OrderComponentSpecification" id="ocs=ShipOrderFunction" type="ocs" typeName="Order Component Specification" name="ShipOrderFunction" resource="\L3-DD-OSM\model\FUNCTION\ShipOrderFunction.orderComponentSpec">
+    <displayName lang="default">ShipOrderFunction</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=L3-DD-OSM" type="Order and Service Management Project" name="Dependency">
+        <target name="L3-DD-OSM" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <baseTask>
+      <relation ref="mtsk=ShippingDebugTask" type="Manual Task" name="Base Task" kind="Entity">
+        <target name="ShippingDebugTask" typeName="Manual Task"/>
+      </relation>
+    </baseTask>
+    <process>
+      <relation ref="pro=ShippingProcess" type="Process" name="Process" kind="Entity">
+        <target name="ShippingProcess" typeName="Process"/>
+      </relation>
+    </process>
+    <componentElements>
+      <element xsi:type="osm:Component" id="ocs=ShipOrderFunction+osm.orch.orderComponentSpec.element=dULrYprvR+mAUNFG+OHHRQ" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="ShipOrderFunction" path="/FulfillmentFunction/ShipFunction/ShipOrderFunction"/>
+    </componentElements>
+    <orderTemplateNodes>
+      <element xsi:type="osm:OrderTemplateNode" id="ocs=ShipOrderFunction+prov.order.node=/ControlData" type="prov.order.node" typeName="Order Node Element" kind="Element" name="ControlData" path="/ControlData"/>
+    </orderTemplateNodes>
+    <extend>
+      <relation ref="ocs=ShipFunction" type="Order Component Specification" name="Extends" kind="Entity">
+        <target name="ShipFunction" typeName="Order Component Specification"/>
+      </relation>
+    </extend>
+  </entity>
+</model:Model>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:proc="http://xmlns.oracle.com/communications/sce/osm/model/process" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/process" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:task="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="proc:processType" name="Test" workstream="true">
+  <com:displayName>Test</com:displayName>
+  <com:saveVersion>5</com:saveVersion>
+  <com:id>+DDAbPHjRxKYgfdzzUhnLg</com:id>
+  <proc:orderType>
+    <com:entity>ProcessAmendment</com:entity>
+    <com:entityType>order</com:entityType>
+    <com:relationship>orderRef</com:relationship>
+  </proc:orderType>
+  <proc:expectedDuration>P0Y0M0DT0H0M86400S</proc:expectedDuration>
+  <proc:startTask>Start1</proc:startTask>
+  <proc:activity id="Start1" name="Start">
+    <proc:processHistorySummary>true</proc:processHistorySummary>
+    <proc:diagramLocation>
+      <proc:Xcoordinate>371.99997</proc:Xcoordinate>
+      <proc:Ycoordinate>229.00002</proc:Ycoordinate>
+    </proc:diagramLocation>
+  </proc:activity>
+  <proc:activity xsi:type="proc:taskRef" id="Task1" name="A">
+    <proc:processHistorySummary>true</proc:processHistorySummary>
+    <proc:diagramLocation>
+      <proc:Xcoordinate>545.00415</proc:Xcoordinate>
+      <proc:Ycoordinate>227.0</proc:Ycoordinate>
+    </proc:diagramLocation>
+    <proc:task>
+      <com:entity>A</com:entity>
+      <com:entityType>manualTask</com:entityType>
+      <com:relationship>taskRef</com:relationship>
+    </proc:task>
+  </proc:activity>
+  <proc:activity xsi:type="proc:taskRef" id="Task6" name="B">
+    <proc:diagramLocation>
+      <proc:Xcoordinate>763.0</proc:Xcoordinate>
+      <proc:Ycoordinate>226.0</proc:Ycoordinate>
+    </proc:diagramLocation>
+    <proc:task>
+      <com:entity>B</com:entity>
+      <com:entityType>manualTask</com:entityType>
+      <com:relationship>taskRef</com:relationship>
+    </proc:task>
+  </proc:activity>
+  <proc:activity xsi:type="proc:taskRef" id="Task7" name="C">
+    <proc:diagramLocation>
+      <proc:Xcoordinate>987.0</proc:Xcoordinate>
+      <proc:Ycoordinate>226.0</proc:Ycoordinate>
+    </proc:diagramLocation>
+    <proc:task>
+      <com:entity>C</com:entity>
+      <com:entityType>manualTask</com:entityType>
+      <com:relationship>taskRef</com:relationship>
+    </proc:task>
+  </proc:activity>
+  <proc:activity xsi:type="proc:endType" id="End8" name="End">
+    <proc:diagramLocation>
+      <proc:Xcoordinate>1173.5</proc:Xcoordinate>
+      <proc:Ycoordinate>222.00015</proc:Ycoordinate>
+    </proc:diagramLocation>
+  </proc:activity>
+  <proc:transition id="Flow9" name="">
+    <proc:from>Start1</proc:from>
+    <proc:to>Task1</proc:to>
+    <proc:status></proc:status>
+    <proc:mandatoryCheck>true</proc:mandatoryCheck>
+  </proc:transition>
+  <proc:transition id="Flow10" name="next">
+    <proc:from>Task1</proc:from>
+    <proc:to>Task6</proc:to>
+    <proc:status>next</proc:status>
+    <proc:mandatoryCheck>true</proc:mandatoryCheck>
+  </proc:transition>
+  <proc:transition id="Flow11" name="next">
+    <proc:from>Task6</proc:from>
+    <proc:to>Task7</proc:to>
+    <proc:status>next</proc:status>
+    <proc:mandatoryCheck>true</proc:mandatoryCheck>
+  </proc:transition>
+  <proc:transition id="Flow12" name="next">
+    <proc:from>Task7</proc:from>
+    <proc:to>End8</proc:to>
+    <proc:status>next</proc:status>
+    <proc:mandatoryCheck>true</proc:mandatoryCheck>
+  </proc:transition>
+</com:modelEntity>

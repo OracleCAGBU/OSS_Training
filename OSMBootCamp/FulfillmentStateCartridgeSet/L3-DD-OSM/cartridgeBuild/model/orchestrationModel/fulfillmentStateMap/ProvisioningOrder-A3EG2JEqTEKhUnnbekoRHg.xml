@@ -1,0 +1,34 @@
+<model:fulfillmentStateMap xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="ProvisioningOrder-A3EG2JEqTEKhUnnbekoRHg" namespace="osm7Order1.com">
+  <model:mappingCriteria>
+    <model:productSpec>
+      <model:name>Broadband.Product.Spec</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:productSpec>
+    <model:orderItem>
+      <model:name>OrderItemSpecification</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:orderItem>
+    <model:orchestrationSequence>
+      <model:name>OrchestrationSequence</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:orchestrationSequence>
+    <model:fulfillmentMode>
+      <model:name>ORDER</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:fulfillmentMode>
+    <model:stageOrderComponentSpec>
+      <model:stage>DefineOrchestrationFunctions</model:stage>
+      <model:orderComponentSpec>
+        <model:name>InstallOrderFunction</model:name>
+        <model:namespace>osm7Order1.com</model:namespace>
+      </model:orderComponentSpec>
+    </model:stageOrderComponentSpec>
+  </model:mappingCriteria>
+  <model:fulfillmentStateMapping>
+    <model:externalFulfillmentState>IN_PROGRESS-INTERNETDOMAIN_INSTALL_PLANNED</model:externalFulfillmentState>
+    <model:fulfillmentState>
+      <model:name>IN_PROGRESS-INSTALL_PLANNED</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:fulfillmentState>
+  </model:fulfillmentStateMapping>
+</model:fulfillmentStateMap>

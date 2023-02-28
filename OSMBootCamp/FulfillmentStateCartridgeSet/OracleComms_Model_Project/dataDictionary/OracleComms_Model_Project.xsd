@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:tns="http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_Model_Base/OracleComms_Model_Base" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_Model_Base/OracleComms_Model_Base">
+    <xs:simpleType name="Subject_ID">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="40"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:complexType name="ServiceAddress">
+    <xs:sequence>
+                                                                                                                                                                                                                    <xs:element maxOccurs="1" minOccurs="0" name="LineOne">
+        <xs:simpleType>
+          <xs:restriction base="tns:LineOne"/>
+        </xs:simpleType>
+      </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="LineTwo">
+        <xs:simpleType>
+          <xs:restriction base="tns:LineTwo"/>
+        </xs:simpleType>
+      </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="CityName">
+        <xs:simpleType>
+          <xs:restriction base="tns:CityName"/>
+        </xs:simpleType>
+      </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="StateName">
+        <xs:simpleType>
+          <xs:restriction base="tns:StateName"/>
+        </xs:simpleType>
+      </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="ProvinceName">
+        <xs:simpleType>
+          <xs:restriction base="tns:ProvinceName"/>
+        </xs:simpleType>
+      </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="CountyName">
+        <xs:simpleType>
+          <xs:restriction base="tns:CountyName"/>
+        </xs:simpleType>
+      </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="CountryCode">
+        <xs:simpleType>
+          <xs:restriction base="tns:CountryCode"/>
+        </xs:simpleType>
+      </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="PostalCode">
+        <xs:simpleType>
+          <xs:restriction base="tns:PostalCode"/>
+        </xs:simpleType>
+      </xs:element>
+        </xs:sequence>
+  </xs:complexType>
+    <xs:simpleType name="Customer_ID">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="150"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="Commercial_ID">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="500"/>
+    </xs:restriction>
+  </xs:simpleType>
+            <xs:simpleType name="CityName">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="StateName">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="CountryCode">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="PostalCode">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="20"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="ProvinceName">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="CountyName">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="LineOne">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="1000"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="LineTwo">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="1000"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

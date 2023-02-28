@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:ActionCode" id="ac=Modify" type="ac" typeName="Action Code" name="Modify" resource="\OracleComms_Model_Project\model\Modify.actionType">
+    <displayName lang="default">Modify</displayName>
+    <note lang="default">The Action code is specified when defining an Action for an entity.&#xD;
+The Modify Action Code indicates that the Action when triggered in the runtime will modify the requested instance of entity associated with the Action.&#xD;
+This action code is typically associated with an Action on a RS.&#xD;
+</note>
+    <project>
+      <relation ref="mprj=OracleComms_Model_Project" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model_Project" typeName="Model Project"/>
+      </relation>
+    </project>
+    <functionalAreas>
+      <element id="ac=Modify+ac.atc=+YdL--+H--+3--+A--+yWg" type="ac.atc" typeName="Action Type Classification" kind="Element" name="Modify Action Type Classification" path="Modify Action Type Classification">
+        <functionalArea>
+          <relation ref="fa=Technical" type="Functional Area" name="Functional Area" kind="Entity">
+            <target name="Technical" typeName="Functional Area"/>
+          </relation>
+        </functionalArea>
+      </element>
+    </functionalAreas>
+  </entity>
+</model:Model>

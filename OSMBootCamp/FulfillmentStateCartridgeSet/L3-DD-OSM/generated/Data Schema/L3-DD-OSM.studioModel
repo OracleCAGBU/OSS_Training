@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:data="http://xmlns.oracle.com/communications/studio/model/data" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="data:DataSchema" id="ds=L3-DD-OSM" type="ds" typeName="Data Schema" name="L3-DD-OSM" resource="\L3-DD-OSM\dataDictionary\L3-DD-OSM.xsd">
+    <displayName lang="default">L3-DD-OSM</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=L3-DD-OSM" type="Order and Service Management Project" name="Dependency">
+        <target name="L3-DD-OSM" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="ds=L3-DD-OSM+dataElement=OrderId" type="dataElement" typeName="Schema Element" kind="Element" name="OrderId" path="/OrderId">
+        <displayName lang="default">Order Id</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">20</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=L3-DD-OSM+dataElement=FunctionType" type="dataElement" typeName="Schema Element" kind="Element" name="FunctionType" path="/FunctionType">
+        <displayName lang="default">Function Type</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements>
+          <element id="ds=L3-DD-OSM+dataElement=FunctionType/componentKey" type="dataElement" typeName="Schema Element" kind="Element" name="componentKey" path="/FunctionType/componentKey">
+            <displayName lang="default">Component Key</displayName>
+            <minOccurs inherited="false">0</minOccurs>
+            <maxOccurs inherited="false">1</maxOccurs>
+            <defaultValue inherited="false"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="false">false</sensitive>
+            <minLength inherited="false">0</minLength>
+            <maxLength inherited="false">100</maxLength>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=L3-DD-OSM+dataElement=FunctionType/orderItem" type="dataElement" typeName="Schema Element" kind="Element" name="orderItem" path="/FunctionType/orderItem">
+            <displayName lang="default">Order Item</displayName>
+            <minOccurs inherited="false">0</minOccurs>
+            <maxOccurs inherited="false">-1</maxOccurs>
+            <defaultValue inherited="false"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="false">false</sensitive>
+            <dataElements>
+              <element id="ds=L3-DD-OSM+dataElement=FunctionType/orderItem/ExternalFulfillmentState" type="dataElement" typeName="Schema Element" kind="Element" name="ExternalFulfillmentState" path="/FunctionType/orderItem/ExternalFulfillmentState">
+                <displayName lang="default">External Fulfillment State</displayName>
+                <minOccurs inherited="false">0</minOccurs>
+                <maxOccurs inherited="false">1</maxOccurs>
+                <defaultValue inherited="false"></defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="false">false</sensitive>
+                <minLength inherited="false">0</minLength>
+                <maxLength inherited="false">100</maxLength>
+                <dataElements/>
+                <primitiveType>string</primitiveType>
+              </element>
+            </dataElements>
+            <primitiveType>structure</primitiveType>
+          </element>
+          <element id="ds=L3-DD-OSM+dataElement=FunctionType/calculatedStartDate" type="dataElement" typeName="Schema Element" kind="Element" name="calculatedStartDate" path="/FunctionType/calculatedStartDate">
+            <displayName lang="default">Calculated Start Date</displayName>
+            <minOccurs inherited="false">0</minOccurs>
+            <maxOccurs inherited="false">1</maxOccurs>
+            <defaultValue inherited="false"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="false">false</sensitive>
+            <minLength inherited="false">0</minLength>
+            <maxLength inherited="false">40</maxLength>
+            <dataElements/>
+            <primitiveType>date</primitiveType>
+          </element>
+          <element id="ds=L3-DD-OSM+dataElement=FunctionType/duration" type="dataElement" typeName="Schema Element" kind="Element" name="duration" path="/FunctionType/duration">
+            <displayName lang="default">Duration</displayName>
+            <minOccurs inherited="false">0</minOccurs>
+            <maxOccurs inherited="false">1</maxOccurs>
+            <defaultValue inherited="false"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="false">false</sensitive>
+            <minLength inherited="false">0</minLength>
+            <maxLength inherited="false">40</maxLength>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+        </dataElements>
+        <primitiveType>structure</primitiveType>
+      </element>
+      <element id="ds=L3-DD-OSM+dataElement=ControlData" type="dataElement" typeName="Schema Element" kind="Element" name="ControlData" path="/ControlData">
+        <displayName lang="default">Control Data</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements>
+          <element id="ds=L3-DD-OSM+dataElement=ControlData/OrderItem" type="dataElement" typeName="Schema Element" kind="Element" name="OrderItem" path="/ControlData/OrderItem">
+            <displayName lang="default">Order Item</displayName>
+            <minOccurs inherited="false">0</minOccurs>
+            <maxOccurs inherited="false">-1</maxOccurs>
+            <defaultValue inherited="false"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="false">false</sensitive>
+            <dataElements>
+              <element id="ds=L3-DD-OSM+dataElement=ControlData/OrderItem/ProductCode" type="dataElement" typeName="Schema Element" kind="Element" name="ProductCode" path="/ControlData/OrderItem/ProductCode">
+                <displayName lang="default">Product Code</displayName>
+                <minOccurs inherited="false">0</minOccurs>
+                <maxOccurs inherited="false">1</maxOccurs>
+                <defaultValue inherited="false"></defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="false">false</sensitive>
+                <minLength inherited="false">0</minLength>
+                <maxLength inherited="false">20</maxLength>
+                <dataElements/>
+                <primitiveType>string</primitiveType>
+              </element>
+              <element id="ds=L3-DD-OSM+dataElement=ControlData/OrderItem/ProductName" type="dataElement" typeName="Schema Element" kind="Element" name="ProductName" path="/ControlData/OrderItem/ProductName">
+                <displayName lang="default">Product Name</displayName>
+                <minOccurs inherited="false">0</minOccurs>
+                <maxOccurs inherited="false">1</maxOccurs>
+                <defaultValue inherited="false"></defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="false">false</sensitive>
+                <minLength inherited="false">0</minLength>
+                <maxLength inherited="false">20</maxLength>
+                <dataElements/>
+                <primitiveType>string</primitiveType>
+              </element>
+              <element id="ds=L3-DD-OSM+dataElement=ControlData/OrderItem/ProductDesc" type="dataElement" typeName="Schema Element" kind="Element" name="ProductDesc" path="/ControlData/OrderItem/ProductDesc">
+                <displayName lang="default">Product Desc</displayName>
+                <minOccurs inherited="false">0</minOccurs>
+                <maxOccurs inherited="false">1</maxOccurs>
+                <defaultValue inherited="false"></defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="false">false</sensitive>
+                <minLength inherited="false">0</minLength>
+                <maxLength inherited="false">20</maxLength>
+                <dataElements/>
+                <primitiveType>string</primitiveType>
+              </element>
+              <element id="ds=L3-DD-OSM+dataElement=ControlData/OrderItem/ProductClass" type="dataElement" typeName="Schema Element" kind="Element" name="ProductClass" path="/ControlData/OrderItem/ProductClass">
+                <displayName lang="default">Product Class</displayName>
+                <minOccurs inherited="false">0</minOccurs>
+                <maxOccurs inherited="false">1</maxOccurs>
+                <defaultValue inherited="false"></defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="false">false</sensitive>
+                <minLength inherited="false">0</minLength>
+                <maxLength inherited="false">20</maxLength>
+                <dataElements/>
+                <primitiveType>string</primitiveType>
+              </element>
+              <element id="ds=L3-DD-OSM+dataElement=ControlData/OrderItem/ProductSpec" type="dataElement" typeName="Schema Element" kind="Element" name="ProductSpec" path="/ControlData/OrderItem/ProductSpec">
+                <displayName lang="default">Product Spec</displayName>
+                <minOccurs inherited="false">0</minOccurs>
+                <maxOccurs inherited="false">1</maxOccurs>
+                <defaultValue inherited="false"></defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="false">false</sensitive>
+                <minLength inherited="false">0</minLength>
+                <maxLength inherited="false">50</maxLength>
+                <dataElements/>
+                <primitiveType>string</primitiveType>
+              </element>
+              <element id="ds=L3-DD-OSM+dataElement=ControlData/OrderItem/LineID" type="dataElement" typeName="Schema Element" kind="Element" name="LineID" path="/ControlData/OrderItem/LineID">
+                <displayName lang="default">Line ID</displayName>
+                <minOccurs inherited="false">0</minOccurs>
+                <maxOccurs inherited="false">1</maxOccurs>
+                <defaultValue inherited="false"></defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="false">false</sensitive>
+                <minLength inherited="false">0</minLength>
+                <maxLength inherited="false">10</maxLength>
+                <dataElements/>
+                <primitiveType>string</primitiveType>
+              </element>
+              <element id="ds=L3-DD-OSM+dataElement=ControlData/OrderItem/BundleID" type="dataElement" typeName="Schema Element" kind="Element" name="BundleID" path="/ControlData/OrderItem/BundleID">
+                <displayName lang="default">Bundle ID</displayName>
+                <minOccurs inherited="false">0</minOccurs>
+                <maxOccurs inherited="false">1</maxOccurs>
+                <defaultValue inherited="false"></defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="false">false</sensitive>
+                <minLength inherited="false">0</minLength>
+                <maxLength inherited="false">10</maxLength>
+                <dataElements/>
+                <primitiveType>string</primitiveType>
+              </element>
+              <element id="ds=L3-DD-OSM+dataElement=ControlData/OrderItem/OrderItemFulfillmentState" type="dataElement" typeName="Schema Element" kind="Element" name="OrderItemFulfillmentState" path="/ControlData/OrderItem/OrderItemFulfillmentState">
+                <displayName lang="default">Order Item Fulfillment State</displayName>
+                <minOccurs inherited="false">0</minOccurs>
+                <maxOccurs inherited="false">1</maxOccurs>
+                <defaultValue inherited="false"></defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="false">false</sensitive>
+                <minLength inherited="false">0</minLength>
+                <maxLength inherited="false">100</maxLength>
+                <dataElements/>
+                <primitiveType>string</primitiveType>
+              </element>
+              <element id="ds=L3-DD-OSM+dataElement=ControlData/OrderItem/PointOfNoReturn" type="dataElement" typeName="Schema Element" kind="Element" name="PointOfNoReturn" path="/ControlData/OrderItem/PointOfNoReturn">
+                <displayName lang="default">Point Of No Return</displayName>
+                <minOccurs inherited="false">0</minOccurs>
+                <maxOccurs inherited="false">-1</maxOccurs>
+                <defaultValue inherited="false"></defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="false">false</sensitive>
+                <minLength inherited="false">0</minLength>
+                <maxLength inherited="false">40</maxLength>
+                <dataElements/>
+                <primitiveType>string</primitiveType>
+              </element>
+            </dataElements>
+            <primitiveType>structure</primitiveType>
+          </element>
+          <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions" type="dataElement" typeName="Schema Element" kind="Element" name="Functions" path="/ControlData/Functions">
+            <displayName lang="default">Functions</displayName>
+            <minOccurs inherited="false">0</minOccurs>
+            <maxOccurs inherited="false">1</maxOccurs>
+            <defaultValue inherited="false"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="false">false</sensitive>
+            <dataElements>
+              <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/InitiateBillingFunction" type="dataElement" typeName="Schema Element" kind="Element" name="InitiateBillingFunction" path="/ControlData/Functions/InitiateBillingFunction">
+                <displayName lang="default">Initiate Billing Function</displayName>
+                <minOccurs inherited="true">0</minOccurs>
+                <maxOccurs inherited="false">-1</maxOccurs>
+                <defaultValue inherited="true"></defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="true">false</sensitive>
+                <base>
+                  <relation ref="ds=L3-DD-OSM+dataElement=FunctionType" type="Schema Element" name="Type" kind="Element">
+                    <target name="FunctionType" typeName="Schema Element"/>
+                    <inEntity name="L3-DD-OSM" typeName="Data Schema"/>
+                  </relation>
+                </base>
+                <dataElements>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/InitiateBillingFunction/componentKey" type="dataElement" typeName="Schema Element" kind="Element" name="componentKey" path="/ControlData/Functions/InitiateBillingFunction/componentKey" inherited="true">
+                    <displayName lang="default">Component Key</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <minLength inherited="false">0</minLength>
+                    <maxLength inherited="false">100</maxLength>
+                    <dataElements/>
+                    <primitiveType>string</primitiveType>
+                  </element>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/InitiateBillingFunction/orderItem" type="dataElement" typeName="Schema Element" kind="Element" name="orderItem" path="/ControlData/Functions/InitiateBillingFunction/orderItem" inherited="true">
+                    <displayName lang="default">Order Item</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">-1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <dataElements>
+                      <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/InitiateBillingFunction/orderItem/ExternalFulfillmentState" type="dataElement" typeName="Schema Element" kind="Element" name="ExternalFulfillmentState" path="/ControlData/Functions/InitiateBillingFunction/orderItem/ExternalFulfillmentState" inherited="true">
+                        <displayName lang="default">External Fulfillment State</displayName>
+                        <minOccurs inherited="false">0</minOccurs>
+                        <maxOccurs inherited="false">1</maxOccurs>
+                        <defaultValue inherited="false"></defaultValue>
+                        <key inherited="false"></key>
+                        <abstract inherited="false">false</abstract>
+                        <deprecated inherited="false">false</deprecated>
+                        <internal inherited="false">false</internal>
+                        <sensitive inherited="false">false</sensitive>
+                        <minLength inherited="false">0</minLength>
+                        <maxLength inherited="false">100</maxLength>
+                        <dataElements/>
+                        <primitiveType>string</primitiveType>
+                      </element>
+                    </dataElements>
+                    <primitiveType>structure</primitiveType>
+                  </element>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/InitiateBillingFunction/calculatedStartDate" type="dataElement" typeName="Schema Element" kind="Element" name="calculatedStartDate" path="/ControlData/Functions/InitiateBillingFunction/calculatedStartDate" inherited="true">
+                    <displayName lang="default">Calculated Start Date</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <minLength inherited="false">0</minLength>
+                    <maxLength inherited="false">40</maxLength>
+                    <dataElements/>
+                    <primitiveType>date</primitiveType>
+                  </element>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/InitiateBillingFunction/duration" type="dataElement" typeName="Schema Element" kind="Element" name="duration" path="/ControlData/Functions/InitiateBillingFunction/duration" inherited="true">
+                    <displayName lang="default">Duration</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <minLength inherited="false">0</minLength>
+                    <maxLength inherited="false">40</maxLength>
+                    <dataElements/>
+                    <primitiveType>string</primitiveType>
+                  </element>
+                </dataElements>
+                <primitiveType>structure</primitiveType>
+              </element>
+              <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/FulfillBillingFunction" type="dataElement" typeName="Schema Element" kind="Element" name="FulfillBillingFunction" path="/ControlData/Functions/FulfillBillingFunction">
+                <displayName lang="default">Fulfill Billing Function</displayName>
+                <minOccurs inherited="true">0</minOccurs>
+                <maxOccurs inherited="false">-1</maxOccurs>
+                <defaultValue inherited="true"></defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="true">false</sensitive>
+                <base>
+                  <relation ref="ds=L3-DD-OSM+dataElement=FunctionType" type="Schema Element" name="Type" kind="Element">
+                    <target name="FunctionType" typeName="Schema Element"/>
+                    <inEntity name="L3-DD-OSM" typeName="Data Schema"/>
+                  </relation>
+                </base>
+                <dataElements>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/FulfillBillingFunction/componentKey" type="dataElement" typeName="Schema Element" kind="Element" name="componentKey" path="/ControlData/Functions/FulfillBillingFunction/componentKey" inherited="true">
+                    <displayName lang="default">Component Key</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <minLength inherited="false">0</minLength>
+                    <maxLength inherited="false">100</maxLength>
+                    <dataElements/>
+                    <primitiveType>string</primitiveType>
+                  </element>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/FulfillBillingFunction/orderItem" type="dataElement" typeName="Schema Element" kind="Element" name="orderItem" path="/ControlData/Functions/FulfillBillingFunction/orderItem" inherited="true">
+                    <displayName lang="default">Order Item</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">-1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <dataElements>
+                      <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/FulfillBillingFunction/orderItem/ExternalFulfillmentState" type="dataElement" typeName="Schema Element" kind="Element" name="ExternalFulfillmentState" path="/ControlData/Functions/FulfillBillingFunction/orderItem/ExternalFulfillmentState" inherited="true">
+                        <displayName lang="default">External Fulfillment State</displayName>
+                        <minOccurs inherited="false">0</minOccurs>
+                        <maxOccurs inherited="false">1</maxOccurs>
+                        <defaultValue inherited="false"></defaultValue>
+                        <key inherited="false"></key>
+                        <abstract inherited="false">false</abstract>
+                        <deprecated inherited="false">false</deprecated>
+                        <internal inherited="false">false</internal>
+                        <sensitive inherited="false">false</sensitive>
+                        <minLength inherited="false">0</minLength>
+                        <maxLength inherited="false">100</maxLength>
+                        <dataElements/>
+                        <primitiveType>string</primitiveType>
+                      </element>
+                    </dataElements>
+                    <primitiveType>structure</primitiveType>
+                  </element>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/FulfillBillingFunction/calculatedStartDate" type="dataElement" typeName="Schema Element" kind="Element" name="calculatedStartDate" path="/ControlData/Functions/FulfillBillingFunction/calculatedStartDate" inherited="true">
+                    <displayName lang="default">Calculated Start Date</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <minLength inherited="false">0</minLength>
+                    <maxLength inherited="false">40</maxLength>
+                    <dataElements/>
+                    <primitiveType>date</primitiveType>
+                  </element>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/FulfillBillingFunction/duration" type="dataElement" typeName="Schema Element" kind="Element" name="duration" path="/ControlData/Functions/FulfillBillingFunction/duration" inherited="true">
+                    <displayName lang="default">Duration</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <minLength inherited="false">0</minLength>
+                    <maxLength inherited="false">40</maxLength>
+                    <dataElements/>
+                    <primitiveType>string</primitiveType>
+                  </element>
+                </dataElements>
+                <primitiveType>structure</primitiveType>
+              </element>
+              <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/ProvisioningOrderFunction" type="dataElement" typeName="Schema Element" kind="Element" name="ProvisioningOrderFunction" path="/ControlData/Functions/ProvisioningOrderFunction">
+                <displayName lang="default">Provisioning Order Function</displayName>
+                <minOccurs inherited="false">0</minOccurs>
+                <maxOccurs inherited="false">-1</maxOccurs>
+                <defaultValue inherited="true"></defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="true">false</sensitive>
+                <base>
+                  <relation ref="ds=L3-DD-OSM+dataElement=FunctionType" type="Schema Element" name="Type" kind="Element">
+                    <target name="FunctionType" typeName="Schema Element"/>
+                    <inEntity name="L3-DD-OSM" typeName="Data Schema"/>
+                  </relation>
+                </base>
+                <dataElements>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/ProvisioningOrderFunction/componentKey" type="dataElement" typeName="Schema Element" kind="Element" name="componentKey" path="/ControlData/Functions/ProvisioningOrderFunction/componentKey" inherited="true">
+                    <displayName lang="default">Component Key</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <minLength inherited="false">0</minLength>
+                    <maxLength inherited="false">100</maxLength>
+                    <dataElements/>
+                    <primitiveType>string</primitiveType>
+                  </element>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/ProvisioningOrderFunction/orderItem" type="dataElement" typeName="Schema Element" kind="Element" name="orderItem" path="/ControlData/Functions/ProvisioningOrderFunction/orderItem" inherited="true">
+                    <displayName lang="default">Order Item</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">-1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <dataElements>
+                      <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/ProvisioningOrderFunction/orderItem/ExternalFulfillmentState" type="dataElement" typeName="Schema Element" kind="Element" name="ExternalFulfillmentState" path="/ControlData/Functions/ProvisioningOrderFunction/orderItem/ExternalFulfillmentState" inherited="true">
+                        <displayName lang="default">External Fulfillment State</displayName>
+                        <minOccurs inherited="false">0</minOccurs>
+                        <maxOccurs inherited="false">1</maxOccurs>
+                        <defaultValue inherited="false"></defaultValue>
+                        <key inherited="false"></key>
+                        <abstract inherited="false">false</abstract>
+                        <deprecated inherited="false">false</deprecated>
+                        <internal inherited="false">false</internal>
+                        <sensitive inherited="false">false</sensitive>
+                        <minLength inherited="false">0</minLength>
+                        <maxLength inherited="false">100</maxLength>
+                        <dataElements/>
+                        <primitiveType>string</primitiveType>
+                      </element>
+                    </dataElements>
+                    <primitiveType>structure</primitiveType>
+                  </element>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/ProvisioningOrderFunction/calculatedStartDate" type="dataElement" typeName="Schema Element" kind="Element" name="calculatedStartDate" path="/ControlData/Functions/ProvisioningOrderFunction/calculatedStartDate" inherited="true">
+                    <displayName lang="default">Calculated Start Date</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <minLength inherited="false">0</minLength>
+                    <maxLength inherited="false">40</maxLength>
+                    <dataElements/>
+                    <primitiveType>date</primitiveType>
+                  </element>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/ProvisioningOrderFunction/duration" type="dataElement" typeName="Schema Element" kind="Element" name="duration" path="/ControlData/Functions/ProvisioningOrderFunction/duration" inherited="true">
+                    <displayName lang="default">Duration</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <minLength inherited="false">0</minLength>
+                    <maxLength inherited="false">40</maxLength>
+                    <dataElements/>
+                    <primitiveType>string</primitiveType>
+                  </element>
+                </dataElements>
+                <primitiveType>structure</primitiveType>
+              </element>
+              <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/ShipOrderFunction" type="dataElement" typeName="Schema Element" kind="Element" name="ShipOrderFunction" path="/ControlData/Functions/ShipOrderFunction">
+                <displayName lang="default">Ship Order Function</displayName>
+                <minOccurs inherited="true">0</minOccurs>
+                <maxOccurs inherited="false">-1</maxOccurs>
+                <defaultValue inherited="true"></defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="true">false</sensitive>
+                <base>
+                  <relation ref="ds=L3-DD-OSM+dataElement=FunctionType" type="Schema Element" name="Type" kind="Element">
+                    <target name="FunctionType" typeName="Schema Element"/>
+                    <inEntity name="L3-DD-OSM" typeName="Data Schema"/>
+                  </relation>
+                </base>
+                <dataElements>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/ShipOrderFunction/componentKey" type="dataElement" typeName="Schema Element" kind="Element" name="componentKey" path="/ControlData/Functions/ShipOrderFunction/componentKey" inherited="true">
+                    <displayName lang="default">Component Key</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <minLength inherited="false">0</minLength>
+                    <maxLength inherited="false">100</maxLength>
+                    <dataElements/>
+                    <primitiveType>string</primitiveType>
+                  </element>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/ShipOrderFunction/orderItem" type="dataElement" typeName="Schema Element" kind="Element" name="orderItem" path="/ControlData/Functions/ShipOrderFunction/orderItem" inherited="true">
+                    <displayName lang="default">Order Item</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">-1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <dataElements>
+                      <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/ShipOrderFunction/orderItem/ExternalFulfillmentState" type="dataElement" typeName="Schema Element" kind="Element" name="ExternalFulfillmentState" path="/ControlData/Functions/ShipOrderFunction/orderItem/ExternalFulfillmentState" inherited="true">
+                        <displayName lang="default">External Fulfillment State</displayName>
+                        <minOccurs inherited="false">0</minOccurs>
+                        <maxOccurs inherited="false">1</maxOccurs>
+                        <defaultValue inherited="false"></defaultValue>
+                        <key inherited="false"></key>
+                        <abstract inherited="false">false</abstract>
+                        <deprecated inherited="false">false</deprecated>
+                        <internal inherited="false">false</internal>
+                        <sensitive inherited="false">false</sensitive>
+                        <minLength inherited="false">0</minLength>
+                        <maxLength inherited="false">100</maxLength>
+                        <dataElements/>
+                        <primitiveType>string</primitiveType>
+                      </element>
+                    </dataElements>
+                    <primitiveType>structure</primitiveType>
+                  </element>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/ShipOrderFunction/calculatedStartDate" type="dataElement" typeName="Schema Element" kind="Element" name="calculatedStartDate" path="/ControlData/Functions/ShipOrderFunction/calculatedStartDate" inherited="true">
+                    <displayName lang="default">Calculated Start Date</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <minLength inherited="false">0</minLength>
+                    <maxLength inherited="false">40</maxLength>
+                    <dataElements/>
+                    <primitiveType>date</primitiveType>
+                  </element>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/ShipOrderFunction/duration" type="dataElement" typeName="Schema Element" kind="Element" name="duration" path="/ControlData/Functions/ShipOrderFunction/duration" inherited="true">
+                    <displayName lang="default">Duration</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <minLength inherited="false">0</minLength>
+                    <maxLength inherited="false">40</maxLength>
+                    <dataElements/>
+                    <primitiveType>string</primitiveType>
+                  </element>
+                </dataElements>
+                <primitiveType>structure</primitiveType>
+              </element>
+              <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/InstallOrderFunction" type="dataElement" typeName="Schema Element" kind="Element" name="InstallOrderFunction" path="/ControlData/Functions/InstallOrderFunction">
+                <displayName lang="default">Install Order Function</displayName>
+                <minOccurs inherited="true">0</minOccurs>
+                <maxOccurs inherited="false">-1</maxOccurs>
+                <defaultValue inherited="true"></defaultValue>
+                <key inherited="false"></key>
+                <abstract inherited="false">false</abstract>
+                <deprecated inherited="false">false</deprecated>
+                <internal inherited="false">false</internal>
+                <sensitive inherited="true">false</sensitive>
+                <base>
+                  <relation ref="ds=L3-DD-OSM+dataElement=FunctionType" type="Schema Element" name="Type" kind="Element">
+                    <target name="FunctionType" typeName="Schema Element"/>
+                    <inEntity name="L3-DD-OSM" typeName="Data Schema"/>
+                  </relation>
+                </base>
+                <dataElements>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/InstallOrderFunction/componentKey" type="dataElement" typeName="Schema Element" kind="Element" name="componentKey" path="/ControlData/Functions/InstallOrderFunction/componentKey" inherited="true">
+                    <displayName lang="default">Component Key</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <minLength inherited="false">0</minLength>
+                    <maxLength inherited="false">100</maxLength>
+                    <dataElements/>
+                    <primitiveType>string</primitiveType>
+                  </element>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/InstallOrderFunction/orderItem" type="dataElement" typeName="Schema Element" kind="Element" name="orderItem" path="/ControlData/Functions/InstallOrderFunction/orderItem" inherited="true">
+                    <displayName lang="default">Order Item</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">-1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <dataElements>
+                      <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/InstallOrderFunction/orderItem/ExternalFulfillmentState" type="dataElement" typeName="Schema Element" kind="Element" name="ExternalFulfillmentState" path="/ControlData/Functions/InstallOrderFunction/orderItem/ExternalFulfillmentState" inherited="true">
+                        <displayName lang="default">External Fulfillment State</displayName>
+                        <minOccurs inherited="false">0</minOccurs>
+                        <maxOccurs inherited="false">1</maxOccurs>
+                        <defaultValue inherited="false"></defaultValue>
+                        <key inherited="false"></key>
+                        <abstract inherited="false">false</abstract>
+                        <deprecated inherited="false">false</deprecated>
+                        <internal inherited="false">false</internal>
+                        <sensitive inherited="false">false</sensitive>
+                        <minLength inherited="false">0</minLength>
+                        <maxLength inherited="false">100</maxLength>
+                        <dataElements/>
+                        <primitiveType>string</primitiveType>
+                      </element>
+                    </dataElements>
+                    <primitiveType>structure</primitiveType>
+                  </element>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/InstallOrderFunction/calculatedStartDate" type="dataElement" typeName="Schema Element" kind="Element" name="calculatedStartDate" path="/ControlData/Functions/InstallOrderFunction/calculatedStartDate" inherited="true">
+                    <displayName lang="default">Calculated Start Date</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <minLength inherited="false">0</minLength>
+                    <maxLength inherited="false">40</maxLength>
+                    <dataElements/>
+                    <primitiveType>date</primitiveType>
+                  </element>
+                  <element id="ds=L3-DD-OSM+dataElement=ControlData/Functions/InstallOrderFunction/duration" type="dataElement" typeName="Schema Element" kind="Element" name="duration" path="/ControlData/Functions/InstallOrderFunction/duration" inherited="true">
+                    <displayName lang="default">Duration</displayName>
+                    <minOccurs inherited="false">0</minOccurs>
+                    <maxOccurs inherited="false">1</maxOccurs>
+                    <defaultValue inherited="false"></defaultValue>
+                    <key inherited="false"></key>
+                    <abstract inherited="false">false</abstract>
+                    <deprecated inherited="false">false</deprecated>
+                    <internal inherited="false">false</internal>
+                    <sensitive inherited="false">false</sensitive>
+                    <minLength inherited="false">0</minLength>
+                    <maxLength inherited="false">40</maxLength>
+                    <dataElements/>
+                    <primitiveType>string</primitiveType>
+                  </element>
+                </dataElements>
+                <primitiveType>structure</primitiveType>
+              </element>
+            </dataElements>
+            <primitiveType>structure</primitiveType>
+          </element>
+          <element id="ds=L3-DD-OSM+dataElement=ControlData/OrderFulfillmentState" type="dataElement" typeName="Schema Element" kind="Element" name="OrderFulfillmentState" path="/ControlData/OrderFulfillmentState">
+            <displayName lang="default">Order Fulfillment State</displayName>
+            <minOccurs inherited="false">0</minOccurs>
+            <maxOccurs inherited="false">1</maxOccurs>
+            <defaultValue inherited="false"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="false">false</sensitive>
+            <minLength inherited="false">0</minLength>
+            <maxLength inherited="false">100</maxLength>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+        </dataElements>
+        <primitiveType>structure</primitiveType>
+      </element>
+      <element id="ds=L3-DD-OSM+dataElement=CustomerOrderXml" type="dataElement" typeName="Schema Element" kind="Element" name="CustomerOrderXml" path="/CustomerOrderXml">
+        <displayName lang="default">Customer Order Xml</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements/>
+        <primitiveType>structure</primitiveType>
+      </element>
+      <element id="ds=L3-DD-OSM+dataElement=OrderNumber" type="dataElement" typeName="Schema Element" kind="Element" name="OrderNumber" path="/OrderNumber">
+        <displayName lang="default">Order Number</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=L3-DD-OSM+dataElement=Revision" type="dataElement" typeName="Schema Element" kind="Element" name="Revision" path="/Revision">
+        <displayName lang="default">Revision</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+    </dataElements>
+  </entity>
+</model:Model>

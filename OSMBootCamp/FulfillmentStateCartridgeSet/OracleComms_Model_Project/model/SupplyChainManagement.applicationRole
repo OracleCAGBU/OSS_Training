@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/core/model/common" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:dom="http://xmlns.oracle.com/communications/sce/model/common/entity" xsi:type="dom:ApplicationRoleType" name="SupplyChainManagement">
+  <displayName lang="[default]">Supply Chain Management</displayName>
+  <saveVersion>3</saveVersion>
+  <id>11fb-LBmQuOTZI0b-tMbQw</id>
+  <dom:abbrevation>SCM</dom:abbrevation>
+  <dom:specializedActionCodes>
+    <id>yWzObYomRCWz8YohAcf1mw</id>
+    <elementType>oracle.communications.sce.common.entity.entities.application.role.specializedactioncode</elementType>
+    <dom:specializedActionName>Ship</dom:specializedActionName>
+    <dom:actionType>
+      <entity>Create</entity>
+      <entityType>actionType</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.application.role.specializedactioncode.actionTypeRef</relationship>
+    </dom:actionType>
+  </dom:specializedActionCodes>
+  <dom:specializedActionCodes>
+    <id>qk0BJqWQTGG3kNqdOfK-BQ</id>
+    <elementType>oracle.communications.sce.common.entity.entities.application.role.specializedactioncode</elementType>
+    <dom:specializedActionName>Recover</dom:specializedActionName>
+    <dom:actionType>
+      <entity>Remove</entity>
+      <entityType>actionType</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.application.role.specializedactioncode.actionTypeRef</relationship>
+    </dom:actionType>
+  </dom:specializedActionCodes>
+  <dom:actionType>
+    <entity>Technical</entity>
+    <entityType>funcArea</entityType>
+    <relationship>oracle.communications.sce.common.entity.entities.application.role.FunctionalAreaRef</relationship>
+  </dom:actionType>
+</modelEntity>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/orchestration" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:osm="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="OrderRecognitionRuleType" name="ORR">
+  <com:displayName>ORR</com:displayName>
+  <com:saveVersion>11</com:saveVersion>
+  <com:id>UbtsHAS6SvaHCVSs2h+1pQ</com:id>
+  <namespace>osm7Order1.com</namespace>
+  <inputMessage>
+    <com:entity>L3-DD-OSM</com:entity>
+    <com:entityType>xsd</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.orderRecognitionRule.inputMessage</com:relationship>
+    <com:element>CustomerOrderXml</com:element>
+    <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+    <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/L3-DD-OSM/L3-DD-OSM</com:namespace>
+    <com:baseElement>(Reusable Structure)</com:baseElement>
+    <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+  </inputMessage>
+  <targetOrder>
+    <com:entity>L3-DD-OSMOrder</com:entity>
+    <com:entityType>order</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.orderRecognitionRule.targetOrder</com:relationship>
+    <version>1.0.0.0.0</version>
+  </targetOrder>
+  <recognitionRule xsi:type="osm:XqueryExpressionRuleType">
+    <osm:xquery>if (fn:namespace-uri(.)=&quot;osm7Order1.com&quot;)&#xD;
+then fn:true()&#xD;
+else fn:false()</osm:xquery>
+  </recognitionRule>
+  <relevancy>26</relevancy>
+  <orderDataRule xsi:type="osm:XqueryExpressionRuleType">
+    <osm:xquery>declare namespace osm7dd=&quot;osm7Order1.com&quot;;&#xD;
+let $root := fn:root()/osm7dd:SalesOrder&#xD;
+let $orderNumber := $root/osm7dd:OrderNumber/text()&#xD;
+let $revision := $root/osm7dd:Revision/text()&#xD;
+&#xD;
+return&#xD;
+&lt;_root>&#xD;
+	&lt;OrderNumber>{$orderNumber}&lt;/OrderNumber>&#xD;
+	&lt;Revision>{$revision}&lt;/Revision>&#xD;
+&lt;/_root></osm:xquery>
+  </orderDataRule>
+  <orderHeaderRules>
+    <reference xsi:type="osm:XqueryExpressionRuleType">
+      <osm:xquery>declare namespace osm7dd=&quot;osm7Order1.com&quot;;&#xD;
+let $root := fn:root()/osm7dd:SalesOrder&#xD;
+let $orderNumber := $root/osm7dd:OrderNumber/text()&#xD;
+&#xD;
+return $orderNumber</osm:xquery>
+    </reference>
+  </orderHeaderRules>
+  <orderTemplateContribution>
+    <ord:nodeExtension>
+      <ord:path>/CustomerOrderXml</ord:path>
+      <ord:xmlType>true</ord:xmlType>
+    </ord:nodeExtension>
+    <ord:orderData>
+      <com:entity>L3-DD-OSM</com:entity>
+      <com:entityType>xsd</com:entityType>
+      <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
+      <com:element>CustomerOrderXml</com:element>
+      <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+      <com:elementName>CustomerOrderXml</com:elementName>
+      <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/L3-DD-OSM/L3-DD-OSM</com:namespace>
+      <com:baseElement>(Reusable Structure)</com:baseElement>
+      <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+    </ord:orderData>
+  </orderTemplateContribution>
+</com:modelEntity>

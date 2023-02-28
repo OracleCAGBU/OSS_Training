@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:orderItemSpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="OrderItemSpecification" namespace="osm7Order1.com">
+  <model:description>OrderItemSpecification</model:description>
+  <model:complexDataType>
+    <model:name>OrderItemSpecificationType</model:name>
+    <model:namespace>osm7Order1.com</model:namespace>
+  </model:complexDataType>
+  <model:productSpecMappingProperty>ProductSpec</model:productSpecMappingProperty>
+  <model:itemNameProperty>ProductName</model:itemNameProperty>
+  <model:itemIdProperty>LineID</model:itemIdProperty>
+  <model:itemRecognitionProperty>ProductClass</model:itemRecognitionProperty>
+  <model:property name="ProductCode" useComplexDataType="false">
+    <model:nodesetExpression xsi:type="model:XqueryExpressionRuleType" enabled="true">
+      <model:xquery><![CDATA[declare namespace osm7dd="osm7Order1.com";
+fn:normalize-space(osm7dd:productCode/text())]]></model:xquery>
+    </model:nodesetExpression>
+  </model:property>
+  <model:property name="ProductName" useComplexDataType="false">
+    <model:nodesetExpression xsi:type="model:XqueryExpressionRuleType" enabled="true">
+      <model:xquery><![CDATA[declare namespace osm7dd="osm7Order1.com";
+fn:normalize-space(osm7dd:productName/text())]]></model:xquery>
+    </model:nodesetExpression>
+  </model:property>
+  <model:property name="ProductDesc" useComplexDataType="false">
+    <model:nodesetExpression xsi:type="model:XqueryExpressionRuleType" enabled="true">
+      <model:xquery><![CDATA[declare namespace osm7dd="osm7Order1.com";
+fn:normalize-space(osm7dd:productDesc/text())]]></model:xquery>
+    </model:nodesetExpression>
+  </model:property>
+  <model:property name="ProductClass" useComplexDataType="false">
+    <model:nodesetExpression xsi:type="model:XqueryExpressionRuleType" enabled="true">
+      <model:xquery><![CDATA[declare namespace osm7dd="osm7Order1.com";
+fn:normalize-space(osm7dd:class/text())]]></model:xquery>
+    </model:nodesetExpression>
+  </model:property>
+  <model:property name="ProductSpec" useComplexDataType="false">
+    <model:nodesetExpression xsi:type="model:XqueryExpressionRuleType" enabled="true">
+      <model:xquery><![CDATA[(: XQuery main module :)
+declare namespace osm7dd="osm7Order1.com";
+let $productSpecMappingXml := fn:doc('osmmodel:///L3-DD-OSM/1.0.0.0.0/resources/productSpecMapping/productSpecMapping.xml')
+let $productSpec := fn:normalize-space(osm7dd:class/text())
+let $fulfillmentPattern := $productSpecMappingXml/productSpecMap/productSpec[fn:lower-case(@name)=fn:lower-case($productSpec)]/fulfillmentPattern/text()
+return $fulfillmentPattern]]></model:xquery>
+    </model:nodesetExpression>
+  </model:property>
+  <model:property name="LineID" useComplexDataType="false">
+    <model:nodesetExpression xsi:type="model:XqueryExpressionRuleType" enabled="true">
+      <model:xquery><![CDATA[declare namespace osm7dd="osm7Order1.com";
+fn:normalize-space(osm7dd:lineID/text())]]></model:xquery>
+    </model:nodesetExpression>
+  </model:property>
+  <model:property name="BundleID" useComplexDataType="false">
+    <model:nodesetExpression xsi:type="model:XqueryExpressionRuleType" enabled="true">
+      <model:xquery><![CDATA[declare namespace osm7dd="osm7Order1.com";
+fn:normalize-space(osm7dd:BundleID/text())]]></model:xquery>
+    </model:nodesetExpression>
+  </model:property>
+  <model:hierarchy name="OrderItemHierarchy" useForChildCompletionDependency="true">
+    <model:key>
+      <model:nodesetExpression xsi:type="model:XqueryExpressionRuleType" enabled="true">
+        <model:xquery><![CDATA[declare namespace osm7dd="osm7Order1.com";
+declare namespace osm="http://xmlns.oracle.com/communications/ordermanagement/model";
+
+fn:normalize-space(osm:properties/osm7dd:LineID/text())
+]]></model:xquery>
+      </model:nodesetExpression>
+    </model:key>
+    <model:parentKey>
+      <model:nodesetExpression xsi:type="model:XqueryExpressionRuleType" enabled="true">
+        <model:xquery><![CDATA[declare namespace osm7dd="osm7Order1.com";
+declare namespace osm="http://xmlns.oracle.com/communications/ordermanagement/model";
+
+fn:normalize-space(osm:properties/osm7dd:BundleID/text())
+]]></model:xquery>
+      </model:nodesetExpression>
+    </model:parentKey>
+  </model:hierarchy>
+  <model:physicalHierarchy>OrderItemHierarchy</model:physicalHierarchy>
+  <model:compositionHierarchy>OrderItemHierarchy</model:compositionHierarchy>
+</model:orderItemSpec>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="model:Project" id="oprj=ProcessAmendmentPOC" type="oprj" typeName="Order and Service Management Project" name="ProcessAmendmentPOC" resource="\ProcessAmendmentPOC\ProcessAmendmentPOC.osmCartridge">
+    <displayName lang="default">ProcessAmendmentPOC</displayName>
+    <note lang="default"/>
+    <version>
+      <major>1</major>
+      <minor>0</minor>
+      <maintenance>0</maintenance>
+      <servicePack>0</servicePack>
+      <efix>0</efix>
+      <build>22</build>
+    </version>
+    <targetVersion xsi:type="model:BuildVersion">
+      <major>7</major>
+      <minor>4</minor>
+      <maintenance>0</maintenance>
+      <servicePack>0</servicePack>
+      <efix>0</efix>
+      <build>0</build>
+    </targetVersion>
+    <propertyCategory name="Cartridge Management">
+      <property defaultValue="false" name="PURGE_CARTRIDGE_BEFORE_DEPLOY"/>
+      <property defaultValue="replace" name="ENTITY_CONFLICT_ACTION_ON_DEPLOY"/>
+      <property defaultValue="true" name="PURGE_ORDER_ON_UNDEPLOY"/>
+      <property defaultValue="true" name="FAST_CARTRIDGE_UNDEPLOY"/>
+      <property defaultValue="true" name="DEFAULT_CARTRIDGE"/>
+    </propertyCategory>
+    <propertyCategory name="Model">
+      <property defaultValue="oms-automation" name="DEFAULT_AUTOMATION_USER"/>
+      <property defaultValue="" name="DEFAULT_REQUEST_QUEUE"/>
+      <property defaultValue="mslv/oms/oms1/internal/jms/events" name="DEFAULT_RESPONSE_QUEUE"/>
+      <property defaultValue="" name="DEFAULT_MESSAGE_PROPERTY_SELECTOR"/>
+      <property defaultValue="ENV1" name="ACTIVATION_ENVIRONMENT_ID"/>
+    </propertyCategory>
+    <dependencies/>
+    <identifier>ProcessAmendmentPOC</identifier>
+    <provider>OSM Cartridge Provider</provider>
+    <sealed>false</sealed>
+    <package></package>
+  </entity>
+</model:Model>

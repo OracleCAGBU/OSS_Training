@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cartridge namespace="L3-DD-OSM" version="1.0.0.0.0" 
+    xsi:schemaLocation="http://www.metasolv.com/OMS/OrderModel/2002/06/25" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:xi="http://www.w3.org/2001/XInclude" 
+    xmlns="http://www.metasolv.com/OMS/OrderModel/2002/06/25"    
+    xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model">	
+		<description>L3-DD-OSM</description>
+		<default>true</default>
+		<timestamp>2007-02-01T21:31:09</timestamp> 
+ 	 	
+        		
+        <xi:include href="orderRecognitionRule/ORR.xml"/>
+        <xi:include href="orchestrationModel/L3-DD-OSM.xml"/>
+	 
+		<xi:include href="complexType/OrderItemSpecificationType.xml"/>
+
+      <model:resource name="L3-DD-OSM" namespace="L3-DD-OSM">
+         <model:description>resource files</model:description>
+         <model:location>resources/resources.zip</model:location>
+      </model:resource>
+      <model:xmlCatalog name="L3-DD-OSM" namespace="L3-DD-OSM">
+         <model:description>xml catalogs</model:description>
+         <model:location>xmlCatalogs/catalogs.zip</model:location>
+      </model:xmlCatalog>
+         <xi:include href="manifest/L3-DD-OSM.xml"/>  
+               
+</cartridge>
+
+

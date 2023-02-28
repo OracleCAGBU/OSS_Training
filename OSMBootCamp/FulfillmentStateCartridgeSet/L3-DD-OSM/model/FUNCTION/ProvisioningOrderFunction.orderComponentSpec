@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/orchestration" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:osm="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="OrderComponentSpec" name="ProvisioningOrderFunction">
+  <com:displayName lang="[default]">ProvisioningOrderFunction</com:displayName>
+  <com:saveVersion>21</com:saveVersion>
+  <com:id>HR06isa5Q7aByW6Yo09E7A</com:id>
+  <namespace>osm7Order1.com</namespace>
+  <extends>
+    <com:entity>ProvisioningFunction</com:entity>
+    <com:entityType>orderComponentSpec</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.orderComponentSpec.parentOrderComponent</com:relationship>
+  </extends>
+  <minDuration/>
+  <defaultDuration/>
+  <maxDuration/>
+  <executedByTask>
+    <com:entity>ProvisioningProcess</com:entity>
+    <com:entityType>process</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.orderComponentSpec.executedByTask</com:relationship>
+  </executedByTask>
+  <baseTask>
+    <com:entity>ProvisioningDebugTask</com:entity>
+    <com:entityType>manualTask</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.orderComponentSpec.baseTask</com:relationship>
+  </baseTask>
+  <isExecutable>false</isExecutable>
+  <orderTemplateContribution>
+    <ord:nodeExtension>
+      <ord:path>/ControlData</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/OrderItem</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/OrderItem/ProductCode</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/OrderItem/ProductName</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/OrderItem/ProductDesc</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/OrderItem/ProductClass</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/OrderItem/ProductSpec</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/OrderItem/LineID</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/OrderItem/BundleID</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/OrderFulfillmentState</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ProvisioningOrderFunction</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ProvisioningOrderFunction/componentKey</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ProvisioningOrderFunction/orderItem</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ProvisioningOrderFunction/orderItem/ExternalFulfillmentState</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ProvisioningOrderFunction/calculatedStartDate</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ProvisioningOrderFunction/duration</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ProvisioningOrderFunction/orderItem/orderItemRef</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ProvisioningOrderFunction/orderItem/orderItemRef/ProductCode</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ProvisioningOrderFunction/orderItem/orderItemRef/ProductName</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ProvisioningOrderFunction/orderItem/orderItemRef/ProductDesc</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ProvisioningOrderFunction/orderItem/orderItemRef/ProductClass</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ProvisioningOrderFunction/orderItem/orderItemRef/ProductSpec</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ProvisioningOrderFunction/orderItem/orderItemRef/LineID</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ProvisioningOrderFunction/orderItem/orderItemRef/BundleID</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/OrderItem/OrderItemFulfillmentState</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ProvisioningOrderFunction/orderItem/orderItemRef/OrderItemFulfillmentState</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/OrderItem/PointOfNoReturn</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ProvisioningOrderFunction/orderItem/orderItemRef/PointOfNoReturn</ord:path>
+    </ord:nodeExtension>
+    <ord:orderData>
+      <com:entity>L3-DD-OSM</com:entity>
+      <com:entityType>xsd</com:entityType>
+      <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
+      <com:element>ControlData</com:element>
+      <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+      <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/L3-DD-OSM/L3-DD-OSM</com:namespace>
+      <com:baseElement>(Reusable Structure)</com:baseElement>
+      <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+      <ord:childNode>
+        <com:entity>L3-DD-OSM</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
+        <com:element>ControlData/Functions</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>Functions</com:elementName>
+        <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/L3-DD-OSM/L3-DD-OSM</com:namespace>
+        <com:baseElement>(Local Structure)</com:baseElement>
+        <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+        <ord:childNode>
+          <com:entity>L3-DD-OSM</com:entity>
+          <com:entityType>xsd</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
+          <com:element>ControlData/Functions/ProvisioningOrderFunction</com:element>
+          <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+          <com:elementName>ProvisioningOrderFunction</com:elementName>
+          <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/L3-DD-OSM/L3-DD-OSM</com:namespace>
+          <com:baseElement>FunctionType</com:baseElement>
+          <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/L3-DD-OSM/L3-DD-OSM</com:baseNamespace>
+          <ord:childNode>
+            <com:entity>L3-DD-OSM</com:entity>
+            <com:entityType>xsd</com:entityType>
+            <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
+            <com:element>ControlData/Functions/ProvisioningOrderFunction/componentKey</com:element>
+            <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+            <com:elementName>ControlData/Functions/ProvisioningOrderFunction/componentKey</com:elementName>
+            <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/L3-DD-OSM/L3-DD-OSM</com:namespace>
+            <com:baseElement>string</com:baseElement>
+            <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+          </ord:childNode>
+          <ord:childNode>
+            <com:entity>L3-DD-OSM</com:entity>
+            <com:entityType>xsd</com:entityType>
+            <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
+            <com:element>ControlData/Functions/ProvisioningOrderFunction/orderItem</com:element>
+            <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+            <com:elementName>orderItem</com:elementName>
+            <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/L3-DD-OSM/L3-DD-OSM</com:namespace>
+            <com:baseElement>(Local Structure)</com:baseElement>
+            <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+            <ord:childNode>
+              <com:entity>L3-DD-OSM</com:entity>
+              <com:entityType>xsd</com:entityType>
+              <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
+              <com:element>ControlData/Functions/ProvisioningOrderFunction/orderItem/ExternalFulfillmentState</com:element>
+              <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+              <com:elementName>ControlData/Functions/ProvisioningOrderFunction/orderItem/ExternalFulfillmentState</com:elementName>
+              <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/L3-DD-OSM/L3-DD-OSM</com:namespace>
+              <com:baseElement>string</com:baseElement>
+              <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+            </ord:childNode>
+            <ord:childRefNode>
+              <com:entity>ProvisioningOrderFunction</com:entity>
+              <com:entityType>orderComponentSpec</com:entityType>
+              <com:relationship>com.mslv.studio.provisioning.order.referenceDataTypeNode</com:relationship>
+              <com:element>/ControlData/OrderItem</com:element>
+              <com:elementType>com.mslv.studio.provisioning.order.orderTemplateNode</com:elementType>
+              <ord:name>orderItemRef</ord:name>
+            </ord:childRefNode>
+          </ord:childNode>
+          <ord:childNode>
+            <com:entity>L3-DD-OSM</com:entity>
+            <com:entityType>xsd</com:entityType>
+            <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
+            <com:element>ControlData/Functions/ProvisioningOrderFunction/calculatedStartDate</com:element>
+            <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+            <com:elementName>calculatedStartDate</com:elementName>
+            <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/L3-DD-OSM/L3-DD-OSM</com:namespace>
+            <com:baseElement>date</com:baseElement>
+            <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+          </ord:childNode>
+          <ord:childNode>
+            <com:entity>L3-DD-OSM</com:entity>
+            <com:entityType>xsd</com:entityType>
+            <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
+            <com:element>ControlData/Functions/ProvisioningOrderFunction/duration</com:element>
+            <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+            <com:elementName>duration</com:elementName>
+            <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/L3-DD-OSM/L3-DD-OSM</com:namespace>
+            <com:baseElement>string</com:baseElement>
+            <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+          </ord:childNode>
+        </ord:childNode>
+      </ord:childNode>
+    </ord:orderData>
+  </orderTemplateContribution>
+  <fulfillmentState name="IN_PROGRESS-HPSDOMAIN_PROVISION_START">
+    <com:id>frsWozctQD+lfBjqQLrO2A</com:id>
+    <com:elementType>oracle.communications.sce.osm.orchestration.orderComponentSpec.fulfillmentState</com:elementType>
+    <osm:description lang="[default]">IN PROGRESS HPSDOMAIN START</osm:description>
+  </fulfillmentState>
+  <fulfillmentState name="IN_PROGRESS-HPSDOMAIN_PROVISION_DESIGNED">
+    <com:id>Jc1uQSohRA65dU3Sl6DTQQ</com:id>
+    <com:elementType>oracle.communications.sce.osm.orchestration.orderComponentSpec.fulfillmentState</com:elementType>
+    <osm:description lang="[default]">IN PROGRESS HPSDOMAIN DESIGNED</osm:description>
+  </fulfillmentState>
+  <fulfillmentState name="COMPLETE-HPSDOMAIN_PROVISION_COMPLETED">
+    <com:id>K3yZ5hGRSZug1BUjmo8-rw</com:id>
+    <com:elementType>oracle.communications.sce.osm.orchestration.orderComponentSpec.fulfillmentState</com:elementType>
+    <osm:description lang="[default]">COMPLETED HPSDOMAIN COMPLETED</osm:description>
+  </fulfillmentState>
+  <fulfillmentState name="IN_PROGRESS-INTERNETDOMAIN_PROVISION_START">
+    <com:id>XK7Dc-kiQfakbw1c4+lwjw</com:id>
+    <com:elementType>oracle.communications.sce.osm.orchestration.orderComponentSpec.fulfillmentState</com:elementType>
+    <osm:description lang="[default]">IN PROGRESS INTERNETDOMAIN START</osm:description>
+  </fulfillmentState>
+  <fulfillmentState name="IN_PROGRESS-INTERNETDOMAIN_PROVISION_DESIGNED">
+    <com:id>+fVjXJq3TOei+M4+m35n2Q</com:id>
+    <com:elementType>oracle.communications.sce.osm.orchestration.orderComponentSpec.fulfillmentState</com:elementType>
+    <osm:description lang="[default]">IN PROGRESS INTERNETDOMAIN DESIGNED</osm:description>
+  </fulfillmentState>
+  <fulfillmentState name="COMPLETE-INTERNETDOMAIN_PROVISION_COMPLETED">
+    <com:id>MgncnKZPRrmXvQIkAEeTXw</com:id>
+    <com:elementType>oracle.communications.sce.osm.orchestration.orderComponentSpec.fulfillmentState</com:elementType>
+    <osm:description lang="[default]">COMPLETED INTERNETDOMAIN COMPLETED</osm:description>
+  </fulfillmentState>
+  <fulfillmentState name="COMPLETE-MOBILEDOMAIN_COMPLETED">
+    <com:id>1EOl2JVJTBa0TBEpkCufgg</com:id>
+    <com:elementType>oracle.communications.sce.osm.orchestration.orderComponentSpec.fulfillmentState</com:elementType>
+    <osm:description lang="[default]">COMPLETE MOBILEDOMAIN COMPLETED</osm:description>
+  </fulfillmentState>
+  <fulfillmentState name="IN_PROGRESS-MOBILEDOMAIN_PROVISION_START">
+    <com:id>syw21maSQua0CKCwC7WULg</com:id>
+    <com:elementType>oracle.communications.sce.osm.orchestration.orderComponentSpec.fulfillmentState</com:elementType>
+    <osm:description lang="[default]">IN PROGRESS MOBILEDOMAIN PROVISION START</osm:description>
+  </fulfillmentState>
+  <fulfillmentState name="IN_PROGRESS-MOBILEDOMAIN_PROVISION_DESIGNED">
+    <com:id>0DmwHdePRR+9M+dE9giHFw</com:id>
+    <com:elementType>oracle.communications.sce.osm.orchestration.orderComponentSpec.fulfillmentState</com:elementType>
+    <osm:description lang="[default]">IN PROGRESS MOBILEDOMAIN PROVISION DESIGNED</osm:description>
+  </fulfillmentState>
+  <fulfillmentState name="COMPLETE">
+    <com:id>+tG0xE-hRNmgctyNFMDj1A</com:id>
+    <com:elementType>oracle.communications.sce.osm.orchestration.orderComponentSpec.fulfillmentState</com:elementType>
+    <osm:description lang="[default]">COMPLETE</osm:description>
+  </fulfillmentState>
+  <fulfillmentState name="IN_PROGRESS">
+    <com:id>DyZN7erARj62JCJldD10Qg</com:id>
+    <com:elementType>oracle.communications.sce.osm.orchestration.orderComponentSpec.fulfillmentState</com:elementType>
+    <osm:description lang="[default]">IN PROGRESS</osm:description>
+  </fulfillmentState>
+</com:modelEntity>

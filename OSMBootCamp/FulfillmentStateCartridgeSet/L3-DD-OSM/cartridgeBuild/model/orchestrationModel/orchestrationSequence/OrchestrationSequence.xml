@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:orchestrationSequence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="OrchestrationSequence" namespace="osm7Order1.com">
+  <model:description>OrchestrationSequence</model:description>
+  <model:orderItem>
+    <model:name>OrderItemSpecification</model:name>
+    <model:namespace>osm7Order1.com</model:namespace>
+  </model:orderItem>
+  <model:orderItemSelector>
+    <model:elementSetExpression xsi:type="model:XqueryExpressionRuleType" enabled="true">
+      <model:xquery><![CDATA[declare namespace osm7dd="osm7Order1.com";
+.//osm7dd:OrderLine]]></model:xquery>
+    </model:elementSetExpression>
+  </model:orderItemSelector>
+  <model:fulfillmentMode>
+    <model:fulfillmentModeRefExpression xsi:type="model:XqueryExpressionRuleType" enabled="true">
+      <model:xquery><![CDATA[declare namespace osm="http://xmlns.oracle.com/communications/ordermanagement/model";
+<osm:fulfillmentMode name='ORDER' namespace="osm7Order1.com"/>]]></model:xquery>
+    </model:fulfillmentModeRefExpression>
+  </model:fulfillmentMode>
+  <model:stage name="DefineOrchestrationFunctions">
+    <model:produces>
+      <model:name>FulfillmentFunction</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:produces>
+  </model:stage>
+  <model:stage name="DefineOrchestrationSystems">
+    <model:dependsOnStage>DefineOrchestrationFunctions</model:dependsOnStage>
+    <model:produces>
+      <model:name>FulfillmentSystem</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:produces>
+  </model:stage>
+  <model:stage name="DefineOrchestrationGranularity">
+    <model:dependsOnStage>DefineOrchestrationSystems</model:dependsOnStage>
+    <model:produces>
+      <model:name>ProcessingGranularity</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:produces>
+  </model:stage>
+  <model:summaryView>
+    <model:view>
+      <model:name>OrderDebugTask</model:name>
+      <model:namespace>urn:oracle:communications:ordermanagement:L3-DD-OSM:1.0.0.0.0</model:namespace>
+    </model:view>
+    <model:workgroup>
+      <model:name>osm7ddRole</model:name>
+      <model:namespace>urn:oracle:communications:ordermanagement:L3-DD-OSM:1.0.0.0.0</model:namespace>
+    </model:workgroup>
+  </model:summaryView>
+  <model:detailView>
+    <model:view>
+      <model:name>OrderDebugTask</model:name>
+      <model:namespace>urn:oracle:communications:ordermanagement:L3-DD-OSM:1.0.0.0.0</model:namespace>
+    </model:view>
+    <model:workgroup>
+      <model:name>osm7ddRole</model:name>
+      <model:namespace>urn:oracle:communications:ordermanagement:L3-DD-OSM:1.0.0.0.0</model:namespace>
+    </model:workgroup>
+  </model:detailView>
+</model:orchestrationSequence>

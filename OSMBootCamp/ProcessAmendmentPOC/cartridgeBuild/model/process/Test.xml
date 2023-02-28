@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process xmlns="http://www.metasolv.com/OMS/OrderModel/2002/06/25" name="Test" workstream="true">
+  <description>Test</description>
+  <expectedDuration>P0Y0M0DT0H0M86400S</expectedDuration>
+  <startActivity>A</startActivity>
+  <activity name="A">
+    <task>A</task>
+    <description>A</description>
+    <inputType>ANY</inputType>
+    <processHistorySummary>true</processHistorySummary>
+  </activity>
+  <activity name="B">
+    <task>B</task>
+    <description>B</description>
+    <inputType>ANY</inputType>
+    <processHistorySummary>false</processHistorySummary>
+  </activity>
+  <activity name="C">
+    <task>C</task>
+    <description>C</description>
+    <inputType>ANY</inputType>
+    <processHistorySummary>false</processHistorySummary>
+  </activity>
+  <transition>
+    <from>
+      <activity>A</activity>
+      <status>next</status>
+    </from>
+    <to>B</to>
+    <mandatoryCheck>true</mandatoryCheck>
+  </transition>
+  <transition>
+    <from>
+      <activity>B</activity>
+      <status>next</status>
+    </from>
+    <to>C</to>
+    <mandatoryCheck>true</mandatoryCheck>
+  </transition>
+</process>

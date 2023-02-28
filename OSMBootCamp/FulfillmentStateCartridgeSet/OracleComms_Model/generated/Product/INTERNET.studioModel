@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:Product" id="prd=INTERNET" type="prd" typeName="Product" name="INTERNET" resource="\OracleComms_Model\model\INTERNET.cmnProduct">
+    <displayName lang="default">INTERNET</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="mprj=OracleComms_Model" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model" typeName="Model Project"/>
+      </relation>
+    </project>
+    <dataElements/>
+    <importAttributes>
+      <element id="prd=INTERNET+prd.pa=Sj910AGOSHe91rFpvCfp1Q" type="prd.pa" typeName="Product Attributes" kind="Element" name="INTERNET Product Attributes" path="INTERNET Product Attributes">
+        <note lang="default"></note>
+      </element>
+    </importAttributes>
+    <fulfillmentPatterns>
+      <element id="prd=INTERNET+prd.pfp=IOh7FsAhSzuqHU03haweeg" type="prd.pfp" typeName="Product Fulfillment Pattern" kind="Element" name="INTERNET Product Fulfillment Pattern" path="INTERNET Product Fulfillment Pattern">
+        <options>
+          <relation ref="fp=InternetFulfillmentPattern" type="Fulfillment Pattern" name="Fulfillment Pattern" kind="Entity">
+            <target name="InternetFulfillmentPattern" typeName="Fulfillment Pattern"/>
+          </relation>
+        </options>
+        <key>INTERNET</key>
+      </element>
+    </fulfillmentPatterns>
+  </entity>
+</model:Model>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:OrderComponentSpecification" id="ocs=ProvisioningOrderFunction" type="ocs" typeName="Order Component Specification" name="ProvisioningOrderFunction" resource="\L3-DD-OSM\model\FUNCTION\ProvisioningOrderFunction.orderComponentSpec">
+    <displayName lang="default">ProvisioningOrderFunction</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=L3-DD-OSM" type="Order and Service Management Project" name="Dependency">
+        <target name="L3-DD-OSM" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <baseTask>
+      <relation ref="mtsk=ProvisioningDebugTask" type="Manual Task" name="Base Task" kind="Entity">
+        <target name="ProvisioningDebugTask" typeName="Manual Task"/>
+      </relation>
+    </baseTask>
+    <process>
+      <relation ref="pro=ProvisioningProcess" type="Process" name="Process" kind="Entity">
+        <target name="ProvisioningProcess" typeName="Process"/>
+      </relation>
+    </process>
+    <componentElements>
+      <element xsi:type="osm:Component" id="ocs=ProvisioningOrderFunction+osm.orch.orderComponentSpec.element=-tsMGXq8SyiwwmBHjDlqFQ" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="ProvisioningOrderFunction" path="/FulfillmentFunction/ProvisioningFunction/ProvisioningOrderFunction"/>
+    </componentElements>
+    <orderTemplateNodes>
+      <element xsi:type="osm:OrderTemplateNode" id="ocs=ProvisioningOrderFunction+prov.order.node=/ControlData" type="prov.order.node" typeName="Order Node Element" kind="Element" name="ControlData" path="/ControlData"/>
+    </orderTemplateNodes>
+    <externalFulfillmentStates>
+      <element xsi:type="osm:ExternalFulfillmentState" id="ocs=ProvisioningOrderFunction+osm.orch.orderComponentSpec.fulfillmentState=frsWozctQD+lfBjqQLrO2A" type="osm.orch.orderComponentSpec.fulfillmentState" typeName="External Fulfillment State" kind="Element" name="IN_PROGRESS-HPSDOMAIN_PROVISION_START" path="/IN_PROGRESS-HPSDOMAIN_PROVISION_START"/>
+      <element xsi:type="osm:ExternalFulfillmentState" id="ocs=ProvisioningOrderFunction+osm.orch.orderComponentSpec.fulfillmentState=Jc1uQSohRA65dU3Sl6DTQQ" type="osm.orch.orderComponentSpec.fulfillmentState" typeName="External Fulfillment State" kind="Element" name="IN_PROGRESS-HPSDOMAIN_PROVISION_DESIGNED" path="/IN_PROGRESS-HPSDOMAIN_PROVISION_DESIGNED"/>
+      <element xsi:type="osm:ExternalFulfillmentState" id="ocs=ProvisioningOrderFunction+osm.orch.orderComponentSpec.fulfillmentState=K3yZ5hGRSZug1BUjmo8-rw" type="osm.orch.orderComponentSpec.fulfillmentState" typeName="External Fulfillment State" kind="Element" name="COMPLETE-HPSDOMAIN_PROVISION_COMPLETED" path="/COMPLETE-HPSDOMAIN_PROVISION_COMPLETED"/>
+      <element xsi:type="osm:ExternalFulfillmentState" id="ocs=ProvisioningOrderFunction+osm.orch.orderComponentSpec.fulfillmentState=XK7Dc-kiQfakbw1c4+lwjw" type="osm.orch.orderComponentSpec.fulfillmentState" typeName="External Fulfillment State" kind="Element" name="IN_PROGRESS-INTERNETDOMAIN_PROVISION_START" path="/IN_PROGRESS-INTERNETDOMAIN_PROVISION_START"/>
+      <element xsi:type="osm:ExternalFulfillmentState" id="ocs=ProvisioningOrderFunction+osm.orch.orderComponentSpec.fulfillmentState=+fVjXJq3TOei+M4+m35n2Q" type="osm.orch.orderComponentSpec.fulfillmentState" typeName="External Fulfillment State" kind="Element" name="IN_PROGRESS-INTERNETDOMAIN_PROVISION_DESIGNED" path="/IN_PROGRESS-INTERNETDOMAIN_PROVISION_DESIGNED"/>
+      <element xsi:type="osm:ExternalFulfillmentState" id="ocs=ProvisioningOrderFunction+osm.orch.orderComponentSpec.fulfillmentState=MgncnKZPRrmXvQIkAEeTXw" type="osm.orch.orderComponentSpec.fulfillmentState" typeName="External Fulfillment State" kind="Element" name="COMPLETE-INTERNETDOMAIN_PROVISION_COMPLETED" path="/COMPLETE-INTERNETDOMAIN_PROVISION_COMPLETED"/>
+      <element xsi:type="osm:ExternalFulfillmentState" id="ocs=ProvisioningOrderFunction+osm.orch.orderComponentSpec.fulfillmentState=1EOl2JVJTBa0TBEpkCufgg" type="osm.orch.orderComponentSpec.fulfillmentState" typeName="External Fulfillment State" kind="Element" name="COMPLETE-MOBILEDOMAIN_COMPLETED" path="/COMPLETE-MOBILEDOMAIN_COMPLETED"/>
+      <element xsi:type="osm:ExternalFulfillmentState" id="ocs=ProvisioningOrderFunction+osm.orch.orderComponentSpec.fulfillmentState=syw21maSQua0CKCwC7WULg" type="osm.orch.orderComponentSpec.fulfillmentState" typeName="External Fulfillment State" kind="Element" name="IN_PROGRESS-MOBILEDOMAIN_PROVISION_START" path="/IN_PROGRESS-MOBILEDOMAIN_PROVISION_START"/>
+      <element xsi:type="osm:ExternalFulfillmentState" id="ocs=ProvisioningOrderFunction+osm.orch.orderComponentSpec.fulfillmentState=0DmwHdePRR+9M+dE9giHFw" type="osm.orch.orderComponentSpec.fulfillmentState" typeName="External Fulfillment State" kind="Element" name="IN_PROGRESS-MOBILEDOMAIN_PROVISION_DESIGNED" path="/IN_PROGRESS-MOBILEDOMAIN_PROVISION_DESIGNED"/>
+      <element xsi:type="osm:ExternalFulfillmentState" id="ocs=ProvisioningOrderFunction+osm.orch.orderComponentSpec.fulfillmentState=+tG0xE-hRNmgctyNFMDj1A" type="osm.orch.orderComponentSpec.fulfillmentState" typeName="External Fulfillment State" kind="Element" name="COMPLETE" path="/COMPLETE"/>
+      <element xsi:type="osm:ExternalFulfillmentState" id="ocs=ProvisioningOrderFunction+osm.orch.orderComponentSpec.fulfillmentState=DyZN7erARj62JCJldD10Qg" type="osm.orch.orderComponentSpec.fulfillmentState" typeName="External Fulfillment State" kind="Element" name="IN_PROGRESS" path="/IN_PROGRESS"/>
+    </externalFulfillmentStates>
+    <extend>
+      <relation ref="ocs=ProvisioningFunction" type="Order Component Specification" name="Extends" kind="Entity">
+        <target name="ProvisioningFunction" typeName="Order Component Specification"/>
+      </relation>
+    </extend>
+  </entity>
+</model:Model>

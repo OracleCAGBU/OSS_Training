@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:OrderComponentSpecification" id="ocs=BillingFunction" type="ocs" typeName="Order Component Specification" name="BillingFunction" resource="\L3-DD-OSM\model\FUNCTION\BillingFunction.orderComponentSpec">
+    <displayName lang="default">BillingFunction</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=L3-DD-OSM" type="Order and Service Management Project" name="Dependency">
+        <target name="L3-DD-OSM" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <componentElements>
+      <element xsi:type="osm:Component" id="ocs=BillingFunction+osm.orch.orderComponentSpec.element=70j9VFqpTsWw6dKhZkxpHw" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="BillingFunction" path="/FulfillmentFunction/BillingFunction">
+        <components>
+          <element xsi:type="osm:Component" id="ocs=FulfillBillingFunction+osm.orch.orderComponentSpec.element=CX5+rntFQPuUb9lcAa9Ngw" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="FulfillBillingFunction" path="/FulfillmentFunction/BillingFunction/FulfillBillingFunction"/>
+          <element xsi:type="osm:Component" id="ocs=InitiateBillingFunction+osm.orch.orderComponentSpec.element=WUH+OARPSD6rNAlyV6r92Q" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="InitiateBillingFunction" path="/FulfillmentFunction/BillingFunction/InitiateBillingFunction"/>
+        </components>
+      </element>
+    </componentElements>
+    <extend>
+      <relation ref="ocs=FulfillmentFunction" type="Order Component Specification" name="Extends" kind="Entity">
+        <target name="FulfillmentFunction" typeName="Order Component Specification"/>
+      </relation>
+    </extend>
+  </entity>
+</model:Model>

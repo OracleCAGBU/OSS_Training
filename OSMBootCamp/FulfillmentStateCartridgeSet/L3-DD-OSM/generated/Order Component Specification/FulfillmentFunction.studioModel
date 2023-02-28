@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:OrderComponentSpecification" id="ocs=FulfillmentFunction" type="ocs" typeName="Order Component Specification" name="FulfillmentFunction" resource="\L3-DD-OSM\model\FUNCTION\FulfillmentFunction.orderComponentSpec">
+    <displayName lang="default">FulfillmentFunction</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=L3-DD-OSM" type="Order and Service Management Project" name="Dependency">
+        <target name="L3-DD-OSM" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <componentElements>
+      <element xsi:type="osm:Component" id="ocs=FulfillmentFunction+osm.orch.orderComponentSpec.element=aseKews1RaidpwqpbxaEpQ" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="FulfillmentFunction" path="/FulfillmentFunction">
+        <components>
+          <element xsi:type="osm:Component" id="ocs=BillingFunction+osm.orch.orderComponentSpec.element=70j9VFqpTsWw6dKhZkxpHw" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="BillingFunction" path="/FulfillmentFunction/BillingFunction">
+            <components>
+              <element xsi:type="osm:Component" id="ocs=FulfillBillingFunction+osm.orch.orderComponentSpec.element=CX5+rntFQPuUb9lcAa9Ngw" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="FulfillBillingFunction" path="/FulfillmentFunction/BillingFunction/FulfillBillingFunction"/>
+              <element xsi:type="osm:Component" id="ocs=InitiateBillingFunction+osm.orch.orderComponentSpec.element=WUH+OARPSD6rNAlyV6r92Q" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="InitiateBillingFunction" path="/FulfillmentFunction/BillingFunction/InitiateBillingFunction"/>
+            </components>
+          </element>
+          <element xsi:type="osm:Component" id="ocs=InstallFunction+osm.orch.orderComponentSpec.element=he4nPF6LQBebsNdaQ7VuYQ" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="InstallFunction" path="/FulfillmentFunction/InstallFunction">
+            <components>
+              <element xsi:type="osm:Component" id="ocs=InstallOrderFunction+osm.orch.orderComponentSpec.element=TgdznYtDTnyz78KVDaDOSw" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="InstallOrderFunction" path="/FulfillmentFunction/InstallFunction/InstallOrderFunction"/>
+            </components>
+          </element>
+          <element xsi:type="osm:Component" id="ocs=ProvisioningFunction+osm.orch.orderComponentSpec.element=9DBBtLKxQvu+kGPjtu2rEg" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="ProvisioningFunction" path="/FulfillmentFunction/ProvisioningFunction">
+            <components>
+              <element xsi:type="osm:Component" id="ocs=ProvisioningOrderFunction+osm.orch.orderComponentSpec.element=-tsMGXq8SyiwwmBHjDlqFQ" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="ProvisioningOrderFunction" path="/FulfillmentFunction/ProvisioningFunction/ProvisioningOrderFunction"/>
+            </components>
+          </element>
+          <element xsi:type="osm:Component" id="ocs=ShipFunction+osm.orch.orderComponentSpec.element=6RGVAKENQAeYCGqA69RVeA" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="ShipFunction" path="/FulfillmentFunction/ShipFunction">
+            <components>
+              <element xsi:type="osm:Component" id="ocs=ShipOrderFunction+osm.orch.orderComponentSpec.element=dULrYprvR+mAUNFG+OHHRQ" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="ShipOrderFunction" path="/FulfillmentFunction/ShipFunction/ShipOrderFunction"/>
+            </components>
+          </element>
+        </components>
+      </element>
+    </componentElements>
+  </entity>
+</model:Model>

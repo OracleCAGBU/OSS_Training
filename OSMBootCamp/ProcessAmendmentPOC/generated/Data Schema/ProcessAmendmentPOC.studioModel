@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:data="http://xmlns.oracle.com/communications/studio/model/data" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="data:DataSchema" id="ds=ProcessAmendmentPOC" type="ds" typeName="Data Schema" name="ProcessAmendmentPOC" resource="\ProcessAmendmentPOC\dataDictionary\ProcessAmendmentPOC.xsd">
+    <displayName lang="default">ProcessAmendmentPOC</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=ProcessAmendmentPOC" type="Order and Service Management Project" name="Dependency">
+        <target name="ProcessAmendmentPOC" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="ds=ProcessAmendmentPOC+dataElement=Name" type="dataElement" typeName="Schema Element" kind="Element" name="Name" path="/Name">
+        <displayName lang="default">Name</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ProcessAmendmentPOC+dataElement=OrderNumber" type="dataElement" typeName="Schema Element" kind="Element" name="OrderNumber" path="/OrderNumber">
+        <displayName lang="default">Order Number</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=ProcessAmendmentPOC+dataElement=Version" type="dataElement" typeName="Schema Element" kind="Element" name="Version" path="/Version">
+        <displayName lang="default">Version</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>integer</primitiveType>
+      </element>
+      <element id="ds=ProcessAmendmentPOC+dataElement=ProcessAmendment" type="dataElement" typeName="Schema Element" kind="Element" name="ProcessAmendment" path="/ProcessAmendment">
+        <displayName lang="default">Process Revision</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+    </dataElements>
+  </entity>
+</model:Model>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:orderFulfillmentStateCompositionRule xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="OrderCompositionRuleSet" namespace="osm7Order1.com">
+  <model:description>OrderCompositionRuleSet</model:description>
+  <model:orderType>
+    <model:name>L3-DD-OSMOrder</model:name>
+    <model:namespace>urn:oracle:communications:ordermanagement:L3-DD-OSM:1.0.0.0.0</model:namespace>
+  </model:orderType>
+  <model:orderCompositionRule name="COMPLETE_RULE">
+    <model:description>COMPLETE RULE</model:description>
+    <model:compositeState>
+      <model:name>COMPLETE</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:compositeState>
+    <model:compositionCondition name="ALL_COMPLETE">
+      <model:description>ALL COMPLETE</model:description>
+      <model:all>
+        <model:name>COMPLETE</model:name>
+        <model:namespace>osm7Order1.com</model:namespace>
+      </model:all>
+    </model:compositionCondition>
+  </model:orderCompositionRule>
+  <model:orderCompositionRule name="IN_PROGRESS_RULE">
+    <model:description>IN PROGRESS RULE</model:description>
+    <model:compositeState>
+      <model:name>IN_PROGRESS</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:compositeState>
+    <model:compositionCondition name="ANY_IN_PROGRESS">
+      <model:description>ANY IN PROGRESS</model:description>
+      <model:any>
+        <model:name>IN_PROGRESS</model:name>
+        <model:namespace>osm7Order1.com</model:namespace>
+      </model:any>
+    </model:compositionCondition>
+  </model:orderCompositionRule>
+</model:orderFulfillmentStateCompositionRule>

@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:data="http://xmlns.oracle.com/communications/studio/model/data" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="data:DataSchema" id="ds=OracleComms_Model_Project" type="ds" typeName="Data Schema" name="OracleComms_Model_Project" resource="\OracleComms_Model_Project\dataDictionary\OracleComms_Model_Project.xsd">
+    <displayName lang="default">Oracle Comms  Model  Project  companion</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="mprj=OracleComms_Model_Project" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model_Project" typeName="Model Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="ds=OracleComms_Model_Project+dataElement=Subject_ID" type="dataElement" typeName="Schema Element" kind="Element" name="Subject_ID" path="/Subject_ID">
+        <displayName lang="default">Subject ID</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <tag>
+          <name>Implicit Parameter</name>
+          <description>Implicit Parameter</description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=OracleComms_Model_Project+dataElement=ServiceAddress" type="dataElement" typeName="Schema Element" kind="Element" name="ServiceAddress" path="/ServiceAddress">
+        <displayName lang="default">Service Address</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements>
+          <element id="ds=OracleComms_Model_Project+dataElement=ServiceAddress/LineOne" type="dataElement" typeName="Schema Element" kind="Element" name="LineOne" path="/ServiceAddress/LineOne">
+            <displayName lang="default">Line One</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">1000</maxLength>
+            <base>
+              <relation ref="ds=OracleComms_Model_Project+dataElement=LineOne" type="Schema Element" name="Type" kind="Element">
+                <target name="LineOne" typeName="Schema Element"/>
+                <inEntity name="OracleComms_Model_Project" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=OracleComms_Model_Project+dataElement=ServiceAddress/LineTwo" type="dataElement" typeName="Schema Element" kind="Element" name="LineTwo" path="/ServiceAddress/LineTwo">
+            <displayName lang="default">Line Two</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">1000</maxLength>
+            <base>
+              <relation ref="ds=OracleComms_Model_Project+dataElement=LineTwo" type="Schema Element" name="Type" kind="Element">
+                <target name="LineTwo" typeName="Schema Element"/>
+                <inEntity name="OracleComms_Model_Project" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=OracleComms_Model_Project+dataElement=ServiceAddress/CityName" type="dataElement" typeName="Schema Element" kind="Element" name="CityName" path="/ServiceAddress/CityName">
+            <displayName lang="default">Town</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">100</maxLength>
+            <base>
+              <relation ref="ds=OracleComms_Model_Project+dataElement=CityName" type="Schema Element" name="Type" kind="Element">
+                <target name="CityName" typeName="Schema Element"/>
+                <inEntity name="OracleComms_Model_Project" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=OracleComms_Model_Project+dataElement=ServiceAddress/StateName" type="dataElement" typeName="Schema Element" kind="Element" name="StateName" path="/ServiceAddress/StateName">
+            <displayName lang="default">State</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">100</maxLength>
+            <base>
+              <relation ref="ds=OracleComms_Model_Project+dataElement=StateName" type="Schema Element" name="Type" kind="Element">
+                <target name="StateName" typeName="Schema Element"/>
+                <inEntity name="OracleComms_Model_Project" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=OracleComms_Model_Project+dataElement=ServiceAddress/ProvinceName" type="dataElement" typeName="Schema Element" kind="Element" name="ProvinceName" path="/ServiceAddress/ProvinceName">
+            <displayName lang="default">Province Name</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">100</maxLength>
+            <base>
+              <relation ref="ds=OracleComms_Model_Project+dataElement=ProvinceName" type="Schema Element" name="Type" kind="Element">
+                <target name="ProvinceName" typeName="Schema Element"/>
+                <inEntity name="OracleComms_Model_Project" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=OracleComms_Model_Project+dataElement=ServiceAddress/CountyName" type="dataElement" typeName="Schema Element" kind="Element" name="CountyName" path="/ServiceAddress/CountyName">
+            <displayName lang="default">County Name</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">100</maxLength>
+            <base>
+              <relation ref="ds=OracleComms_Model_Project+dataElement=CountyName" type="Schema Element" name="Type" kind="Element">
+                <target name="CountyName" typeName="Schema Element"/>
+                <inEntity name="OracleComms_Model_Project" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=OracleComms_Model_Project+dataElement=ServiceAddress/CountryCode" type="dataElement" typeName="Schema Element" kind="Element" name="CountryCode" path="/ServiceAddress/CountryCode">
+            <displayName lang="default">Country</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">100</maxLength>
+            <base>
+              <relation ref="ds=OracleComms_Model_Project+dataElement=CountryCode" type="Schema Element" name="Type" kind="Element">
+                <target name="CountryCode" typeName="Schema Element"/>
+                <inEntity name="OracleComms_Model_Project" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+          <element id="ds=OracleComms_Model_Project+dataElement=ServiceAddress/PostalCode" type="dataElement" typeName="Schema Element" kind="Element" name="PostalCode" path="/ServiceAddress/PostalCode">
+            <displayName lang="default">Postal Code</displayName>
+            <minOccurs inherited="true">0</minOccurs>
+            <maxOccurs inherited="true">1</maxOccurs>
+            <defaultValue inherited="true"></defaultValue>
+            <key inherited="false"></key>
+            <abstract inherited="false">false</abstract>
+            <deprecated inherited="false">false</deprecated>
+            <internal inherited="false">false</internal>
+            <sensitive inherited="true">false</sensitive>
+            <minLength inherited="true">0</minLength>
+            <maxLength inherited="true">20</maxLength>
+            <base>
+              <relation ref="ds=OracleComms_Model_Project+dataElement=PostalCode" type="Schema Element" name="Type" kind="Element">
+                <target name="PostalCode" typeName="Schema Element"/>
+                <inEntity name="OracleComms_Model_Project" typeName="Data Schema"/>
+              </relation>
+            </base>
+            <dataElements/>
+            <primitiveType>string</primitiveType>
+          </element>
+        </dataElements>
+        <tag>
+          <name>Implicit Parameter</name>
+          <description>Implicit Parameter</description>
+        </tag>
+        <primitiveType>structure</primitiveType>
+      </element>
+      <element id="ds=OracleComms_Model_Project+dataElement=Customer_ID" type="dataElement" typeName="Schema Element" kind="Element" name="Customer_ID" path="/Customer_ID">
+        <displayName lang="default">Customer ID</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">150</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <tag>
+          <name>Implicit Parameter</name>
+          <description>Implicit Parameter</description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=OracleComms_Model_Project+dataElement=Commercial_ID" type="dataElement" typeName="Schema Element" kind="Element" name="Commercial_ID" path="/Commercial_ID">
+        <displayName lang="default">Commercial ID</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">500</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Implicit Parameter</name>
+          <description>Implicit Parameter</description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=OracleComms_Model_Project+dataElement=CityName" type="dataElement" typeName="Schema Element" kind="Element" name="CityName" path="/CityName">
+        <displayName lang="default">Town</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">100</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=OracleComms_Model_Project+dataElement=StateName" type="dataElement" typeName="Schema Element" kind="Element" name="StateName" path="/StateName">
+        <displayName lang="default">State</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">100</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=OracleComms_Model_Project+dataElement=CountryCode" type="dataElement" typeName="Schema Element" kind="Element" name="CountryCode" path="/CountryCode">
+        <displayName lang="default">Country</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">100</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=OracleComms_Model_Project+dataElement=PostalCode" type="dataElement" typeName="Schema Element" kind="Element" name="PostalCode" path="/PostalCode">
+        <displayName lang="default">Postal Code</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">20</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=OracleComms_Model_Project+dataElement=ProvinceName" type="dataElement" typeName="Schema Element" kind="Element" name="ProvinceName" path="/ProvinceName">
+        <displayName lang="default">Province Name</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">100</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=OracleComms_Model_Project+dataElement=CountyName" type="dataElement" typeName="Schema Element" kind="Element" name="CountyName" path="/CountyName">
+        <displayName lang="default">County Name</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">100</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=OracleComms_Model_Project+dataElement=LineOne" type="dataElement" typeName="Schema Element" kind="Element" name="LineOne" path="/LineOne">
+        <displayName lang="default">Line One</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">1000</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=OracleComms_Model_Project+dataElement=LineTwo" type="dataElement" typeName="Schema Element" kind="Element" name="LineTwo" path="/LineTwo">
+        <displayName lang="default">Line Two</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">1000</maxLength>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+    </dataElements>
+  </entity>
+</model:Model>

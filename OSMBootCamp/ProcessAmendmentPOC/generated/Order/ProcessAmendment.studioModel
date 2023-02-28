@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:Order" id="ord=ProcessAmendment" type="ord" typeName="Order" name="ProcessAmendment" resource="\ProcessAmendmentPOC\model\ProcessAmendment.order">
+    <displayName lang="default">ProcessAmendment</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=ProcessAmendmentPOC" type="Order and Service Management Project" name="Dependency">
+        <target name="ProcessAmendmentPOC" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <orderTemplateNode>
+      <relation ref="ds=ProcessAmendmentPOC" type="Data Schema" name="Order Template Node" kind="Entity">
+        <target name="ProcessAmendmentPOC" typeName="Data Schema"/>
+      </relation>
+    </orderTemplateNode>
+    <creationTask>
+      <relation ref="mtsk=CreationTask" type="Manual Task" name="Creation Task" kind="Entity">
+        <target name="CreationTask" typeName="Manual Task"/>
+      </relation>
+    </creationTask>
+    <queryTask>
+      <relation ref="mtsk=QueryTask" type="Manual Task" name="Query View" kind="Entity">
+        <target name="QueryTask" typeName="Manual Task"/>
+      </relation>
+    </queryTask>
+    <defaultProcess>
+      <relation ref="pro=Test" type="Process" name="Default Process" kind="Entity">
+        <target name="Test" typeName="Process"/>
+      </relation>
+    </defaultProcess>
+    <roles>
+      <relation ref="rol=Test" type="Role" name="Permission" kind="Entity">
+        <target name="Test" typeName="Role"/>
+      </relation>
+    </roles>
+    <lifeCyclePolicy>
+      <relation ref="olp=OLCP" type="Order Lifecycle Policy" name="Policy" kind="Entity">
+        <target name="OLCP" typeName="Order Lifecycle Policy"/>
+      </relation>
+    </lifeCyclePolicy>
+    <orderTemplateNodes>
+      <element xsi:type="osm:OrderTemplateNode" id="ord=ProcessAmendment+prov.order.node=/Name" type="prov.order.node" typeName="Order Node Element" kind="Element" name="Name" path="/Name"/>
+      <element xsi:type="osm:OrderTemplateNode" id="ord=ProcessAmendment+prov.order.node=/OrderNumber" type="prov.order.node" typeName="Order Node Element" kind="Element" name="OrderNumber" path="/OrderNumber"/>
+      <element xsi:type="osm:OrderTemplateNode" id="ord=ProcessAmendment+prov.order.node=/Version" type="prov.order.node" typeName="Order Node Element" kind="Element" name="Version" path="/Version"/>
+      <element xsi:type="osm:OrderTemplateNode" id="ord=ProcessAmendment+prov.order.node=/ProcessAmendment" type="prov.order.node" typeName="Order Node Element" kind="Element" name="ProcessAmendment" path="/ProcessAmendment"/>
+    </orderTemplateNodes>
+    <rules>
+      <element xsi:type="osm:OrderRule" id="ord=ProcessAmendment+prov.order.rule=Wf92-I4sSSe+qojzkcwfsw" type="prov.order.rule" typeName="Order Template Rule Element" kind="Element" name="null_rule" path="null_rule"/>
+    </rules>
+  </entity>
+</model:Model>

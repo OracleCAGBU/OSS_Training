@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:complexType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:_25="http://www.metasolv.com/OMS/OrderModel/2002/06/25" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="OrderItemSpecificationType" namespace="osm7Order1.com" abstract="false" final="false">
+  <model:description>OrderItemSpecification</model:description>
+  <model:extends>
+    <model:name>BaseAbstractOrderItem</model:name>
+    <model:namespace>http://xmlns.oracle.com/communications/studio/ordermanagement/transformation</model:namespace>
+  </model:extends>
+  <model:element xsi:type="model:TextType" name="ProductCode">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>ProductCode</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>ProductCode</_25:description>
+      <_25:label lang="en">ProductCode</_25:label>
+    </model:viewRule>
+    <model:length>20</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="ProductName">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>ProductName</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>ProductName</_25:description>
+      <_25:label lang="en">ProductName</_25:label>
+    </model:viewRule>
+    <model:length>20</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="ProductDesc">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>ProductDesc</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>ProductDesc</_25:description>
+      <_25:label lang="en">ProductDesc</_25:label>
+    </model:viewRule>
+    <model:length>20</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="ProductClass">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>ProductClass</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>ProductClass</_25:description>
+      <_25:label lang="en">ProductClass</_25:label>
+    </model:viewRule>
+    <model:length>20</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="ProductSpec">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>ProductSpec</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>ProductSpec</_25:description>
+      <_25:label lang="en">ProductSpec</_25:label>
+    </model:viewRule>
+    <model:length>50</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="LineID">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>LineID</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>LineID</_25:description>
+      <_25:label lang="en">LineID</_25:label>
+    </model:viewRule>
+    <model:length>10</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="BundleID">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>BundleID</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>BundleID</_25:description>
+      <_25:label lang="en">BundleID</_25:label>
+    </model:viewRule>
+    <model:length>10</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="OrderItemFulfillmentState">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>1</model:maxOccurs>
+    <model:description>OrderItemFulfillmentState</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>OrderItemFulfillmentState</_25:description>
+      <_25:label lang="en">OrderItemFulfillmentState</_25:label>
+    </model:viewRule>
+    <model:length>100</model:length>
+  </model:element>
+  <model:element xsi:type="model:TextType" name="PointOfNoReturn">
+    <model:minOccurs>0</model:minOccurs>
+    <model:maxOccurs>999999999</model:maxOccurs>
+    <model:description>PointOfNoReturn</model:description>
+    <model:editable>true</model:editable>
+    <model:significant>true</model:significant>
+    <model:viewRule xsi:type="_25:informationRuleType" enabled="true" final="false" override="false">
+      <_25:description>PointOfNoReturn</_25:description>
+      <_25:label lang="en">PointOfNoReturn</_25:label>
+    </model:viewRule>
+    <model:length>40</model:length>
+  </model:element>
+</model:complexType>
