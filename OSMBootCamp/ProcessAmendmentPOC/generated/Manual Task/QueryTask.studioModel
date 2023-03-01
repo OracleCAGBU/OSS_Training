@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:ManualTask" id="mtsk=QueryTask" type="mtsk" typeName="Manual Task" name="QueryTask" resource="\ProcessAmendmentPOC\model\QueryTask.manualTask">
+    <displayName lang="default">QueryTask</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=ProcessAmendmentPOC" type="Order and Service Management Project" name="Dependency">
+        <target name="ProcessAmendmentPOC" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <order>
+      <relation ref="ord=ProcessAmendment" type="Order" name="Order" kind="Entity">
+        <target name="ProcessAmendment" typeName="Order"/>
+      </relation>
+    </order>
+    <taskDataElements>
+      <element xsi:type="osm:TaskData" id="mtsk=QueryTask+prov.task.data.node=/Name" type="prov.task.data.node" typeName="Task Data Element" kind="Element" name="Name" path="/Name"/>
+      <element xsi:type="osm:TaskData" id="mtsk=QueryTask+prov.task.data.node=/OrderNumber" type="prov.task.data.node" typeName="Task Data Element" kind="Element" name="OrderNumber" path="/OrderNumber"/>
+      <element xsi:type="osm:TaskData" id="mtsk=QueryTask+prov.task.data.node=/Version" type="prov.task.data.node" typeName="Task Data Element" kind="Element" name="Version" path="/Version"/>
+      <element xsi:type="osm:TaskData" id="mtsk=QueryTask+prov.task.data.node=/ProcessAmendment" type="prov.task.data.node" typeName="Task Data Element" kind="Element" name="ProcessAmendment" path="/ProcessAmendment"/>
+    </taskDataElements>
+    <roles>
+      <relation ref="rol=Test" type="Role" name="Permissions" kind="Entity">
+        <target name="Test" typeName="Role"/>
+      </relation>
+    </roles>
+  </entity>
+</model:Model>

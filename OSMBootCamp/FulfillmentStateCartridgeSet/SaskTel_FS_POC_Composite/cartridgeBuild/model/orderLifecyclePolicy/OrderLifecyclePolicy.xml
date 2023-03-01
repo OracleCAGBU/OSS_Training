@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+	
+<orderStatePolicy name="OrderLifecyclePolicy"  xsi:schemaLocation="http://www.metasolv.com/OMS/OrderModel/2002/06/25" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.metasolv.com/OMS/OrderModel/2002/06/25">	
+	<description>OrderLifecyclePolicy</description>
+		<amendingOrderState>
+			<processAmendmentOrderTransaction>
+				<condition>
+					<conditionName>Condition</conditionName>
+					<expression><![CDATA[
+true()
+]]></expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>osm7ddRole</workgroup>
+				</permission>
+
+			</processAmendmentOrderTransaction>
+			<submitAmendmentOrderTransaction>
+				<condition>
+					<conditionName>Condition</conditionName>
+					<expression><![CDATA[
+true()
+]]></expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>osm7ddRole</workgroup>
+				</permission>
+
+			</submitAmendmentOrderTransaction>				
+		</amendingOrderState>
+		<completedOrderState>
+			<updateOrderTransaction>
+				<condition>
+					<conditionName>defaultCondition</conditionName>
+					<expression>true()</expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>osm7ddRole</workgroup>
+				</permission>
+
+			</updateOrderTransaction>
+		</completedOrderState>
+		<inProgressState>
+			<failOrderTransaction>
+				<condition>
+					<conditionName>defaultCondition</conditionName>
+					<expression>true()</expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>osm7ddRole</workgroup>
+				</permission>
+				<waitFor>
+					<noTasksInProgressCondition/>
+					<conditionNotSatisfiedEventInterval>P0DT1H0M0.000S</conditionNotSatisfiedEventInterval>
+				</waitFor>
+
+			</failOrderTransaction>
+			<processAmendmentOrderTransaction>
+				<condition>
+					<conditionName>Condition</conditionName>
+					<expression><![CDATA[
+true()
+]]></expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>osm7ddRole</workgroup>
+				</permission>
+				<waitFor>
+					<noTasksInProgressCondition/>
+					<conditionNotSatisfiedEventInterval>P0DT1H0M0.000S</conditionNotSatisfiedEventInterval>
+				</waitFor>
+
+			</processAmendmentOrderTransaction>								
+			<raiseExceptionTransaction>
+				<condition>
+					<conditionName>defaultCondition</conditionName>
+					<expression>true()</expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>osm7ddRole</workgroup>
+				</permission>
+				<waitFor>
+					<noTasksInProgressCondition/>
+					<conditionNotSatisfiedEventInterval>P0DT1H0M0.000S</conditionNotSatisfiedEventInterval>
+				</waitFor>
+
+			</raiseExceptionTransaction>				
+			<submitAmendmentOrderTransaction>
+				<condition>
+					<conditionName>Condition</conditionName>
+					<expression><![CDATA[
+true()
+]]></expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>osm7ddRole</workgroup>
+				</permission>
+
+			</submitAmendmentOrderTransaction>				
+			<updateOrderTransaction>
+				<condition>
+					<conditionName>defaultCondition</conditionName>
+					<expression>true()</expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>osm7ddRole</workgroup>
+				</permission>
+
+			</updateOrderTransaction>				
+		</inProgressState>	
+		<notStartedOrderState>
+			<deleteOrderTransaction>
+				<condition>
+					<conditionName>defaultCondition</conditionName>
+					<expression>true()</expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>osm7ddRole</workgroup>
+				</permission>
+
+			</deleteOrderTransaction>	
+			<failOrderTransaction>
+				<condition>
+					<conditionName>defaultCondition</conditionName>
+					<expression>true()</expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>osm7ddRole</workgroup>
+				</permission>
+				<waitFor>
+					<noTasksInProgressCondition/>
+					<conditionNotSatisfiedEventInterval>P0DT1H0M0.000S</conditionNotSatisfiedEventInterval>
+				</waitFor>
+
+			</failOrderTransaction>
+			<updateOrderTransaction>
+				<condition>
+					<conditionName>defaultCondition</conditionName>
+					<expression>true()</expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>osm7ddRole</workgroup>
+				</permission>
+
+			</updateOrderTransaction>	
+		</notStartedOrderState>
+		<suspendedOrderState>
+			<failOrderTransaction>
+				<condition>
+					<conditionName>defaultCondition</conditionName>
+					<expression>true()</expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>osm7ddRole</workgroup>
+				</permission>
+				<waitFor>
+					<noTasksInProgressCondition/>
+					<conditionNotSatisfiedEventInterval>P0DT1H0M0.000S</conditionNotSatisfiedEventInterval>
+				</waitFor>
+
+			</failOrderTransaction>
+		</suspendedOrderState> 
+		<waitingOrderState/>
+		<waitingForRevisionOrderState>
+			<failOrderTransaction>
+				<condition>
+					<conditionName>defaultCondition</conditionName>
+					<expression>true()</expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>osm7ddRole</workgroup>
+				</permission>
+				<waitFor>
+					<noTasksInProgressCondition/>
+					<conditionNotSatisfiedEventInterval>P0DT1H0M0.000S</conditionNotSatisfiedEventInterval>
+				</waitFor>
+
+			</failOrderTransaction>
+		</waitingForRevisionOrderState>	
+</orderStatePolicy>

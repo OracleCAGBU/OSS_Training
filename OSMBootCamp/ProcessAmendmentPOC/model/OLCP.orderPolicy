@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xsi:type="ord:orderStatePolicyType" name="OLCP">
+  <com:displayName>OLCP</com:displayName>
+  <com:saveVersion>13</com:saveVersion>
+  <com:id>eAZ7ijhOSBq4XpiJ7CFrEQ</com:id>
+  <ord:amendingOrderState>
+    <ord:submitAmendmentOrderTransaction>
+      <ord:condition name="Condition">
+        <prov:expression>true()</prov:expression>
+      </ord:condition>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>Test</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:submitAmendmentOrderTransaction>
+    <ord:suspendOrderTransaction/>
+    <ord:abortOrderTransaction/>
+    <ord:resolveFailureOrderTransaction/>
+    <ord:processAmendmentOrderTransaction>
+      <ord:condition name="Condition">
+        <prov:expression>(:&#xD;
+let $orderRoot := fn:root(.)/GetOrder.Response&#xD;
+let $processAmendment := $orderRoot/_root/ProcessAmendment/text()&#xD;
+&#xD;
+return&#xD;
+		if($processAmendment='Yes')&#xD;
+		then fn:true()&#xD;
+		else fn:false()&#xD;
+:)&#xD;
+fn:true()</prov:expression>
+      </ord:condition>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>Test</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+      <ord:waitFor>
+        <ord:conditionNotSatisfiedEventInterval>P0DT1H0M0.000S</ord:conditionNotSatisfiedEventInterval>
+      </ord:waitFor>
+    </ord:processAmendmentOrderTransaction>
+  </ord:amendingOrderState>
+  <ord:cancelledOrderState>
+    <ord:deleteOrderTransaction/>
+    <ord:resumeOrderTransaction/>
+    <ord:updateOrderTransaction/>
+    <ord:abortOrderTransaction/>
+  </ord:cancelledOrderState>
+  <ord:cancellingOrderState>
+    <ord:suspendOrderTransaction/>
+    <ord:abortOrderTransaction/>
+    <ord:resolveFailureOrderTransaction/>
+  </ord:cancellingOrderState>
+  <ord:completedOrderState>
+    <ord:deleteOrderTransaction/>
+    <ord:updateOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>Test</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:updateOrderTransaction>
+    <ord:cancelOrderTransaction/>
+  </ord:completedOrderState>
+  <ord:inProgressState>
+    <ord:cancelOrderTransaction/>
+    <ord:processAmendmentOrderTransaction>
+      <ord:condition name="Condition">
+        <prov:expression>&#xD;
+let $orderRoot := fn:root(.)/GetOrder.Response&#xD;
+let $processAmendment := $orderRoot/_root/ProcessAmendment/text()&#xD;
+&#xD;
+return&#xD;
+		if($processAmendment='Yes')&#xD;
+		then fn:true()&#xD;
+		else fn:false()&#xD;
+</prov:expression>
+      </ord:condition>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>Test</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:processAmendmentOrderTransaction>
+    <ord:raiseExceptionTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>Test</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:raiseExceptionTransaction>
+    <ord:submitAmendmentOrderTransaction>
+      <ord:condition name="Condition">
+        <prov:expression>true()</prov:expression>
+      </ord:condition>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>Test</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:submitAmendmentOrderTransaction>
+    <ord:suspendOrderTransaction/>
+    <ord:updateOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>Test</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:updateOrderTransaction>
+    <ord:failOrderTransaction/>
+    <ord:abortOrderTransaction/>
+    <ord:resolveFailureOrderTransaction/>
+  </ord:inProgressState>
+  <ord:notStartedOrderState>
+    <ord:deleteOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>Test</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:deleteOrderTransaction>
+    <ord:suspendOrderTransaction/>
+    <ord:updateOrderTransaction>
+      <ord:permission name="Permission">
+        <ord:workgroup>
+          <com:entity>Test</com:entity>
+          <com:entityType>rolePermissions</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderPolicy.role</com:relationship>
+        </ord:workgroup>
+      </ord:permission>
+    </ord:updateOrderTransaction>
+    <ord:failOrderTransaction/>
+    <ord:abortOrderTransaction/>
+  </ord:notStartedOrderState>
+  <ord:suspendedOrderState>
+    <ord:cancelOrderTransaction/>
+    <ord:resumeOrderTransaction/>
+    <ord:submitAmendmentOrderTransaction/>
+    <ord:updateOrderTransaction/>
+    <ord:failOrderTransaction/>
+    <ord:abortOrderTransaction/>
+    <ord:resolveFailureOrderTransaction/>
+  </ord:suspendedOrderState>
+  <ord:abortedOrderState>
+    <ord:deleteOrderTransaction/>
+    <ord:updateOrderTransaction/>
+  </ord:abortedOrderState>
+  <ord:failedOrderState>
+    <ord:updateOrderTransaction/>
+    <ord:submitAmendmentOrderTransaction/>
+    <ord:cancelOrderTransaction/>
+    <ord:abortOrderTransaction/>
+    <ord:resolveFailureOrderTransaction/>
+  </ord:failedOrderState>
+  <ord:waitingForRevisionOrderState>
+    <ord:updateOrderTransaction/>
+    <ord:resumeOrderTransaction/>
+    <ord:submitAmendmentOrderTransaction/>
+    <ord:cancelOrderTransaction/>
+    <ord:failOrderTransaction/>
+    <ord:abortOrderTransaction/>
+    <ord:resolveFailureOrderTransaction/>
+  </ord:waitingForRevisionOrderState>
+  <ord:waitingOrderState>
+    <ord:abortOrderTransaction/>
+    <ord:cancelOrderTransaction/>
+    <ord:failOrderTransaction/>
+    <ord:submitAmendmentOrderTransaction/>
+    <ord:suspendOrderTransaction/>
+    <ord:updateOrderTransaction/>
+  </ord:waitingOrderState>
+</com:modelEntity>

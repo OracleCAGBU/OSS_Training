@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/core/model/common" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:dom="http://xmlns.oracle.com/communications/sce/model/common/entity" xsi:type="dom:ProviderFunctionType" name="Calculate_Technical_Order">
+  <displayName lang="[default]">Calculate  Technical  Order</displayName>
+  <information>This is a Provider Function that determines the Technical Order lines.   It is invoked to calculate a delta configuration between the future state of Service &amp; Resource inventory in an SRM system, and current state of the network, for a given service instance. In the context of &quot;Activation,&quot; for example, this Provider Function determines technical order lines for activating devices, called Network Elements, on the network.</information>
+  <saveVersion>8</saveVersion>
+  <id>--+H---o--+zXTYk--+YpQ</id>
+  <dom:mappingTarget>
+    <id>---J--+E--+f75Rn--+uxA</id>
+    <elementType>oracle.communications.sce.common.entity.entities.provider.function.mappingtarget</elementType>
+    <dom:mappingTargetType>RFS</dom:mappingTargetType>
+    <dom:actionType>
+      <entity>Technical</entity>
+      <entityType>funcArea</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.provider.function.mappingtarget.actionTypeRef</relationship>
+    </dom:actionType>
+  </dom:mappingTarget>
+  <dom:mappingTarget>
+    <id>sxUPgewt--+D--+UTFg6jQ</id>
+    <elementType>oracle.communications.sce.common.entity.entities.provider.function.mappingtarget</elementType>
+    <dom:mappingTargetType>RESOURCE</dom:mappingTargetType>
+    <dom:actionType>
+      <entity>Technical</entity>
+      <entityType>funcArea</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.provider.function.mappingtarget.actionTypeRef</relationship>
+    </dom:actionType>
+  </dom:mappingTarget>
+  <dom:providerFunctionRelationshipTypes>
+    <id>--+7--+V--+IQTwn--+09Q</id>
+    <elementType>oracle.communications.sce.common.entity.entities.provider.function.relationshiptypes</elementType>
+    <dom:relationships>
+      <entity>Composition.Exclusive</entity>
+      <entityType>relType</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.provider.function.relationshiptypes.relationshipTypeRef</relationship>
+    </dom:relationships>
+    <dom:relationships>
+      <entity>Composition.Reference</entity>
+      <entityType>relType</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.provider.function.relationshiptypes.relationshipTypeRef</relationship>
+    </dom:relationships>
+    <dom:relationships>
+      <entity>Composition.Shared</entity>
+      <entityType>relType</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.provider.function.relationshiptypes.relationshipTypeRef</relationship>
+    </dom:relationships>
+  </dom:providerFunctionRelationshipTypes>
+  <dom:mappingSource>
+    <id>gwsV--+1--+7w6dOHFk0Kg</id>
+    <elementType>oracle.communications.sce.common.entity.entities.provider.function.mappingsource</elementType>
+    <dom:mappingSourceType>RFS</dom:mappingSourceType>
+  </dom:mappingSource>
+  <dom:mappingSource>
+    <id>---n--+6--+UJXQB---YQw</id>
+    <elementType>oracle.communications.sce.common.entity.entities.provider.function.mappingsource</elementType>
+    <dom:mappingSourceType>RESOURCE</dom:mappingSourceType>
+  </dom:mappingSource>
+  <dom:mappingSource>
+    <id>---zL+cH--+X---v--+s0w</id>
+    <elementType>oracle.communications.sce.common.entity.entities.provider.function.mappingsource</elementType>
+    <dom:mappingSourceType>LOCATION</dom:mappingSourceType>
+  </dom:mappingSource>
+  <dom:realization>
+    <id>7ahV--+U--+l--+U1XQ7ZQ</id>
+    <elementType>oracle.communications.sce.common.entity.entities.provider.function.providerfunctionrealization</elementType>
+    <dom:providerFunctionRealizationType>NONE</dom:providerFunctionRealizationType>
+  </dom:realization>
+</modelEntity>

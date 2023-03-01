@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:orderRecognitionRule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="ORR" namespace="osm7Order1.com">
+  <model:description>ORR</model:description>
+  <model:recognitionRule xsi:type="model:XqueryExpressionRuleType" enabled="true">
+    <model:xquery><![CDATA[if (fn:namespace-uri(.)="osm7Order1.com")
+then fn:true()
+else fn:false()]]></model:xquery>
+  </model:recognitionRule>
+  <model:relevancy>26</model:relevancy>
+  <model:storageRule xsi:type="model:XqueryExpressionRuleType" enabled="true">
+    <model:xquery><![CDATA[<CustomerOrderXml>{.}</CustomerOrderXml>]]></model:xquery>
+  </model:storageRule>
+  <model:createOrderSpecification>
+    <model:cartridge>
+      <model:name>
+        <model:name>Training_OSM_Composite</model:name>
+        <model:namespace>Training_OSM_Composite</model:namespace>
+      </model:name>
+      <model:version>1.0.0.0.0</model:version>
+    </model:cartridge>
+    <model:orderType>
+      <model:name>L3-DD-OSMOrder</model:name>
+      <model:namespace>Training_OSM_Composite</model:namespace>
+    </model:orderType>
+    <model:orderSource>
+      <model:name>L3-DD-OSMOrder</model:name>
+      <model:namespace>Training_OSM_Composite</model:namespace>
+    </model:orderSource>
+    <model:creationView>
+      <model:name>OrderCreationTask</model:name>
+      <model:namespace>Training_OSM_Composite</model:namespace>
+    </model:creationView>
+  </model:createOrderSpecification>
+  <model:orderHeaderRules>
+    <model:reference xsi:type="model:XqueryExpressionRuleType" enabled="true">
+      <model:xquery><![CDATA[declare namespace osm7dd="osm7Order1.com";
+let $root := fn:root()/osm7dd:SalesOrder
+let $orderNumber := $root/osm7dd:OrderNumber/text()
+
+return $orderNumber]]></model:xquery>
+    </model:reference>
+  </model:orderHeaderRules>
+  <model:orderDataRule xsi:type="model:XqueryExpressionRuleType" enabled="true">
+    <model:xquery><![CDATA[declare namespace osm7dd="osm7Order1.com";
+let $root := fn:root()/osm7dd:SalesOrder
+let $orderNumber := $root/osm7dd:OrderNumber/text()
+let $revision := $root/osm7dd:Revision/text()
+
+return
+<_root>
+	<OrderNumber>{$orderNumber}</OrderNumber>
+	<Revision>{$revision}</Revision>
+</_root>]]></model:xquery>
+  </model:orderDataRule>
+</model:orderRecognitionRule>

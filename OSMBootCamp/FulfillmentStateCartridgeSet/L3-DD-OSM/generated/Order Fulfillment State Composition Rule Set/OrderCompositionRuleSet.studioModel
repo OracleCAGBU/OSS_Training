@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:OrderCompositionRuleSet" id="ofs=OrderCompositionRuleSet" type="ofs" typeName="Order Fulfillment State Composition Rule Set" name="OrderCompositionRuleSet" resource="\L3-DD-OSM\model\FULFILLMENT_STATE_RULE\OrderCompositionRuleSet.orderCompositionRuleSet">
+    <displayName lang="default">OrderCompositionRuleSet</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=L3-DD-OSM" type="Order and Service Management Project" name="Dependency">
+        <target name="L3-DD-OSM" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <order>
+      <relation ref="ord=L3-DD-OSMOrder" type="Order" name="oracle.communications.sce.osm.orchestration.composition.ruleSet.order.order" kind="Entity">
+        <target name="L3-DD-OSMOrder" typeName="Order"/>
+      </relation>
+    </order>
+    <compositionRules>
+      <element xsi:type="osm:OrderCompositionRule" id="ofs=OrderCompositionRuleSet+osm.orch.composition.ruleSet.order.rule=aBzpAPT8StCV0kdFerW67g" type="osm.orch.composition.ruleSet.order.rule" typeName="Order Fulfillment State Composition Rule" kind="Element" name="COMPLETE_RULE" path="/COMPLETE_RULE">
+        <orderCompositionConditions>
+          <element xsi:type="osm:OrderCompositionCondition" id="ofs=OrderCompositionRuleSet+osm.orch.composition.condition.order=fILMbssUT5+JCEKHLqNn2A" type="osm.orch.composition.condition.order" typeName="Order Fulfillment State Composition Condition" kind="Element" name="ALL_COMPLETE" path="/COMPLETE_RULE/ALL_COMPLETE"/>
+        </orderCompositionConditions>
+      </element>
+      <element xsi:type="osm:OrderCompositionRule" id="ofs=OrderCompositionRuleSet+osm.orch.composition.ruleSet.order.rule=wefQag0FQvGcxrVMXWC6RQ" type="osm.orch.composition.ruleSet.order.rule" typeName="Order Fulfillment State Composition Rule" kind="Element" name="IN_PROGRESS_RULE" path="/IN_PROGRESS_RULE">
+        <orderCompositionConditions>
+          <element xsi:type="osm:OrderCompositionCondition" id="ofs=OrderCompositionRuleSet+osm.orch.composition.condition.order=0BJZ6BTpRgy8AqdIi9JWbw" type="osm.orch.composition.condition.order" typeName="Order Fulfillment State Composition Condition" kind="Element" name="ANY_IN_PROGRESS" path="/IN_PROGRESS_RULE/ANY_IN_PROGRESS"/>
+        </orderCompositionConditions>
+      </element>
+    </compositionRules>
+  </entity>
+</model:Model>

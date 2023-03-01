@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/core/model/common" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:dom="http://xmlns.oracle.com/communications/sce/model/common/entity" xsi:type="dom:ApplicationRoleType" name="WorkForceManagement">
+  <displayName lang="[default]">Work Force Management</displayName>
+  <saveVersion>3</saveVersion>
+  <id>hmRULcc+S42h7eYU5lOFTA</id>
+  <dom:abbrevation>WFM</dom:abbrevation>
+  <dom:specializedActionCodes>
+    <id>XBEz6d4RR5exoKiJ4UgBaw</id>
+    <elementType>oracle.communications.sce.common.entity.entities.application.role.specializedactioncode</elementType>
+    <dom:specializedActionName>Install</dom:specializedActionName>
+    <dom:actionType>
+      <entity>Create</entity>
+      <entityType>actionType</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.application.role.specializedactioncode.actionTypeRef</relationship>
+    </dom:actionType>
+  </dom:specializedActionCodes>
+  <dom:specializedActionCodes>
+    <id>0MepDWXUQXaDck9qVdl3Lw</id>
+    <elementType>oracle.communications.sce.common.entity.entities.application.role.specializedactioncode</elementType>
+    <dom:specializedActionName>Reconfigure</dom:specializedActionName>
+    <dom:actionType>
+      <entity>Modify</entity>
+      <entityType>actionType</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.application.role.specializedactioncode.actionTypeRef</relationship>
+    </dom:actionType>
+  </dom:specializedActionCodes>
+  <dom:specializedActionCodes>
+    <id>VrFGQ99kRjaJ3BhZIAQZfg</id>
+    <elementType>oracle.communications.sce.common.entity.entities.application.role.specializedactioncode</elementType>
+    <dom:specializedActionName>Uninstall</dom:specializedActionName>
+    <dom:actionType>
+      <entity>Remove</entity>
+      <entityType>actionType</entityType>
+      <relationship>oracle.communications.sce.common.entity.entities.application.role.specializedactioncode.actionTypeRef</relationship>
+    </dom:actionType>
+  </dom:specializedActionCodes>
+  <dom:actionType>
+    <entity>Technical</entity>
+    <entityType>funcArea</entityType>
+    <relationship>oracle.communications.sce.common.entity.entities.application.role.FunctionalAreaRef</relationship>
+  </dom:actionType>
+</modelEntity>

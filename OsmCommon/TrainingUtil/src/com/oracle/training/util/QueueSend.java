@@ -80,12 +80,28 @@ public class QueueSend {
 	 * @exception JMSException if JMS fails to send message due to internal error
 	 */
 	public void send(String message, String primaryKey) throws JMSException {
+		//primaryKey="23:302";
 		msg.setText(message);
 		msg.setJMSCorrelationID(primaryKey);
-		msg.setStringProperty("OSS_ORDER_PRIMARY_KEY", primaryKey);
-		msg.setStringProperty("OSS_ORDER_TYPE", "javax.oss.order.CreateOrderValue");
+		
+		//CreateOrderByValueResponse
+		
+		//msg.setStringProperty("OSS_EVENT_TYPE", "sa:createOrderByValueResponse");
+		
+		//OrderCompleteEvent
+		
 		msg.setStringProperty("OSS_EVENT_TYPE", "javax.oss.order.OrderStateChangeEvent");
-		msg.setStringProperty("OSS_API_CLIENT_ID", "ActivateBroadband-Training_OSM_TOM_Activate_Broadband-1.0.0.0.0");
+		msg.setStringProperty("OSS_ORDER_CURRENT_STATE", "closed.completed");
+		msg.setStringProperty("OSS_ORDER_PRIMARY_KEY", primaryKey);
+		
+		//GetOrderByKeyResponse_orderCompleteEvent
+		
+		//msg.setStringProperty("OSS_EVENT_TYPE", "sa:getOrderByKeyResponse");
+		//msg.setStringProperty("EVENT_TYPE_TRIGGERED", "orderCompleteEvent");
+		
+		//msg.setStringProperty("OSS_ORDER_TYPE", "javax.oss.order.CreateOrderValue");
+		//msg.setStringProperty("OSS_API_CLIENT_ID", "ActivateBroadband-Training_OSM_TOM_Activate_Broadband-1.0.0.0.0");
+		//msg.setStringProperty("EVENT_TYPE_TRIGGERED", "orderCompleteEvent");
 		qsender.send(msg);
 	}
 
@@ -139,7 +155,9 @@ public class QueueSend {
 		String url = "t3://192.168.56.101:7001";
 		String username = "weblogic";
 		String password = "admin123";
+		//String filePath = "C:/Debapriya/Oracle/Projects/OSS Training Solution/Integration Testing/Broadband/Create/Request and Response Payloads/CreateOrderByValueResponse.xml";
 		String filePath = "C:/Debapriya/Oracle/Projects/OSS Training Solution/Integration Testing/Broadband/Create/Request and Response Payloads/OrderCompletionEvent.xml";
+		//String filePath = "C:/Debapriya/Oracle/Projects/OSS Training Solution/Integration Testing/Broadband/Create/Request and Response Payloads/GetOrderByKeyResponse.xml";
 		InitialContext ic = getInitialContext(url, username, password);
 		QueueSend qs = new QueueSend();
 		qs.init(ic, QUEUE);

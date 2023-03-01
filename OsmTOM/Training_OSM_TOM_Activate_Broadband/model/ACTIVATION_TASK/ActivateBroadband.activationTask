@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:act="http://xmlns.oracle.com/communications/sce/integration/model/task/activation" xmlns="http://xmlns.oracle.com/communications/sce/integration/model/task/activation" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:task="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="act:activationTaskType" name="ActivateBroadband">
   <com:displayName>ActivateBroadbandTask</com:displayName>
-  <com:saveVersion>67</com:saveVersion>
+  <com:saveVersion>89</com:saveVersion>
   <com:id>kmXz2420QliXYWo6fNefDQ</com:id>
   <task:orderType>
     <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -44,70 +44,6 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-              <task:childNode>
-                <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                <com:entityType>order</com:entityType>
-                <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/ActivationOrderID</com:element>
-                <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                <task:childRefNode>false</task:childRefNode>
-              </task:childNode>
-              <task:childNode>
-                <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                <com:entityType>order</com:entityType>
-                <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData</com:element>
-                <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/orderKey</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childNode>
-                    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                    <com:entityType>order</com:entityType>
-                    <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                    <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/orderKey/primaryKey</com:element>
-                    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                    <task:childRefNode>false</task:childRefNode>
-                  </task:childNode>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/reason</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/eventTime</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/currentState</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/rollbackExcept</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childRefNode>false</task:childRefNode>
-              </task:childNode>
               <task:childRefNode>false</task:childRefNode>
             </task:childNode>
             <task:childNode>
@@ -116,302 +52,6 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-              <task:childNode>
-                <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                <com:entityType>order</com:entityType>
-                <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/ActivationOrderID</com:element>
-                <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                <task:childRefNode>false</task:childRefNode>
-              </task:childNode>
-              <task:childNode>
-                <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                <com:entityType>order</com:entityType>
-                <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData</com:element>
-                <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/orderKey</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childNode>
-                    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                    <com:entityType>order</com:entityType>
-                    <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                    <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/orderKey/primaryKey</com:element>
-                    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                    <task:childRefNode>false</task:childRefNode>
-                  </task:childNode>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/reason</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/eventTime</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/currentState</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/rollbackExcept</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childRefNode>false</task:childRefNode>
-              </task:childNode>
-              <task:childNode>
-                <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                <com:entityType>order</com:entityType>
-                <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters</com:element>
-                <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/infoParm</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childNode>
-                    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                    <com:entityType>order</com:entityType>
-                    <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                    <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/infoParm/label</com:element>
-                    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                    <task:childRefNode>false</task:childRefNode>
-                  </task:childNode>
-                  <task:childNode>
-                    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                    <com:entityType>order</com:entityType>
-                    <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                    <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/infoParm/group</com:element>
-                    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                    <task:childRefNode>false</task:childRefNode>
-                  </task:childNode>
-                  <task:childNode>
-                    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                    <com:entityType>order</com:entityType>
-                    <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                    <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/infoParm/dataValue</com:element>
-                    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                    <task:childRefNode>false</task:childRefNode>
-                  </task:childNode>
-                  <task:childNode>
-                    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                    <com:entityType>order</com:entityType>
-                    <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                    <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/infoParm/serviceId</com:element>
-                    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                    <task:childRefNode>false</task:childRefNode>
-                  </task:childNode>
-                  <task:childNode>
-                    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                    <com:entityType>order</com:entityType>
-                    <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                    <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/infoParm/description</com:element>
-                    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                    <task:childRefNode>false</task:childRefNode>
-                  </task:childNode>
-                  <task:childNode>
-                    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                    <com:entityType>order</com:entityType>
-                    <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                    <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/infoParm/serviceKey</com:element>
-                    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/infoParm/serviceKey/applicationDN</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/infoParm/serviceKey/type</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/infoParm/serviceKey/primaryKey</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/infoParm/serviceKey/serviceSequenceNumber</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childRefNode>false</task:childRefNode>
-                  </task:childNode>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/orderValue</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childNode>
-                    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                    <com:entityType>order</com:entityType>
-                    <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                    <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/orderValue/orderKey</com:element>
-                    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/orderValue/orderKey/primaryKey</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childRefNode>false</task:childRefNode>
-                  </task:childNode>
-                  <task:childNode>
-                    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                    <com:entityType>order</com:entityType>
-                    <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                    <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/orderValue/actualCompletionDate</com:element>
-                    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                    <task:childRefNode>false</task:childRefNode>
-                  </task:childNode>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/rollbackExceptions</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childRefNode>false</task:childRefNode>
-              </task:childNode>
-              <task:childNode>
-                <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                <com:entityType>order</com:entityType>
-                <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/CommandHistory</com:element>
-                <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/CommandHistory/value</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childNode>
-                    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                    <com:entityType>order</com:entityType>
-                    <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                    <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/CommandHistory/value/item</com:element>
-                    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/CommandHistory/value/item/asdlCommand</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/CommandHistory/value/item/asdlState</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/CommandHistory/value/item/asdlId</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/CommandHistory/value/item/neId</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/CommandHistory/value/item/description</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/CommandHistory/value/item/actualCompletionDate</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/CommandHistory/value/item/queueDate</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/CommandHistory/value/item/startDate</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/CommandHistory/value/item/retryCount</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childRefNode>false</task:childRefNode>
-                  </task:childNode>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childRefNode>false</task:childRefNode>
-              </task:childNode>
               <task:childRefNode>false</task:childRefNode>
             </task:childNode>
             <task:childNode>
@@ -420,166 +60,14 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-              <task:childNode>
-                <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                <com:entityType>order</com:entityType>
-                <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/ActivationOrderID</com:element>
-                <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                <task:childRefNode>false</task:childRefNode>
-              </task:childNode>
-              <task:childNode>
-                <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                <com:entityType>order</com:entityType>
-                <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData</com:element>
-                <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData/orderKey</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childNode>
-                    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                    <com:entityType>order</com:entityType>
-                    <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                    <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData/orderKey/primaryKey</com:element>
-                    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                    <task:childRefNode>false</task:childRefNode>
-                  </task:childNode>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData/reason</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData/eventTime</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData/currentState</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData/rollbackExcept</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childRefNode>false</task:childRefNode>
-              </task:childNode>
-              <task:childNode>
-                <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                <com:entityType>order</com:entityType>
-                <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory</com:element>
-                <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                <task:childNode>
-                  <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                  <com:entityType>order</com:entityType>
-                  <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                  <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value</com:element>
-                  <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                  <task:childNode>
-                    <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                    <com:entityType>order</com:entityType>
-                    <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                    <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item</com:element>
-                    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/asdlCommand</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/asdlState</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/asdlId</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/neId</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/description</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/actualCompletionDate</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/queueDate</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/startDate</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childNode>
-                      <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
-                      <com:entityType>order</com:entityType>
-                      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-                      <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/retryCount</com:element>
-                      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-                      <task:childRefNode>false</task:childRefNode>
-                    </task:childNode>
-                    <task:childRefNode>false</task:childRefNode>
-                  </task:childNode>
-                  <task:childRefNode>false</task:childRefNode>
-                </task:childNode>
-                <task:childRefNode>false</task:childRefNode>
-              </task:childNode>
+              <task:childRefNode>false</task:childRefNode>
+            </task:childNode>
+            <task:childNode>
+              <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
+              <com:entityType>order</com:entityType>
+              <com:relationship>ora.task.orderTemplateRef</com:relationship>
+              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/ExceptionData</com:element>
+              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
               <task:childRefNode>false</task:childRefNode>
             </task:childNode>
             <task:childRefNode>false</task:childRefNode>
@@ -1248,6 +736,71 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/ActivationOrderID</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData/orderKey</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData/orderKey/primaryKey</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData/reason</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData/eventTime</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData/currentState</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData/rollbackExcept</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/ActivationOrderID</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/CommandHistory</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/ExceptionData/ExceptionData</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
     <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/ActivationOrderID</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
@@ -1288,47 +841,472 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/ActivationOrderID</task:path>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData</task:path>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/orderKey</task:path>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/orderKey/primaryKey</task:path>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/discover</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/reason</task:path>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getName</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/eventTime</task:path>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getObject</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/currentState</task:path>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getObject/objectId</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/rollbackExcept</task:path>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getObject/objectName</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters</task:path>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getObject/objectType</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getAttributes</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getAttributes/attribute</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getAttributes/attribute/attributeName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getAttributes/attribute/attributeValue</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getAttributes/attribute/attributeXmlValue</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getChildren</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getChildren/eomObject</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getChildren/eomObject/objectId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getChildren/eomObject/objectName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getChildren/eomObject/objectType</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getParents</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getParents/eomObject</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getParents/eomObject/objectId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getParents/eomObject/objectName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getParents/eomObject/objectType</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getPath</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getParameters</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getParameters/eomObject</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getParameters/eomObject/objectId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getParameters/eomObject/objectName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getParameters/eomObject/objectType</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getTargets</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getTargets/eomObject</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getTargets/eomObject/objectId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getTargets/eomObject/objectName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getTargets/eomObject/objectType</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getTransactionStatus</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getTransactionStatus/transactionId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getTransactionStatus/transactionName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getTransactionStatus/transactionStatus</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/getTransactionStatus/reasonForFailure</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/find</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/find/eomObject</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/find/eomObject/objectId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/find/eomObject/objectName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/find/eomObject/objectType</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/findParameters</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/findParameters/eomObject</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/findParameters/eomObject/objectId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/findParameters/eomObject/objectName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/findParameters/eomObject/objectType</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/transaction</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/transaction/transactionId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/transaction/transactionName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/transaction/transactionStatus</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/xmlValue/transaction/reasonForFailure</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/label</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/group</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/serviceId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/description</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/serviceKey</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/serviceKey/applicationDN</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/serviceKey/type</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/serviceKey/primaryKey</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/EventData/infoParms/infoParm/serviceKey/serviceSequenceNumber</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/CommandHistory</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/CommandHistory/value</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/CommandHistory/value/item</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/CommandHistory/value/item/asdlCommand</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/CommandHistory/value/item/asdlState</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/CommandHistory/value/item/asdlId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/CommandHistory/value/item/neId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/CommandHistory/value/item/description</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/CommandHistory/value/item/actualCompletionDate</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/CommandHistory/value/item/queueDate</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/CommandHistory/value/item/startDate</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/CommandHistory/value/item/retryCount</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/DetailedParameters</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/DetailedParameters/orderValue</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/DetailedParameters/orderValue/orderKey</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/DetailedParameters/orderValue/orderKey/primaryKey</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/DetailedParameters/orderValue/actualCompletionDate</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/DetailedParameters/infoParm</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/DetailedParameters/infoParm/label</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/DetailedParameters/infoParm/group</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/DetailedParameters/infoParm/dataValue</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/DetailedParameters/infoParm/serviceId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/DetailedParameters/infoParm/description</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/DetailedParameters/infoParm/serviceKey</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/DetailedParameters/infoParm/serviceKey/applicationDN</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/DetailedParameters/infoParm/serviceKey/type</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/DetailedParameters/infoParm/serviceKey/primaryKey</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/DetailedParameters/infoParm/serviceKey/serviceSequenceNumber</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/DetailedParameters/rollbackExceptions</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
@@ -1343,12 +1321,12 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/infoParm/group</task:path>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/infoParm/dataValue</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/infoParm/dataValue</task:path>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/DetailedParameters/infoParm/group</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
@@ -1413,7 +1391,357 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/CommandHistory</task:path>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/orderKey</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/orderKey/primaryKey</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/reason</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/eventTime</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/currentState</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/rollbackExcept</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/discover</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getObject</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getObject/objectId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getObject/objectName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getObject/objectType</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getAttributes</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getAttributes/attribute</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getAttributes/attribute/attributeName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getAttributes/attribute/attributeValue</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getAttributes/attribute/attributeXmlValue</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getChildren</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getChildren/eomObject</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getChildren/eomObject/objectId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getChildren/eomObject/objectName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getChildren/eomObject/objectType</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getParents</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getParents/eomObject</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getParents/eomObject/objectId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getParents/eomObject/objectName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getParents/eomObject/objectType</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getPath</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getParameters</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getParameters/eomObject</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getParameters/eomObject/objectId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getParameters/eomObject/objectName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getParameters/eomObject/objectType</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getTargets</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getTargets/eomObject</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getTargets/eomObject/objectId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getTargets/eomObject/objectName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getTargets/eomObject/objectType</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getTransactionStatus</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getTransactionStatus/transactionId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getTransactionStatus/transactionName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getTransactionStatus/transactionStatus</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/getTransactionStatus/reasonForFailure</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/find</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/find/eomObject</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/find/eomObject/objectId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/find/eomObject/objectName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/find/eomObject/objectType</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/findParameters</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/findParameters/eomObject</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/findParameters/eomObject/objectId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/findParameters/eomObject/objectName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/findParameters/eomObject/objectType</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/transaction</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/transaction/transactionId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/transaction/transactionName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/transaction/transactionStatus</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/xmlValue/transaction/reasonForFailure</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/label</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/group</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/serviceId</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/description</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/serviceKey</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/serviceKey/applicationDN</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/serviceKey/type</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/serviceKey/primaryKey</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/EventData/infoParms/infoParm/serviceKey/serviceSequenceNumber</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
@@ -1473,102 +1801,92 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/ActivationOrderID</task:path>
+    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/ExceptionData/ExceptionData/message</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData</task:path>
+    <task:path>/inputMessage</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData/orderKey</task:path>
+    <task:path>/SOMCorrelationID</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData/orderKey/primaryKey</task:path>
+    <task:path>/ControlData/OrderItem</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData/reason</task:path>
+    <task:path>/ControlData/OrderItem/PointOfNoReturn</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData/eventTime</task:path>
+    <task:path>/ControlData/OrderItem/OrderItemFulfillmentState</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData/currentState</task:path>
+    <task:path>/ControlData/OrderItem/FulfillmentPattern</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/EventData/rollbackExcept</task:path>
+    <task:path>/ControlData/OrderItem/LineId</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory</task:path>
+    <task:path>/ControlData/OrderItem/LineName</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value</task:path>
+    <task:path>/ControlData/OrderItem/ProductSpecification</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item</task:path>
+    <task:path>/ControlData/OrderItem/RequestedDeliveryDate</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/asdlCommand</task:path>
+    <task:path>/ControlData/OrderItem/ParentLineId</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/asdlState</task:path>
+    <task:path>/ControlData/OrderItem/Recognition</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/asdlId</task:path>
+    <task:path>/ControlData/OrderItem/Action</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/neId</task:path>
+    <task:path>/ControlData/OrderItem/SpecializedAction</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/description</task:path>
+    <task:path>/ControlData/OrderItem/xmlData</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/actualCompletionDate</task:path>
+    <task:path>/ControlData/OrderItem/SpecificationGroup</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/queueDate</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/startDate</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/CommandHistory/value/item/retryCount</task:path>
+    <task:path>/ControlData/OrderItem/dynamicParams</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
@@ -1616,13 +1934,13 @@
     <com:entity>ActivateBroadbandRole</com:entity>
     <com:entityType>rolePermissions</com:entityType>
     <com:relationship>com.mslv.studio.provisioning.task.rolePermission</com:relationship>
-    <task:executionModes>do redo undo</task:executionModes>
+    <task:executionModes>do redo undo failed_do failed_redo failed_undo</task:executionModes>
   </task:workgroupPermission>
   <task:workgroupPermission>
     <com:entity>TOM_Role</com:entity>
     <com:entityType>rolePermissions</com:entityType>
     <com:relationship>com.mslv.studio.provisioning.task.rolePermission</com:relationship>
-    <task:executionModes>do redo undo</task:executionModes>
+    <task:executionModes>do redo undo failed_do failed_redo failed_undo</task:executionModes>
   </task:workgroupPermission>
   <task:compensationStrategy/>
   <task:inProgressCompensation>
@@ -1631,7 +1949,7 @@
   </task:inProgressCompensation>
   <task:automationComponent xsi:type="task:internalAutomationPlugin">
     <prov:runAs>%{DEFAULT_AUTOMATION_USER}</prov:runAs>
-    <prov:executeQueue>System.%{ACTIVATION_ENVIRONMENT_ID}.OSM.ASAP.7-2;Comp.XVTEventTopic</prov:executeQueue>
+    <prov:executeQueue></prov:executeQueue>
   </task:automationComponent>
   <act:request>
     <act:activationOrderHeader>
@@ -2331,430 +2649,9 @@
     <act:response>
       <act:responseValue>orderCompleteEvent</act:responseValue>
       <act:mapping>
-        <act:eventData>
-          <act:eventData>
-            <act:data>/orderKey/primaryKey</act:data>
-            <act:data>/reason</act:data>
-            <act:data>/eventTime</act:data>
-            <act:data>/currentState</act:data>
-            <act:data>/rollbackExcept</act:data>
-          </act:eventData>
-          <act:detailedParameters>
-            <act:data>/infoParm/label</act:data>
-            <act:data>/infoParm/group</act:data>
-            <act:data>/infoParm/dataValue</act:data>
-            <act:data>/infoParm/serviceId</act:data>
-            <act:data>/infoParm/description</act:data>
-            <act:data>/infoParm/serviceKey/applicationDN</act:data>
-            <act:data>/infoParm/serviceKey/type</act:data>
-            <act:data>/infoParm/serviceKey/primaryKey</act:data>
-            <act:data>/infoParm/serviceKey/serviceSequenceNumber</act:data>
-            <act:data>/orderValue/orderKey/primaryKey</act:data>
-            <act:data>/orderValue/actualCompletionDate</act:data>
-            <act:data>/rollbackExceptions</act:data>
-          </act:detailedParameters>
-          <act:commandHistory>
-            <act:data>/value/item/asdlCommand</act:data>
-            <act:data>/value/item/asdlState</act:data>
-            <act:data>/value/item/asdlId</act:data>
-            <act:data>/value/item/neId</act:data>
-            <act:data>/value/item/description</act:data>
-            <act:data>/value/item/actualCompletionDate</act:data>
-            <act:data>/value/item/queueDate</act:data>
-            <act:data>/value/item/startDate</act:data>
-            <act:data>/value/item/retryCount</act:data>
-          </act:commandHistory>
-        </act:eventData>
-        <act:responseDataLocation>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory</act:responseDataLocation>
-        <act:dataMappingBinding>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>null</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/orderKey/primaryKey</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>sa:orderKey/sa:primaryKey</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/reason</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../a:reason</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/eventTime</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../o:eventTime</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/currentState</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../a:currentState</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/EventData/rollbackExcept</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../slv-sa:rollbackExcept</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/infoParm</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>ser:orderValue/ns:infoParms/ns:infoParm</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/infoParm/label</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>ns:label</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/infoParm/group</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>ns:group</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/infoParm/dataValue</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>ns:value</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/infoParm/serviceId</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>ns:serviceId</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/infoParm/description</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>ns:description</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/infoParm/serviceKey</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../../../ull</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/infoParm/serviceKey/applicationDN</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../../../../er:orderValue/ns:infoParms/ns:infoParm/ns:serviceKey/com:applicationDN</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/infoParm/serviceKey/type</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../../../../er:orderValue/ns:infoParms/ns:infoParm/ns:serviceKey/com:type</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/infoParm/serviceKey/primaryKey</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../../../../er:orderValue/ns:infoParms/ns:infoParm/ns:serviceKey/ser:primaryKey</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/infoParm/serviceKey/serviceSequenceNumber</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../../../../er:orderValue/ns:infoParms/ns:infoParm/ns:serviceKey/ns:serviceSequenceNumber</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/orderValue</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>null</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/orderValue/orderKey</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>.</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/orderValue/orderKey/primaryKey</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../a:orderValue/sa:orderKey/sa:primaryKey</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/orderValue/actualCompletionDate</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../a:orderValue/sa:actualCompletionDate</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters/rollbackExceptions</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>mslv-sa:rollbackExceptions</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/DetailedParameters</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>null</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>null</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/value</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>.</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/value/item</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../ull</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/value/item/asdlCommand</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../../o:value/co:item/mslv-sa:asdlCommand</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/value/item/asdlState</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../../o:value/co:item/mslv-sa:asdlState</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/value/item/asdlId</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../../o:value/co:item/mslv-sa:asdlId</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/value/item/neId</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../../o:value/co:item/mslv-sa:neId</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/value/item/description</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../../value/item/description</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/value/item/actualCompletionDate</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../../o:value/co:item/mslv-sa:actualCompletionDate</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/value/item/queueDate</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../../o:value/co:item/mslv-sa:queueDate</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/value/item/startDate</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../../o:value/co:item/mslv-sa:startDate</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-          <act:osmDataMapping>
-            <act:dataNode>
-              <com:entity>ActivateBroadband</com:entity>
-              <com:entityType>activationTask</com:entityType>
-              <com:relationship>oracle.communications.sce.integration.task.taskNodeRef</com:relationship>
-              <com:element>/ControlData/Functions/ActivateBroadbandFunction/ExtendedConfiguration/ActivationResponse/CommandHistory/value/item/retryCount</com:element>
-              <com:elementType>com.mslv.studio.provisioning.task.data.node</com:elementType>
-            </act:dataNode>
-            <act:binding>../../o:value/co:item/mslv-sa:retryCount</act:binding>
-            <act:bindingType>XPATH</act:bindingType>
-          </act:osmDataMapping>
-        </act:dataMappingBinding>
+        <act:dataMappingBinding/>
         <act:transition>
-          <act:conditionName>Always</act:conditionName>
+          <act:conditionName>Default</act:conditionName>
           <act:condition>true()</act:condition>
           <act:status>success</act:status>
         </act:transition>
@@ -2763,6 +2660,7 @@
     <act:response>
       <act:responseValue>orderFailEvent</act:responseValue>
       <act:mapping>
+        <act:dataMappingBinding/>
         <act:transition>
           <act:conditionName>Always</act:conditionName>
           <act:condition>true()</act:condition>
@@ -2773,6 +2671,7 @@
     <act:response>
       <act:responseValue>createOrderByValueException</act:responseValue>
       <act:mapping>
+        <act:dataMappingBinding/>
         <act:transition>
           <act:conditionName>Always</act:conditionName>
           <act:condition>true()</act:condition>
@@ -3018,4 +2917,5 @@
   </act:activationCredential>
   <act:asapMessageQueue>System.%{ACTIVATION_ENVIRONMENT_ID}.OSM.ASAP.7-2;Comp.MessageQueue</act:asapMessageQueue>
   <act:asapEventTopic>System.%{ACTIVATION_ENVIRONMENT_ID}.OSM.ASAP.7-2;Comp.XVTEventTopic</act:asapEventTopic>
+  <act:isAsapEventDeliveredToQueue>true</act:isAsapEventDeliveredToQueue>
 </com:modelEntity>

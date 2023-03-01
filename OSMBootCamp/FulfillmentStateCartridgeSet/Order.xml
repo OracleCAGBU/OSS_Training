@@ -1,0 +1,65 @@
+<soapenv:Envelope xmlns:ord="http://xmlns.oracle.com/communications/ordermanagement" xmlns:osm7dd="osm7Order1.com" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-C15435BEA353C1621316515027084392">
+            <wsse:Username>osmadmin</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">osm4dsadmin</wsse:Password>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <ord:CreateOrder>
+         <osm7dd:SalesOrder>
+            <osm7dd:OrderNumber>Base_031</osm7dd:OrderNumber>
+            <osm7dd:Revision>1</osm7dd:Revision>
+            <osm7dd:ListOfOrderItems>
+               <osm7dd:OrderLine>
+                  <osm7dd:productName>ISD Pack</osm7dd:productName>
+                  <osm7dd:productDesc>Mobile Plan</osm7dd:productDesc>
+                  <osm7dd:productCode>14867</osm7dd:productCode>
+                  <osm7dd:actionCode>Add</osm7dd:actionCode>
+                  <osm7dd:lineID>11</osm7dd:lineID>
+                  <osm7dd:BundleID/>
+                  <osm7dd:class>MOBILE</osm7dd:class>
+               </osm7dd:OrderLine>
+               <osm7dd:OrderLine>
+                  <osm7dd:productName>Mobile PrePaid Plan</osm7dd:productName>
+                  <osm7dd:productDesc>Mobile PrePaid Plan</osm7dd:productDesc>
+                  <osm7dd:productCode>14868</osm7dd:productCode>
+                  <osm7dd:actionCode>Add</osm7dd:actionCode>
+                  <osm7dd:lineID>12</osm7dd:lineID>
+                  <osm7dd:BundleID>11</osm7dd:BundleID>
+                  <osm7dd:class>MOBILE</osm7dd:class>
+               </osm7dd:OrderLine>
+               <osm7dd:OrderLine>
+                  <osm7dd:productName>Mobile PostPaid Plan</osm7dd:productName>
+                  <osm7dd:productDesc>Mobile PostPaid Plan</osm7dd:productDesc>
+                  <osm7dd:productCode>14871</osm7dd:productCode>
+                  <osm7dd:actionCode>Add</osm7dd:actionCode>
+                  <osm7dd:lineID>13</osm7dd:lineID>
+                  <osm7dd:BundleID>11</osm7dd:BundleID>
+                  <osm7dd:class>MOBILE</osm7dd:class>
+               </osm7dd:OrderLine>
+               <osm7dd:OrderLine>
+                  <osm7dd:productName>Internet</osm7dd:productName>
+                  <osm7dd:productDesc>Internet</osm7dd:productDesc>
+                  <osm7dd:productCode>14877</osm7dd:productCode>
+                  <osm7dd:actionCode>Add</osm7dd:actionCode>
+                  <osm7dd:lineID>14</osm7dd:lineID>
+                  <osm7dd:BundleID/>
+                  <osm7dd:class>INTERNET</osm7dd:class>
+               </osm7dd:OrderLine>
+               <osm7dd:OrderLine>
+                  <osm7dd:productName>infiNET 150</osm7dd:productName>
+                  <osm7dd:productDesc>Internet Speed</osm7dd:productDesc>
+                  <osm7dd:productCode>14878</osm7dd:productCode>
+                  <osm7dd:actionCode>Add</osm7dd:actionCode>
+                  <osm7dd:lineID>15</osm7dd:lineID>
+                  <osm7dd:BundleID>14</osm7dd:BundleID>
+                  <osm7dd:class>INTERNET</osm7dd:class>
+               </osm7dd:OrderLine>
+            </osm7dd:ListOfOrderItems>
+         </osm7dd:SalesOrder>
+      </ord:CreateOrder>
+   </soapenv:Body>
+</soapenv:Envelope>

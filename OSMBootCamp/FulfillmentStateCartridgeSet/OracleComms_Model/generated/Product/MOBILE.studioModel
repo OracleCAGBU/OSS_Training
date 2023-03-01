@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:Product" id="prd=MOBILE" type="prd" typeName="Product" name="MOBILE" resource="\OracleComms_Model\model\MOBILE.cmnProduct">
+    <displayName lang="default">MOBILE</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="mprj=OracleComms_Model" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model" typeName="Model Project"/>
+      </relation>
+    </project>
+    <dataElements/>
+    <importAttributes>
+      <element id="prd=MOBILE+prd.pa=qQag+GW7TkaOftSQMupldA" type="prd.pa" typeName="Product Attributes" kind="Element" name="MOBILE Product Attributes" path="MOBILE Product Attributes">
+        <note lang="default"></note>
+      </element>
+    </importAttributes>
+    <fulfillmentPatterns>
+      <element id="prd=MOBILE+prd.pfp=BoUivyG1R72JbcMXOyHjHQ" type="prd.pfp" typeName="Product Fulfillment Pattern" kind="Element" name="MOBILE Product Fulfillment Pattern" path="MOBILE Product Fulfillment Pattern">
+        <options>
+          <relation ref="fp=MobileFulfillmentPattern" type="Fulfillment Pattern" name="Fulfillment Pattern" kind="Entity">
+            <target name="MobileFulfillmentPattern" typeName="Fulfillment Pattern"/>
+          </relation>
+        </options>
+        <key>MOBILE</key>
+      </element>
+    </fulfillmentPatterns>
+  </entity>
+</model:Model>

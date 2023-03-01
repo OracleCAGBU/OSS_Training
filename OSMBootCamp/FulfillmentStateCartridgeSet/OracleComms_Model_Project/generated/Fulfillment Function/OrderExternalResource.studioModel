@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:FulfillmentFunction" id="ff=OrderExternalResource" type="ff" typeName="Fulfillment Function" name="OrderExternalResource" resource="\OracleComms_Model_Project\model\OrderExternalResource.fullfillmentFunction">
+    <displayName lang="default">Order External Resource</displayName>
+    <note lang="default">Invoke a Partner Gateway to initiate ordering of an external/off-net resource</note>
+    <project>
+      <relation ref="mprj=OracleComms_Model_Project" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model_Project" typeName="Model Project"/>
+      </relation>
+    </project>
+    <realization>
+      <element id="ff=OrderExternalResource+ff.ffr=UkjfDDP7RT+AjBhDbtwyeQ" type="ff.ffr" typeName="Fulfillment Function Realization" kind="Element" name="OrderExternalResource Fulfillment Function Realization" path="OrderExternalResource Fulfillment Function Realization">
+        <fulfillmentFunctionSystem>OSM</fulfillmentFunctionSystem>
+        <fulfillmentFunctionRealization>OSM_ORDER_COMPONENT</fulfillmentFunctionRealization>
+      </element>
+    </realization>
+  </entity>
+</model:Model>

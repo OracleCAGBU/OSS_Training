@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:OrderComponentSpecification" id="ocs=InstallOrderFunction" type="ocs" typeName="Order Component Specification" name="InstallOrderFunction" resource="\L3-DD-OSM\model\FUNCTION\InstallOrderFunction.orderComponentSpec">
+    <displayName lang="default">InstallOrderFunction</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=L3-DD-OSM" type="Order and Service Management Project" name="Dependency">
+        <target name="L3-DD-OSM" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <baseTask>
+      <relation ref="mtsk=InstallDebugTask" type="Manual Task" name="Base Task" kind="Entity">
+        <target name="InstallDebugTask" typeName="Manual Task"/>
+      </relation>
+    </baseTask>
+    <process>
+      <relation ref="pro=InstallProcess" type="Process" name="Process" kind="Entity">
+        <target name="InstallProcess" typeName="Process"/>
+      </relation>
+    </process>
+    <componentElements>
+      <element xsi:type="osm:Component" id="ocs=InstallOrderFunction+osm.orch.orderComponentSpec.element=TgdznYtDTnyz78KVDaDOSw" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="InstallOrderFunction" path="/FulfillmentFunction/InstallFunction/InstallOrderFunction"/>
+    </componentElements>
+    <orderTemplateNodes>
+      <element xsi:type="osm:OrderTemplateNode" id="ocs=InstallOrderFunction+prov.order.node=/ControlData" type="prov.order.node" typeName="Order Node Element" kind="Element" name="ControlData" path="/ControlData"/>
+    </orderTemplateNodes>
+    <externalFulfillmentStates>
+      <element xsi:type="osm:ExternalFulfillmentState" id="ocs=InstallOrderFunction+osm.orch.orderComponentSpec.fulfillmentState=nmXtI8eAQGGf6x3KZXOMRQ" type="osm.orch.orderComponentSpec.fulfillmentState" typeName="External Fulfillment State" kind="Element" name="IN_PROGRESS-INTERNETDOMAIN_INSTALL_PLANNED" path="/IN_PROGRESS-INTERNETDOMAIN_INSTALL_PLANNED"/>
+      <element xsi:type="osm:ExternalFulfillmentState" id="ocs=InstallOrderFunction+osm.orch.orderComponentSpec.fulfillmentState=kxvRuo0cS7GrCB-8ukwUrg" type="osm.orch.orderComponentSpec.fulfillmentState" typeName="External Fulfillment State" kind="Element" name="COMPLETE-INTERNETDOMAIN_INSTALL_COMPLETE" path="/COMPLETE-INTERNETDOMAIN_INSTALL_COMPLETE"/>
+      <element xsi:type="osm:ExternalFulfillmentState" id="ocs=InstallOrderFunction+osm.orch.orderComponentSpec.fulfillmentState=PH+2wlW8TD+C4PwMlkK5ug" type="osm.orch.orderComponentSpec.fulfillmentState" typeName="External Fulfillment State" kind="Element" name="COMPLETE-MOBILEDOMAIN_INSTALL_COMPLETE" path="/COMPLETE-MOBILEDOMAIN_INSTALL_COMPLETE"/>
+      <element xsi:type="osm:ExternalFulfillmentState" id="ocs=InstallOrderFunction+osm.orch.orderComponentSpec.fulfillmentState=E1R4r4oESa2ZYLAMAdNfrA" type="osm.orch.orderComponentSpec.fulfillmentState" typeName="External Fulfillment State" kind="Element" name="IN_PROGRESS-MOBILEDOMAIN_INSTALL_PLANNED" path="/IN_PROGRESS-MOBILEDOMAIN_INSTALL_PLANNED"/>
+      <element xsi:type="osm:ExternalFulfillmentState" id="ocs=InstallOrderFunction+osm.orch.orderComponentSpec.fulfillmentState=gr8iZKLhQ9Cil6AN11kxSg" type="osm.orch.orderComponentSpec.fulfillmentState" typeName="External Fulfillment State" kind="Element" name="COMPLETE" path="/COMPLETE"/>
+      <element xsi:type="osm:ExternalFulfillmentState" id="ocs=InstallOrderFunction+osm.orch.orderComponentSpec.fulfillmentState=046hVD9IRc+jnsBKE5OHmg" type="osm.orch.orderComponentSpec.fulfillmentState" typeName="External Fulfillment State" kind="Element" name="IN_PROGRESS" path="/IN_PROGRESS"/>
+    </externalFulfillmentStates>
+    <extend>
+      <relation ref="ocs=InstallFunction" type="Order Component Specification" name="Extends" kind="Entity">
+        <target name="InstallFunction" typeName="Order Component Specification"/>
+      </relation>
+    </extend>
+  </entity>
+</model:Model>

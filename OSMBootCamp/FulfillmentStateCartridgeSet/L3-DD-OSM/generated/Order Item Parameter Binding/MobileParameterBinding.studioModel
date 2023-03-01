@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:OrderItemParameterBinding" id="oipb=MobileParameterBinding" type="oipb" typeName="Order Item Parameter Binding" name="MobileParameterBinding" resource="\L3-DD-OSM\model\PARAMETER_BINDING\MobileParameterBinding.orderItemParameterBinding">
+    <displayName lang="default">MobileParameterBinding</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=L3-DD-OSM" type="Order and Service Management Project" name="Dependency">
+        <target name="L3-DD-OSM" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <orderItemSpecification>
+      <relation ref="ois=OrderItemSpecification" type="Order Item Specification" name="Order Item Specification" kind="Entity">
+        <target name="OrderItemSpecification" typeName="Order Item Specification"/>
+      </relation>
+    </orderItemSpecification>
+    <conceptualModelEntity>
+      <relation ref="prd=MOBILE" type="Product" name="Conceptual Model Entity" kind="Entity">
+        <target name="MOBILE" typeName="Product"/>
+      </relation>
+    </conceptualModelEntity>
+  </entity>
+</model:Model>

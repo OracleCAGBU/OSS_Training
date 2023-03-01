@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:productSpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="Mobile.Product.Spec" namespace="osm7Order1.com">
+  <model:description>Mobile.Product.Spec</model:description>
+  <model:extends>
+    <model:name>Base.Product.Spec</model:name>
+    <model:namespace>osm7Order1.com</model:namespace>
+  </model:extends>
+  <model:orchestrationPlan>
+    <model:fulfillmentMode>
+      <model:name>ORDER</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:fulfillmentMode>
+    <model:component>
+      <model:name>ProvisioningOrderFunction</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+      <model:fulfillmentStatePoNR>
+        <model:fulfillmentState>
+          <model:name>COMPLETE-PROVISION_COMPLETE</model:name>
+          <model:namespace>osm7Order1.com</model:namespace>
+        </model:fulfillmentState>
+        <model:pointOfNoReturn>PROVISIONING_COMPLETED</model:pointOfNoReturn>
+      </model:fulfillmentStatePoNR>
+      <model:fulfillmentStatePoNR>
+        <model:fulfillmentState>
+          <model:name>IN_PROGRESS-PROVISION_DESIGNED</model:name>
+          <model:namespace>osm7Order1.com</model:namespace>
+        </model:fulfillmentState>
+        <model:pointOfNoReturn>PROVISIONING_DESIGNED</model:pointOfNoReturn>
+      </model:fulfillmentStatePoNR>
+    </model:component>
+    <model:transition name="Mobile.Product.Spec-ORDER--ProvisioningOrderFunction-FulfillBillingFunction">
+      <model:from>
+        <model:component>
+          <model:name>ProvisioningOrderFunction</model:name>
+          <model:namespace>osm7Order1.com</model:namespace>
+        </model:component>
+      </model:from>
+      <model:to>
+        <model:name>FulfillBillingFunction</model:name>
+        <model:namespace>osm7Order1.com</model:namespace>
+      </model:to>
+      <model:waitForCondition xsi:type="model:TaskStateWaitForConditionType">
+        <model:state>
+          <model:name>completed</model:name>
+          <model:namespace>default</model:namespace>
+        </model:state>
+      </model:waitForCondition>
+      <model:orderItemDependencyCriteria xsi:type="model:IdentityIntersectionOrderItemRelationship" name="Mobile.Product.Spec-ORDER--ProvisioningOrderFunction-FulfillBillingFunctionOrderItemRelationship"/>
+    </model:transition>
+  </model:orchestrationPlan>
+  <model:pointOfNoReturn name="PROVISIONING_DESIGNED">
+    <model:description>PROVISIONING DESIGNED</model:description>
+    <model:hardPointOfNoReturn>false</model:hardPointOfNoReturn>
+  </model:pointOfNoReturn>
+  <model:pointOfNoReturn name="PROVISIONING_COMPLETED">
+    <model:description>PROVISIONING COMPLETED</model:description>
+    <model:hardPointOfNoReturn>true</model:hardPointOfNoReturn>
+  </model:pointOfNoReturn>
+</model:productSpec>

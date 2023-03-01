@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:RelationshipType" id="rt=Primary" type="rt" typeName="Relationship Type" name="Primary" resource="\OracleComms_Model_Project\model\Primary.relType">
+    <displayName lang="default">Primary</displayName>
+    <note lang="default">This is a type of relationship between a Product Spec and a CFS.&#xD;
+Each CFS/RS must have at least one Primary Relationship with a Product Spec.  Note, however, that the CFS spec may be created before there is a Product Spec for it to relate. But, before the catalog is complete and ready for order processing, there must be a primary PS relationship defined to it.&#xD;
+</note>
+    <project>
+      <relation ref="mprj=OracleComms_Model_Project" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model_Project" typeName="Model Project"/>
+      </relation>
+    </project>
+  </entity>
+</model:Model>

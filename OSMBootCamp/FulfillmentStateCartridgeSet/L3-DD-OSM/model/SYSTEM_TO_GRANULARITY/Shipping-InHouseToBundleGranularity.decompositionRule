@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/orchestration" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:osm="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="DecompositionRuleType" name="Shipping-InHouseToBundleGranularity">
+  <com:displayName>Shipping-InHouseToBundleGranularity</com:displayName>
+  <com:saveVersion>4</com:saveVersion>
+  <com:id>1XGWC9HRR8KzHpCTz-OPwQ</com:id>
+  <namespace>osm7Order1.com</namespace>
+  <orderItem>
+    <com:entity>OrderItemSpecification</com:entity>
+    <com:entityType>orderItemSpec</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.decompositionRule.orderItem</com:relationship>
+  </orderItem>
+  <source>
+    <com:entity>Shipping-InHouse</com:entity>
+    <com:entityType>orderComponentSpec</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.decompositionRule.source</com:relationship>
+  </source>
+  <target>
+    <com:entity>BundleGranularity</com:entity>
+    <com:entityType>orderComponentSpec</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.decompositionRule.target</com:relationship>
+  </target>
+</com:modelEntity>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:ApplicationRole" id="ar=WorkForceManagement" type="ar" typeName="Application Role" name="WorkForceManagement" resource="\OracleComms_Model_Project\model\WorkForceManagement.applicationRole" shortName="WFM">
+    <displayName lang="default">Work Force Management</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="mprj=OracleComms_Model_Project" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model_Project" typeName="Model Project"/>
+      </relation>
+    </project>
+    <specializedActionCodes>
+      <element id="ar=WorkForceManagement+ar.sacd=XBEz6d4RR5exoKiJ4UgBaw" type="ar.sacd" typeName="Specialized Action Code Detail" kind="Element" name="Install" path="/Install" specializedActionName="Install">
+        <actionCode>
+          <relation ref="ac=Create" type="Action Code" name="Action Code" kind="Entity">
+            <target name="Create" typeName="Action Code"/>
+          </relation>
+        </actionCode>
+      </element>
+      <element id="ar=WorkForceManagement+ar.sacd=0MepDWXUQXaDck9qVdl3Lw" type="ar.sacd" typeName="Specialized Action Code Detail" kind="Element" name="Reconfigure" path="/Reconfigure" specializedActionName="Reconfigure">
+        <actionCode>
+          <relation ref="ac=Modify" type="Action Code" name="Action Code" kind="Entity">
+            <target name="Modify" typeName="Action Code"/>
+          </relation>
+        </actionCode>
+      </element>
+      <element id="ar=WorkForceManagement+ar.sacd=VrFGQ99kRjaJ3BhZIAQZfg" type="ar.sacd" typeName="Specialized Action Code Detail" kind="Element" name="Uninstall" path="/Uninstall" specializedActionName="Uninstall">
+        <actionCode>
+          <relation ref="ac=Remove" type="Action Code" name="Action Code" kind="Entity">
+            <target name="Remove" typeName="Action Code"/>
+          </relation>
+        </actionCode>
+      </element>
+    </specializedActionCodes>
+    <actionType>
+      <relation ref="fa=Technical" type="Functional Area" name="Action Type" kind="Entity">
+        <target name="Technical" typeName="Functional Area"/>
+      </relation>
+    </actionType>
+  </entity>
+</model:Model>

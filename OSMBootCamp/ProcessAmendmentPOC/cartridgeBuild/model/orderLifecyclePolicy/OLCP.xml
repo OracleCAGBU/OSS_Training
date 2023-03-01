@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+	
+<orderStatePolicy name="OLCP"  xsi:schemaLocation="http://www.metasolv.com/OMS/OrderModel/2002/06/25" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.metasolv.com/OMS/OrderModel/2002/06/25">	
+	<description>OLCP</description>
+		<amendingOrderState>
+			<processAmendmentOrderTransaction>
+				<condition>
+					<conditionName>Condition</conditionName>
+					<expression><![CDATA[
+(:
+let $orderRoot := fn:root(.)/GetOrder.Response
+let $processAmendment := $orderRoot/_root/ProcessAmendment/text()
+
+return
+		if($processAmendment='Yes')
+		then fn:true()
+		else fn:false()
+:)
+fn:true()
+]]></expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>Test</workgroup>
+				</permission>
+
+			</processAmendmentOrderTransaction>
+			<submitAmendmentOrderTransaction>
+				<condition>
+					<conditionName>Condition</conditionName>
+					<expression><![CDATA[
+true()
+]]></expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>Test</workgroup>
+				</permission>
+
+			</submitAmendmentOrderTransaction>				
+		</amendingOrderState>
+		<completedOrderState>
+			<updateOrderTransaction>
+				<condition>
+					<conditionName>defaultCondition</conditionName>
+					<expression>true()</expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>Test</workgroup>
+				</permission>
+
+			</updateOrderTransaction>
+		</completedOrderState>
+		<inProgressState>
+			<processAmendmentOrderTransaction>
+				<condition>
+					<conditionName>Condition</conditionName>
+					<expression><![CDATA[
+
+let $orderRoot := fn:root(.)/GetOrder.Response
+let $processAmendment := $orderRoot/_root/ProcessAmendment/text()
+
+return
+		if($processAmendment='Yes')
+		then fn:true()
+		else fn:false()
+
+]]></expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>Test</workgroup>
+				</permission>
+				<waitFor>
+					<noTasksInProgressCondition/>
+					<conditionNotSatisfiedEventInterval>P0DT1H0M0.000S</conditionNotSatisfiedEventInterval>
+				</waitFor>
+
+			</processAmendmentOrderTransaction>								
+			<raiseExceptionTransaction>
+				<condition>
+					<conditionName>defaultCondition</conditionName>
+					<expression>true()</expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>Test</workgroup>
+				</permission>
+				<waitFor>
+					<noTasksInProgressCondition/>
+					<conditionNotSatisfiedEventInterval>P0DT1H0M0.000S</conditionNotSatisfiedEventInterval>
+				</waitFor>
+
+			</raiseExceptionTransaction>				
+			<submitAmendmentOrderTransaction>
+				<condition>
+					<conditionName>Condition</conditionName>
+					<expression><![CDATA[
+true()
+]]></expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>Test</workgroup>
+				</permission>
+
+			</submitAmendmentOrderTransaction>				
+			<updateOrderTransaction>
+				<condition>
+					<conditionName>defaultCondition</conditionName>
+					<expression>true()</expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>Test</workgroup>
+				</permission>
+
+			</updateOrderTransaction>				
+		</inProgressState>	
+		<notStartedOrderState>
+			<deleteOrderTransaction>
+				<condition>
+					<conditionName>defaultCondition</conditionName>
+					<expression>true()</expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>Test</workgroup>
+				</permission>
+
+			</deleteOrderTransaction>	
+			<updateOrderTransaction>
+				<condition>
+					<conditionName>defaultCondition</conditionName>
+					<expression>true()</expression>
+				</condition>
+				<permission>
+					<condition>true()</condition>
+					<workgroup>Test</workgroup>
+				</permission>
+
+			</updateOrderTransaction>	
+		</notStartedOrderState> 
+		<waitingOrderState/>
+</orderStatePolicy>

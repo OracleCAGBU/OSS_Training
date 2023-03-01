@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:FulfillmentPattern" id="fp=InternetFulfillmentPattern" type="fp" typeName="Fulfillment Pattern" name="InternetFulfillmentPattern" resource="\OracleComms_Model\model\InternetFulfillmentPattern.procPtrnType">
+    <displayName lang="default">InternetFulfillmentPattern</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="mprj=OracleComms_Model" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model" typeName="Model Project"/>
+      </relation>
+    </project>
+    <realization>
+      <element id="fp=InternetFulfillmentPattern+fp.ppr=Z41BPMn5TT2ecuZs8-5SIQ" type="fp.ppr" typeName="Processing Pattern Realization" kind="Element" name="InternetFulfillmentPattern Processing Pattern Realization" path="InternetFulfillmentPattern Processing Pattern Realization">
+        <fulfillmentPatternSystemType>OSM</fulfillmentPatternSystemType>
+      </element>
+    </realization>
+    <classification>
+      <element id="fp=InternetFulfillmentPattern+fp.ppc=BAtGH3wFTACwJi7l67+ZfA" type="fp.ppc" typeName="Processing Pattern Classification" kind="Element" name="InternetFulfillmentPattern Processing Pattern Classification" path="InternetFulfillmentPattern Processing Pattern Classification">
+        <functionalAreas>
+          <relation ref="fa=Commercial" type="Functional Area" name="Functional Area" kind="Entity">
+            <target name="Commercial" typeName="Functional Area"/>
+          </relation>
+        </functionalAreas>
+      </element>
+    </classification>
+  </entity>
+</model:Model>

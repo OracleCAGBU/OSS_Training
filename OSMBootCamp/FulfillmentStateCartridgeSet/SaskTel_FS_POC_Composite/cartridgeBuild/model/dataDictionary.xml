@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataDictionary xsi:schemaLocation="http://www.metasolv.com/OMS/OrderModel/2002/06/25" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://www.metasolv.com/OMS/OrderModel/2002/06/25"
+	xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model"> 
+	<element name="ControlData"  xsi:type="groupType">
+	
+		<description>Control Data</description>
+		<viewRule xsi:type="informationRuleType">
+			<label lang="en">&quot;ControlData&quot;</label>
+
+		<description>Control Data</description>		</viewRule>
+		
+	</element>	
+	<element name="calculatedStartDate"  xsi:type="dateType">
+	
+		<description>Calculated Start Date</description>
+		<viewRule xsi:type="informationRuleType">
+			<label lang="en">&quot;calculatedStartDate&quot;</label>
+
+		<description>Calculated Start Date</description>		</viewRule>
+		
+				
+	</element>
+	<element name="OrderNumber"  xsi:type="textType">
+	
+		<description>Order Number</description>
+		<viewRule xsi:type="informationRuleType">
+			<label lang="en">&quot;OrderNumber&quot;</label>
+
+		<description>Order Number</description>		</viewRule>
+		
+		
+				<length>40</length>
+		
+	</element>
+	<element name="duration"  xsi:type="textType">
+	
+		<description>Duration</description>
+		<viewRule xsi:type="informationRuleType">
+			<label lang="en">&quot;duration&quot;</label>
+
+		<description>Duration</description>		</viewRule>
+		
+		
+				<length>40</length>
+		
+	</element>
+	<element name="orderItem"  xsi:type="groupType">
+	
+		<description>Order Item</description>
+		<viewRule xsi:type="informationRuleType">
+			<label lang="en">&quot;orderItem&quot;</label>
+
+		<description>Order Item</description>		</viewRule>
+		
+	</element>	
+	<element name="ExternalFulfillmentState"  xsi:type="textType">
+	
+		<description>External Fulfillment State</description>
+		<viewRule xsi:type="informationRuleType">
+			<label lang="en">&quot;ExternalFulfillmentState&quot;</label>
+
+		<description>External Fulfillment State</description>		</viewRule>
+		
+		
+				<length>100</length>
+		
+	</element>
+	<element name="componentKey"  xsi:type="textType">
+	
+		<description>Component Key</description>
+		<viewRule xsi:type="informationRuleType">
+			<label lang="en">&quot;componentKey&quot;</label>
+
+		<description>Component Key</description>		</viewRule>
+		
+		
+				<length>100</length>
+		
+	</element>
+	<element name="CustomerOrderXml"  xsi:type="xmlType">
+	
+		<description>Customer Order Xml</description>
+		<viewRule xsi:type="informationRuleType">
+			<label lang="en">&quot;CustomerOrderXml&quot;</label>
+
+		<description>Customer Order Xml</description>		</viewRule>
+		<significant>false</significant>
+		<length>0</length>
+	</element>	
+	<element name="Functions"  xsi:type="groupType">
+	
+		<description>Functions</description>
+		<viewRule xsi:type="informationRuleType">
+			<label lang="en">&quot;Functions&quot;</label>
+
+		<description>Functions</description>		</viewRule>
+		
+	</element>	
+	<element name="InstallOrderFunction"  xsi:type="groupType">
+	
+		<description>Install Order Function</description>
+		<viewRule xsi:type="informationRuleType">
+			<label lang="en">&quot;InstallOrderFunction&quot;</label>
+
+		<description>Install Order Function</description>		</viewRule>
+		
+	</element>	
+	<element name="OrderId"  xsi:type="textType">
+	
+		<description>Order Id</description>
+		<viewRule xsi:type="informationRuleType">
+			<label lang="en">&quot;OrderId&quot;</label>
+
+		<description>Order Id</description>		</viewRule>
+		
+		
+				<length>20</length>
+		
+	</element>
+	<element name="Revision"  xsi:type="textType">
+	
+		<description>Revision</description>
+		<viewRule xsi:type="informationRuleType">
+			<label lang="en">&quot;Revision&quot;</label>
+
+		<description>Revision</description>		</viewRule>
+		
+		
+				<length>40</length>
+		
+	</element>
+	<element name="OrderFulfillmentState"  xsi:type="textType">
+	
+		<description>Order Fulfillment State</description>
+		<viewRule xsi:type="informationRuleType">
+			<label lang="en">&quot;OrderFulfillmentState&quot;</label>
+
+		<description>Order Fulfillment State</description>		</viewRule>
+		
+		
+				<length>100</length>
+		
+	</element>
+	<element name="FulfillBillingFunction"  xsi:type="groupType">
+	
+		<description>Fulfill Billing Function</description>
+		<viewRule xsi:type="informationRuleType">
+			<label lang="en">&quot;FulfillBillingFunction&quot;</label>
+
+		<description>Fulfill Billing Function</description>		</viewRule>
+		
+	</element>	
+	<element name="InitiateBillingFunction"  xsi:type="groupType">
+	
+		<description>Initiate Billing Function</description>
+		<viewRule xsi:type="informationRuleType">
+			<label lang="en">&quot;InitiateBillingFunction&quot;</label>
+
+		<description>Initiate Billing Function</description>		</viewRule>
+		
+	</element>	
+	<element name="ProvisioningOrderFunction"  xsi:type="groupType">
+	
+		<description>Provisioning Order Function</description>
+		<viewRule xsi:type="informationRuleType">
+			<label lang="en">&quot;ProvisioningOrderFunction&quot;</label>
+
+		<description>Provisioning Order Function</description>		</viewRule>
+		
+	</element>	
+	<element name="OrderItem"  xsi:type="complexType">
+	
+		<description>Order Item</description>
+		<viewRule xsi:type="informationRuleType">
+			<label lang="en">&quot;OrderItem&quot;</label>
+
+		<description>Order Item</description>		</viewRule>
+		<complexTypeRef>
+			<model:name>OrderItemSpecificationType</model:name>
+			<model:namespace>osm7Order1.com</model:namespace>
+		</complexTypeRef>
+	</element>
+ 
+	<element name="ShipOrderFunction"  xsi:type="groupType">
+	
+		<description>Ship Order Function</description>
+		<viewRule xsi:type="informationRuleType">
+			<label lang="en">&quot;ShipOrderFunction&quot;</label>
+
+		<description>Ship Order Function</description>		</viewRule>
+		
+	</element>	
+     	<element name="orderItemRef"  xsi:type="referenceType">
+		<description>orderItemRef</description>
+	</element>	
+		
+	<schemaFile>dataDictionary/OracleComms_Model_Project/OracleComms_Model_Project.xsd</schemaFile>
+	<schemaFile>dataDictionary/L3-DD-OSM/L3-DD-OSM.xsd</schemaFile>
+	<schemaFile>dataDictionary/OracleComms_Model/OracleComms_Model.xsd</schemaFile>
+</dataDictionary>

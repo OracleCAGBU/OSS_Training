@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:orderComponentSpec xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="ProvisioningOrderFunction" namespace="osm7Order1.com">
+  <model:description>ProvisioningOrderFunction</model:description>
+  <model:extends>
+    <model:name>ProvisioningFunction</model:name>
+    <model:namespace>osm7Order1.com</model:namespace>
+  </model:extends>
+  <model:executedByTask>
+    <model:name>ProvisioningOrderFunction_ProvisioningProcess</model:name>
+    <model:namespace>default</model:namespace>
+  </model:executedByTask>
+  <model:isExecutable>false</model:isExecutable>
+  <model:externalFulfillmentState name="IN_PROGRESS-HPSDOMAIN_PROVISION_START">
+    <model:description>IN PROGRESS HPSDOMAIN START</model:description>
+  </model:externalFulfillmentState>
+  <model:externalFulfillmentState name="IN_PROGRESS-HPSDOMAIN_PROVISION_DESIGNED">
+    <model:description>IN PROGRESS HPSDOMAIN DESIGNED</model:description>
+  </model:externalFulfillmentState>
+  <model:externalFulfillmentState name="COMPLETE-HPSDOMAIN_PROVISION_COMPLETED">
+    <model:description>COMPLETED HPSDOMAIN COMPLETED</model:description>
+  </model:externalFulfillmentState>
+  <model:externalFulfillmentState name="IN_PROGRESS-INTERNETDOMAIN_PROVISION_START">
+    <model:description>IN PROGRESS INTERNETDOMAIN START</model:description>
+  </model:externalFulfillmentState>
+  <model:externalFulfillmentState name="IN_PROGRESS-INTERNETDOMAIN_PROVISION_DESIGNED">
+    <model:description>IN PROGRESS INTERNETDOMAIN DESIGNED</model:description>
+  </model:externalFulfillmentState>
+  <model:externalFulfillmentState name="COMPLETE-INTERNETDOMAIN_PROVISION_COMPLETED">
+    <model:description>COMPLETED INTERNETDOMAIN COMPLETED</model:description>
+  </model:externalFulfillmentState>
+  <model:externalFulfillmentState name="COMPLETE-MOBILEDOMAIN_COMPLETED">
+    <model:description>COMPLETE MOBILEDOMAIN COMPLETED</model:description>
+  </model:externalFulfillmentState>
+  <model:externalFulfillmentState name="IN_PROGRESS-MOBILEDOMAIN_PROVISION_START">
+    <model:description>IN PROGRESS MOBILEDOMAIN PROVISION START</model:description>
+  </model:externalFulfillmentState>
+  <model:externalFulfillmentState name="IN_PROGRESS-MOBILEDOMAIN_PROVISION_DESIGNED">
+    <model:description>IN PROGRESS MOBILEDOMAIN PROVISION DESIGNED</model:description>
+  </model:externalFulfillmentState>
+  <model:externalFulfillmentState name="COMPLETE">
+    <model:description>COMPLETE</model:description>
+  </model:externalFulfillmentState>
+  <model:externalFulfillmentState name="IN_PROGRESS">
+    <model:description>IN PROGRESS</model:description>
+  </model:externalFulfillmentState>
+  <model:honorCalculatedDates>false</model:honorCalculatedDates>
+</model:orderComponentSpec>

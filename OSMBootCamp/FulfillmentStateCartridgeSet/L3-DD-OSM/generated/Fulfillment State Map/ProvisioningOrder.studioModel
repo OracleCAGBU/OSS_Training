@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:FulfillmentStateMap" id="fsm=ProvisioningOrder" type="fsm" typeName="Fulfillment State Map" name="ProvisioningOrder" resource="\L3-DD-OSM\model\FULFILLMENT_STATE_MAP\ProvisioningOrder.fulfillmentStateMap">
+    <displayName lang="default">ProvisioningOrder</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=L3-DD-OSM" type="Order and Service Management Project" name="Dependency">
+        <target name="L3-DD-OSM" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <fulfillmentPattern>
+      <relation ref="ofp=Broadband.Product.Spec" type="Orchestration Fulfillment Pattern" name="oracle.communications.sce.osm.orchestration.fulfillmentstatemap.fulfillmentStateMap.mapping.productSpec" kind="Entity">
+        <target name="Broadband.Product.Spec" typeName="Orchestration Fulfillment Pattern"/>
+      </relation>
+    </fulfillmentPattern>
+    <fulfillmentMode>
+      <relation ref="fm=ORDER" type="Fulfillment Mode" name="oracle.communications.sce.osm.orchestration.fulfillmentstatemap.fulfillmentStateMap.mapping.fulfillmentMode" kind="Entity">
+        <target name="ORDER" typeName="Fulfillment Mode"/>
+      </relation>
+    </fulfillmentMode>
+    <orderItem>
+      <relation ref="ois=OrderItemSpecification" type="Order Item Specification" name="oracle.communications.sce.osm.orchestration.fulfillmentstatemap.fulfillmentStateMap.mapping.orderItem" kind="Entity">
+        <target name="OrderItemSpecification" typeName="Order Item Specification"/>
+      </relation>
+    </orderItem>
+    <externalFulfillmentState>
+      <relation ref="ocs=InstallOrderFunction" type="Order Component Specification" name="oracle.communications.sce.osm.orchestration.fulfillmentstatemap.fulfillmentStateMap.mapping.externalState" kind="Entity">
+        <target name="InstallOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+    </externalFulfillmentState>
+    <orchestrationComponents>
+      <relation ref="ocs=InstallOrderFunction" type="Order Component Specification" name="oracle.communications.sce.osm.orchestration.fulfillmentstatemap.fulfillmentStateMap.mapping.stageComponent.component" kind="Entity">
+        <target name="InstallOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=ProvisioningOrderFunction" type="Order Component Specification" name="oracle.communications.sce.osm.orchestration.fulfillmentstatemap.fulfillmentStateMap.mapping.stageComponent.component" kind="Entity">
+        <target name="ProvisioningOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+    </orchestrationComponents>
+    <orchestrationStages>
+      <relation ref="ost=DefineOrchestrationFunctions" type="Orchestration Stage" name="oracle.communications.sce.osm.orchestration.fulfillmentstatemap.fulfillmentStateMap.mapping.stageComponent.stage" kind="Entity">
+        <target name="DefineOrchestrationFunctions" typeName="Orchestration Stage"/>
+      </relation>
+    </orchestrationStages>
+    <fulfillmentStates>
+      <element xsi:type="osm:FulfillmentState" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.state=vcl0fesUQzeuFTrbOTqwHQ" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.state" typeName="Fulfillment State" kind="Element" name="IN_PROGRESS" path="IN_PROGRESS"/>
+      <element xsi:type="osm:FulfillmentState" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.state=F2povW0OTRu2-4cwTihBZQ" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.state" typeName="Fulfillment State" kind="Element" name="IN_PROGRESS-PROVISION_START" path="IN_PROGRESS/IN_PROGRESS-PROVISION_START"/>
+      <element xsi:type="osm:FulfillmentState" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.state=ZCSfvmJ5Sy6eJ9itJHrSkA" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.state" typeName="Fulfillment State" kind="Element" name="IN_PROGRESS-PROVISION_DESIGNED" path="IN_PROGRESS/IN_PROGRESS-PROVISION_DESIGNED"/>
+      <element xsi:type="osm:FulfillmentState" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.state=nuL1HGDZT0OsyX1PDgNUug" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.state" typeName="Fulfillment State" kind="Element" name="IN_PROGRESS-INSTALL_PLANNED" path="IN_PROGRESS/IN_PROGRESS-INSTALL_PLANNED"/>
+      <element xsi:type="osm:FulfillmentState" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.state=hzB5ej63Rz6jPXhjqnEraw" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.state" typeName="Fulfillment State" kind="Element" name="COMPLETE" path="COMPLETE"/>
+      <element xsi:type="osm:FulfillmentState" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.state=KhoYqAzPSxm93ezZf5gCag" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.state" typeName="Fulfillment State" kind="Element" name="COMPLETE-PROVISION_COMPLETE" path="COMPLETE/COMPLETE-PROVISION_COMPLETE"/>
+      <element xsi:type="osm:FulfillmentState" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.state=c1Fp6q4IQq68Jf8ZwxaNww" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.state" typeName="Fulfillment State" kind="Element" name="COMPLETE-INSTALL_COMPLETE" path="COMPLETE/COMPLETE-INSTALL_COMPLETE"/>
+    </fulfillmentStates>
+    <fulfillmentStateMappings>
+      <element xsi:type="osm:FulfillmentStateMapping" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping=UzbtX0l2QDmD6ecvqGvHRA" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping" typeName="Fulfillment State Mapping" kind="Element" name="Fulfillment State Mapping" path="/Fulfillment State Mapping"/>
+      <element xsi:type="osm:FulfillmentStateMapping" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping=m+j8L2uHQFuCet2Qts4sCg" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping" typeName="Fulfillment State Mapping" kind="Element" name="Fulfillment State Mapping" path="/Fulfillment State Mapping"/>
+      <element xsi:type="osm:FulfillmentStateMapping" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping=ffQzz-iNRue29O-O69WH5w" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping" typeName="Fulfillment State Mapping" kind="Element" name="Fulfillment State Mapping" path="/Fulfillment State Mapping"/>
+      <element xsi:type="osm:FulfillmentStateMapping" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping=Cdm8I+1eQbiRnSGRKPilsw" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping" typeName="Fulfillment State Mapping" kind="Element" name="Fulfillment State Mapping" path="/Fulfillment State Mapping"/>
+      <element xsi:type="osm:FulfillmentStateMapping" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping=kXHqSCVEQcKCl-SSDTHfEQ" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping" typeName="Fulfillment State Mapping" kind="Element" name="Fulfillment State Mapping" path="/Fulfillment State Mapping"/>
+      <element xsi:type="osm:FulfillmentStateMapping" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping=nurVJQU1Rlu+n-igYdVD1g" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping" typeName="Fulfillment State Mapping" kind="Element" name="Fulfillment State Mapping" path="/Fulfillment State Mapping"/>
+      <element xsi:type="osm:FulfillmentStateMapping" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping=TaYBg5+7S9SxN3tF+KKqhw" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping" typeName="Fulfillment State Mapping" kind="Element" name="Fulfillment State Mapping" path="/Fulfillment State Mapping"/>
+      <element xsi:type="osm:FulfillmentStateMapping" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping=iiPoexfARFGQ0DlRh0V28g" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping" typeName="Fulfillment State Mapping" kind="Element" name="Fulfillment State Mapping" path="/Fulfillment State Mapping"/>
+      <element xsi:type="osm:FulfillmentStateMapping" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping=vRQIWovFQPGR8sdkeCrRnw" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping" typeName="Fulfillment State Mapping" kind="Element" name="Fulfillment State Mapping" path="/Fulfillment State Mapping"/>
+      <element xsi:type="osm:FulfillmentStateMapping" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping=A3EG2JEqTEKhUnnbekoRHg" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping" typeName="Fulfillment State Mapping" kind="Element" name="Fulfillment State Mapping" path="/Fulfillment State Mapping"/>
+      <element xsi:type="osm:FulfillmentStateMapping" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping=yF--iNSaTOiyG2tyfNuG8Q" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping" typeName="Fulfillment State Mapping" kind="Element" name="Fulfillment State Mapping" path="/Fulfillment State Mapping"/>
+      <element xsi:type="osm:FulfillmentStateMapping" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping=tQ3hugxURQ23DeFXR6V-Ww" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping" typeName="Fulfillment State Mapping" kind="Element" name="Fulfillment State Mapping" path="/Fulfillment State Mapping"/>
+      <element xsi:type="osm:FulfillmentStateMapping" id="fsm=ProvisioningOrder+osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping=xP4XFyDuTsONCGZktKRxYA" type="osm.orch.fulfillmentstatemap.fulfillmentStateMap.mapping" typeName="Fulfillment State Mapping" kind="Element" name="Fulfillment State Mapping" path="/Fulfillment State Mapping"/>
+    </fulfillmentStateMappings>
+  </entity>
+</model:Model>

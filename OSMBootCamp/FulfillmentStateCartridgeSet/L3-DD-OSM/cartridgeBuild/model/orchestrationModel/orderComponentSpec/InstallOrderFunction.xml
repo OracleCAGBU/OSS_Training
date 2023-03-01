@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:orderComponentSpec xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="InstallOrderFunction" namespace="osm7Order1.com">
+  <model:description>InstallOrderFunction</model:description>
+  <model:extends>
+    <model:name>InstallFunction</model:name>
+    <model:namespace>osm7Order1.com</model:namespace>
+  </model:extends>
+  <model:executedByTask>
+    <model:name>InstallOrderFunction_InstallProcess</model:name>
+    <model:namespace>default</model:namespace>
+  </model:executedByTask>
+  <model:isExecutable>false</model:isExecutable>
+  <model:externalFulfillmentState name="IN_PROGRESS-INTERNETDOMAIN_INSTALL_PLANNED">
+    <model:description>IN PROGRESS INTERNETDOMAIN INSTALL PLANNED</model:description>
+  </model:externalFulfillmentState>
+  <model:externalFulfillmentState name="COMPLETE-INTERNETDOMAIN_INSTALL_COMPLETE">
+    <model:description>COMPLETE INTERNETDOMAIN INSTALL COMPLETE</model:description>
+  </model:externalFulfillmentState>
+  <model:externalFulfillmentState name="COMPLETE-MOBILEDOMAIN_INSTALL_COMPLETE">
+    <model:description>COMPLETE MOBILEDOMAIN INSTALL COMPLETE</model:description>
+  </model:externalFulfillmentState>
+  <model:externalFulfillmentState name="IN_PROGRESS-MOBILEDOMAIN_INSTALL_PLANNED">
+    <model:description>IN PROGRESS MOBILEDOMAIN INSTALL COMPLETE</model:description>
+  </model:externalFulfillmentState>
+  <model:externalFulfillmentState name="COMPLETE">
+    <model:description>COMPLETE</model:description>
+  </model:externalFulfillmentState>
+  <model:externalFulfillmentState name="IN_PROGRESS">
+    <model:description>IN PROGRESS</model:description>
+  </model:externalFulfillmentState>
+  <model:honorCalculatedDates>false</model:honorCalculatedDates>
+</model:orderComponentSpec>

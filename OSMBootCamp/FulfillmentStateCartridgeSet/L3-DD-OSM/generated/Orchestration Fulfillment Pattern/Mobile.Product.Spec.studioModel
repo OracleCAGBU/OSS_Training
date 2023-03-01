@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:FulfillmentPattern" id="ofp=Mobile.Product.Spec" type="ofp" typeName="Orchestration Fulfillment Pattern" name="Mobile.Product.Spec" resource="\L3-DD-OSM\model\Mobile.Product.Spec.productSpec">
+    <displayName lang="default">Mobile.Product.Spec</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=L3-DD-OSM" type="Order and Service Management Project" name="Dependency">
+        <target name="L3-DD-OSM" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <fulfillmentModes>
+      <relation ref="fm=ORDER" type="Fulfillment Mode" name="Fullfillment Mode" kind="Entity">
+        <target name="ORDER" typeName="Fulfillment Mode"/>
+      </relation>
+    </fulfillmentModes>
+    <orchestrationPlanComponents>
+      <relation ref="ocs=ShipOrderFunction" type="Order Component Specification" name="FulfillmentModeOrderComponentSpecs" kind="Entity">
+        <target name="ShipOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=InitiateBillingFunction" type="Order Component Specification" name="FulfillmentModeOrderComponentSpecs" kind="Entity">
+        <target name="InitiateBillingFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=FulfillBillingFunction" type="Order Component Specification" name="FulfillmentModeOrderComponentSpecs" kind="Entity">
+        <target name="FulfillBillingFunction" typeName="Order Component Specification"/>
+      </relation>
+      <relation ref="ocs=ProvisioningOrderFunction" type="Order Component Specification" name="FulfillmentModeOrderComponentSpecs" kind="Entity">
+        <target name="ProvisioningOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+    </orchestrationPlanComponents>
+    <transitionFromOrchestrationPlanComponents>
+      <relation ref="ocs=ProvisioningOrderFunction" type="Order Component Specification" name="oracle.communications.sce.osm.orchestration.productSpec.from.orchPlanComponent" kind="Entity">
+        <target name="ProvisioningOrderFunction" typeName="Order Component Specification"/>
+      </relation>
+    </transitionFromOrchestrationPlanComponents>
+    <transitionToOrchestrationPlanComponents>
+      <relation ref="ocs=FulfillBillingFunction" type="Order Component Specification" name="oracle.communications.sce.osm.orchestration.productSpec.to.orchPlanComponent" kind="Entity">
+        <target name="FulfillBillingFunction" typeName="Order Component Specification"/>
+      </relation>
+    </transitionToOrchestrationPlanComponents>
+    <realizes>
+      <relation ref="fp=MobileFulfillmentPattern" type="Fulfillment Pattern" name="Realization" kind="Entity">
+        <target name="MobileFulfillmentPattern" typeName="Fulfillment Pattern"/>
+      </relation>
+    </realizes>
+    <plans>
+      <element xsi:type="osm:Plan" id="ofp=Mobile.Product.Spec+osm.orch.productSpec.plan=FmNrVIK-QLa0p-YoBLgnAw" type="osm.orch.productSpec.plan" typeName="Orchestration Plan Element" kind="Element" name="ORDER" path="/ORDER"/>
+    </plans>
+    <pointOfNoReturnValues>
+      <element xsi:type="osm:PointOfNoReturn" id="ofp=Mobile.Product.Spec+osm.orch.productSpec.pointOfNoReturn=FqtRgNYmSai1GgMnQXttnQ" type="osm.orch.productSpec.pointOfNoReturn" typeName="Point of No Return Value" kind="Element" name="PROVISIONING_DESIGNED" path="/PROVISIONING_DESIGNED"/>
+      <element xsi:type="osm:PointOfNoReturn" id="ofp=Mobile.Product.Spec+osm.orch.productSpec.pointOfNoReturn=2KctR7lUQEWuBOJNPDZ3hw" type="osm.orch.productSpec.pointOfNoReturn" typeName="Point of No Return Value" kind="Element" name="PROVISIONING_COMPLETED" path="/PROVISIONING_COMPLETED"/>
+    </pointOfNoReturnValues>
+    <extend>
+      <relation ref="ofp=Base.Product.Spec" type="Orchestration Fulfillment Pattern" name="Parent" kind="Entity">
+        <target name="Base.Product.Spec" typeName="Orchestration Fulfillment Pattern"/>
+      </relation>
+    </extend>
+  </entity>
+</model:Model>

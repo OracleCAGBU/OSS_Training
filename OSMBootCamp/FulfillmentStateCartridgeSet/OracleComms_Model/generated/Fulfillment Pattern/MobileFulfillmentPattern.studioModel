@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:FulfillmentPattern" id="fp=MobileFulfillmentPattern" type="fp" typeName="Fulfillment Pattern" name="MobileFulfillmentPattern" resource="\OracleComms_Model\model\MobileFulfillmentPattern.procPtrnType">
+    <displayName lang="default">MobileFulfillmentPattern</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="mprj=OracleComms_Model" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model" typeName="Model Project"/>
+      </relation>
+    </project>
+    <realization>
+      <element id="fp=MobileFulfillmentPattern+fp.ppr=qv3b5BVdSzuZl4N+fplLIw" type="fp.ppr" typeName="Processing Pattern Realization" kind="Element" name="MobileFulfillmentPattern Processing Pattern Realization" path="MobileFulfillmentPattern Processing Pattern Realization">
+        <fulfillmentPatternSystemType>OSM</fulfillmentPatternSystemType>
+      </element>
+    </realization>
+    <classification>
+      <element id="fp=MobileFulfillmentPattern+fp.ppc=Mkswwc3kSYedcw6j-Rw6ig" type="fp.ppc" typeName="Processing Pattern Classification" kind="Element" name="MobileFulfillmentPattern Processing Pattern Classification" path="MobileFulfillmentPattern Processing Pattern Classification">
+        <functionalAreas>
+          <relation ref="fa=Commercial" type="Functional Area" name="Functional Area" kind="Entity">
+            <target name="Commercial" typeName="Functional Area"/>
+          </relation>
+        </functionalAreas>
+      </element>
+    </classification>
+  </entity>
+</model:Model>

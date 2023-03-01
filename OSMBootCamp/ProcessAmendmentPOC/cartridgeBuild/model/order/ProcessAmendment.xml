@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+			
+<orderDefinition xsi:schemaLocation="http://www.metasolv.com/OMS/OrderModel/2002/06/25" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.metasolv.com/OMS/OrderModel/2002/06/25">	
+	<orderType>ProcessAmendment</orderType>
+	<orderSource>ProcessAmendment</orderSource>
+	<orderStatePolicy>OLCP</orderStatePolicy> 
+ 	<amendable>true</amendable>
+	<keyDef>
+		<key>_root/OrderNumber</key>
+
+	</keyDef>
+	<version>_root/Version</version>
+	<name>ProcessAmendment</name>
+	<description>ProcessAmendment order entry task</description>	
+	<orderTemplate>
+		<orderData>/Name</orderData>
+		<orderData>/OrderNumber</orderData>
+		<orderData>/Version</orderData>
+		<orderData>/ProcessAmendment</orderData>
+
+
+	</orderTemplate>
+	<entryView>CreationTask</entryView>
+	<defaultProcess>Test</defaultProcess>
+
+	
+	<workgroupView>
+	  <workgroup>Test</workgroup>
+	  <view>QueryTask</view>
+	</workgroupView>
+	
+
+	<taskView>
+		<task>B</task>
+		<view>B</view>		
+	</taskView>
+	<taskView>
+		<task>C</task>
+		<view>C</view>		
+	</taskView>
+	<taskView>
+		<task>A</task>
+		<view>A</view>		
+	</taskView>
+	<taskView>
+		<task>QueryTask</task>
+		<view>QueryTask</view>		
+	</taskView>
+	<taskView>
+		<task>CreationTask</task>
+		<view>CreationTask</view>		
+	</taskView>
+</orderDefinition>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:productSpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/ordermanagement/model" name="Broadband.Product.Spec" namespace="osm7Order1.com">
+  <model:description>Broadband.Product.Spec</model:description>
+  <model:extends>
+    <model:name>Base.Product.Spec</model:name>
+    <model:namespace>osm7Order1.com</model:namespace>
+  </model:extends>
+  <model:orchestrationPlan>
+    <model:fulfillmentMode>
+      <model:name>ORDER</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:fulfillmentMode>
+    <model:component>
+      <model:name>InstallOrderFunction</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+      <model:fulfillmentStatePoNR>
+        <model:fulfillmentState>
+          <model:name>IN_PROGRESS-INSTALL_PLANNED</model:name>
+          <model:namespace>osm7Order1.com</model:namespace>
+        </model:fulfillmentState>
+        <model:pointOfNoReturn>INSTALL_PLANNED</model:pointOfNoReturn>
+      </model:fulfillmentStatePoNR>
+      <model:fulfillmentStatePoNR>
+        <model:fulfillmentState>
+          <model:name>COMPLETE-INSTALL_COMPLETE</model:name>
+          <model:namespace>osm7Order1.com</model:namespace>
+        </model:fulfillmentState>
+        <model:pointOfNoReturn>INSTALL_COMPLETED</model:pointOfNoReturn>
+      </model:fulfillmentStatePoNR>
+    </model:component>
+    <model:component>
+      <model:name>ProvisioningOrderFunction</model:name>
+      <model:namespace>osm7Order1.com</model:namespace>
+    </model:component>
+    <model:transition name="Broadband.Product.Spec-ORDER--ShipOrderFunction-InstallOrderFunction">
+      <model:from>
+        <model:component>
+          <model:name>ShipOrderFunction</model:name>
+          <model:namespace>osm7Order1.com</model:namespace>
+        </model:component>
+      </model:from>
+      <model:to>
+        <model:name>InstallOrderFunction</model:name>
+        <model:namespace>osm7Order1.com</model:namespace>
+      </model:to>
+      <model:waitForCondition xsi:type="model:TaskStateWaitForConditionType">
+        <model:state>
+          <model:name>completed</model:name>
+          <model:namespace>default</model:namespace>
+        </model:state>
+      </model:waitForCondition>
+      <model:orderItemDependencyCriteria xsi:type="model:IdentityIntersectionOrderItemRelationship" name="Broadband.Product.Spec-ORDER--ShipOrderFunction-InstallOrderFunctionOrderItemRelationship"/>
+    </model:transition>
+    <model:transition name="Broadband.Product.Spec-ORDER--InstallOrderFunction-ProvisioningOrderFunction">
+      <model:from>
+        <model:component>
+          <model:name>InstallOrderFunction</model:name>
+          <model:namespace>osm7Order1.com</model:namespace>
+        </model:component>
+      </model:from>
+      <model:to>
+        <model:name>ProvisioningOrderFunction</model:name>
+        <model:namespace>osm7Order1.com</model:namespace>
+      </model:to>
+      <model:waitForCondition xsi:type="model:TaskStateWaitForConditionType">
+        <model:state>
+          <model:name>completed</model:name>
+          <model:namespace>default</model:namespace>
+        </model:state>
+      </model:waitForCondition>
+      <model:orderItemDependencyCriteria xsi:type="model:IdentityIntersectionOrderItemRelationship" name="Broadband.Product.Spec-ORDER--InstallOrderFunction-ProvisioningOrderFunctionOrderItemRelationship"/>
+    </model:transition>
+    <model:transition name="Broadband.Product.Spec-ORDER--ProvisioningOrderFunction-FulfillBillingFunction">
+      <model:from>
+        <model:component>
+          <model:name>ProvisioningOrderFunction</model:name>
+          <model:namespace>osm7Order1.com</model:namespace>
+        </model:component>
+      </model:from>
+      <model:to>
+        <model:name>FulfillBillingFunction</model:name>
+        <model:namespace>osm7Order1.com</model:namespace>
+      </model:to>
+      <model:waitForCondition xsi:type="model:TaskStateWaitForConditionType">
+        <model:state>
+          <model:name>completed</model:name>
+          <model:namespace>default</model:namespace>
+        </model:state>
+      </model:waitForCondition>
+      <model:orderItemDependencyCriteria xsi:type="model:IdentityIntersectionOrderItemRelationship" name="Broadband.Product.Spec-ORDER--ProvisioningOrderFunction-FulfillBillingFunctionOrderItemRelationship"/>
+    </model:transition>
+  </model:orchestrationPlan>
+  <model:pointOfNoReturn name="INSTALL_PLANNED">
+    <model:description>INSTALL DESIGNED</model:description>
+    <model:hardPointOfNoReturn>false</model:hardPointOfNoReturn>
+  </model:pointOfNoReturn>
+  <model:pointOfNoReturn name="INSTALL_COMPLETED">
+    <model:description>INSTALL COMPLETED</model:description>
+    <model:hardPointOfNoReturn>true</model:hardPointOfNoReturn>
+  </model:pointOfNoReturn>
+</model:productSpec>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:proc="http://xmlns.oracle.com/communications/sce/osm/model/process" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/process" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:task="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="proc:processType" name="BillingProcess" workstream="false">
+  <com:displayName>BillingProcess</com:displayName>
+  <com:saveVersion>4</com:saveVersion>
+  <com:id>UYIz+xhjQX23GPWmjSF1mw</com:id>
+  <proc:orderType>
+    <com:entity>L3-DD-OSMOrder</com:entity>
+    <com:entityType>order</com:entityType>
+    <com:relationship>orderRef</com:relationship>
+  </proc:orderType>
+  <proc:expectedDuration>P0Y0M0DT0H0M86400S</proc:expectedDuration>
+  <proc:startTask>Start1</proc:startTask>
+  <proc:activity id="Start1" name="Start">
+    <proc:processHistorySummary>true</proc:processHistorySummary>
+    <proc:diagramLocation>
+      <proc:Xcoordinate>50.0</proc:Xcoordinate>
+      <proc:Ycoordinate>50.0</proc:Ycoordinate>
+    </proc:diagramLocation>
+  </proc:activity>
+  <proc:activity xsi:type="proc:taskRef" id="Task1" name="BillingDebugTask">
+    <proc:processHistorySummary>true</proc:processHistorySummary>
+    <proc:diagramLocation>
+      <proc:Xcoordinate>220.0</proc:Xcoordinate>
+      <proc:Ycoordinate>98.0</proc:Ycoordinate>
+    </proc:diagramLocation>
+    <proc:task>
+      <com:entity>BillingDebugTask</com:entity>
+      <com:entityType>manualTask</com:entityType>
+      <com:relationship>taskRef</com:relationship>
+    </proc:task>
+  </proc:activity>
+  <proc:activity xsi:type="proc:endType" id="End2" name="End">
+    <proc:diagramLocation>
+      <proc:Xcoordinate>525.0</proc:Xcoordinate>
+      <proc:Ycoordinate>86.0</proc:Ycoordinate>
+    </proc:diagramLocation>
+  </proc:activity>
+  <proc:transition id="Flow3" name="">
+    <proc:from>Start1</proc:from>
+    <proc:to>Task1</proc:to>
+    <proc:status></proc:status>
+    <proc:mandatoryCheck>true</proc:mandatoryCheck>
+  </proc:transition>
+  <proc:transition id="Flow4" name="next">
+    <proc:from>Task1</proc:from>
+    <proc:to>End2</proc:to>
+    <proc:status>next</proc:status>
+    <proc:mandatoryCheck>true</proc:mandatoryCheck>
+  </proc:transition>
+</com:modelEntity>

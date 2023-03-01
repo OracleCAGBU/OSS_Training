@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:Role" id="rol=Test" type="rol" typeName="Role" name="Test" resource="\ProcessAmendmentPOC\model\Test.rolePermissions">
+    <displayName lang="default">Test</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=ProcessAmendmentPOC" type="Order and Service Management Project" name="Dependency">
+        <target name="ProcessAmendmentPOC" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+  </entity>
+</model:Model>

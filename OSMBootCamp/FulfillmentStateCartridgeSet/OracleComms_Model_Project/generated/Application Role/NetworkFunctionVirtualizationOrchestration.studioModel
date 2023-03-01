@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:ApplicationRole" id="ar=NetworkFunctionVirtualizationOrchestration" type="ar" typeName="Application Role" name="NetworkFunctionVirtualizationOrchestration" resource="\OracleComms_Model_Project\model\NetworkFunctionVirtualizationOrchestration.applicationRole" shortName="NFVO">
+    <displayName lang="default">Network Function Virtualization Orchestration</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="mprj=OracleComms_Model_Project" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model_Project" typeName="Model Project"/>
+      </relation>
+    </project>
+    <specializedActionCodes>
+      <element id="ar=NetworkFunctionVirtualizationOrchestration+ar.sacd=JDo3EqcYROmTgS9Q3ke7cw" type="ar.sacd" typeName="Specialized Action Code Detail" kind="Element" name="Instantiate" path="/Instantiate" specializedActionName="Instantiate">
+        <actionCode>
+          <relation ref="ac=Create" type="Action Code" name="Action Code" kind="Entity">
+            <target name="Create" typeName="Action Code"/>
+          </relation>
+        </actionCode>
+      </element>
+      <element id="ar=NetworkFunctionVirtualizationOrchestration+ar.sacd=tFb9mQceTeK7AkOfB-2J0w" type="ar.sacd" typeName="Specialized Action Code Detail" kind="Element" name="Terminate" path="/Terminate" specializedActionName="Terminate">
+        <actionCode>
+          <relation ref="ac=Remove" type="Action Code" name="Action Code" kind="Entity">
+            <target name="Remove" typeName="Action Code"/>
+          </relation>
+        </actionCode>
+      </element>
+    </specializedActionCodes>
+    <actionType>
+      <relation ref="fa=Technical" type="Functional Area" name="Action Type" kind="Entity">
+        <target name="Technical" typeName="Functional Area"/>
+      </relation>
+    </actionType>
+  </entity>
+</model:Model>

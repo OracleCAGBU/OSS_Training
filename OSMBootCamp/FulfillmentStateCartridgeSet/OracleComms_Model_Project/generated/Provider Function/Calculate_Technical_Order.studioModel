@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmn="http://xmlns.oracle.com/communications/studio/model/common" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="cmn:ProviderFunction" id="pf=Calculate_Technical_Order" type="pf" typeName="Provider Function" name="Calculate_Technical_Order" resource="\OracleComms_Model_Project\model\Calculate_Technical_Order.provFunc">
+    <displayName lang="default">Calculate  Technical  Order</displayName>
+    <note lang="default">This is a Provider Function that determines the Technical Order lines.   It is invoked to calculate a delta configuration between the future state of Service &amp; Resource inventory in an SRM system, and current state of the network, for a given service instance. In the context of &quot;Activation,&quot; for example, this Provider Function determines technical order lines for activating devices, called Network Elements, on the network.</note>
+    <project>
+      <relation ref="mprj=OracleComms_Model_Project" type="Model Project" name="Dependency">
+        <target name="OracleComms_Model_Project" typeName="Model Project"/>
+      </relation>
+    </project>
+    <mappingSource>
+      <element id="pf=Calculate_Technical_Order+pf.ms=gwsV--+1--+7w6dOHFk0Kg" type="pf.ms" typeName="Mapping Source" kind="Element" name="RFS" path="/RFS">
+        <MappingSource>RFS</MappingSource>
+      </element>
+      <element id="pf=Calculate_Technical_Order+pf.ms=---n--+6--+UJXQB---YQw" type="pf.ms" typeName="Mapping Source" kind="Element" name="RESOURCE" path="/RESOURCE">
+        <MappingSource>RESOURCE</MappingSource>
+      </element>
+      <element id="pf=Calculate_Technical_Order+pf.ms=---zL+cH--+X---v--+s0w" type="pf.ms" typeName="Mapping Source" kind="Element" name="LOCATION" path="/LOCATION">
+        <MappingSource>LOCATION</MappingSource>
+      </element>
+    </mappingSource>
+    <mappingTarget>
+      <element id="pf=Calculate_Technical_Order+pf.mt=---J--+E--+f75Rn--+uxA" type="pf.mt" typeName="Mapping Target" kind="Element" name="RFS.Technical" path="/RFS.Technical">
+        <actionType>
+          <relation ref="fa=Technical" type="Functional Area" name="Action Type" kind="Entity">
+            <target name="Technical" typeName="Functional Area"/>
+          </relation>
+        </actionType>
+        <MappingTarget>RFS</MappingTarget>
+      </element>
+      <element id="pf=Calculate_Technical_Order+pf.mt=sxUPgewt--+D--+UTFg6jQ" type="pf.mt" typeName="Mapping Target" kind="Element" name="RESOURCE.Technical" path="/RESOURCE.Technical">
+        <actionType>
+          <relation ref="fa=Technical" type="Functional Area" name="Action Type" kind="Entity">
+            <target name="Technical" typeName="Functional Area"/>
+          </relation>
+        </actionType>
+        <MappingTarget>RESOURCE</MappingTarget>
+      </element>
+    </mappingTarget>
+    <providerFunctionRelationshipTypes>
+      <element id="pf=Calculate_Technical_Order+pf.rt=--+7--+V--+IQTwn--+09Q" type="pf.rt" typeName="Relationship Types" kind="Element" name="Calculate_Technical_Order Relationship Types" path="Calculate_Technical_Order Relationship Types">
+        <relationships>
+          <relation ref="rt=Composition.Exclusive" type="Relationship Type" name="Relationship Types" kind="Entity">
+            <target name="Composition.Exclusive" typeName="Relationship Type"/>
+          </relation>
+          <relation ref="rt=Composition.Reference" type="Relationship Type" name="Relationship Types" kind="Entity">
+            <target name="Composition.Reference" typeName="Relationship Type"/>
+          </relation>
+          <relation ref="rt=Composition.Shared" type="Relationship Type" name="Relationship Types" kind="Entity">
+            <target name="Composition.Shared" typeName="Relationship Type"/>
+          </relation>
+        </relationships>
+      </element>
+    </providerFunctionRelationshipTypes>
+  </entity>
+</model:Model>

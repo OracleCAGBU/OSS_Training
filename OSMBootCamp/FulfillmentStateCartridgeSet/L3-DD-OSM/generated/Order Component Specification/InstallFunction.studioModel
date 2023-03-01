@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model" xmlns:osm="http://xmlns.oracle.com/communications/studio/model/osm">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="osm:OrderComponentSpecification" id="ocs=InstallFunction" type="ocs" typeName="Order Component Specification" name="InstallFunction" resource="\L3-DD-OSM\model\FUNCTION\InstallFunction.orderComponentSpec">
+    <displayName lang="default">InstallFunction</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="oprj=L3-DD-OSM" type="Order and Service Management Project" name="Dependency">
+        <target name="L3-DD-OSM" typeName="Order and Service Management Project"/>
+      </relation>
+    </project>
+    <componentElements>
+      <element xsi:type="osm:Component" id="ocs=InstallFunction+osm.orch.orderComponentSpec.element=he4nPF6LQBebsNdaQ7VuYQ" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="InstallFunction" path="/FulfillmentFunction/InstallFunction">
+        <components>
+          <element xsi:type="osm:Component" id="ocs=InstallOrderFunction+osm.orch.orderComponentSpec.element=TgdznYtDTnyz78KVDaDOSw" type="osm.orch.orderComponentSpec.element" typeName="Orchestration Component Element" kind="Element" name="InstallOrderFunction" path="/FulfillmentFunction/InstallFunction/InstallOrderFunction"/>
+        </components>
+      </element>
+    </componentElements>
+    <extend>
+      <relation ref="ocs=FulfillmentFunction" type="Order Component Specification" name="Extends" kind="Entity">
+        <target name="FulfillmentFunction" typeName="Order Component Specification"/>
+      </relation>
+    </extend>
+  </entity>
+</model:Model>

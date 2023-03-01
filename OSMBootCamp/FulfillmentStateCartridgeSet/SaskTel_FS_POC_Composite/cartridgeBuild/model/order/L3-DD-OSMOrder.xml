@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+			
+<orderDefinition xsi:schemaLocation="http://www.metasolv.com/OMS/OrderModel/2002/06/25" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.metasolv.com/OMS/OrderModel/2002/06/25">	
+	<orderType>L3-DD-OSMOrder</orderType>
+	<orderSource>L3-DD-OSMOrder</orderSource>
+	<orderStatePolicy>OrderLifecyclePolicy</orderStatePolicy> 
+ 	<amendable>true</amendable>
+	<keyDef>
+		<key>_root/OrderNumber</key>
+
+	</keyDef>
+	<version>_root/Revision</version>
+	<name>L3-DD-OSMOrder</name>
+	<description>L3-DD-OSMOrder order entry task</description>	
+	<orderTemplate>
+		<orderData>/ControlData</orderData>
+		<orderData>/ControlData/OrderItem</orderData>
+		<orderData>/ControlData/OrderFulfillmentState</orderData>
+		<orderData>/ControlData/Functions</orderData>
+		<orderData>/ControlData/Functions/FulfillBillingFunction</orderData>
+		<orderData>/ControlData/Functions/FulfillBillingFunction/componentKey</orderData>
+		<orderData>/ControlData/Functions/FulfillBillingFunction/orderItem</orderData>
+		<orderData>/ControlData/Functions/FulfillBillingFunction/orderItem/ExternalFulfillmentState</orderData>
+		<orderData>/ControlData/Functions/FulfillBillingFunction/orderItem/orderItemRef</orderData>
+		<orderData>/ControlData/Functions/FulfillBillingFunction/calculatedStartDate</orderData>
+		<orderData>/ControlData/Functions/FulfillBillingFunction/duration</orderData>
+		<orderData>/ControlData/Functions/InstallOrderFunction</orderData>
+		<orderData>/ControlData/Functions/InstallOrderFunction/componentKey</orderData>
+		<orderData>/ControlData/Functions/InstallOrderFunction/orderItem</orderData>
+		<orderData>/ControlData/Functions/InstallOrderFunction/orderItem/ExternalFulfillmentState</orderData>
+		<orderData>/ControlData/Functions/InstallOrderFunction/orderItem/orderItemRef</orderData>
+		<orderData>/ControlData/Functions/InstallOrderFunction/calculatedStartDate</orderData>
+		<orderData>/ControlData/Functions/InstallOrderFunction/duration</orderData>
+		<orderData>/ControlData/Functions/InitiateBillingFunction</orderData>
+		<orderData>/ControlData/Functions/InitiateBillingFunction/componentKey</orderData>
+		<orderData>/ControlData/Functions/InitiateBillingFunction/orderItem</orderData>
+		<orderData>/ControlData/Functions/InitiateBillingFunction/orderItem/ExternalFulfillmentState</orderData>
+		<orderData>/ControlData/Functions/InitiateBillingFunction/orderItem/orderItemRef</orderData>
+		<orderData>/ControlData/Functions/InitiateBillingFunction/calculatedStartDate</orderData>
+		<orderData>/ControlData/Functions/InitiateBillingFunction/duration</orderData>
+		<orderData>/ControlData/Functions/ShipOrderFunction</orderData>
+		<orderData>/ControlData/Functions/ShipOrderFunction/componentKey</orderData>
+		<orderData>/ControlData/Functions/ShipOrderFunction/orderItem</orderData>
+		<orderData>/ControlData/Functions/ShipOrderFunction/orderItem/ExternalFulfillmentState</orderData>
+		<orderData>/ControlData/Functions/ShipOrderFunction/orderItem/orderItemRef</orderData>
+		<orderData>/ControlData/Functions/ShipOrderFunction/calculatedStartDate</orderData>
+		<orderData>/ControlData/Functions/ShipOrderFunction/duration</orderData>
+		<orderData>/ControlData/Functions/ProvisioningOrderFunction</orderData>
+		<orderData>/ControlData/Functions/ProvisioningOrderFunction/componentKey</orderData>
+		<orderData>/ControlData/Functions/ProvisioningOrderFunction/orderItem</orderData>
+		<orderData>/ControlData/Functions/ProvisioningOrderFunction/orderItem/ExternalFulfillmentState</orderData>
+		<orderData>/ControlData/Functions/ProvisioningOrderFunction/orderItem/orderItemRef</orderData>
+		<orderData>/ControlData/Functions/ProvisioningOrderFunction/calculatedStartDate</orderData>
+		<orderData>/ControlData/Functions/ProvisioningOrderFunction/duration</orderData>
+		<orderData>/CustomerOrderXml</orderData>
+		<orderData>/OrderId</orderData>
+		<orderData>/OrderNumber</orderData>
+		<orderData>/Revision</orderData>
+
+		<keyDef>
+			<orderData>/ControlData/Functions/FulfillBillingFunction</orderData>
+			<key>./componentKey</key>
+		</keyDef>
+		<keyDef>
+			<orderData>/ControlData/Functions/FulfillBillingFunction/orderItem</orderData>
+			<key>./orderItemRef/LineID</key>
+		</keyDef>
+		<keyDef>
+			<orderData>/ControlData/Functions/InstallOrderFunction</orderData>
+			<key>./componentKey</key>
+		</keyDef>
+		<keyDef>
+			<orderData>/ControlData/Functions/InstallOrderFunction/orderItem</orderData>
+			<key>./orderItemRef/LineID</key>
+		</keyDef>
+		<keyDef>
+			<orderData>/ControlData/Functions/InitiateBillingFunction</orderData>
+			<key>./componentKey</key>
+		</keyDef>
+		<keyDef>
+			<orderData>/ControlData/Functions/InitiateBillingFunction/orderItem</orderData>
+			<key>./orderItemRef/LineID</key>
+		</keyDef>
+		<keyDef>
+			<orderData>/ControlData/Functions/ShipOrderFunction</orderData>
+			<key>./componentKey</key>
+		</keyDef>
+		<keyDef>
+			<orderData>/ControlData/Functions/ShipOrderFunction/orderItem</orderData>
+			<key>./orderItemRef/LineID</key>
+		</keyDef>
+		<keyDef>
+			<orderData>/ControlData/Functions/ProvisioningOrderFunction</orderData>
+			<key>./componentKey</key>
+		</keyDef>
+		<keyDef>
+			<orderData>/ControlData/Functions/ProvisioningOrderFunction/orderItem</orderData>
+			<key>./orderItemRef/LineID</key>
+		</keyDef>
+
+	</orderTemplate>
+	<entryView>OrderCreationTask</entryView>
+	<defaultProcess>OrderOrchestrationProcess</defaultProcess>
+
+	
+	<workgroupView>
+	  <workgroup>osm7ddRole</workgroup>
+	  <view>OrderDebugTask</view>
+	</workgroupView>
+	
+
+	<taskView>
+		<task>BillingDebugTask</task>
+		<view>BillingDebugTask</view>		
+	</taskView>
+	<taskView>
+		<task>InstallDebugTask</task>
+		<view>InstallDebugTask</view>		
+	</taskView>
+	<taskView>
+		<task>ShippingDebugTask</task>
+		<view>ShippingDebugTask</view>		
+	</taskView>
+	<taskView>
+		<task>OrderCreationTask</task>
+		<view>OrderCreationTask</view>		
+	</taskView>
+	<taskView>
+		<task>OrderDebugTask</task>
+		<view>OrderDebugTask</view>		
+	</taskView>
+	<taskView>
+		<task>ProvisioningDebugTask</task>
+		<view>ProvisioningDebugTask</view>		
+	</taskView>
+</orderDefinition>
