@@ -33,16 +33,24 @@ rule "InsteadProcessInteractionItems"
 	    
 	    Iterator it = itemMap.entrySet().iterator();
 	   	
-	    if(bi.getSpecification().getName().equals("Service Order")){
+	    if(bi.getSpecification().getName().equals("BI_Order")){
 	    	log.debug("", new Object[] { "#### First persist all BI items and then call automateConfiguration for the first BI item ####" });
 	    	//Persist all itemTypeConfigPair(s) in JMS queue
 	    	DesignNAssignJMSClient jmsClient = new DesignNAssignJMSClient();
 	    	jmsClient.initializeDesignNAssignJMSClient();
+			
+			HashMap<ServiceConfigurationVersion, BusinessInteractionItemType> configItemMap = new HashMap<ServiceConfigurationVersion, BusinessInteractionItemType>();
+			
 			while (it.hasNext()) {
+			
 				Map.Entry itemTypeConfigPair = (Map.Entry) it.next();
 				BusinessInteractionItemType item = (BusinessInteractionItemType) itemTypeConfigPair.getKey();
+				log.debug("", new Object[] { "item : " + item });
+				
 				ServiceConfigurationVersion configuration = (ServiceConfigurationVersion) itemTypeConfigPair.getValue();
-				HashMap<ServiceConfigurationVersion, BusinessInteractionItemType> configItemMap = new HashMap<ServiceConfigurationVersion, BusinessInteractionItemType>();
+				log.debug("", new Object[] { "configuration : " + configuration });
+				
+				//HashMap<ServiceConfigurationVersion, BusinessInteractionItemType> configItemMap = new HashMap<ServiceConfigurationVersion, BusinessInteractionItemType>();
 	        	configItemMap.put(configuration, item);
 	        	MessageProducer sender = jmsClient.createMessageSender(bi.getId());
 	        	jmsClient.sendObjectMessage(configItemMap, sender, DesignNAssignJMSClient.process_new);
@@ -53,7 +61,7 @@ rule "InsteadProcessInteractionItems"
 			jmsClient.initializeDesignNAssignJMSClient();
 			log.debug("", new Object[] { "START PROCESS MESSAGE FOR ********************************** : "+bi.getId() });
 			MessageConsumer receiver = jmsClient.createMessageReceiver(bi.getId(), DesignNAssignJMSClient.process_new);
-		    jmsClient.processMessage(receiver);	
+		    jmsClient.processMessage(receiver, configItemMap );	
 
 		} else {
 			log.debug("", new Object[] { "#### If its not a Service Order, directly call automateConfiguration for config ####" });

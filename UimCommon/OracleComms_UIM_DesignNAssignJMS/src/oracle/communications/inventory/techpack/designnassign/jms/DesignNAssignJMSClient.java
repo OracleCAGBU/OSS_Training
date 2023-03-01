@@ -23,6 +23,8 @@ import oracle.communications.inventory.api.entity.BusinessInteraction;
 import oracle.communications.inventory.api.entity.BusinessInteractionState;
 import oracle.communications.inventory.api.entity.ServiceConfigurationVersion;
 import oracle.communications.inventory.api.exception.ValidationException;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.framework.logging.LogFactory;
 import oracle.communications.inventory.api.framework.logging.impl.FeedbackProviderImpl;
 import oracle.communications.inventory.c2a.DesignManager;
 import oracle.communications.inventory.c2a.impl.DesignHelper;
@@ -32,6 +34,7 @@ import weblogic.jms.extensions.WLMessageProducer;
 
 public class DesignNAssignJMSClient {
 	
+	private static Log log = LogFactory.getLog(DesignNAssignJMSClient.class);
 	public final static String resume_design = "RESUME_PENDING_DESIGN";
 	public final static String process_new = "PROCESS_NEXT_DESIGN";
 	
@@ -44,9 +47,29 @@ public class DesignNAssignJMSClient {
 	Queue designNAssignQueue;
 	ObjectMessage message  = null;
 	
+	/**
+	 * Log the debug data values in the debug log if the log is enabled. 
+	 * 
+	 * @param objects
+	 */
+	
+	private void debug(Object ...objects) {
+		try {
+			if (log.isDebugEnabled()) {
+				StringBuilder sb=new StringBuilder();
+				for(Object obj:objects) {
+					sb.append(obj);
+				}
+				log.debug("",sb.toString());
+			}
+		} catch (Exception e) {
+			log.debug("", "Error Message :"+e.getMessage());
+		}
+	}
+	
 	public DesignNAssignJMSClient()
     {
-        System.out.println("Constructor DesignNAssignJMSClient called");
+        debug("Constructor DesignNAssignJMSClient called");
     }
 	
 	
@@ -59,8 +82,10 @@ public class DesignNAssignJMSClient {
 	}
 	
     public void initializeDesignNAssignJMSClient() throws JMSException {
-        String                  queueName = "DesignNAssignQueue";
-        String                  queueConnectionFactoryName = "weblogic.jms.XAConnectionFactory";
+        debug("#### initializeDesignNAssignJMSClient START");
+        
+        String                  queueName = "inventoryWSQueueAlternate";
+        String                  queueConnectionFactoryName = "inventoryWSQueueAlternateCF";
         Context                 jndiContext = null;
         QueueConnectionFactory  queueConnectionFactory = null;
         
@@ -74,17 +99,23 @@ public class DesignNAssignJMSClient {
             queueConnectionFactory = (QueueConnectionFactory)
                 jndiContext.lookup(queueConnectionFactoryName);
             designNAssignQueue = (Queue) jndiContext.lookup(queueName);
-            System.out.println("Queue name : "+designNAssignQueue.getQueueName());
+            debug(log,"Queue name : "+designNAssignQueue.getQueueName());
             queueConnection = queueConnectionFactory.createQueueConnection();
+            debug(log,"queueConnection : " + queueConnection);
 			queueSession = queueConnection.createQueueSession(true, Session.AUTO_ACKNOWLEDGE);
+            debug(log,"queueSession : " + queueSession);
+
         } catch (NamingException e) {
-            System.out.println("JNDI lookup failed: " +
+            debug("JNDI lookup failed: " +
                 e.toString());
             System.exit(1);
         }
+        debug("#### initializeDesignNAssignJMSClient END");
     }
     
     public MessageProducer createMessageSender(String biID){
+        debug("#### createMessageSender START");
+        
     	WLMessageProducer queueSender = null;
     	try {
 			queueSender = (WLMessageProducer)queueSession.createProducer(designNAssignQueue);
@@ -93,10 +124,14 @@ public class DesignNAssignJMSClient {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        debug("#### createMessageSender END");
+
     	return queueSender;
     }
     
     public MessageConsumer createMessageReceiver(String biID, String resumeOrNew){
+        debug("#### createMessageReceiver START");
+
     	MessageConsumer queueReceiver = null;
     	try {
     		String messageSelector = null;
@@ -109,10 +144,14 @@ public class DesignNAssignJMSClient {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        debug("#### createMessageReceiver END");
+
     	return queueReceiver;
     }
     
     public void sendObjectMessage(Serializable object, MessageProducer queueSender, String resumeOrNew){
+        debug("#### sendObjectMessage START");
+
     	try {
     		this.message = queueSession.createObjectMessage();
 			this.message.setObject(object);
@@ -120,7 +159,7 @@ public class DesignNAssignJMSClient {
 				this.message.setStringProperty("designstatus", "PENDING_DESIGN");
 				this.message.setStringProperty("manualdesigncomponent", DesignNAssignJMSClient.getManualDesignComponent());
 			}
-			//System.out.println("Producing message: " + message.getObject());
+			debug(log,"Producing message: " + message.getObject());
 			queueSender.send(message);
 			
 		} catch (Exception e) {
@@ -134,29 +173,38 @@ public class DesignNAssignJMSClient {
 				e.printStackTrace();
 			}
 		}
+        debug("#### sendObjectMessage END");
+
     }
     
-    public Message processMessage(MessageConsumer queueReceiver) throws Exception {
+    public Message processMessage(MessageConsumer queueReceiver, HashMap<ServiceConfigurationVersion, BusinessInteractionItemType> configItemMap) throws Exception {
+        debug("#### processMessage START");
+
     	Message msg = null;
     	try {    		
     		queueConnection.start();
     		msg = queueReceiver.receive(1000);
-			if (msg != null) {
-				if (msg instanceof ObjectMessage){
-					message = (ObjectMessage) msg;
-					DesignNAssignJMSClient.setManualDesignComponent(message.getStringProperty("manualdesigncomponent"));
+            debug(log,"msg : " + msg);
+
+			if (configItemMap != null) {
+//				if (msg instanceof ObjectMessage){
+//					message = (ObjectMessage) msg;
+					//DesignNAssignJMSClient.setManualDesignComponent(message.getStringProperty("manualdesigncomponent"));
+					//HashMap<ServiceConfigurationVersion, BusinessInteractionItemType> configMap = (HashMap<ServiceConfigurationVersion, BusinessInteractionItemType>) message.getObject();
 					
-					HashMap<ServiceConfigurationVersion, BusinessInteractionItemType> configMap = (HashMap<ServiceConfigurationVersion, BusinessInteractionItemType>) message.getObject();
-					System.out.println("Consuming message: " + configMap.keySet());
+					HashMap<ServiceConfigurationVersion, BusinessInteractionItemType> configMap = configItemMap;
+					debug("Consuming message: " + configMap.keySet());
 					Iterator<ServiceConfigurationVersion> keyItr = configMap.keySet().iterator();
 					if(keyItr.hasNext()){
 						config = keyItr.next();
 						orderItem = configMap.get(config);
-						System.out.println(" ###### Process Message #####" + config.getId() + "#####" + config.getName());
+						debug(" ###### Process Message #####" + config.getId() + "#####" + config.getName());
+						debug(" ###### config #####" + config + "##### + orderItem" + orderItem);
+
 						BaseConfigurationManager baseConfigMgr = PersistenceHelper.makeConfigurationManager(config.getClass());
 						baseConfigMgr.automateConfiguration(config, orderItem);
 					}
-				}
+//				}
 				//Call postDesign
 				if(!queueReceiver.getMessageSelector().contains("designstatus = 'PENDING_DESIGN'")){
 					//Get Service Order BI
@@ -171,10 +219,14 @@ public class DesignNAssignJMSClient {
 			//Close the receiver
 			queueReceiver.close();
     	}
+        debug("#### processMessage END");
+
     	return msg;
     }
     
     public void postDesign(BusinessInteraction serviceOrderBI){
+        debug("#### postDesign START");
+
     	try {
 			Set<BusinessInteraction> manualBIs = serviceOrderBI.getChildBusinessInteractions();
 			
@@ -192,14 +244,15 @@ public class DesignNAssignJMSClient {
                 HashMap<ServiceConfigurationVersion, BusinessInteractionItemType> configItemMap = new HashMap<ServiceConfigurationVersion, BusinessInteractionItemType>();
         		configItemMap.put(config, orderItem);
         		MessageProducer sender = this.createMessageSender(serviceOrderBI.getId());
-        		System.out.println("ManualDesignComponent : "+ getManualDesignComponent());
+        		debug("ManualDesignComponent : "+ getManualDesignComponent());
         		this.sendObjectMessage(configItemMap, sender, DesignNAssignJMSClient.resume_design); 
         		this.commitOrRollbackJMSSession();
 			}
 			else{
+				debug(log,"Before process message");
 				//If no manual design pending
 				MessageConsumer receiver = this.createMessageReceiver(serviceOrderBI.getId(), DesignNAssignJMSClient.process_new);
-				Message nextItem = this.processMessage(receiver);
+				Message nextItem = this.processMessage(receiver, null);
 				
 				//If no manual design pending and no next message in the queue, send the final ProcessInteraction response to OSM
 				if(nextItem==null){					
@@ -212,9 +265,13 @@ public class DesignNAssignJMSClient {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}    	
+        debug("#### postDesign END");
+
     }
     
     public void postDesign(BusinessInteraction serviceOrderBI, boolean initializeSession){
+        debug("#### postDesign START");
+
     	if(initializeSession)
 			try {
 				this.initializeDesignNAssignJMSClient();
@@ -223,9 +280,12 @@ public class DesignNAssignJMSClient {
 				e.printStackTrace();
 			}
     	this.postDesign(serviceOrderBI);
+        debug("#### postDesign END");
     }
     
     public void sendFinalProcessInteractionResponseToOSM(BusinessInteraction bi){
+        debug("#### sendFinalProcessInteractionResponseToOSM START");
+
     	String jmsCorrelationId = null;
     	
     	Set<BusinessInteraction> childBIs = bi.getChildBusinessInteractions();
@@ -238,7 +298,7 @@ public class DesignNAssignJMSClient {
     		}
     	}
         
-        System.out.println("JMS Correlation Id: " + jmsCorrelationId);
+        debug("JMS Correlation Id: " + jmsCorrelationId);
         
         DesignManager designManager = DesignHelper.makeDesignManager();
         
@@ -249,19 +309,29 @@ public class DesignNAssignJMSClient {
         }catch(ValidationException e){
         	//log.error("", e.getMessage());
         }
+        debug("#### sendFinalProcessInteractionResponseToOSM END");
+
     }
 	
     public void commitOrRollbackJMSSession() throws JMSException {
+        debug("#### commitOrRollbackJMSSession START");
+
     	try{
-	    	if(FeedbackProviderImpl.hasErrors())
+	    	if(FeedbackProviderImpl.hasErrors()) {
 				queueSession.rollback();
-			else
+				debug(log,"Message rollbacked");
+	    	}
+			else {
+				debug(log,"Message Committed");
 				queueSession.commit();
+			}
 			
 			queueSession.close();
 			queueConnection.close();
     	} catch(JMSException e){
     		throw e;
     	}
+        debug("#### commitOrRollbackJMSSession END");
+
     }
 }

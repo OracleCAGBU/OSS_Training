@@ -15,6 +15,8 @@ import oracle.communications.inventory.api.entity.BusinessInteractionChar;
 import oracle.communications.inventory.api.entity.BusinessInteractionSpec;
 import oracle.communications.inventory.api.entity.CharacteristicSpecification;
 import oracle.communications.inventory.api.exception.ValidationException;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.framework.logging.LogFactory;
 import oracle.communications.inventory.c2a.DesignManager;
 import oracle.communications.inventory.c2a.impl.DesignHelper;
 import oracle.communications.inventory.techpack.designnassign.jms.DesignNAssignJMSClient;
@@ -25,16 +27,38 @@ import oracle.communications.platform.persistence.PersistenceHelper;
 
 public class EWODesigner {
     
+	private static Log log = LogFactory.getLog(DesignNAssignJMSClient.class);
     private static final String SPEC_EWO = "Engineering Work Order";
     
     private BusinessInteractionManager biManager = PersistenceHelper.makeBusinessInteractionManager();
     
+    /**
+	 * Log the debug data values in the debug log if the log is enabled. 
+	 * 
+	 * @param objects
+	 */
+	
+	private void debug(Object ...objects) {
+		try {
+			if (log.isDebugEnabled()) {
+				StringBuilder sb=new StringBuilder();
+				for(Object obj:objects) {
+					sb.append(obj);
+				}
+				log.debug("",sb.toString());
+			}
+		} catch (Exception e) {
+			log.debug("", "Error Message :"+e.getMessage());
+		}
+	}
+	
     public EWODesigner() {
 
     }
     
     public BusinessInteraction createEWO(String name) throws ValidationException{
-        
+        debug(log,"#### createEWO START");
+
         Finder finder = PersistenceHelper.makeFinder();
         
         try{
@@ -78,11 +102,15 @@ public class EWODesigner {
             return bi;
 
         }finally{
+            debug(log,"#### createEWO END");
             finder.close();
         }
+
     }
     
     public boolean isPendingEWOExist(String name){
+		debug(log,"isPendingEWOExist - START");
+
     	boolean isExist = false;
     	Finder finder = PersistenceHelper.makeFinder();
     	BusinessInteractionSpec biSpec = finder.findByName(BusinessInteractionSpec.class, SPEC_EWO).iterator().next();
@@ -99,10 +127,13 @@ public class EWODesigner {
     	List<BusinessInteraction> bis = biManager.findBusinessInteraction(searchCriteria);
     	if(!bis.isEmpty())
     		isExist = true;
+		debug(log,"isPendingEWOExist - END");
     	return isExist;
     }
     
     public BusinessInteraction getEWOByName(String name){
+		debug(log,"getEWOByName - START");
+
     	BusinessInteraction ewo = null;
     	Finder finder = PersistenceHelper.makeFinder();
     	BusinessInteractionSpec biSpec = finder.findByName(BusinessInteractionSpec.class, SPEC_EWO).iterator().next();
@@ -117,10 +148,13 @@ public class EWODesigner {
     		//TODO Assuming there will only be one BI with this name.
     		ewo = bis.get(0);
     	}
+		debug(log,"getEWOByName - END");
     	return ewo;
     }
     
 	public void setManualDesignComponent(String componentName) {
+		debug(log,"setManualDesignComponent - START");
+
 		if(componentName!=null){
 			if(DesignNAssignJMSClient.getManualDesignComponent()!=null)
 				DesignNAssignJMSClient.setManualDesignComponent(componentName+"#"+DesignNAssignJMSClient.getManualDesignComponent());
@@ -129,9 +163,13 @@ public class EWODesigner {
 		}
 		else
 			DesignNAssignJMSClient.setManualDesignComponent(componentName);
+		debug(log,"setManualDesignComponent - END");
+
 	}
 
 	public String getManualDesignComponent(String designerClassName) throws ValidationException {
+		debug(log,"getManualDesignComponent - START");
+
 		String componentName = null;
 		String resumeComponentString = DesignNAssignJMSClient.getManualDesignComponent();
 		if (resumeComponentString != null) {
@@ -144,10 +182,13 @@ public class EWODesigner {
 				}
 			}
 		}
+		debug(log,"getManualDesignComponent - END");
+
 		return componentName;
 	}
 	
 	public void startManualDesign(BusinessInteraction currentBi, String ewoName) throws ValidationException {
+		debug(log,"startManualDesign - START");
 
 		BusinessInteractionManager biManager = PersistenceHelper.makeBusinessInteractionManager();
 		DesignManager designManager = DesignHelper.makeDesignManager();
@@ -167,6 +208,7 @@ public class EWODesigner {
 			}
 		}
 		biManager.switchContext(ewo, null);
+		debug(log,"startManualDesign - END");
 	}
 	
 }
