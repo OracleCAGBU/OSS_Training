@@ -1,0 +1,70 @@
+package oracle.communications.inventory.rules
+
+import java.lang.*;
+import java.util.*;
+
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointContext;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointRuleContext;
+import oracle.communications.inventory.api.configuration.BaseConfigurationManager;
+import oracle.communications.inventory.api.entity.common.InventoryConfigurationVersion;
+import oracle.communications.inventory.api.entity.ServiceConfigurationVersion;
+import oracle.communications.inventory.xmlbeans.BusinessInteractionItemType;
+import oracle.communications.platform.persistence.PersistenceHelper;
+import oracle.communications.inventory.api.entity.BusinessInteraction;
+import oracle.communications.inventory.techpack.designnassign.jms.DesignNAssignJMSClient;
+import javax.jms.MessageConsumer;
+import javax.jms.MessageProducer;
+import javax.jms.ObjectMessage;
+
+global Log log;
+
+rule "InsteadProcessInteractionItems"
+    salience 0
+    when
+        context : ExtensionPointRuleContext()
+        
+    then
+    	log.debug("", new Object[] { "INSTEAD GLOBAL - PII - INSIDE RULESET **********************************ProcessInteractionItems" });
+    	
+    	BusinessInteraction bi = (BusinessInteraction) context.getArguments()[0];
+    	
+	    Map<BusinessInteractionItemType, InventoryConfigurationVersion> itemMap = (Map<BusinessInteractionItemType, InventoryConfigurationVersion>) context.getArguments()[1];
+	    
+	    Iterator it = itemMap.entrySet().iterator();
+	   	
+	    if(bi.getSpecification().getName().equals("Service Order")){
+	    	log.debug("", new Object[] { "#### First persist all BI items and then call automateConfiguration for the first BI item ####" });
+	    	//Persist all itemTypeConfigPair(s) in JMS queue
+	    	DesignNAssignJMSClient jmsClient = new DesignNAssignJMSClient();
+	    	jmsClient.initializeDesignNAssignJMSClient();
+			while (it.hasNext()) {
+				Map.Entry itemTypeConfigPair = (Map.Entry) it.next();
+				BusinessInteractionItemType item = (BusinessInteractionItemType) itemTypeConfigPair.getKey();
+				ServiceConfigurationVersion configuration = (ServiceConfigurationVersion) itemTypeConfigPair.getValue();
+				HashMap<ServiceConfigurationVersion, BusinessInteractionItemType> configItemMap = new HashMap<ServiceConfigurationVersion, BusinessInteractionItemType>();
+	        	configItemMap.put(configuration, item);
+	        	MessageProducer sender = jmsClient.createMessageSender(bi.getId());
+	        	jmsClient.sendObjectMessage(configItemMap, sender, DesignNAssignJMSClient.process_new);
+			}
+			jmsClient.commitOrRollbackJMSSession();
+			
+			//Receive the first message from the queue to start automated Design & Assign for the first item.
+			jmsClient.initializeDesignNAssignJMSClient();
+			log.debug("", new Object[] { "START PROCESS MESSAGE FOR ********************************** : "+bi.getId() });
+			MessageConsumer receiver = jmsClient.createMessageReceiver(bi.getId(), DesignNAssignJMSClient.process_new);
+		    jmsClient.processMessage(receiver);	
+
+		} else {
+			log.debug("", new Object[] { "#### If its not a Service Order, directly call automateConfiguration for config ####" });
+			while (it.hasNext()) {
+				Map.Entry itemTypeConfigPair = (Map.Entry) it.next();
+				BusinessInteractionItemType item = (BusinessInteractionItemType) itemTypeConfigPair.getKey();
+				InventoryConfigurationVersion configuration = (InventoryConfigurationVersion) itemTypeConfigPair.getValue();
+				BaseConfigurationManager bcm = PersistenceHelper.makeConfigurationManager(configuration.getClass());
+	
+				// Automate configuration
+				bcm.automateConfiguration(configuration, item);
+			}
+		}
+    end

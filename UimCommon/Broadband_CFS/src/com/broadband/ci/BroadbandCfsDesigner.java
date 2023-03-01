@@ -38,7 +38,7 @@ public class BroadbandCfsDesigner extends BaseDesigner {
 
 			debug(log,"partyName : " + paramMap.get(Constants.PARAM_PARTYNAME));
 			/*PARAM_PARTY*/
-			designManager.relateCustomerToService(paramMap.get(Constants.PARAM_PARTYNAME),config, Constants.PARAM_PARTY, null);
+			designManager.relateCustomerToService(paramMap.get(Constants.PARAM_PARTYNAME),config, Constants.PARAM_PARTY, Constants.PARAM_PARTYROLE );
 			designManager.addUpdateServiceCharacteristic(config.getService(), Constants.PARAM_PAYTYPE, paramMap.get(Constants.PARAM_PAYTYPE).toString());
 			
 		}

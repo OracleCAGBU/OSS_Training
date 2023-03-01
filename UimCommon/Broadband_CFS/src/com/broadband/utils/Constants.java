@@ -36,7 +36,7 @@ public class Constants {
 	public static final String SA_NULL_ACTION = "null_action";
 	public static final String SA_NO_ACTION = "no_action";
 	public static final String SA_CHANGECPE = "ChangeCPE";
-	public static final String SA_CHANGEUPLOADSPEED = "ChangeUploadSpeed";
+	public static final String SA_CHANGESPEED = "ChangeSpeed";
 
 	public static final String SA_CHANGEMEDIUM = "changeMedium";
 	public static final String SA_CHANGEPAYTYPE = "PrepaidToPostpaid";
@@ -752,6 +752,7 @@ public class Constants {
 	public static final String PARAM_AVAILABLE_PORTS="AvailablePorts";
 	
 	public static final String PARAM_PARTYNAME = "PartyName";
+	public static final String PARAM_PARTYROLE = "Customer";
 	
 	public static final String SN_FIXEDVOICE = "FixedVoice";
 	public static final String SN_BROADBAND = "Broadband";
