@@ -65,19 +65,6 @@ public class BroadbandRfsDesigner extends BaseDesigner {
 		List<ParameterType> parameters = orderItem.getParameterList();
 		HashMap<String, String> paramMap = UimHelper.getParamMap(parameters);
 		
-		debug(log,"Line no 69");
-
-		debug(log,"paramMap.get(Constants.PARAM_PAYTYPE) : " + paramMap.get(Constants.PARAM_PAYTYPE));
-
-		debug(log,"Line no 72");
-
-		/*for(PropertyType i : orderItem.getService().getPropertyList()) {
-			if(i.getName().equals("PayType")) {
-				debug(log," PayType : " + i.getValue());
-				designManager.addUpdateServiceCharacteristic(cfs, Constants.PARAM_PAYTYPE, i.getValue());
-			}
-		}*/
-		
 		try {
 			
 			/*PARAM_PROPERTIES*/
@@ -128,50 +115,7 @@ public class BroadbandRfsDesigner extends BaseDesigner {
 			RequestPolicyHelper.checkPolicy();
 			debug(log,"processRfs - END");
 		}
-		
-		/*ConfigurationType configType =  orderItem.getService().getConfigurationList().get(0);
-		List<ConfigurationItemType> configItemTypeList = configType.getConfigurationItemList();
-		debug(log,"Config Items List Size :" ,configItemTypeList.size());*/
-		/*try {			
-			for(ConfigurationItemType configItemType: configItemTypeList){
 				
-				if(configItemType.getName().equals(Constants.PARAM_PROPERTIES)) {
-					setConfigItemProperties(scvConVers, configItemType);
-					configItemType.getPropertyList().get(0).getName();
-					for(ConfigurationItemPropertyType i : configItemType.getPropertyList()) {
-						UimHelper.setConfigItemCharValue(scvConVers, Constants.PARAM_PROPERTIES, i.getName(), i.getValue());
-					}					
-				}
-				
-				else if(configItemType.getName().equals(Constants.PARAM_CPE_CI)) {
-					designManager.aquireConfigItem(scvConVers, Constants.PARAM_CPE_CI);
-					processCPE(scvConVers, configItemType, serviceAction);
-				}
-				
-				else if(configItemType.getName().equals(Constants.PARAM_USER_CREDENTIALS)) {
-					designManager.aquireConfigItem(scvConVers, Constants.PARAM_USER_CREDENTIALS);
-					for(ConfigurationItemPropertyType i : configItemType.getPropertyList()) {
-						UimHelper.setConfigItemCharValue(scvConVers, Constants.PARAM_USER_CREDENTIALS, i.getName(), i.getValue());
-					}
-				}
-				
-				else if(configItemType.getName().equals(Constants.PARAM_SERVICE_ADDRESS_CI)){
-					debug(log,"Inside PARAM_SERVICE_ADDRESS_CI");
-					GeographicPlace geographicPlace = PlaceHelper.processPlace(scvConVers, configItemType, Constants.SPEC_BROADBAND_CFS_SC);
-					debug(log,"GeographicPlace : "+geographicPlace);
-					ServiceConfigurationItem serviceAddressCi = designManager.aquireConfigItem(scvConVers, Constants.PARAM_SERVICE_ADDRESS_CI);
-					designManager.referenceSubjectToParentCi(scvConVers, serviceAddressCi, (ConfigurationReferenceEnabled)geographicPlace);
-				}
-			}
-			
-			if (FeedbackProviderImpl.hasErrors()) {
-				log.validationException("Service.designFailed",	new java.lang.IllegalStateException(), Constants.CI_RFS_HOLDER);
-			}
-		} finally {
-			RequestPolicyHelper.checkPolicy();
-			debug(log,"processRfs - END");
-		}*/
-		
 		debug(log,"designAdd - END");
 		ServiceManager serviceManager = CommonHelper.makeServiceManager();
 		return serviceManager.updateServiceConfigurationVersion(scvConVers);
@@ -190,10 +134,6 @@ public class BroadbandRfsDesigner extends BaseDesigner {
 		debug(log,Constants.SERVICE_DETAILS,Constants.NAME,Constants.COLON_DELIMITTER,scvConVers.getService().getName(),Constants.SPACE_DELIMITTER, 
 				Constants.SPECIFICATION,Constants.COLON_DELIMITTER,scvConVers.getService().getSpecification().getName(),Constants.SPACE_DELIMITTER,
 				Constants.CHAR_SERVICEACTION,Constants.COLON_DELIMITTER,orderItem.getService().getAction());	
-		
-		/*UimHelper.setConfigItemCharValue(scvConVers, "Properties_CI", "ServiceAction", orderItem.getService().getAction());*/
-
-		/*UimHelper.setConfigItemCharValue(scvConVers, "Properties_CI", "ServiceNumber", serviceNumber);*/
 		
 		List<ParameterType> parameters = orderItem.getParameterList();
 		HashMap<String, String> paramMap = UimHelper.getParamMap(parameters);
@@ -235,30 +175,6 @@ public class BroadbandRfsDesigner extends BaseDesigner {
 			} else 
 				throw new ValidationException("The LogicalDevice of Specification : CPE, id : " + paramMap.get(Constants.CHAR_SERIAL_NUMBER) + 
 						" does not exists.");
-		
-			
-			/*for(ConfigurationItemType configItemType: configItemTypeList){
-				if(configItemType.getName().equals(Constants.PARAM_CPE_CI)) {
-					
-					//Finding an existing CPE
-					for(ConfigurationItemPropertyType i : configItemType.getPropertyList()) {
-						if(i.getName().equals("ID")) {
-							LogicalDevice ld = UimHelper.getLogicaldDeviceByIdAndSpec(Constants.SPEC_CPE, i.getValue(), CriteriaOperator.EQUALS);
-							debug(log," LogicalDevice : " + ld);
-							if(!Utils.checkNull(ld)) {
-								debug(log, "Logical Device Assignment Status : " + ld.getCurrentAssignment());
-								if(Utils.checkNull(ld.getCurrentAssignment()))
-									designManager.assignSubjectToParent(scvConVers, Constants.PARAM_CPE_CI, ld);
-								else 
-									throw new ValidationException("The LogicalDevice of ID : " + i.getValue() + " ,is already assigned to another service.");
-							} else 
-								throw new ValidationException("The LogicalDevice of Specification : CPE, id : " + i.getValue() + " does not exists.");
-						}
-					}
-					//Creating a new CPE & assigning it to CPE_CI
-					//processCPE(scvConVers, configItemType, Constants.SA_CREATE);
-				}
-			}*/
 			
 		} else if(serviceAction.equals(Constants.SA_CHANGESPEED)) {
 			HashMap<String,String> paramSpeed = new HashMap<String,String>();

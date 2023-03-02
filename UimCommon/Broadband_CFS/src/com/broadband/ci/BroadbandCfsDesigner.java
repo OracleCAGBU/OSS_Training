@@ -42,16 +42,7 @@ public class BroadbandCfsDesigner extends BaseDesigner {
 			designManager.addUpdateServiceCharacteristic(config.getService(), Constants.PARAM_PAYTYPE, paramMap.get(Constants.PARAM_PAYTYPE).toString());
 			
 		}
-		/*if(serviceAction.equals(Constants.SA_CREATE)) {
-			debug(log," PartyList : " + orderItem.getService().getPartyList());
-			debug(log," Party ID : " + orderItem.getService().getPartyList().get(0).getId());
-			
-			if(!Utils.isEmpty(orderItem.getService().getPartyList()) && !Utils.isBlank(orderItem.getService().getPartyList().get(0).getName())) {
-				DesignManager designManager = DesignHelper.makeDesignManager();
-				designManager.relateCustomerToService(orderItem.getService().getPartyList().get(0).getName(),config, 
-													  orderItem.getService().getPartyList().get(0).getSpecification().getName(), null);
-			}
-		}*/
+		
 		//Process Service Order
 		super.designAdd(config, orderItem);
 

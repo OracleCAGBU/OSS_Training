@@ -5123,6 +5123,7 @@ public class DesignManagerImpl extends BaseInvManager implements DesignManager {
     @Override
     public String getJMSCorrelationId() {
         String correlationId = (String)oracle.communications.inventory.api.framework.security.UserEnvironmentFactory.getUserEnvironment().getUserData("JMS_CORRELATION_ID");
+		log.debug("CorrelationId : " + correlationId);
         return correlationId;
     }
     
