@@ -30,6 +30,7 @@ import oracle.communications.inventory.c2a.DesignManager;
 import oracle.communications.inventory.c2a.impl.DesignHelper;
 import oracle.communications.inventory.xmlbeans.BusinessInteractionItemType;
 import oracle.communications.platform.persistence.PersistenceHelper;
+import oracle.communications.platform.util.Utils;
 import weblogic.jms.extensions.WLMessageProducer;
 
 public class DesignNAssignJMSClient {
@@ -287,12 +288,17 @@ public class DesignNAssignJMSClient {
         debug("#### sendFinalProcessInteractionResponseToOSM START");
 
     	String jmsCorrelationId = null;
+        
+    	debug(log, " bi : " + bi);
+    	debug(log, " ExternalObjectId : " + bi.getExternalObjectId());
     	
     	Set<BusinessInteraction> childBIs = bi.getChildBusinessInteractions();
-    	for(BusinessInteraction ewo : childBIs){
-    		if(ewo.getSpecification().getName().equals("Engineering Work Order")){
-    			if(ewo.getExternalObjectId()!=null){
-    				jmsCorrelationId = ewo.getExternalObjectId();
+    	for(BusinessInteraction childBI : childBIs){
+            debug(log, " childBI : " + childBI.getExternalObjectId());
+    		if(childBI.getSpecification().getName().equals("BI_Order")){
+    	    	debug(log, "BI_Order found");
+    			if(!Utils.checkBlank(childBI.getExternalObjectId())){
+    				jmsCorrelationId = childBI.getExternalObjectId();
     				break;
     			}
     		}

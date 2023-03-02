@@ -73,7 +73,7 @@ public class EWODesigner {
             //An alternative approach would be to create a new characteristic for managing the
             //correlationId
             String correlationId = DesignHelper.makeDesignManager().getJMSCorrelationId();
-            bi.setExternalObjectId(correlationId);
+//            bi.setExternalObjectId(correlationId);
 
             CharacteristicSpecification charSpec = PersistenceHelper.makeCharacteristicManager().getCharacteristicSpecification(biSpec, "desiredDueDate");
             BusinessInteractionChar charValue = bi.makeCharacteristicInstance();

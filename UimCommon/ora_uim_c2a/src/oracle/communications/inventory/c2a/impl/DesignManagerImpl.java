@@ -4962,7 +4962,7 @@ public class DesignManagerImpl extends BaseInvManager implements DesignManager {
 			serviceOrder.getHeader().setSpecification(biSpecType);
 			serviceOrder.getHeader().setId("");
 			serviceOrder.getHeader().addNewExternalIdentity();
-			serviceOrder.getHeader().getExternalIdentity().setExternalObjectId("");
+			serviceOrder.getHeader().getExternalIdentity().setExternalObjectId(srvNameSuffix);
 			// Name is required.
 			serviceOrder.getHeader().setName(serviceOrderName);
 			serviceOrder.getHeader().setDescription(
@@ -5138,9 +5138,9 @@ public class DesignManagerImpl extends BaseInvManager implements DesignManager {
         
        try {
            jndiContext = new InitialContext();
-           osmQueue = (Queue) jndiContext.lookup("oracle.communications.ordermanagement.inventoryWSResponseQueue");
+           osmQueue = (Queue) jndiContext.lookup("inventoryWSQueueAlternate");
            qConFactory =
-               (QueueConnectionFactory) jndiContext.lookup("inventoryWSQueueCF");
+               (QueueConnectionFactory) jndiContext.lookup("inventoryWSQueueAlternateCF");
        } catch (NamingException e) {
            log.error("", e);
        }
