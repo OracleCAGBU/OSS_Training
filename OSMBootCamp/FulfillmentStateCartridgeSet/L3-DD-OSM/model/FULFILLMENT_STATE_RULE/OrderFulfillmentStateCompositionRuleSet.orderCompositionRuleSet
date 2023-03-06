@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/orchestration" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:osm="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="OrderCompositionRuleSetType" name="OrderFulfillmentStateCompositionRuleSet">
+  <com:displayName lang="[default]">OrderFulfillmentStateCompositionRuleSet</com:displayName>
+  <com:saveVersion>10</com:saveVersion>
+  <com:id>YY4Rh1SSRMSLN6Cc+OSuvg</com:id>
+  <namespace>osm7Order1.com</namespace>
+  <order>
+    <com:entity>L3-DD-OSMOrder</com:entity>
+    <com:entityType>order</com:entityType>
+    <com:relationship>oracle.communications.sce.osm.orchestration.composition.ruleSet.order.order</com:relationship>
+  </order>
+  <rule name="COMPLETE_RULE">
+    <com:id>G3vT3EjDSCm91G50MiVSuA</com:id>
+    <com:elementType>oracle.communications.sce.osm.orchestration.composition.ruleSet.order.rule</com:elementType>
+    <osm:description lang="[default]">COMPLETE RULE</osm:description>
+    <compositeState>
+      <com:entity>FulfillmentStateMap</com:entity>
+      <com:entityType>fulfillmentStateMap</com:entityType>
+      <com:relationship>oracle.communications.sce.osm.orchestration.compositionCompositeState</com:relationship>
+      <com:element>W0MEAzG5SsG3QcXQ1zpsqw</com:element>
+      <com:elementType>oracle.communications.sce.osm.orchestration.fulfillmentstatemap.fulfillmentStateMap.state</com:elementType>
+      <com:elementName>COMPLETE</com:elementName>
+    </compositeState>
+    <compositionCondition name="ALL_COMPLETE">
+      <com:id>n81AE8COQpiI+nwyVG2KCA</com:id>
+      <com:elementType>oracle.communications.sce.osm.orchestration.composition.condition.order</com:elementType>
+      <osm:description lang="[default]">ALL COMPLETE</osm:description>
+      <all>
+        <com:entity>FulfillmentStateMap</com:entity>
+        <com:entityType>fulfillmentStateMap</com:entityType>
+        <com:relationship>oracle.communications.sce.osm.orchestration.compositionCondition</com:relationship>
+        <com:element>WeJPOQl8RqyIKXHpIs7Iog</com:element>
+        <com:elementType>oracle.communications.sce.osm.orchestration.fulfillmentstatemap.fulfillmentStateMap.state</com:elementType>
+        <com:elementName>COMPLETE-PROVISION_COMPLETE</com:elementName>
+      </all>
+    </compositionCondition>
+  </rule>
+  <rule name="IN_PROGRESS_RULE">
+    <com:id>yqFayMV6T7eb18bHV0LtlA</com:id>
+    <com:elementType>oracle.communications.sce.osm.orchestration.composition.ruleSet.order.rule</com:elementType>
+    <osm:description lang="[default]">IN PROGRESS RULE</osm:description>
+    <compositeState>
+      <com:entity>FulfillmentStateMap</com:entity>
+      <com:entityType>fulfillmentStateMap</com:entityType>
+      <com:relationship>oracle.communications.sce.osm.orchestration.compositionCompositeState</com:relationship>
+      <com:element>kMVARRmbSX6I8YnUUZHr7w</com:element>
+      <com:elementType>oracle.communications.sce.osm.orchestration.fulfillmentstatemap.fulfillmentStateMap.state</com:elementType>
+      <com:elementName>IN_PROGRESS</com:elementName>
+    </compositeState>
+    <compositionCondition name="ANY_IN_PROGRESS">
+      <com:id>Ca5D3WmyTDav24V-2q0MrQ</com:id>
+      <com:elementType>oracle.communications.sce.osm.orchestration.composition.condition.order</com:elementType>
+      <osm:description lang="[default]">ANY IN PROGRESS</osm:description>
+      <any>
+        <com:entity>FulfillmentStateMap</com:entity>
+        <com:entityType>fulfillmentStateMap</com:entityType>
+        <com:relationship>oracle.communications.sce.osm.orchestration.compositionCondition</com:relationship>
+        <com:element>kMVARRmbSX6I8YnUUZHr7w</com:element>
+        <com:elementType>oracle.communications.sce.osm.orchestration.fulfillmentstatemap.fulfillmentStateMap.state</com:elementType>
+        <com:elementName>IN_PROGRESS</com:elementName>
+      </any>
+    </compositionCondition>
+  </rule>
+</com:modelEntity>
