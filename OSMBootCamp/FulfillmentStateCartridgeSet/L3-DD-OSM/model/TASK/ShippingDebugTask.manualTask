@@ -83,6 +83,20 @@
         <com:element>/ControlData/OrderItem/PointOfNoReturn</com:element>
         <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
       </task:childNode>
+      <task:childNode>
+        <com:entity>L3-DD-OSMOrder</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/ParentOrderID</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>L3-DD-OSMOrder</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/DependingLineID</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
     </task:childNode>
     <task:childNode>
       <com:entity>L3-DD-OSMOrder</com:entity>
@@ -184,6 +198,22 @@
               <com:entityType>order</com:entityType>
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ShipOrderFunction/orderItem/orderItemRef/PointOfNoReturn</com:element>
+              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <task:childRefNode>true</task:childRefNode>
+            </task:childNode>
+            <task:childNode>
+              <com:entity>L3-DD-OSMOrder</com:entity>
+              <com:entityType>order</com:entityType>
+              <com:relationship>ora.task.orderTemplateRef</com:relationship>
+              <com:element>/ControlData/Functions/ShipOrderFunction/orderItem/orderItemRef/ParentOrderID</com:element>
+              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <task:childRefNode>true</task:childRefNode>
+            </task:childNode>
+            <task:childNode>
+              <com:entity>L3-DD-OSMOrder</com:entity>
+              <com:entityType>order</com:entityType>
+              <com:relationship>ora.task.orderTemplateRef</com:relationship>
+              <com:element>/ControlData/Functions/ShipOrderFunction/orderItem/orderItemRef/DependingLineID</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
               <task:childRefNode>true</task:childRefNode>
             </task:childNode>
@@ -364,6 +394,26 @@
   </task:viewNodeExtension>
   <task:viewNodeExtension>
     <task:path>/ControlData/Functions/ShipOrderFunction/orderItem/orderItemRef/PointOfNoReturn</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/ParentOrderID</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/DependingLineID</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ShipOrderFunction/orderItem/orderItemRef/ParentOrderID</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ShipOrderFunction/orderItem/orderItemRef/DependingLineID</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>

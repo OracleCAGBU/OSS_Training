@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xsi:type="ord:orderType" name="L3-DD-OSMOrder">
   <com:displayName>L3-DD-OSMOrder</com:displayName>
-  <com:saveVersion>38</com:saveVersion>
+  <com:saveVersion>39</com:saveVersion>
   <com:id>PrM28SP7Tz2a3ID0UWEmtg</com:id>
   <ord:amendable>true</ord:amendable>
   <ord:keyDef name="Key">
@@ -362,6 +362,45 @@
     <ord:nodeExtension>
       <ord:path>/Revision</ord:path>
     </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/OrderItem/ParentOrderID</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/OrderItem/DependingLineID</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ShipOrderFunction/orderItem/orderItemRef/ParentOrderID</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ShipOrderFunction/orderItem/orderItemRef/DependingLineID</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ProvisioningOrderFunction/orderItem/orderItemRef/ParentOrderID</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/ProvisioningOrderFunction/orderItem/orderItemRef/DependingLineID</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/FulfillBillingFunction/orderItem/orderItemRef/ParentOrderID</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/FulfillBillingFunction/orderItem/orderItemRef/DependingLineID</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/InitiateBillingFunction/orderItem/orderItemRef/ParentOrderID</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/InitiateBillingFunction/orderItem/orderItemRef/DependingLineID</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/InstallOrderFunction/orderItem/orderItemRef/ParentOrderID</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/Functions/InstallOrderFunction/orderItem/orderItemRef/DependingLineID</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/Test</ord:path>
+    </ord:nodeExtension>
     <ord:orderData>
       <com:entity>L3-DD-OSM</com:entity>
       <com:entityType>xsd</com:entityType>
@@ -406,6 +445,17 @@
       <com:baseElement>int</com:baseElement>
       <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
     </ord:orderData>
+    <ord:orderData>
+      <com:entity>L3-DD-OSM</com:entity>
+      <com:entityType>xsd</com:entityType>
+      <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
+      <com:element>Test</com:element>
+      <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+      <com:elementName>Test</com:elementName>
+      <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/L3-DD-OSM/L3-DD-OSM</com:namespace>
+      <com:baseElement>string</com:baseElement>
+      <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+    </ord:orderData>
   </ord:orderTemplate>
   <ord:rule name="null_rule"/>
   <ord:orderStatePolicy>
@@ -422,6 +472,16 @@
       <com:entityType>manualTask</com:entityType>
       <com:relationship>com.mslv.studio.provisioning.queryTask</com:relationship>
     </ord:queryTask>
+    <ord:column name="OrderNumber">
+      <ord:node>
+        <com:entity>L3-DD-OSMOrder</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>com.mslv.studio.provisioning.order.column</com:relationship>
+        <com:element>/OrderNumber</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+        <com:elementName>OrderNumber</com:elementName>
+      </ord:node>
+    </ord:column>
     <ord:canCreateOrders>true</ord:canCreateOrders>
     <ord:summaryTask>
       <com:entity>OrderDebugTask</com:entity>

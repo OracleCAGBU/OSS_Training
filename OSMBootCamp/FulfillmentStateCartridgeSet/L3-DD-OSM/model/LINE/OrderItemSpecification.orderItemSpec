@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/orchestration" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:osm="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="OrderItemSpec" name="OrderItemSpecification">
   <com:displayName>OrderItemSpecification</com:displayName>
-  <com:saveVersion>31</com:saveVersion>
+  <com:saveVersion>56</com:saveVersion>
   <com:id>HDQdd0ABTvOOPLwn8GkJcw</com:id>
   <namespace>osm7Order1.com</namespace>
   <useComplexDataType>true</useComplexDataType>
@@ -82,6 +82,18 @@ fn:normalize-space(osm7dd:lineID/text())</osm:xquery>
 fn:normalize-space(osm7dd:BundleID/text())</osm:xquery>
     </nodesetExpression>
   </property>
+  <property name="ParentOrderID">
+    <nodesetExpression xsi:type="osm:XqueryExpressionRuleType">
+      <osm:xquery>declare namespace osm7dd=&quot;osm7Order1.com&quot;;&#xD;
+fn:normalize-space(osm7dd:parentOrderID/text())</osm:xquery>
+    </nodesetExpression>
+  </property>
+  <property name="DependingLineID">
+    <nodesetExpression xsi:type="osm:XqueryExpressionRuleType">
+      <osm:xquery>declare namespace osm7dd=&quot;osm7Order1.com&quot;;&#xD;
+fn:normalize-space(osm7dd:dependingLineID/text())</osm:xquery>
+    </nodesetExpression>
+  </property>
   <hierarchy name="OrderItemHierarchy" useForChildCompletionDependency="true">
     <key>
       <nodesetExpression xsi:type="osm:XqueryExpressionRuleType">
@@ -116,6 +128,60 @@ fn:normalize-space(osm:properties/osm7dd:BundleID/text())&#xD;
     <com:element>OrderItemHierarchy</com:element>
     <com:elementType>oracle.communications.sce.osm.orchestration.orderItemSpec.hierarchy</com:elementType>
   </compositionHierarchy>
+  <orderItemDependency name="followOnOrderDependency">
+    <orderItemSelector xsi:type="osm:XqueryExpressionRuleType">
+      <osm:externalInstance xsi:type="osm:dataProviderRuleType" enabled="true" final="false" override="false">
+        <osm:description>GetOrderDataInstance</osm:description>
+        <osm:dataProvider inline="false" lang="">
+          <osm:dataProvider>
+            <com:entity>GetOrderWebService</com:entity>
+            <com:entityType>dataProvider</com:entityType>
+            <com:relationship>com.mslv.studio.provisioning.entities.viewrules.dataProviderRef</com:relationship>
+          </osm:dataProvider>
+          <osm:paramter name="soap.request" useDefault="true">
+            <osm:binding>let $parentOrderId  	:= .//*:ParentOrderID/text()&#xD;
+let $orderType         :='L3-DD-OSMOrder'&#xD;
+&#xD;
+return&#xD;
+(&#xD;
+&lt;ord:FindOrder xmlns:ord=&quot;http://xmlns.oracle.com/communications/ordermanagement&quot;>        &#xD;
+         &lt;ord:SelectBy>            &#xD;
+            &lt;ord:OrderType>{$orderType}&lt;/ord:OrderType>&#xD;
+            &lt;ord:Field>               &#xD;
+               &lt;ord:Path>/OrderNumber&lt;/ord:Path>&#xD;
+               &lt;ord:EqualTo>{$parentOrderId}&lt;/ord:EqualTo>               &#xD;
+            &lt;/ord:Field>            &#xD;
+         &lt;/ord:SelectBy>         &#xD;
+&lt;/ord:FindOrder>&#xD;
+)</osm:binding>
+          </osm:paramter>
+        </osm:dataProvider>
+      </osm:externalInstance>
+      <osm:xquery>declare namespace osm = &quot;http://xmlns.oracle.com/communications/ordermanagement/model&quot;;&#xD;
+declare namespace javaSystem = &quot;java:java.lang.System&quot;;&#xD;
+declare namespace javaPrintStream = &quot;java:java.io.PrintStream&quot;;&#xD;
+declare namespace javaString = &quot;java:java.lang.String&quot;;&#xD;
+declare namespace saxon=&quot;http://saxon.sf.net/&quot;;&#xD;
+declare namespace xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;;&#xD;
+&#xD;
+&#xD;
+let $printStream := javaSystem:out()						&#xD;
+let $parentOrderId := fn:normalize-space(*:properties/*:ParentOrderID)&#xD;
+let $parentOrderItemId := fn:normalize-space(*:properties/*:DependingLineID)&#xD;
+let $inputStr := saxon:serialize(., &lt;xsl:output method='xml' omit-xml-declaration='yes' indent='yes' saxon:indent-spaces='4'/>)&#xD;
+&#xD;
+return&#xD;
+(&#xD;
+	if(fn:string-length(*:properties/*:ParentOrderID/text())>0)&#xD;
+	then&#xD;
+	(&#xD;
+		javaPrintStream:print($printStream, fn:concat('Follow On Order Item : ', $inputStr)),&#xD;
+		&lt;osm:dependency fromOrderId=&quot;{$parentOrderId}&quot; fromOrderItemId=&quot;{$parentOrderItemId}&quot;/>&#xD;
+	)&#xD;
+	else()&#xD;
+)</osm:xquery>
+    </orderItemSelector>
+  </orderItemDependency>
   <orderTemplateContribution>
     <ord:nodeExtension>
       <ord:path>/ControlData</ord:path>
@@ -198,6 +264,12 @@ fn:normalize-space(osm:properties/osm7dd:BundleID/text())&#xD;
     <ord:nodeExtension>
       <ord:path>/ControlData/OrderItem/PointOfNoReturn</ord:path>
     </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/OrderItem/ParentOrderID</ord:path>
+    </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/OrderItem/DependingLineID</ord:path>
+    </ord:nodeExtension>
     <ord:orderData>
       <com:entity>L3-DD-OSM</com:entity>
       <com:entityType>xsd</com:entityType>
@@ -214,7 +286,7 @@ fn:normalize-space(osm:properties/osm7dd:BundleID/text())&#xD;
         <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
         <com:element>ControlData/OrderItem</com:element>
         <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-        <com:elementName>OrderItem</com:elementName>
+        <com:elementName>ControlData/OrderItem</com:elementName>
         <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/L3-DD-OSM/L3-DD-OSM</com:namespace>
         <com:baseElement>(Local Structure)</com:baseElement>
         <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -224,7 +296,7 @@ fn:normalize-space(osm:properties/osm7dd:BundleID/text())&#xD;
           <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
           <com:element>ControlData/OrderItem/ProductCode</com:element>
           <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-          <com:elementName>ControlData/OrderItem/ProductCode</com:elementName>
+          <com:elementName>ProductCode</com:elementName>
           <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/L3-DD-OSM/L3-DD-OSM</com:namespace>
           <com:baseElement>string</com:baseElement>
           <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -313,6 +385,28 @@ fn:normalize-space(osm:properties/osm7dd:BundleID/text())&#xD;
           <com:element>ControlData/OrderItem/PointOfNoReturn</com:element>
           <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
           <com:elementName>PointOfNoReturn</com:elementName>
+          <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/L3-DD-OSM/L3-DD-OSM</com:namespace>
+          <com:baseElement>string</com:baseElement>
+          <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+        </ord:childNode>
+        <ord:childNode>
+          <com:entity>L3-DD-OSM</com:entity>
+          <com:entityType>xsd</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
+          <com:element>ControlData/OrderItem/ParentOrderID</com:element>
+          <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+          <com:elementName>ParentOrderID</com:elementName>
+          <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/L3-DD-OSM/L3-DD-OSM</com:namespace>
+          <com:baseElement>string</com:baseElement>
+          <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+        </ord:childNode>
+        <ord:childNode>
+          <com:entity>L3-DD-OSM</com:entity>
+          <com:entityType>xsd</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
+          <com:element>ControlData/OrderItem/DependingLineID</com:element>
+          <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+          <com:elementName>DependingLineID</com:elementName>
           <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/L3-DD-OSM/L3-DD-OSM</com:namespace>
           <com:baseElement>string</com:baseElement>
           <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>

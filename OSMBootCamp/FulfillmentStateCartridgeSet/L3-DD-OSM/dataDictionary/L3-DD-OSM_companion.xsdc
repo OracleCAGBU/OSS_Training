@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xmlns:provisioning="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:specification="http://www.mslv.com/studio/inventory/model/specification" xsi:type="com:dataDictionaryCompanionType" name="L3-DD-OSM_companion">
   <com:displayName>L3-DD-OSM</com:displayName>
-  <com:saveVersion>26</com:saveVersion>
+  <com:saveVersion>31</com:saveVersion>
   <com:id>YvT2ImAxSbq9JWq9ficbEA</com:id>
   <com:dataDictionaryNode>
     <com:entity>L3-DD-OSM</com:entity>
@@ -1282,7 +1282,7 @@
         <data:dataElementId>ControlData/Functions/InstallOrderFunction</data:dataElementId>
         <layout:hints/>
       </com:detail>
-      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" queryEnabled="false" valueEnabled="false">
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
         <com:id>oa1qbw9BR0ab7Flt74WFhA</com:id>
         <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
         <data:dataElementId>ControlData/Functions/InstallOrderFunction</data:dataElementId>
@@ -1467,8 +1467,33 @@
     <com:baseElement>date</com:baseElement>
     <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
     <com:dataElementId>ControlData/Functions/InitiateBillingFunction/calculatedStartDate</com:dataElementId>
-    <com:extension xsi:type="provisioning:ElementExtensionType"/>
+    <com:extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </com:extension>
     <com:dataDictionaryDetails>
+      <com:detail xsi:type="data:dataElementInformationDetails">
+        <com:id>GngOCWg0Q6KniqhtcDGBSg</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+        <data:dataElementId>ControlData/Functions/InitiateBillingFunction/calculatedStartDate</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="layout:hintDetail">
+        <com:id>4b9-AcV3T-+-2-tLqrPoOQ</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+        <data:dataElementId>ControlData/Functions/InitiateBillingFunction/calculatedStartDate</data:dataElementId>
+        <layout:hints/>
+      </com:detail>
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <com:id>xK5WX3Y1SnSC+7S4S8POVw</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
+        <data:dataElementId>ControlData/Functions/InitiateBillingFunction/calculatedStartDate</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="specification:CharElementDetailType">
+        <com:id>03CoE0q0QE+sl-AirqR7MA</com:id>
+        <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+        <data:dataElementId>ControlData/Functions/InitiateBillingFunction/calculatedStartDate</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </com:detail>
       <com:detail xsi:type="data:dataElementCommonDetail">
         <com:id>nOWoVDEFTMmFLipBkod0vg</com:id>
         <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
@@ -1493,8 +1518,33 @@
     <com:baseElement>string</com:baseElement>
     <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
     <com:dataElementId>ControlData/Functions/InitiateBillingFunction/duration</com:dataElementId>
-    <com:extension xsi:type="provisioning:ElementExtensionType"/>
+    <com:extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </com:extension>
     <com:dataDictionaryDetails>
+      <com:detail xsi:type="data:dataElementInformationDetails">
+        <com:id>rLsi2vjZSguKEpLHe8oqkw</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+        <data:dataElementId>ControlData/Functions/InitiateBillingFunction/duration</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="layout:hintDetail">
+        <com:id>cmH0ngqnTLmhJgtfbpR-3g</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+        <data:dataElementId>ControlData/Functions/InitiateBillingFunction/duration</data:dataElementId>
+        <layout:hints/>
+      </com:detail>
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <com:id>dxSFjucKSmuYxoyxwFM7dA</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
+        <data:dataElementId>ControlData/Functions/InitiateBillingFunction/duration</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="specification:CharElementDetailType">
+        <com:id>Ch3rN8D7RlOqwGUkLx6wvA</com:id>
+        <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+        <data:dataElementId>ControlData/Functions/InitiateBillingFunction/duration</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </com:detail>
       <com:detail xsi:type="data:dataElementCommonDetail">
         <com:id>MWdKHjauSW2UMW0W3DJQJg</com:id>
         <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
@@ -1883,7 +1933,7 @@
         <data:minLength>0</data:minLength>
         <data:maxLength>100</data:maxLength>
         <data:minMultiplicity>0</data:minMultiplicity>
-        <data:maxMultiplicity>1</data:maxMultiplicity>
+        <data:maxMultiplicity>-1</data:maxMultiplicity>
       </com:detail>
       <com:detail xsi:type="data:dataElementEnumerationDetail">
         <com:id>xNjKsV2uSimOtkpBOcEGaA</com:id>
@@ -1962,7 +2012,7 @@
         <data:minLength>0</data:minLength>
         <data:maxLength>100</data:maxLength>
         <data:minMultiplicity>0</data:minMultiplicity>
-        <data:maxMultiplicity>1</data:maxMultiplicity>
+        <data:maxMultiplicity>-1</data:maxMultiplicity>
       </com:detail>
     </com:dataDictionaryDetails>
   </com:dataDictionaryNode>
@@ -1975,8 +2025,33 @@
     <com:baseElement>string</com:baseElement>
     <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
     <com:dataElementId>ControlData/Functions/InitiateBillingFunction/orderItem/ExternalFulfillmentState</com:dataElementId>
-    <com:extension xsi:type="provisioning:ElementExtensionType"/>
+    <com:extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </com:extension>
     <com:dataDictionaryDetails>
+      <com:detail xsi:type="data:dataElementInformationDetails">
+        <com:id>5YoqhwZbT326d1W2nWHIag</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+        <data:dataElementId>ControlData/Functions/InitiateBillingFunction/orderItem/ExternalFulfillmentState</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="layout:hintDetail">
+        <com:id>sSMYE2kFTQiVqEh2Ee7KKg</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+        <data:dataElementId>ControlData/Functions/InitiateBillingFunction/orderItem/ExternalFulfillmentState</data:dataElementId>
+        <layout:hints/>
+      </com:detail>
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <com:id>6rvwZLRoSCuS8nz2COOx8g</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
+        <data:dataElementId>ControlData/Functions/InitiateBillingFunction/orderItem/ExternalFulfillmentState</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="specification:CharElementDetailType">
+        <com:id>8Jh6MgAzS0+LJxsfsSFGpA</com:id>
+        <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+        <data:dataElementId>ControlData/Functions/InitiateBillingFunction/orderItem/ExternalFulfillmentState</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </com:detail>
       <com:detail xsi:type="data:dataElementCommonDetail">
         <com:id>eK5pHUb+SK+gSWo2iwwOnw</com:id>
         <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
@@ -1988,7 +2063,7 @@
         <data:minLength>0</data:minLength>
         <data:maxLength>100</data:maxLength>
         <data:minMultiplicity>0</data:minMultiplicity>
-        <data:maxMultiplicity>1</data:maxMultiplicity>
+        <data:maxMultiplicity>-1</data:maxMultiplicity>
       </com:detail>
     </com:dataDictionaryDetails>
   </com:dataDictionaryNode>
@@ -2014,7 +2089,7 @@
         <data:minLength>0</data:minLength>
         <data:maxLength>100</data:maxLength>
         <data:minMultiplicity>0</data:minMultiplicity>
-        <data:maxMultiplicity>1</data:maxMultiplicity>
+        <data:maxMultiplicity>-1</data:maxMultiplicity>
       </com:detail>
     </com:dataDictionaryDetails>
   </com:dataDictionaryNode>
@@ -2040,7 +2115,7 @@
         <data:minLength>0</data:minLength>
         <data:maxLength>100</data:maxLength>
         <data:minMultiplicity>0</data:minMultiplicity>
-        <data:maxMultiplicity>1</data:maxMultiplicity>
+        <data:maxMultiplicity>-1</data:maxMultiplicity>
       </com:detail>
     </com:dataDictionaryDetails>
   </com:dataDictionaryNode>
@@ -2053,8 +2128,33 @@
     <com:baseElement>string</com:baseElement>
     <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
     <com:dataElementId>ControlData/Functions/InstallOrderFunction/orderItem/ExternalFulfillmentState</com:dataElementId>
-    <com:extension xsi:type="provisioning:ElementExtensionType"/>
+    <com:extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </com:extension>
     <com:dataDictionaryDetails>
+      <com:detail xsi:type="data:dataElementInformationDetails">
+        <com:id>V97S+H+NQuKtMc0iuSp-Hw</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+        <data:dataElementId>ControlData/Functions/InstallOrderFunction/orderItem/ExternalFulfillmentState</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="layout:hintDetail">
+        <com:id>Jz+phKA0RB+Ug7z+khywjg</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+        <data:dataElementId>ControlData/Functions/InstallOrderFunction/orderItem/ExternalFulfillmentState</data:dataElementId>
+        <layout:hints/>
+      </com:detail>
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <com:id>KLqvVI2mSyegCBq3oPIeMQ</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
+        <data:dataElementId>ControlData/Functions/InstallOrderFunction/orderItem/ExternalFulfillmentState</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="specification:CharElementDetailType">
+        <com:id>WYupyyqARSWTqte2CjE2vw</com:id>
+        <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+        <data:dataElementId>ControlData/Functions/InstallOrderFunction/orderItem/ExternalFulfillmentState</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </com:detail>
       <com:detail xsi:type="data:dataElementCommonDetail">
         <com:id>eK5pHUb+SK+gSWo2iwwOnw</com:id>
         <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
@@ -2066,7 +2166,7 @@
         <data:minLength>0</data:minLength>
         <data:maxLength>100</data:maxLength>
         <data:minMultiplicity>0</data:minMultiplicity>
-        <data:maxMultiplicity>1</data:maxMultiplicity>
+        <data:maxMultiplicity>-1</data:maxMultiplicity>
       </com:detail>
     </com:dataDictionaryDetails>
   </com:dataDictionaryNode>
@@ -2303,6 +2403,189 @@
         <com:id>Vgv1ARWgQaSh0vEXMuFmAw</com:id>
         <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
         <data:dataElementId>Revision</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </com:detail>
+    </com:dataDictionaryDetails>
+  </com:dataDictionaryNode>
+  <com:dataDictionaryNode>
+    <com:entity>L3-DD-OSM</com:entity>
+    <com:entityType>xsd</com:entityType>
+    <com:relationship>com.mslv.studio.core.data.dictionary.extension</com:relationship>
+    <com:element>ControlData/OrderItem/ParentOrderID</com:element>
+    <com:elementType>xs:string</com:elementType>
+    <com:baseElement>string</com:baseElement>
+    <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+    <com:dataElementId>ControlData/OrderItem/ParentOrderID</com:dataElementId>
+    <com:displayName lang="en"></com:displayName>
+    <com:displayName>Parent Order ID</com:displayName>
+    <com:extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </com:extension>
+    <com:dataDictionaryDetails>
+      <com:detail xsi:type="data:dataElementCommonDetail">
+        <com:id>rvtVj1+cQwucwwSY5CM3DA</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+        <data:dataElementId>ControlData/OrderItem/ParentOrderID</data:dataElementId>
+        <data:defaultValue></data:defaultValue>
+        <data:key></data:key>
+        <data:deprecated>false</data:deprecated>
+        <data:sensitive>false</data:sensitive>
+        <data:minLength>0</data:minLength>
+        <data:maxLength>40</data:maxLength>
+        <data:minMultiplicity>0</data:minMultiplicity>
+        <data:maxMultiplicity>1</data:maxMultiplicity>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementEnumerationDetail">
+        <com:id>3ztX4ZMBRuqWIo2JiCACtg</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+        <data:dataElementId>ControlData/OrderItem/ParentOrderID</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementInformationDetails">
+        <com:id>nIoGfnJuQrK8YKfTLdOZLw</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+        <data:dataElementId>ControlData/OrderItem/ParentOrderID</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="layout:hintDetail">
+        <com:id>NslxnY9ASCGU-TL8KXs2Yw</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+        <data:dataElementId>ControlData/OrderItem/ParentOrderID</data:dataElementId>
+        <layout:hints/>
+      </com:detail>
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <com:id>NLa6ShnYR0Kerj-d7vmSwQ</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
+        <data:dataElementId>ControlData/OrderItem/ParentOrderID</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="specification:CharElementDetailType">
+        <com:id>D3hqzbZOSEiCK3msMSAJRw</com:id>
+        <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+        <data:dataElementId>ControlData/OrderItem/ParentOrderID</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </com:detail>
+    </com:dataDictionaryDetails>
+  </com:dataDictionaryNode>
+  <com:dataDictionaryNode>
+    <com:entity>L3-DD-OSM</com:entity>
+    <com:entityType>xsd</com:entityType>
+    <com:relationship>com.mslv.studio.core.data.dictionary.extension</com:relationship>
+    <com:element>ControlData/OrderItem/DependingLineID</com:element>
+    <com:elementType>xs:string</com:elementType>
+    <com:baseElement>string</com:baseElement>
+    <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+    <com:dataElementId>ControlData/OrderItem/DependingLineID</com:dataElementId>
+    <com:displayName lang="en"></com:displayName>
+    <com:displayName>Depending Line ID</com:displayName>
+    <com:extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+    </com:extension>
+    <com:dataDictionaryDetails>
+      <com:detail xsi:type="data:dataElementCommonDetail">
+        <com:id>JY8BAZQYSOOjntCX+y6Ibw</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+        <data:dataElementId>ControlData/OrderItem/DependingLineID</data:dataElementId>
+        <data:defaultValue></data:defaultValue>
+        <data:key></data:key>
+        <data:deprecated>false</data:deprecated>
+        <data:sensitive>false</data:sensitive>
+        <data:minLength>0</data:minLength>
+        <data:maxLength>40</data:maxLength>
+        <data:minMultiplicity>0</data:minMultiplicity>
+        <data:maxMultiplicity>1</data:maxMultiplicity>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementEnumerationDetail">
+        <com:id>WgtiNryZT5ipouI3M9diPw</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+        <data:dataElementId>ControlData/OrderItem/DependingLineID</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementInformationDetails">
+        <com:id>Gelk2frPQNCeeTUN6OL7Qg</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+        <data:dataElementId>ControlData/OrderItem/DependingLineID</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="layout:hintDetail">
+        <com:id>fbKeMalnRHyGcOkgO38UCw</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+        <data:dataElementId>ControlData/OrderItem/DependingLineID</data:dataElementId>
+        <layout:hints/>
+      </com:detail>
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <com:id>jzGOTiqkS8yHbKCRC3GYhw</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
+        <data:dataElementId>ControlData/OrderItem/DependingLineID</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="specification:CharElementDetailType">
+        <com:id>fofx2vbKQGGF8MpBUx+Nfw</com:id>
+        <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+        <data:dataElementId>ControlData/OrderItem/DependingLineID</data:dataElementId>
+        <specification:startTimestamp>0</specification:startTimestamp>
+        <specification:endTimestamp>0</specification:endTimestamp>
+      </com:detail>
+    </com:dataDictionaryDetails>
+  </com:dataDictionaryNode>
+  <com:dataDictionaryNode>
+    <com:entity>L3-DD-OSM</com:entity>
+    <com:entityType>xsd</com:entityType>
+    <com:relationship>com.mslv.studio.core.data.dictionary.extension</com:relationship>
+    <com:element>Test</com:element>
+    <com:elementType>anyType</com:elementType>
+    <com:baseElement>string</com:baseElement>
+    <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+    <com:dataElementId>Test</com:dataElementId>
+    <com:displayName lang="en"></com:displayName>
+    <com:displayName>Key</com:displayName>
+    <com:extension xsi:type="provisioning:ElementExtensionType">
+      <provisioning:significant>true</provisioning:significant>
+      <provisioning:viewRule xsi:type="provisioning:styleRuleType" enabled="true" final="false" override="false">
+        <provisioning:description>Style</provisioning:description>
+        <provisioning:secret>true()</provisioning:secret>
+      </provisioning:viewRule>
+    </com:extension>
+    <com:minCardinality>0</com:minCardinality>
+    <com:maxCardinality>1</com:maxCardinality>
+    <com:dataDictionaryDetails>
+      <com:detail xsi:type="data:dataElementCommonDetail">
+        <com:id>vZcJPXE6Q5aVPTRjV6ogyw</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+        <data:dataElementId>Test</data:dataElementId>
+        <data:defaultValue></data:defaultValue>
+        <data:key></data:key>
+        <data:deprecated>false</data:deprecated>
+        <data:abstract>false</data:abstract>
+        <data:sensitive>false</data:sensitive>
+        <data:minLength>0</data:minLength>
+        <data:maxLength>40</data:maxLength>
+        <data:minMultiplicity>0</data:minMultiplicity>
+        <data:maxMultiplicity>1</data:maxMultiplicity>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementEnumerationDetail">
+        <com:id>p2sJZJBgT46K9joj4Amb+w</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementEnumeration</com:elementType>
+        <data:dataElementId>Test</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="data:dataElementInformationDetails">
+        <com:id>G8xp7f6uROuD9qOK8ojtzw</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+        <data:dataElementId>Test</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="layout:hintDetail">
+        <com:id>z6OMECWgQhy8GDU0Q+UVZQ</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+        <data:dataElementId>Test</data:dataElementId>
+        <layout:hints>
+          <layout:panel page="Default" panel="Default"/>
+        </layout:hints>
+      </com:detail>
+      <com:detail xsi:type="poms:valueComplexType" linkEnabled="false" overrideDictionaryValues="false" query="" queryEnabled="false" valueEnabled="false">
+        <com:id>Lxmziu2MT6ajQUpE7HB2Lg</com:id>
+        <com:elementType>oracle.communications.sce.poms.model.data.ValueElementDetail</com:elementType>
+        <data:dataElementId>Test</data:dataElementId>
+      </com:detail>
+      <com:detail xsi:type="specification:CharElementDetailType">
+        <com:id>LZwzYH9bQcuZOoLan-XrVQ</com:id>
+        <com:elementType>oracle.communications.studio.inventory.model.data.StudioModelDataElementCharDetailType</com:elementType>
+        <data:dataElementId>Test</data:dataElementId>
         <specification:startTimestamp>0</specification:startTimestamp>
         <specification:endTimestamp>0</specification:endTimestamp>
       </com:detail>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aut="http://xmlns.oracle.com/communications/sce/osm/model/process/task/automation" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:task="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="task:manualTaskType" name="InstallDebugTask">
   <com:displayName>InstallDebugTask</com:displayName>
-  <com:saveVersion>9</com:saveVersion>
+  <com:saveVersion>10</com:saveVersion>
   <com:id>h34issMgRa6Nq7C1v2iX-g</com:id>
   <task:orderType>
     <com:entity>L3-DD-OSMOrder</com:entity>
@@ -81,6 +81,20 @@
         <com:entityType>order</com:entityType>
         <com:relationship>ora.task.orderTemplateRef</com:relationship>
         <com:element>/ControlData/OrderItem/PointOfNoReturn</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>L3-DD-OSMOrder</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/ParentOrderID</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>L3-DD-OSMOrder</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/DependingLineID</com:element>
         <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
       </task:childNode>
     </task:childNode>
@@ -187,6 +201,22 @@
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
               <task:childRefNode>true</task:childRefNode>
             </task:childNode>
+            <task:childNode>
+              <com:entity>L3-DD-OSMOrder</com:entity>
+              <com:entityType>order</com:entityType>
+              <com:relationship>ora.task.orderTemplateRef</com:relationship>
+              <com:element>/ControlData/Functions/InstallOrderFunction/orderItem/orderItemRef/ParentOrderID</com:element>
+              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <task:childRefNode>true</task:childRefNode>
+            </task:childNode>
+            <task:childNode>
+              <com:entity>L3-DD-OSMOrder</com:entity>
+              <com:entityType>order</com:entityType>
+              <com:relationship>ora.task.orderTemplateRef</com:relationship>
+              <com:element>/ControlData/Functions/InstallOrderFunction/orderItem/orderItemRef/DependingLineID</com:element>
+              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <task:childRefNode>true</task:childRefNode>
+            </task:childNode>
             <task:childRefNode>true</task:childRefNode>
           </task:childNode>
           <task:childNode>
@@ -221,6 +251,13 @@
       <com:element>/ControlData/OrderFulfillmentState</com:element>
       <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
     </task:childNode>
+  </task:orderTemplateRef>
+  <task:orderTemplateRef>
+    <com:entity>L3-DD-OSMOrder</com:entity>
+    <com:entityType>order</com:entityType>
+    <com:relationship>ora.task.orderTemplateRef</com:relationship>
+    <com:element>/Test</com:element>
+    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
   </task:orderTemplateRef>
   <task:viewNodeExtension>
     <task:path>/ControlData</task:path>
@@ -364,6 +401,31 @@
   </task:viewNodeExtension>
   <task:viewNodeExtension>
     <task:path>/ControlData/Functions/InstallOrderFunction/orderItem/orderItemRef/PointOfNoReturn</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/ParentOrderID</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/DependingLineID</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/InstallOrderFunction/orderItem/orderItemRef/ParentOrderID</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/InstallOrderFunction/orderItem/orderItemRef/DependingLineID</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/Test</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
