@@ -26,6 +26,7 @@ declare variable $orderData             := fn:root(.)/oms:GetOrder.Response;
 declare variable $sTaskName             := context:getTaskMnemonic($context);
 declare variable $sOrderId              := $orderData/oms:OrderID/text();
 declare variable $sVersion              := $orderData/oms:Version/text();
+declare variable $sReference            := $orderData/oms:Reference/text();
 declare variable $sUsername             := 'oms-automation';
 declare variable $sPassword             := 'admin123';
 declare variable $sUimUsername          := 'uimadmin';
@@ -69,10 +70,12 @@ declare function local:addSoapBody(
 let $eProcessRequest                     := local:createSoapMessage($orderData)
 let $sProcessRequest                     := saxon:serialize($eProcessRequest, <xsl:output method='xml' omit-xml-declaration='yes' indent='yes' saxon:indent-spaces='4'/>)
 let $sOrderData                          := saxon:serialize($orderData, <xsl:output method='xml' omit-xml-declaration='yes' indent='yes' saxon:indent-spaces='4'/>)
+let $sCorrelationId                      := systeminteractionmodule:getCorrelationID($orderData)
 
 return
     (
         log:info($log, fn:concat('ProcessBI Request : ', $sProcessRequest)),
+        outboundMessage:setJMSCorrelationID($outboundMessage,$sCorrelationId),
         outboundMessage:setStringProperty($outboundMessage, "URI", $serviceManagementURI),
         outboundMessage:setStringProperty($outboundMessage, "_wls_mimehdrContent_Type", $mimeContextType),
         $eProcessRequest

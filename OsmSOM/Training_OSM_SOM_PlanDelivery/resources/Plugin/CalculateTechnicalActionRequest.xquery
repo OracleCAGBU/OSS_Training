@@ -28,6 +28,7 @@ declare variable $orderData             := fn:root(.)/oms:GetOrder.Response;
 declare variable $sTaskName             := context:getTaskMnemonic($context);
 declare variable $sOrderId              := $orderData/oms:OrderID/text();
 declare variable $sVersion              := $orderData/oms:Version/text();
+declare variable $sReference            := $orderData/oms:Reference/text();
 declare variable $sUsername             := 'oms-automation';
 declare variable $sPassword             := 'admin123';
 declare variable $sUimUsername          := 'uimadmin';
@@ -74,11 +75,13 @@ let $bid                                                  := uimlib:getBICorrela
 let $eCalculateTechnicalActionRequest                     := local:createSoapMessage($bid)
 let $sOrderData                                           := saxon:serialize($orderData, <xsl:output method='xml' omit-xml-declaration='yes' indent='yes' saxon:indent-spaces='4'/>)
 let $sCalculateTechnicalActionRequest                     := saxon:serialize($eCalculateTechnicalActionRequest, <xsl:output method='xml' omit-xml-declaration='yes' indent='yes' saxon:indent-spaces='4'/>)
+let $sCorrelationId                                       := systeminteractionmodule:getCorrelationID($orderData)
 
 return
     (
         (:log:info($log, fn:concat('GetOrder.Response : ', $sOrderData)),:)
         log:info($log, fn:concat('CalculateTechnicalAction Request : ', $sCalculateTechnicalActionRequest)),
+        outboundMessage:setJMSCorrelationID($outboundMessage,$sCorrelationId),
         outboundMessage:setStringProperty($outboundMessage, "URI", $ctoURI),
         outboundMessage:setStringProperty($outboundMessage, "_wls_mimehdrContent_Type", $mimeContextType),
         $eCalculateTechnicalActionRequest

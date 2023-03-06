@@ -28,6 +28,7 @@ declare variable $orderData             := fn:root(.)/oms:GetOrder.Response;
 declare variable $sTaskName             := context:getTaskMnemonic($context);
 declare variable $sOrderId              := $orderData/oms:OrderID/text();
 declare variable $sVersion              := $orderData/oms:Version/text();
+declare variable $sReference            := $orderData/oms:Reference/text();
 declare variable $sUsername             := 'oms-automation';
 declare variable $sPassword             := 'admin123';
 declare variable $sUimUsername          := 'uimadmin';
@@ -86,11 +87,13 @@ declare function local:addSoapBody(
 let $eCaptureRequest                     := local:createSoapMessage($orderData)
 let $sOrderData                          := saxon:serialize($orderData, <xsl:output method='xml' omit-xml-declaration='yes' indent='yes' saxon:indent-spaces='4'/>)
 let $sCaptureRequest                     := saxon:serialize($eCaptureRequest, <xsl:output method='xml' omit-xml-declaration='yes' indent='yes' saxon:indent-spaces='4'/>)
+let $sCorrelationId                      := systeminteractionmodule:getCorrelationID($orderData)
 
 return
     (
         (:log:info($log, fn:concat('GetOrder.Response : ', $sOrderData)),:)
         log:info($log, fn:concat('CaptureBI Request : ', $sCaptureRequest)),
+        outboundMessage:setJMSCorrelationID($outboundMessage,$sCorrelationId),
         outboundMessage:setStringProperty($outboundMessage, "URI", $serviceManagementURI),
         outboundMessage:setStringProperty($outboundMessage, "_wls_mimehdrContent_Type", $mimeContextType),
         $eCaptureRequest

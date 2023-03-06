@@ -40,6 +40,15 @@ declare function systeminteractionmodule:setCorrelationID (
         $sCorrelationID  
 };
 
+declare function systeminteractionmodule:getCorrelationID(
+    $orderData as element()*) as xs:string?
+{
+    let $oi := $orderData/oms:_root/oms:ControlData/oms:Functions/*[fn:contains(fn:local-name(),'Function')]/oms:orderItem/oms:orderItemRef
+    let $id := $oi/oms:LineId/text()
+    let $correlationID := fn:substring-after($id,'CSO_')
+    return $correlationID         
+};
+
 declare function systeminteractionmodule:getSourceLineOrderItemsFromTransformedLineItem(
     $eTransformedOrderLineItem as element (),
     $eMappingContext as element (),
