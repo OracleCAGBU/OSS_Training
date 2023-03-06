@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adapt="http://xmlns.oracle.com/communications/sce/osm/model/adapter" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/adapter" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xsi:type="adapt:adapterType" name="GetOrderWebService">
+  <com:displayName>GetOrderWebService</com:displayName>
+  <com:saveVersion>6</com:saveVersion>
+  <com:id>rRjI6rfgR7i7TT6N22n7Aw</com:id>
+  <com:interface>
+    <com:inputParameter xsi:type="adapt:xpathInputParameterType" name="soap.request"><adapt:defaultValue>let $parentOrderId  	:= .//*:ParentOrderID/text()&#xD;
+let $orderType         :='L3-DD-OSMOrder'&#xD;
+&#xD;
+return&#xD;
+(&#xD;
+&lt;ord:FindOrder xmlns:ord=&quot;http://xmlns.oracle.com/communications/ordermanagement&quot;>        &#xD;
+         &lt;ord:SelectBy>            &#xD;
+            &lt;ord:OrderType>{$orderType}&lt;/ord:OrderType>&#xD;
+            &lt;ord:Field>               &#xD;
+               &lt;ord:Path>/OrderNumber&lt;/ord:Path>&#xD;
+               &lt;ord:EqualTo>{$parentOrderId}&lt;/ord:EqualTo>               &#xD;
+            &lt;/ord:Field>            &#xD;
+         &lt;/ord:SelectBy>         &#xD;
+&lt;/ord:FindOrder>&#xD;
+)</adapt:defaultValue><adapt:contentType>XQUERY</adapt:contentType></com:inputParameter>
+  </com:interface>
+  <com:implementation xsi:type="adapt:adapterImplementationType">
+    <com:entity></com:entity>
+    <com:entityType>Class</com:entityType>
+    <com:relationship>com.mslv.studio.provisioning.dataProvider.implementationClass</com:relationship>
+    <adapt:builtInType>WEB_SERVICE</adapt:builtInType>
+  </com:implementation>
+  <adapt:cache enabled="true">
+    <adapt:scope>SYSTEM</adapt:scope>
+    <adapt:timeout>15000</adapt:timeout>
+    <adapt:maxsize>50</adapt:maxsize>
+  </adapt:cache>
+</com:modelEntity>
