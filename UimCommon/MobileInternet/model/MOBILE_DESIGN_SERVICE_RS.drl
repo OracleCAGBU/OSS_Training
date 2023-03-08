@@ -1,0 +1,43 @@
+package com.mobile.ci;
+
+import java.lang.*;
+import java.util.*;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointContext;
+import oracle.communications.inventory.api.entity.ServiceConfigurationVersion;
+import oracle.communications.inventory.xmlbeans.BusinessInteractionItemType;
+import oracle.communications.inventory.api.exception.ValidationException;
+import com.mobile.ci.BaseDesigner;
+import oracle.communications.inventory.api.framework.logging.LogFactory;
+
+global Log log;
+
+rule "DESIGN_ASSIGN : MobileInternet"
+    salience 0
+    when
+        svcConVers : ServiceConfigurationVersion()
+        context : ExtensionPointContext()
+        
+    then 
+    	//log = LogFactory.getLog("com.broadband.ci");
+        log.debug("", new Object[] { "DESIGN_ASSIGN : MobileInternet Starts" });
+		System.out.println("inside Design ruleset...");
+    	try {	
+	        if (svcConVers != null) {
+	            BusinessInteractionItemType biItem = (BusinessInteractionItemType) context.getArguments()[1];
+	            BaseDesigner designer = new BaseDesigner();
+            	designer.design(svcConVers, biItem);
+            }
+        }
+        catch(ValidationException x) {
+    	    throw x; // pass this through as a fault message
+        }
+    	catch(Exception x) {
+    		// wrap all other exceptions to ensure a meaningful fault message
+    		log.error("", x, new Object[] { x.getMessage() });
+    		throw new ValidationException( "design failed due to exception", x);
+    	}
+        log.debug("", new Object[] { "DESIGN_ASSIGN : MobileInternet Ends" });
+        
+    end
+	

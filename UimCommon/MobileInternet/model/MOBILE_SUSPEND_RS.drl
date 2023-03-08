@@ -1,0 +1,41 @@
+package com.mobile.ci;
+
+import java.lang.*;
+import java.util.*;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.rules.impl.RuleDebug;
+import oracle.communications.inventory.api.entity.Service;
+import oracle.communications.inventory.api.exception.ValidationException;
+import com.mobile.ci.BaseDesigner;
+import oracle.communications.inventory.api.framework.logging.LogFactory;
+
+global Log log;
+
+rule "SUSPEND : MobileInteret"
+	salience 100
+	when
+		service : Service()
+	then 
+        log = LogFactory.getLog("com.mobile.ci");
+        log.debug("", "SUSPEND : MobileInteret - RULE START");
+		
+        try {
+			if (service != null){
+				log.debug("", "Inside try");
+	            BaseDesigner designer = new BaseDesigner();
+				designer.suspendService(service);
+				log.debug("", "Outside try");
+			}  
+    	}
+    	catch(ValidationException x) {
+    		log.debug("", "Inside catch");
+    	    throw x; // pass this through as a fault message
+    	}
+    	catch(Exception x) {
+    		// wrap all other exceptions to ensure a meaningful fault message
+    		log.error("", x, new Object[] { x.getMessage() });
+    		throw new ValidationException( "design failed due to exception", x);
+    	}		         
+		
+		log.debug("", "SUSPEND : MobileInteret - RULE END");
+	end

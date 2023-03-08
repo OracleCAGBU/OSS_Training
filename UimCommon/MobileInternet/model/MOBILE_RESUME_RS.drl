@@ -1,0 +1,39 @@
+package com.mobile.ci;
+
+import java.lang.*;
+import java.util.*;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.extensibility.rules.impl.RuleDebug;
+import oracle.communications.inventory.api.entity.Service;
+import oracle.communications.inventory.api.exception.ValidationException;
+import com.mobile.ci.BaseDesigner;
+import oracle.communications.inventory.api.framework.logging.LogFactory;
+
+global Log log;
+
+rule "Resume : MobileInternet"
+	salience 0
+	when
+		service : Service()
+	
+	then 
+        log = LogFactory.getLog("com.mobile.ci");
+        log.debug("", "Resume : MobileInternet - RULE START");
+		
+        try {
+			if (service != null){
+	            BaseDesigner designer = new BaseDesigner();
+				designer.resumeService(service);
+			}  
+    	}
+    	catch(ValidationException x) {
+    	    throw x; // pass this through as a fault message
+    	}
+    	catch(Exception x) {
+    		// wrap all other exceptions to ensure a meaningful fault message
+    		log.error("", x, new Object[] { x.getMessage() });
+    		throw new ValidationException( "design failed due to exception", x);
+    	}		         
+		
+		log.debug("", "Resume : MobileInternet - RULE END");
+	end
