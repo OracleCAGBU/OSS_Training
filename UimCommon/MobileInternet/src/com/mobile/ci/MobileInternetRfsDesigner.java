@@ -180,7 +180,10 @@ public class MobileInternetRfsDesigner extends BaseDesigner {
 			debug(log,"Inside SA_CHANGEPAYTYPE");
 			designManager.aquireConfigItem(scvConVers, Constants.PARAM_PROPERTIES_CI);
 			designManager.addUpdateServiceCharacteristic(cfs, Constants.PARAM_PAYTYPE, paramMap.get(Constants.PARAM_PAYTYPE));
+			designManager.addUpdateServiceCharacteristic(cfs, Constants.PARAM_SERVICEPLAN, paramMap.get(Constants.PARAM_SERVICEPLAN));
+
 			UimHelper.setConfigItemCharValue(scvConVers, Constants.PARAM_PROPERTIES_CI, Constants.PARAM_PAYTYPE, paramMap.get(Constants.PARAM_PAYTYPE));
+			UimHelper.setConfigItemCharValue(scvConVers, Constants.PARAM_PROPERTIES_CI, Constants.PARAM_SERVICEPLAN, paramMap.get(Constants.PARAM_SERVICEPLAN));
 		} 
 		
 		UimHelper.setConfigItemCharValue(scvConVers, Constants.PARAM_PROPERTIES_CI, Constants.PARAM_SERVICE_ACTION, serviceAction);

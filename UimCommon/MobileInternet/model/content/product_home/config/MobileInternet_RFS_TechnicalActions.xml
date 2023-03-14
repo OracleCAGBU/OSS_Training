@@ -38,6 +38,10 @@
          <act:name>IMSI</act:name>
          <act:type>string</act:type>
       </act:parameter>
+      <act:parameter>
+         <act:name>PayType</act:name>
+         <act:type>string</act:type>
+      </act:parameter>
       <act:applicationRole>Activation</act:applicationRole>
    </act:action>
    <!--CHANGEPAYTYPE@TA_ACT_MOBILE_RFS-->
@@ -76,6 +80,10 @@
       </act:parameter>
       <act:parameter>
          <act:name>IMSI</act:name>
+         <act:type>string</act:type>
+      </act:parameter>
+      <act:parameter>
+         <act:name>PayType</act:name>
          <act:type>string</act:type>
       </act:parameter>
       <act:applicationRole>Activation</act:applicationRole>
@@ -118,6 +126,10 @@
          <act:name>IMSI</act:name>
          <act:type>string</act:type>
       </act:parameter>
+      <act:parameter>
+         <act:name>PayType</act:name>
+         <act:type>string</act:type>
+      </act:parameter>
       <act:applicationRole>Activation</act:applicationRole>
    </act:action>
    <!--SUSPEND@TA_ACT_MOBILE_RFS-->
@@ -156,6 +168,10 @@
       </act:parameter>
       <act:parameter>
          <act:name>IMSI</act:name>
+         <act:type>string</act:type>
+      </act:parameter>
+      <act:parameter>
+         <act:name>PayType</act:name>
          <act:type>string</act:type>
       </act:parameter>
       <act:applicationRole>Activation</act:applicationRole>
@@ -198,6 +214,10 @@
          <act:name>IMSI</act:name>
          <act:type>string</act:type>
       </act:parameter>
+      <act:parameter>
+         <act:name>PayType</act:name>
+         <act:type>string</act:type>
+      </act:parameter>
       <act:applicationRole>Activation</act:applicationRole>
    </act:action>
    <!--DISCONNECT@TA_ACT_MOBILE_RFS-->
@@ -236,6 +256,10 @@
       </act:parameter>
       <act:parameter>
          <act:name>IMSI</act:name>
+         <act:type>string</act:type>
+      </act:parameter>
+      <act:parameter>
+         <act:name>PayType</act:name>
          <act:type>string</act:type>
       </act:parameter>
       <act:applicationRole>Activation</act:applicationRole>
@@ -321,6 +345,10 @@
          <act:path>./Properties_CI/ServicePlan</act:path>
       </act:binding>
       <act:binding>
+         <act:parameter>PayType</act:parameter>
+         <act:path>./Properties_CI/PayType</act:path>
+      </act:binding>
+      <act:binding>
          <act:parameter>MSISDN</act:parameter>
          <act:path>./MSISDN_CI/Assignment[(@State='PENDING_ASSIGN')]/id</act:path>
       </act:binding>
@@ -354,6 +382,10 @@
       <act:binding>
          <act:parameter>ServicePlan</act:parameter>
          <act:path>./Properties_CI/ServicePlan</act:path>
+      </act:binding>
+      <act:binding>
+         <act:parameter>PayType</act:parameter>
+         <act:path>./Properties_CI/PayType</act:path>
       </act:binding>
       <act:binding>
          <act:parameter>MSISDN</act:parameter>
@@ -391,6 +423,10 @@
          <act:path>./Properties_CI/ServicePlan</act:path>
       </act:binding>
       <act:binding>
+         <act:parameter>PayType</act:parameter>
+         <act:path>./Properties_CI/PayType</act:path>
+      </act:binding>
+      <act:binding>
          <act:parameter>MSISDN</act:parameter>
          <act:path>./MSISDN_CI/Assignment[(@State='PENDING_ASSIGN')]/id</act:path>
       </act:binding>
@@ -420,6 +456,10 @@
       <act:binding>
          <act:parameter>Email</act:parameter>
          <act:path>./Properties_CI/Email</act:path>
+      </act:binding>
+      <act:binding>
+         <act:parameter>PayType</act:parameter>
+         <act:path>./Properties_CI/PayType</act:path>
       </act:binding>
       <act:binding>
          <act:parameter>ServicePlan</act:parameter>
@@ -461,6 +501,10 @@
          <act:path>./Properties_CI/ServicePlan</act:path>
       </act:binding>
       <act:binding>
+         <act:parameter>PayType</act:parameter>
+         <act:path>./Properties_CI/PayType</act:path>
+      </act:binding>
+      <act:binding>
          <act:parameter>MSISDN</act:parameter>
          <act:path>./MSISDN_CI/Assignment[(@State='ASSIGNED')]/id</act:path>
       </act:binding>
@@ -494,6 +538,10 @@
       <act:binding>
          <act:parameter>ServicePlan</act:parameter>
          <act:path>./Properties_CI/ServicePlan</act:path>
+      </act:binding>
+      <act:binding>
+         <act:parameter>PayType</act:parameter>
+         <act:path>./Properties_CI/PayType</act:path>
       </act:binding>
       <act:binding>
          <act:parameter>MSISDN</act:parameter>
