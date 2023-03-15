@@ -8,9 +8,10 @@ import com.orcl.activation.cisco.isp.x1_0.IspConnectionHandler;
 import com.orcl.activation.cisco.isp.x1_0.helper.ISPConstants;
 import com.orcl.activation.cisco.isp.x1_0.helper.ISPHelper;
 import com.orcl.activation.cisco.isp.x1_0.request.ProvisionRequest;
-import com.orcl.activation.cisco.isp.x1_0.request.QueryRequest.Credential;
+import com.orcl.activation.cisco.isp.x1_0.request.ProvisionRequest.Credential;
+import com.orcl.activation.cisco.isp.x1_0.request.ProvisionRequest.Service;
 import com.orcl.activation.cisco.isp.x1_0.response.ProvisionResponse;
-import com.orcl.activation.cisco.isp.x1_0.response.QueryResponse.Service;
+import com.orcl.activation.cisco.isp.x1_0.response.QueryResponse;
 
 import java.io.StringReader;
 
@@ -65,7 +66,7 @@ public class AddFiber_cpeProcessor implements AddFiber_cpeProcessorInterface {
 			provReq.setAction(ISPConstants.ACTION_ADD);
 			provReq.setMACAddress(macAddress);
 			provReq.setSerialNumber(serialnumber);
-			
+
 			Service service=new Service();
 			service.setCPEType(cpetype);
 			service.setDownloadSpeed(downloadspeed);
@@ -73,28 +74,42 @@ public class AddFiber_cpeProcessor implements AddFiber_cpeProcessorInterface {
 			service.setModel(model);
 			service.setUploadSpeed(uploadspeed);
 			service.setVendor(vendor);
-			
-			Credential cred = new Credential();
-			cred.setUsername(connHdlr.getUserId());
-			cred.setPassword(connHdlr.getPassword());
+			service.setUsername(username);
+			service.setPassword(password);
 
-			provReq.getService();
-			provReq.getCredential();
-			
+			Credential cred = new Credential();
+			cred.setUser(connHdlr.getUserId());
+			cred.setAuthentication(connHdlr.getPassword());
+
+			provReq.setService(service);
+			provReq.setCredential(cred);
+
 			String provReqStr = ispHelper.getRequestString(provReq);
 			logger.logDebug("Provision Request - " + provReqStr);
 
-			
-			//Not connected with Network so no need of checking loopback condition
-			//if (!systemParameters.isLoopback()) {
+			ProvisionResponse provRes=null;
 
-			String provResStr = connHdlr.sendRequest(provReqStr);
-			
-			Unmarshaller unmarshaller = JAXBContext.newInstance(ProvisionResponse.class).createUnmarshaller();
-			// unmarshaller.setProperty(Unmarshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			if (!systemParameters.isLoopback()) {
 
-			ProvisionResponse provRes = (ProvisionResponse) unmarshaller.unmarshal(new StringReader(provResStr));
+				String provResStr = connHdlr.sendRequest(provReqStr);
 
+				Unmarshaller unmarshaller = JAXBContext.newInstance(ProvisionResponse.class).createUnmarshaller();
+
+				provRes = (ProvisionResponse) unmarshaller.unmarshal(new StringReader(provResStr));
+			}
+			else {
+				ProvisionResponse resp=new ProvisionResponse();
+				resp.setDesc("SUCCESS");
+				resp.setResult(0);
+
+				String provResStr = ispHelper.getProvisionResponse(resp);
+				logger.logDebug("Activate response - " + provResStr);
+
+				Unmarshaller unmarshaller = JAXBContext.newInstance(ProvisionResponse.class).createUnmarshaller();
+
+				provRes = (ProvisionResponse) unmarshaller.unmarshal(new StringReader(provResStr));
+
+			}
 			int Result = provRes.getResult();
 
 			responseCode = Integer.toString(Result);

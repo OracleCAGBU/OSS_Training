@@ -7,7 +7,10 @@
     <serviceMap>
       <atomicService>A_CISCO-ISP_1-0_CHANGE_FIBER_CPE</atomicService>
       <pointOfNoReturn>0</pointOfNoReturn>
-      <condition xsi:type="AlwaysConditionType"/>
+      <condition xsi:type="DefinedConditionType">
+        <expression></expression>
+        <parameterLabel>SerialNumber</parameterLabel>
+      </condition>
     </serviceMap>
   </commonService>
 </serviceModel>

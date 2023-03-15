@@ -8,10 +8,11 @@ import com.orcl.activation.cisco.isp.x1_0.fiber_cpe.change.generated.*;
 import com.orcl.activation.cisco.isp.x1_0.helper.ISPConstants;
 import com.orcl.activation.cisco.isp.x1_0.helper.ISPHelper;
 import com.orcl.activation.cisco.isp.x1_0.request.ModifyRequest;
-import com.orcl.activation.cisco.isp.x1_0.request.QueryRequest.Credential;
+import com.orcl.activation.cisco.isp.x1_0.request.ModifyRequest.Credential;
+import com.orcl.activation.cisco.isp.x1_0.request.ModifyRequest.Service;
 import com.orcl.activation.cisco.isp.x1_0.response.ModifyResponse;
 import com.orcl.activation.cisco.isp.x1_0.response.ProvisionResponse;
-import com.orcl.activation.cisco.isp.x1_0.response.QueryResponse.Service;
+import com.orcl.activation.cisco.isp.x1_0.response.QueryResponse;
 
 import java.io.StringReader;
 
@@ -51,6 +52,7 @@ public class ChangeFiber_cpeProcessor implements ChangeFiber_cpeProcessorInterfa
 			String uploadspeed = parms.getUploadSpeed();
 			String macAddress = parms.getMACAddress();
 			String old_serialnumber = parms.getOld_SerialNumber();
+			String status = parms.getStatus();
 
 			// Check if parameter is not null or have no value
 			ispHelper.isNotNull(macAddress, ISPConstants.MACAddress);
@@ -63,40 +65,58 @@ public class ChangeFiber_cpeProcessor implements ChangeFiber_cpeProcessorInterfa
 				modReq.setSerialNumber(serialnumber);
 			}
 			if(old_serialnumber!=null) {
-				modReq.setSerialNumber(old_serialnumber);
+				modReq.setOldSerialNumber(old_serialnumber);
 			}
-
+			
+			if(status!=null) {
+				modReq.setStatus(status);
+			}
+			
 			Service service=new Service();
+
 			if(downloadspeed!=null) {
 				service.setDownloadSpeed(downloadspeed);	
 			}
 			if(uploadspeed!=null) {
-				service.setDownloadSpeed(uploadspeed);	
+				service.setUploadSpeed(uploadspeed);	
 			}
 
 			Credential cred = new Credential();
-			cred.setUsername(connHdlr.getUserId());
-			cred.setPassword(connHdlr.getPassword());
+			cred.setUser(connHdlr.getUserId());
+			cred.setAuthentication(connHdlr.getPassword());
 
 			if(service!=null) {
-				modReq.getService();
+				modReq.setService(service);
 			}
-			modReq.getCredential();
+			modReq.setCredential(cred);
 
 			String modReqStr = ispHelper.getRequestString(modReq);
 			logger.logDebug("Change Request - " + modReqStr);
 
+			ModifyResponse modRes =null;
+			if (!systemParameters.isLoopback()) {
 
-			//Not connected with Network so no need of checking loopback condition
-			//if (!systemParameters.isLoopback()) {
+				String modResStr = connHdlr.sendRequest(modReqStr);
 
-			String modResStr = connHdlr.sendRequest(modReqStr);
+				Unmarshaller unmarshaller = JAXBContext.newInstance(ModifyResponse.class).createUnmarshaller();
 
-			Unmarshaller unmarshaller = JAXBContext.newInstance(ProvisionResponse.class).createUnmarshaller();
-			// unmarshaller.setProperty(Unmarshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+				modRes = (ModifyResponse) unmarshaller.unmarshal(new StringReader(modResStr));
 
-			ModifyResponse modRes = (ModifyResponse) unmarshaller.unmarshal(new StringReader(modResStr));
+			}
+			else {
+				
+				ModifyResponse resp=new ModifyResponse();
+				resp.setDesc("SUCCESS");
+				resp.setResult(0);
 
+				String modResStr = ispHelper.getModifyResponse(resp);
+				logger.logDebug("Modify response - " + modResStr);
+
+				Unmarshaller unmarshaller = JAXBContext.newInstance(ModifyResponse.class).createUnmarshaller();
+
+				modRes = (ModifyResponse) unmarshaller.unmarshal(new StringReader(modResStr));
+
+			}
 			int Result = modRes.getResult();
 
 			responseCode = Integer.toString(Result);
