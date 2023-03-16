@@ -1,0 +1,64 @@
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.metasolv.com/ServiceActivation/2003/ServiceModel">
+  <description></description>
+  <atomicService xsi:type="AtomicServiceType" name="A_ERIC_2-0_ADD_SUB_MOBILE_DATA">
+    <description></description>
+    <sendParameterCount>false</sendParameterCount>
+    <parameter xsi:type="SimpleParameterType" name="MCLI">
+      <description></description>
+      <required>true</required>
+      <default></default>
+      <parameterValueMap>MCLI</parameterValueMap>
+    </parameter>
+    <parameter xsi:type="SimpleParameterType" name="Name">
+      <description></description>
+      <required>true</required>
+      <default></default>
+      <parameterValueMap>Name</parameterValueMap>
+    </parameter>
+    <parameter xsi:type="SimpleParameterType" name="Email">
+      <description></description>
+      <required>false</required>
+      <default></default>
+      <parameterValueMap>Email</parameterValueMap>
+    </parameter>
+    <parameter xsi:type="SimpleParameterType" name="MSISDN">
+      <description></description>
+      <required>true</required>
+      <default></default>
+      <parameterValueMap>MSISDN</parameterValueMap>
+    </parameter>
+    <parameter xsi:type="SimpleParameterType" name="IMSI">
+      <description></description>
+      <required>true</required>
+      <default></default>
+      <parameterValueMap>IMSI</parameterValueMap>
+    </parameter>
+    <parameter xsi:type="SimpleParameterType" name="ICCID">
+      <description></description>
+      <required>true</required>
+      <default></default>
+      <parameterValueMap>ICCID</parameterValueMap>
+    </parameter>
+    <parameter xsi:type="SimpleParameterType" name="RoamingAllowed">
+      <description></description>
+      <required>false</required>
+      <default></default>
+      <parameterValueMap>RoamingAllowed</parameterValueMap>
+    </parameter>
+    <parameter xsi:type="SimpleParameterType" name="ServicePlan">
+      <description></description>
+      <required>false</required>
+      <default></default>
+      <parameterValueMap>ServicePlan</parameterValueMap>
+    </parameter>
+  </atomicService>
+  <atomicDeviceMap name="A_ERIC_2-0_ADD_SUB_MOBILE_DATA">
+    <deviceMap>
+      <vendor>ERIC</vendor>
+      <type>MOBILE</type>
+      <version>2-0</version>
+      <implementation>com.oracle.activation.eric.mobile.x2_0.sub_mobile_data.add.generated.AddSub_mobile_dataProxy.execute</implementation>
+      <interpreter>JINTERPRETER_PROGRAM</interpreter>
+    </deviceMap>
+  </atomicDeviceMap>
+</serviceModel>

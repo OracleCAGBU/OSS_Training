@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activation="http://xmlns.oracle.com/communications/studio/model/activation" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="activation:ServiceAction" id="sa=C_MOD_MOBILE_SERVICE" type="sa" typeName="Service Action" name="C_MOD_MOBILE_SERVICE" resource="\SC_ERIC_MOBILE\model\C_MOD_MOBILE_SERVICE.serviceAction">
+    <note lang="default"/>
+    <project>
+      <relation ref="aprj=SC_ERIC_MOBILE" type="Activation Project" name="Dependency">
+        <target name="SC_ERIC_MOBILE" typeName="Activation Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="sa=C_MOD_MOBILE_SERVICE+dataElement=/C_MOD_MOBILE_SERVICE/OLD_MSISDN" type="dataElement" typeName="Data Element" kind="Element" name="OLD_MSISDN" path="/C_MOD_MOBILE_SERVICE/OLD_MSISDN">
+        <displayName lang="default">OLD MSISDN</displayName>
+        <minOccurs inherited="false">1</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <base>
+          <relation ref="ds=NW_ERIC_MOBILE+dataElement=OLD_MSISDN" type="Schema Element" name="Type" kind="Element">
+            <target name="OLD_MSISDN" typeName="Schema Element"/>
+            <inEntity name="NW_ERIC_MOBILE" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="sa=C_MOD_MOBILE_SERVICE+dataElement=/C_MOD_MOBILE_SERVICE/MSISDN" type="dataElement" typeName="Data Element" kind="Element" name="MSISDN" path="/C_MOD_MOBILE_SERVICE/MSISDN">
+        <displayName lang="default">MSISDN</displayName>
+        <displayName lang="default">MSISDN</displayName>
+        <minOccurs inherited="false">1</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <base>
+          <relation ref="ds=NW_ERIC_MOBILE+dataElement=MSISDN" type="Schema Element" name="Type" kind="Element">
+            <target name="MSISDN" typeName="Schema Element"/>
+            <inEntity name="NW_ERIC_MOBILE" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="sa=C_MOD_MOBILE_SERVICE+dataElement=/C_MOD_MOBILE_SERVICE/MCLI" type="dataElement" typeName="Data Element" kind="Element" name="MCLI" path="/C_MOD_MOBILE_SERVICE/MCLI">
+        <displayName lang="default">MCLI</displayName>
+        <minOccurs inherited="false">1</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">254</maxLength>
+        <base>
+          <relation ref="ds=Activation_Schema+dataElement=MCLI" type="Schema Element" name="Type" kind="Element">
+            <target name="MCLI" typeName="Schema Element"/>
+            <inEntity name="Activation_Schema" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="sa=C_MOD_MOBILE_SERVICE+dataElement=/C_MOD_MOBILE_SERVICE/IMSI" type="dataElement" typeName="Data Element" kind="Element" name="IMSI" path="/C_MOD_MOBILE_SERVICE/IMSI">
+        <displayName lang="default">IMSI</displayName>
+        <minOccurs inherited="false">1</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <base>
+          <relation ref="ds=NW_ERIC_MOBILE+dataElement=IMSI" type="Schema Element" name="Type" kind="Element">
+            <target name="IMSI" typeName="Schema Element"/>
+            <inEntity name="NW_ERIC_MOBILE" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="sa=C_MOD_MOBILE_SERVICE+dataElement=/C_MOD_MOBILE_SERVICE/ServicePlan" type="dataElement" typeName="Data Element" kind="Element" name="ServicePlan" path="/C_MOD_MOBILE_SERVICE/ServicePlan">
+        <displayName lang="default">Service Plan</displayName>
+        <minOccurs inherited="false">1</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <base>
+          <relation ref="ds=NW_ERIC_MOBILE+dataElement=ServicePlan" type="Schema Element" name="Type" kind="Element">
+            <target name="ServicePlan" typeName="Schema Element"/>
+            <inEntity name="NW_ERIC_MOBILE" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="sa=C_MOD_MOBILE_SERVICE+dataElement=/C_MOD_MOBILE_SERVICE/PayType" type="dataElement" typeName="Data Element" kind="Element" name="PayType" path="/C_MOD_MOBILE_SERVICE/PayType">
+        <displayName lang="default">Pay Type</displayName>
+        <minOccurs inherited="false">1</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <base>
+          <relation ref="ds=NW_ERIC_MOBILE+dataElement=PayType" type="Schema Element" name="Type" kind="Element">
+            <target name="PayType" typeName="Schema Element"/>
+            <inEntity name="NW_ERIC_MOBILE" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+    </dataElements>
+    <atomicActions>
+      <relation ref="aa=A_ERIC_2-0_MOD_SUB_MOBILE_MSISDN" type="Atomic Action" name="AtomicAction" kind="Entity">
+        <target name="A_ERIC_2-0_MOD_SUB_MOBILE_MSISDN" typeName="Atomic Action"/>
+      </relation>
+      <relation ref="aa=A_ERIC_2-0_MOD_SUB_MOBILE_PAYTYPE" type="Atomic Action" name="AtomicAction" kind="Entity">
+        <target name="A_ERIC_2-0_MOD_SUB_MOBILE_PAYTYPE" typeName="Atomic Action"/>
+      </relation>
+    </atomicActions>
+  </entity>
+</model:Model>

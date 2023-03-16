@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activation="http://xmlns.oracle.com/communications/studio/model/activation" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="activation:NETemplate" id="net=T_ERIC-MOBILE_2-0_HOST" type="net" typeName="NE Template" name="T_ERIC-MOBILE_2-0_HOST" resource="\NW_ERIC_MOBILE\model\NE\T_ERIC-MOBILE_2-0_HOST.neTemplate">
+    <note lang="default"/>
+    <project>
+      <relation ref="aprj=NW_ERIC_MOBILE" type="Activation Project" name="Dependency">
+        <target name="NW_ERIC_MOBILE" typeName="Activation Project"/>
+      </relation>
+    </project>
+    <connectionHandlers>
+      <relation ref="nech=CONN_HANDLER_MOBILE" type="NE Connection Handler" name="com.mslv.studio.activation.connectionHandler.supportedNE" kind="Entity">
+        <target name="CONN_HANDLER_MOBILE" typeName="NE Connection Handler"/>
+      </relation>
+    </connectionHandlers>
+  </entity>
+</model:Model>

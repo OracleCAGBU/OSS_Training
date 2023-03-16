@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/activation/model/config" xmlns:res="http://www.mslv.com/studio/activation/model/config" xmlns:com="http://www.mslv.com/studio/core/model/common" xsi:type="ElementType" name="T_ERIC-MOBILE_2-0_HOST">
+  <com:displayName></com:displayName>
+  <com:saveVersion>12</com:saveVersion>
+  <com:id>nOePaQz7QJ2NABlt48lrmw</com:id>
+  <vendor>ERIC</vendor>
+  <technology>MOBILE</technology>
+  <softwareLoad>2-0</softwareLoad>
+  <nepServerName>$NEP</nepServerName>
+  <primaryPool name="ericPool">
+    <device name="Connection1">
+      <lineType>GENERIC_MESSAGE_BASED_CONNECTION</lineType>
+    </device>
+    <device name="Connection2">
+      <lineType>GENERIC_MESSAGE_BASED_CONNECTION</lineType>
+    </device>
+  </primaryPool>
+  <maximumConnections>5</maximumConnections>
+  <dropTimeout>1</dropTimeout>
+  <spawnThreshold>6</spawnThreshold>
+  <killThreshold>3</killThreshold>
+  <routingElement name="ERIC_MOBILE_2-0"/>
+  <lineType>GENERIC_MESSAGE_BASED_CONNECTION</lineType>
+  <communicationParameter>
+    <label>Host</label>
+    <value>
+      <value>http://10.21.34.56:8020</value>
+    </value>
+    <description>New Parameter</description>
+  </communicationParameter>
+  <communicationParameter>
+    <label>URL_Suffix</label>
+    <value>
+      <value>/services/mobwebapi/user/</value>
+    </value>
+    <description>New Parameter</description>
+  </communicationParameter>
+  <communicationParameter>
+    <label>Username</label>
+    <value>
+      <value>test</value>
+    </value>
+    <description>New Parameter</description>
+  </communicationParameter>
+  <communicationParameter>
+    <label>Read_Timeout</label>
+    <value>
+      <value>60</value>
+    </value>
+    <description>New Parameter</description>
+  </communicationParameter>
+  <communicationParameter>
+    <label>Write_Timeout</label>
+    <value>
+      <value>60</value>
+    </value>
+    <description>New Parameter</description>
+  </communicationParameter>
+  <communicationParameter>
+    <label>Log_Enabled</label>
+    <value>
+      <value>true</value>
+    </value>
+    <description>New Parameter</description>
+  </communicationParameter>
+</com:modelEntity>

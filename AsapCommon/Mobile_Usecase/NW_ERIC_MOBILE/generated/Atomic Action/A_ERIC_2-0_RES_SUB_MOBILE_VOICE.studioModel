@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activation="http://xmlns.oracle.com/communications/studio/model/activation" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="activation:AtomicAction" id="aa=A_ERIC_2-0_RES_SUB_MOBILE_VOICE" type="aa" typeName="Atomic Action" name="A_ERIC_2-0_RES_SUB_MOBILE_VOICE" resource="\NW_ERIC_MOBILE\model\RESUME\A_ERIC_2-0_RES_SUB_MOBILE_VOICE.atomicAction">
+    <note lang="default"/>
+    <project>
+      <relation ref="aprj=NW_ERIC_MOBILE" type="Activation Project" name="Dependency">
+        <target name="NW_ERIC_MOBILE" typeName="Activation Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="aa=A_ERIC_2-0_RES_SUB_MOBILE_VOICE+dataElement=Gw+Vi9w5Ry6Ahk7m7otSqQ" type="dataElement" typeName="Data Element" kind="Element" name="MCLI" path="/A_ERIC_2-0_RES_SUB_MOBILE_VOICE/MCLI">
+        <displayName lang="default">MCLI</displayName>
+        <minOccurs inherited="true">1</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">254</maxLength>
+        <base>
+          <relation ref="ds=Activation_Schema+dataElement=MCLI" type="Schema Element" name="Type" kind="Element">
+            <target name="MCLI" typeName="Schema Element"/>
+            <inEntity name="Activation_Schema" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_ERIC_2-0_RES_SUB_MOBILE_VOICE+dataElement=PAGzgqbwSRqueJKVr9puWQ" type="dataElement" typeName="Data Element" kind="Element" name="MSISDN" path="/A_ERIC_2-0_RES_SUB_MOBILE_VOICE/MSISDN">
+        <displayName lang="default">MSISDN</displayName>
+        <minOccurs inherited="true">1</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_ERIC_MOBILE+dataElement=MSISDN" type="Schema Element" name="Type" kind="Element">
+            <target name="MSISDN" typeName="Schema Element"/>
+            <inEntity name="NW_ERIC_MOBILE" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_ERIC_2-0_RES_SUB_MOBILE_VOICE+dataElement=7cpvfQCvTyeKj1+g4mZqcw" type="dataElement" typeName="Data Element" kind="Element" name="IMSI" path="/A_ERIC_2-0_RES_SUB_MOBILE_VOICE/IMSI">
+        <displayName lang="default">IMSI</displayName>
+        <minOccurs inherited="true">1</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_ERIC_MOBILE+dataElement=IMSI" type="Schema Element" name="Type" kind="Element">
+            <target name="IMSI" typeName="Schema Element"/>
+            <inEntity name="NW_ERIC_MOBILE" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+    </dataElements>
+    <actionProcessors>
+      <relation ref="ap=I_ERIC_2-0_RES_SUB_MOBILE_VOICE" type="Action Processor" name="Action Processor" kind="Entity">
+        <target name="I_ERIC_2-0_RES_SUB_MOBILE_VOICE" typeName="Action Processor"/>
+      </relation>
+    </actionProcessors>
+    <schemaGens>
+      <relation ref="aprj=NW_ERIC_MOBILE" type="Activation Project" name="com.mslv.studio.activation.networkAction.schemaGen">
+        <target name="NW_ERIC_MOBILE" typeName="Activation Project"/>
+      </relation>
+    </schemaGens>
+  </entity>
+</model:Model>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified"
+    targetNamespace="http://www.metasolv.com/ServiceActivation/NW_ERIC_MOBILE"
+    xmlns="http://www.metasolv.com/ServiceActivation/NW_ERIC_MOBILE"
+    xmlns:mca-serviceentities="http://www.metasolv.com/MCA/ServiceEntities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://www.metasolv.com/MCA/ServiceEntities"/>
+    <xs:element name="C_ERIC_2-0_ADD_SUB_MOBILE_DATA">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Email" type="EmailType"/>
+                <xs:element name="ICCID" type="ICCIDType"/>
+                <xs:element name="IMSI" type="IMSIType"/>
+                <xs:element name="MCLI" type="MCLIType"/>
+                <xs:element name="MSISDN" type="MSISDNType"/>
+                <xs:element name="Name" type="NameType"/>
+                <xs:element name="RoamingAllowed" type="RoamingAllowedType"/>
+                <xs:element name="ServicePlan" type="ServicePlanType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="C_ERIC_2-0_ADD_SUB_MOBILE_VOICE">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="BAIC" type="BAICType"/>
+                <xs:element name="BAOC" type="BAOCType"/>
+                <xs:element name="BICRO" type="BICROType"/>
+                <xs:element name="BOIC" type="BOICType"/>
+                <xs:element name="CFB" type="CFBType"/>
+                <xs:element name="CFNRC" type="CFNRCType"/>
+                <xs:element name="CFNRY" type="CFNRYType"/>
+                <xs:element name="CFS" type="CFSType"/>
+                <xs:element name="ENABLE_MMS" type="ENABLE_MMSType"/>
+                <xs:element name="Email" type="EmailType"/>
+                <xs:element name="ICCID" type="ICCIDType"/>
+                <xs:element name="IMSI" type="IMSIType"/>
+                <xs:element name="MCLI" type="MCLIType"/>
+                <xs:element name="MSISDN" type="MSISDNType"/>
+                <xs:element name="Name" type="NameType"/>
+                <xs:element name="PayType" type="PayTypeType"/>
+                <xs:element name="RoamingAllowed" type="RoamingAllowedType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="C_ERIC_2-0_DEL_SUB_MOBILE_DATA">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="IMSI" type="IMSIType"/>
+                <xs:element name="MCLI" type="MCLIType"/>
+                <xs:element name="MSISDN" type="MSISDNType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="C_ERIC_2-0_DEL_SUB_MOBILE_VOICE">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="BAIC" type="BAICType"/>
+                <xs:element name="BAOC" type="BAOCType"/>
+                <xs:element name="BICRO" type="BICROType"/>
+                <xs:element name="BOIC" type="BOICType"/>
+                <xs:element name="CFB" type="CFBType"/>
+                <xs:element name="CFNRC" type="CFNRCType"/>
+                <xs:element name="CFNRY" type="CFNRYType"/>
+                <xs:element name="CFS" type="CFSType"/>
+                <xs:element name="ENABLE_MMS" type="ENABLE_MMSType"/>
+                <xs:element name="Email" type="EmailType"/>
+                <xs:element name="ICCID" type="ICCIDType"/>
+                <xs:element name="IMSI" type="IMSIType"/>
+                <xs:element name="MCLI" type="MCLIType"/>
+                <xs:element name="MSISDN" type="MSISDNType"/>
+                <xs:element name="Name" type="NameType"/>
+                <xs:element name="PayType" type="PayTypeType"/>
+                <xs:element name="RoamingAllowed" type="RoamingAllowedType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="C_ERIC_2-0_MOD_SUB_MOBILE_MSISDN">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="IMSI" type="IMSIType"/>
+                <xs:element name="MCLI" type="MCLIType"/>
+                <xs:element name="MSISDN" type="MSISDNType"/>
+                <xs:element name="OLD_MSISDN" type="OLD_MSISDNType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="C_ERIC_2-0_MOD_SUB_MOBILE_PAYTYPE">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="MCLI" type="MCLIType"/>
+                <xs:element name="MSISDN" type="MSISDNType"/>
+                <xs:element name="PayType" type="PayTypeType"/>
+                <xs:element name="ServicePlan" type="ServicePlanType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="C_ERIC_2-0_RES_SUB_MOBILE_DATA">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="IMSI" type="IMSIType"/>
+                <xs:element name="MCLI" type="MCLIType"/>
+                <xs:element name="MSISDN" type="MSISDNType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="C_ERIC_2-0_RES_SUB_MOBILE_VOICE">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="IMSI" type="IMSIType"/>
+                <xs:element name="MCLI" type="MCLIType"/>
+                <xs:element name="MSISDN" type="MSISDNType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="C_ERIC_2-0_SUS_SUB_MOBILE_DATA">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="IMSI" type="IMSIType"/>
+                <xs:element name="MCLI" type="MCLIType"/>
+                <xs:element name="MSISDN" type="MSISDNType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="C_ERIC_2-0_SUS_SUB_MOBILE_VOICE">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="IMSI" type="IMSIType"/>
+                <xs:element name="MCLI" type="MCLIType"/>
+                <xs:element name="MSISDN" type="MSISDNType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="ICCIDType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OLD_MSISDNType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ENABLE_MMSType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="EmailType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MSISDNType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CFNRYType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="BAICType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ServicePlanType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PayTypeType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="BAOCType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CFNRCType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NameType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CFSType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MCLIType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="IMSIType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="BOICType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="BICROType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CFBType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RoamingAllowedType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

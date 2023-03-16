@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/activation/model/action" xmlns:act="http://www.mslv.com/studio/activation/model/action" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xsi:type="serviceModelType" name="I_ERIC_2-0_SUS_SUB_MOBILE_DATA">
+  <com:category>
+    <com:name>entity</com:name>
+    <com:value>SUB_MOBILE_DATA</com:value>
+  </com:category>
+  <com:saveVersion>2</com:saveVersion>
+  <com:id>Lln7t1VpQIWRD8CzTaji5w</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>Lln7t1VpQIWRD8CzTaji5w</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>I_ERIC_2-0_SUS_SUB_MOBILE_DATA</data:name>
+    <data:displayName lang="[default]">I_ERIC_2-0_SUS_SUB_MOBILE_DATA</data:displayName>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>yyGUubvfTweR6+oGCW0RxA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>Lln7t1VpQIWRD8CzTaji5w</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <service>
+    <implementation>
+      <vendor>ERIC</vendor>
+      <technology>MOBILE</technology>
+      <softwareLoad>2-0</softwareLoad>
+      <action>SUS</action>
+      <implementation xsi:type="SynchronizedJavaDeviceActionType">
+        <com:entity>com.oracle.activation.eric.mobile.x2_0.sub_mobile_data.sus.generated.SusSub_mobile_dataProxy</com:entity>
+        <com:entityType>java</com:entityType>
+        <com:relationship>synchronizedJavaDeviceAction</com:relationship>
+        <com:method>execute</com:method>
+      </implementation>
+      <commandDetails/>
+      <commandResponseDetails/>
+    </implementation>
+  </service>
+</com:modelEntity>

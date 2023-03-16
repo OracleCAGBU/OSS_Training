@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activation="http://xmlns.oracle.com/communications/studio/model/activation" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="activation:AtomicAction" id="aa=A_ERIC_2-0_ADD_SUB_MOBILE_DATA" type="aa" typeName="Atomic Action" name="A_ERIC_2-0_ADD_SUB_MOBILE_DATA" resource="\NW_ERIC_MOBILE\model\ADD\A_ERIC_2-0_ADD_SUB_MOBILE_DATA.atomicAction">
+    <note lang="default"/>
+    <project>
+      <relation ref="aprj=NW_ERIC_MOBILE" type="Activation Project" name="Dependency">
+        <target name="NW_ERIC_MOBILE" typeName="Activation Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="aa=A_ERIC_2-0_ADD_SUB_MOBILE_DATA+dataElement=-55x3ciuRE+iIPwcTvfrCg" type="dataElement" typeName="Data Element" kind="Element" name="MCLI" path="/A_ERIC_2-0_ADD_SUB_MOBILE_DATA/MCLI">
+        <displayName lang="default">MCLI</displayName>
+        <minOccurs inherited="true">1</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">254</maxLength>
+        <base>
+          <relation ref="ds=Activation_Schema+dataElement=MCLI" type="Schema Element" name="Type" kind="Element">
+            <target name="MCLI" typeName="Schema Element"/>
+            <inEntity name="Activation_Schema" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_ERIC_2-0_ADD_SUB_MOBILE_DATA+dataElement=RZ7r3sw7Qw6LlbWnMBzE+w" type="dataElement" typeName="Data Element" kind="Element" name="Name" path="/A_ERIC_2-0_ADD_SUB_MOBILE_DATA/Name">
+        <displayName lang="default">Name</displayName>
+        <minOccurs inherited="true">1</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_ERIC_MOBILE+dataElement=Name" type="Schema Element" name="Type" kind="Element">
+            <target name="Name" typeName="Schema Element"/>
+            <inEntity name="NW_ERIC_MOBILE" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_ERIC_2-0_ADD_SUB_MOBILE_DATA+dataElement=BroPehnGRkitHElxFMVChA" type="dataElement" typeName="Data Element" kind="Element" name="Email" path="/A_ERIC_2-0_ADD_SUB_MOBILE_DATA/Email">
+        <displayName lang="default">Email</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_ERIC_MOBILE+dataElement=Email" type="Schema Element" name="Type" kind="Element">
+            <target name="Email" typeName="Schema Element"/>
+            <inEntity name="NW_ERIC_MOBILE" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_ERIC_2-0_ADD_SUB_MOBILE_DATA+dataElement=JXaH9KdBTMqWy3POVVlXlg" type="dataElement" typeName="Data Element" kind="Element" name="MSISDN" path="/A_ERIC_2-0_ADD_SUB_MOBILE_DATA/MSISDN">
+        <displayName lang="default">MSISDN</displayName>
+        <minOccurs inherited="true">1</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_ERIC_MOBILE+dataElement=MSISDN" type="Schema Element" name="Type" kind="Element">
+            <target name="MSISDN" typeName="Schema Element"/>
+            <inEntity name="NW_ERIC_MOBILE" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_ERIC_2-0_ADD_SUB_MOBILE_DATA+dataElement=6M1LpiSqTVqDtGojXS3TkQ" type="dataElement" typeName="Data Element" kind="Element" name="IMSI" path="/A_ERIC_2-0_ADD_SUB_MOBILE_DATA/IMSI">
+        <displayName lang="default">IMSI</displayName>
+        <minOccurs inherited="true">1</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_ERIC_MOBILE+dataElement=IMSI" type="Schema Element" name="Type" kind="Element">
+            <target name="IMSI" typeName="Schema Element"/>
+            <inEntity name="NW_ERIC_MOBILE" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_ERIC_2-0_ADD_SUB_MOBILE_DATA+dataElement=2lbZudQQQBWrED9lbKMbww" type="dataElement" typeName="Data Element" kind="Element" name="ICCID" path="/A_ERIC_2-0_ADD_SUB_MOBILE_DATA/ICCID">
+        <displayName lang="default">ICCID</displayName>
+        <minOccurs inherited="true">1</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_ERIC_MOBILE+dataElement=ICCID" type="Schema Element" name="Type" kind="Element">
+            <target name="ICCID" typeName="Schema Element"/>
+            <inEntity name="NW_ERIC_MOBILE" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_ERIC_2-0_ADD_SUB_MOBILE_DATA+dataElement=ZUoVNwXhTxuLVLP0sS400g" type="dataElement" typeName="Data Element" kind="Element" name="RoamingAllowed" path="/A_ERIC_2-0_ADD_SUB_MOBILE_DATA/RoamingAllowed">
+        <displayName lang="default">Roaming Allowed</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_ERIC_MOBILE+dataElement=RoamingAllowed" type="Schema Element" name="Type" kind="Element">
+            <target name="RoamingAllowed" typeName="Schema Element"/>
+            <inEntity name="NW_ERIC_MOBILE" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="aa=A_ERIC_2-0_ADD_SUB_MOBILE_DATA+dataElement=Ib+4eyEUTcKsHofjmHcLSA" type="dataElement" typeName="Data Element" kind="Element" name="ServicePlan" path="/A_ERIC_2-0_ADD_SUB_MOBILE_DATA/ServicePlan">
+        <displayName lang="default">Service Plan</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=NW_ERIC_MOBILE+dataElement=ServicePlan" type="Schema Element" name="Type" kind="Element">
+            <target name="ServicePlan" typeName="Schema Element"/>
+            <inEntity name="NW_ERIC_MOBILE" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+    </dataElements>
+    <actionProcessors>
+      <relation ref="ap=I_ERIC_2-0_ADD_SUB_MOBILE_DATA" type="Action Processor" name="Action Processor" kind="Entity">
+        <target name="I_ERIC_2-0_ADD_SUB_MOBILE_DATA" typeName="Action Processor"/>
+      </relation>
+    </actionProcessors>
+    <schemaGens>
+      <relation ref="aprj=NW_ERIC_MOBILE" type="Activation Project" name="com.mslv.studio.activation.networkAction.schemaGen">
+        <target name="NW_ERIC_MOBILE" typeName="Activation Project"/>
+      </relation>
+    </schemaGens>
+  </entity>
+</model:Model>

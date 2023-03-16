@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/activation/model/module" xmlns:mod="http://www.mslv.com/studio/activation/model/module" xmlns:com="http://www.mslv.com/studio/core/model/common" xsi:type="ModuleType" name="NW_ERIC_MOBILE">
+  <com:displayName></com:displayName>
+  <com:saveVersion>3</com:saveVersion>
+  <com:id>CSNQR53tTziUFcd3zCwAhw</com:id>
+  <com:testComponents displayName="Test Work Orders" includeAll="true" relationship="com.mslv.studio.activation.module.testWorkOrder">
+    <com:modelID>com.mslv.studio.activation.test.activationTestCase</com:modelID>
+  </com:testComponents>
+  <com:version>
+    <com:major>1</com:major>
+    <com:minor>0</com:minor>
+    <com:maintenance>0</com:maintenance>
+    <com:servicePack>0</com:servicePack>
+    <com:eFix>0</com:eFix>
+    <com:build>0</com:build>
+  </com:version>
+  <com:targetApplicationVersion>
+    <com:major>7</com:major>
+    <com:minor>3</com:minor>
+    <com:maintenance>0</com:maintenance>
+  </com:targetApplicationVersion>
+  <com:propertyCategory name="Cartridge Management">
+    <com:property name="RESTART_ASAP_SERVERS">
+      <com:defaultValue>FALSE</com:defaultValue>
+    </com:property>
+  </com:propertyCategory>
+  <com:dependencies>
+    <com:minVersion inclusive="true"></com:minVersion>
+    <com:maxVersion inclusive="false"></com:maxVersion>
+    <com:projectRef>
+      <com:entity>ActivationRoutingDictionary</com:entity>
+      <com:entityType>ddCartridge</com:entityType>
+      <com:relationship>unknown</com:relationship>
+    </com:projectRef>
+    <com:dependencyType>design</com:dependencyType>
+  </com:dependencies>
+  <com:dependencyViolationErrorLevel>error</com:dependencyViolationErrorLevel>
+  <com:catridgeElement>
+    <com:id>WGRD46agSU+0uxqkQHkGlA</com:id>
+    <com:elementType>oracle.communications.studio.model.StudioCartridgeElement</com:elementType>
+  </com:catridgeElement>
+  <serviceType>networkCartridge</serviceType>
+  <vendor>Activation Cartridge Provider</vendor>
+  <licenceText></licenceText>
+  <moduleDetails>
+    <deviceDetails>
+      <deviceName>Enter the Hardware Model(s) supported by this cartridge here.  Example: CISCO 6503; CISCO 6506; CISCO 6509 etc..</deviceName>
+      <deviceDescription></deviceDescription>
+      <vendor>ERIC</vendor>
+      <technology>MOBILE</technology>
+      <softwareLoad>2-0</softwareLoad>
+    </deviceDetails>
+  </moduleDetails>
+  <buildLocation>
+    <name>src</name>
+    <location>src</location>
+  </buildLocation>
+  <defaultImplementationPackage></defaultImplementationPackage>
+  <serviceActionDeploymentList/>
+  <networkActionDeploymentList/>
+  <networkElementDeploymentList/>
+  <networkElementTemplateList/>
+  <dynamicRouteDeploymentList/>
+  <dnRoutingDeploymentList/>
+  <userDefinedExitTypeDeploymentList/>
+  <eventTemplateDeploymentList/>
+  <connectionHandlerDeploymentList/>
+  <libraryDeploymentList/>
+  <sourceDeploymentList/>
+  <testDeploymentList/>
+  <shellScriptDeploymentList/>
+  <SQLScriptDeploymentList/>
+  <PLSQLScriptDeploymentList/>
+  <stateTableDeploymentList/>
+  <documentationDeploymentList/>
+  <miscDeploymentList/>
+  <activationPlatform>7.3.0</activationPlatform>
+  <CommandAutoParsing>false</CommandAutoParsing>
+  <HeaderBodySeparator>NONE</HeaderBodySeparator>
+  <ParameterSeparator>NONE</ParameterSeparator>
+  <NameValueSeparator>NONE</NameValueSeparator>
+  <ArrayEncloser>NONE</ArrayEncloser>
+  <ArrayIndexSeparator>NONE</ArrayIndexSeparator>
+  <MmlTail>NONE</MmlTail>
+  <EndOfMessage>NONE</EndOfMessage>
+</com:modelEntity>
