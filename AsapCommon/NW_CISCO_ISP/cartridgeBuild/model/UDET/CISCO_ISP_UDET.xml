@@ -4,6 +4,7 @@
   
   <serviceModel xmlns="http://www.metasolv.com/ServiceActivation/2003/ServiceModel">
      <userDefinedExitType>
+          <atomicService>A_CISCO-ISP_1-0_RETRIEVE_FIBER_CPE</atomicService>
           <neDescriptor>
                <softwareLoad>1-0</softwareLoad>
                <technology>ISP</technology>
@@ -12,7 +13,7 @@
           <searchPattern>3</searchPattern>
           <userType>MAC_NOT_FOUND</userType>
           <baseType>SOFT_FAIL</baseType>
-          <description>Description goes Here.</description>
+          <description>MAC not found</description>
      </userDefinedExitType>
      <userDefinedExitType>
           <neDescriptor>
@@ -23,7 +24,7 @@
           <searchPattern>0</searchPattern>
           <userType>SUCCESS</userType>
           <baseType>SUCCEED</baseType>
-          <description>Description goes Here.</description>
+          <description>Success</description>
      </userDefinedExitType>
      <userDefinedExitType>
           <neDescriptor>
@@ -34,7 +35,7 @@
           <searchPattern>1</searchPattern>
           <userType>INVLD_AUTHENTICATION</userType>
           <baseType>FAIL</baseType>
-          <description>Description goes Here.</description>
+          <description>Invalid Authentication</description>
      </userDefinedExitType>
      <userDefinedExitType>
           <neDescriptor>
@@ -45,7 +46,7 @@
           <searchPattern>2</searchPattern>
           <userType>INVALID_MAC</userType>
           <baseType>FAIL</baseType>
-          <description>Description goes Here.</description>
+          <description>Invalid MAC</description>
      </userDefinedExitType>
      <userDefinedExitType>
           <neDescriptor>
@@ -55,10 +56,35 @@
           </neDescriptor>
           <searchPattern>4</searchPattern>
           <userType>SERVICE_FAILURE</userType>
-          <baseType>RETRY</baseType>
-          <description>Description goes Here.</description>
+          <baseType>FAIL</baseType>
+          <description>Service Failure</description>
+     </userDefinedExitType>
+     <userDefinedExitType>
+          <atomicService>A_CISCO-ISP_1-0_RETRIEVE_FIBER_CPE</atomicService>
+          <neDescriptor>
+               <softwareLoad>1-0</softwareLoad>
+               <technology>ISP</technology>
+               <neVendor>CISCO</neVendor>
+          </neDescriptor>
+          <searchPattern>0</searchPattern>
+          <userType>MAC_EXIST</userType>
+          <baseType>FAIL</baseType>
+          <description>MAC Already Present</description>
+     </userDefinedExitType>
+     <userDefinedExitType>
+          <neDescriptor>
+               <softwareLoad>1-0</softwareLoad>
+               <technology>ISP</technology>
+               <neVendor>CISCO</neVendor>
+          </neDescriptor>
+          <searchPattern>3</searchPattern>
+          <userType>MAC_NOT_FOUND</userType>
+          <baseType>FAIL</baseType>
+          <description>MAC not Found</description>
      </userDefinedExitType>
 </serviceModel>
+  
+  
   
   
   

@@ -7,9 +7,10 @@ import com.orcl.activation.cisco.isp.x1_0.IspConnectionHandler;
 import com.orcl.activation.cisco.isp.x1_0.fiber_cpe.terminate.generated.*;
 import com.orcl.activation.cisco.isp.x1_0.helper.ISPConstants;
 import com.orcl.activation.cisco.isp.x1_0.helper.ISPHelper;
-import com.orcl.activation.cisco.isp.x1_0.request.QueryRequest.Credential;
 import com.orcl.activation.cisco.isp.x1_0.request.TerminateRequest;
+import com.orcl.activation.cisco.isp.x1_0.request.TerminateRequest.Credential;
 import com.orcl.activation.cisco.isp.x1_0.response.ProvisionResponse;
+import com.orcl.activation.cisco.isp.x1_0.response.QueryResponse;
 import com.orcl.activation.cisco.isp.x1_0.response.TerminateResponse;
 
 import java.io.StringReader;
@@ -54,27 +55,38 @@ public class TerminateFiber_cpeProcessor implements TerminateFiber_cpeProcessorI
 			TerminateRequest terReq = new TerminateRequest();
 			terReq.setAction(ISPConstants.ACTION_TERMINATE);
 			terReq.setMACAddress(macAddress);
-			
-			Credential cred = new Credential();
-			cred.setUsername(connHdlr.getUserId());
-			cred.setPassword(connHdlr.getPassword());
 
-			terReq.getCredential();
+			Credential cred=new Credential();
+			cred.setUser(connHdlr.getUserId());
+			cred.setAuthentication(connHdlr.getPassword());
+
+			terReq.setCredential(cred);
 
 			String terReqStr = ispHelper.getRequestString(terReq);
-			logger.logDebug("Change Request - " + terReqStr);
+			logger.logDebug("Terminate Request - " + terReqStr);
 
+			TerminateResponse terRes=null;
+			if (!systemParameters.isLoopback()) {
 
-			//Not connected with Network so no need of checking loopback condition
-			//if (!systemParameters.isLoopback()) {
+				String terResStr = connHdlr.sendRequest(terReqStr);
 
-			String terResStr = connHdlr.sendRequest(terReqStr);
+				Unmarshaller unmarshaller = JAXBContext.newInstance(TerminateResponse.class).createUnmarshaller();
 
-			Unmarshaller unmarshaller = JAXBContext.newInstance(ProvisionResponse.class).createUnmarshaller();
-			// unmarshaller.setProperty(Unmarshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+				terRes = (TerminateResponse) unmarshaller.unmarshal(new StringReader(terResStr));
 
-			TerminateResponse terRes = (TerminateResponse) unmarshaller.unmarshal(new StringReader(terResStr));
+			}
+			else {
+				TerminateResponse resp=new TerminateResponse();
+				resp.setDesc("SUCCESS");
+				resp.setResult(0);
 
+				String terResStr = ispHelper.getTerminateResponse(resp);
+				logger.logDebug("Terminate response - " + terResStr);
+
+				Unmarshaller unmarshaller = JAXBContext.newInstance(TerminateResponse.class).createUnmarshaller();
+
+				terRes = (TerminateResponse) unmarshaller.unmarshal(new StringReader(terResStr));
+			}
 			int Result = terRes.getResult();
 
 			responseCode = Integer.toString(Result);

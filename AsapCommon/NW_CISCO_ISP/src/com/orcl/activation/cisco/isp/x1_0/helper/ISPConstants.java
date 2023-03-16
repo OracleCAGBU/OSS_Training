@@ -18,8 +18,8 @@ public class ISPConstants {
 	public static final String PROV_EXCEPTION_CODE = "77777";
 	public static final String MACAddress = "MACAddress";
 	public static final String SERVICE_ISP = null;
-	public static final String USER = "Username";
-	public static final String PASSWORD = "Password";
+	public static final String USER = "USERNAME";
+	public static final String PASSWORD = "ISP_PASSWORD";
 	public static final String SERIALNUMBER = "serialNumber";
 
 }

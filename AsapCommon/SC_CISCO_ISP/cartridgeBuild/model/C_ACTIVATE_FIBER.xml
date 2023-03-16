@@ -12,7 +12,9 @@
     <serviceMap>
       <atomicService>A_CISCO-ISP_1-0_ADD_FIBER_CPE</atomicService>
       <pointOfNoReturn>0</pointOfNoReturn>
-      <condition xsi:type="AlwaysConditionType"/>
+      <condition xsi:type="AlwaysConditionType">
+        <expression>(MAC_EXIST LIKE &quot;FALSE&quot;)</expression>
+      </condition>
     </serviceMap>
   </commonService>
 </serviceModel>

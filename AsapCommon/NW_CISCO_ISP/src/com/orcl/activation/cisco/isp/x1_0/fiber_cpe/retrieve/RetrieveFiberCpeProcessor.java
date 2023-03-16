@@ -65,21 +65,54 @@ public class RetrieveFiberCpeProcessor implements RetrieveFiberCpeProcessorInter
 			queryReq.setMACAddress(macAddress);
 
 			Credential cred = new Credential();
-			cred.setUsername(connHdlr.getUserId());
-			cred.setPassword(connHdlr.getPassword());
+			cred.setUser(connHdlr.getUserId());
+			cred.setAuthentication(connHdlr.getPassword());
+
+			queryReq.setCredential(cred);
 
 			String queryReqStr = ispHelper.getRequestString(queryReq);
 			logger.logDebug("Query Request - " + queryReqStr);
 
-			//Not connected with Network so no need of checking loopback condition
-			//if (!systemParameters.isLoopback()) {
+			QueryResponse queryRes = null ;
+			Unmarshaller unmarshaller = null;
 
-			String provResStr = connHdlr.sendRequest(queryReqStr);
-			
-			Unmarshaller unmarshaller = JAXBContext.newInstance(QueryResponse.class).createUnmarshaller();
-			// unmarshaller.setProperty(Unmarshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			if (!systemParameters.isLoopback()) {
 
-			QueryResponse queryRes = (QueryResponse) unmarshaller.unmarshal(new StringReader(queryReqStr));
+				String queryResStr = connHdlr.sendRequest(queryReqStr);
+
+				unmarshaller = JAXBContext.newInstance(QueryResponse.class).createUnmarshaller();
+
+				queryRes = (QueryResponse) unmarshaller.unmarshal(new StringReader(queryResStr));
+			}
+			else {
+
+				QueryResponse resp=new QueryResponse();
+				resp.setDesc("MAC NOT FOUND");
+				resp.setResult(3);
+
+				//If MAC ALREADY PRESENT
+
+				/*resp.setResult(0);
+				resp.setDesc("MAC FOUND");
+				resp.setSerialNumber("6473765735");
+				resp.setMACAddress("6482CBDC0452");
+				resp.setState("Active");
+				Service respService=new Service();
+				respService.setCPEType("4G");
+				respService.setDownloadSpeed("200Mbps");
+				respService.setIPAddress("131.245.453.35");
+				respService.setModel("JIO LOT 3-DP 1392");
+				respService.setUploadSpeed("150Mbps");
+				respService.setUsername("Sherlock");
+				respService.setVendor("VI");
+				*/
+
+				String respstr = ispHelper.getQueryResponse(resp);
+				logger.logDebug("Query response - " + respstr);
+
+				unmarshaller = JAXBContext.newInstance(QueryResponse.class).createUnmarshaller();
+				queryRes =(QueryResponse) unmarshaller.unmarshal(new StringReader(respstr));
+			}
 
 			int Result = queryRes.getResult();
 
@@ -102,10 +135,18 @@ public class RetrieveFiberCpeProcessor implements RetrieveFiberCpeProcessorInter
 				logger.logDebug("MACAddress - " + mac +"\nserialNumber - "+serialNumber+"\nstate - "+state);
 				logger.logDebug("Service::" + "\nIPAddress - " + IPAddress +"\nCPEType - "+CPEType+"\nVendor - "+Vendor+"\nModel - "+Model
 						+"\nDownloadSpeed - "+DownloadSpeed +"\nUploadSpeed - "+UploadSpeed);
+				
+				responseCode = Integer.toString(Result);
+				responseDesc = queryRes.getDesc();
+				
+				output.addActionParameter("MAC_EXIST", "TRUE");
+				
 			} else
 			{
 				responseCode = Integer.toString(Result);
 				responseDesc = queryRes.getDesc();
+				
+				output.addActionParameter("MAC_EXIST", "FALSE");
 			}
 		}
 		catch(Exception ex)

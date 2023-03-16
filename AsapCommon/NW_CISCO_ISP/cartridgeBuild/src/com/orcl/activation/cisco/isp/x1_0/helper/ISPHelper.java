@@ -13,8 +13,10 @@ import com.orcl.activation.cisco.isp.x1_0.request.ModifyRequest;
 import com.orcl.activation.cisco.isp.x1_0.request.ProvisionRequest;
 import com.orcl.activation.cisco.isp.x1_0.request.QueryRequest;
 import com.orcl.activation.cisco.isp.x1_0.request.TerminateRequest;
+import com.orcl.activation.cisco.isp.x1_0.response.ModifyResponse;
 import com.orcl.activation.cisco.isp.x1_0.response.ProvisionResponse;
 import com.orcl.activation.cisco.isp.x1_0.response.QueryResponse;
+import com.orcl.activation.cisco.isp.x1_0.response.TerminateResponse;
 
 
 
@@ -42,22 +44,51 @@ public class ISPHelper {
 	 * @return String
 	 * @throws JAXBException
 	 */
-	public String getQueryResponse(String responseStr) throws JAXBException {
+	public String getQueryResponse(QueryResponse responseStr) throws JAXBException {
 
-		String responseCode = null;
-		String responseDesc = null;
+		JAXBContext jc = JAXBContext.newInstance(responseStr.getClass());
+		Marshaller marshaller = jc.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		StringWriter sw = new StringWriter();
+		marshaller.marshal(responseStr, sw);
 
-		Unmarshaller unmarshaller = JAXBContext.newInstance(ProvisionResponse.class).createUnmarshaller();
-		// unmarshaller.setProperty(Unmarshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		return sw.toString();
 
-		QueryResponse queryRes = (QueryResponse) unmarshaller.unmarshal(new StringReader(responseStr));
+	}
 
-		int Result = queryRes.getResult();
+	public String getProvisionResponse(ProvisionResponse responseStr) throws JAXBException {
 
-		responseCode = Integer.toString(Result);
-		responseDesc = queryRes.getDesc();
+		JAXBContext jc = JAXBContext.newInstance(responseStr.getClass());
+		Marshaller marshaller = jc.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		StringWriter sw = new StringWriter();
+		marshaller.marshal(responseStr, sw);
 
-		return responseCode;
+		return sw.toString();
+
+	}
+
+	public String getModifyResponse(ModifyResponse responseStr) throws JAXBException {
+
+		JAXBContext jc = JAXBContext.newInstance(responseStr.getClass());
+		Marshaller marshaller = jc.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		StringWriter sw = new StringWriter();
+		marshaller.marshal(responseStr, sw);
+
+		return sw.toString();
+
+	}
+
+	public String getTerminateResponse(TerminateResponse responseStr) throws JAXBException {
+
+		JAXBContext jc = JAXBContext.newInstance(responseStr.getClass());
+		Marshaller marshaller = jc.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		StringWriter sw = new StringWriter();
+		marshaller.marshal(responseStr, sw);
+
+		return sw.toString();
 
 	}
 
@@ -79,7 +110,7 @@ public class ISPHelper {
 		return sw.toString();
 
 	}
-	
+
 	public String getRequestString(ProvisionRequest provReq) throws JAXBException {
 
 		JAXBContext jc = JAXBContext.newInstance(provReq.getClass());
@@ -91,7 +122,7 @@ public class ISPHelper {
 		return sw.toString();
 
 	}
-	
+
 	public String getRequestString(ModifyRequest modReq) throws JAXBException {
 
 		JAXBContext jc = JAXBContext.newInstance(modReq.getClass());
@@ -103,7 +134,7 @@ public class ISPHelper {
 		return sw.toString();
 
 	}
-	
+
 	public String getRequestString(TerminateRequest terReq) throws JAXBException {
 
 		JAXBContext jc = JAXBContext.newInstance(terReq.getClass());
