@@ -1,4 +1,5 @@
 <act:technicalActionCalculator xmlns:act="http://xmlns.oracle.com/communications/inventory/actioncalculator">
+   
    <!--Action-->
    <!--CREATE@TA_ACT_MOBILE_RFS-->
    <act:action>
@@ -112,6 +113,10 @@
       </act:parameter>
       <act:parameter>
          <act:name>MSISDN</act:name>
+         <act:type>string</act:type>
+      </act:parameter>
+      <act:parameter>
+         <act:name>OldMSISDN</act:name>
          <act:type>string</act:type>
       </act:parameter>
       <act:parameter>
@@ -264,6 +269,7 @@
       </act:parameter>
       <act:applicationRole>Activation</act:applicationRole>
    </act:action>
+   
    <!--Matcher-->
    <act:match>
       <act:diff>
@@ -325,6 +331,7 @@
       <act:action>DISCONNECT@TA_ACT_MOBILE_RFS</act:action>
       <act:anchor>..</act:anchor>
    </act:match>
+   
    <!--Generator-->
    <!--CREATE@TA_ACT_MOBILE_RFS-->
    <act:generator>
@@ -429,6 +436,10 @@
       <act:binding>
          <act:parameter>MSISDN</act:parameter>
          <act:path>./MSISDN_CI/Assignment[(@State='PENDING_ASSIGN')]/id</act:path>
+      </act:binding>
+      <act:binding>
+         <act:parameter>OldMSISDN</act:parameter>
+         <act:path>./MSISDN_CI/Assignment[(@State='PENDING_UNASSIGN')]/id</act:path>
       </act:binding>
       <act:binding>
          <act:parameter>RoamingAllowed</act:parameter>
@@ -560,4 +571,5 @@
          <act:path>./IMSI_CI/Assignment[(@State='PENDING_UNASSIGN')]/id</act:path>
       </act:binding>
    </act:generator>
+
 </act:technicalActionCalculator>
