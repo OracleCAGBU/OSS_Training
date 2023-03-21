@@ -191,6 +191,14 @@
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
               <childRefNode>true</childRefNode>
             </childNode>
+            <childNode>
+              <com:entity>COM_SalesOrderFulfillment</com:entity>
+              <com:entityType>order</com:entityType>
+              <com:relationship>ora.task.orderTemplateRef</com:relationship>
+              <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/SpecificationGroup</com:element>
+              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+              <childRefNode>true</childRefNode>
+            </childNode>
             <childRefNode>true</childRefNode>
           </childNode>
         </childNode>
@@ -319,6 +327,13 @@
         <com:entityType>order</com:entityType>
         <com:relationship>ora.task.orderTemplateRef</com:relationship>
         <com:element>/ControlData/OrderItem/ServiceInstanceIndicator</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </childNode>
+      <childNode>
+        <com:entity>COM_SalesOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/SpecificationGroup</com:element>
         <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
       </childNode>
     </childNode>
@@ -1063,6 +1078,16 @@
   </viewNodeExtension>
   <viewNodeExtension>
     <path>/Order/CustomerPartyReference/ContactID</path>
+    <editable>true</editable>
+    <defaultValue></defaultValue>
+  </viewNodeExtension>
+  <viewNodeExtension>
+    <path>/ControlData/OrderItem/SpecificationGroup</path>
+    <editable>true</editable>
+    <defaultValue></defaultValue>
+  </viewNodeExtension>
+  <viewNodeExtension>
+    <path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/SpecificationGroup</path>
     <editable>true</editable>
     <defaultValue></defaultValue>
   </viewNodeExtension>

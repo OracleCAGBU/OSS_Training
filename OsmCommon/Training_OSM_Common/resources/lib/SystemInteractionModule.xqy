@@ -12,6 +12,7 @@ declare namespace ent                                                       = "h
 declare namespace con                                                       = "http://xmlns.oracle.com/communications/inventory/configuration";
 declare namespace spec                                                      = "http://xmlns.oracle.com/communications/inventory/specification";
 declare namespace techws                                                    = "http://xmlns.oracle.com/communications/inventory/webservice/technical";
+declare namespace corecom                                                   = "http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2";
 
 declare variable $systeminteractionmodule:ORDER_ITEM_NS                    := "urn:com:metasolv:oms:xmlapi:1";
 declare variable $systeminteractionmodule:ORDER_ITEM_TYPE                  := "omsAny";
@@ -290,7 +291,8 @@ declare function systeminteractionmodule:addExtensibleAttributesToParameters(
 { 
     (: Dynamic Params :)
     
-     (: <invbi:parameter> :)        
+     (: <invbi:parameter> :)   
+    if(fn:exists($orderitem/oms:dynamicParams)) then  (  
     for $attribute in $orderitem/oms:dynamicParams/node()
     return 
         if(exists($attribute/*)) 
@@ -301,6 +303,12 @@ declare function systeminteractionmodule:addExtensibleAttributesToParameters(
         (
             systeminteractionmodule:addSimpleParameter($attribute)
         ) 
+        )
+        else 
+        (
+        for $attribute in $orderitem/oms:SpecificationGroup/*:specificationGroup/*
+        return
+        systeminteractionmodule:addSimpleParameter($attribute))
           
 };
 
@@ -878,3 +886,25 @@ declare function systeminteractionmodule:getTargetFromTA(
 
     $ta/techws:target/text()
 };
+declare function systeminteractionmodule:getspecificationGroupAttributesFromLineItem(
+    $eSourceOrderLineItems as element()*) as element()* {
+    
+
+      for $eSourceOrderLineItem in $eSourceOrderLineItems
+      
+      let $specificationGroupAttributes := $eSourceOrderLineItem/*:orderItemRef/*:SpecificationGroup/SpecificationGroups/*:Specification
+      
+      for $specificationGroupAttribute in $specificationGroupAttributes
+      let $specParamName    := $specificationGroupAttribute/*:Name
+      let $specParamValue   := $specificationGroupAttribute/*:Value
+      
+      return (
+                     element{fn:data($specParamName)}
+                    {
+                        fn:data($specParamValue)
+                    }
+      )
+      
+      
+     
+    };

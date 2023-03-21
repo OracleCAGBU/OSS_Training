@@ -214,8 +214,7 @@ declare function local:createProvisioningOrderLineItems(
         return local:createProvisioningOrderLineItemFromTransformedLineItem($eOrderData,$eTransformedOrderLineItem,$ePrimarySourceLineOrderItem,$eSourceLineOrderItems)
     
     ) else (
-         for $eSourceOrderLineItem in $eSourceOrderLineItems
-        return local:createProvisioningOrderLineItemFromSourceOrderLineItem($eOrderData,$eSourceOrderLineItem)
+        local:createProvisioningOrderLineItemFromSourceOrderLineItem($eOrderData,$eSourceOrderLineItems)
         )
     
     )
@@ -287,13 +286,14 @@ declare function local:createProvisioningOrderLineItemFromTransformedLineItem(
 (: Function to create ProvisionOrderLine Item for Mobile:)
 declare function local:createProvisioningOrderLineItemFromSourceOrderLineItem(
     $eOrderData as element()*,
-    $eSourceOrderLineItem as element()*) as element()*
+    $eSourceOrderLineItems as element()*) as element()*
 {
-    let $sOrderLineId := $eSourceOrderLineItem/oms:orderItemRef/oms:LineId/text()
+    let $paymLineItem := $eSourceOrderLineItems/oms:orderItemRef[oms:LineName/text() ="PAYM"]
     let $sOrderReference := $eOrderData/oms:Reference/text()
-    let $sRecognitionSpec := fn:normalize-space(data($eSourceOrderLineItem/oms:orderItemRef/oms:Recognition))
+    let $sRecognitionSpec := fn:normalize-space(data($paymLineItem/oms:orderItemRef/oms:Recognition))
     let $sRecognition := fn:substring-before($sRecognitionSpec, 'Spec')
     let $sFic := fn:substring-after($sRecognition, '}')
+    let $sOrderLineId := data($paymLineItem/oms:LineId)
     
     return(
         <provord:ProvisioningOrderLine>
@@ -301,7 +301,7 @@ declare function local:createProvisioningOrderLineItemFromSourceOrderLineItem(
                 <corecom:BusinessComponentID schemeID="PROVISIONINGORDER_LINEID" schemeAgencyID="COMMON">{$sOrderLineId}</corecom:BusinessComponentID>
                 <corecom:ID schemeID="SALESORDER_LINEID" schemeAgencyID="SEBL_01">{$sOrderLineId}</corecom:ID>
             </corecom:Identification>
-            <provord:ServiceActionCode>{data($eSourceOrderLineItem/oms:orderItemRef/oms:Action)}</provord:ServiceActionCode>
+            <provord:ServiceActionCode>{data($paymLineItem/oms:Action)}</provord:ServiceActionCode>
             <provord:ServicePointCode />
             <provord:MilestoneCode />
             <corecom:Status xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2">
@@ -327,21 +327,23 @@ declare function local:createProvisioningOrderLineItemFromSourceOrderLineItem(
                 <corecom:ItemIdentification>
                     <corecom:BusinessComponentID schemeAgencyID="COMMON" schemeID="ITEM_ID">{$sOrderLineId}</corecom:BusinessComponentID>
                 </corecom:ItemIdentification>
-                <corecom:Name>{data($eSourceOrderLineItem/oms:orderItemRef/oms:LineName)}</corecom:Name>
+                <corecom:Name>Mobile Service</corecom:Name>
                 <corecom:ClassificationCode listID="PermittedTypeCode" />
                 <corecom:ClassificationCode listID="BillingProductTypeCode" />
                 <corecom:ClassificationCode listID="FulfillmentItemCode">{$sFic}</corecom:ClassificationCode>
                 <corecom:TypeCode>SERVICE</corecom:TypeCode>
-                <corecom:Description>{data($eSourceOrderLineItem/oms:orderItemRef/oms:LineName)}</corecom:Description>
+                <corecom:Description>Mobile Service</corecom:Description>
                 <corecom:FulfillmentCompositionTypeCode />
                 <corecom:FulfillmentSuccessCode />
                 <corecom:NetworkItemTypeCode />
-                <corecom:PrimaryClassificationCode>{data($eSourceOrderLineItem/oms:orderItemRef/oms:ProductSpecification)}</corecom:PrimaryClassificationCode>
+                <corecom:PrimaryClassificationCode>{data($paymLineItem/oms:ProductSpecification)}</corecom:PrimaryClassificationCode>
             </corecom:ItemReference>
             <provord:ProvisioningOrderSchedule>
-                <provord:RequestedDeliveryDateTime>{data($eSourceOrderLineItem/oms:orderItemRef/oms:RequestedDeliveryDate)}</provord:RequestedDeliveryDateTime>          
+                <provord:RequestedDeliveryDateTime>{data($paymLineItem/oms:RequestedDeliveryDate)}</provord:RequestedDeliveryDateTime>          
             </provord:ProvisioningOrderSchedule>
-                                 
+            <provord:specificationGroup>{
+                 systeminteractionmodule:getspecificationGroupAttributesFromLineItem($eSourceOrderLineItems) }
+            </provord:specificationGroup>                     
         </provord:ProvisioningOrderLine>
     )
 };
@@ -356,6 +358,8 @@ return
     (
       (:  log:info($log, fn:concat('GetOrder.Response : ', $sTaskData)), :)
         log:info($log, fn:concat('SOM Order Payload : ', $sSomRequest)),
+        
+       log:info($log, fn:concat('sTaskData : ', $sTaskData)),
         outboundMessage:setJMSCorrelationID( $outboundMessage, fn:concat($sOrderId,'_',$sOrderHistId) ),
         outboundMessage:setStringProperty( $outboundMessage, "URI", $osmURI),
         outboundMessage:setStringProperty( $outboundMessage, "_wls_mimehdrContent_Type", $mimeContextType),
