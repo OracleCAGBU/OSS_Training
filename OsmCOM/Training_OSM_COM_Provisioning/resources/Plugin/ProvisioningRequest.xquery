@@ -358,8 +358,7 @@ return
     (
       (:  log:info($log, fn:concat('GetOrder.Response : ', $sTaskData)), :)
         log:info($log, fn:concat('SOM Order Payload : ', $sSomRequest)),
-        
-       log:info($log, fn:concat('sTaskData : ', $sTaskData)),
+        (:log:info($log, fn:concat('sTaskData : ', $sTaskData)),:)
         outboundMessage:setJMSCorrelationID( $outboundMessage, fn:concat($sOrderId,'_',$sOrderHistId) ),
         outboundMessage:setStringProperty( $outboundMessage, "URI", $osmURI),
         outboundMessage:setStringProperty( $outboundMessage, "_wls_mimehdrContent_Type", $mimeContextType),

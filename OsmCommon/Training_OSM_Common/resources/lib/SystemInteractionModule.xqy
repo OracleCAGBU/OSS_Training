@@ -195,7 +195,8 @@ declare function systeminteractionmodule:addInteractionHeader(
                                    then ''
                                    else $bicorrID
     let $friendlyReference      := $orderData/oms:Reference
-    let $interactionName        := "Broadband CFS Create Order"        
+    let $specificationName      := $orderData/oms:_root/oms:ControlData/oms:Functions/oms:DesignServiceFunction/oms:orderItem/oms:orderItemRef/oms:ServiceSpecification/text()
+    let $interactionName        := fn:concat(fn:replace($specificationName, '_', " "), " ", "Create Order")        
     
       where (exists($orderData))
         return
