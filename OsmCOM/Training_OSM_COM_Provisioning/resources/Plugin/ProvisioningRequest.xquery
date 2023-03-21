@@ -206,6 +206,7 @@ declare function local:createProvisioningOrderLineItems(
     let $sComponentKey := $eComponent/oms:componentKey/text()
     let $eTransformedOrderLineItems := $eComponent/oms:transformedOrderItem
     let $eSourceOrderLineItems := $eComponent/oms:orderItem
+    let $sFulfillmentPattern := $eSourceOrderLineItems[1]/oms:orderItemRef/oms:FulfillmentPattern/text()
     return(
     if (fn:exists($eTransformedOrderLineItems)) then (
         for $eTransformedOrderLineItem in $eTransformedOrderLineItems
@@ -214,7 +215,9 @@ declare function local:createProvisioningOrderLineItems(
         return local:createProvisioningOrderLineItemFromTransformedLineItem($eOrderData,$eTransformedOrderLineItem,$ePrimarySourceLineOrderItem,$eSourceLineOrderItems)
     
     ) else (
-        local:createProvisioningOrderLineItemFromSourceOrderLineItem($eOrderData,$eSourceOrderLineItems)
+        if($sFulfillmentPattern="Service.Mobile")
+        then local:createProvisioningOrderLineItemFromSourceOrderLineItem($eOrderData,$eSourceOrderLineItems,"Mobile Service")
+        else ()
         )
     
     )
@@ -283,17 +286,39 @@ declare function local:createProvisioningOrderLineItemFromTransformedLineItem(
         </provord:ProvisioningOrderLine>
     )
 };
+
+declare function local:getActionCode($eSourceOrderLineItems as element()*) as xs:string? {
+
+   if(fn:exists($eSourceOrderLineItems[*:orderItemRef/*:SpecificationGroup/SpecificationGroups/*:Specification[fn:contains(*:Name/text(),'Old_MSISDN')
+                and fn:string-length(*:Value/text())>0]]))
+   then 'ChangeMSISDN'
+   else if(fn:exists($eSourceOrderLineItems[*:orderItemRef/*:SpecificationGroup/SpecificationGroups/*:Specification[fn:contains(*:Name/text(),'Old_PayType')
+                and fn:string-length(*:Value/text())>0]]))
+   then 'ChangePayType'
+   else()
+};
 (: Function to create ProvisionOrderLine Item for Mobile:)
 declare function local:createProvisioningOrderLineItemFromSourceOrderLineItem(
     $eOrderData as element()*,
-    $eSourceOrderLineItems as element()*) as element()*
+    $eSourceOrderLineItems as element()*,
+    $sProductSpec as xs:string?) as element()*
 {
-    let $paymLineItem := $eSourceOrderLineItems/oms:orderItemRef[oms:LineName/text() ="PAYM"]
+    let $primaryLineItem := $eSourceOrderLineItems/oms:orderItemRef[oms:ProductSpecification/text()=$sProductSpec]
     let $sOrderReference := $eOrderData/oms:Reference/text()
-    let $sRecognitionSpec := fn:normalize-space(data($paymLineItem/oms:orderItemRef/oms:Recognition))
+    let $sRecognitionSpec := fn:normalize-space(data($primaryLineItem/oms:Recognition))
     let $sRecognition := fn:substring-before($sRecognitionSpec, 'Spec')
     let $sFic := fn:substring-after($sRecognition, '}')
-    let $sOrderLineId := data($paymLineItem/oms:LineId)
+    let $sOrderLineId := data($primaryLineItem/oms:LineId)
+    let $sLineName := if($primaryLineItem/oms:ProductSpecification/text()="Mobile Service")
+                     then "MobileInternet_CFS"
+                     else fn:concat($primaryLineItem/oms:LineName/text(),'_',"CFS")
+    let $sActionCode := if($sProductSpec="Mobile Service")
+                        then (
+                            if(fn:string-length(local:getActionCode($eSourceOrderLineItems))>0) then
+                            local:getActionCode($eSourceOrderLineItems)
+                            else $primaryLineItem/oms:Action/text()
+                        )
+                        else $primaryLineItem/oms:Action/text()
     
     return(
         <provord:ProvisioningOrderLine>
@@ -301,7 +326,7 @@ declare function local:createProvisioningOrderLineItemFromSourceOrderLineItem(
                 <corecom:BusinessComponentID schemeID="PROVISIONINGORDER_LINEID" schemeAgencyID="COMMON">{$sOrderLineId}</corecom:BusinessComponentID>
                 <corecom:ID schemeID="SALESORDER_LINEID" schemeAgencyID="SEBL_01">{$sOrderLineId}</corecom:ID>
             </corecom:Identification>
-            <provord:ServiceActionCode>{data($paymLineItem/oms:Action)}</provord:ServiceActionCode>
+            <provord:ServiceActionCode>{$sActionCode}</provord:ServiceActionCode>
             <provord:ServicePointCode />
             <provord:MilestoneCode />
             <corecom:Status xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2">
@@ -327,22 +352,25 @@ declare function local:createProvisioningOrderLineItemFromSourceOrderLineItem(
                 <corecom:ItemIdentification>
                     <corecom:BusinessComponentID schemeAgencyID="COMMON" schemeID="ITEM_ID">{$sOrderLineId}</corecom:BusinessComponentID>
                 </corecom:ItemIdentification>
-                <corecom:Name>Mobile Service</corecom:Name>
+                <corecom:Name>{$sLineName}</corecom:Name>
                 <corecom:ClassificationCode listID="PermittedTypeCode" />
                 <corecom:ClassificationCode listID="BillingProductTypeCode" />
                 <corecom:ClassificationCode listID="FulfillmentItemCode">{$sFic}</corecom:ClassificationCode>
                 <corecom:TypeCode>SERVICE</corecom:TypeCode>
-                <corecom:Description>Mobile Service</corecom:Description>
+                <corecom:Description>{$sLineName}</corecom:Description>
                 <corecom:FulfillmentCompositionTypeCode />
                 <corecom:FulfillmentSuccessCode />
                 <corecom:NetworkItemTypeCode />
-                <corecom:PrimaryClassificationCode>{data($paymLineItem/oms:ProductSpecification)}</corecom:PrimaryClassificationCode>
+                <corecom:PrimaryClassificationCode>{$sLineName}</corecom:PrimaryClassificationCode>
             </corecom:ItemReference>
             <provord:ProvisioningOrderSchedule>
-                <provord:RequestedDeliveryDateTime>{data($paymLineItem/oms:RequestedDeliveryDate)}</provord:RequestedDeliveryDateTime>          
+                <provord:RequestedDeliveryDateTime>{data($primaryLineItem/oms:RequestedDeliveryDate)}</provord:RequestedDeliveryDateTime>          
             </provord:ProvisioningOrderSchedule>
-            <provord:specificationGroup>{
-                 systeminteractionmodule:getspecificationGroupAttributesFromLineItem($eSourceOrderLineItems) }
+            <provord:specificationGroup>
+                                        {
+                 systeminteractionmodule:getspecificationGroupAttributesFromLineItem($eSourceOrderLineItems),
+                 systeminteractionmodule:getspecificationGroupAttributesFromOrderData($eOrderData,$sActionCode) 
+                                        }
             </provord:specificationGroup>                     
         </provord:ProvisioningOrderLine>
     )
