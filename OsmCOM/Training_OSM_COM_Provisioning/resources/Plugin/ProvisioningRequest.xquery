@@ -308,7 +308,7 @@ declare function local:createProvisioningOrderLineItemFromSourceOrderLineItem(
     let $sRecognitionSpec := fn:normalize-space(data($primaryLineItem/oms:Recognition))
     let $sRecognition := fn:substring-before($sRecognitionSpec, 'Spec')
     let $sFic := fn:substring-after($sRecognition, '}')
-    let $sOrderLineId := data($primaryLineItem/oms:LineId)
+    let $sOrderLineId := fn:concat('CSO_',data($primaryLineItem/oms:LineId))
     let $sLineName := if($primaryLineItem/oms:ProductSpecification/text()="Mobile Service")
                      then "MobileInternet_CFS"
                      else fn:concat($primaryLineItem/oms:LineName/text(),'_',"CFS")

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/cartridge" xmlns:cart="http://xmlns.oracle.com/communications/sce/osm/model/cartridge" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xsi:type="provisioningCartridgeType" name="Training_OSM_TOM_Fulfillment">
   <com:displayName lang="[default]">Training_OSM_TOM_Fulfillment</com:displayName>
-  <com:saveVersion>5</com:saveVersion>
+  <com:saveVersion>6</com:saveVersion>
   <com:id>2xqrLFNGQZmoB6gpFBPlMg</com:id>
   <com:provider>OSM Cartridge Provider</com:provider>
   <com:version>
@@ -92,6 +92,16 @@
     <com:projectRef>
       <com:entity>OracleComms_Model_BaseCatalog</com:entity>
       <com:entityType>ddCartridge</com:entityType>
+      <com:relationship>unknown</com:relationship>
+    </com:projectRef>
+    <com:dependencyType>design</com:dependencyType>
+  </com:dependencies>
+  <com:dependencies>
+    <com:minVersion inclusive="true">1.0.0.0.0</com:minVersion>
+    <com:maxVersion inclusive="false"></com:maxVersion>
+    <com:projectRef>
+      <com:entity>Training_OSM_TOM_ActivateMobile</com:entity>
+      <com:entityType>osmCartridge</com:entityType>
       <com:relationship>unknown</com:relationship>
     </com:projectRef>
     <com:dependencyType>design</com:dependencyType>
