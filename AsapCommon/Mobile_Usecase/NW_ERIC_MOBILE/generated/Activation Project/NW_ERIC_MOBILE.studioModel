@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="model:Project" id="aprj=NW_ERIC_MOBILE" type="aprj" typeName="Activation Project" name="NW_ERIC_MOBILE" resource="\NW_ERIC_MOBILE\NW_ERIC_MOBILE.activationCartridge">
+    <note lang="default"/>
+    <version>
+      <major>1</major>
+      <minor>0</minor>
+      <maintenance>0</maintenance>
+      <servicePack>0</servicePack>
+      <efix>0</efix>
+      <build>22</build>
+    </version>
+    <targetVersion xsi:type="model:BuildVersion">
+      <major>7</major>
+      <minor>3</minor>
+      <maintenance>0</maintenance>
+      <servicePack>0</servicePack>
+      <efix>0</efix>
+      <build>0</build>
+    </targetVersion>
+    <propertyCategory name="Cartridge Management">
+      <property defaultValue="FALSE" name="RESTART_ASAP_SERVERS"/>
+    </propertyCategory>
+    <dependencies>
+      <element id="aprj=NW_ERIC_MOBILE+prjd=ActivationRoutingDictionary" type="prjd" typeName="Project Dependency" name="ActivationRoutingDictionary">
+        <supportedVersion>
+          <minVersion exclusive="false"></minVersion>
+          <maxVersion exclusive="true"></maxVersion>
+        </supportedVersion>
+        <project>
+          <relation ref="mprj=ActivationRoutingDictionary" type="Model Project" name="Dependency">
+            <target name="ActivationRoutingDictionary" typeName="Model Project"/>
+          </relation>
+        </project>
+      </element>
+    </dependencies>
+    <identifier>NW_ERIC_MOBILE</identifier>
+    <provider>Activation Cartridge Provider</provider>
+    <sealed>false</sealed>
+    <package></package>
+  </entity>
+</model:Model>

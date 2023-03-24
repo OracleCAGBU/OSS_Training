@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aut="http://xmlns.oracle.com/communications/sce/osm/model/process/task/automation" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:task="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="task:manualTaskType" name="ProvisionOrderBaseTask">
   <com:displayName>ProvisionOrderBaseTask</com:displayName>
-  <com:saveVersion>7</com:saveVersion>
+  <com:saveVersion>8</com:saveVersion>
   <com:id>UvRJ9IqjRsG+uCDBio13Tw</com:id>
   <task:orderType>
     <com:entity>COM_SalesOrderFulfillment</com:entity>
@@ -12,22 +12,8 @@
     <com:entity>COM_SalesOrderFulfillment</com:entity>
     <com:entityType>order</com:entityType>
     <com:relationship>ora.task.orderTemplateRef</com:relationship>
-    <com:element>/inputMessage</com:element>
-    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-  </task:orderTemplateRef>
-  <task:orderTemplateRef>
-    <com:entity>COM_SalesOrderFulfillment</com:entity>
-    <com:entityType>order</com:entityType>
-    <com:relationship>ora.task.orderTemplateRef</com:relationship>
     <com:element>/ControlData</com:element>
     <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-    <task:childNode>
-      <com:entity>COM_SalesOrderFulfillment</com:entity>
-      <com:entityType>order</com:entityType>
-      <com:relationship>ora.task.orderTemplateRef</com:relationship>
-      <com:element>/ControlData/OrderFulfillmentState</com:element>
-      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-    </task:childNode>
     <task:childNode>
       <com:entity>COM_SalesOrderFulfillment</com:entity>
       <com:entityType>order</com:entityType>
@@ -91,17 +77,8 @@
               <com:entity>COM_SalesOrderFulfillment</com:entity>
               <com:entityType>order</com:entityType>
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
-              <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/PointOfNoReturn</com:element>
+              <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/Action</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-              <task:childRefNode>true</task:childRefNode>
-            </task:childNode>
-            <task:childNode>
-              <com:entity>COM_SalesOrderFulfillment</com:entity>
-              <com:entityType>order</com:entityType>
-              <com:relationship>ora.task.orderTemplateRef</com:relationship>
-              <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/OrderItemFulfillmentState</com:element>
-              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>COM_SalesOrderFulfillment</com:entity>
@@ -109,7 +86,6 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/FulfillmentPattern</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>COM_SalesOrderFulfillment</com:entity>
@@ -117,7 +93,6 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/LineId</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>COM_SalesOrderFulfillment</com:entity>
@@ -125,23 +100,6 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/LineName</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-              <task:childRefNode>true</task:childRefNode>
-            </task:childNode>
-            <task:childNode>
-              <com:entity>COM_SalesOrderFulfillment</com:entity>
-              <com:entityType>order</com:entityType>
-              <com:relationship>ora.task.orderTemplateRef</com:relationship>
-              <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/ProductSpecification</com:element>
-              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-              <task:childRefNode>true</task:childRefNode>
-            </task:childNode>
-            <task:childNode>
-              <com:entity>COM_SalesOrderFulfillment</com:entity>
-              <com:entityType>order</com:entityType>
-              <com:relationship>ora.task.orderTemplateRef</com:relationship>
-              <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/RequestedDeliveryDate</com:element>
-              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>COM_SalesOrderFulfillment</com:entity>
@@ -149,15 +107,13 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/ParentLineId</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>COM_SalesOrderFulfillment</com:entity>
               <com:entityType>order</com:entityType>
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
-              <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/Action</com:element>
+              <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/ProductSpecification</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>COM_SalesOrderFulfillment</com:entity>
@@ -165,15 +121,13 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/Recognition</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>COM_SalesOrderFulfillment</com:entity>
               <com:entityType>order</com:entityType>
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
-              <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/xmlData</com:element>
+              <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/RequestedDeliveryDate</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
             <task:childNode>
               <com:entity>COM_SalesOrderFulfillment</com:entity>
@@ -181,7 +135,27 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/dynamicParams</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-              <task:childRefNode>true</task:childRefNode>
+            </task:childNode>
+            <task:childNode>
+              <com:entity>COM_SalesOrderFulfillment</com:entity>
+              <com:entityType>order</com:entityType>
+              <com:relationship>ora.task.orderTemplateRef</com:relationship>
+              <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/PointOfNoReturn</com:element>
+              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+            </task:childNode>
+            <task:childNode>
+              <com:entity>COM_SalesOrderFulfillment</com:entity>
+              <com:entityType>order</com:entityType>
+              <com:relationship>ora.task.orderTemplateRef</com:relationship>
+              <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/OrderItemFulfillmentState</com:element>
+              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+            </task:childNode>
+            <task:childNode>
+              <com:entity>COM_SalesOrderFulfillment</com:entity>
+              <com:entityType>order</com:entityType>
+              <com:relationship>ora.task.orderTemplateRef</com:relationship>
+              <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/xmlData</com:element>
+              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
             </task:childNode>
             <task:childNode>
               <com:entity>COM_SalesOrderFulfillment</com:entity>
@@ -189,9 +163,14 @@
               <com:relationship>ora.task.orderTemplateRef</com:relationship>
               <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/ServiceInstanceIndicator</com:element>
               <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-              <task:childRefNode>true</task:childRefNode>
             </task:childNode>
-            <task:childRefNode>true</task:childRefNode>
+            <task:childNode>
+              <com:entity>COM_SalesOrderFulfillment</com:entity>
+              <com:entityType>order</com:entityType>
+              <com:relationship>ora.task.orderTemplateRef</com:relationship>
+              <com:element>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/SpecificationGroup</com:element>
+              <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+            </task:childNode>
           </task:childNode>
         </task:childNode>
         <task:childNode>
@@ -220,10 +199,16 @@
             <com:relationship>ora.task.orderTemplateRef</com:relationship>
             <com:element>/ControlData/Functions/ProvisioningFunction/transformedOrderItem/orderItemRef</com:element>
             <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-            <task:childRefNode>true</task:childRefNode>
           </task:childNode>
         </task:childNode>
       </task:childNode>
+    </task:childNode>
+    <task:childNode>
+      <com:entity>COM_SalesOrderFulfillment</com:entity>
+      <com:entityType>order</com:entityType>
+      <com:relationship>ora.task.orderTemplateRef</com:relationship>
+      <com:element>/ControlData/OrderFulfillmentState</com:element>
+      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
     </task:childNode>
     <task:childNode>
       <com:entity>COM_SalesOrderFulfillment</com:entity>
@@ -235,14 +220,7 @@
         <com:entity>COM_SalesOrderFulfillment</com:entity>
         <com:entityType>order</com:entityType>
         <com:relationship>ora.task.orderTemplateRef</com:relationship>
-        <com:element>/ControlData/OrderItem/PointOfNoReturn</com:element>
-        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-      </task:childNode>
-      <task:childNode>
-        <com:entity>COM_SalesOrderFulfillment</com:entity>
-        <com:entityType>order</com:entityType>
-        <com:relationship>ora.task.orderTemplateRef</com:relationship>
-        <com:element>/ControlData/OrderItem/OrderItemFulfillmentState</com:element>
+        <com:element>/ControlData/OrderItem/Action</com:element>
         <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
       </task:childNode>
       <task:childNode>
@@ -270,20 +248,6 @@
         <com:entity>COM_SalesOrderFulfillment</com:entity>
         <com:entityType>order</com:entityType>
         <com:relationship>ora.task.orderTemplateRef</com:relationship>
-        <com:element>/ControlData/OrderItem/ProductSpecification</com:element>
-        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-      </task:childNode>
-      <task:childNode>
-        <com:entity>COM_SalesOrderFulfillment</com:entity>
-        <com:entityType>order</com:entityType>
-        <com:relationship>ora.task.orderTemplateRef</com:relationship>
-        <com:element>/ControlData/OrderItem/RequestedDeliveryDate</com:element>
-        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
-      </task:childNode>
-      <task:childNode>
-        <com:entity>COM_SalesOrderFulfillment</com:entity>
-        <com:entityType>order</com:entityType>
-        <com:relationship>ora.task.orderTemplateRef</com:relationship>
         <com:element>/ControlData/OrderItem/ParentLineId</com:element>
         <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
       </task:childNode>
@@ -291,7 +255,7 @@
         <com:entity>COM_SalesOrderFulfillment</com:entity>
         <com:entityType>order</com:entityType>
         <com:relationship>ora.task.orderTemplateRef</com:relationship>
-        <com:element>/ControlData/OrderItem/Action</com:element>
+        <com:element>/ControlData/OrderItem/ProductSpecification</com:element>
         <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
       </task:childNode>
       <task:childNode>
@@ -305,7 +269,7 @@
         <com:entity>COM_SalesOrderFulfillment</com:entity>
         <com:entityType>order</com:entityType>
         <com:relationship>ora.task.orderTemplateRef</com:relationship>
-        <com:element>/ControlData/OrderItem/xmlData</com:element>
+        <com:element>/ControlData/OrderItem/RequestedDeliveryDate</com:element>
         <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
       </task:childNode>
       <task:childNode>
@@ -319,7 +283,35 @@
         <com:entity>COM_SalesOrderFulfillment</com:entity>
         <com:entityType>order</com:entityType>
         <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/PointOfNoReturn</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>COM_SalesOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/OrderItemFulfillmentState</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>COM_SalesOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/xmlData</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>COM_SalesOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
         <com:element>/ControlData/OrderItem/ServiceInstanceIndicator</com:element>
+        <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+      </task:childNode>
+      <task:childNode>
+        <com:entity>COM_SalesOrderFulfillment</com:entity>
+        <com:entityType>order</com:entityType>
+        <com:relationship>ora.task.orderTemplateRef</com:relationship>
+        <com:element>/ControlData/OrderItem/SpecificationGroup</com:element>
         <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
       </task:childNode>
     </task:childNode>
@@ -632,28 +624,20 @@
       </task:childNode>
     </task:childNode>
   </task:orderTemplateRef>
-  <task:viewNodeExtension>
-    <task:path>/inputMessage</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
+  <task:orderTemplateRef>
+    <com:entity>COM_SalesOrderFulfillment</com:entity>
+    <com:entityType>order</com:entityType>
+    <com:relationship>ora.task.orderTemplateRef</com:relationship>
+    <com:element>/inputMessage</com:element>
+    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+  </task:orderTemplateRef>
   <task:viewNodeExtension>
     <task:path>/ControlData</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/OrderFulfillmentState</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
     <task:path>/ControlData/Functions</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/ControlData/OrderItem</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
@@ -683,11 +667,6 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ProvisioningFunction/transformedOrderItem</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
     <task:path>/ControlData/Functions/ProvisioningFunction/orderItem/ExternalFulfillmentState</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
@@ -703,12 +682,7 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/PointOfNoReturn</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/OrderItemFulfillmentState</task:path>
+    <task:path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/Action</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
@@ -728,22 +702,12 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/ProductSpecification</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/RequestedDeliveryDate</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
     <task:path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/ParentLineId</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/Action</task:path>
+    <task:path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/ProductSpecification</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
@@ -753,12 +717,42 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/xmlData</task:path>
+    <task:path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/RequestedDeliveryDate</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
     <task:path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/dynamicParams</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/PointOfNoReturn</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/OrderItemFulfillmentState</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/xmlData</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/ServiceInstanceIndicator</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/SpecificationGroup</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/Functions/ProvisioningFunction/transformedOrderItem</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
@@ -773,12 +767,77 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/OrderItem/PointOfNoReturn</task:path>
+    <task:path>/ControlData/Functions/ProvisioningFunction/transformedOrderItem/orderItemRef</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/OrderItem/OrderItemFulfillmentState</task:path>
+    <task:path>/ControlData/OrderFulfillmentState</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/Order</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/Order/OrderNumber</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/Order/TypeCode</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/Order/CustomerPartyReference</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/Order/CustomerPartyReference/FirstName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/Order/CustomerPartyReference/LastName</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/Order/CustomerPartyReference/AccountType</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/Order/CustomerPartyReference/AccountID</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/Order/CustomerPartyReference/ContactID</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/TransformedOrderItem</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/MappingContext</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/Action</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
@@ -798,22 +857,12 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/OrderItem/ProductSpecification</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/ControlData/OrderItem/RequestedDeliveryDate</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
     <task:path>/ControlData/OrderItem/ParentLineId</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/OrderItem/Action</task:path>
+    <task:path>/ControlData/OrderItem/ProductSpecification</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
@@ -823,7 +872,7 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/OrderItem/xmlData</task:path>
+    <task:path>/ControlData/OrderItem/RequestedDeliveryDate</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
@@ -833,7 +882,17 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/ServiceInstanceIndicator</task:path>
+    <task:path>/ControlData/OrderItem/PointOfNoReturn</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/OrderItemFulfillmentState</task:path>
+    <task:editable>true</task:editable>
+    <task:defaultValue></task:defaultValue>
+  </task:viewNodeExtension>
+  <task:viewNodeExtension>
+    <task:path>/ControlData/OrderItem/xmlData</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
@@ -843,17 +902,7 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/ControlData/TransformedOrderItem</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/ControlData/MappingContext</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/ControlData/Functions/ProvisioningFunction/transformedOrderItem/orderItemRef</task:path>
+    <task:path>/ControlData/OrderItem/SpecificationGroup</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
@@ -1023,47 +1072,7 @@
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>
   <task:viewNodeExtension>
-    <task:path>/Order</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/Order/OrderNumber</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/Order/TypeCode</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/Order/CustomerPartyReference</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/Order/CustomerPartyReference/FirstName</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/Order/CustomerPartyReference/LastName</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/Order/CustomerPartyReference/AccountType</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/Order/CustomerPartyReference/AccountID</task:path>
-    <task:editable>true</task:editable>
-    <task:defaultValue></task:defaultValue>
-  </task:viewNodeExtension>
-  <task:viewNodeExtension>
-    <task:path>/Order/CustomerPartyReference/ContactID</task:path>
+    <task:path>/inputMessage</task:path>
     <task:editable>true</task:editable>
     <task:defaultValue></task:defaultValue>
   </task:viewNodeExtension>

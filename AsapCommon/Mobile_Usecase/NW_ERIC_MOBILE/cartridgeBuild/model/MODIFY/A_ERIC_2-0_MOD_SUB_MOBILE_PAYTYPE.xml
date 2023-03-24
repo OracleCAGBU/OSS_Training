@@ -1,0 +1,40 @@
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.metasolv.com/ServiceActivation/2003/ServiceModel">
+  <description></description>
+  <atomicService xsi:type="AtomicServiceType" name="A_ERIC_2-0_MOD_SUB_MOBILE_PAYTYPE">
+    <description></description>
+    <sendParameterCount>false</sendParameterCount>
+    <parameter xsi:type="SimpleParameterType" name="MCLI">
+      <description></description>
+      <required>true</required>
+      <default></default>
+      <parameterValueMap>MCLI</parameterValueMap>
+    </parameter>
+    <parameter xsi:type="SimpleParameterType" name="MSISDN">
+      <description></description>
+      <required>true</required>
+      <default></default>
+      <parameterValueMap>MSISDN</parameterValueMap>
+    </parameter>
+    <parameter xsi:type="SimpleParameterType" name="ServicePlan">
+      <description></description>
+      <required>true</required>
+      <default></default>
+      <parameterValueMap>ServicePlan</parameterValueMap>
+    </parameter>
+    <parameter xsi:type="SimpleParameterType" name="PayType">
+      <description></description>
+      <required>true</required>
+      <default></default>
+      <parameterValueMap>PayType</parameterValueMap>
+    </parameter>
+  </atomicService>
+  <atomicDeviceMap name="A_ERIC_2-0_MOD_SUB_MOBILE_PAYTYPE">
+    <deviceMap>
+      <vendor>ERIC</vendor>
+      <type>MOBILE</type>
+      <version>2-0</version>
+      <implementation>com.oracle.activation.eric.mobile.x2_0.sub_mobile_payType.generated.ModSub_mobile_payTypeProxy.execute</implementation>
+      <interpreter>JINTERPRETER_PROGRAM</interpreter>
+    </deviceMap>
+  </atomicDeviceMap>
+</serviceModel>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<project default="package" basedir=".">
+	<property name="basews" value="../../"/>
+	<property name="jarTarget" value="${basews}/${project_name}/lib/${archive_name}.jar"/>
+	<property name="outputDir" value="${basews}/${project_name}/out"/>
+	
+	<target name="package" depends="cleanPackage">
+		<echo message="Project Name=${project_name}"/>
+		<echo message="Destination Jar=${jarTarget}"/>
+		<echo message="Output Dir=${outputDir}"/>
+		<jar destfile="${jarTarget}" basedir="${outputDir}" filesonly="false"/>
+	</target>
+	
+	<target name="cleanPackage">
+		<echo message="Project Name=${project_name}"/>
+		<delete file="${jarTarget}"/>
+	</target>
+</project>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<createOrderByValueRequest
+    xmlns="http://java.sun.com/products/oss/xml/ServiceActivation"
+    xmlns:co="http://java.sun.com/products/oss/xml/Common"
+    xmlns:mslv-sa="http://www.metasolv.com/oss/ServiceActivation/2003"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.metasolv.com/oss/ServiceActivation/2003 ./ASAPServiceActivation.xsd">
+    <orderValue xsi:type="mslv-sa:ASAPOrderValue">
+        <apiClientId/>
+        <orderKey>
+            <co:applicationContext>
+                <co:factoryClass/>
+                <co:url/>
+                <co:systemProperties/>
+            </co:applicationContext>
+            <co:type/>
+            <primaryKey>DUMMY_WO</primaryKey>
+        </orderKey>
+        <priority>3</priority>
+        <requestedCompletionDate>2023-03-15T23:31:00</requestedCompletionDate>
+        <services>
+            <item xsi:type="mslv-sa:ASAPService">
+                <serviceKey xsi:type="mslv-sa:ASAPServiceKey">
+                    <co:applicationContext>
+                        <co:factoryClass/>
+                        <co:url/>
+                        <co:systemProperties/>
+                    </co:applicationContext>
+                    <co:applicationDN>System/ENV_ID/ApplicationType/ServiceActivation/Application/1-0;5-0;ASAP/Comp/</co:applicationDN>
+                    <co:type/>
+                    <primaryKey/>
+                </serviceKey>
+                <mslv-sa:asdlRoute>TO_BE_DETERMINED</mslv-sa:asdlRoute>
+                <mslv-sa:serviceValues>
+                    <mslv-sa:serviceValue xsi:type="mslv-sa:ASAPServiceValue">
+                        <mslv-sa:name>BAIC</mslv-sa:name>
+                        <mslv-sa:value>1</mslv-sa:value>
+                        <mslv-sa:type>OPTIONAL_SCALAR</mslv-sa:type>
+                    </mslv-sa:serviceValue>
+                    <mslv-sa:serviceValue xsi:type="mslv-sa:ASAPServiceValue">
+                        <mslv-sa:name>BAOC</mslv-sa:name>
+                        <mslv-sa:value>1</mslv-sa:value>
+                        <mslv-sa:type>OPTIONAL_SCALAR</mslv-sa:type>
+                    </mslv-sa:serviceValue>
+                    <mslv-sa:serviceValue xsi:type="mslv-sa:ASAPServiceValue">
+                        <mslv-sa:name>BICRO</mslv-sa:name>
+                        <mslv-sa:value>1</mslv-sa:value>
+                        <mslv-sa:type>OPTIONAL_SCALAR</mslv-sa:type>
+                    </mslv-sa:serviceValue>
+                    <mslv-sa:serviceValue xsi:type="mslv-sa:ASAPServiceValue">
+                        <mslv-sa:name>BOIC</mslv-sa:name>
+                        <mslv-sa:value>1</mslv-sa:value>
+                        <mslv-sa:type>OPTIONAL_SCALAR</mslv-sa:type>
+                    </mslv-sa:serviceValue>
+                    <mslv-sa:serviceValue xsi:type="mslv-sa:ASAPServiceValue">
+                        <mslv-sa:name>CFB</mslv-sa:name>
+                        <mslv-sa:value>1</mslv-sa:value>
+                        <mslv-sa:type>OPTIONAL_SCALAR</mslv-sa:type>
+                    </mslv-sa:serviceValue>
+                    <mslv-sa:serviceValue xsi:type="mslv-sa:ASAPServiceValue">
+                        <mslv-sa:name>CFNRC</mslv-sa:name>
+                        <mslv-sa:value>1</mslv-sa:value>
+                        <mslv-sa:type>OPTIONAL_SCALAR</mslv-sa:type>
+                    </mslv-sa:serviceValue>
+                    <mslv-sa:serviceValue xsi:type="mslv-sa:ASAPServiceValue">
+                        <mslv-sa:name>CFNRY</mslv-sa:name>
+                        <mslv-sa:value>1</mslv-sa:value>
+                        <mslv-sa:type>OPTIONAL_SCALAR</mslv-sa:type>
+                    </mslv-sa:serviceValue>
+                    <mslv-sa:serviceValue xsi:type="mslv-sa:ASAPServiceValue">
+                        <mslv-sa:name>CFS</mslv-sa:name>
+                        <mslv-sa:value>1</mslv-sa:value>
+                        <mslv-sa:type>OPTIONAL_SCALAR</mslv-sa:type>
+                    </mslv-sa:serviceValue>
+                    <mslv-sa:serviceValue xsi:type="mslv-sa:ASAPServiceValue">
+                        <mslv-sa:name>ENABLE_MMS</mslv-sa:name>
+                        <mslv-sa:value>True</mslv-sa:value>
+                        <mslv-sa:type>OPTIONAL_SCALAR</mslv-sa:type>
+                    </mslv-sa:serviceValue>
+                    <mslv-sa:serviceValue xsi:type="mslv-sa:ASAPServiceValue">
+                        <mslv-sa:name>Email</mslv-sa:name>
+                        <mslv-sa:value/>
+                        <mslv-sa:type>OPTIONAL_SCALAR</mslv-sa:type>
+                    </mslv-sa:serviceValue>
+                    <mslv-sa:serviceValue xsi:type="mslv-sa:ASAPServiceValue">
+                        <mslv-sa:name>ICCID</mslv-sa:name>
+                        <mslv-sa:value/>
+                        <mslv-sa:type>REQUIRED_SCALAR</mslv-sa:type>
+                    </mslv-sa:serviceValue>
+                    <mslv-sa:serviceValue xsi:type="mslv-sa:ASAPServiceValue">
+                        <mslv-sa:name>IMSI</mslv-sa:name>
+                        <mslv-sa:value/>
+                        <mslv-sa:type>REQUIRED_SCALAR</mslv-sa:type>
+                    </mslv-sa:serviceValue>
+                    <mslv-sa:serviceValue xsi:type="mslv-sa:ASAPServiceValue">
+                        <mslv-sa:name>MCLI</mslv-sa:name>
+                        <mslv-sa:value/>
+                        <mslv-sa:type>REQUIRED_SCALAR</mslv-sa:type>
+                    </mslv-sa:serviceValue>
+                    <mslv-sa:serviceValue xsi:type="mslv-sa:ASAPServiceValue">
+                        <mslv-sa:name>MSISDN</mslv-sa:name>
+                        <mslv-sa:value/>
+                        <mslv-sa:type>REQUIRED_SCALAR</mslv-sa:type>
+                    </mslv-sa:serviceValue>
+                    <mslv-sa:serviceValue xsi:type="mslv-sa:ASAPServiceValue">
+                        <mslv-sa:name>Name</mslv-sa:name>
+                        <mslv-sa:value/>
+                        <mslv-sa:type>REQUIRED_SCALAR</mslv-sa:type>
+                    </mslv-sa:serviceValue>
+                    <mslv-sa:serviceValue xsi:type="mslv-sa:ASAPServiceValue">
+                        <mslv-sa:name>RoamingAllowed</mslv-sa:name>
+                        <mslv-sa:value/>
+                        <mslv-sa:type>OPTIONAL_SCALAR</mslv-sa:type>
+                    </mslv-sa:serviceValue>
+                    <mslv-sa:serviceValue xsi:type="mslv-sa:ASAPServiceValue">
+                        <mslv-sa:name>ServicePlan</mslv-sa:name>
+                        <mslv-sa:value/>
+                        <mslv-sa:type>OPTIONAL_SCALAR</mslv-sa:type>
+                    </mslv-sa:serviceValue>
+                </mslv-sa:serviceValues>
+            </item>
+        </services>
+        <mslv-sa:parentKey>
+            <co:applicationContext>
+                <co:factoryClass/>
+                <co:url/>
+                <co:systemProperties/>
+            </co:applicationContext>
+            <co:applicationDN/>
+            <co:type/>
+            <primaryKey/>
+        </mslv-sa:parentKey>
+        <mslv-sa:origin>ASC Test Orders</mslv-sa:origin>
+        <mslv-sa:organizationUnit>STUDIO</mslv-sa:organizationUnit>
+        <mslv-sa:timeout>-1</mslv-sa:timeout>
+        <mslv-sa:secureData>true</mslv-sa:secureData>
+        <mslv-sa:maximumDelayFail>0</mslv-sa:maximumDelayFail>
+        <mslv-sa:rollbackIfFail>false</mslv-sa:rollbackIfFail>
+        <mslv-sa:batchGroup/>
+        <mslv-sa:asdlTimeout>-1</mslv-sa:asdlTimeout>
+        <mslv-sa:asdlRetry>5</mslv-sa:asdlRetry>
+        <mslv-sa:asdlRetryInterval>120</mslv-sa:asdlRetryInterval>
+        <mslv-sa:asdlDelayFail>false</mslv-sa:asdlDelayFail>
+        <mslv-sa:externalSystemId/>
+        <mslv-sa:srqAction>ADD</mslv-sa:srqAction>
+        <mslv-sa:command>UPDATE</mslv-sa:command>
+        <mslv-sa:orderParameters>
+            <mslv-sa:orderParameter>
+                <mslv-sa:name>DUMMY_GLOBAL_PARAM</mslv-sa:name>
+                <mslv-sa:value>DUMMY_VAL</mslv-sa:value>
+            </mslv-sa:orderParameter>
+        </mslv-sa:orderParameters>
+        <mslv-sa:infoParms/>
+        <mslv-sa:extendedWoProperties/>
+    </orderValue>
+</createOrderByValueRequest>

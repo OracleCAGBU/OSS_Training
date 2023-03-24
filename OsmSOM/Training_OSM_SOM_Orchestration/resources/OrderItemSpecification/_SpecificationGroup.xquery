@@ -14,4 +14,11 @@ declare namespace corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common
 (: TO DO: Write XQuery to identify LineId :)
 
 let $orderItem := .
-return $orderItem/fulfillord:CSODynamicParams
+let $specGroup := if(fn:exists($orderItem/fulfillord:CSODynamicParams)) then
+                     $orderItem/fulfillord:CSODynamicParams
+                  else  $orderItem/*:specificationGroup
+return 
+
+$specGroup
+
+

@@ -14,15 +14,14 @@ declare variable $log external;
      (: Example: let $productSpecName :=  fn:normalize-space(fulfillord:productSpec/text()) :)
      let $orderItem := .
      let $productSpecName := fn:normalize-space($orderItem/corecom:ItemReference/corecom:ClassificationCode[@listID="FulfillmentItemCode"]/text())
+     let $productSpecMap := vf:instance('ProductSpecMap')
+     let $fulfillmentPattern := fn:normalize-space($productSpecMap/productSpec[fn:lower-case(@name)=fn:lower-case($productSpecName)]/fulfillmentPattern/text())
      
     return
        (
-       log:info($log, fn:concat('OrderItem : ', $orderItem)),
-       log:info($log, fn:concat('productSpecName :' , $productSpecName)),
-       (: Mobile Changes :)
-       if ($productSpecName = ('','Mobile Service','4G','Bundle','BRM Technical Products', 'SIM Card','Handset')) then
-       
-       "Service.Mobile"
-       else
-       "Service.Broadband"
+            (: Mobile Changes :)
+           if ($productSpecName = ('Mobile Service','4G','Bundle','BRM Technical Products', 'SIM Card','Handset')) then
+            "Service.Mobile"
+           else
+            $fulfillmentPattern
        )

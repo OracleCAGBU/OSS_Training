@@ -1,0 +1,24 @@
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.metasolv.com/ServiceActivation/2003/ServiceModel">
+  <description></description>
+  <commonService name="C_MOD_MOBILE_SERVICE">
+    <description></description>
+    <rollbackOnFailure>false</rollbackOnFailure>
+    <priority>1</priority>
+    <serviceMap>
+      <atomicService>A_ERIC_2-0_MOD_SUB_MOBILE_MSISDN</atomicService>
+      <pointOfNoReturn>0</pointOfNoReturn>
+      <condition xsi:type="DefinedConditionType">
+        <expression></expression>
+        <parameterLabel>OLD_MSISDN</parameterLabel>
+      </condition>
+    </serviceMap>
+    <serviceMap>
+      <atomicService>A_ERIC_2-0_MOD_SUB_MOBILE_PAYTYPE</atomicService>
+      <pointOfNoReturn>0</pointOfNoReturn>
+      <condition xsi:type="DefinedConditionType">
+        <expression></expression>
+        <parameterLabel>PayType</parameterLabel>
+      </condition>
+    </serviceMap>
+  </commonService>
+</serviceModel>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  
+  
+  
+  <serviceModel xmlns="http://www.metasolv.com/ServiceActivation/2003/ServiceModel">
+     <userDefinedExitType>
+          <neDescriptor>
+               <softwareLoad>2-0</softwareLoad>
+               <technology>MOBILE</technology>
+               <neVendor>ERIC</neVendor>
+          </neDescriptor>
+          <searchPattern>0</searchPattern>
+          <userType>SUCCESS</userType>
+          <baseType>SUCCEED</baseType>
+          <description>Success</description>
+     </userDefinedExitType>
+     <userDefinedExitType>
+          <neDescriptor>
+               <softwareLoad>2-0</softwareLoad>
+               <technology>MOBILE</technology>
+               <neVendor>ERIC</neVendor>
+          </neDescriptor>
+          <searchPattern>1</searchPattern>
+          <userType>SUB_ALREEADY_EXIST</userType>
+          <baseType>FAIL</baseType>
+          <description>Subscriber Already exist.</description>
+     </userDefinedExitType>
+     <userDefinedExitType>
+          <neDescriptor>
+               <softwareLoad>2-0</softwareLoad>
+               <technology>MOBILE</technology>
+               <neVendor>ERIC</neVendor>
+          </neDescriptor>
+          <searchPattern>2</searchPattern>
+          <userType>SUB_NOT_EXIST</userType>
+          <baseType>FAIL</baseType>
+          <description>Subscriber does Not exist.</description>
+     </userDefinedExitType>
+     <userDefinedExitType>
+          <neDescriptor>
+               <softwareLoad>2-0</softwareLoad>
+               <technology>MOBILE</technology>
+               <neVendor>ERIC</neVendor>
+          </neDescriptor>
+          <searchPattern>3</searchPattern>
+          <userType>INVALID_MSISDN</userType>
+          <baseType>FAIL</baseType>
+          <description>Invalid MSISDN format</description>
+     </userDefinedExitType>
+     <userDefinedExitType>
+          <neDescriptor>
+               <softwareLoad>2-0</softwareLoad>
+               <technology>MOBILE</technology>
+               <neVendor>ERIC</neVendor>
+          </neDescriptor>
+          <searchPattern>4</searchPattern>
+          <userType>MAPPING_ERROR</userType>
+          <baseType>FAIL</baseType>
+          <description>MSISDN and IMSI not mapped</description>
+     </userDefinedExitType>
+</serviceModel>
+  
+  
+  
+  

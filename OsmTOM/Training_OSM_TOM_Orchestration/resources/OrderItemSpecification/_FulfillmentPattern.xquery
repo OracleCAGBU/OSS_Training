@@ -13,12 +13,14 @@ declare namespace corecom       = "http://xmlns.oracle.com/EnterpriseObjects/Cor
      (: Example: let $productSpecName :=  fn:normalize-space(fulfillord:productSpec/text()) :)
       let $orderItem := .
       let $productSpecName := fn:normalize-space($orderItem/corecom:ClassificationCode/text())
+      let $fulfillmentPattern := fn:normalize-space($productSpecMap/productSpec[fn:lower-case(@name)=fn:lower-case($productSpecName)]/fulfillmentPattern/text())
      
 	return
-		if ($productSpecName != '')
-		then
-			fn:normalize-space($productSpecMap/productSpec[fn:lower-case(@name)=fn:lower-case($productSpecName)]/fulfillmentPattern/text())
-		else ()
+		if ($fulfillmentPattern != '')
+		then $fulfillmentPattern
+		else if($productSpecName='MobileInternet_RFS')
+		then "TOFP_MOBILE_Standard"
+        else ()
 			(: TO DO: If there is a product specification with no matching fulfillment pattern, return generic fulfillment pattern name :)
 			(: For this to work at run time either create a generic fulfillment pattern with name 'Non.Service.Offer' or change it what needs to be returned :)
 		

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/orchestration" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:osm="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="DecompositionRuleType" name="Decomp_TOM_ASAP_To_WholeOrderGranularity">
   <com:displayName>Decomp_TOM_ASAP_To_WholeOrderGranularity</com:displayName>
-  <com:saveVersion>4</com:saveVersion>
+  <com:saveVersion>5</com:saveVersion>
   <com:id>IhvsWDr1RiyQJOQsT6hW3A</com:id>
   <namespace>TOM_TechnicalOrderFulfillment</namespace>
   <orderItem>
@@ -9,13 +9,8 @@
     <com:entityType>orderItemSpec</com:entityType>
     <com:relationship>oracle.communications.sce.osm.orchestration.decompositionRule.orderItem</com:relationship>
   </orderItem>
-  <product>
-    <com:entity>TOFP_BROADBAND_Standard</com:entity>
-    <com:entityType>productSpec</com:entityType>
-    <com:relationship>oracle.communications.sce.osm.orchestration.decompositionRule.productSpec</com:relationship>
-  </product>
   <source>
-    <com:entity>ActivateBroadbandFunction</com:entity>
+    <com:entity>TOM_ASAP</com:entity>
     <com:entityType>orderComponentSpec</com:entityType>
     <com:relationship>oracle.communications.sce.osm.orchestration.decompositionRule.source</com:relationship>
   </source>

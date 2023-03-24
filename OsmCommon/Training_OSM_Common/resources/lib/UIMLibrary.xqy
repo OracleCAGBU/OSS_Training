@@ -95,6 +95,7 @@ declare variable $uimlib:techwsNamespace                    := "http://xmlns.ora
 declare variable $uimlib:invconfigPrefix                    := "invconfig:";
 declare variable $uimlib:child                              := "child";
 declare variable $uimlib:sBIOrder                           := "BI_Order";
+declare variable $uimlib:sMobile                            := "Mobile";
 declare variable $uimlib:DesignServiceFunction              := "DesignServiceFunction";
 declare variable $uimlib:PlanDeliveryFunction               := "PlanDeliveryFunction";
 declare variable $uimlib:DeliverOrderFunction               := "DeliverOrderFunction";

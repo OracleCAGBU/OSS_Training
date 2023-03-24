@@ -19,19 +19,11 @@ declare variable $log external;
      
 	return
 	(
-		if ($productSpecName = ('SIM Card','4G','Mobile Service') ) then (
-		 log:info($log, fn:concat('Inside if productSpecMap:',$productSpecName)),
-		
-		'SOFP_MOBILE_Standard'
-		)
-		else if ($productSpecName != '') then (
-		 log:info($log, fn:concat('Inside else sif productSpecMap:',$productSpecName)),
-		
-			fn:normalize-space($productSpecMap/productSpec[fn:lower-case(@name)=fn:lower-case($productSpecName)]/fulfillmentPattern/text())
-			 
-		)
-		else (
-		 log:info($log, fn:concat('Inside else productSpecMap:',$productSpecName)))
+		if ($productSpecName = ('MobileInternet_CFS') ) then
+		      'SOFP_MOBILE_Standard'
+		else if ($productSpecName != '') then
+		       fn:normalize-space($productSpecMap/productSpec[fn:lower-case(@name)=fn:lower-case($productSpecName)]/fulfillmentPattern/text())
+		else log:info($log, fn:concat('Inside else productSpecMap:',$productSpecName))
 		 
 	)		
 		

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/orchestration" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:osm="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="OrderItemSpec" name="COM_SalesOrderFulfillment">
   <com:displayName>COM_SalesOrderFulfillment</com:displayName>
-  <com:saveVersion>32</com:saveVersion>
+  <com:saveVersion>34</com:saveVersion>
   <com:id>ljhM--+x--+rnzg4--+s7A</com:id>
   <namespace>COM_SalesOrderFulfillment</namespace>
   <productSpecMappingProperty>
@@ -125,6 +125,11 @@
   <property name="ServiceInstanceIndicator">
     <nodesetExpression xsi:type="osm:XqueryExpressionRuleType">
       <osm:xquery>'true'</osm:xquery>
+    </nodesetExpression>
+  </property>
+  <property name="SpecificationGroup">
+    <nodesetExpression xsi:type="osm:XqueryExpressionFileRuleType">
+      <osm:fileUri>http://www.training.com/orderitem_properties/_SpecificationGroup.xquery</osm:fileUri>
     </nodesetExpression>
   </property>
   <hierarchy name="parentChildHierarchy">
@@ -298,6 +303,10 @@
     <ord:nodeExtension>
       <ord:path>/ControlData/MappingContext/ProviderFunction/TargetMapping/SourceMapping/MappingRule/AttributeMapping/mappingRuleItem</ord:path>
     </ord:nodeExtension>
+    <ord:nodeExtension>
+      <ord:path>/ControlData/OrderItem/SpecificationGroup</ord:path>
+      <ord:xmlType>true</ord:xmlType>
+    </ord:nodeExtension>
     <ord:orderData>
       <com:entity>OracleComms_OSM_CommonDataDictionary</com:entity>
       <com:entityType>xsd</com:entityType>
@@ -461,6 +470,17 @@
           <com:baseElement>string</com:baseElement>
           <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
         </ord:childNode>
+        <ord:childNode>
+          <com:entity>OracleComms_OSM_COM_Orchestration</com:entity>
+          <com:entityType>xsd</com:entityType>
+          <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
+          <com:element>SpecificationGroup</com:element>
+          <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+          <com:elementName>SpecificationGroup</com:elementName>
+          <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_COM_Orchestration/OracleComms_OSM_COM_Orchestration</com:namespace>
+          <com:baseElement>(Reusable Structure)</com:baseElement>
+          <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
+        </ord:childNode>
       </ord:childNode>
       <ord:childNode>
         <com:entity>OracleComms_OSM_CommonDataDictionary</com:entity>
@@ -489,7 +509,7 @@
           <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
           <com:element>MappingContext/ProviderFunction</com:element>
           <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-          <com:elementName>ProviderFunction</com:elementName>
+          <com:elementName>MappingContext/ProviderFunction</com:elementName>
           <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:namespace>
           <com:baseElement>(Local Structure)</com:baseElement>
           <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -531,7 +551,7 @@
               <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
               <com:element>MappingContext/ProviderFunction/TargetMapping/target</com:element>
               <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-              <com:elementName>target</com:elementName>
+              <com:elementName>MappingContext/ProviderFunction/TargetMapping/target</com:elementName>
               <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:namespace>
               <com:baseElement>string</com:baseElement>
               <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -552,7 +572,7 @@
                 <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                 <com:element>MappingContext/ProviderFunction/TargetMapping/SourceMapping/source</com:element>
                 <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                <com:elementName>source</com:elementName>
+                <com:elementName>MappingContext/ProviderFunction/TargetMapping/SourceMapping/source</com:elementName>
                 <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:namespace>
                 <com:baseElement>string</com:baseElement>
                 <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -573,7 +593,7 @@
                   <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                   <com:element>MappingContext/ProviderFunction/TargetMapping/SourceMapping/InstantiatingMappingRule/namespace</com:element>
                   <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                  <com:elementName>namespace</com:elementName>
+                  <com:elementName>MappingContext/ProviderFunction/TargetMapping/SourceMapping/InstantiatingMappingRule/namespace</com:elementName>
                   <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:namespace>
                   <com:baseElement>string</com:baseElement>
                   <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -605,7 +625,7 @@
                     <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                     <com:element>MappingContext/ProviderFunction/TargetMapping/SourceMapping/InstantiatingMappingRule/AttributeMapping/Source</com:element>
                     <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                    <com:elementName>Source</com:elementName>
+                    <com:elementName>MappingContext/ProviderFunction/TargetMapping/SourceMapping/InstantiatingMappingRule/AttributeMapping/Source</com:elementName>
                     <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:namespace>
                     <com:baseElement>AttributeMappingPropertyType</com:baseElement>
                     <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:baseNamespace>
@@ -648,7 +668,7 @@
                       <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                       <com:element>MappingContext/ProviderFunction/TargetMapping/SourceMapping/InstantiatingMappingRule/AttributeMapping/Target/name</com:element>
                       <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                      <com:elementName>name</com:elementName>
+                      <com:elementName>MappingContext/ProviderFunction/TargetMapping/SourceMapping/InstantiatingMappingRule/AttributeMapping/Target/name</com:elementName>
                       <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:namespace>
                       <com:baseElement>string</com:baseElement>
                       <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -716,7 +736,7 @@
                   <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                   <com:element>MappingContext/ProviderFunction/TargetMapping/SourceMapping/MappingRule/namespace</com:element>
                   <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                  <com:elementName>namespace</com:elementName>
+                  <com:elementName>MappingContext/ProviderFunction/TargetMapping/SourceMapping/MappingRule/namespace</com:elementName>
                   <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:namespace>
                   <com:baseElement>string</com:baseElement>
                   <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
@@ -748,7 +768,7 @@
                     <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                     <com:element>MappingContext/ProviderFunction/TargetMapping/SourceMapping/MappingRule/AttributeMapping/Source</com:element>
                     <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                    <com:elementName>Source</com:elementName>
+                    <com:elementName>MappingContext/ProviderFunction/TargetMapping/SourceMapping/MappingRule/AttributeMapping/Source</com:elementName>
                     <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:namespace>
                     <com:baseElement>AttributeMappingPropertyType</com:baseElement>
                     <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:baseNamespace>
@@ -791,7 +811,7 @@
                       <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
                       <com:element>MappingContext/ProviderFunction/TargetMapping/SourceMapping/MappingRule/AttributeMapping/Target/name</com:element>
                       <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-                      <com:elementName>name</com:elementName>
+                      <com:elementName>MappingContext/ProviderFunction/TargetMapping/SourceMapping/MappingRule/AttributeMapping/Target/name</com:elementName>
                       <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:namespace>
                       <com:baseElement>string</com:baseElement>
                       <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>

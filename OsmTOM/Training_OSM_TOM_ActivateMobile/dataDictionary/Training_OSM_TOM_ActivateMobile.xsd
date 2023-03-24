@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:Q1="http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary" xmlns:Q2="http://xmlns.oracle.com/communications/sce/dictionary/osm_asap_integration/ASAP" xmlns:tns="http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_TOM_ActivateMobile/Training_OSM_TOM_ActivateMobile" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_TOM_ActivateMobile/Training_OSM_TOM_ActivateMobile">
+            <xs:import namespace="http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary" schemaLocation="../../../Model/OracleComms_OSM_CommonDataDictionary/dataDictionary/OracleComms_OSM_CommonDataDictionary.xsd"/>
+    <xs:import namespace="http://xmlns.oracle.com/communications/sce/dictionary/osm_asap_integration/ASAP" schemaLocation="../../ActivationOSMIntegrationDataDictionary/dataDictionary/ASAP_OSM.xsd"/>
+            <xs:complexType name="ActivationResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ActivationOrderID">
+        <xs:simpleType>
+          <xs:restriction base="Q2:ActivationOrderID"/>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="EventData">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="Q2:EventData"/>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="DetailedParameters">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="Q2:DetailedParameters"/>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="CommandHistory">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="Q2:CommandHistory"/>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ExceptionData">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="Q2:ExceptionData"/>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+    <xs:complexType name="ExtendedConfiguration">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ActivationResponse">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="tns:ActivationResponse"/>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+    <xs:complexType name="ActivateMobileFunction">
+    <xs:complexContent>
+      <xs:extension base="Q1:FulfillmentFunctionType"/>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

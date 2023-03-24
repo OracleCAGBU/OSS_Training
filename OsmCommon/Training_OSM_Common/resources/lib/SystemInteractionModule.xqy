@@ -12,6 +12,7 @@ declare namespace ent                                                       = "h
 declare namespace con                                                       = "http://xmlns.oracle.com/communications/inventory/configuration";
 declare namespace spec                                                      = "http://xmlns.oracle.com/communications/inventory/specification";
 declare namespace techws                                                    = "http://xmlns.oracle.com/communications/inventory/webservice/technical";
+declare namespace corecom                                                   = "http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2";
 
 declare variable $systeminteractionmodule:ORDER_ITEM_NS                    := "urn:com:metasolv:oms:xmlapi:1";
 declare variable $systeminteractionmodule:ORDER_ITEM_TYPE                  := "omsAny";
@@ -194,7 +195,8 @@ declare function systeminteractionmodule:addInteractionHeader(
                                    then ''
                                    else $bicorrID
     let $friendlyReference      := $orderData/oms:Reference
-    let $interactionName        := "Broadband CFS Create Order"        
+    let $specificationName      := $orderData/oms:_root/oms:ControlData/oms:Functions/oms:DesignServiceFunction/oms:orderItem/oms:orderItemRef/oms:ServiceSpecification/text()
+    let $interactionName        := fn:concat(fn:replace($specificationName, '_', " "), " ", "Create Order")        
     
       where (exists($orderData))
         return
@@ -204,7 +206,9 @@ declare function systeminteractionmodule:addInteractionHeader(
                 uimlib:createQualifiedElementFromString($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:action, $tmpaction)
                 )else(),
                 if($taskName=$uimlib:CaptureBITask)then(
-                uimlib:createQualifiedSpecificationName($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:sBIOrder),
+                if(fn:contains($specificationName,'Broadband'))
+                then uimlib:createQualifiedSpecificationName($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:sBIOrder)
+                else uimlib:createQualifiedSpecificationName($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:sMobile),
                 uimlib:createQualifiedElementFromString($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:action, $uimlib:CREATE),         
                 uimlib:createQualifiedElementFromString($uimlib:invbiNamespace, $uimlib:invbiPrefix, $uimlib:name, $interactionName),
                (: uimlib:createFriendlyQualifiedExternalIdentity($uimlib:invbiNamespace, $uimlib:invbiPrefix, $bicorrID, $friendlyReference),:)
@@ -290,7 +294,8 @@ declare function systeminteractionmodule:addExtensibleAttributesToParameters(
 { 
     (: Dynamic Params :)
     
-     (: <invbi:parameter> :)        
+     (: <invbi:parameter> :)   
+    if(fn:exists($orderitem/oms:dynamicParams)) then  (  
     for $attribute in $orderitem/oms:dynamicParams/node()
     return 
         if(exists($attribute/*)) 
@@ -301,6 +306,12 @@ declare function systeminteractionmodule:addExtensibleAttributesToParameters(
         (
             systeminteractionmodule:addSimpleParameter($attribute)
         ) 
+        )
+        else 
+        (
+        for $attribute in $orderitem/oms:SpecificationGroup/*:specificationGroup/*
+        return
+        systeminteractionmodule:addSimpleParameter($attribute))
           
 };
 
@@ -877,4 +888,80 @@ declare function systeminteractionmodule:getTargetFromTA(
     $ta as element()*) as xs:string * {
 
     $ta/techws:target/text()
+};
+declare function systeminteractionmodule:getspecificationGroupAttributesFromLineItem(
+    $eSourceOrderLineItems as element()*) as element()* {
+    
+
+      for $eSourceOrderLineItem in $eSourceOrderLineItems
+      
+      let $specificationGroupAttributes := $eSourceOrderLineItem/*:orderItemRef/*:SpecificationGroup/SpecificationGroups/*:Specification
+      
+      for $specificationGroupAttribute in $specificationGroupAttributes
+      let $specParamName    := $specificationGroupAttribute/*:Name
+      let $specParamValue   := $specificationGroupAttribute/*:Value
+      
+      return (
+                     element{fn:data($specParamName)}
+                    {
+                        fn:data($specParamValue)
+                    }
+      )
+      
+      
+     
+    };
+    
+declare function systeminteractionmodule:getspecificationGroupAttributesFromOrderData(
+    $eOrderData as element(), $sActionCode as xs:string?) as element()* {
+    
+    let $eDataArea                  := $eOrderData/oms:_root/oms:inputMessage//*:DataArea
+    let $eAddress                   := $eDataArea/*:ProcessSalesOrderFulfillment/*:CustomerPartyReference/*:CustomerPartyAccountContactAddressCommunication/
+                                       *:AddressCommunication/*:Address
+    let $sHouseNumber               := $eAddress/*:HouseNumber                                      
+    let $sBuildingName              := $eAddress/*:BuildingName
+    let $sStreetName                := $eAddress/*:StreetName
+    let $sLatitude                  := $eAddress/*:Latitude
+    let $sLongitude                 := $eAddress/*:Longitude
+    
+    let $result := (
+                        if(fn:exists($sBuildingName))then 
+                            element{'BuildingName'}
+                                 {
+                                    fn:data($sBuildingName)
+                                 }
+                        else(),
+                        if(fn:exists($sHouseNumber))then 
+                            element{'Street_HouseNumber'}
+                                 {
+                                    fn:data($sHouseNumber)
+                                 }
+                        else(),
+                        if(fn:exists($sStreetName))then 
+                            element{'Street_VillageName'}
+                                 {
+                                    fn:data($sStreetName)
+                                 }
+                        else(),
+                        if(fn:exists($sLongitude))then 
+                            element{'Longitude'}
+                                 {
+                                    fn:data($sLongitude)
+                                 }
+                        else(),
+                        if(fn:exists($sLatitude))then 
+                            element{'Latitude'}
+                                 {
+                                    fn:data($sLatitude)
+                                 }
+                        else(),
+                        if(fn:exists($sActionCode))then
+                            element{'ServiceAction'}
+                                {
+                                    $sActionCode
+                                }
+                        else()
+                   )
+                  
+     return $result
 };

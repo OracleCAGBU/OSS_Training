@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<activationModel name="SC_ERIC_MOBILE" xmlns="http://www.metasolv.com/ServiceActivation/2003/ActivationModel" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <name>SC_ERIC_MOBILE</name>
+    <description> (b4)</description>
+    <dependsOn>
+        <id>NW_ERIC_MOBILE</id>
+    </dependsOn>
+    <version><label>1.0.0.0.0</label></version>
+    <component>
+        <serviceModel>model/C_MOD_MOBILE_SERVICE.xml</serviceModel>
+    </component>
+    <component>
+        <serviceModel>model/C_SUS_MOBILE_SERVICE.xml</serviceModel>
+    </component>
+    <component>
+        <serviceModel>model/C_RES_MOBILE_SERVICE.xml</serviceModel>
+    </component>
+    <component>
+        <serviceModel>model/C_DEL_MOBILE_SERVICE.xml</serviceModel>
+    </component>
+    <component>
+        <serviceModel>model/C_ADD_MOBILE_SERVICE.xml</serviceModel>
+    </component>
+    <role name="administrator">
+        <description>System Administrator</description>
+    </role>
+</activationModel>
