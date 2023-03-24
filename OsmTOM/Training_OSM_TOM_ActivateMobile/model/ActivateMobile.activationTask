@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:act="http://xmlns.oracle.com/communications/sce/integration/model/task/activation" xmlns="http://xmlns.oracle.com/communications/sce/integration/model/task/activation" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xmlns:task="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xsi:type="act:activationTaskType" name="ActivateMobile">
   <com:displayName>ActivateMobile</com:displayName>
-  <com:saveVersion>163</com:saveVersion>
+  <com:saveVersion>168</com:saveVersion>
   <com:id>FRGZebv4RsaG89Q6qSqoiQ</com:id>
   <task:orderType>
     <com:entity>TOM_ProvisionTechnicalOrderFulfillment</com:entity>
@@ -1178,54 +1178,6 @@
           <com:entity>C_MOD_MOBILE_SERVICE</com:entity>
           <com:entityType>serviceAction</com:entityType>
           <com:relationship>parameter.ServiceAction</com:relationship>
-          <com:element>OLD_MSISDN</com:element>
-          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
-        </act:saParameterName>
-        <act:binding>&lt;mslv-sa:serviceValue xsi:type=&quot;mslv-sa:ASAPServiceValue&quot;&#xD;
-    xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;>&#xD;
-    &lt;mslv-sa:name>OLD_MSISDN&lt;/mslv-sa:name>&#xD;
-    &lt;xsl:variable name=&quot;orderItemRef&quot;  select=&quot;osm:ControlData/osm:Functions/osm:ActivateMobileFunction/osm:orderItem/osm:orderItemRef&quot; />&#xD;
-    &lt;xsl:if&#xD;
-        test=&quot;$orderItemRef[osm:Action = 'Modify'] and $orderItemRef[(osm:SpecializedAction = 'CHANGEMSISDN@TA_ACT_MOBILE_RFS' or osm:SpecializedAction = 'CHANGEPAYTYPE@TA_ACT_MOBILE_RFS')]&quot;>&#xD;
-        &lt;mslv-sa:value>&#xD;
-            &lt;xsl:value-of&#xD;
-                select=&quot;$orderItemRef[osm:Action = 'Modify' and (osm:SpecializedAction = 'CHANGEMSISDN@TA_ACT_MOBILE_RFS' or osm:SpecializedAction = 'CHANGEPAYTYPE@TA_ACT_MOBILE_RFS')]/osm:SpecificationGroup/*[local-name()='TechnicalParameters']/*[local-name()='OLD_MSISDN']&quot;&#xD;
-            />&#xD;
-        &lt;/mslv-sa:value>&#xD;
-    &lt;/xsl:if>&#xD;
-    &lt;mslv-sa:type>REQUIRED_SCALAR&lt;/mslv-sa:type>&#xD;
-&lt;/mslv-sa:serviceValue></act:binding>
-        <act:bindingType>XSLT</act:bindingType>
-      </act:parameterBinding>
-      <act:parameterBinding>
-        <act:saParameterName>
-          <com:entity>C_MOD_MOBILE_SERVICE</com:entity>
-          <com:entityType>serviceAction</com:entityType>
-          <com:relationship>parameter.ServiceAction</com:relationship>
-          <com:element>PayType</com:element>
-          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
-        </act:saParameterName>
-        <act:binding>&lt;mslv-sa:serviceValue xsi:type=&quot;mslv-sa:ASAPServiceValue&quot;&#xD;
-    xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;>&#xD;
-    &lt;mslv-sa:name>PayType&lt;/mslv-sa:name>&#xD;
-    &lt;xsl:variable name=&quot;orderItemRef&quot;  select=&quot;osm:ControlData/osm:Functions/osm:ActivateMobileFunction/osm:orderItem/osm:orderItemRef&quot; />&#xD;
-    &lt;xsl:if&#xD;
-        test=&quot;$orderItemRef[osm:Action = 'Modify'] and $orderItemRef[(osm:SpecializedAction = 'CHANGEMSISDN@TA_ACT_MOBILE_RFS' or osm:SpecializedAction = 'CHANGEPAYTYPE@TA_ACT_MOBILE_RFS')]&quot;>&#xD;
-        &lt;mslv-sa:value>&#xD;
-            &lt;xsl:value-of&#xD;
-                select=&quot;$orderItemRef[osm:Action = 'Modify' and (osm:SpecializedAction = 'CHANGEMSISDN@TA_ACT_MOBILE_RFS' or osm:SpecializedAction = 'CHANGEPAYTYPE@TA_ACT_MOBILE_RFS')]/osm:SpecificationGroup/*[local-name()='TechnicalParameters']/*[local-name()='PayType']&quot;&#xD;
-            />&#xD;
-        &lt;/mslv-sa:value>&#xD;
-    &lt;/xsl:if>&#xD;
-    &lt;mslv-sa:type>REQUIRED_SCALAR&lt;/mslv-sa:type>&#xD;
-&lt;/mslv-sa:serviceValue></act:binding>
-        <act:bindingType>XSLT</act:bindingType>
-      </act:parameterBinding>
-      <act:parameterBinding>
-        <act:saParameterName>
-          <com:entity>C_MOD_MOBILE_SERVICE</com:entity>
-          <com:entityType>serviceAction</com:entityType>
-          <com:relationship>parameter.ServiceAction</com:relationship>
           <com:element>ServicePlan</com:element>
           <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
         </act:saParameterName>
@@ -1278,6 +1230,56 @@
           <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
         </act:saParameterName>
         <act:binding>'ERIC_MOBILE_2-0'</act:binding>
+      </act:parameterBinding>
+      <act:parameterBinding>
+        <act:saParameterName>
+          <com:entity>C_MOD_MOBILE_SERVICE</com:entity>
+          <com:entityType>serviceAction</com:entityType>
+          <com:relationship>parameter.ServiceAction</com:relationship>
+          <com:element>PayType</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        </act:saParameterName>
+        <act:binding>&lt;mslv-sa:serviceValue xsi:type=&quot;mslv-sa:ASAPServiceValue&quot;&#xD;
+    xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;>&#xD;
+    &lt;mslv-sa:name>PayType&lt;/mslv-sa:name>&#xD;
+    &lt;xsl:variable name=&quot;orderItemRef&quot;  select=&quot;osm:ControlData/osm:Functions/osm:ActivateMobileFunction/osm:orderItem/osm:orderItemRef&quot; />&#xD;
+    &lt;xsl:if&#xD;
+        test=&quot;$orderItemRef[osm:Action = 'Modify'] and $orderItemRef[(osm:SpecializedAction = 'CHANGEMSISDN@TA_ACT_MOBILE_RFS' or osm:SpecializedAction = 'CHANGEPAYTYPE@TA_ACT_MOBILE_RFS')]&quot;>&#xD;
+        &lt;mslv-sa:value>&#xD;
+            &lt;xsl:value-of&#xD;
+                select=&quot;$orderItemRef[osm:Action = 'Modify' and osm:SpecializedAction = 'CHANGEPAYTYPE@TA_ACT_MOBILE_RFS']/osm:SpecificationGroup/*[local-name()='TechnicalParameters']/*[local-name()='PayType']&quot;&#xD;
+            />&#xD;
+        &lt;/mslv-sa:value>&#xD;
+    &lt;/xsl:if>&#xD;
+    &lt;mslv-sa:type>REQUIRED_SCALAR&lt;/mslv-sa:type>&#xD;
+&lt;/mslv-sa:serviceValue></act:binding>
+        <act:condition>osm:ControlData/osm:Functions/osm:ActivateMobileFunction/osm:orderItem/osm:orderItemRef[osm:Action='Modify' and osm:SpecializedAction='CHANGEPAYTYPE@TA_ACT_MOBILE_RFS']</act:condition>
+        <act:bindingType>XSLT</act:bindingType>
+      </act:parameterBinding>
+      <act:parameterBinding>
+        <act:saParameterName>
+          <com:entity>C_MOD_MOBILE_SERVICE</com:entity>
+          <com:entityType>serviceAction</com:entityType>
+          <com:relationship>parameter.ServiceAction</com:relationship>
+          <com:element>OLD_MSISDN</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        </act:saParameterName>
+        <act:binding>&lt;mslv-sa:serviceValue xsi:type=&quot;mslv-sa:ASAPServiceValue&quot;&#xD;
+    xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;>&#xD;
+    &lt;mslv-sa:name>OLD_MSISDN&lt;/mslv-sa:name>&#xD;
+    &lt;xsl:variable name=&quot;orderItemRef&quot;  select=&quot;osm:ControlData/osm:Functions/osm:ActivateMobileFunction/osm:orderItem/osm:orderItemRef&quot; />&#xD;
+    &lt;xsl:if&#xD;
+        test=&quot;$orderItemRef[osm:Action = 'Modify'] and $orderItemRef[(osm:SpecializedAction = 'CHANGEMSISDN@TA_ACT_MOBILE_RFS' or osm:SpecializedAction = 'CHANGEPAYTYPE@TA_ACT_MOBILE_RFS')]&quot;>&#xD;
+        &lt;mslv-sa:value>&#xD;
+            &lt;xsl:value-of&#xD;
+                select=&quot;$orderItemRef[osm:Action = 'Modify' and osm:SpecializedAction = 'CHANGEMSISDN@TA_ACT_MOBILE_RFS' ]/osm:SpecificationGroup/*[local-name()='TechnicalParameters']/*[local-name()='OLD_MSISDN']&quot;&#xD;
+            />&#xD;
+        &lt;/mslv-sa:value>&#xD;
+    &lt;/xsl:if>&#xD;
+    &lt;mslv-sa:type>REQUIRED_SCALAR&lt;/mslv-sa:type>&#xD;
+&lt;/mslv-sa:serviceValue></act:binding>
+        <act:condition>osm:ControlData/osm:Functions/osm:ActivateMobileFunction/osm:orderItem/osm:orderItemRef[osm:Action='Modify' and osm:SpecializedAction='CHANGEMSISDN@TA_ACT_MOBILE_RFS']</act:condition>
+        <act:bindingType>XSLT</act:bindingType>
       </act:parameterBinding>
     </act:serviceAction>
     <act:serviceAction>
