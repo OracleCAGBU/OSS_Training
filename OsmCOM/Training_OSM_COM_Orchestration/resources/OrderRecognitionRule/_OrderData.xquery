@@ -12,6 +12,7 @@ declare namespace corecom       =   "http://xmlns.oracle.com/EnterpriseObjects/C
 (: This XQuery selects all the contents of the incoming order. :)
 let $eOrderData      := fn:root(.)//fulfillord:DataArea
 let $sOrderNumber    := $eOrderData/fulfillord:ProcessSalesOrderFulfillment/corecom:Identification/corecom:BusinessComponentID/text()
+let $sVersion        := $eOrderData/fulfillord:ProcessSalesOrderFulfillment/corecom:Identification/corecom:Revision/corecom:Number/text()
 let $sTypeCode       := $eOrderData/fulfillord:ProcessSalesOrderFulfillment/fulfillord:TypeCode/text()
 let $sCustomerName   := $eOrderData/fulfillord:ProcessSalesOrderFulfillment/corecom:CustomerPartyReference/corecom:CustomerPartyAccountName/text()
 let $sFirstName      := fn:substring-before($sCustomerName, ',')
@@ -25,6 +26,7 @@ return
     <_root>
         <Order>
             <OrderNumber>{$sOrderNumber}</OrderNumber>
+            <Version>{$sVersion}</Version>
             <TypeCode>{$sTypeCode}</TypeCode>
             <CustomerPartyReference>
                 <FirstName>{$sFirstName}</FirstName>

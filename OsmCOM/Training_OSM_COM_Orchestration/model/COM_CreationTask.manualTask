@@ -645,6 +645,13 @@
         <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
       </childNode>
     </childNode>
+    <childNode>
+      <com:entity>COM_SalesOrderFulfillment</com:entity>
+      <com:entityType>order</com:entityType>
+      <com:relationship>ora.task.orderTemplateRef</com:relationship>
+      <com:element>/Order/Version</com:element>
+      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+    </childNode>
   </orderTemplateRef>
   <viewNodeExtension>
     <path>/inputMessage</path>
@@ -1088,6 +1095,11 @@
   </viewNodeExtension>
   <viewNodeExtension>
     <path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/SpecificationGroup</path>
+    <editable>true</editable>
+    <defaultValue></defaultValue>
+  </viewNodeExtension>
+  <viewNodeExtension>
+    <path>/Order/Version</path>
     <editable>true</editable>
     <defaultValue></defaultValue>
   </viewNodeExtension>

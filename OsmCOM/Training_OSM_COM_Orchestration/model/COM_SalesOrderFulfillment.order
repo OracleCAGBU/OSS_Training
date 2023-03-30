@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:ord="http://xmlns.oracle.com/communications/sce/osm/model/order" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xsi:type="orderType" name="COM_SalesOrderFulfillment">
   <com:displayName>COM_SalesOrderFulfillment</com:displayName>
-  <com:saveVersion>17</com:saveVersion>
+  <com:saveVersion>24</com:saveVersion>
   <com:id>---brYUg--+DS9xQ--+jNQ</com:id>
-  <amendable>false</amendable>
+  <amendable>true</amendable>
   <keyDef name="Key">
-    <prov:expression>true()</prov:expression>
+    <prov:expression>_root/Order/OrderNumber</prov:expression>
   </keyDef>
+  <version>_root/Version</version>
   <orderSource>
     <creationTask>
       <com:entity>COM_CreationTask</com:entity>
@@ -64,6 +65,9 @@
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/ProvisioningFunction</path>
+      <keyExpression name="Key">
+        <prov:expression>./componentKey</prov:expression>
+      </keyExpression>
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/ProvisioningFunction/componentKey</path>
@@ -76,6 +80,9 @@
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/ProvisioningFunction/orderItem</path>
+      <keyExpression name="Key">
+        <prov:expression>./orderItemRef/LineId</prov:expression>
+      </keyExpression>
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/ProvisioningFunction/orderItem/ExternalFulfillmentState</path>
@@ -85,6 +92,9 @@
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef</path>
+      <keyExpression name="Key">
+        <prov:expression>./LineId</prov:expression>
+      </keyExpression>
     </nodeExtension>
     <nodeExtension>
       <path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/PointOfNoReturn</path>
@@ -287,6 +297,15 @@
     <nodeExtension>
       <path>/Order/CustomerPartyReference/ContactID</path>
     </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/Functions/ProvisioningFunction/orderItem/orderItemRef/SpecificationGroup</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/ControlData/OrderItem/SpecificationGroup</path>
+    </nodeExtension>
+    <nodeExtension>
+      <path>/Order/Version</path>
+    </nodeExtension>
     <orderData>
       <com:entity>OracleComms_OSM_CommonDataDictionary</com:entity>
       <com:entityType>xsd</com:entityType>
@@ -335,10 +354,21 @@
         <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
         <com:element>Order/OrderNumber</com:element>
         <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-        <com:elementName>OrderNumber</com:elementName>
+        <com:elementName>Order/OrderNumber</com:elementName>
         <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_COM_Orchestration/OracleComms_OSM_COM_Orchestration</com:namespace>
         <com:baseElement>OrderNumberType</com:baseElement>
         <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:baseNamespace>
+      </childNode>
+      <childNode>
+        <com:entity>OracleComms_OSM_COM_Orchestration</com:entity>
+        <com:entityType>xsd</com:entityType>
+        <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
+        <com:element>Order/Version</com:element>
+        <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
+        <com:elementName>Version</com:elementName>
+        <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_COM_Orchestration/OracleComms_OSM_COM_Orchestration</com:namespace>
+        <com:baseElement>string</com:baseElement>
+        <com:baseNamespace>http://www.w3.org/2001/XMLSchema</com:baseNamespace>
       </childNode>
       <childNode>
         <com:entity>OracleComms_OSM_COM_Orchestration</com:entity>
@@ -367,7 +397,7 @@
           <com:relationship>com.mslv.studio.provisioning.order.orderTemplateNode</com:relationship>
           <com:element>Order/CustomerPartyReference/FirstName</com:element>
           <com:elementType>com.mslv.studio.core.data.dictionary.node</com:elementType>
-          <com:elementName>FirstName</com:elementName>
+          <com:elementName>Order/CustomerPartyReference/FirstName</com:elementName>
           <com:namespace>http://xmlns.oracle.com/communications/sce/dictionary/Training_OSM_COM_Orchestration/OracleComms_OSM_COM_Orchestration</com:namespace>
           <com:baseElement>firstName</com:baseElement>
           <com:baseNamespace>http://xmlns.oracle.com/communications/sce/dictionary/OracleComms_OSM_CommonDataDictionary/OracleComms_OSM_CommonDataDictionary</com:baseNamespace>

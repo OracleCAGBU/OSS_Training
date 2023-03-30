@@ -154,6 +154,7 @@ declare function local:addDataArea(
     let $sLastName                      := $eCustomerPartyReference/oms:LastName/text()
     let $sCustomerAccountName           := fn:concat($sFirstName,',',$sLastName)
     let $sOrderNumber                   := $eOrderData/oms:_root/oms:Order/oms:OrderNumber/text()
+    let $sVersion                       := $eOrderData/oms:_root/oms:Order/oms:Version/text()
     let $sBusinessComponentID           := systeminteractionmodule:generateUniqueId()
     
     return  
@@ -165,7 +166,7 @@ declare function local:addDataArea(
                     <corecom:BusinessComponentID schemeID="PROVISIONINGORDER_ID" schemeAgencyID="COMMON">{$sBusinessComponentID}</corecom:BusinessComponentID> 
                     <corecom:ID schemeID="SALESORDER_ID" schemeAgencyID="SEBL_01">{$sOrderNumber}</corecom:ID>  
                     <corecom:Revision>
-                        <corecom:Number>1</corecom:Number> 
+                        <corecom:Number>{$sVersion}</corecom:Number> 
                     </corecom:Revision>
                 </corecom:Identification>
                 <provord:RequestedDeliveryDateTime/>
