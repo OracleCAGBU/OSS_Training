@@ -11,6 +11,8 @@ declare namespace corecom           = "http://xmlns.oracle.com/EnterpriseObjects
 
 let $eOrderData             := fn:root(.)//fulfillord:DataArea
 let $sCOMCorrelationID      := $eOrderData/fulfillord:ProcessProvisioningOrder/corecom:Correlation/corecom:COMCorrelationID/text()
+let $sOrderNumber           := $eOrderData/fulfillord:ProcessProvisioningOrder/corecom:Identification/corecom:ID/text()
+let $sRevision              := $eOrderData/fulfillord:ProcessProvisioningOrder/corecom:Identification/corecom:Revision/corecom:Number/text()
 
 (: Returns all contents of incoming order. :)
 (: TO DO: Modify the XQuery to only select subset of incoming order data.:)
@@ -19,5 +21,9 @@ let $sCOMCorrelationID      := $eOrderData/fulfillord:ProcessProvisioningOrder/c
 return
 
 <_root>
+    <Order>
+        <OrderNumber>{$sOrderNumber}</OrderNumber>
+        <Version>{$sRevision}</Version>
+    </Order>
     <COMCorrelationID>{$sCOMCorrelationID}</COMCorrelationID>
 </_root>

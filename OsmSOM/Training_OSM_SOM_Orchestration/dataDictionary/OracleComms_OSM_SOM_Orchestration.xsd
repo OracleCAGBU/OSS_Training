@@ -310,4 +310,24 @@
       <xs:maxLength value="40"/>
     </xs:restriction>
   </xs:simpleType>
+    <xs:complexType name="Order">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="OrderNumber">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="0"/>
+            <xs:maxLength value="40"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element maxOccurs="1" minOccurs="0" name="Version">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="0"/>
+            <xs:maxLength value="40"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
 </xs:schema>

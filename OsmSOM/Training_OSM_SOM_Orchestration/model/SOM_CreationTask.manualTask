@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xmlns:task="http://xmlns.oracle.com/communications/sce/osm/model/process/task" xmlns:aut="http://xmlns.oracle.com/communications/sce/osm/model/process/task/automation" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:prov="http://xmlns.oracle.com/communications/sce/osm/model/provisioning" xsi:type="manualTaskType" name="SOM_CreationTask">
   <com:displayName>SOM_CreationTask</com:displayName>
-  <com:saveVersion>11</com:saveVersion>
+  <com:saveVersion>12</com:saveVersion>
   <com:id>--+H---s--+4AUYv--+MIg</com:id>
   <orderType>
     <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
@@ -2032,6 +2032,27 @@
     <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
     <com:entityType>order</com:entityType>
     <com:relationship>ora.task.orderTemplateRef</com:relationship>
+    <com:element>/Order</com:element>
+    <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+    <childNode>
+      <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+      <com:entityType>order</com:entityType>
+      <com:relationship>ora.task.orderTemplateRef</com:relationship>
+      <com:element>/Order/OrderNumber</com:element>
+      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+    </childNode>
+    <childNode>
+      <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+      <com:entityType>order</com:entityType>
+      <com:relationship>ora.task.orderTemplateRef</com:relationship>
+      <com:element>/Order/Version</com:element>
+      <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
+    </childNode>
+  </orderTemplateRef>
+  <orderTemplateRef>
+    <com:entity>SOM_ProvisionServiceOrderFulfillment</com:entity>
+    <com:entityType>order</com:entityType>
+    <com:relationship>ora.task.orderTemplateRef</com:relationship>
     <com:element>/COMCorrelationID</com:element>
     <com:elementType>com.mslv.studio.provisioning.order.node</com:elementType>
   </orderTemplateRef>
@@ -3347,6 +3368,21 @@
   </viewNodeExtension>
   <viewNodeExtension>
     <path>/COMCorrelationID</path>
+    <editable>true</editable>
+    <defaultValue></defaultValue>
+  </viewNodeExtension>
+  <viewNodeExtension>
+    <path>/Order</path>
+    <editable>true</editable>
+    <defaultValue></defaultValue>
+  </viewNodeExtension>
+  <viewNodeExtension>
+    <path>/Order/OrderNumber</path>
+    <editable>true</editable>
+    <defaultValue></defaultValue>
+  </viewNodeExtension>
+  <viewNodeExtension>
+    <path>/Order/Version</path>
     <editable>true</editable>
     <defaultValue></defaultValue>
   </viewNodeExtension>
